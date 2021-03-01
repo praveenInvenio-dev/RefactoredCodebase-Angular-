@@ -1,0 +1,104 @@
+.red {
+    color: #FF0000;
+}
+
+.cardh160 {
+    cursor: pointer;
+}
+
+.border-bottom-none {
+    border-bottom: 1px solid transparent !important;
+}
+
+.btn.btn-primary {
+    margin-right: 20px;
+}
+
+.whitespace-now-wrap {
+    white-space: nowrap;
+}
+
+.modal-filter .max-width-600 {
+    max-width: 600px !important;
+}
+
+.rowshadow-hoverNone:hover {
+    box-shadow: none;
+}
+/*Error messages boreder-red*/
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border: 1px solid red !important;
+}
+.border-red
+{
+    border-color: red !important;
+}
+
+.disablePointer {
+	pointer-events: none;
+   }
+
+/* .file-attachment-with-bg{
+   background-color:#006450 !important;
+   padding: 12px 4px 3px;
+   } */
+
+/* .bg-red{
+       background-color: #FF0000 !important;
+       padding: 12px 4px 3px;
+   } */
+
+.mb-60{
+       margin-bottom: 60px !important;
+   }
+.opacity-0{
+       opacity: 0 !important;
+   }
+.custom-upload-file{
+       transform: Y(-50%);
+       width:100%;
+       height:100%;
+       z-index: 9999999999;
+   }
+   .w-230{
+       width:230px !important;
+       
+   }
+   .w-5{
+    width:5px !important;
+}
+.arabic-width{
+    padding: 2px 0px 22px 2px !important;
+    width:230px !important;
+}
+.justify-content-end{
+justify-content: flex-end !important;}
+
+.table .table-bordered th.max-width-190:last-child{
+    max-width:190px;
+}
+/* for vertical align middle */
+.col-middle-text{
+    vertical-align: middle;
+}
+/* for alignment of close button in ar*/
+.arabic-btn {
+    float:left !important;
+    padding-left: 10px;
+  }
+  .item-cardetails-head {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+  }
+  .mt-30 {
+      margin-top: 30px;
+  }
+
+  .width440 {
+    width: 440px;
+  }
+  

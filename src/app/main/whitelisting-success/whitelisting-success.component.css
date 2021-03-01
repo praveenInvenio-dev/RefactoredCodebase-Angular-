@@ -1,0 +1,99 @@
+.heading {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+  color: #232323;
+}
+
+.heading-caption {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #999;
+}
+
+.info-box {
+  /* padding: 10px; */
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+}
+
+.info-text {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #151515;
+}
+
+.info-sub-text {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.btnCss {
+  width: 221px;
+  height: 48px;
+  border-radius: 14px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff !important;
+  background-color: #d2a02a !important;
+}
+
+.dashboard-link {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #d99a29 !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.paddingx-10 {
+  padding: 0px 10px;
+  min-width: 437px;
+  min-height: 56px;
+  align-items: center;
+}
+
+.textOnLeft {
+  text-align: end;
+  word-break: break-all;
+}
+
+@media (max-width: 768px) {
+  .textOnLeft {
+    text-align: start;
+  }
+}

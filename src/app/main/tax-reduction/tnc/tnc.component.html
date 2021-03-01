@@ -1,0 +1,40 @@
+<mat-dialog-content>
+  <div class="container p-0 tnc-dialog-content-wrapper">
+    <div class="row d-block tnc-x-container">
+      <img src="assets/images/close.svg" alt="close" [ngClass]="
+          data.translation.direction === 'ltr' ? 'float-right' : 'float-left'
+        " (click)="onCrossClick()" />
+    </div>
+    <div class="col-md-12">
+      <span class="pageTitle">{{ data.translation.tncHeading }}</span>
+    </div>
+    <div style="margin-top: 24px">
+      <div class="col-md-12">
+        <div class="tnc-content-container">
+          <div class="tnc-content">
+            <span style="font-family: SSTArabic-Roman;" [innerHtml]="
+                data.translation[data.page].tncContent
+                  .trim()
+                  .replaceAll('\n', '<br/>')
+              "></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 d-flex mt-3" style="align-items: center;cursor: pointer;">
+      <div class="tnc-checkbox" [ngClass]="checkboxSelected ? 'tnc-checkbox-selected' : ''" (click)="toggleCheckbox()">
+        <img [style.display]="checkboxSelected === true ? '' : 'none'" src="assets/image/white-check.svg" alt="" />
+      </div>
+      <div class="tnc-checkbox-label" >
+        {{ data.translation[data.page].tncAgreeCheckboxText }}
+      </div>
+    </div>
+    <div class="col-md-12 mt-5">
+      <button mat-raised-button [disabled]="!checkboxSelected" type="button" class="btnPrimary mb-2" [ngClass]="
+            data.translation.direction === 'ltr' ? 'float-right' : 'float-left'
+          " style="margin: 0 8px;min-width: 244px;" (click)="onButtonClick()">
+        {{ data.translation[data.page].tncButton }}
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>

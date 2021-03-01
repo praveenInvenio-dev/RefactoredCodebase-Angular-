@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="899" height="396" viewBox="0 0 899 396">
+    <defs>
+        <filter id="kqnmopjwva" width="101.1%" height="102.5%" x="-.6%" y="-1%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0.615686275 0 0 0 0 0.615686275 0 0 0 0 0.615686275 0 0 0 0.1 0"/>
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="1"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+        <rect id="rfv1enloyb" width="899" height="396" x="0" y="0" rx="8"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-271 -574) translate(271 538) translate(0 36)">
+                    <use fill="#000" filter="url(#kqnmopjwva)" xlink:href="#rfv1enloyb"/>
+                    <rect width="899" height="396" fill="#FFF" rx="8"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,141 @@
+
+
+
+.exciseTitle1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+}
+
+
+.viewMore {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: start;
+  color: #006450;
+}
+
+.sideNumber {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 6px;
+  float: right;
+}
+
+.exciseSecondTitle {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.exciseSecondTitle1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+}
+.btnCss {
+  width: 184px;
+  height: 48px;
+  border-radius: 14px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  background-color: #d2a02a;
+}
+
+.modalTxt1 {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+.modalTxt2 {
+  object-fit: contain;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.accCardbck {
+  height: 136px;
+  background-image: url("../../../assets/image/selected-copy-2@2x.png");
+  background-position: center;
+  border-radius: 14px;
+}
+
+.accCardbckActive {
+  height: 136px;
+  background-image: url("../../../assets/image/selected@2x.png");
+  background-position: center;
+}
+
+.crdbtm {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: start;
+}
+
+.cardTxt1 {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.cardTxt2 {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}

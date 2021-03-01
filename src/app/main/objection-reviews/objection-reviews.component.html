@@ -1,0 +1,551 @@
+<div
+    class="container alignStart my-3 px-0 refundsContainer"
+    [dir]="lang['dir']"
+    *ngIf="!showNewObjection"
+  >
+    <div class="pageTitle textDark">{{ lang["bc1"] }}</div>
+    <div class="row mx-0 mt-3">
+      <div class="col-9 px-0 tabs">
+        <span
+          class="mie-2 value pointer pb-3"
+          [ngClass]="
+            displayedObjections === 'all'
+              ? 'sstbold selectedTab'
+              : 'sstroman textDark'
+          "
+          (click)="selectObjection('all')"
+          >{{ lang["all"] }}</span
+        >
+        <span
+          class="mx-2 value pointer pb-3"
+          [ngClass]="
+            displayedObjections === 'zakatCit'
+              ? 'sstbold selectedTab'
+              : 'sstroman textDark'
+          "
+          (click)="selectObjection('zakatCit')"
+          >{{ lang["zakatCit"] }}</span
+        >
+        <span
+          class="mx-2 value pointer pb-3"
+          [ngClass]="
+            displayedObjections === 'vat'
+              ? 'sstbold selectedTab'
+              : 'sstroman textDark'
+          "
+          (click)="selectObjection('vat')"
+          >{{ lang["vat"] }}</span
+        >
+        <span
+          class="mx-2 value pointer pb-3"
+          [ngClass]="
+            displayedObjections === 'excise'
+              ? 'sstbold selectedTab'
+              : 'sstroman textDark'
+          "
+          (click)="selectObjection('excise')"
+          >{{ lang["excise"] }}</span
+        >
+        <span
+          class="mx-2 value pointer pb-3"
+          [ngClass]="
+            displayedObjections === 'withholding'
+              ? 'sstbold selectedTab'
+              : 'sstroman textDark'
+          "
+          (click)="selectObjection('withholding')"
+          >{{ lang["withholding"] }}</span
+        >
+      </div>
+      <div class="col-3 px-0 alignEnd tabs">
+        <span
+          class="iconPaddingBottom mie-2 pointer"
+          [ngClass]="listView ? '' : 'selectedTab'"
+          (click)="toggleListView('grid')"
+        >
+          <img
+            [src]="
+              listView
+                ? 'assets/image/cards-gray.svg'
+                : 'assets/image/cards-green.svg'
+            "
+          />
+        </span>
+        <span
+          class="iconPaddingBottom pointer"
+          [ngClass]="!listView ? '' : 'selectedTab'"
+          (click)="toggleListView('list')"
+        >
+          <img
+            [src]="
+              listView ? 'assets/image/table.svg' : 'assets/image/table-gray.svg'
+            "
+          />
+        </span>
+      </div>
+    </div>
+    <div class="row mt-3 mx-0 justify-content-between">
+      <div style="width: 851px">
+        <div class="filter-search">
+          <input
+            type="text"
+            [placeholder]="lang.search"
+            [(ngModel)]="searchFilter"
+          />
+          <img src="assets/images/inbox/search.svg" alt="" />
+        </div>
+      </div>
+      <div class="row justify-content-end mx-0">
+        <img src="assets/images/filter.svg" alt="filter" class="ff-filter-icon" (click)="onClickFilterIcon()"/>
+      </div>
+    </div>
+  
+    <!-- Grid View -->
+    <div *ngIf="!listView" class="row justify-content-between mt-3 mx-0">
+      <div class="add-card-large col-md-6 mt-3 px-0"  style="height: 202px;" (click)="newObjection()">
+        <img class="px-2" src="assets/image/add.svg" />
+        <div class="value fwb textPrimary mx-1 mt-2">
+          {{
+            displayedObjections === "all"
+              ? lang.title
+              : displayedObjections === "vat"
+              ? lang.newVat
+              : ""
+          }}
+        </div>
+      </div>
+      <ng-container
+        *ngIf="displayedObjections === 'all' || displayedObjections === 'vat'"
+      >
+        <div
+          class="filing-card textDark border col-md-6 mt-3 px-0 pointer" style="height: 202px;"
+          *ngFor="let each of filteredVatReviews | filter: searchFilter"  (click)="redirectApplication('vat',each)"
+        >
+          <div class="row filing-card-upper px-3"  style="height: 100px;">
+            <div class="col-md-6">
+              <div class="value fwb">{{ lang.vatReview }}</div>
+              <!-- <div class="caption textGray">{{ each?.Fbnum }}</div> -->
+            </div>
+            <div
+              class="col-md-6"
+              style="justify-content: flex-end; display: flex"
+            >
+              <div
+                class="tag32"
+                [ngClass]="statusColor(each.Fbust)"
+                [matTooltip]="each?.FbustTxt"
+              >
+                {{ each?.FbustTxt }}
+              </div>
+            </div>
+          </div>
+  
+          <div class="divider"></div>
+  
+          <div class="row filing-card-down px-3" style="height: 100px;">
+            <div class="col-6 mobpad1">
+                <div class="caption textGray">{{lang.reqNumber}}</div>
+                <!-- <div class="value  fwb">{{each.convertedDate}}</div> -->
+                <div class="value  fwb">{{each?.Fbnum }}</div>
+                
+
+            </div>
+            <!-- <div class="col-6 mobpad1">
+                <div class="caption textGray">{{lang.list.creationDate}}</div>
+                <div class="value  fwb">{{each.convertedDate}}</div>
+            </div> -->
+
+
+        </div>
+        </div>
+      </ng-container>
+    </div>
+    <!-- List View -->
+    <div class="row mt-5 mt-3" *ngIf="listView">
+      <div class="col-md-12">
+        <div class="mb-2 border">
+          <div
+            class="row"
+            style="margin: 0; cursor: pointer"
+            (click)="newObjection()"
+          >
+            <img class="col-auto" src="assets/image/add.svg" />
+            <div class="value fwb textPrimary mt-3 mb-3 mx-1 col">
+              {{
+                displayedObjections === "all"
+                  ? lang.title
+                  : displayedObjections === "vat"
+                  ? lang.newVat
+                  : ""
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 listViewWhitelisting mt-3">
+        <table style="width: 100%">
+          <tr class="tabHeader" *ngIf="vatReviews.length > 0">
+            <th
+              colspan="8"
+              [ngClass]="
+                lang.dir === 'rtl' ? 'tableFirstHeadingRtl' : 'tableFirstHeading'
+              "
+            >
+              {{ lang.reqName }}
+            </th>
+            <th colspan="8">{{ lang.reqNumber }}</th>
+            <!-- <th colspan="8">{{ lang.date }}</th> -->
+  
+            <th
+              colspan="1"
+              [ngClass]="
+                lang.dir === 'rtl' ? 'tableLastHeadingRtl' : 'tableLastHeading'
+              "
+            >
+              {{ lang.status }}
+            </th>
+          </tr>
+  
+          <ng-container
+            *ngIf="displayedObjections === 'all' || displayedObjections === 'vat'"
+          >
+            <tr 
+              class="tabheader2"
+              *ngFor="
+                let vat of filteredVatReviews | filter: searchFilter;
+                index as vatIndex
+              "
+              (click)="redirectApplication('vat',vat)"
+            >
+              <td
+                colspan="8"
+                [ngClass]="
+                    vatIndex === filteredVatReviews.length - 1 && lang.dir === 'rtl'
+                    ? 'tableBottomLeftRtl'
+                    : vatIndex === filteredVatReviews.length - 1 && lang.dir === 'ltr'
+                    ? 'tableBottomLeft'
+                    : ''
+                "
+              >
+              {{ lang.vatReview }}
+              </td>
+              <td colspan="8">{{ vat?.Fbnum }}</td>
+              <!-- <td colspan="8">
+                {{ refund?.TotalOffsetAmt }} {{ refund?.Waers }}
+              </td> -->
+  
+              <td
+                colspan="8"
+                [ngClass]="
+                    vatIndex === filteredVatReviews.length - 1 && lang.dir === 'rtl'
+                    ? 'tableBottomRightRtl'
+                    : vatIndex === filteredVatReviews.length - 1 && lang.dir === 'ltr'
+                    ? 'tableBottomRight'
+                    : ''
+                "
+              >
+                <div
+                  class="tag32"
+                  [ngClass]="statusColor(vat?.Fbust)"
+                  [matTooltip]="vat?.FbustTxt"
+                >
+                  {{ vat?.FbustTxt }}
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- new objections  -->
+<div class="container alignStart" [dir]="lang['dir']" *ngIf="showNewObjection">
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="exciseTitle1 unicodeDir" style="cursor: pointer;" (click)="toggleNewObjection()" >{{lang['bc1']}} &gt; </span><span class="exciseTitle1"
+                    style="color: #151515">{{lang['bc2']}}</span>
+            </div>
+
+        </div>
+        <div class="row mt-3" style="width: 100%">
+            <div class="col-md-12">
+                <div class="viewMore">
+                    <span style="cursor: pointer" (click)="toggleNewObjection()">
+                        <img [src]="lang['dir'] =='ltr'?'assets/image/arrow-left-green.svg':'assets/image/arrow-right-green.svg'"
+                        style="width: 24px" />
+                        {{lang['back']}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="exciseSecondTitle">
+                    {{ lang['title']}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="exciseSecondTitle1">
+                    {{ lang['subtitle']}}
+
+                </div>
+            </div>
+        </div>
+        <div class="Rectangle-12New mt-3"></div>
+
+        <!-- header end -->
+
+        <!-- 4 cards Start -->
+
+
+        <div class="mt-3 mb-3">
+            <div class="row col-md-12 col-sm-12 col-xs-12 mt-2 mb-3">
+                <div class="col-md-3 col-sm-6 col-xs-12 col-xl-3 mb-3">
+                    <mat-card [ngClass]="isActive ==1? 'cardActive':'cardInActive'" (click)="getModal('zakatObjCard')">
+                        <div [ngClass]="lang.dir==='ltr' ? 'acctxt1L':'acctxt1R'">
+                            <div [ngClass]="isActive ==1? 'exciseCardTxt1':'exciseCardTxt1In'">
+                                {{ lang['zakatObjCard']['title'] }}
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 col-xl-3 mb-3">
+                    <mat-card [ngClass]="isActive ==2? 'cardActive':'cardInActive'" (click)="getModal('vatReviewCard')">
+                        <div [ngClass]="lang.dir==='ltr' ? 'acctxt1L':'acctxt1R'">
+                            <div [ngClass]="isActive ==2? 'exciseCardTxt1':'exciseCardTxt1In'">
+                                {{ lang.vatReviewCard.title }}
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 col-xl-3 mb-3">
+                    <mat-card [ngClass]="isActive ==3? 'cardActive':'cardInActive'">
+                        <div [ngClass]="lang.dir==='ltr' ? 'acctxt1L':'acctxt1R'">
+                            <div [ngClass]="isActive ==3? 'exciseCardTxt1':'exciseCardTxt1In'">
+                                {{ lang.exciseTaxCard.title }}
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 col-xl-3 mb-3">
+                    <mat-card [ngClass]="isActive ==4? 'cardActive':'cardInActive'" (click)="getModal('withholdingTaxCard')">
+                        <div [ngClass]="lang.dir==='ltr' ? 'acctxt1L':'acctxt1R'">
+                            <div [ngClass]="isActive ==4? 'exciseCardTxt1':'exciseCardTxt1In'">
+                                {{ lang.withholdingTaxCard.title }}
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--   Zakat objection  Modal -->
+
+
+<div class="modal" id="zakatObjCard" data-keyboard="false" data-backdrop="static" [dir]="lang.dir">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="px-4 py-3  col-md-12 ">
+
+                    <div class="col-md-12 alignEnd"> <img class="modalCloseIcon" src="assets/image/close.svg"
+                            (click)="closeModal('zakatObjCard')" />
+                    </div>
+
+
+
+                    <div class="dark fbl f28 mt-4 mb-3"> {{lang.zakatObjCard.modalTitle}}</div>
+                    <div class="lightCard py-3 pr-3 mb-3">
+
+                        <ul class="modalInstructions f12 gray">
+                            <li>{{lang.zakatObjCard.i1}}</li>
+                            <li>{{lang.zakatObjCard.i2}}</li>
+                            <li>{{lang.zakatObjCard.i3}}</li>
+                            <li>{{lang.zakatObjCard.i4}}</li>
+                            <li>{{lang.zakatObjCard.i5}}</li>
+                            <li>{{lang.zakatObjCard.i6}}</li>
+                            <li>{{lang.zakatObjCard.i7}}</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <mat-checkbox class="checkboxAckCss">
+                            {{lang.zakatObjCard.agree}}
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-12 mt-4 mb-2 alignEnd">
+                        <button class="btnPrimary" mat-raised-button> {{lang.zakatObjCard.button}}</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end zakat objection modal  -->
+
+
+
+<!--   Vat Review  Modal -->
+
+<div class="modal" id="vatReviewCard" data-keyboard="false" data-backdrop="static" [dir]="lang.dir">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="px-4 py-3  col-md-12 ">
+
+                    <div class="col-md-12 alignEnd"> <img src="assets/image/close.svg" class="modalCloseIcon"
+                            (click)="closeModal('vatReviewCard')" />
+                    </div>
+
+
+
+                    <div class="dark fbl f28 mt-4 mb-3"> {{lang.vatReviewCard.modalTitle}}</div>
+                    <div class="lightCard py-3 pr-3 mb-3">
+
+                        <ul class="modalInstructions f12 gray">
+                            <li>{{lang.vatReviewCard.i1}}</li>
+                            <li>{{lang.vatReviewCard.i2}}</li>
+                            <li>{{lang.vatReviewCard.i3}}</li>
+                            <li>{{lang.vatReviewCard.i4}}</li>
+                            <li>{{lang.vatReviewCard.i5}}</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <mat-checkbox class="checkboxAckCss"  [(ngModel)]="isVatReviewAgree"  [ngClass]="!isVatReviewAgree && isVatReviewAgreeSubmit?'checkboxErr':''">
+                            {{lang.vatReviewCard.agree}}
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-12 mt-4 mb-2 alignEnd">
+                        <button class="btnPrimary" mat-raised-button   (click)="goTo('vatReview')"> {{lang.vatReviewCard.button}}</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end zakat objection modal  -->
+
+
+<!--   Withholding objection  Modal -->
+
+
+<div class="modal" id="withholdingTaxCard" data-keyboard="false" data-backdrop="static" [dir]="lang.dir">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="px-4 py-3  col-md-12 ">
+
+                    <div class="col-md-12 alignEnd"> <img class="modalCloseIcon" src="assets/image/close.svg"
+                            (click)="closeModal('withholdingTaxCard')" />
+                    </div>
+
+
+
+                    <div class="dark fbl f28 mt-4 mb-3"> {{lang.withholdingTaxCard.modalTitle}}</div>
+                    <div class="lightCard py-3 pr-3 mb-3">
+
+                        <ul class="modalInstructions f12 gray">
+                            <li>{{lang.withholdingTaxCard.i1}}</li>
+                            <li>{{lang.withholdingTaxCard.i2}}</li>
+                            <li>{{lang.withholdingTaxCard.i3}}</li>
+                            <li>{{lang.withholdingTaxCard.i4}}</li>
+                            <li>{{lang.withholdingTaxCard.i5}}</li>
+                            <li>{{lang.withholdingTaxCard.i6}}</li>
+                            <li>{{lang.withholdingTaxCard.i7}}</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <mat-checkbox class="checkboxAckCss">
+                            {{lang.withholdingTaxCard.agree}}
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-12 mt-4 mb-2 alignEnd">
+                        <button class="btnPrimary" mat-raised-button> {{lang.withholdingTaxCard.button}}</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end withholidng objection modal  -->
+
+
+
+
+
+<!-- filter modal -->
+
+
+<div class="modal textDark" id="filter" data-keyboard="false" data-backdrop="static" [dir]="lang.dir"  style="font-family: SSTArabic-Roman;">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="px-4 py-3  col-md-12 ">
+
+                  <div class="col-md-12 alignEnd"> <img src="assets/image/close.svg" class="modalCloseIcon"
+                          (click)="onCloseFilter()" />
+                  </div>
+
+                  <div class="filterMargin row">
+
+                  <div class="dark fbl f28 mt-4 mb-3" style="font-family: SSTArabic-bold;"> {{lang.filterModal.filter}}</div>
+                  <div class="py-3  mb-3 filterModal">
+                      
+                  <div>
+                      <div class="matLabel  labelMarginBottom">{{lang.filterModal.status}}</div>
+                      <mat-select class="commonMatSelect"    [(ngModel)]="selectedStatus">
+                          <ng-container *ngFor="let each of statusList;" >
+                          <!-- <mat-option *ngIf="each.Estat!='01'" [value]="each.Estat"> {{each.Txt30}}</mat-option> -->
+                          <mat-option  [value]="each.Estat"> {{each.Txt30}}</mat-option>
+
+                      </ng-container>
+
+                      </mat-select>
+                      <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                  </div>
+
+
+                  <div class="col-md-12 mt-4 mb-2 alignEnd" style="padding: 0;">
+                      <button class="btnPrimary" (click)="onApplyFilter()" style="min-width: 207px;padding: 0;" mat-raised-button> {{lang.filterModal.apply}}</button>
+                  </div>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+
+<notifier-container></notifier-container>

@@ -1,0 +1,94 @@
+.modal-content {
+    width: 800px !important;
+}
+
+.tabHeader {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #151515;
+}
+
+.tabheader2 {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #999999;
+    cursor: pointer;
+}
+
+.tabheader2:hover {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #999999;
+    box-shadow: 0 4px 8px 0 rgba(35, 35, 35, 0.1);
+    cursor: pointer;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 350px;
+}
+table tr th,
+table tr td {
+    border: 0.5px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    text-align: center;
+    height: 64px;
+    padding: 5px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    border: 0.5px solid #bbb;
+}
+table tr th {
+    background: #ffffff;
+    border-top: 1px solid #bbb;
+    text-align: center;
+}
+
+table tr:first-child th:first-child {
+    border-top-left-radius: 16px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 16px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 16px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 16px;
+}
+
+.btnPrimary {
+    background-color: var(--secondary) !important;
+    color: #ffffff !important;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+.modal-footer {
+    border-top: none;
+}
+.mat-button {
+    background-color: var(--secondary) !important;
+    color: #ffffff !important;
+}

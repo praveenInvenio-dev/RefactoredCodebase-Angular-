@@ -1,0 +1,285 @@
+/* TABLE COLUMN FIXED STARTS */
+
+.table-scroll {
+    position: relative;
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow: auto;
+}
+
+.table-scroll th,
+.table-scroll td {
+    white-space: nowrap;
+    vertical-align: top;
+    font-weight: normal;
+}
+
+.clone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.clone th,
+.clone td {
+    visibility: hidden
+}
+
+.clone .fixed-side {
+    background: #fff;
+    visibility: visible;
+}
+
+.clone thead,
+.clone tfoot {
+    background: transparent;
+}
+
+
+/* TABLE COLUMN FIXED ENDS */
+
+
+/* EXCISE TAXATIONAL RETUR CSS STARTS HERE */
+
+.w-124 {
+    width: 124px !important;
+}
+
+.w-90 {
+    width: 90px !important;
+}
+
+.form-control.input-161:hover,
+.form-control.input-161:active,
+.form-control.input-161:focus {
+    min-height: 32px !important;
+}
+
+input:focus {
+    outline: none !important;
+}
+
+.nav-pills .nav-link.active2,
+.nav-pills .show>.nav-link {
+    color: #232323;
+    font-weight: bold;
+    background-color: #ffffff;
+    border-bottom: 4px solid #d99a29 !important;
+}
+
+app-returns select.form-control {
+    min-height: 34px !important;
+}
+
+app-returns .form-control,
+.form-control:hover,
+.form-control:focus {
+    min-height: 32px !important;
+}
+
+.modal-dialog-xlarge {
+    max-width: 1100px;
+}
+
+.border-red {
+    border-color: red !important;
+}
+
+.opacity-0 {
+    opacity: 0 !important;
+}
+
+.custom-upload-file {
+    transform: Y(-50%);
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999;
+}
+
+
+/* EXCISE TAXATIONAL RETUR CSS ENDS HERE */
+
+.lang-arabic .d-flex.ar-text-left,
+.lang-arabic .d-flex.justify-content-between,
+.lang-arabic .row.flex-dir-reserve,
+.lang-arabic .d-flex.justify-content-between h3.d-flex {
+    flex-direction: row-reverse !important;
+}
+
+.lang-arabic a img.ar-dir-reverse {
+    transform: rotate(180deg);
+}
+
+ul li,
+ul {
+    padding: 0px;
+    list-style-type: none;
+}
+
+img.h-24 {
+    height: 24px
+}
+
+.lang-arabic .row-reverse {
+    flex-direction: row-reverse !important;
+}
+
+.lang-arabic .flex-direction-inherit {
+    flex-direction: inherit !important;
+}
+
+.lang-arabic .custom-ar-direction-link {
+    display: contents;
+}
+
+.lang-arabic .custom-ar-direction-link img {
+    transform: rotate(180deg);
+}
+
+.lang-arabic .custom-width-table .ml-10 {
+    margin-left: 10px !important;
+}
+
+.lang-arabic .ar-direction-align {
+    transform: rotate(0deg);
+    display: inline-block;
+}
+
+.custom-upload-file {
+    opacity: 0;
+    transform: Y(-50%);
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+
+.download-btn {
+    margin-bottom: 95px !important;
+}
+
+.download-btn a {
+    margin-right: 5px;
+}
+
+.download-btn a>img {
+    margin-right: 5px;
+}
+
+.download-btn a {
+    background: rgba(0, 100, 80, .1);
+    border: 0px;
+    color: #000;
+    border-radius: 5px;
+    padding: 7px 12px 12px;
+    box-shadow: 0 2px 4px 0 rgb(35 35 35 / 10%);
+    text-decoration: none !important;
+}
+
+.download-btn a:hover {
+    background: rgba(0, 100, 80, .1);
+    color: #000;
+}
+
+
+/* pointer none events*/
+
+.pointer-none {
+    pointer-events: none !important;
+}
+
+select.form-control,
+select.form-control:hover,
+select.form-control:focus {
+    padding: 0px 10px !important;
+    white-space: normal !important;
+    font-weight: unset !important;
+}
+
+.lang-arabic#toolTips .modal-filter-head,
+.lang-arabic#ConfirmPopupSB .modal-filter-head,
+.lang-arabic#paymenthistory .modal-filter-head,
+.lang-arabic#ConfirmPopupTP .modal-filter-head,
+.lang-arabic#submitSuccessPopup .modal-filter-head,
+.lang-arabic#ConfirmSaveasDraft .modal-filter-head
+{
+    margin: 40px 40px 0 60px;
+    text-align: left !important;
+}
+.lang-arabic#paymenthistory .modal-filter-head {
+    margin: 40px 40px 0 20px;
+    text-align: left !important;
+}
+
+.lang-arabic#toolTips .modal-filter-head button,
+.lang-arabic#ConfirmPopupSB .modal-filter-head button,
+.lang-arabic#paymenthistory .modal-filter-head button,
+.lang-arabic#ConfirmPopupTP .modal-filter-head button,
+.lang-arabic#submitSuccessPopup .modal-filter-head button,
+.lang-arabic#ConfirmSaveasDraft .modal-filter-head button
+ {
+    float: none !important;
+}
+
+img.ar-dir-reverse {
+    position: relative;
+    top: 3px;
+}
+
+.lang-arabic .la-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.lang-arabic .la-ml-0 {
+    margin-left: 0 !important;
+}
+
+.lang-arabic img.mr-10.ar-dir-reverse {
+    margin-right: 0 !important;
+    margin-left: 0
+}
+
+.lang-arabic .la-justify-content-start {
+    justify-content: flex-start !important;
+}
+
+.lang-arabic .la-justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.w-225 {
+    width: 225px !important;
+}
+
+.la-ml-0 {
+    margin-left: 0 !important;
+}
+
+.lang-arabic .bg-Watercourse-opa1 td.ar-text-right {
+    text-align: right !important;
+}
+
+.lang-arabic select {
+    direction: rtl;
+}
+
+.mt-4 {
+    margin-top: 4px !important;
+}
+
+.mb-15.download-btn {
+    margin-bottom: 15px !important;
+}
+
+.table.custom-width-table table td {
+    padding: 24px 24px !important;
+}
+
+.whitespace-nowrap {
+    white-space: nowrap;
+}

@@ -1,0 +1,621 @@
+<div class="container">
+  <div class="col-md-12 mt-3 mx-2" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'" *ngIf="!OtpSuccess">
+    <span class="breadTitle1" style="color: #999999; cursor: pointer"
+      routerLink="/mains/installmentplan">{{ lang.screen1.title }} > </span><span class="breadTitle1"
+      [style.color]="Notes ? '#999999': '#151515'" style="cursor: pointer;" (click)="openDetails()">{{
+      lang.zakatSc.ins_pln_set
+    }} </span><span class="breadTitle1" *ngIf="Notes" style="color: '#151515';">>
+      {{lang.zakatSc.notes}}</span>
+  </div>
+</div>
+
+
+<div class="container" dir="{{ dir }}" *ngIf="showDetails">
+
+  <div class="row mt-3">
+    <div class="col-md-12 stepHeader mt-3 mx-3">
+      <span class="stepBack" [routerLink]="['/mains/installmentplan']" *ngIf="dir === 'rtl'">
+        <img mat-raised-button src="assets/image/arrow-right-green.svg" />
+        {{ lang.screen2.back }}</span>
+      <span class="stepBack" [routerLink]="['/mains/installmentplan']" *ngIf="dir === 'ltr'">
+        <img mat-raised-button src="assets/image/arrow-left-green.svg" />
+        {{ lang.screen2.back }}</span>
+    </div>
+  </div>
+  <!-- <form [formGroup]="fourthFormGroup"> -->
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+        <div class="col-md-6 Installment-Plans" *ngIf="invoiceDetails.InstReqFor === '01'">
+          {{ lang.screen1.tab2 }}
+        </div>
+        <div class="col-md-6 Installment-Plans" *ngIf="invoiceDetails.InstReqFor === '02'">
+          {{ lang.screen1.int }}
+        </div>
+        <div class="col-md-6" style="display: flex; justify-content: flex-end">
+          <div class="tag32 mt-3 px-3 card-status" [ngClass]="newStatus === 'مسودة' || newStatus === 'Draft' || newStatus === 'مقدمة' || newStatus === 'Submitted' || newStatus === 'مطلوب بيانات اضافية' || newStatus === 'Additional Information Required' 
+                ? 'tag-unsubmit'
+                : newStatus ===  'تم إلغائها' || newStatus === 'Cancelled' || newStatus === 'منقوض' || newStatus === 'Revoked'
+                ? 'tag-danger'
+                : newStatus === 'قيد المراجعة' || newStatus === 'In Process'
+                ? 'tag-partial'
+                : newStatus === 'موافقة' || newStatus === 'Approved'
+                ? 'tag-success'
+                : ''
+            ">
+            {{ newStatus }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card border">
+            <div class="col-md-12 row">
+              <div class="col-md-4 mt-3 mb-3 display-center">
+                <!-- <div class="card-column-label">
+                  {{ lang.screen1.next_dt }}
+                </div>
+                <div class="card-column-value">
+                  {{ dueDate | date }}
+                </div> -->
+              </div>
+              <div class="col-md-4 mt-3 mb-3">
+                <div class="chart-wrapper">
+                  <div class="chart-inner-text">
+                    <span class="chart-inner-text1">{{ lang.screen2.tot }}</span><Br />
+                    <span class="card-column-value to-crt">{{
+                        getFormattedAmount(iprPostData.TotAmt)
+                          | currency: "SAR"
+                          | slice: 3
+                      }}
+                      {{ lang.screen1.sar }}</span>
+                  </div>
+                  <canvas baseChart [data]="doughnutChartData" [colors]="lineChartColors"
+                    [chartType]="doughnutChartType" [labels]="doughnutChartLabels" [options]="chartOptions" width="450"
+                    height="200" [legend]="douChartLegend">
+                  </canvas>
+                </div>
+              </div>
+              <div class="col-md-4 mt-3 mb-3 display-center">
+                <!-- <div class="legend-text">
+                  <span class="circle-text mx-2" style="background-color: #006450"></span>
+                  <span class="card-column-value">{{ paidAmt | currency: "SAR" | slice: 3 }}
+                    {{ lang.screen1.sar }}</span>
+                </div>
+                <div class="legend-text">
+                  <span class="circle-text mx-2" style="background-color: #95d600"></span>
+                  <span class="card-column-value">{{ nextInsAmt | currency: "SAR" | slice: 3 }}
+                    {{ lang.screen1.sar }}</span>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card border" style="max-width: 100%">
+            <div class="row mt-3">
+              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                <div class="circle-icon mx-3">
+                  <img class="px-3" src="assets/image/bill.png" />
+                </div>
+                <span class="value fwb">{{ lang.zakatSc.ins_dtls }}</span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-12 mt-3">
+                <mat-divider style="position: inherit"></mat-divider>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row px-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.screen2.ref_num }}
+                        </div>
+                        <div class="card-column-value">
+                          {{ invoiceDetails.Fbnum }}
+                        </div>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.screen2.rsn }}
+                        </div>
+                        <div class="card-column-value" *ngIf="iprPostData.InstReqReason === '01'">
+                          {{ lang.zakatSc.rsn1 }}
+                        </div>
+                        <div class="card-column-value" *ngIf="iprPostData.InstReqReason === '02'">
+                          {{ lang.zakatSc.rsn2 }}
+                        </div>
+                        <div class="card-column-value" *ngIf="iprPostData.InstReqReason === '03'">
+                          {{ lang.zakatSc.rsn3 }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <mat-divider style="position: inherit"></mat-divider>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mt-3 mb-3">
+                    <div class="row px-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.zakatSc.due_amt }}
+                        </div>
+                        <div class="card-column-value">
+                          {{
+                            getFormattedAmount(iprPostData.TotAmt)
+                              | currency: "SAR"
+                              | slice: 3
+                          }}
+                          {{ lang.screen1.sar }}
+                        </div>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.zakatSc.ins_amt }}
+                        </div>
+                        <div class="card-column-value">
+                          {{
+                            getFormattedAmount(insAmt)
+                              | currency: "SAR"
+                              | slice: 3
+                          }}
+                          {{ lang.screen1.sar }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <mat-divider style="position: inherit"></mat-divider>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mt-3 mb-3">
+                    <div class="row px-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.screen2.no_ins }}
+                        </div>
+                        <div class="card-column-value">
+                          {{ invoiceDetails.PlanDur }}
+                        </div>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-value">
+                          <button class="btnSecondary" mat-button (click)="displayForm()">
+                            {{ lang.screen2.display_ins }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card border" style="max-width: 100%">
+            <div class="row mt-3">
+              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                <div class="circle-icon mx-3">
+                  <img class="px-3" src="assets/image/bill.png" />
+                </div>
+                <span class="value fwb">{{ lang.screen2.bills }}</span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-12 mt-3">
+                <mat-divider style="position: inherit"></mat-divider>
+              </div>
+            </div>
+            <div class="row" *ngFor="
+                let bill of zakatBillDetails;
+                let index = index;
+                last as isLast
+              ">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row px-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="value fwb mt-3 mb-3">
+                          {{ lang.screen2.bill }} {{ bill.LineNo }}
+                        </div>
+                      </div>
+                      <div class="col-md-6"></div>
+                    </div>
+                    <div class="row px-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.zakatSc.bill_ty }}
+                        </div>
+                        <div class="card-column-value" *ngIf="bill.Abtyp === 'ZAKT'">
+                          {{ lang.screen1.tab2 }}
+                        </div>
+                        <div class="card-column-value" *ngIf="bill.Abtyp === 'ITAX'">
+                          {{ lang.screen1.int }}
+                        </div>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.zakatSc.invno }}
+                        </div>
+                        <div class="card-column-value">{{ bill.InvNo }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <mat-divider style="position: inherit"></mat-divider>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mt-3 mb-3">
+                    <div class="row px-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.zakatSc.due_amt }}
+                        </div>
+                        <div class="card-column-value">
+                          {{
+                            getFormattedAmount(bill.DueAmt)
+                              | currency: "SAR"
+                              | slice: 3
+                          }}
+                          {{ lang.screen1.sar }}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <!-- <div class="card-column-label">Amount</div>
+                        <div class="card-column-value">
+                        {{bill.InvAmt | currency:'SAR'  | slice:3}}</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="!isLast">
+                  <div class="col-md-12 mt-3">
+                    <mat-divider style="position: inherit"></mat-divider>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card border" style="max-width: 100%">
+            <div class="row mt-3">
+              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                <div class="circle-icon mx-3">
+                  <img class="px-3" src="assets/image/attach.png" />
+                </div>
+                <span class="value fwb">{{ lang.screen2.attachments }}</span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-12 mt-3">
+                <mat-divider style="position: inherit"></mat-divider>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-3">
+                <div class="row">
+                  <div class="col-md-12 mb-3">
+                    <div class="row px-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.screen2.card_label1 }}
+                        </div>
+                        <div class="card-column-value">
+                          {{ file1 }}&nbsp;
+                          <img src="assets/images/generic-documents.png" style="width: 24px" alt="" />
+                        </div>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="card-column-label">
+                          {{ lang.screen2.card_label2 }}
+                        </div>
+                        <div class="card-column-value">
+                          {{ file2 }}&nbsp;
+                          <img src="assets/images/generic-documents.png" style="width: 24px" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="tag-success-installment row mx-1">
+        <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+          <div class="primary-centre-text" style="font-size: 16px">
+            {{ lang.screen2.pr_amt }}
+          </div>
+        </div>
+        <div class="col-md-6 align-left-text">
+          <div>
+            {{ getFormattedAmount(nextInsAmt) | currency: "SAR" | slice: 3 }}
+            {{ lang.screen1.sar }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="tag-success-installment row mx-1">
+        <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+          <div class="primary-centre-text" style="font-size: 16px">
+            {{ lang.screen2.amt }}
+          </div>
+        </div>
+        <div class="col-md-6 align-left-text">
+          <div>
+            {{
+              getFormattedAmount(iprPostData.TotAmt)
+                | currency: "SAR"
+                | slice: 3
+            }}
+            {{ lang.screen1.sar }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3 mx-3">
+    <button class="btnPrimary" style="width: 22%" mat-button data-toggle="modal" data-target="#revokeOption"
+      *ngIf=" statusText === 'موافقة' || statusText === 'Approved'">
+      {{ lang.zakatSc.revk }}
+    </button>
+
+    <button class="btnPrimary" style="width: 22%" mat-button *ngIf="invoiceDetails.Status === 'E0018'"
+      (click)="reSubmit()">
+      Submit
+    </button>
+    <!-- <button class="btnPrimary onhover-notallowed" style="width: 22%" mat-button (click)="revokeInvoice(invoiceDetails.Fbnum)">
+      {{ lang.zakatSc.revk }}
+    </button> -->
+  </div>
+</div>
+
+<!-- revoke Button -->
+<div class="modal" id="revokeOption" data-keyboard="false" data-backdrop="static" [dir]="lang.dir">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+        {{lang.zakatSc.RevcfMsg1}} {{lang.zakatSc.RevcfMsg2}}
+      </div>
+      <div class="modal-footer">
+        <button class="btnPrimary mx-2" style="min-width: 91px;" type="submit" mat-raised-button
+          (click)="revokeInvoice(invoiceDetails.Fbnum)">
+          {{lang.zakatSc.Okay}}
+        </button>
+        <button class="btn btn-link mx-2" style="min-width: 91px;color: #aa0c19;font-family: SSTArabic-Bold;"
+          type="submit" data-dismiss="modal" (click)="closeModal()">
+          {{lang.zakatSc.cancel}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End -->
+
+
+<!--  Notes  -->
+<div class="container" *ngIf="Notes" dir="{{ dir }}">
+  <div class="row mt-3" *ngIf="!OtpSuccess">
+    <div class="col-md-12 stepHeader mt-3 mx-3">
+      <span class="stepBack" (click)="backNotes()" *ngIf="dir === 'rtl'">
+        <img mat-raised-button src="assets/image/arrow-right-green.svg" />
+        {{ lang.screen2.back }}</span>
+      <span class="stepBack" (click)="backNotes()" *ngIf="dir === 'ltr'">
+        <img mat-raised-button src="assets/image/arrow-left-green.svg" />
+        {{ lang.screen2.back }}</span>
+    </div>
+  </div>
+
+  <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+    <div class="col-md-12 Installment-Plans mt-3 mx-3">
+      {{ lang.zakatSc.notes }}
+    </div>
+  </div>
+  <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+    <div class="col-md-12 placeholder mx-3">
+      {{ lang.zakatSc.details }}
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12 mt-3 mx-3">
+      <mat-divider style="position: inherit"></mat-divider>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12 mt-5 mx-3">
+      <textarea class="rectangle-box" [placeholder]="lang.zakatSc.desc" maxlength="1000" [(ngModel)]="notes"
+        [ngClass]="notes === '' && submitted  ? 'input-error' : ''"></textarea>
+      <div class="char-length col-md-12" [ngClass]="dir === 'rtl' ? 'textEn' : 'textAr'">{{notes.length}}/1000</div>
+    </div>
+    <div class="col-md-12 mt-5 mx-2" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+      <button class="btnPrimary mt-3" style="width: 22%" mat-button (click)="openOtpModel()">
+        {{ lang.screen2.confirm }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- End -->
+
+<!-- OTP model  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-controls-modal="myModal" data-backdrop="static"
+  data-keyboard="false" aria-labelledby="myModalLabel" aria-hidden="true" dir="{{ dir }}">
+  <div class="modal-dialog otp-modal-box">
+    <div class="modal-content otp-modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="container">
+          <div class="col-md-12 mt-5 mx-2">
+            <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+              <div class="col-md-12 Installment-Plans mt-3 mx-3">
+                {{ lang.zakatSc.t1 }}
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12 placeholder mx-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                {{ lang.zakatSc.title }} - XXXXXX{{mobile}}
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12 placeholder mx-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                {{ lang.zakatSc.rAppNo }} {{ fbNum }}
+              </div>
+              <!-- <div class="col-md-6">
+                <div class="card-column-value" style="float: right">
+                  {{ fbNum }}
+                </div>
+              </div> -->
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="row mt-3">
+                  <div class="col-md-12 vBox mx-3" [style.padding-right]="dir == 'rtl' ? '0' : ''" dir="ltr"
+                    [style.justify-content]="dir === 'rtl'? 'flex-end':''">
+                    <input id="e1Id" #e1 type="password" class="Verif-box ash" maxlength="1"
+                      [disabled]="enableResendButton" (keyup)="keyUpEvent($event, 1)" />
+                    <input #e2 type="password" class="Verif-box ash" maxlength="1" [disabled]="enableResendButton"
+                      (keyup)="keyUpEvent($event, 2)" />
+                    <input #e3 type="password" class="Verif-box ash" maxlength="1" [disabled]="enableResendButton"
+                      (keyup)="keyUpEvent($event, 3)" />
+                    <input #e4 type="password" class="Verif-box ash" maxlength="1" [disabled]="enableResendButton"
+                      (keyup)="keyUpEvent($event, 4)" style="color: transparent; text-shadow: 0 0 0 black" />
+                  </div>
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-12 mx-3">
+                    <div class="smallHeading" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      <img src="assets/image/forgotClock.svg" /> &nbsp;
+                      <span>{{ counterDisplay }} </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="col-md-12 mx-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                    <span class="btnSecondary acknowledgement-btn"
+                      style="font-family: 'SSTArabic-Roman'">{{ lang.zakatSc.msgStrip }}</span>
+                  </div>
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-12 mx-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                    <button (click)="resendOTP()" class="resend" [style.opacity]="enableResendButton ? '1' : '0.2'"
+                      [style.cursor]="enableResendButton ? 'pointer' : ''" style="
+                          border: none;
+                          color: #006450;
+                          background-color: white;
+                        " [disabled]="!enableResendButton">
+                      {{ lang.zakatSc.verifyTitle }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End -->
+
+<div class="row mt-3" *ngIf="OtpSuccess" dir="{{ dir }}">
+  <div class="col-md-12 mt-3 mx-3">
+    <div class="row align-center">
+      <img class="px-3" style="height: 12vh" src="assets/image/success.svg" />
+    </div>
+  </div>
+  <div class="col-md-12 mt-3 mx-3">
+    <div class="row align-center Installment-Plans">
+      {{ lang.screen1.card1 }}
+    </div>
+  </div>
+  <div class="col-md-12 mt-3 mx-3">
+    <div class="row align-center card-column-label">
+      {{ lang.zakatSc.success_msg1 }}
+    </div>
+  </div>
+  <div class="col-md-12 mt-3 mx-3">
+    <div class="row align-center mt-3">
+      <div class="confirmation-input-box">
+        <div class="col-md-6">
+          <div class="card-column-label" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            {{ lang.screen2.ref_num }}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card-column-value" [ngClass]="dir === 'rtl' ? 'textEn' : 'textAr'">
+            {{ fbNum }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 mt-3 mx-3">
+    <div class="row mt-3 mx-3 align-center">
+      <span class="btnSecondary acknowledgement-btn"
+        [routerLink]="['/mains/dashboard']">{{ lang.screen2.go_dashboard }}</span>
+    </div>
+  </div>
+  <!-- <div class="col-md-12 mt-3 mx-3">
+    <div class="row mt-3 mx-3 align-center">
+      <span class="btnSecondary acknowledgement-btn" (click)="downloadAck(fbNum)">{{ lang.screen2.dwnld_cnfrm }}</span>
+    </div>
+  </div> -->
+</div>
+
+<notifier-container></notifier-container>

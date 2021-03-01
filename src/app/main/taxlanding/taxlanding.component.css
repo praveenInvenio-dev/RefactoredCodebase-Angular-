@@ -1,0 +1,76 @@
+.taxMgt {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: black;
+}
+
+.viewMore {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: start;
+  position: relative;
+  color: #006450;
+  right: 15px;
+}
+
+.exciseTitle1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+}
+
+.exciseTitle1:hover{
+  color: #232323;
+}
+
+.quickActionTxt {
+  object-fit: contain;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.quickActionTxt2{
+  font-family:  SSTArabic-Medium;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+  text-align: start;
+}
+
+.taxMgttxt2 {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: black;
+}

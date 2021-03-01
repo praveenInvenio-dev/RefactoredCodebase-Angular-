@@ -1,0 +1,1268 @@
+<notifier-container></notifier-container>
+<div class="container alignStart textDark" style="max-width: 936px; font-family: SSTArabic-Roman;"
+[dir]="lang.dir =='ltr'?'ltr':'rtl'">
+<div class="container alignStart"  style=" padding: 0;"*ngIf="!isSuccessPage">
+  <div class="row">
+    <!-- <div class="col-md-10 container">
+      <span class="exciseTitle1 unicodeDir bcTitle">{{ lang.bc1 }} &gt; {{ lang.bc2 }} &gt; </span><span
+        class="exciseTitle1 bcTitleActive" style="
+        font-size: 16px;">{{ lang.bc3  }}</span>
+    </div> -->
+  </div>
+  <div class="col-md-12" style="margin: 0; padding: 0;">
+    
+
+    <div class="  row mb-4">
+      <div class="col-md-12">
+
+      <div  *ngIf="optionActive!== 1" >
+        <span class="exciseTitle1 unicodeDir bcTitle" style="cursor: pointer;" (click)="TaxManagement()"
+          > {{ lang.bc1 }}</span>  <span class="exciseTitle1 unicodeDir bcTitle"> &gt; </span> <span class="exciseTitle1 unicodeDir bcTitle" 
+          (click)="VatServicesClicked()" style="cursor: pointer;" > {{ lang.bc2 }}</span> <span class="exciseTitle1 unicodeDir bcTitle"> &gt; </span> 
+           <span class="exciseTitle1 unicodeDir bcTitleActive" 
+           (click)="releaseSecurityClicked()">{{ lang.bc3 }}</span>
+      </div>
+      <div *ngIf="optionActive === 1" >
+        <span class="exciseTitle1 unicodeDir bcTitle" (click)="TaxManagement()" style="cursor: pointer;"
+          >{{ lang.bc1 }}</span><span class="exciseTitle1 unicodeDir bcTitle"> &gt; </span>
+          <span class="exciseTitle1 unicodeDir bcTitle" (click)="VatServicesClicked()" style="cursor: pointer;"> {{ lang.bc2 }}</span>
+          <span class="exciseTitle1 unicodeDir bcTitle"> &gt; </span> <span class="exciseTitle1 bcTitleActive" style="
+        font-size: 16px;" (click)="releaseSecurityClicked()">{{ lang.bc3 }} </span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3" style="width: 100%">
+      <div class="col-md-12">
+          <div class="stepHeader row">
+              <span class="stepBack col-md-6" (click)="back()">
+                  <img [src]="lang['dir'] =='ltr'?'assets/image/arrow-left-green.svg':'assets/image/arrow-right-green.svg'"
+                      style="width: 24px">
+                  {{lang.back}}</span>
+              <span *ngIf="optionActive!==1&&!isViewOnlyMode" class="stepNumber col-md-6">
+                  <img [ngClass]="lang.dir=='rtl'?'rotateSteps':''" src="{{ lang.menu[optionActive - 1].step }}"
+                      style="width: auto;height: 16px;" />  
+                  <img *ngIf="optionActive==5 " class="m-0 p-1" [ngClass]="lang.dir=='rtl'?'rotateTick':''"  src="assets/image/check.svg" />
+              </span>
+
+
+
+          </div>
+      </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+        <div  class="pageTitle" *ngIf="!isViewOnlyMode">
+           {{ lang.menu[optionActive - 1].title }}
+        </div>
+        <div  class="pageTitle" *ngIf="isViewOnlyMode">
+          {{ lang.bc3 }}
+       </div>
+        
+        <!-- *ngIf="mainPage==true && showApp ==false" -->
+    </div>
+    <div class="col-md-12">
+      <div *ngIf="optionActive!==1&&!isViewOnlyMode" class="row mt-2">
+        <div class="col-md-12">
+            <div class="value textGray">
+             {{  lang.menu[optionActive - 1].subtitle }}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+  <div *ngIf="optionActive==1">
+      <div class="layoutOptions">
+          <img [ngClass]="layoutType == 'grid'?'layoutId layoutId-active' : 'layoutId filterContrast'"   (click)="changeLayoutType('grid')" [src]="layoutType=='grid'?'  assets/image/card-green.svg':'assets/image/cards.svg'" >
+          <img [ngClass]="layoutType == 'table'?'layoutId layoutId-active' : 'layoutId filterContrast'" (click)="changeLayoutType('table')" src="assets/image/table.svg">
+
+      </div>
+
+      <div class="mt-4 row">
+          <div class="searchBar col">
+           
+              <input id="SearchInput" [placeholder]="lang.search" (mouseover)="onSearchHoverIn()"  (mouseout)="onSearchFocusOut()" (input)="onSearchFocusIn()"  (blur)="onSearchFocusOut()"  class="commonInput"    [(ngModel)]="searchText"  type="search"/>
+            
+              <span *ngIf="showSearch" 
+                  [ngClass]="lang.dir=='ltr'?'searchIcon-ltr':'searchIcon-rtl'"  class="searchIcon"><img
+                      src="assets/images/search.png" /></span>
+          </div>
+          <!-- (click)="onClickFilterIcon()" -->
+          <div class="filterIcon col-auto" (click)="showFilterDialogue()" >
+              <img src="assets/image/filter.svg" />
+          </div>
+      </div>
+
+
+      <div *ngIf="layoutType=='grid'"  class="row mt-5" style="margin-bottom: 56px;">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="mb-2 cardCntrMb">
+                  <div class="add-card-large  col-md-6 " style="height: 172px;max-width: 438px;"  (click)="onSubmit()">
+                      <img class="px-2" src="assets/image/add.svg">
+                      <div class="value fwb textPrimary mx-1 mt-2">{{lang.addNewRequest}}</div>
+                  </div>
+              </div>
+          </div>
+          <ng-container *ngFor="let each of requestedReleaseSecurityList | filter:searchText ">
+          <div class="col-md-6 col-sm-12 col-xs-12 mb-2" style="cursor: pointer;" (click)="onWorkItemList_ItemTapped(each)">
+            <!-- (click)="addRulingRequest(each.Fbnum)" -->
+              <div class="mb-2 cardCntrMb"  >
+                  <div class="filing-card textDark border" style="height: 172px; max-width: 438px;">
+                      <div class="row filing-card-upper px-3">
+                          <div class="col-md-6">
+                              <div class="value  fwb"> {{each.FbtText}} </div>
+                              <!-- <div class="caption textGray">{{each.FbtText}}</div>  -->
+                          </div>
+                          <div class="col-md-6" style="justify-content: flex-end;
+                      display: flex;">
+                      <!-- [ngClass]="statusColor(each.Fbust)" -->
+                              <div *ngIf="isOrangeStatus(each.Fbust)"  class="tag32 tag-partial"  [matTooltip]="each.FbustTxt" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.FbustTxt}}</div>
+                              <div *ngIf="isGreenStatus(each.Fbust)"  class="tag32 tag-success"  [matTooltip]="each.FbustTxt" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.FbustTxt}}</div>
+                              <div *ngIf="isRedStatus(each.Fbust)"  class="tag32 tag-danger"  [matTooltip]="each.FbustTxt" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.FbustTxt}}</div>
+                              <div *ngIf="isGreyStatus(each.Fbust)"  class="tag32 tag-unsubmit"  [matTooltip]="each.FbustTxt" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.FbustTxt}}</div>
+                          </div>
+                      </div>
+                      <div class="divider">
+                      </div>
+                      <div class="row filing-card-down px-3" style="height: 67px;">
+                          <div class="col-6 mobpad1">
+                           <div class="caption textGray">{{lang.requestNumber}}</div> 
+                            <div class="value  fwb">{{each.Fbnum }}</div>
+                          </div>
+                          <div class="col-6 mobpad1">
+                            <div class="caption textGray"> {{lang.creationdate}} </div> 
+                             <div class="value  fwb" [innerHTML]=GetFormattedCreationDate(each.Receipt) ></div>
+                           </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+          </ng-container>
+      </div>
+
+
+      <div *ngIf="layoutType=='table'"  class="row mt-5" style="margin-bottom: 56px;">
+          <div class="col-12">
+              <div class="mb-2 border">
+                  <div class="row" style="height: 44px;margin: 0; cursor: pointer;"  (click)="onSubmit()">
+                      <img class="col-auto" src="assets/image/add.svg">
+                      <div class="value fwb textPrimary mt-2 mx-1 col" style="padding-inline-start: 0; margin-inline-start: 0;">{{lang.addNewRequest}}</div>
+                  </div>
+              </div>
+          </div>
+          
+          <table [hidden]="isSubmittedRequestPresent()" style="width:100%;table-layout: fixed; margin-left:15px;margin-right: 15px;">
+              <tr class="tabHeader" >
+                  <ng-container *ngIf="lang.dir !== 'rtl'">
+                      <th colspan="8">{{lang.applicationtype}}  </th>
+                  </ng-container>
+                  <ng-container *ngIf="lang.dir === 'rtl'">
+                      <th colspan="8" [style.border-right]="lang.dir === 'rtl' ? ('1px solid #bbb'):''"
+                          [style.border-top-left-radius]="lang.dir === 'rtl' ? '0px' : '16px'"
+                          [style.border-top-right-radius]="lang.dir === 'rtl' ? '16px' : '0px'">{{lang.applicationtype}}</th>
+                  </ng-container>
+                  <th colspan="8" >{{lang.requestNumber}}</th>
+                  <th colspan="8" >{{lang.creationdate}} </th>
+                  
+                  <ng-container *ngIf="lang.dir !== 'rtl'">
+                      <th colspan="8"> {{lang.status}} </th>
+                  </ng-container>
+                  <ng-container *ngIf="lang.dir === 'rtl'">
+                      <th colspan="8" [style.border-top-right-radius]="lang.dir === 'rtl' ? '0px' : '16px'"
+                          [style.border-top-left-radius]="lang.dir === 'rtl' ? '16px' : '0px'">{{lang.status}} 
+                      </th>
+                  </ng-container>
+              </tr>
+              <ng-container *ngFor="let each of requestedReleaseSecurityList | filter:searchText; let i=index">
+                <!-- *ngIf="(each.Fbust == selectedStatus || selectedStatus=='01') && (each.Fbtyp == 'TPEV')" -->
+                  <tr class="tabheader2" style="cursor: pointer;" (click)="onWorkItemList_ItemTapped(each)"     >
+                      <ng-container *ngIf="lang.dir === 'rtl'">
+                          <!-- <td colspan="8" >{{each.FbtText}}
+                          </td> -->
+                          <td colspan="8"
+                              [style.border-bottom-right-radius]="lang.dir === 'rtl' ? '16px' : '0px'"
+                              [style.border-bottom-left-radius]="lang.dir === 'rtl' ? '0px' : '0px'"
+                              >
+                              {{each.FbtText}}
+                          </td>
+                      </ng-container>
+
+
+                      <ng-container *ngIf="lang.dir !== 'rtl'">
+                          <td colspan="8">{{each.FbtText}}</td>
+                      </ng-container>
+
+
+                      <td colspan="8">{{each.Fbnum}}</td>
+                      <td colspan="8" [innerHTML]=GetFormattedCreationDate(each.Receipt) ></td>
+                    
+                     
+                      <ng-container *ngIf="lang.dir !== 'rtl'">
+                          <td colspan="8">
+                              <span  *ngIf="isOrangeStatus(each.Fbust)" [matTooltip]="each.FbustTxt" class="tag32 tag-partial" style="height: 35px; width: 80%"   >
+                                  {{each.FbustTxt }}</span>
+                                  <span *ngIf="isGreenStatus(each.Fbust)"  [matTooltip]="each.FbustTxt" class="tag32 tag-success" style="height: 35px; width: 80%"   >
+                                    {{each.FbustTxt }}
+                                  </span>
+                                  <span  *ngIf="isRedStatus(each.Fbust)" [matTooltip]="each.FbustTxt" class="tag32 tag-danger" style="height: 35px; width: 80%"   >
+                                    {{each.FbustTxt }}
+                                  </span>
+                                  <span  *ngIf="isGreyStatus(each.Fbust)"  [matTooltip]="each.FbustTxt" class="tag32 tag-unsubmit" style="height: 35px; width: 80%"   >
+                                    {{each.FbustTxt }}
+                                  </span>
+                          </td>
+
+                      </ng-container>
+                      <!-- [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']" -->
+                      <ng-container *ngIf="lang.dir === 'rtl'">
+                          <!-- <td colspan="8" > 
+                              <span
+                                 >
+                                  {{each.StatText}}</span>
+                          </td> -->
+
+                           <td colspan="8"
+                              [style.border-bottom-left-radius]="lang.dir === 'rtl' ? '16px' : '0px'"
+                              [style.border-bottom-right-radius]="lang.dir === 'rtl' ? '0px' : '0px'"
+                             
+                              
+                              >
+                              <span *ngIf="isOrangeStatus(each.Fbust)" [matTooltip]="each.FbustTxt" class="tag32 tag-partial" style="height: fit-content;width:80% ; margin: 16px 0 16px 17px;
+                              padding: 8px 21px 8px 22px;"   >
+                                  {{each.FbustTxt}}
+                              </span>
+                              <span *ngIf="isGreenStatus(each.Fbust)" [matTooltip]="each.FbustTxt" class="tag32 tag-success" style="height: fit-content;width:80% ; margin: 16px 0 16px 17px;
+                              padding: 8px 21px 8px 22px;"   >
+                                  {{each.FbustTxt}}
+                              </span>
+                              <span  *ngIf="isRedStatus(each.Fbust)" [matTooltip]="each.FbustTxt" class="tag32 tag-danger" style="height: fit-content;width:80% ; margin: 16px 0 16px 17px;
+                              padding: 8px 21px 8px 22px;"   >
+                                  {{each.FbustTxt}}
+                              </span>
+                              <span  *ngIf="isGreyStatus(each.Fbust)" [matTooltip]="each.FbustTxt" class="tag32 tag-unsubmit" style="height: fit-content;width:80% ; margin: 16px 0 16px 17px;
+                              padding: 8px 21px 8px 22px;"   >
+                                  {{each.FbustTxt}}
+                              </span>
+                          </td> 
+                      </ng-container>
+
+                  </tr>
+              </ng-container>
+
+
+
+          </table>
+      </div>
+
+
+
+
+
+  </div>
+  <div *ngIf="optionActive==1" class="row mt-2">
+      <div class="col-md-12">
+          <div class="value textGray">
+              {{ lang.menu[optionActive - 1].subtitle }}
+          </div>
+      </div>
+  </div>
+  <div *ngIf="optionActive!==1" class="Rectangle-12New mt-3"></div>
+
+
+    <br /><br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <div class="row" *ngIf="optionActive === 2">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit2()">
+
+          <div class="row block" [ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/user.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2"> {{ lang.menu[2- 1].title }} </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 justifyContentEnd vCenter row">
+                <div class="edit-button"></div>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.tin}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Gpartz}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.taxpayerName}}</div>
+                <span class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Name}}</span>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.cRLicense}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Actno}}</span>
+              </div>
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.mainoutlit}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Actnm}}</span>
+              </div>
+
+              <!-- <div class="col-md-6 block-5">
+                      <div class="matLabel block-4">{{lang.taxpayerName}}</div>
+                      <span class="Placeholder-text-Copy block-3 col-md-6"
+                        >tax year</span
+                      >
+                    </div> -->
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.address}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.AddressSet.BuildingNo +' '+ dataTorequestedReleaseSecurityLis.d.AddressSet.Street+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.Quarter+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.RegionDesc+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.City+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.PostalCd}}</span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <br /><br />
+
+          <div>
+            <button class="btnPrimary " type="submit" mat-raised-button>
+              {{lang.continueText}}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="row" *ngIf="optionActive === 3">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit3()" [formGroup]="securityDetailForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="value valueLight mb-3">
+                {{lang.pleaseselectthetypeofsecuritysubmitted}}
+              </div>
+            </div>
+
+            <div class="row col-12">
+              <div class="col-md-4 mb-3 " style="min-width: 224px; max-width: 240px ;">
+               <div class="card207"  [ngClass]="securityDetailForm.controls.TypeOfSecuritySubmitted.errors && onSubmit3Flag?'inputErrCard':''">
+                <div class="selector-card border pb-3 px-3 card207" 
+                [ngClass]="{'selector-card-active': securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'}"
+                (click)="typeOfSecurityIsDisable ? $event.stopPropagation() : Title1Clicked();">
+                <div class="value  fwb">{{lang.cashsecurity}}</div>
+              </div>
+
+               </div>
+
+              </div>
+              <div class="col-md-4 mb-3 " style="min-width: 224px;max-width: 240px;"> 
+                <div class="card207" [ngClass]="securityDetailForm.controls.TypeOfSecuritySubmitted.errors && onSubmit3Flag?'inputErrCard':''">
+                <div class="selector-card border pb-3 px-3 card207" 
+                  [ngClass]="{'selector-card-active': securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Bank'}"
+                  (click)="typeOfSecurityIsDisable ? $event.stopPropagation() : Title2Clicked();">
+                  <div class="value  fwb">{{lang.bankguarantee}}</div>
+                </div>
+              </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="value valueLight mb-3 " style="margin-top: 40px;">
+                {{lang.Pleaseselectthecasereferencenumber}}
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6  mt-3">
+
+              <div class="matLabel  labelMarginBottom">{{lang.caseReferenceNumber}}</div>
+              <mat-select [ngClass]="securityDetailForm.controls.CashreferenceNumber.errors && onSubmit3Flag?'inputErr':''" style="min-width: unset;max-width:unset;width: 100% !important;" class="commonMatSelect " formControlName="CashreferenceNumber"
+                (selectionChange)="changeReferenceNumber($event)">
+
+                <mat-option *ngFor="let item of dataTorequestedReleaseSecurityLis.d.SecRefSet.results" style="font-family: SSTArabic-Roman;color: 232323 !important;" [value]="item"
+                  value="1"> {{item.Refno}}</mat-option>
+
+
+              </mat-select>
+              <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+            </div>
+            <div class="col-xs-12 col-sm-6 mt-3">
+
+              <div class="matLabel  labelMarginBottom">{{lang.SecurityAmount}}</div>
+              <input class="commonInput"  style="min-width: unset;max-width:unset;width: 100% !important;" disabled formControlName="SecurityAmount" />
+              <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+            </div>
+            <div class="col-xs-12 col-sm-6 mt-3">
+
+              <div class="matLabel  labelMarginBottom">{{lang.Submissiondatestring}}</div>
+              <input class="commonInput"    style="min-width: unset;max-width:unset;width: 100% !important;" [value]="GetFormattedSubmissionDate(securityDetailForm.controls['SubmissionDate'].value)"  disabled  />
+              <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+  
+            </div>
+            <div class="col-md-12" *ngIf="securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'">
+              <div class="value valueLight mb-3" style="margin-top: 40px;">
+                {{lang.Pleasespecifyyourpreferredrefundmethod}}
+              </div>
+            </div>
+            <div class="col-md-4 mb-3" style="min-width: 224px;max-width: 240px ; " *ngIf="securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'">
+              <div class="card207"  [ngClass]="securityDetailForm.controls.PreferredRefundMethod.errors && onSubmit3Flag?'inputErrCard':''">
+              <div class="selector-card border pb-3 px-3 card207" 
+                [ngClass]="{'selector-card-active': securityDetailForm.controls['PreferredRefundMethod'].value === 'CashRefundMethod'}"
+                (click)="CashRefundMethodTileClicked()">
+                <div class="value  fwb">{{lang.Cashrefund}}</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-md-4 mb-3" style="min-width: 224px;max-width: 240px ; "  *ngIf="securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'">
+              <div class="card207"  [ngClass]="securityDetailForm.controls.PreferredRefundMethod.errors && onSubmit3Flag?'inputErrCard':''">
+             
+              <div class="selector-card border pb-3 px-3 card207" 
+                [ngClass]="{'selector-card-active': securityDetailForm.controls['PreferredRefundMethod'].value === 'CarryForwardRefundMethod'}"
+                (click)="CarryForwardRefundMethodTileClicked()">
+                <div class="value  fwb">{{lang.CarryforwardofcreditinVATaccount}}</div>
+              </div>
+            </div>
+            </div>
+            <div class="col-md-12"
+              *ngIf="securityDetailForm.controls['PreferredRefundMethod'].value === 'CashRefundMethod' && securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'">
+              <div class="value valueLight mb-3" style="margin-top: 40px;">
+                {{lang.Selectthepreferredaccount}}
+              </div>
+            </div>
+            
+            <div class=" row col-12" style="margin-inline-start: 0;"
+              *ngIf="securityDetailForm.controls['PreferredRefundMethod'].value === 'CashRefundMethod' && securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'">
+              <ng-container style="margin-inline-start: 0;" *ngFor="let item of dataTorequestedReleaseSecurityLis.d.IBANSet.results; let i=index;">
+              <div style=" margin-inline-end: 20px;margin-inline-start: 0;min-width: 224px;max-width: 240px ;">            
+                <div  class="" style="width: 212px; height: 106px;"  [ngClass]="securityDetailForm.controls.IbanNumber.errors && onSubmit3Flag?'inputErrCard':''">
+                <div  class=" pb-3 px-3 mb-2 col-md-4 col-sm-12 col-xs-12 selector-card  border "
+               style="width: 207px; margin-inline-start: 0;"
+                (click)="IbanSelectorCardClicker(i)"
+                [ngClass]="{'selector-card-active':item.Iban=== securityDetailForm.get('IbanNumber').value}">
+                <img [src]="getBankLogo(item.Iban)"  [hidden]="getBankLogo(item.Iban)==''"  style=" width: 32px;height: 32px;object-fit: contain; margin-inline-start: auto;">
+                <div [ngClass]="{'grey':item.Iban!== securityDetailForm.get('IbanNumber').value}" style="display: inline-block; overflow-wrap: anywhere; font-size: 12px"  [innerHTML]=trimIban(item.Iban) >
+                 </div>
+                
+                <div style="display: inline-block; overflow-wrap: anywhere;   text-overflow: ellipsis;text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;" [hidden]="getBankName(item.Iban)==''" [innerHTML]=getBankName(item.Iban) class="value  fwb ">
+                  </div>
+                  
+                  
+
+
+
+
+              </div>
+            </div>
+            </div>
+
+            </ng-container>
+            </div>
+
+
+          </div>
+
+
+
+
+
+
+          <br /><br />
+
+          <div>
+            <!-- [disabled]="securityDetailForm.invalid" -->
+            <button class="btnPrimary "  type="submit"
+              mat-raised-button>
+              {{lang.continueText}}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="optionActive === 4">
+      <div class="col-md-12">
+        <form [formGroup]="DeclarationFormGroup" (ngSubmit)="onSubmit4()">
+
+          <div class="mt-3">
+
+
+
+            <div class="row" style="margin-bottom: 56px;">
+
+              <div class="col-xs-12 col-sm-6 mb-2">
+
+                <div class="matLabel mt-2  labelMarginBottom">{{lang.f3.label1}}</div>
+                <mat-select class="commonMatSelect" style="min-width: unset;max-width:unset;width: 100% !important;"
+                  formControlName="idType" [ngClass]="DeclarationFormGroup.controls.idType.errors && onSubmit4Flag?'inputErr':''" (selectionChange)="onIdSelect()">
+
+                  <mat-option value="ZS0001" style="font-family: SSTArabic-Roman;color: 232323 !important;"> {{lang.f3.id1}}</mat-option>
+                  <mat-option value="ZS0002" style="font-family: SSTArabic-Roman;color: 232323 !important;"> {{lang.f3.id2}}</mat-option>
+                  <mat-option value="ZS0003" style="font-family: SSTArabic-Roman;color: 232323 !important;">{{lang.f3.id3}}</mat-option>
+
+                </mat-select>
+                <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+              </div>
+              <div class="col-xs-12 col-sm-6 mb-2">
+                <div class="matLabel mt-2  labelMarginBottom">{{lang.f3.label2}}</div>
+                <input class="commonInput" [placeholder]="lang.f3.label2" formControlName="idNum" [ngClass]="((DeclarationFormGroup.controls.idNum.errors && onSubmit4Flag)  || (showIdNumError && this.DeclarationFormGroup.controls.idType.value=='ZS0003'))?'inputErr':''"
+                  style="min-width: unset;max-width:unset;width: 100% !important;" maxlength="15" (input)="onIdNumChange()"
+                  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                  [readOnly]="(isIdValidated == true && DeclarationFormGroup.controls.idType.value!='ZS0003') || (isIdValidated==false && this.DeclarationFormGroup.controls.idType.value!='ZS0003')" />
+                <div class="matLabel helperMarginTop text-danger"
+                  *ngIf="showIdNumError && this.DeclarationFormGroup.controls.idType.value=='ZS0003'">{{lang.gccIDError}}</div>
+              </div>
+              <div class="col-xs-12 col-sm-6 mb-2">
+                <div class="matLabel mt-2  labelMarginBottom">{{lang.f3.label3}}</div>
+                <input class="commonInput" [placeholder]="lang.f3.label3" formControlName="name" [ngClass]="DeclarationFormGroup.controls.name.errors && onSubmit4Flag?'inputErr':''"  maxlength="80" (input)="nameValidator($event)" (blur)="onInputBlur()"
+                  style="min-width: unset;max-width:unset;width: 100% !important;" />
+                <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+              </div>
+              <br/>
+
+
+<div class="col-md-12">
+              <div class="check mt-4" style="margin: 0 ">
+                <!-- checkboxAckCss -->
+                <mat-checkbox class="check checkboxAckCssnew" formControlName="cbdeclaration" [ngClass]="DeclarationFormGroup.controls.cbdeclaration.errors && onSubmit4Flag?'inputError':''"  >
+                  {{lang.f3.term}}
+                </mat-checkbox>
+              </div>
+            </div>
+
+            </div>
+
+
+
+            <!-- [disabled]="DeclarationFormGroup.invalid || isIdValidated == false" 
+            [disabled]="DeclarationFormGroup.invalid || isIdValidated == false"-->
+            <button type="submit" class="btnPrimary" 
+              style="min-width: 207px !important;" mat-raised-button>
+              {{ lang.continue }}
+            </button>
+          </div>
+
+
+          <!-- <div class="row" style="margin-bottom: 56px;">
+
+                            <div class="col-xs-12 col-sm-6">
+
+                                <div class="matLabel mt-2 required labelMarginBottom">{{lang.f3.label1}}</div>
+                                <mat-select class="commonMatSelect">
+
+                                    <mat-option value="1"> option1</mat-option>
+                                    <mat-option value="2"> option2</mat-option>
+
+                                </mat-select> -->
+          <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+          <!-- </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="matLabel mt-2 required labelMarginBottom">{{lang.f3.label2}}</div>
+                                <input class="commonInput" placeholder="placeholder" /> -->
+          <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+          <!-- </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="matLabel mt-2 required labelMarginBottom">{{lang.f3.label3}}</div>
+                                <input class="commonInput" placeholder="placeholder" /> -->
+          <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+          <!-- </div>
+
+
+
+                            <div class="check mt-4" style="margin: 0 15px">
+                                <mat-checkbox class="checkboxAckCss">
+                                    {{lang.f3.term}}
+                                </mat-checkbox>
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <button type="submit" class="btnPrimary" style="min-width: 207px !important;"
+                            mat-raised-button>
+                            {{ lang.continue }}
+                        </button>
+                    </div> -->
+
+        </form>
+      </div>
+    </div>
+
+
+
+
+    <div class="row" *ngIf="optionActive === 5 && !isViewOnlyMode">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit5()">
+
+          <div class="row block mb-5" [ngStyle]="{'margin-inline-start': lang.dir==='rtl'? '15px' : ''}">
+            <div class="row border" style="width: 100%" >
+                <div class="col-md-6 sectionTitle block-2" >
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section" > 
+                    <div class="roundedIcon">
+                      <img src="assets/image/user.svg" />
+                    </div>
+                    <div  class="sectionTitle fwb px-2"> {{ lang.menu[2- 1].title }} </div>
+                  </div>
+                </div>
+
+              <div class="col-md-6 sectionTitle block-2 justifyContentEnd    vCenter row" >
+                <div class="row  px-3 mx-0 taxpayer-card-section" > 
+                  <div class="edit-button  px-2" (click)="TapayerDetailEditClicked()">{{lang.edit}}</div>
+                </div>
+                
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.tin}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Gpartz}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.taxpayerName}}</div>
+                <span class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Name}}</span>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.cRLicense}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Actno}}</span>
+              </div>
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.mainoutlit}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.Actnm}}</span>
+              </div>
+
+              <!-- <div class="col-md-6 block-5">
+                  <div class="matLabel block-4">{{lang.taxpayerName}}</div>
+                  <span class="Placeholder-text-Copy block-3 col-md-6"
+                    >tax year</span
+                  >
+                </div> -->
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.address}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{dataTorequestedReleaseSecurityLis.d.AddressSet.BuildingNo +' '+ dataTorequestedReleaseSecurityLis.d.AddressSet.Street+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.Quarter+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.RegionDesc+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.City+' '+dataTorequestedReleaseSecurityLis.d.AddressSet.PostalCd}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row block mb-5" [ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/details.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2"> {{ lang.menu[2].title }} </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 sectionTitle block-2 justifyContentEnd    vCenter row" >
+                <div class="row  px-3 mx-0 taxpayer-card-section" > 
+                  <div class="edit-button   px-2" (click)="SubmissionDetailEditClicked()">{{lang.edit}}</div>
+                </div>
+                
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.typeoFsecuritySubmitted}}</div>
+                <span *ngIf="securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'"
+                  class="Placeholder-text-Copy block-3 col-md-6">{{lang.cashsecurity}}</span>
+                <span *ngIf="securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Bank'"
+                  class="Placeholder-text-Copy block-3 col-md-6">{{lang.bankguarantee}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.cashRefNo}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{securityDetailForm.controls['CashreferenceNumber'].value.Refno}}</span>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.securityAmount}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{securityDetailForm.controls['SecurityAmount'].value}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.submissionDate}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6" [innerHTML]="GetFormattedSubmissionDate(securityDetailForm.controls['SubmissionDate'].value)">  </span>
+              </div>
+              <div class="hr" *ngIf="securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'"></div>
+
+              <div class="col-md-6 block-5" *ngIf="securityDetailForm.controls['PreferredRefundMethod'].value === 'CashRefundMethod' && securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'">
+                <div class="matLabel block-4" >{{lang.preferredAccount}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{securityDetailForm.controls['IbanNumber'].value}}</span>
+                <!-- <span class="Placeholder-text-Copy block-3 col-md-6"
+                    >certificate number</span
+                  > -->
+              </div>
+              <div class="col-md-6 block-5" *ngIf="securityDetailForm.controls['TypeOfSecuritySubmitted'].value === 'Cash'">
+                <div class="matLabel block-4">{{lang.preferredRefundMethond}}</div>
+                <span class="Placeholder-text-Copy block-3 col-md-6" *ngIf="securityDetailForm.controls['PreferredRefundMethod'].value === 'CarryForwardRefundMethod'">{{lang.CarryforwardofcreditinVATaccount}}</span>
+                <span class="Placeholder-text-Copy block-3 col-md-6" *ngIf="securityDetailForm.controls['PreferredRefundMethod'].value === 'CashRefundMethod'">{{lang.Cashrefund}}</span>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="row block mb-5"[ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon"> 
+                    <img src="assets/image/declaration.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2"> {{ lang.menu[3].title }} </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 sectionTitle block-2 justifyContentEnd    vCenter row" >
+                <div class="row  px-3 mx-0 taxpayer-card-section" > 
+                  <div class="edit-button  px-2" (click)="DeclarationPageEditClicked()">{{lang.edit}}</div>
+                </div>
+                
+              </div>
+
+              <div class="hr"></div>
+              <!-- <mat-option value="ZS0001"> {{lang.f3.id1}}</mat-option>
+                  <mat-option value="ZS0002"> {{lang.f3.id2}}</mat-option>
+                  <mat-option value="ZS0003">{{lang.f3.id3}}</mat-option> -->
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.iDType}}</div>
+                <span class="Placeholder-text-Copy block-3 col-md-6"
+                  *ngIf="DeclarationFormGroup.controls['idType'].value==='ZS0001'"> {{lang.f3.id1}}</span>
+                <span class="Placeholder-text-Copy block-3 col-md-6"
+                  *ngIf="DeclarationFormGroup.controls['idType'].value==='ZS0002'"> {{lang.f3.id2}}</span>
+                <span class="Placeholder-text-Copy block-3 col-md-6"
+                  *ngIf="DeclarationFormGroup.controls['idType'].value==='ZS0003'"> {{lang.f3.id3}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.idNo}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{DeclarationFormGroup.controls['idNum'].value}}</span>
+              </div>
+
+              <div class="hr"></div>
+
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.contactPersonName}}</div>
+                <span class="Placeholder-text-Copy breakWordWrap block-3 col-md-6">
+                  {{DeclarationFormGroup.controls['name'].value}}</span>
+              </div>
+              <div class="hr"></div>
+
+            </div>
+          </div>
+
+
+
+          <br /><br />
+
+          <div>
+            <button class="btnPrimary " type="submit" mat-raised-button>
+              {{lang.confirm}}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="row" *ngIf="optionActive === 5 && isViewOnlyMode">
+      <div class="col-md-12">
+        <form >
+
+          <div class="row block mb-5" [ngStyle]="{'margin-inline-start': lang.dir==='rtl'? '15px' : ''}">
+            <div class="row border" style="width: 100%" >
+                <div class="col-md-6 sectionTitle block-2" >
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section" > 
+                    <div class="roundedIcon">
+                      <img src="assets/image/user.svg" />
+                    </div>
+                    <div  class="sectionTitle fwb px-2"> {{ lang.menu[2- 1].title }} </div>
+                  </div>
+                </div>
+
+              <div class="col-md-6 sectionTitle block-2 justifyContentEnd    vCenter row" >
+                <div class="row  px-3 mx-0 taxpayer-card-section" > 
+                  <!-- <div class="edit-button  px-2" (click)="TapayerDetailEditClicked()">{{lang.edit}}</div> -->
+                </div>
+                
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.tin}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Gpartz}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.taxpayerName}}</div>
+                <span class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Name}}</span>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.cRLicense}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Actno}}</span>
+              </div>
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.mainoutlit}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Actnm}}</span>
+              </div>
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.address}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.AddressSet.BuildingNo +' '+ viewOnlyModeRequestData.AddressSet.Street+' '+viewOnlyModeRequestData.AddressSet.Quarter+' '+viewOnlyModeRequestData.AddressSet.RegionDesc+' '+viewOnlyModeRequestData.AddressSet.City+' '+viewOnlyModeRequestData.AddressSet.PostalCd}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row block mb-5" [ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/details.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2"> {{ lang.menu[2].title }} </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 sectionTitle block-2 justifyContentEnd    vCenter row" >
+                <div class="row  px-3 mx-0 taxpayer-card-section" > 
+                  <!-- <div class="edit-button   px-2" (click)="SubmissionDetailEditClicked()">{{lang.edit}}</div> -->
+                </div>
+                
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.typeoFsecuritySubmitted}}</div>
+                <span *ngIf="viewOnlyModeRequestData.Sectp === 'C'"
+                  class="Placeholder-text-Copy block-3 col-md-6">{{lang.cashsecurity}}</span>
+                <span *ngIf="viewOnlyModeRequestData.Sectp === 'B'"
+                  class="Placeholder-text-Copy block-3 col-md-6">{{lang.bankguarantee}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.cashRefNo}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Refno}}</span>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.securityAmount}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Reamt}}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.submissionDate}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6" [innerHTML]="GetFormattedSubmissionDate(viewOnlyModeRequestData.Secdt)">  </span>
+              </div>
+              <div class="hr" *ngIf="viewOnlyModeRequestData.Sectp === 'C'"></div>
+
+              <div class="col-md-6 block-5" *ngIf="viewOnlyModeRequestData.Refmt === 'B' && viewOnlyModeRequestData.Sectp === 'C'">
+                <div class="matLabel block-4" >{{lang.preferredAccount}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Iban}}</span>
+              </div>
+              <div class="col-md-6 block-5" *ngIf="viewOnlyModeRequestData.Sectp === 'C'">
+                <div class="matLabel block-4">{{lang.preferredRefundMethond}}</div>
+                <span class="Placeholder-text-Copy block-3 col-md-6" *ngIf="viewOnlyModeRequestData.Refmt === 'V'">{{lang.CarryforwardofcreditinVATaccount}}</span>
+                <span class="Placeholder-text-Copy block-3 col-md-6" *ngIf="viewOnlyModeRequestData.Refmt === 'B'">{{lang.Cashrefund}}</span>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="row block mb-5"[ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon"> 
+                    <img src="assets/image/declaration.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2"> {{ lang.menu[3].title }} </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 sectionTitle block-2 justifyContentEnd    vCenter row" >
+                <div class="row  px-3 mx-0 taxpayer-card-section" > 
+                  <!-- <div class="edit-button  px-2" (click)="DeclarationPageEditClicked()">{{lang.edit}}</div> -->
+                </div>
+                
+              </div>
+
+              <div class="hr"></div>
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.iDType}}</div>
+                <span class="Placeholder-text-Copy block-3 col-md-6"
+                  *ngIf="viewOnlyModeRequestData.Type==='ZS0001'"> {{lang.f3.id1}}</span>
+                <span class="Placeholder-text-Copy block-3 col-md-6"
+                  *ngIf="viewOnlyModeRequestData.Type==='ZS0002'"> {{lang.f3.id2}}</span>
+                <span class="Placeholder-text-Copy block-3 col-md-6"
+                  *ngIf="viewOnlyModeRequestData.Type==='ZS0003'"> {{lang.f3.id3}}</span>
+              </div>
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.idNo}}</div>
+                <span
+                  class="Placeholder-text-Copy block-3 col-md-6">{{viewOnlyModeRequestData.Idnumber}}</span>
+              </div>
+
+              <div class="hr"></div>
+
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">{{lang.contactPersonName}}</div>
+                <span class="Placeholder-text-Copy breakWordWrap block-3 col-md-6">
+                 {{viewOnlyModeRequestData.Decnm}}</span>
+              </div>
+              <div class="hr"></div>
+            </div>
+          </div>
+
+
+
+          <br /><br />
+
+          <div>
+            <button class="btnPrimary " (click)="DownloadConfirmation()" mat-raised-button>
+              {{lang.downloadConfirmation}}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <br /><br />
+  </div>
+</div>
+<div class="container text-center alignStart" *ngIf="isSuccessPage" [dir]="lang.dir">
+  <div class="mini-container mt-5">
+    <img src="assets/image/success.svg" class="Success block-9" />
+
+    <br /><br /><br />
+
+    <div class="pageTitle block-8">{{lang.requestsent}}</div>
+
+    <div class="sub-heading" style="margin-top: 8px;">
+      {{lang.successPageSubHeading}}
+    </div>
+
+    <br /><br />
+
+    <div class="row justify-content-center mx-0">
+      <div style="height: 56px;" class="col-md-5
+          col-lg-5
+           border row vCenter mt-3 justify-content-between py-2 block-13">
+
+        <div class="value textGray">{{lang.name}}</div>
+        <div class="value textDark fw500"  style="font-family: SSTArabic-Medium;"> {{AfterSubmitAPIResponse.d.Name}}</div>
+      </div>
+    </div>
+    <div class="row justify-content-center mx-0">
+      <div class=" col-lg-5
+          col-md-6 border row vCenter mt-3 justify-content-between py-2 block-13" style="height: 56px;">
+        <div class="value textGray">{{lang.requestNumber}} </div>
+        <div class="value textDark fw500" style="font-family: SSTArabic-Medium;">{{AfterSubmitAPIResponse.d.Fbnumz}}</div>
+      </div>
+    </div>
+    <div class="row justify-content-center mx-0">
+      <div style="height: 56px;" class=" col-lg-5
+           col-md-6 border row vCenter mt-3 justify-content-between py-2 block-13">
+        <div class="value textGray">{{lang.date}}</div>
+        <div class="value textDark fw500"  style="font-family: SSTArabic-Medium;" [innerHTML]="GetFormattedSubmissionDate(AfterSubmitAPIResponse.d.Secdt)"></div>
+        <!-- [innerHTML]="GetFormattedSubmissionDate(AfterSubmitAPIResponse.d.Secdt)" -->
+      </div>
+    </div>
+    <br /><br />
+
+
+    <div class="col-xs-12 col-sm-12 mt-2 col-md-12">
+      <button class="btnPrimary mt-5" (click)="DownloadCertificateAcknowledgemnet()" style="min-width: 207px !important;" mat-raised-button>
+        {{lang.downloadConfirmation}}</button>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12">
+
+      <button class="btnFourth mt-4 mb-5" [routerLink]="['/mains']" style="min-width: 207px !important;">
+        {{lang.gotoDashboard}}</button>
+
+  </div>
+
+
+
+
+
+   
+    <br /><br /><br />
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="modal textDark"   [dir]="lang.dir" id="aftSelect" data-keyboard="false" data-backdrop="static"  style="font-family: SSTArabic-Roman;"  *ngIf="optionActive === 4">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row text-center mt-3">
+          <div class="col-md-12">
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="labelTxtCss" style="text-align: center">
+                  {{lang.f3.label2}}
+                </div>
+
+                
+                  <input  class="commonInput" [ngClass]="idErr1?'inputErr':''" (input)="idnumberValueChange($event.target.value)" [placeholder]="lang.f3.label2" [value]="DeclarationFormGroup['controls']['idNum'].value" (keypress)="matcher($event)"  maxlength="10" [(ngModel)]="id1" name="id1" />
+                
+                <div *ngIf="idErr1" class="invalid-feedback">
+                  <p style="margin-top: 10px;font-size: 14px;text-align: center;">
+                    {{ idMsg }}
+                  </p>
+                </div>
+              </div>
+              <div *ngIf="this.DeclarationFormGroup.controls.idType.value!='ZS0003'" class="col-md-12">
+                <div class="labelTxtCss mt-3" style="text-align: center">
+                  {{ lang.modal.dob }}
+                </div>
+
+
+
+                <div class="commomDatePicker" [ngClass]="dobErr?'inputErr':''" style="margin: 0 auto;">
+
+                  <input readonly [max]="today"   (click)="datePicker.open()" matInput [matDatepicker]="datePicker"  name="dob1"   [(ngModel)]="dob1" 
+                  placeholder="dd-mm-yyyy" >
+                  <mat-datepicker-toggle matSuffix  [for]="datePicker">
+                    <mat-icon matDatepickerToggleIcon style="vertical-align: top;">
+                      <img src="assets/image/calendar.svg" alt="calendar" />
+                    </mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #datePicker >
+                  </mat-datepicker>
+                  
+          
+              </div>
+
+                <!-- <div class="commomDatePicker" style="margin: 0 auto;">
+                  <input (click)="dd.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #dd="ngbDatepicker"
+                    name="dob1"   [(ngModel)]="dob1" />
+
+                  <mat-icon matSuffix (click)="dd.toggle()" style="color: #707070; cursor: pointer;    top: 13%;
+                  position: relative;">
+                    date_range
+                  </mat-icon>
+              </div> -->
+                <div *ngIf="dobErr" class="invalid-feedback">
+                  <p style="margin-top: 10px;font-size: 14px;text-align: center;">
+                    {{ dobMsg }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 mb-2">
+              <button mat-button (click)="validateID2()" style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                  font-family: SSTArabic-Bold;
+                " class="btnTCss">
+                {{lang.modal.validate}}
+              </button>
+              <button mat-button style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                  font-family: SSTArabic-Bold;
+                " data-dismiss="modal"  (click)="reset()" class="btnTCss">
+                {{lang.modal.close}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal" id="terms" data-keyboard="false" data-backdrop="static" [dir]="lang.dir">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="px-4 py-3  col-md-12 ">
+
+                  <div class="col-md-12 alignEnd"> <img src="assets/image/close.svg" class="modalCloseIcon"
+                          (click)="closeModal('terms')" />
+                  </div>
+
+
+
+                  <div class="dark fbl f28 mt-4 mb-3" > {{lang.instructionDialogue.title}}</div>
+                  <div class="lightCard py-3 pr-3 " style="vertical-align: middle;">
+
+                    <div class="m-3">
+                      <p class="modalInstructions f12 gray" >
+                        {{lang.instructionDialogue.p1}}
+                      </p>
+                      <p class="modalInstructions f12 gray">
+                        {{lang.instructionDialogue.p2}}
+                      </p>
+
+                    </div>
+                      
+                  </div>
+
+                 
+                  <div  class="check mt-4" >
+                      <mat-checkbox class="check checkboxAckCssnew" [ngClass]=" !isAgree && onSubmit1Flag?'inputError':''" [(ngModel)]="isAgree">
+                      {{ lang.instructionDialogue.checkboxText}}
+                      </mat-checkbox>
+                  </div>
+                  <div class=" mt-4 mb-2 alignEnd">
+                    <!-- [disabled]="isAgree==false" -->
+                      <button class="btnPrimary"    (click)="TermConditionDialogueContinueClicked()"  mat-raised-button>{{ lang.instructionDialogue.buttonText }}</button>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div
+  class="modal alignStart"
+  id="filterModal"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+>
+  <div class="modal-dialog center">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeFilter()"
+            />
+          </div>
+          <div style="align-content: center;"> 
+          <div style="width: fit-content;margin-inline-start: auto;
+          margin-inline-end: auto; ">
+          <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+            {{lang.filter}}
+          </div>
+          <!-- {{ lang["filter"]["title"] }}  -->
+          <div class="caption textGray mt-3 block-4" style="font-size: 12px;">
+            {{lang.status}}
+          </div>
+          <!-- {{ lang["filter"]["status"] }}  -->
+          <mat-select
+            class="commonMatSelect mat-1"
+            [(ngModel)]="filterStatusValue"
+            name="filterStatusValue"
+          >
+            <mat-option
+              *ngFor="let filter of filterTypes" 
+              [value]="filter['Estat']"
+              >{{ filter["Txt30"] }}</mat-option
+            >
+          </mat-select>
+          <div  class=" marginTop50 mb-2 alignEnd" style="margin-top: 50px;">
+            <button
+              class="btnPrimary btnprimary-width"
+              mat-raised-button
+              (click)="applyFilter()"
+            >
+            {{lang.apply}}
+            </button>
+            <!-- {{ lang["filter"]["apply"] }} -->
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

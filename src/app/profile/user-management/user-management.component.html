@@ -1,0 +1,68 @@
+<div class="container" [dir]="dir">
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <span class="title1" [style.float]="dir==='rtl'?'right':'left'">{{lang.title1}} </span
+      ><span class="title1" style="color: #151515" [style.float]="dir==='rtl'?'right':'left'"
+      [style.margin-right]="dir === 'rtl' ? '3px' : ''" [style.margin-left]="dir === 'ltr' ? '3px' : ''">{{lang.usrMngmt}}</span>
+    </div>
+  </div>
+  <div class="row mt-4" style="width: 100%">
+    <div class="col-md-12">
+      <div class="viewMore">
+        <span style="cursor: pointer" (click)="back()">
+          <img [src]="img" style="width: 24px" />
+          {{lang.back}}</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4" style="text-align: start">
+    <div class="col-md-12">
+      <div class="secondTitle">
+        {{lang.usrMngmt}}
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="row mt-5">
+      <div class="col-md-6 mt-3 mb-3" *ngIf="showTile('39','038')">
+        <mat-card >
+          <div class="row" style="height: 50px; padding-top: 12px; cursor: pointer;" (click)="toUAUI5('usrAdmin')">
+            <div
+              class="col-md-2"
+              style="text-align: start; width: 24px; height: 24px">
+              <img alt="Logo"  src="assets/image/deregistration.svg">
+            </div>
+            <div class="col-md-8 placeholdertext">{{lang.usrAdmin}}</div>
+            <div
+              class="col-md-2"
+              style="text-align: end; width: 24px; height: 24px">
+              <img [src]="img1" />
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="col-md-6 mt-3 mb-3" *ngIf="showTile('39','039')">
+        <mat-card >
+          <div class="row" style="height: 50px; padding-top: 12px; cursor: pointer;" (click)="toTAUI5('taskAllctn')">
+            <div
+              class="col-md-2"
+              style="text-align: start; width: 24px; height: 24px">
+              <img alt="Logo"  src="assets/image/deregistration.svg">
+            </div>
+            <div class="col-md-8 placeholdertext">{{lang.taskAllocation}}</div>
+            <div
+              class="col-md-2"
+              style="text-align: end; width: 24px; height: 24px">
+              <img [src]="img1" />
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</div>

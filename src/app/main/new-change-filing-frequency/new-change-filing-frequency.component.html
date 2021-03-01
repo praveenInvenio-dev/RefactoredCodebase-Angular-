@@ -1,0 +1,791 @@
+<div class="container alignStart mt-4" style="max-width: 899px; font-family: SSTArabic-Roman;"
+    [dir]="lang.dir =='ltr'?'ltr':'rtl'">
+    <div [dir]="lang.dir =='ltr'?'ltr':'rtl'">
+        <div *ngIf="optionActive !== 6">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="bcTitle unicodeDir"><span (click)="backTo('')" style="cursor: pointer;">{{lang.bc1}} </span>&gt; <span (click)="backTo('001')" style="cursor: pointer;">{{lang.bc2}}</span> &gt; </span><span
+                        class="bcTitle bcTitleActive">{{lang.bc3}}</span>
+                </div>
+            </div>
+            <div class="row" style="width: 100%; margin-top: 40px !important; ">
+                <div class="col-md-12">
+                    <div class="stepHeader row">
+                        <span class="stepBack col-md-6" (click)="back()">
+                            <img [src]="lang['dir'] =='ltr'?'assets/image/arrow-left-green.svg':'assets/image/arrow-right-green.svg'"
+                                style="width: 24px">
+                            {{lang.back}}</span>
+                        <span class="stepNumber col-md-6" *ngIf="optionActive!=7" [dir]="lang.dir =='ltr'?'ltr':'rtl'" [class]="lang['dir']=='ltr'?'arbstep':'arbstep'">
+                            <img src="{{ lang.menu[optionActive - 1].step }}" style="width: 66px; height: 16px;" [class]="lang['dir']=='ltr'?'':'rotate'" />
+                            <img *ngIf="optionActive==5" style="padding-inline-start: 4px;"
+                                src="assets/image/check.svg" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="pageTitle col-md-10 col-sm-10 col-xs-10 col-6">
+                    {{ lang.menu[optionActive - 1].title }} 
+                </div>
+                <div class="imgAra col-md-2 col-sm-2 col-xs-2 col-6 pad-0-lt" *ngIf="lang.menu[optionActive - 1].cards">
+                    <span class="posrel">
+                        <img (click)="tableView()"
+                            [class]="viewSel== 'tableview'? 'Rectangle rightTableCard': 'RectangleDeselect rightTableCard'"
+                            [src]='img1' class="rightTableCard" />
+                    </span>
+                    <span class="posrel">
+                        <img (click)="listview()"
+                            [class]="viewSel== 'listview'? 'Rectangle rightTableCard': 'RectangleDeselect rightTableCard'"
+                            [src]="img2" class="rightTableCard" />
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mt-2" *ngIf="lang.menu[optionActive - 1].subtitle!==''">
+                <div class="col-md-12">
+                    <div class="value textGray">
+                        {{ lang.menu[optionActive - 1].subtitle }}
+                    </div>
+                </div>
+            </div>
+            <div class="Rectangle-12New"></div>
+        </div>
+
+        <!-- header end -->
+        <div class="mt-3 mb-3">
+            <form style="width: 100%">
+                <!-- form 1 -->
+                <div class="row" *ngIf="optionActive === 1">
+                    <div class="col-md-12">
+                        <form [formGroup]="changeFreFormGroup1" (ngSubmit)="onSubmit1()">
+
+                            <div class="row mt-4" [dir]="lang.dir =='ltr'?'ltr':'rtl'">
+                                <div class="col-md-12 ff-search-box">
+                                  <div
+                                    class="ff-search-input-container"
+                                    [ngClass]="
+                                    lang.dir == 'rtl' ? 'float-right' : 'd-inline-block'
+                                    "
+                                  >
+                                    <input
+                                      class="commonInput"
+                                      [placeholder]="lang.search"
+                                      formControlName="searchText"
+                                    />
+                                    <img
+                                      src="assets/images/search.svg"
+                                      alt=""
+                                      class="ff-search-icon"
+                                      [ngClass]="lang.dir === 'ltr' ? 'ff-search-icon-right': 'ff-search-icon-left'"
+                                    />
+                                  </div>
+                                  <img
+                                    src="assets/images/filter.svg"
+                                    alt="filter"
+                                    class="ff-filter-icon"
+                                    [ngClass]="lang.dir == 'ltr' ? 'float-right' : 'float-left'"
+                                    (click)="onFilterClick()"
+                                  />
+                                </div>
+                              </div>
+                            <div *ngIf="viewSel === 'listview'" class="row mt-5" style="margin-bottom: 56px;">
+                                <div class="col-md-6 col-sm-12 col-xs-12 mb-2" style="height: 160px; max-width: 437px;" (click)="onSubmit1()">
+                                    <div class="mb-2 cardCntrMb">
+                                        <div class="add-card-large  col-md-6 " style="height: 160px;">
+                                            <img class="px-2" src="assets/image/add.svg"> 
+                                            <div class="value fwb textPrimary mx-1 mt-2">
+                                                {{lang.step1.ChangeFillingFrequency}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container *ngFor="let data of filtData | Search :  changeFreFormGroup1.value.searchText">
+                                    <div class="col-md-6 col-sm-12 col-xs-12 mb-2" >
+                                        <div class="mb-2 cardCntrMb" (click)="openSelectedCard(data.Fbnum)" >
+                                            <div class="filing-card textDark border" style="height: 160px; max-width: 437px;">
+                                                <div class="row filing-card-upper px-3" >
+                                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="value  fwb Headellipses" style="font-size: 20px;" >{{data.FbtText}}</div>
+                                                        <div class="caption textGray"></div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6" style="justify-content: flex-end;
+                                                display: flex;">
+                                                        <div [ngClass]="statusColor(data.Fbust)"  class="tag32 Statusellipse" style="height: fit-content;width:unset;padding:10px;font-size: 16px;padding: 7px 10px;">{{data.FbustTxt}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="divider">
+                                                </div>
+                                                <div class="row filing-card-down px-3" style="height: 67px;">
+                                                    <div class="col-6 mobpad1">
+                                                        <div class="caption textGray">{{lang.FbNumber}}</div>
+                                                        <div class="value  fwb">{{data.Fbnum}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </ng-container>
+                                    <!-- <div class="col-md-6 col-sm-12 col-xs-12" *ngFor="let data of filtData | Search :  changeFreFormGroup1.value.searchText" >
+                                    <div class="mb-2 cardCntrMb" (click)="openSelectedCard(data.Fbnum)">
+                                        <div class="filing-card textDark border" >
+                                            <div class="row filing-card-upper px-3">
+                                                <div class="col-md-6">
+                                                    <div class="value  fwb Headellipses" style="font-size: 20px;">{{data.FbtText}}</div>
+                                                    <div class="caption textGray">{{data.Fbnum}}</div>
+                                                </div>
+                                                <div class="col-md-6" style="justify-content: flex-end;
+                                            display: flex;">
+                                                    <div class="tag32 tag-partial Statusellipse" [ngStyle]="{'background-color':getcolor(data.FbustTxt)}">{{data.FbustTxt}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="divider">
+                                            </div>
+                                            <div class="row filing-card-down px-3">
+                                                <div class="col-md-6 mobpad1">
+                                                    <div class="caption textGray">{{lang.step1.CurrentFrequency}}</div>
+                                                    <div class="value  fwb">Monthly</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="caption textGray">{{lang.step1.NewFrequency}}</div>
+                                                    <div class="value  fwb">Quarterly</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="caption textGray">{{lang.step1.eff_date}}</div>
+                                                    <div class="value  fwb">Quarter 4 - 2020</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="caption textGray">{{lang.step1.RequestDate}}</div>
+                                                    <div class="value  fwb">09th Aug 2020</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div *ngIf="viewSel === 'tableview'" class="row mt-5" style="margin-bottom: 23px;">
+                                <div class="col-12">
+                                    <div class="mb-2 border">
+                                        <div class="row" style="height: 44px;margin: 0; cursor: pointer;"  (click)="onSubmit1()">
+                                            <img class="col-auto" src="assets/image/add.svg">
+                                            <div class="value fwb textPrimary mt-2 mx-1 col">{{lang.step1.ChangeFillingFrequency}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6 col-sm-12 col-xs-12" (click)="onSubmit1()">
+                                    <div class="mb-2 cardCntrMb">
+                                        <div class="add-card-large  col-md-6 ">
+                                            <img class="px-2" src="assets/image/add.svg"> 
+                                            <div class="value fwb textPrimary mx-1 mt-2 col">
+                                                {{lang.step1.ChangeFillingFrequency}}</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <table  *ngIf="viewSel === 'tableview' && filtData.length>0" class="table myTable table-responsive" style="width: 100% !important;">
+                                <thead style="width: 100%;">
+                                    <tr>
+                                        <th scope="col" style="width: 50%;">{{lang.Description}}</th>
+                                        <th scope="col" >{{lang.FbNumber}}</th>
+                                        <!-- <th scope="col">{{lang.step1.CurrentFrequency}}</th>
+                                        <th scope="col">{{lang.step1.NewFrequency}}</th>
+                                        <th scope="col">{{lang.step1.eff_date}}</th>
+                                        <th scope="col">{{lang.step1.RequestDate}}</th> -->
+                                        <th scope="col" style="width: 50%;">{{lang.Status}}</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody style="width: 100%;">
+                                    <tr (click)="openSelectedCard(data.Fbnum)" *ngFor="let data of filtData | Search :  this.changeFreFormGroup1.value.searchText">
+                                        <td>{{data.FbtText}}</td>
+                                        <td>{{data.Fbnum}}</td>
+                                        <!-- <td>Monthly</td>
+                                        <td>Quarterly</td>
+                                        <td>Quarter 4 - 2020</td>
+                                        <td>09th Aug 2020</td> -->
+                                        <td> 
+                                            <div [ngClass]="statusColor(data.Fbust)"  class="tag32 Statusellipse" style="font-size: 16px;padding: 7px 10px;">{{data.FbustTxt}}</div>
+                                            <!-- <a class="tblBtn" [ngClass]="statusColor(data.Fbust)"> {{data.FbustTxt}}</a>  -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- form 2 -->
+
+                <div class="row" *ngIf="optionActive === 2">
+                    <div class="col-md-12">
+                        <form [formGroup]="changeFreFormGroup2" (ngSubmit)="onSubmit2()">
+                            <div class="mt-3">
+                                <div class="form-5-container textDark row" style="margin-bottom: 56px; padding-inline-start: 14px;">
+                                    <div class="border single-input-card col-xs-12 col-sm-6  mb-4"
+                                        style="margin-inline-end: 5px;">
+                                        <div class="value textGray">
+                                            {{lang.step2.Currentfrequency}}
+                                        </div>
+                                        <div class="value fwb" style="font-size: 16px;">
+                                            {{changeFilingObject['d']['CureentF']}}
+                                        </div>
+                                    </div>
+                                    <div class="border single-input-card col-xs-12 col-sm-6 mb-4" style="margin-inline-end: 5px;">
+                                        <div class="value textGray">
+                                            {{lang.step2.Newfrequency}}
+                                        </div>
+                                        <div class="value fwb" style="font-size: 16px;">
+                                            {{changeFilingObject['d']['FilingF']}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 mt-2 mb-2" style="padding-inline-start: 0px;">
+                                        <div class="matLabel labelMarginBottom">{{lang.step2.Effactivedate}}</div>
+                                        <mat-select class="commonMatSelect" [ngClass]="changeFreFormGroup2.controls.Persl.errors && !isSubmit ?'inputErr':''" formControlName="Persl" style="font-weight: bold;" >
+                                            <!-- [compareWith]="compareItem" -->
+                                            <mat-option *ngFor="let effDate of getapi2res.d.EffDateSet.results "
+                                                [value]="effDate" class="matoptxt"  (click)="getseleffDate(effDate.Txt50)">
+                                                {{ effDate.Txt50 }} </mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="check mt-4">
+                                        <mat-checkbox formControlName="Iagrfg" class="checkboxAckCss sstcls" [ngClass]="changeFreFormGroup2.controls.Iagrfg.errors && !isSubmit ?'checkboxErr':''" style="font-size: 12px;">
+                                            {{lang.step2.condition}}
+                                        </mat-checkbox>
+                                    </div>
+                                </div>
+                                <!-- [disabled]="!changeFreFormGroup2.valid || changeFreFormGroup2.value.Iagrfg==false" -->
+                                <button type="submit"  class="btnPrimary btnCss" mat-raised-button>
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- form 3 -->
+
+                <div class="row" *ngIf="optionActive === 3">
+                    <div class="col-md-12">
+                        <form [formGroup]="changeFreFormGroup3" (ngSubmit)="onSubmit3()">
+                            <div class="mt-3">
+                                <div class="form-4-container textDark" style="margin-bottom: 56px;">
+                                    <div class="value mt-2 mb-3" style="    font-family: 'SSTArabic-Roman'; font-weight: normal;">{{lang.step3.Pleaseselectthetypeofdocument}}</div>
+                                    <div class="row" style="margin: 0; flex-direction: row;">
+                                        <div (click)="typeDocHandler(item, i)"
+                                            [class]="!item.stat && cardSelected !== i ? 'selector-card border pb-3 px-3 mt-3' : 'selector-card-active selector-card border pb-3 px-3 mt-3'"
+                                            [ngClass]="item.err ? 'inputErr' : ''"
+                                            style="margin-inline-end: 15px;"
+                                            *ngFor="let item of getapi2res.d.ATT_TYPSet.results ; let i=index">
+                                            <div class="tileLvl">{{item.Txt50}}</div>
+                                        </div>
+                                     </div>
+                                    <!-- <div class="value mt-4 mb-3">{{typeDocText}}</div> -->
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mt-4">
+                                            <!-- <div class="value mt-2 mb-2"></div> -->
+                                            <div class="card-upload border mt-3" 
+                                                [ngClass]="filesSubmitted ? 'inputErr' : ''"  
+                                                style="min-width: unset;max-width:unset; cursor:pointer;"
+                                                (click)="fileInput.click()" appDragDrop
+                                                (onFileDropped)="uploadFlag ? uploadFiles($event) :''">
+                                                <div class="card-upload-content">
+                                                    <input hidden type="file" [disabled]="!uploadFlag "  #fileInput
+                                                        (change)="uploadFiles($event.target.files)" id="filingAttach" />
+                                                    <img src="assets/image/attach.svg" />
+                                                    <div class="value textPrimary mt-1 card-main-text fwb">
+                                                        {{lang.step3.Draganddropfiletouploaddocumentation}}</div>
+                                                    <div class="caption textGray mt-1">5MB Max</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let attach of changeFreFormGroup3.get('doc')['controls']; let j = index;"
+                                            class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="value mt-2 mb-2">{{getapi2res.d.ATT_TYPSet.results[attach['controls']['cardSelected']['value']].Txt50}}</div>
+                                            <div class="card-uploaded border" style="min-width: unset;max-width:unset">
+                                                <div class="card-delete" (click)="deleteAttachmentFromSer(attach['controls']['id'].value, attach['controls']['did'].value,j)"><img src="assets/image/delete.svg" />
+                                                </div>
+                                                <div class="card-file-content">
+                                                    <img src="assets/images/generic-documents.png" style="width: 24px;
+                                                    margin: 0 auto;" />
+                                                    <div class="value textDark mt-1  card-main-text fwb" style="overflow: hidden; margin: 0 auto;">
+                                                        {{ attach['controls']['name'].value }}</div>
+                                                    <div class="caption textGray mt-1"></div>
+                                                    <!-- {{  attach['controls']['size'].value}} Kb -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="border col-md-12 p-4 mt-3">
+                                        <div class="row">
+                                            <img src="assets/image/information.svg" class="attchIcon" />
+                                            <div class="value c-filing-font-black">
+                                                {{lang.step3.Attachments}}
+                                            </div>
+                                        </div>
+                                        <div class="descriptiontext textGray">
+                                            {{lang.step3.condition}}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- [disabled]="getCheck()" -->
+                                <button type="submit" class="btnPrimary btnCss" mat-raised-button>
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- form 4 -->
+
+                <div class="row" *ngIf="optionActive === 4">
+                    <div class="col-md-12">
+                        <form [formGroup]="changeFreFormGroup4" (ngSubmit)="onSubmit4()">
+                            <div class="mt-3">
+                                <div class="row" style="margin-bottom: 56px;">
+                                    
+                                    <div class="col-xs-12 col-sm-6 mt-2 mb-2">
+                                        <div class="matLabel labelMarginBottom">{{lang.step4.IDType}}</div>
+                                        <mat-select class="commonMatSelect" style="font-weight: bold;" [ngClass]="changeFreFormGroup4.controls.DecidTy.errors && !isSubmit ?'inputErr':''" formControlName="DecidTy" (selectionChange)="onIdSelect()" >
+                                            <!-- [compareWith]="compareID" -->
+                                            <mat-option value="ZS0001" class="matoptxt" >{{lang.NationalID}}</mat-option>
+                                            <mat-option value="ZS0002" class="matoptxt" >{{lang.IqamaID}}
+                                            </mat-option>
+                                            <mat-option value="ZS0003" class="matoptxt" >{{lang.GCCID}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 mt-2 mb-2">
+                                        <div class="matLabel labelMarginBottom">{{lang.step4.IDNumber}}</div>
+                                        <input class="commonInput" style="font-weight: bold;" [placeholder]="lang.step4.IDNumber" formControlName="DecidNo" [ngClass]="changeFreFormGroup4.controls.DecidNo.errors && !isSubmit ?'inputErr':''"
+                                            style="min-width: unset;max-width:unset;width: 100% !important;" (input)="onIdNumChange()" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                                            [readOnly]="(isIdValidated == true && changeFreFormGroup4.controls.DecidTy.value!='ZS0003') || (isIdValidated==false && this.changeFreFormGroup4.controls.DecidTy.value!='ZS0003')" />
+                                            <div class="matLabel helperMarginTop text-danger" *ngIf="showIdNumError && this.changeFreFormGroup4.controls.DecidTy.value=='ZS0003'">{{lang.gccvalidation}}</div>
+                                            <!-- <div class="matLabel helperMarginTop text-danger" *ngIf="showIdNumError && this.changeFreFormGroup4.controls.DecidTy.value=='ZS0002'">Enter a valid Iqama ID</div>  -->
+                                            <!-- <input class="commonInput" formControlName="DecidNo" placeholder="ID" 
+                                            (input)="onIdNumChange()"  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));" [readOnly]="(isIdValidated == true && changeFreFormGroup4.controls.DecidTy.value!='ZS0003') || (isIdValidated==false && this.changeFreFormGroup4.controls.DecidTy.value!='ZS0003')"
+                                            /> pattern="[a-zA-Z0-9]+$" "[a-zA-Z0-9\ ]+$"  -->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 mt-2 mb-2">
+                                        <div class="matLabel labelMarginBottom">{{lang.step4.ContectPersonName}}</div>
+                                            <input class="commonInput" style="font-weight: bold;" (input)="nameValidator($event)" 
+                                             maxlength="80" formControlName="Decname" [placeholder]="lang.step4.ContectPersonName"  [ngClass]="changeFreFormGroup4.controls.Decname.errors && !isSubmit ?'inputErr':''"
+                                             [readOnly]="(isIdValidated == true && changeFreFormGroup4.controls.DecidTy.value!='ZS0003') || (isIdValidated==false && this.changeFreFormGroup4.controls.DecidTy.value!='ZS0003')"
+                                             />
+                                            <!-- <div class="matLabel helperMarginTop text-danger" *ngIf="nameError">Invalid name</div> -->
+                                    </div>
+                                    
+                                </div>
+                                <div class="check mb-4" style="margin: 0 0">
+                                    <mat-checkbox class="checkboxAckCss sstcls" style="font-size: 12px; margin: 0 0 54px 0;" formControlName="Decfg" [ngClass]="changeFreFormGroup4.controls.Decfg.errors && !isSubmit ?'checkboxErr':''">
+                                        {{lang.step4.condition}}
+                                    </mat-checkbox>
+                                </div>
+                                <!-- [disabled]="!changeFreFormGroup4.valid || isIdValidated== false || changeFreFormGroup4.value.Decfg==false" -->
+                                <button type="submit" class="btnPrimary btnCss"  mat-raised-button>
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- form 5 -->
+
+                <div class="row" *ngIf="optionActive === 5">
+                    <div class="col-md-12">
+                        <form [formGroup]="changeFreFormGroup5" (ngSubmit)="onSubmit5()">
+                            <div class="mt-3">
+                                <div class="summary-card  cardGap border">
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row col-9">
+                                            <div><img src="assets/image/review-details.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.step5.FrequencyDetails}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-6 col-3" style="text-align: end;"><button
+                                                class="btnEdit  textPrimary" style=" min-width: fit-content;"
+                                                (click)="editFrequencyDetails()">{{lang.step5.Edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectanglengp"></div>
+                                    <div class="row vCenter px-3 frequency-detail-card-section">
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.step5.Currentfrequency}}</div>
+                                            <div class="value fwb">{{changeFilingObject['d']['CureentF']}}</div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.step5.NewFrequency}}</div>
+                                            <div class="value fwb">{{changeFilingObject['d']['FilingF']}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="Rectanglengp"></div>
+                                    <div class="vCenterSingle px-3 frequency-detail-card-section">
+                                        <div class="value mb-1 textGray">{{lang.step5.Effactivedate}}</div>
+                                        <div class="value fwb">{{changeFreFormGroup2.value.Persl.Txt50}}</div>
+                                    </div>
+                                </div>
+                                <!-----------------------------  
+                                    CARD2 
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border" *ngIf="hideattach=='yes'">
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img src="assets/image/attach-grey.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.step5.Attachments}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnEdit  textPrimary" style=" min-width: fit-content;"
+                                                (click)="editAttachments()">{{lang.step5.Edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectanglengp" *ngIf="changeFreFormGroup3.get('doc')['controls'].length>0"></div>
+                                    <span *ngFor="let attach of changeFreFormGroup3.get('doc')['controls']; let j = index;">
+                                        <div class="vCenterSingle px-3 frequency-detail-card-section">
+                                            <div class="value mb-1 textGray">
+                                                {{getapi2res.d.ATT_TYPSet.results[attach['controls']['cardSelected']['value']].Txt50}}
+                                            </div>
+                                            <div  class="value fwb"> {{ attach['controls']['name'].value }}<span><img style="padding: 0 5px;
+                                                width: 28px;" src="assets/images/generic-documents.png"></span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="j!=changeFreFormGroup3.get('doc')['controls'].length-1" class="Rectanglengp"></div>
+                                    </span>
+
+                                </div>
+                                <!-----------------------------  
+                                
+                                    CARD3
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img src="assets/image/summary.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.step5.Decleration}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnEdit  textPrimary" style=" min-width: fit-content;"
+                                                (click)="editDecleration()">{{lang.step5.Edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectanglengp"></div>
+                                    <div class="row vCenter px-3 frequency-detail-card-section">
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.step5.IDType}}</div>
+                                            <div class="value fwb">{{getIDtype()}}</div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.step5.IDNumber}}</div>
+                                            <div class="value fwb">{{changeFilingObject.d.DecidNo}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="Rectanglengp"></div>
+                                    <div class="vCenterSingle px-3 frequency-detail-card-section">
+                                        <div class="value mb-1 textGray">{{lang.step5.ContectPersonName}}</div>
+                                        <div class="value fwb" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; display: inline-block !important;">{{changeFilingObject.d.Decname}}</div>
+                                    </div>
+                                </div>
+                                <button mat-button type="submit" class="btnCss mt-5">
+                                    {{lang.step5.Confirm}}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- form 6 -->
+
+                <div class="row" *ngIf="optionActive === 6">
+                    <div class="col-md-12">
+                        <form [formGroup]="changeFreFormGroup6" (ngSubmit)="onSubmit6()"
+                            style="max-width: 530px;margin: auto;">
+                            <div class="mt-3">
+                                <div class="centerItem" style="margin-bottom: 56px;">
+                                    <div><img src="assets/image/success.svg"></div>
+                                </div>
+                                <div class="pageTitle col-md-12 mt-3" style="text-align: center; font-family: SSTArabic-Roman;">
+                                    {{lang.step6.Requestsent}}
+                                </div>
+                                <div class="submiTtext col-md-12" style="margin-top: 8px; font-family: SSTArabic-Roman;">
+                                    {{lang.step6.YourVATFillingFrequencychangerequestissuccessfullysubmitted}}
+                                </div>
+                                <!--  -->
+                                <div class=" single-line-sec contentCenter" style="margin-top: 32px;">
+                                    <div class="row vCenter border" style="height: 56px;">
+                                        <div style="width: 50%;text-align: start;" class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.step6.Name}}</div>
+                                        </div>
+                                        <div style="width: 50%;text-align: end;" class="col-sm-6">
+                                            <div class="value fwb" style="font-family: SSTArabic-Roman;">{{tpNamess}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" single-line-sec contentCenter" style="margin-top: 16px;">
+                                    <div class="row vCenter border" style="height: 56px;">
+                                        <div style="width: 50%;text-align: start;" class="col-sm-6">
+                                            <div class="value mb-1 textGray" style="font-family: SSTArabic-Roman;">{{lang.step6.RequestNumber}}</div>
+                                        </div>
+                                        <div style="width: 50%;text-align: end;" class="col-sm-6">
+                                            <div class="value fwb" style="font-family: SSTArabic-Roman;">{{no}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" single-line-sec contentCenter" style="margin-top: 16px;">
+                                    <div class="row vCenter border" style="height: 56px;">
+                                        <div style="width: 50%;text-align: start;" class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.step6.Date}}</div>
+                                        </div>
+                                        <div style="width: 50%;text-align: end;" class="col-sm-6">
+                                            <div class="value fwb">{{getDatefn()}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="text-align: center; margin-top: 56px;">
+                                    <button (click)="downloadCnf(no)" class="btnPrimary btnCss" mat-raised-button>
+                                        {{lang.step6.Downloadconfirmation}}
+                                    </button>
+                                </div>
+                                <div class="col-md-12 goToDas" style="margin-top: 28px;" [routerLink]="['/main']">
+                                    {{lang.step6.GotoDashboard}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- form 7  -->
+                <div class="row" *ngIf="optionActive === 7">
+                    <div class="col-md-12">
+                        <form [formGroup]="changeFreFormGroup7">
+                            <div class="mt-3">
+                                <div class="summary-card  cardGap border">
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row col-9">
+                                            <div><img src="assets/image/review-details.svg"></div>
+                                            <div class="sectionTitle fwb px-3 pr-zero">{{historyCardData[0].FbtText}}</div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-6 col-3" style="text-align: end;">  
+                                        </div>
+                                    </div>
+                                    <div class="Rectanglengp"></div>
+                                    <div class="row vCenter px-3 frequency-detail-card-section">
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.fbnumtext}}</div>
+                                            <div class="value fwb">{{historyCardData[0].Fbnum}}</div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.statustext}}</div>
+                                            <div class="value fwb">{{historyCardData[0].FbustTxt}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+  <div [dir]="lang.dir =='ltr'?'ltr':'rtl'" class="modal" id="aftSelect" data-keyboard="false" data-backdrop="static"  *ngIf="optionActive === 4">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row text-center mt-3">
+            <div class="col-md-12">
+              <div class="row text-center">
+                <div class="col-md-12">
+                  <div class="labelTxtCss" style="text-align: center">
+                    {{lang.IDNumber}}
+                  </div>
+  
+                 
+                    <input class="commonInput" [ngClass]="idErr1 ? 'inputErr' : ''" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));" (input)="onIdinputChange()" style="width: 95%; padding: 0px 10px 0px 10px;"  [placeholder]="lang.IDNumber" [value]="changeFreFormGroup4['controls']['DecidNo'].value"  [(ngModel)]="id1" name="id1" />
+                 
+                  <div *ngIf="idErr1" class="invalid-feedback">
+                    <p style="position: relative; text-align: center; margin-top: 15px;font-size: 12px">
+                      {{ idMsg }}
+                    </p>
+                  </div>
+                </div>
+                <div *ngIf="this.changeFreFormGroup4.controls.DecidTy.value!='ZS0003'" class="col-md-12">
+                  <div class="labelTxtCss mt-3" style="text-align: center">
+                    {{ lang.modal.dob }}
+                  </div>
+                  <div class="commomDatePicker" [ngClass]="dobErr ? 'inputErr' : ''" style="margin: 0 auto;">
+
+                    <input readonly (click)="datePicker.open()" (dateChange)="onDateChange(datePicker)" matInput [matDatepicker]="datePicker"  name="dob1"   [(ngModel)]="dob1" 
+                    [placeholder]="lang.modal.dobPlaceholder" [max]="today" >
+                    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePicker >
+                    </mat-datepicker>
+            
+                </div>
+                  <div *ngIf="dobErr" class="invalid-feedback">
+                    <p style="position: relative; text-align: center; margin-top: 15px;font-size: 12px;">
+                      {{ dobMsg }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="mt-3 mb-2">
+                <button mat-button (click)="validateID2()" style="
+                    width: auto;
+                    border: none;
+                    color: #d2a02a;
+                    font-size: 16px;
+                  " class="btnTCss">
+                    {{lang.validate}}
+                </button>
+                <button mat-button style="
+                    width: auto;
+                    border: none;
+                    color: #d2a02a;
+                    font-size: 16px;
+                  " data-dismiss="modal"  (click)="reset()" class="btnTCss">
+                                   {{lang.Close}}
+
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div
+  class="modal alignStart"
+  id="changefilingterms"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+>
+  <div class="modal-dialog center">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('can')"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+            {{ lang.instruction.modalTitle }}
+          </div>
+        <div class="lightCard py-3 pr-3 mb-3 border">
+          <div class="modalInstructions f12 gray mb-1 font-color" style="font-family:'SSTArabic-Bold';">{{ lang.instruction.content1 }}</div>
+          <div class="modalInstructions f12 gray mb-1 font-color">{{ lang.instruction.term1 }}</div>
+          <div class="modalInstructions f12 gray mb-1 font-color">{{ lang.instruction.term2 }}</div>
+          <div class="modalInstructions f12 gray mb-1 font-color">{{ lang.instruction.term3 }}</div>
+          <div class="modalInstructions f12 gray mb-1 font-color">{{ lang.instruction.term4 }}</div>
+          <div class="modalInstructions f12 gray mb-2 font-color">{{ lang.instruction.term5 }}</div>
+          <div class="modalInstructions f12 gray mb-1 font-color" style="font-family:'SSTArabic-Bold';">{{ lang.instruction.content2 }}</div>
+          <div class="modalInstructions f12 gray mb-1 font-color">{{ lang.instruction.term6 }}</div>
+        </div>
+
+          <div class="check row mx-0">
+            <mat-checkbox
+              class="checkboxAckCss"
+              [(ngModel)]="instructionsAccepted"
+              [ngClass]="instructionsSubmitted && !instructionsAccepted ? 'checkboxErr' : '' "
+            >
+            </mat-checkbox>
+            <div
+              class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+              style="font-size: 12px; font-weight: 600"
+              [ngClass]="instructionsSubmitted && !instructionsAccepted ? 'checkboxerr' : '' "
+            >
+              {{lang.instruction.checkLable}} 
+            </div>
+          </div>
+
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary btnprimary-width btnCss"
+              (click)="closeModal('cnf')"
+              mat-raised-button
+            >
+              {{ lang.instruction.Confirm }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="myModal" style="border-radius: 14px;" [dir]="lang.dir =='ltr'?'ltr':'rtl'">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header" style="border-bottom: none !important;">
+                <button type="button" class="close" (click)="closepopup('can')" data-dismiss="modal" style="width: 100%;"
+                    [style.text-align]="lang.dir === 'rtl' ? 'end' : 'end'"><img src="assets/image/close.svg" /></button>
+            </div>
+            <div class="modal-body" >
+                <div class="container" style="max-height: 440px; overflow-y: auto;">
+                    <div class="row" style="text-align: start;margin-left: 5%;margin-right: 5%;">
+                        <div class="col-md-12">
+                            <div class="filter1">{{lang.filter}}</div>
+                            <div class="row" >
+                                <div class="col-md-12">
+                                    <div class="filter2">{{lang.Type}}</div>
+                                    <div class="row">
+                                        <!-- style="display: flex;" -->
+                                        <ng-container *ngFor="let item of retypeData ; let i=index">
+                                            <div *ngIf="item!=''" [class]="chipSelected != i ? 'chpNormal filter3 mt-3 mr-3' : 'chpSelected filter3 mt-3 mr-3'" style="min-height: 40px;"
+                                                (click)="changeType(i)">
+                                                <!-- [class]="!item.stat && cardSelected != i ?'selector-card border pb-3 px-3 mt-3' : 'selector-card-active selector-card border pb-3 px-3 mt-3'" class="filter3 mt-3 mr-3" -->
+                                                <span class="filter4">
+                                                    {{item}}
+                                                </span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="filter2">{{lang.Status}}</div>
+                                    <div class="row">
+                                        <!-- style="display: flex;" StchipSelected-->
+                                        <ng-container *ngFor="let item of statusData ; let i=index">
+                                            <div [class]="StchipSelected != i ? 'chpNormal filter3 mt-3 mr-3' : 'chpSelected filter3 mt-3 mr-3'" style="min-height: 40px;" (click)="changestatus(i)">
+                                                <span class="filter4">
+                                                    {{item}}
+                                                </span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <button mat-button type="submit" class="btnCss mt-5" (click)="filterList()"
+                                        >{{lang.Apply}}</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button mat-button type="submit" class="btnCss mt-5" (click)="resetFil()"
+                                        >{{lang.Reset}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<notifier-container></notifier-container>

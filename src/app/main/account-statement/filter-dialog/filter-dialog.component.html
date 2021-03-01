@@ -1,0 +1,174 @@
+<div class="col-md-12">
+  <div class="row" style="margin-top: 2.5em">
+    <div class="pageTitle">
+      {{ translation.filterHeader }}
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="acc-dialog-subheading">
+      {{ translation.type }}
+    </div>
+  </div>
+  <div class="row mt-3">
+    <span
+      class="badge badge-pill acc-filter-pills"
+      *ngFor="let item of data.filterTypeList; let itemIndex = index"
+      [ngClass]="[
+        isItemSelected(item) ? 'active' : '',
+        data.direction === 'rtl' ? 'acc-pill-ar' : ''
+      ]"
+      (click)="onFilterTypeClick(itemIndex)"
+    >
+      {{ item.name }}
+    </span>
+  </div>
+  <div class="row" style="margin-top: 26px; margin-bottom: 8px">
+    <div class="acc-dialog-subheading">
+      {{ translation.filterStatementAmount }}
+    </div>
+  </div>
+  <div class="row">
+    <div
+      class="dateRangePicker"
+      [ngClass]="data.direction === 'rtl' ? 'acc-arabic' : ''"
+    >
+      <input
+        type="text"
+        matInput
+        class="acc-filter-range-input"
+        [placeholder]="translation.from"
+        [formControl]="amountTextFields.min"
+        (keyup)="onAmountChange('min', 'float', $event)"
+      />
+      <input
+        type="number"
+        style="display: none"
+        [formControl]="finalOutputData.amount.min"
+      />
+      <span
+        style="display: flex; align-items: center"
+        [style.marginLeft.px]="data.direction === 'ltr' ? 5 : 0"
+        [style.marginRight.px]="data.direction === 'ltr' ? 0 : 5"
+      >
+        <img
+          src="assets/image/arrow-right.svg"
+          class="acc-date-arrow"
+          [style.transform]="
+            data.direction == 'rtl' ? 'rotate(180deg)' : 'rotate(0deg)'
+          "
+        />
+      </span>
+      <input
+        type="text"
+        matInput
+        class="acc-filter-range-input"
+        [placeholder]="translation.to"
+        [formControl]="amountTextFields.max"
+        (keyup)="onAmountChange('max', 'float', $event)"
+      />
+      <input
+        type="number"
+        style="display: none"
+        [formControl]="finalOutputData.amount.max"
+      />
+    </div>
+  </div>
+  <div class="row" style="margin-top: 30px; margin-bottom: 8px">
+    <div class="acc-dialog-subheading">
+      {{ translation.txnDate }}
+    </div>
+  </div>
+  <div class="row">
+    <div
+      class="dateRangePicker"
+      [ngClass]="data.direction === 'rtl' ? 'acc-arabic' : ''"
+    >
+      <input
+        readonly
+        (click)="picker1.close(); picker.open()"
+        matInput
+        [matDatepicker]="picker"
+        name="fromdate"
+        style="border: none"
+        [max]="maxDate"
+        [placeholder]="translation.from"
+        [formControl]="finalOutputData.txn_date.min"
+        (dateChange)="changesToDate(finalOutputData.txn_date, 'from', picker)"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="picker"
+        matDatepickerToggleIcon="none"
+      >
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker [calendarHeaderComponent]="calendarComponent">
+      </mat-datepicker>
+      <span style="display: flex; align-items: center">
+        <img
+          src="assets/image/arrow-right.svg"
+          class="acc-date-arrow"
+          [style.transform]="
+            data.direction == 'rtl' ? 'rotate(180deg)' : 'rotate(0deg)'
+          "
+        />
+      </span>
+      <input
+        readonly
+        (click)="picker.close(); picker1.open()"
+        matInput
+        [matDatepicker]="picker1"
+        name="todate"
+        style="border: none"
+        [max]="maxDate"
+        [placeholder]="translation.to"
+        [formControl]="finalOutputData.txn_date.max"
+        (dateChange)="changesToDate(finalOutputData.txn_date, 'to', picker1)"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker1">
+        <mat-icon
+          matDatepickerToggleIcon
+          class="d-flex"
+          [ngClass]="data.direction === 'ltr' ? 'float-right' : 'float-left'"
+        >
+          <img src="assets/image/calendar.svg" alt="calendar" />
+        </mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker1 [calendarHeaderComponent]="calendarComponent">
+      </mat-datepicker>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 30px; margin-bottom: 8px">
+    <div class="acc-dialog-subheading">
+      {{ translation.filterFiscalYear }}
+    </div>
+  </div>
+  <div class="row">
+    <mat-select
+      class="commonMatSelect"
+      (selectionChange)="onFiscalYearChange($event)"
+      [ngClass]="data.direction === 'rtl' ? 'text-right' : ''"
+      [value]="selectedFiscalYear"
+    >
+      <mat-option value=""></mat-option>
+      <mat-option [value]="option.year" *ngFor="let option of fiscalYearList">
+        {{ option.year }}
+      </mat-option>
+    </mat-select>
+  </div>
+  <div class="row" style="margin-top: 64px">
+    <div
+      class="w-100"
+      [ngClass]="data.direction === 'ltr' ? 'text-right' : ''"
+      style="padding-bottom: 10px"
+    >
+      <button
+        class="btnPrimary popup-button"
+        mat-raised-button
+        style="width: 207px; height: 48px"
+        (click)="onApplyClick()"
+      >
+        {{ translation.filterApplyButton }}
+      </button>
+    </div>
+  </div>
+</div>

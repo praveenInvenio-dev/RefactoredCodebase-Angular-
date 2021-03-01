@@ -1,0 +1,54 @@
+<div class="row mt-2">
+  <div class="col-md-6">
+    <div
+      class="add-card-large cardWith437 iptax-card-container"
+      (click)="onNewApplicationClick()"
+    >
+      <img class="px-2" src="assets/image/add.svg" />
+      <div class="value greenBold fwb textPrimary mx-1 mt-2">
+        {{ pageTranslation.newRequest }}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" *ngFor="let item of dataList">
+    <div
+      class="filing-card textDark border iptax-card-container"
+      (click)="onNewApplicationClick(item.Fbnum)"
+    >
+      <div class="row iptax-card-section">
+        <div class="col-md-8">
+          <div class="card-title value fwb">{{ item.FbtText }}</div>
+          <!-- <div class="caption textGray">{{ item.FbtText }}</div> -->
+        </div>
+        <div
+          class="col-md-4"
+          style="justify-content: flex-end; display: flex; align-items: center"
+        >
+          <div
+            class="tag32"
+            style="height: 35px; width: 80%"
+            [matTooltip]="item.FbustTxt"
+            [ngClass]="item.Fbust === 'E0045' ? 'tag-success' : 'tag-partial'"
+          >
+            {{ item.FbustTxt }}
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="row iptax-card-section">
+        <div class="col-md-6">
+          <div class="caption textGray">
+            {{ pageTranslation.requestNumber }}
+          </div>
+          <div class="value fwb">{{ item.Fbnum }}</div>
+        </div>
+        <div class="col-md-6">
+          <div class="caption textGray">{{ pageTranslation.creationDate }}</div>
+          <div class="value fwb">{{ getCreationDate(item.Receipt) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

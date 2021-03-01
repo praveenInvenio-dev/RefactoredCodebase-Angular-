@@ -1,0 +1,49 @@
+.acc-filter-pills {
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--dark);
+
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  margin-right: 24px;
+  border: 1px solid #999999;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.acc-pill-ar {
+  margin-right: 0;
+  margin-left: 24px;
+}
+
+.acc-filter-pills:hover,
+.acc-filter-pills.active {
+  background-color: #eaeaea;
+}
+
+.acc-filter-range-input {
+  border: none;
+  width: 46%;
+}
+
+input {
+  padding-bottom: 8px;
+}
+
+/* Override */
+.dateRangePicker {
+  width: 100%;
+  max-width: 100%;
+}
+
+.dateRangePicker input::placeholder {
+  text-align: left;
+}
+
+.acc-arabic input::placeholder {
+  text-align: right;
+}

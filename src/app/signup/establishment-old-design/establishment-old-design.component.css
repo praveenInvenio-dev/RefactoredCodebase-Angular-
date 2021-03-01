@@ -1,0 +1,437 @@
+.alignleft {
+    float: left;
+  }
+  .alignright {
+    float: right;
+  }
+  
+  .numberCss {
+    width: 8.5px;
+    height: 8.5px;
+    border-radius: 50%;
+    background-color: #d2a02a;
+    font-size: 25px !important;
+    position: relative;
+    color: white;
+    top: -15px;
+    right: 4px;
+  }
+  .cardCss {
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .cardCssActive {
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .txtCss {
+    font-size: 15px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: center;
+    color: #d2a02a;
+    margin-left: 10px;
+    position: relative;
+    top: 8px;
+  }
+  
+  .txtCssActive {
+    font-size: 15px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: center;
+    color: #13614c;
+    margin-left: 10px;
+    position: relative;
+    top: 8px;
+  }
+  
+  .viewCss {
+    display: inline-flex;
+    color: gray;
+  }
+  
+  .viewCssActive {
+    display: inline-flex;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+    width: 100%;
+  }
+  
+  .cardHeader {
+    border-bottom: 1px solid gray;
+    margin-bottom: 15px;
+  }
+  
+  .ellipse {
+    width: 34.5px;
+    height: 34.5px;
+    border-radius: 50%;
+    box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+  }
+  
+  .ellipse-inner {
+    width: 8.5px;
+    height: 8.5px;
+    border-radius: 50%;
+    background-color: #d2a02a;
+    position: relative;
+    top: 1px;
+    left: 1px;
+  }
+  
+  .lineCss {
+    width: 960px;
+    height: 540px;
+    background-color: #f5f5f5;
+  }
+  
+  .pwdcss {
+    color: #00e695;
+    width: fit-content;
+  }
+  
+  .checkCss {
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
+  }
+  
+  .mainTitle {
+    font-size: 15px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-align: center;
+    color: #13614c;
+  }
+  
+  .subTitle {
+    font-size: 13px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.15;
+    letter-spacing: normal;
+    text-align: center;
+    color: #100f0f;
+  }
+  
+  .btnCss {
+    color: white;
+    border-radius: 4.5px;
+    background-color: #d2a02a;
+  }
+  
+  .btnArbCss {
+    float: right;
+    color: white;
+    border-radius: 4.5px;
+    background-color: #d2a02a;
+  }
+  /* DONE BY ME */
+  .vContainer {
+    width: 850px;
+    height: 550px;
+    margin: auto;
+    /* width: 955px;
+    height: 648px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff; */
+  }
+  
+  .vText {
+    width: 816px;
+    height: 151px;
+    font-family: SSTArabic;
+    font-size: 24px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.96;
+    letter-spacing: normal;
+    text-align: center;
+    color: #100f0f;
+    padding-top: 50px;
+  }
+  
+  .Verif-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 9px;
+    border: solid 3px #707070;
+    margin-right: 15px;
+    background-color: var(--white-two);
+  }
+  
+  .vBox :hover {
+    border-color: #d2a02a;
+  }
+  
+  .vBox {
+    display: flex;
+    justify-content: center;
+    height: 199px;
+    align-items: center;
+  }
+  
+  .ash {
+    font-family: SSTArabic;
+    font-size: 45px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-align: center;
+    color: #100f0f;
+  }
+  
+  .timer {
+    font-family: SSTArabic;
+    font-size: 26px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: normal;
+    text-align: center;
+    color: #100f0f;
+  }
+  
+  .resend {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 30px;
+  }
+  
+  .checkCircleENG {
+    float: right;
+    width: 26.2px;
+    height: 26.2px;
+    color: #00e695;
+  }
+  
+  .checkCircleARB {
+    float: left;
+    width: 26.2px;
+    height: 26.2px;
+    color: #00e695;
+  }
+  
+  .hrCss2 {
+    width: 94%;
+    float: left;
+    position: relative;
+    bottom: 85px;
+    right: 179px;
+  }
+  
+  .hrCss3 {
+    width: 95%;
+    float: right;
+    position: relative;
+    bottom: 118px;
+    left: 181px;
+  }
+  
+  .stepperIcon {
+    color: #13614c;
+    position: relative;
+    top: -10px;
+    left: -9px;
+    font-size: 27px;
+  }
+  
+  .hrCss2Active {
+    width: 93%;
+    float: left;
+    position: relative;
+    bottom: 80px;
+    right: 178px;
+  }
+  
+  .hrCss3Active {
+    width: 94%;
+    float: right;
+    position: relative;
+    bottom: 113px;
+    left: 179px;
+  }
+  
+  .stepperArbIcon {
+    color: #13614c;
+    position: relative;
+    bottom: 8px;
+    right: -9px;
+    font-size: 25px;
+  }
+  
+  ::ng-deep .mat-radio-label-content {
+    font-size: 14px !important;
+    font-family: SSTArabic-Medium !important;
+    position: relative;
+    top: -1px;
+  }
+  
+  ::ng-deep
+    .mat-radio-button.mat-accent.mat-radio-checked
+    .mat-radio-outer-circle,
+  .mat-radio-outer-circle {
+    border-color: #ffffff !important;
+  }
+  
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #ffffff !important;
+  }
+  
+  .attBoxCss {
+    border: 1px dashed #707070;
+    height: 50px;
+    border-radius: 9px;
+    /* line-height: 4; */
+    margin-top: 20px;
+  }
+  
+  table {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      min-width: 500px;
+      margin-bottom: 15px;
+  }
+  
+  th.mat-header-cell {
+      text-align: left;
+      max-width: 100px;
+      font-size: 14px!important;
+  }
+  
+  
+  tr.mat-header-row {
+    height: 30px;
+  }
+  
+  .mat-input-element {
+    width: 90%;
+  }
+  
+  .btnGArbCss {
+    font-family: SSTArabic-Medium;
+    float: right;
+    color: white;
+    border-radius: 9px;
+    background-color: #13614c;
+    width: 150px!important;
+    height: 49px;
+  }
+  
+  .btnGCss {
+    width: 150px!important;
+    height: 49px;
+    font-family: SSTArabic-Medium;
+    color: white;
+    border-radius: 9px;
+    font-size: 16px;
+    background-color: #13614c;
+  }
+  
+  .dayField {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 0.25rem!important;
+      border-bottom-left-radius: 0.25rem!important;
+  }
+  
+   .inputDayField {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 0.25rem!important;
+      border-bottom-right-radius: 0.25rem!important;
+  }
+  
+  #day input[type="text"]:focus {
+    box-shadow: 0px 0px 0px 2px #13614c, inset 0 0 0px 0px #13614c;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  
+  #month input[type="text"]:focus {
+    box-shadow: 0px 0px 0px 2px #13614c, inset 0 0 0px 0px #13614c;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  
+  .time-picker-component .mat-form-field-infix {
+    display: inherit;
+  }
+  
+  .custom {
+    border: 1px solid;
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 0.25rem;
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+  
+  #custom input[type="text"]:focus {
+    box-shadow: 0px 0px 0px 2px #13614c, inset 0 0 0px 0px #13614c;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  
+  #custom .mat-select:focus {
+    box-shadow: 0px 0px 0px 2px #13614c, inset 0 0 0px 0px #13614c;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+  
+  ::ng-deep #code .mat-select-trigger {
+    height: 3.125em;
+  }
+  ::ng-deep #code .mat-select-value {
+    padding-top: 13px;
+      padding-left: 9px;
+  }
+  
+  .thMatHeaderCellLeftEng{
+    text-align: left;
+    max-width: 100px;
+    font-size: 14px!important;
+  }
+  .thMatHeaderCellRightArb{
+    text-align: right;
+    max-width: 100px;
+    font-size: 14px!important;
+  }
+  

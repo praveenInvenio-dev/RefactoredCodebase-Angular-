@@ -1,0 +1,63 @@
+<div style="
+background: white;
+width: 100%; height: 23%;
+"><div class="dateRangeText mt-1">Period: {{ julianIntToDate(daterange._selected?.fromDate['jdnEnd']) | date }} - {{ julianIntToDate(daterange._selected?.toDate['jdnEnd']) | date }}</div>
+<div class="row mt-3" >
+<div class="col-md-10" id="dtBtns" style="
+display: flex;
+justify-content: space-evenly;
+">
+<!-- <input type="button" class="dtBtn" value="Month"> -->
+<button class="dtBtn">Month</button>
+  <button class="dtBtn">3 Months</button>
+  <button class="dtBtn">6 Months</button>
+  <button class="dtBtn">Year</button>
+  <button class="dtBtn">Customize</button>
+</div>
+</div></div>
+<div class="daterange-container" [id]="daterange.id" style="margin-top: 0;">
+  <div class="daterange-calendars">
+    <mat-calendar #fromCalendar
+    cdkTrapFocus
+    [selected]="daterange._selected?.fromDate"
+    (selectedChange)="_select(fromCalendar, $event)">
+  </mat-calendar>
+    <mat-calendar #toCalendar
+    [selected]="daterange._selected?.toDate"
+    [minDate]="daterange.minToDate"
+    [dateFilter]="daterange.toCalendarDateFilter"
+    (selectedChange)="_select(toCalendar, $event)"
+    ></mat-calendar>
+  </div>
+  <!-- <div class="daterange-panel">
+    <div class="daterange-options">
+      <div class="daterange-option">
+        <button mat-button (click)="today()">Aujourd'hui</button>
+      </div>
+      <div class="daterange-option">
+        <button mat-button>30 derniers jours</button>
+      </div>
+      <div class="daterange-option">
+        <button mat-button>Ce mois-ci</button>
+      </div>
+      <div class="daterange-option">
+        <button mat-button>Le mois dernier</button>
+      </div>
+      <div class="daterange-option">
+        <button mat-button>Choisir une autre période</button>
+      </div>
+    </div>
+    <div class="daterange-from-to">
+      <mat-form-field>
+        <input placeholder="DU" matInput autocomplete="off">
+      </mat-form-field>
+      <mat-form-field>
+        <input placeholder="AU" matInput autocomplete="off">
+      </mat-form-field>
+    </div>
+    <div class="daterange-actions">
+      <button mat-button (click)="apply()">APPLIQUER</button>
+      <button mat-button (click)="cancel()">ANNULER</button>
+    </div>
+  </div> -->
+</div>

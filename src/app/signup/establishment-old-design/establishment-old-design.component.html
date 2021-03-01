@@ -1,0 +1,1169 @@
+<app-header [direction]="direction" [title]="lang.title"></app-header>
+
+<div class="container mt-5" dir="{{ direction }}">
+  <div *ngIf="!show">
+    <!-- PROGRESS BAR - START -->
+    <div class="row" *ngIf="!show && !showVerification">
+      <div class="col-md-12">
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div [ngClass]="optionActive === 1 ? 'viewCssActive' : 'viewCss'">
+              <div class="card cardz" [ngClass]="optionActive === 1 ? 'cardCss' : 'cardCssActive'">
+                <div class="card-body">
+                  <i class="fa fa-check-circle" [ngClass]="
+                      direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'
+                    " *ngIf="showOne" aria-hidden="true"></i>
+                  <p class="ellipse-inner" *ngIf="!showOne"></p>
+                </div>
+              </div>
+            </div>
+            <p [ngClass]="optionActive === 1 ? 'txtCss' : 'txtCssActive'">
+              {{ lang.header.h1 }}
+            </p>
+
+          </div>
+          <div class="col-md-4">
+            <div [ngClass]="optionActive === 2 ? 'viewCssActive' : 'viewCss'">
+              <div class="card cardz" [ngClass]="optionActive === 2 ? 'cardCss' : 'cardCssActive'">
+                <div class="card-body">
+                  <i class="fa fa-check-circle" [ngClass]="
+                      direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'
+                    " *ngIf="showTwo" aria-hidden="true"></i>
+                  <p class="ellipse-inner" *ngIf="!showTwo" [style.background]="defaultValue === 1 ? 'white' : ''"></p>
+                </div>
+              </div>
+            </div>
+            <p [ngClass]="optionActive === 2 ? 'txtCss' : 'txtCssActive'"
+              [style.color]="defaultValue === 1 ? '#c0c0c0' : ''">
+              {{ lang.header.h2 }}
+            </p>
+            <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss2Active" />
+            <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss3Active" />
+            <hr *ngIf="optionActive === 2 || optionActive === 1" class="hrCss2" />
+            <hr *ngIf="optionActive === 2 || optionActive === 1" class="hrCss3" />
+          </div>
+          <div class="col-md-4">
+            <div [ngClass]="optionActive === 3 ? 'viewCssActive' : 'viewCss'">
+              <div class="card cardz" [ngClass]="optionActive === 3 ? 'cardCss' : 'cardCssActive'">
+                <div class="card-body">
+                  <!-- <i class="fa fa-arrow-left" style="font-size: 25px;" aria-hidden="true"></i> -->
+                  <p class="ellipse-inner" [style.background]="
+                      defaultValue === 3 || defaultValue === 1 ? 'white' : ''
+                    "></p>
+                </div>
+              </div>
+            </div>
+            <p [ngClass]="optionActive === 3 ? 'txtCss' : 'txtCssActive'" [style.color]="
+                defaultValue === 3 || defaultValue === 1 ? '#c0c0c0' : ''
+              ">
+              {{ lang.header.h3 }}
+            </p>
+            <!-- <hr [ngClass]="direction === 'rtl' ? 'hrCss4' : 'hrEngCss4'" /> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PROGRESS BAR - END -->
+
+    <!-- VERIFICATION CARD SCREEN - START -->
+    <!-- <div class="row rowCss mt-2 vContainer" *ngIf="showVerification">
+      <div class="col-md-12">
+        <mat-card class="mt-3 vContainer">
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="vText">
+                  <span> {{ lang.c7.title }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" dir="ltr">
+              <div class="col-md-12 vBox">
+                <input class="Verif-box ash" maxlength="1" value="*" />
+                <input class="Verif-box ash" maxlength="1" value="*" />
+                <input class="Verif-box ash" maxlength="1" value="*" />
+                <input class="Verif-box ash" maxlength="1" value="2" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sideHeading timer">
+                  <span>0:{{ counter }} </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="sideHeading resend">
+                  <span>
+                    <u>{{ lang.c7.in1 }}</u></span>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div> -->
+    <app-otp-verification *ngIf="showVerification" (validateOTP)="validateOTP($event)" (resend)="resendOTP()">
+    </app-otp-verification>
+    <!-- VERIFICATION CARD SCREEN - END -->
+
+    <!-- ESTABLISHMENT REGISTER SCREEN 1 - START -->
+    <div class="row rowCss mt-2" *ngIf="optionActive === 1 && !showVerification">
+      <div class="col-md-12">
+        <form [formGroup]="estbForm" (ngSubmit)="onSubmit()">
+          <mat-card class="mt-3">
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="sideHeading">
+                    <span> {{ lang.c1.title }}</span>
+                    <mat-icon [ngClass]="
+                        direction === 'rtl'
+                          ? 'checkCircleARB'
+                          : 'checkCircleENG'
+                      ">check_circle</mat-icon>
+                    <p class="Rectangle-12"></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c1.in1 }}</div>
+                  <mat-form-field appearance="outline">
+                    <!-- <input
+                      dir="rtl"
+                      matInput
+                      placeholder="{{ lang.c1.ph.in1 }}"
+                      formControlName="idType"
+                    /> -->
+                    <!-- <mat-select formControlName="idType">
+                      <mat-option [value]="lang.c2.in2">{{
+                        lang.c2.in2
+                        }}</mat-option>
+                      <mat-option [value]="lang.c2.in2">{{
+                        lang.c2.in3
+                        }}</mat-option>
+                      <mat-option [value]="lang.c2.in2">{{
+                        lang.c2.in4
+                        }}</mat-option>
+                    </mat-select>
+                  [ngClass]="{ 'is-invalid': submitted3 && f2.Type.errors }">-->
+                    <mat-select formControlName="idType">
+                      <mat-option [value]="idType.value" *ngFor="let idType of idTypes">
+                        {{idType.name}}</mat-option>
+                      <!-- <mat-option value="ZS0001">{{ idTypes.t1 }}</mat-option>
+                      <mat-option value="ZS0002">{{ idTypes.t2 }}</mat-option>
+                      <mat-option value="ZS0003">{{ idTypes.t3 }}</mat-option> -->
+                    </mat-select>
+                    <mat-error *ngIf="hasError('idType', 'required')">ID Type is required</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c1.in2 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="1234567890" formControlName="idNum" />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c1.in3 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker1" formControlName="dob" placeholder="4/5/1410"
+                      [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c1.in4 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Name" formControlName="fname" />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c1.in5 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="name" formControlName="lname" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <!-- PASSPORT DETAILS - START -->
+          <mat-card class="mt-3" *ngIf="estbForm.value.idType === 'ZS0002' || estbForm.value.idType === 'ZS0003'">
+            <mat-card-content formGroupName="passportForm">
+              <div class="sideHeading">
+                {{ lang.c2.title }}
+                <mat-icon [ngClass]="
+                    direction === 'rtl' ? 'checkCircleARB' : 'checkCircleENG'
+                  ">check_circle</mat-icon>
+                <p class="Rectangle-12"></p>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c2.in1 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="1234567890" formControlName="pssprtNum" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c2.in2 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Issue City" formControlName="issueCity" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c2.in3 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker2" placeholder="4/5/2018" formControlName="issueDate" />
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c2.in4 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker3" placeholder="4/5/2021" formControlName="expiryDate" />
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-md-4">
+                  <div class="registerLabelCss">{{ lang.c2.in5 }}</div>
+                  <mat-form-field appearance="outline" class="dottedBox">
+                    <input matInput placeholder="{{ lang.c2.ph.in5 }}" />
+                  </mat-form-field>
+                </div> -->
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c2.in5 }}</div>
+                  <div class="form-group attBoxCss">
+                    <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                      <span class="material-icons attIconCss" style="line-height: 1.5;">
+                        attach_file
+                      </span>
+                      <input type="file" style="display: none;" placeholder="1234567890"
+                        formControlName="pssprtAttchmnt" />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <!-- PASSPORT DETAILS - END -->
+
+          <!-- CONTACT SECTION - START  -->
+          <mat-card class="mt-3">
+            <mat-card-content formGroupName="contactForm">
+              <div class="sideHeading">
+                {{ lang.c3.title }}
+                <p class="Rectangle-12"></p>
+              </div>
+              <div class="row">
+                <!-- <div class="col-md-4">
+                  <div class="registerLabelCss">{{ lang.c3.in1 }}</div>
+                  <mat-form-field appearance="outline">
+                    <mat-select formControlName="idType">
+                      <mat-option value="ZS0001">{{ idTypes.t1 }}</mat-option>
+                      <mat-option value="ZS0002">{{ idTypes.t2 }}</mat-option>
+                      <mat-option value="ZS0003">{{ idTypes.t3 }}</mat-option>
+                    </mat-select>
+                    <input matInput placeholder="966 5555555555" />
+                  </mat-form-field>
+                </div> -->
+
+                <div class="time-picker-component col-md-4">
+                  <!-- <mat-form-field appearance="outline" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;"> -->
+                  <div class="registerLabelCss required">{{ lang.c3.in1 }}</div>
+                  <div id="custom">
+                    <mat-select id="code" class="custom" style="width: 30%;">
+                      <mat-option [value]="item.Telefto" *ngFor="let item of codes" (click)="onChange(item.Telefto)">
+                        {{ item.Land1 }}&nbsp; +{{item.Telefto}}</mat-option>
+                      <!-- <mat-option value="ZS0002">{{ idTypes.t2 }}</mat-option>
+                      <mat-option value="ZS0003">{{ idTypes.t3 }}</mat-option> -->
+                    </mat-select>
+                    <input matInput type="text" formControlName="mobile" [value]="name" class="custom"
+                      placeholder="966 5555555555" style="width: 70%; padding-left: 12px;">
+                  </div>
+                  <!-- </mat-form-field> -->
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c3.in2 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Test@gazt.gov.sa" formControlName="email" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c3.in3 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Test@gazt.gov.sa" formControlName="cnfrmEmail" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <!-- CONTACT SECTION - END -->
+          <div class="mt-3">
+            <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'" (click)="showFileds()">
+              {{ lang.c1.btn }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- ESTABLISHMENT REGISTER SCREEN 1 - END -->
+
+    <!-- COMPLETE INFORMATION SCREEN 2 - START -->
+    <div class="row rowCss mt-2" *ngIf="optionActive === 2">
+      <div class="col-md-12">
+
+        <form [formGroup]="facilityInfoForm" (ngSubmit)="onSubmit1()">
+          <!-- FACILITY INFORMATION -START -->
+          <mat-card class="mt-3">
+            <mat-card-content>
+              <div class="sideHeading">
+                {{ lang.c8.title }}
+                <p class="Rectangle-12"></p>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="registerLabelCss">{{ lang.c8.in1 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="" formControlName="tin" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c8.in2 }}</div>
+                  <mat-form-field appearance="outline">
+                    <mat-select formControlName="branch">
+                      <mat-option value="ZS0001" selected>Riyadh</mat-option>
+                      <mat-option value="ZS0002">Dubai</mat-option>
+                      <mat-option value="ZS0003">Saudi Arabia</mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="hasError('idType', 'required')">ID Type is
+                    required</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <p class="registerLabel2Css required">{{ lang.c8.in3 }}</p>
+                  <div class="row mr-3" style="margin-left: 5rem !important;">
+                    <mat-radio-group aria-label="Select an option" name="r2" formControlName="resStatus">
+                      <!-- [ngClass]="{ 'is-invalid': submitted && f1.type.errors }"  -->
+                      <mat-radio-button value="1" class="mr-2 radioCss" [style.background]="
+                          facilityInfoForm.get('resStatus').value === '1'
+                            ? '#d2a02a'
+                            : 'none'
+                        " [style.color]="
+                          facilityInfoForm.get('resStatus').value === '1'
+                            ? '#ffffff'
+                            : 'black'
+                        ">{{ lang.c8.in4 }}
+                      </mat-radio-button>
+                      <mat-radio-button value="2" class="mr-2 radioCss" [style.background]="
+                          facilityInfoForm.get('resStatus').value === '2'
+                            ? '#d2a02a'
+                            : 'none'
+                        " [style.color]="
+                          facilityInfoForm.get('resStatus').value === '2'
+                            ? '#ffffff'
+                            : 'black'
+                        ">{{ lang.c8.in5 }}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    <!-- <div *ngIf="submitted && f1.type.errors" class="invalid-feedback">
+                  <div *ngIf="f1.type.errors.required">{{vatErr.e11}}</div>
+                </div> -->
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="row" *ngIf="facilityInfoForm.value.resStatus == 2">
+                <div class="col-md-12">
+                  <p class="registerLabel2Css required">{{ lang.c8.in6 }}</p>
+                  <div class="row mr-3" style="margin-left: 5rem !important;">
+                    <mat-radio-group aria-label="Select an option" name="r3" formControlName="legalEntity">
+                      <!-- [ngClass]="{ 'is-invalid': submitted && f1.type.errors }"  -->
+                      <mat-radio-button value="1" class="mr-2 radioCss" [style.background]="
+                          facilityInfoForm.get('legalEntity').value === '1'
+                            ? '#d2a02a'
+                            : 'none'
+                        " [style.color]="
+                          facilityInfoForm.get('legalEntity').value === '1'
+                            ? '#ffffff'
+                            : 'black'
+                        ">{{ lang.c8.in7 }}
+                      </mat-radio-button>
+                      <mat-radio-button value="2" class="mr-2 radioCss" [style.background]="
+                          facilityInfoForm.get('legalEntity').value === '2'
+                            ? '#d2a02a'
+                            : 'none'
+                        " [style.color]="
+                          facilityInfoForm.get('legalEntity').value === '2'
+                            ? '#ffffff'
+                            : 'black'
+                        ">{{ lang.c8.in8 }}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    <!-- <div *ngIf="submitted && f1.type.errors" class="invalid-feedback">
+                  <div *ngIf="f1.type.errors.required">{{vatErr.e11}}</div>
+                </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="facilityInfoForm.value.resStatus == 2">
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{ lang.c8.in9 }}</div>
+                  <mat-form-field appearance="outline">
+                    <mat-select formControlName="compStatus">
+                      <mat-option value="ZS0001" selected>Dividends, Management of directors' fees paid by
+                        resident com.</mat-option>
+                      <mat-option value="ZS0002">Option 2</mat-option>
+                      <mat-option value="ZS0003">Option 3</mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="hasError('idType', 'required')">ID Type is
+                    required</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <!-- FACILITY INFORMATION - END -->
+
+          <!-- FACILITY BRANCHES - START -->
+          <mat-card class="mt-3">
+            <mat-card-content>
+              <div class="sideHeading">
+                {{ lang.c9.title }}
+                <p class="Rectangle-12"></p>
+              </div>
+
+              <!-- <div fxLayout fxLayoutAlign="center center"> -->
+              <!-- <mat-form-field > -->
+
+              <label style="width: 100%;">
+                <input matInput type="text" style="margin-top: 20px;" (keyup)="doFilter($event.target.value)" />
+                <span class="material-icons" style="color: #c0c0c0; position: relative; top: 10px; font-size: 30px; right:10px;
+               float:right;">
+                  search
+                </span>
+              </label>
+              <!-- <button mat-icon-button [style.float]="'right'">
+                    <mat-icon class="mat-18" [style.color]="'#6f6f6e'">search</mat-icon>
+                  </button> -->
+
+              <!-- </mat-form-field> -->
+              <!-- </div> -->
+              <p class="Rectangle-12"></p>
+              <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="branchName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <span [style.float]="direction === 'rtl'? 'left': 'right'">{{lang.c9.in1}}</span>
+                  </th>
+                  <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let element">Branch Name A</td>
+                </ng-container>
+
+                <ng-container matColumnDef="crLicense">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{lang.c9.in2}}
+                  </th>
+                  <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let element">
+                    {{ element.crLicense }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="city">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{lang.c9.in3}}
+                  </th>
+                  <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let element">{{ element.city }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{lang.c9.in4}}</th>
+                  <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let element">{{ element.type }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="update">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let element">
+                    <button mat-icon-button>
+                      <mat-icon class="mat-18" [style.color]="'#d2a02a'">edit</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let element">
+                    <button mat-icon-button color="warn">
+                      <mat-icon class="mat-18">delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              </table>
+
+              <!-- <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+              </mat-paginator>
+              <p class="Rectangle-12"></p> -->
+              <div class="row">
+                <div class="col-md-12">
+                  <button mat-button [ngClass]="direction === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button"
+                    style="width: auto;" href="#addModal" data-toggle="modal">{{lang.c9.btn}}
+                  </button>
+                </div>
+              </div>
+      </mat-card-content>
+      </mat-card>
+      <!-- FACILITY BRANCHES - END -->
+
+      <!-- FACILITY FINANCIAL INFORMATION - START -->
+      <mat-card class="mt-3" formGroupName="financialInfo">
+        <mat-card-content>
+          <div class="sideHeading">
+            {{ lang.c10.title }}
+            <p class="Rectangle-12"></p>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="registerLabelCss required">{{lang.c10.in1}}</div>
+              <mat-form-field appearance="outline">
+                <mat-select formControlName="accounting">
+                  <mat-option value="ZS0001" selected>Accounting</mat-option>
+                  <mat-option value="ZS0002">Dubai</mat-option>
+                  <mat-option value="ZS0003">Saudi Arabia</mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="hasError('idType', 'required')">ID Type is
+                    required</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <div class="registerLabelCss">{{lang.c10.in2}}</div>
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="Capital" />
+              </mat-form-field>
+            </div>
+            <!-- <div class="col-md-4">
+                  <div class="registerLabelCss">{{ lang.c10.in3 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="{{ lang.c10.ph.in3 }}" />
+                  </mat-form-field>
+                </div> -->
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="registerLabel2Css required">{{lang.c10.in3}}</p>
+              <div class="row mr-3" style="margin-left: 5rem !important;">
+                <mat-radio-group aria-label="Select an option" name="r2" formControlName="calendarType">
+                  <!-- [ngClass]="{ 'is-invalid': submitted && f1.type.errors }"  -->
+                  <mat-radio-button value="1" class="mr-2 radioCss" [style.background]="
+                        facilityInfoForm.get('financialInfo').get('calendarType').value === '1'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        facilityInfoForm.get('financialInfo').get('calendarType').value === '1'
+                          ? '#ffffff'
+                          : 'black'
+                      ">{{lang.c10.in4}}
+                  </mat-radio-button>
+                  <mat-radio-button value="2" class="mr-2 radioCss" [style.background]="
+                        facilityInfoForm.get('financialInfo').get('calendarType').value === '2'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        facilityInfoForm.get('financialInfo').get('calendarType').value === '2'
+                          ? '#ffffff'
+                          : 'black'
+                      ">{{lang.c10.in5}}
+                  </mat-radio-button>
+                </mat-radio-group>
+                <!-- <div *ngIf="submitted && f1.type.errors" class="invalid-feedback">
+                  <div *ngIf="f1.type.errors.required">{{vatErr.e11}}</div>
+                </div> -->
+              </div>
+            </div>
+          </div> <br>
+          <div class="row">
+            <!-- <div class="col-md-2">
+                  <div class="registerLabelCss">{{lang.c10.in6}}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="5" /><span matSuffix>| Day </span>
+                  </mat-form-field> -->
+            <!-- <span class="input-group-text md-addon">@</span> -->
+            <!-- </div>
+                <div class="col-md-2">
+                  <div class="registerLabelCss" style="height: 28px;"></div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="5" /><span matSuffix>| Month </span>
+                  </mat-form-field>
+                </div> -->
+
+            <div class="col-md-2">
+              <div class="registerLabelCss required">{{lang.c10.in6}}</div>
+              <div class="input-group mb-3" style="top: 21px;" id="day">
+                <input type="text" class="form-control" placeholder="5" aria-label="Recipient's username"
+                  formControlName="endDay" aria-describedby="basic-addon2" style="height: 50px;"
+                  [ngClass]="direction === 'rtl' ? 'inputDayField' : ''">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2" style="height: 50px;"
+                    [ngClass]="direction === 'rtl' ? 'dayField' : ''">Day</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="registerLabelCss"></div>
+              <div class="input-group mb-3" style="top: 49px;" id="month">
+                <input type="text" class="form-control" placeholder="5" aria-label="Recipient's username"
+                  formControlName="endMonth" aria-describedby="basic-addon2" style="height: 50px;"
+                  [ngClass]="direction === 'rtl' ? 'inputDayField' : ''">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2" style="height: 50px;"
+                    [ngClass]="direction === 'rtl' ? 'dayField' : ''">Month</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="registerLabelCss required">{{lang.c10.in7}}</div>
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="8/4/1438" formControlName="commencementDate" />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <div class="registerLabelCss required">{{lang.c10.in8}}</div>
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="8/4/1438" formControlName="taxableDate" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- FACILITY FINANCIAL INFORMATION - END -->
+      </form>
+      <div class="mt-3">
+        <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'" (click)="NextStep(3)">
+          {{ lang.c3.btn }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- COMPLETE INFORMATION SCREEN 2 - START -->
+
+  <!-- PASSWORD SCREEN - START -->
+  <div class="row rowCss mt-2" *ngIf="optionActive === 3">
+    <div class="col-md-12">
+      <mat-card class="mt-3">
+        <mat-card-content>
+          <div class="sideHeading">
+            {{ lang.c4.title }}
+            <p class="Rectangle-12"></p>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-md-push-6">
+              <div class="row">
+                <div class="col-md-12">
+                  <p [ngClass]="
+                        direction === 'rtl' ? 'pwdArbScreenCss' : 'pwdScreenCss'
+                      ">
+                    {{ lang.c4.in1 }}
+                  </p>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="*********" />
+                  </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                  <p [ngClass]="
+                        direction === 'rtl' ? 'pwdArbScreenCss' : 'pwdScreenCss'
+                      ">
+                    {{ lang.c4.in2 }}
+                  </p>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="*********" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-md-pull-6">
+              <div class="row">
+                <div class="col-md-12">
+                  <p style="
+                        height: 8px;
+                        border-radius: 3.5px;
+                        background-color: #d2a02a;
+                      "></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="textbox" style="color: #13614c;">
+                    <div [ngClass]="
+                          direction === 'rtl' ? 'alignright' : 'alignleft'
+                        ">
+                      {{ lang.c4.subtitle.t1 }}
+                    </div>
+                    <div [ngClass]="
+                          direction === 'rtl' ? 'alignleft' : 'alignright'
+                        ">
+                      <b>
+                        {{ lang.c4.subtitle.t2 }}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <p class="pwdcss">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    {{ lang.c4.subtitle.t3 }}
+                  </p>
+                  <p class="pwdcss">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    {{ lang.c4.subtitle.t4 }}
+                  </p>
+                  <p class="pwdcss">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    {{ lang.c4.subtitle.t5 }}
+                  </p>
+                  <p class="pwdcss">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    {{ lang.c4.subtitle.t6 }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="mt-3">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-12">
+              <p [ngClass]="direction === 'rtl' ? 'ackArbCss' : ''">
+                <mat-checkbox class="checkCss"></mat-checkbox>
+                <b>{{ lang.c5.title }}</b>
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="mt-3 mb-3">
+        <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'" (click)="submit()">
+          {{ lang.c5.btn }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- PASSWORD SCREEN - END -->
+</div>
+<!-- REGISTRATION SUCCESSFUL SCREEN - START -->
+<mat-card class="mt-3" style="margin-left: 10%;
+margin-right: 10%;" *ngIf="show">
+  <mat-card-content>
+    <div class="row text-center" style="margin-top: 40px;" *ngIf="show">
+      <div class="col-md-12">
+        <i class="fa fa-check-circle" aria-hidden="true" style="font-size: 50px; color: #00e695;"></i>
+        <div class="mt-3">
+          <p class="mainTitle">{{ lang.c6.t1 }}</p>
+        </div>
+        <div class="subTitle">
+          <p>{{ lang.c6.t2 }}</p>
+          <p>{{ lang.c6.t3 }}</p>
+          <p>{{ lang.c6.t4 }}</p>
+        </div>
+
+        <div class="mb-3">
+          <button mat-button class="btnCss" [routerLink]="['/main/dashboard']">
+            {{ lang.c6.btn }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!-- REGISTRATION SUCCESSFUL SCREEN - END -->
+</div>
+<!-- model start -->
+<!-- Add Modal HTML -->
+<div id="addModal" class="modal fade" dir="{{ direction }}">
+  <div class="modal-dialog" style="margin:0 auto;top:20%;margin-bottom:30px; max-width:828px;height: auto;">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background:#13614c;color: #fff;text-align: center;">
+        <p class="modal-title" style="background:#13614c;color: #fff;text-align: center;margin:0 auto">
+          {{lang.c11.title}}</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+      </div>
+      <form>
+        <div class="modal-body">
+
+          <mat-card class="mt-3">
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="registerLabelCss required">{{ lang.c11.in1 }}</div>
+                  <mat-form-field appearance="outline">
+                    <input matInput placeholder="Branch Name"  />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row mt-5">
+                <div class="col-md-12">
+                  <p class="registerLabel2Css"> {{lang.c11.subtitle}}</p>
+                  <div class="row  mr-3" style="margin-left: 2.5rem!important;">
+
+                    <mat-radio-group aria-label="Select an option" [(ngModel)]="radio3" name="r3">
+                      <mat-radio-button value="1" [style.background]="radio3==='1'?'#d2a02a':'none'"
+                        [style.color]="radio3==='1'?'#ffffff':'black'" class="mr-4 radioCss">{{lang.c11.in3}}
+                      </mat-radio-button>
+                      <mat-radio-button value="2" [style.background]="radio3==='2'?'#d2a02a':'none'"
+                        [style.color]="radio3==='2'?'#ffffff':'black'" class="mr-4 radioCss">{{lang.c11.in4}}
+                      </mat-radio-button>
+                      <mat-radio-button value="3" [style.background]="radio3==='3'?'#d2a02a':'none'"
+                        [style.color]="radio3==='3'?'#ffffff':'black'" class="mr-4 radioCss"> {{lang.c11.in5}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="registerBox" style="display: flex;">
+                    <!-- <i class="fa fa-info-circle" style="position: relative;
+                  top: 6px;
+                  color: #c0c0c0;" aria-hidden="true"></i> -->
+                    <span class="material-icons" style="color: #c0c0c0;">
+                      error_outline
+                    </span>
+                    <p class="registerLabelnCss"> {{lang.c11.in6}}
+                    </p>
+
+                  </div>
+
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="mt-3">
+            <!-- <mat-card-header class="cardHeader">
+                    <mat-card-title>Contact Information</mat-card-title>
+                </mat-card-header> -->
+            <mat-card-content>
+              <!-- <div class="sideHeading">
+                  {{lang.c12.title}}
+                  <p class="Rectangle-12"></p>
+              </div> -->
+              <div class="row">
+                <div class="col-md-12 mt-3">
+                  <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="sideHeadingExpansionBar">
+                          {{lang.c12.title}} (1)
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <!-- <p class="registerLabel2Css"> {{lang.c12.subtitle}}</p> -->
+                          <p [ngClass]="direction === 'rtl' ? 'ackArbCss' : ''">
+                            <mat-checkbox class="checkCss"></mat-checkbox>
+                            <b>{{lang.c12.subtitle}}</b>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in1}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Enter  Issue Country ">
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in2}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Issue By">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in3}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Issued City">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in4}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="1234567890 ">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{ lang.c12.in5 }}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="picker4" placeholder="4/5/2018"
+                               />
+                            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                            <mat-datepicker #picker4></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{ lang.c12.in6 }}</div>
+                          <div class="form-group attBoxCss">
+                            <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                              <span class="material-icons attIconCss" style="line-height: 1.5;">
+                                attach_file
+                              </span>
+                              <input type="file" style="display: none;" placeholder="Explore"
+                                />
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in7}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Main Group of Activity">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in8}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Sub Group Of Activity">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in9}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Main Activity">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mt-3">
+                  <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="sideHeadingExpansionBar">
+                          {{lang.c12.title}}(2)
+                        </mat-panel-title>
+
+                      </mat-expansion-panel-header>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="registerLabel2Css" [ngClass]="direction === 'rtl' ? 'ackArbCss' : ''">
+                            <mat-checkbox class="checkCss"></mat-checkbox>
+                            {{lang.c12.subtitle}}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in1}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Enter  Issue Country ">
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in2}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Issue By">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in3}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Issued City">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in4}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="License Number ">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{ lang.c12.in5 }}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="picker5" placeholder="4/5/2018"
+                               />
+                            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                            <mat-datepicker #picker5></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{ lang.c12.in6 }}</div>
+                          <div class="form-group attBoxCss">
+                            <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                              <span class="material-icons attIconCss" style="line-height: 1.5;">
+                                attach_file
+                              </span>
+                              <input type="file" style="display: none;" placeholder="Explore"
+                                 />
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in7}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Main Group of Activity">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in8}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Sub Group Of Activity">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c12.in9}}</div>
+                          <mat-form-field appearance="outline">
+
+                            <input matInput placeholder="Main Activity">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mt-5">
+                  <button mat-button [ngClass]="direction === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button">
+                    {{lang.c12.btn}}
+                  </button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="mt-3">
+            <!-- <mat-card-header class="cardHeader">
+                    <mat-card-title>Contact Information</mat-card-title>
+                </mat-card-header> -->
+            <mat-card-content>
+              <div class="sideHeading">
+                {{lang.c13.title}}
+                <p class="Rectangle-12"></p>
+              </div>
+              <div class="row rowCss">
+
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{lang.c13.in1}}</div>
+                  <mat-form-field appearance="outline">
+
+                    <input matInput placeholder="Enter  City">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{lang.c13.in2}}</div>
+                  <mat-form-field appearance="outline">
+
+                    <input matInput placeholder="Enter Province">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{lang.c13.in3}}</div>
+                  <mat-form-field appearance="outline">
+
+                    <input matInput placeholder="Enter Country  ">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{lang.c13.in4}}</div>
+                  <mat-form-field appearance="outline">
+
+                    <input matInput placeholder="Enter Street Name ">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{lang.c13.in5}}</div>
+                  <mat-form-field appearance="outline">
+
+                    <input matInput placeholder="Enter  Postal Code ">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{lang.c13.in6}}</div>
+                  <mat-form-field appearance="outline">
+
+                    <input matInput placeholder="Enter Building Number">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <div class="registerLabelCss required">{{lang.c13.in7}}</div>
+                  <mat-form-field appearance="outline">
+
+                    <input matInput placeholder="Enter Unit Number">
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="{{ lang.c13.btn2 }}">
+          <!-- <input type="submit" class="btn btn-success" value="Add"> -->
+          <!-- <div class="mt-3">
+            <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'">
+             {{ lang.c13.btn1 }}
+            </button>
+          </div> -->
+          <div class="mt-3 mb-2">
+            <button mat-raised-button data-dismiss="modal" [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'">
+              {{ lang.c13.btn1 }}
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

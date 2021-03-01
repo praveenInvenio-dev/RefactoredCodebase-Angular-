@@ -1,0 +1,993 @@
+<!-- <p>display-warehouse works!</p> -->
+<div dir={{Direction}}  *ngIf="Step==1" [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+	    <div class="mb-40">
+            <a  onclick="return false" class="text-Gray">{{lang?.warehouselist?.nav?.t1}}  </a> {{lang?.warehouselist?.nav?.t2}}
+        </div>
+
+        <div class="mb-26 d-flex">
+            <a routerLink="/mains/tax" class="text-Watercourse font-weight-bold">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang?.nav?.t3}}
+            </a>
+		</div>
+        
+        <div class="custom-nav-tabs d-flex justify-content-between align-items-center">
+            <h2>{{lang?.warehouselist?.card?.t1}}</h2>
+            <div class="d-flex icons-viewtype">
+                <a  (click)="isGridView = true" class="active" [ngClass]="{'active':isGridView}">
+                    <img src="assets/images/icon-cards-active.svg" alt="">
+                </a>
+                <a (click)="isGridView = false" [ngClass]="{'active':!isGridView}" >
+                    <img src="assets/images/icon-list.svg" >
+                </a>
+            </div>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="tab-content custom-navtab-content">
+            <div class="tab-pane active">
+                <div class="d-flex align-items-center width100P mb-32">
+                    <div class="searchBox card position-relative">
+                        <img src="assets/images/icon-search.svg" alt="" class="position-absolute search-with-shadow ar-search-with-shadow">
+                        <input type="text" placeholder="{{lang?.warehouselist?.card?.placeholder}}" class="placeholder-text-gray pl-30"  (input)="SearchWareList()"[(ngModel)]="searchTerm" autocomplete="off">
+                    </div>
+                    <!-- <img class="ml-15" src="assets/images/icon-filter.svg" alt=""> -->
+                </div>
+
+                <div class="row d-flex" *ngIf="isGridView">
+					<div class="col-sm-6" *ngFor="let item of WarehouseListData; let i = index;">
+                        <div *ngIf="WarehouseListData?.length > 0">
+                            <div class="card mb-24 position-relative">
+                               
+
+                                <div (click)="displayWarehouse(item);Step=2;searchTerm='' ">
+                                    <div class="d-flex width100P align-items-center justify-content-between pt-10 p-24 height100p">
+                                        <div>
+                                            <h3 class="mb-1">
+                                                {{item?.FbtText}}
+                                            </h3>
+
+                                            <div class="font-12 text-Gray  mb-0">
+                                                {{item?.Fbnum}}
+                                            </div>
+                                        </div>
+                                        
+                                        <span class="status status-submitted custom width140p" [ngClass]="
+                                        {'staus-1':item?.Status =='E0046', 
+                                         'staus-2':(
+                                             item?.Status =='E0009' || 
+                                             item?.Status =='E0019' || 
+                                             item?.Status =='E0032'
+                                            ) 
+                                         ,'staus-3':(
+                                            item?.Status =='E0011' || 
+                                            item?.Status =='E0049' || 
+                                            item?.Status =='E0039' || 
+                                            item?.Status =='E0038' || 
+                                            item?.Status =='E0030' || 
+                                            item?.Status =='E0029' ||  
+                                            item?.Status =='E0028' || 
+                                            item?.Status =='E0027' || 
+                                            item?.Status =='E0026' || 
+                                            item?.Status =='E0025' || 
+                                            item?.Status =='E0024' || 
+                                            item?.Status =='E0023' || 
+                                            item?.Status =='E0022' ||  
+                                            item?.Status =='E0021' || 
+                                            item?.Status =='E0020' || 
+                                            item?.Status =='E0013' || 
+                                            item?.Status =='E0012' || 
+                                            item?.Status =='E0018' ||
+                                            item?.Status =='E0031' ||
+                                            item?.Status =='E0015' ) 
+                                        ,'staus-4':(
+                                            item?.Status =='E0048' ||  
+                                            item?.Status =='E0047' || 
+                                            item?.Status =='E0037' || 
+                                            item?.Status =='E0033' || 
+                                            item?.Status =='E0041' || 
+                                            item?.Status =='E0034' )
+                                        ,'staus-5':item?.Status =='E0001'
+                                       } " >
+                                        
+                                            {{item?.StatusTxt}}
+                                        </span>
+                                    </div>
+                                    <div class="border-bottom-whisper"></div>
+
+                                    <div class="row p-24">
+                                        <div class="col-sm-6">
+                                            <p class="font-12 text-Gray  mb-0">{{lang?.warehouselist?.card?.t4}}</p>
+                                            <div class="text-Eerie-Black font-16 font-weight-500">
+                                                {{item?.Fin}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <p class="font-12 text-Gray mb-0">{{lang?.warehouselist?.card?.t5}}</p>
+                                            <div class="text-Eerie-Black font-16 font-weight-500">
+                                                {{item?.Actnm}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+
+                <div class="listView" *ngIf="!isGridView">
+                    <div class="table mb-32 border-top-whisper card" *ngIf="WarehouseListData?.length > 0">
+                        <table width="100%" class="table-bordered table-bordered-less">
+                            <thead>
+                                <tr>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang?.step1?.s2?.t2}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                            {{lang?.step1?.s1?.t4}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                            {{lang?.step1?.s1?.t5}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang?.warehouselist?.card?.t10}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let item of WarehouseListData; let i = index;">
+                                <tr (click)="displayWarehouse(item);Step=2;searchTerm=''">
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                            {{item?.FbtText}}
+                                    </td>
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item?.Fin}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item?.Fin}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        <span class="status status-submitted custom"
+                                        [ngClass]="
+                                        {'staus-1':item?.Status =='E0046', 
+                                         'staus-2':(
+                                             item?.Status =='E0009' || 
+                                             item?.Status =='E0019' || 
+                                             item?.Status =='E0032'
+                                            ) 
+                                         ,'staus-3':(
+                                            item?.Status =='E0011' || 
+                                            item?.Status =='E0049' || 
+                                            item?.Status =='E0039' || 
+                                            item?.Status =='E0038' || 
+                                            item?.Status =='E0030' || 
+                                            item?.Status =='E0029' ||  
+                                            item?.Status =='E0028' || 
+                                            item?.Status =='E0027' || 
+                                            item?.Status =='E0026' || 
+                                            item?.Status =='E0025' || 
+                                            item?.Status =='E0024' || 
+                                            item?.Status =='E0023' || 
+                                            item?.Status =='E0022' ||  
+                                            item?.Status =='E0021' || 
+                                            item?.Status =='E0020' || 
+                                            item?.Status =='E0013' || 
+                                            item?.Status =='E0012' || 
+                                            item?.Status =='E0018' ||
+                                            item?.Status =='E0031' ||
+                                            item?.Status =='E0015' ) 
+                                        ,'staus-4':(
+                                            item?.Status =='E0048' ||  
+                                            item?.Status =='E0047' || 
+                                            item?.Status =='E0037' || 
+                                            item?.Status =='E0033' || 
+                                            item?.Status =='E0041' || 
+                                            item?.Status =='E0034' )
+                                        ,'staus-5':item?.Status =='E0001'
+                                       } ">
+                                                {{item?.StatusTxt}}
+                                    </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row d-flex align-items-center justify-content-center" *ngIf="WarehouseListData?.length == 0">
+                    {{lang.nav.norecors}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div  *ngIf="Step==2"   dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a  onclick="return false" class="text-Gray">{{lang.nav.t1}}  </a>{{lang.nav.t2}} 
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="Step = 1;searchTerm='' " class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+        </div>
+
+        <div class="mb-32">
+		    <div class="d-flex justify-content-between align-items-center">
+				<h2 class="mb-12">{{lang.step1.s1.t1}}</h2>
+				<span class="status status-h40 status-submitted font-16" [ngClass]="
+                {'staus-1':selectedWareHouse?.Status =='E0046', 
+                 'staus-2':(
+                    selectedWareHouse?.Status =='E0009' || 
+                    selectedWareHouse?.Status =='E0019' || 
+                    selectedWareHouse?.Status =='E0032'
+                    ) 
+                 ,'staus-3':(
+                    selectedWareHouse?.Status =='E0011' || 
+                    selectedWareHouse?.Status =='E0049' || 
+                    selectedWareHouse?.Status =='E0039' || 
+                    selectedWareHouse?.Status =='E0038' || 
+                    selectedWareHouse?.Status =='E0030' || 
+                    selectedWareHouse?.Status =='E0029' ||  
+                    selectedWareHouse?.Status =='E0028' || 
+                    selectedWareHouse?.Status =='E0027' || 
+                    selectedWareHouse?.Status =='E0026' || 
+                    selectedWareHouse?.Status =='E0025' || 
+                    selectedWareHouse?.Status =='E0024' || 
+                    selectedWareHouse?.Status =='E0023' || 
+                    selectedWareHouse?.Status =='E0022' ||  
+                    selectedWareHouse?.Status =='E0021' || 
+                    selectedWareHouse?.Status =='E0020' || 
+                    selectedWareHouse?.Status =='E0013' || 
+                    selectedWareHouse?.Status =='E0012' || 
+                    selectedWareHouse?.Status =='E0018' ||
+                    selectedWareHouse?.Status =='E0031' ||
+                    selectedWareHouse?.Status =='E0015' ) 
+                ,'staus-4':(
+                    selectedWareHouse?.Status =='E0048' ||  
+                    selectedWareHouse?.Status =='E0047' || 
+                    selectedWareHouse?.Status =='E0037' || 
+                    selectedWareHouse?.Status =='E0033' || 
+                    selectedWareHouse?.Status =='E0041' || 
+                    selectedWareHouse?.Status =='E0034' )
+                ,'staus-5':selectedWareHouse?.Status =='E0001'
+               } ">{{selectedWareHouse?.StatusTxt}}</span>
+            </div>
+        </div>
+
+        <div class="card  mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-warehouse.svg" class="" alt=""></span> {{lang.step1.s1.t3}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s1.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Fin}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s1.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Bunm}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s1.t6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <span *ngIf="WarehouseDetails?.Purpose == UsagePurposeList[1]?.Key">{{UsagePurposeList[1]?.Text}}</span>
+                        <span *ngIf="WarehouseDetails?.Purpose == UsagePurposeList[2]?.Key">{{UsagePurposeList[2]?.Text}}</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s1.t7}}</p>
+                    <div *ngIf="WarehouseDetails?.WH_EREGGOODSSet?.results.length > 0">
+                        <div *ngFor="let good of WarehouseDetails.WH_EREGGOODSSet.results;">
+                            <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="good.Flag == 'X'">
+                                {{good.GoodsTxt}}
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="WarehouseDetails?.WH_EREGGOODSSet?.results.length == 0">
+                        -
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-location.svg" class="" alt=""></span>{{lang.step1.s2.t1}} 
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s2.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Whfnm}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s2.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].Addrnumber}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s2.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].Latitude}}
+                    </div>
+                </div>
+
+				<div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s2.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].Longitude}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-location.svg" class="" alt=""></span>{{lang.step1.s3.t1}} 
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s3.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <span *ngIf="WarehouseDetails?.Whlsf == LeasedList[1]?.Key">{{LeasedList[1]?.Text}}</span>
+                        <span *ngIf="WarehouseDetails?.Whlsf == LeasedList[2]?.Key">{{LeasedList[2]?.Text}}</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <span *ngIf="WarehouseDetails?.Whlsi == OwnerTypeList[0]?.Key">{{OwnerTypeList[0]?.Text}}</span>
+                        <span *ngIf="WarehouseDetails?.Whlsi == OwnerTypeList[1]?.Key">{{OwnerTypeList[1]?.Text}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div *ngIf="WarehouseDetails?.Whlsi == 'I'">
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{OwnerIdTypeName}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.WH_CONTACTPSet.results[1].Idnumber}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+            
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t6}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{OwnerNationalityName}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t7}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.WH_CONTACT_DTLSet.results[1].MobNumber}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+            
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t8}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.WH_CONTACT_DTLSet.results[1].SmtpAddr}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+            </div>
+
+            <div *ngIf="WarehouseDetails?.Whlsi == 'C'">
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t9}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.WoCrNo}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t10}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.WoTin}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+            
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t11}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.Compnm}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t12}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.WoAddress}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+            
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t13}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WarehouseDetails?.WH_CONTACT_DTLSet.results[0].TelNumber}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+            </div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t14}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Lsfdt | date}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t15}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Lsedt | date}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+            <div class="row p-24">
+				<div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s3.t16}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center" *ngFor="let attach of WarehouseDetails?.ATTACHSet.results">
+                        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="attach.Dotyp == 'WA01'">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <div class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10">
+                                <!-- <a class="FileName" (click)="downloadFile(attach?.DocUrl)"> {{ attach.Filename }}</a> -->
+                                <a style="cursor: pointer" (click)="downloadFile(attach?.DocUrl)"> {{ attach?.Filename }}</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span> {{lang.step1.s4.t1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+			    <div class="col-md-12">
+				    <h3 class="mb-0">{{lang.step1.s4.t2}}</h3>
+                </div>
+                
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s4.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].LenSiz}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s4.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].WidSiz}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+            <div class="row p-24">
+			    <div class="col-sm-12">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s4.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].HeiSiz}}
+                    </div>
+                </div>
+			</div>
+            <div class="border-bottom-whisper"></div>
+            
+            <div class="row p-24">
+			    <div class="col-md-12">
+				    <h3 class="mb-0">{{lang.step1.s4.t6}}</h3>
+                </div>
+                
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s4.t7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].CubicSc}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s4.t8}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_ADDRESSSet.results[0].SquarSc}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+            <div class="p-24 mb-24">
+                <p class="font-16 text-Gray mb-0">{{lang.step1.s4.t9}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center" *ngFor="let attach of WarehouseDetails?.ATTACHSet.results">
+                    <div class="d-flex justify-content-center align-items-center h-100" *ngIf="attach.Dotyp == 'WA02'">
+                        <div class="m-0 font-weight-500 font-16 text-center">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PDF'"
+                                            src="assets/images/icon-pdf.svg" class="mb-10">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLSX'"
+                                            src="assets/images/icon-excel.svg" class="mb-10">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLS'"
+                                            src="assets/images/icon-excel.svg" class="mb-10">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOC'"
+                                            src="assets/images/icon-doc.svg" class="mb-10">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOCX'"
+                                            src="assets/images/icon-doc.svg" class="mb-10">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPG'"
+                                            src="assets/images/icon-jpg.svg" class="mb-10">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPEG'"
+                                            src="assets/images/icon-jpg.svg" class="mb-10">
+                                        <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PNG'"
+                                            src="assets/images/icon-png.svg" class="mb-10">
+
+                            <a  style="cursor: pointer" (click)="downloadFile(attach?.DocUrl)"> {{ attach?.Filename }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span> {{lang.step1.s5.t1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s5.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{ManagerIdTypeName}}
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s5.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_CONTACTPSet.results[0].Idnumber}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s5.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{ManagerNationalityName}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s5.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_CONTACTPSet.results[0].HiringDt | date}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s5.t6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{ManagerTitleName}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s5.t7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_CONTACTPSet.results[0].Firstnm}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s5.t8}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_CONTACTPSet.results[0].Fathernm}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s5.t9}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_CONTACTPSet.results[0].Grandfathernm}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s5.t10}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_CONTACT_DTLSet.results[0].MobNumber}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s5.t11}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.WH_CONTACT_DTLSet.results[0].SmtpAddr}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span> {{lang.step1.s5.t12}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-y-14">
+                <div class="text-Eerie-Black font-16">
+                    {{lang.step1.s5.t13}}
+                </div>
+
+                <div class="text-Eerie-Black font-20 font-weight-bold">
+                    {{WarehouseDetails?.Bgamt | number}}
+                </div>
+            </div>
+        </div>
+
+		<div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt="">
+                    </span> {{lang.step1.s6.t1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s6.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center">
+                        {{AdditionalName1}} 
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[0].RbFg == '1'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center" *ngFor="let attach of WarehouseDetails?.ATTACHSet.results">
+                        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="attach.Dotyp == 'WQ01'">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PDF'"
+                                    src="assets/images/icon-pdf.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLSX'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLS'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOC'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOCX'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPEG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PNG'"
+                                    src="assets/images/icon-png.svg" class="mb-10">
+                                <a  style="cursor: pointer" (click)="downloadFile(attach?.DocUrl)"> {{attach?.Filename }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[0].RbFg == '0'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{AdditionalNotes1}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center">
+                        {{AdditionalName2}} 
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[1].RbFg == '1'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center" *ngFor="let attach of WarehouseDetails?.ATTACHSet.results">
+                        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="attach.Dotyp == 'WQ02'">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PDF'"
+                                    src="assets/images/icon-pdf.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLSX'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLS'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOC'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOCX'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPEG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PNG'"
+                                    src="assets/images/icon-png.svg" class="mb-10">
+                                <a  style="cursor: pointer" (click)="downloadFile(attach?.DocUrl)"> {{ attach?.Filename }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[1].RbFg == '0'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{AdditionalNotes2}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s6.t8}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{AdditionalName3}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[2].RbFg == '1'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t9}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center" *ngFor="let attach of WarehouseDetails?.ATTACHSet.results">
+                        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="attach.Dotyp == 'WQ03'">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PDF'"
+                                    src="assets/images/icon-pdf.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLSX'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLS'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOC'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOCX'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPEG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PNG'"
+                                    src="assets/images/icon-png.svg" class="mb-10">
+                                <a style="cursor: pointer" (click)="downloadFile(attach?.DocUrl)"> {{ attach?.Filename }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[2].RbFg == '0'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t10}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{AdditionalNotes3}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s6.t11}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{AdditionalName4}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[3].RbFg == '1'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t12}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center" *ngFor="let attach of WarehouseDetails?.ATTACHSet.results">
+                        <div class="d-flex justify-content-center align-items-center h-100" *ngIf="attach.Dotyp == 'WQ04'">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PDF'"
+                                    src="assets/images/icon-pdf.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLSX'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='XLS'"
+                                    src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOC'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='DOCX'"
+                                    src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='JPEG'"
+                                    src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="attach.Filename.split('.').pop().toString().toUpperCase()=='PNG'"
+                                    src="assets/images/icon-png.svg" class="mb-10">
+                                <a style="cursor: pointer" (click)="downloadFile(attach?.DocUrl)"> {{attach?.Filename }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="WarehouseDetails?.AddQuesSet.results[3].RbFg == '0'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s6.t13}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{AdditionalNotes4}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="card card-shadow-none mb-56">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-declaration.svg" class="" alt=""></span> {{lang.step1.s7.t1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s7.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Decnm}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s7.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Decdg}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.s7.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                       <span *ngIf="WarehouseDetails?.Type == IdTypeList[1]?.Key">{{IdTypeList[1]?.Text}}</span>
+                       <span *ngIf="WarehouseDetails?.Type == IdTypeList[2]?.Key">{{IdTypeList[2]?.Text}}</span>
+                       <span *ngIf="WarehouseDetails?.Type == IdTypeList[3]?.Key">{{IdTypeList[3]?.Text}}</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.s7.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WarehouseDetails?.Idnumber}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" (click)="Step=3"> {{lang?.step1?.s1?.acknowledgement}}</button>
+
+    </div>
+</div>
+<div  *ngIf="Step == 3"  dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="inner">
+            <div class="text-center mb-56">
+                <div class="text-center mb-40">
+                    <img src="assets/images/icon-success.svg" alt="">
+                </div>
+                <h2 class="mb-12"> {{lang.step1.s1.acknowledgement}}</h2>
+                <div class="text-Gray font-16 mb-56">{{lang.step1.s1.t10}}</div>
+                <div class="inner mb-24">
+                 
+                    <div
+                        class="d-flex align-items-center justify-content-between mb-16 item-cardetails card-shadow-none">
+                        <span class="font-16 text-Gray  mb-0">
+                                {{lang.step1.s1.appNo}}
+                        </span>
+                        <span class="text-Eerie-Black font-16 font-weight-500">
+                          {{WarehouseDetails?.Fbnum}}
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between item-cardetails card-shadow-none">
+                        <span class="font-16 text-Gray  mb-0">
+                            {{lang?.step1?.s1?.t8}}
+                        </span>
+                        <span class="text-Eerie-Black font-16 font-weight-500">
+                            {{CurrentDate | date:'dd-MM-yyyy'}}
+                        </span>
+                    </div>
+                </div>
+                <div class="text-Gray font-16 mb-56">
+                    {{lang?.step1?.s1?.t9}}
+                </div>
+            </div>
+            <div class="mb-24 text-center  d-flex flex-column justify-content-center align-items-center">
+                <button class="btn btn-primary d-inline-block mb-40" (click)="Acknowledgement();"
+                    >{{lang?.step1?.s1?.downloadAck}} </button>
+                    <button class="btn btn-primary d-inline-block mb-40" (click)="downloadForm();"
+                    >{{lang?.step1?.s1?.dwldform}} </button>
+                    <button class="btn btn-link d-inline-block mr-0" (click)="Step=1" > {{lang?.step1?.s1?.redirect}}
+                    </button>
+            </div>
+
+        </div>
+    </div>
+  
+</div>

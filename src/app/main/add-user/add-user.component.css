@@ -1,0 +1,290 @@
+.addUserRoot {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.addUserMiddle {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.addUserBack {
+  font-size: 16px;
+}
+
+.zs-lengther {
+  max-width: 75%;
+  height: fit-content;
+  padding-top: 0.6rem;
+}
+
+.zs-dateicon {
+  /* margin-inline-start: auto; */
+  line-height: 10px !important  ;
+}
+
+.zs-datpicker {
+  display: none;
+}
+
+.zs-mobileNumberContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.zs-mobileNumberContainer .inputError{
+  position: relative;
+  display: flex;
+  align-items: center;
+ 
+}
+
+.zs-mobileCode {
+  position: absolute;
+  margin-inline-start: 15px;
+  width: 60px;
+  display: flex;
+  color: #999999;
+  font-size: 16px;
+  align-items: center;
+  border: none;
+  align-content: center;
+  height: var(--inputHeight);
+  pointer-events: none;
+  line-height: 24px;
+  background: transparent;
+  font-family: SSTArabic-Roman;
+}
+
+.zs-mobileNumber {
+  padding-inline-start: 80px !important;
+}
+
+.redTextaddUser {
+  color: #aa0c19;
+  font-family: "SSTArabic-Roman";
+}
+
+.addUserH {
+  display: flex;
+  justify-content: flex-start;
+  font-family: "SSTARABIC-BOLD";
+}
+
+.addUserLocation {
+  font-size: 16px;
+  padding-top: 40px;
+  font-family: "SSTArabic-Roman";
+}
+
+.addUserH {
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+  padding-top: 32px;
+}
+
+.addUserCompleteDetails {
+  padding-top: 8px;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #ebebeb;
+  font-family: "SSTArabic-Roman";
+}
+
+.labelMarginBottom {
+  font-family: "SSTArabic-Roman";
+}
+
+.xmen {
+  width: 437px !important;
+  border-radius: 14px !important;
+  height: 48px !important;
+}
+
+.addUsrSpan {
+  font-size: 16px;
+  color: #999999;
+  font-size: 16px;
+}
+
+.addUsrSpan1 {
+  font-size: 16px;
+  color: #999999;
+  padding-inline-end: 0.5rem;
+  font-size: 16px;
+}
+
+.addUsrSpan2 {
+  /* padding-left: 0.5rem; */
+  font-size: 16px;
+}
+
+.adduseHspan2 {
+  font-size: 16px;
+  color: #006450;
+  font-weight: bold;
+}
+
+.auBack {
+  padding-top: 40px;
+  font-family: "SSTArabic-Bold";
+}
+
+.auBack:hover {
+  cursor: pointer;
+}
+
+.addUsrInput {
+  border-radius: 14px;
+  height: 48px !important;
+}
+
+.addusrName {
+  padding-top: 0.5rem;
+}
+
+.addusrPhone {
+  padding-top: 1rem;
+}
+
+.btnFonxt {
+  font-family: SSTArabic-Bold;
+}
+
+.commonInputx {
+  border-radius: var(--inputBorderRadius);
+  border: solid 1px #999999 !important;
+  height: var(--inputHeight);
+  outline: none;
+  padding: 0 var(--inputPadding);
+  font-family: SSTArabic-Roman;
+  color: var(--dark);
+  font-size: 16px;
+  line-height: 24px;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+  width: 100%;
+}
+.commonInputxError {
+  border-radius: var(--inputBorderRadius);
+  border: solid 1px red !important;
+  height: var(--inputHeight);
+  outline: none;
+  padding: 0 var(--inputPadding);
+  font-family: SSTArabic-Roman;
+  color: var(--dark);
+  font-size: 16px;
+  line-height: 24px;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+  width: 100%;
+}
+.zs-mobileNumberen {
+  padding-inline-start: 80px !important;
+}
+.zs-mobileNumberar {
+  padding-inline-start: 15px !important;
+}
+.commomDatePickerx {
+  margin: 0;
+  border-radius: var(--inputBorderRadius);
+  border: solid 1px var(--gray);
+
+  height: var(--inputHeight);
+
+  font-size: 16px;
+
+  padding-inline-start: var(--inputPadding);
+  padding-inline-end: 5px;
+  padding-top: 3px;
+  color: var(--dark);
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+}
+
+.commomDatePickerx input {
+  border: none;
+}
+
+.datpick {
+  display: none;
+}
+.inputErr {
+  border: 1px solid red !important ;
+}
+.inputError
+{
+  border: 1px solid red !important ;
+
+border-radius: 14px;
+}
+.mt10 {
+  padding-top: 2rem;
+}
+
+.commonMatSelectx {
+  border-radius: var(--inputBorderRadius);
+  border: solid 1px var(--gray);
+  width: 100%;
+  height: var(--inputHeight);
+  font-family: "SSTArabic-Roman";
+  outline: none;
+  box-sizing: border-box;
+  padding: 10px var(--inputPadding);
+  font-family: SSTArabic-Roman;
+  color: var(--dark);
+  font-size: 16px;
+  line-height: 24px;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+  cursor: pointer;
+  /* background: url("assets/image/arrow-down-gray.svg") no-repeat right 10px top 12px transparent; */
+}
+
+.commonMatSelectx .mat-select-panel {
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+.commonMatSelectx .mat-select-panel .mat-option:hover {
+  /* background-color: #0653ab !important; */
+  background-color: var(--light) !important;
+  color: var(--dark) !important;
+}
+
+.commonMatSelectx .mat-select-value {
+  color: var(--dark) !important;
+}
+
+.commonMatSelectx .mat-select-arrow {
+  background: url("../../../assets/image/arrow-down-gray.svg");
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+
+.commonMatSelectx:hover {
+  border: solid 2px var(--dark);
+}
+
+.commonMatSelectx:active,
+.commonMatSelectx:focus {
+  border: solid 2px var(--primary) !important;
+}
+
+.commonMatSelectx:focus .mat-select-arrow,
+.commonMatSelectx:active .mat-select-arrow {
+  background: url("../../../assets/image/arrow-down-green.svg");
+}
+
+.addBtn {
+  margin-top: 4rem;
+}

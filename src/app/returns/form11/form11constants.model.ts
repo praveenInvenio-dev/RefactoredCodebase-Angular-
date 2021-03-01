@@ -1,0 +1,5576 @@
+export const form11constants = {
+  langz: {
+    eng: {
+      dir: "ltr",
+      otp: {
+        title: "Please enter the verification code sent to mobile number",
+        verifyTitle: "Resend Verification code",
+      },
+      signup: {
+        title: "Create New Account",
+        subtitle: {
+          t1: "Company",
+          t2: "Establishment",
+          t3: "Individuals",
+          t4: "other",
+        },
+      },
+      individual: {
+        title: "New Individual Account",
+        header: {
+          h1: "Individual Register",
+          h2: "Review Information",
+          h3: "Password",
+        },
+
+        c1: {
+          title: "Individual register",
+          in1: "ID Type",
+          in2: "ID Number",
+          in3: "Date of Birth",
+          btn: "Continue",
+        },
+        c7: {
+          title: "Individual register",
+          in1: "ID Type",
+          in2: "ID Number",
+          in3: "Name",
+        },
+        c2: {
+          title: "National Address",
+          in1: "City",
+          in2: "Neighbourhood",
+          in3: "Street Name",
+          in4: "Postal Code",
+          in5: "Building Number",
+          in6: "Unit Number",
+          btn: "Continue",
+        },
+        c3: {
+          title: "Contact Information",
+          in1: "Mobile Number",
+          in2: "Email",
+          in3: "Confirm Email",
+          btn: "Continue",
+        },
+        c4: {
+          title: "Create New Password",
+          in1: "New Password",
+          in2: "Confirm New Password",
+          subtitle: {
+            t1: "Password Strength:",
+            t2: "Strong",
+            t3: "Password should not be less than 8 characters",
+            t4: "Not exceed 16 characters",
+            t5: "At Least one English capital and one small letters",
+            t6: "At Least one Numbers and one symbols",
+            t7: "Weak",
+            t8: "The new password and confirm password are matches",
+          },
+        },
+        c5: {
+          title: "I agree with these Terms & Conditions and to proceed further",
+          btn: "Confirm",
+        },
+        c6: {
+          t1: "Registration Successful ",
+          t2: "You have Successfully registered to GAZT Services",
+          t3: "You have received an SMS with the TIN number.",
+          t4:
+            "You can use the TIN number and the set password to login in future",
+          btn: "Go To Dashboard",
+        },
+        c8: {
+          t1: "Please enter the verification code sent to mobile number",
+          t2: "Resend Verification code",
+        },
+        m: {
+          t1: "National address",
+          t2: "You have many national addresses, Please select one of them",
+          btn: "Save",
+        },
+        indErr: {
+          e1: "Please Enter Alphabets only",
+          e2: "Please Enter Alphanumeric  Value",
+          e3: "Please Enter Numeric Value",
+          e4: "Please Enter the Name",
+          e5: "Please Enter the City",
+          e6: "Please Enter the Neighbourhood",
+          e7: "Please Enter the Street Name",
+          e8: "Please Enter the Postal Code",
+          e9: "Please Enter the Building Number",
+          e10: "Please Enter the Unit Number",
+          e11: "Please Enter the Mobile Number",
+          e12: "Please Enter the Email",
+          e13: "Email and Confirm Email should be same",
+          e14: "Please Select any One Option",
+          e15: "Please Select Only One Option",
+          e16: "Please Enter Valid Email",
+          e17: "Tin is already generated for this ID",
+          e18: "Valid ID Number",
+          e19: "OTP Sent. Please Enter OTP",
+          e20: "Invalid OTP. Please Enter Again",
+          e21: "Date of birth cannot be Future Date",
+          e22: "Mobile Number Should not start by 0",
+        },
+      },
+      Government: {
+        title: "Governmental and sub Governmental",
+
+        header: {
+          h1: "Organization Information",
+          h2: "Complete Information",
+          h3: "Password",
+        },
+        c1: {
+          title: "Organization Information",
+          in1: "TIN",
+          in2: "Company ID",
+          in3: "Government Agency Name",
+          btn: "Continue",
+        },
+        c2: {
+          title: "Contact Information",
+          in1: "Mobile Number",
+          in2: "Email",
+          in3: "Confirm Email",
+          btn: "Continue",
+        },
+        err: {
+          t1: "TIN should start from 3",
+          t2: "TIN should be of 10 digits",
+          t3: "Company ID should start from 7",
+          t4: "ID should be of 10 digits",
+          t5: "Please Enter Company ID",
+          t6: "Please Enter Government Agency Name",
+          t7: "Please Enter TIN",
+          t8: "Valid Company ID",
+          t9: "OTP Service Error"
+        }
+      },
+      company: {
+        title: "New Company Account",
+        branch: {
+          t1: "Branch Details",
+          t2: "Activity Details",
+          t3: "Address Details",
+          t4: "Contact Person",
+          btn1: "Save",
+          btn2: "Cancel",
+        },
+        header: {
+          h1: "Company Register",
+          h2: "Complete Information",
+          h3: "Password",
+        },
+        c1: {
+          title: "Company register",
+          in1: "Company Type",
+          in2: "Company Number",
+          in3: "Company Name",
+          in4: "First Name",
+          in5: "Last Name",
+          btn: "Continue",
+        },
+        c7: {
+          title:
+            "Please enter the verification code sent to mobile number xxxxxx0236",
+          in1: "Resend Verification code",
+        },
+        c2: {
+          title: "Passport Details",
+          in1: "Passport Number",
+          in2: "Issue City",
+          in3: "Issue Date",
+          in4: "Expiry Date",
+          in5: "Copy of Passport",
+        },
+        c3: {
+          title: "Contact Information",
+          in1: "Mobile Number",
+          in2: "Email",
+          in3: "Confirm Email",
+          btn: "Continue",
+        },
+        c4: {
+          title: "Create New Password",
+          in1: "New Password",
+          in2: "Confirm New Password",
+          subtitle: {
+            t1: "Password Strength:",
+            t2: "Strong",
+            t3: "Password should not be less than 8 characters",
+            t4: "Not exceed 16 characters",
+            t5: "English capital and small letters",
+            t6: "Numbers and symbols",
+          },
+        },
+        c5: {
+          title: "I agree with these Terms & Conditions and to proceed further",
+          btn: "Confirm",
+        },
+        c6: {
+          t1: "Registration Successful ",
+          t2: "You have Successfully registered to GAZT Services",
+          t3: "You have received an SMS with the TIN number.",
+          t4:
+            "You can use the TIN number and the set password to login in future",
+          btn: "Go To Dashboard",
+        },
+        c8: {
+          title: "Company Register",
+          in1: "TIN",
+          in2: "Reporting Branch",
+          in3: "What is your Residency Statues?",
+          in4: "Non-Resident",
+          in5: "Resident",
+          in6: "Type of legal entity",
+          in7: "Permanent  Establishment",
+          in8: "Non-Permanent  Establishment",
+          in9: "Permanent Company status",
+          in10: "Does all income derived from KSA",
+          in11: "Is top management of the company in KSA",
+          in12: "Attachment",
+          in13: "Capital",
+          in14: "Personal",
+          in15: "Professional",
+          in16: "",
+
+        },
+        c08: {
+          title: "Facility Information",
+          subtitle: "Select to enter Commercial Number or License number. ",
+          in1: "Commercial Number",
+          in2: "License Number",
+          in3: "License Number",
+          in4: "Issue By",
+          in5: "Issued City",
+        },
+        c9: {
+          title: " Branches Details",
+          in1: "Branch Name",
+          in2: "CRLicense No.",
+          in3: "Branch city",
+          in4: "Type",
+          btn: "Add New Branch",
+        },
+        c10: {
+          title: "Financial Details ",
+          in1: "Accounting Type/Method",
+          in2: "TIN in your country",
+          in3: "TAN in your countrypital",
+          in4: "Capital Registration Date",
+          in5: "Capital amount (SAR)",
+          in6: "Calendar Type to select the End of financial year ?",
+          in7: "Hijri",
+          in8: "Gregorian",
+          in9: "End of Financial",
+          in10: "Business Commencement Date",
+          in11: "Taxable Date",
+        },
+        c11: {
+          title: "New Branch Details",
+          in1: "Branch Name *",
+          in2: "Copy of Company Memorandum",
+          subtitle: "Type of identification?",
+          in3: "Add Commercial Number ",
+          in4: "Add Licenses Number ",
+          in5:
+            "You can add multiple licenses numbers (maximum 4), and select only one main license that is linked to the main activity for this branch ",
+        },
+        c12: {
+          title: "License Details",
+          subtitle: "Main Activity",
+          in1: "Issue Country",
+          in2: "Issue By ",
+          in3: "Issued City",
+          in4: "License Number",
+          in5: "Valid From ",
+          in6: "Copy Of License",
+          in7: "Main Group of Activity",
+          in8: "Sub Group Of Activity",
+          in9: "Main Activity",
+          btn: "Add New License",
+        },
+        c19: {
+          title: "Commercial Number Details",
+          subtitle: "Main Activity",
+          in1: "Issue Country",
+          in2: "Issue By ",
+          in3: "Issued City",
+          in4: "License Number",
+          in5: "Valid From ",
+          in6: "Copy Of CR",
+          in7: "Main Group of Activity",
+          in8: "Sub Group Of Activity",
+          in10: "Transfer copy of CR",
+          in9: "Main Activity",
+          btn: "Add New License",
+        },
+        c13: {
+          title: "Address Details",
+          in1: "City",
+          in2: "Province",
+          in3: "Country",
+          in4: "Street Name",
+          in5: "Postal Code",
+          in6: "Building Number",
+          in7: "Unit Number",
+          btn1: "Save",
+          btn2: "Cancel",
+        },
+        c14: {
+          title: "Shareholders Details",
+          in1: "Name",
+          in2: "ID Type",
+          in3: "ID Number",
+          in4: "Capital Percentage",
+          in5: "Benefit Percentage",
+          btn: "Add New shareholders",
+        },
+        c15: {
+          header: "New Shareholder Details",
+          title: "Shareholder Percentage Details",
+          in1: "Share Capital",
+          in2: "Start Date of sharing Capital",
+          in3: "Share Profit",
+          in4: "Start Date of sharing Profit",
+        },
+        c16: {
+          title: "Shareholder Details",
+          subtitle: "Type of Share Percentage of a capital company",
+          in1: "Shareholder Type",
+          in2: "TIN",
+          in3: "ID Type",
+          in4: "ID Number",
+          in5: "Company Name",
+          in6: "Start Date",
+          in7: "End Date",
+          in8: "SaudiGCC Share",
+          in9: "Foreign Share ",
+          in10: "Copy Of Commercial Number",
+          rd1: "Established in KSA with 100% Saudi capital",
+          rd2: "Established in KSA with 100% non Saudi capital",
+          rd3: "Established in KSA with mixed capital",
+          rd4: "Established in one of the gulf countries",
+          rd5: "Established in other countries",
+        },
+        c17: {
+          title: "Communications details",
+          in1: "Mobile.",
+          in2: "Email *",
+          btn1: "Save",
+          btn2: "Cancel",
+        },
+        c18: {
+          in1: "Saudi Partner Share:",
+          in2: "Foreign Partner Share:",
+          in3: "Capital Share:",
+          in4: "Profit Share: ",
+        },
+      },
+      vat: {
+        title: "Register in VAT",
+        header: {
+          h1: "Taxpayer Details",
+          h2: "Financial Details",
+          h3: "Declaration",
+        },
+        c1: {
+          title: "Taxpayer Details",
+          t1: "VAT Eligibility Date",
+          t2: "Import or Export",
+          t3: "Importer",
+          t4: "Exporter",
+          t5: "Importer & Exporter",
+        },
+        c2: {
+          title: "IBAN",
+          t1: "Select your Bank account",
+          t2: "SA32...…………………………………………………………54",
+          t3: "SA32...…………………………………………………………33",
+          btn: "Add New IBAN",
+          btn2: "Continue",
+        },
+        c3: {
+          title: "Sales Details",
+          t1:
+            "What will be your total VAT Taxable sales value in the upcoming 12 months (incl. this month)?",
+          t2:
+            "What was your total VAT taxable sales value for the last 12 months at the time of registration?",
+          t3: "Between 375,00 SAR & 1,000,000 SAR",
+        },
+        c4: {
+          title: "Expenses Details",
+          t1:
+            " What will be your total VAT taxable expenses value in the upcoming 12 months (incl. this month)?",
+
+          t2:
+            "What was your total VAT taxable expenses value for the last 12 months at the time of registration?",
+          t3: "Less than",
+          t4: "187,500 SAR",
+          t5: "Greater or equal than",
+          t6: "187,500 SAR",
+          t7: "More than",
+          t8: "40,000,000 SAR",
+          t9: "Less than 187,500 SAR",
+        },
+        c5: {
+          title: "Supporting Documents",
+          t1:
+            "Please submit the supporting documents as proof of your VAT eligibility.",
+          t12:
+            "Otherwise, it is highly likely that you will be audited over the course of next 6 months.",
+          t2:
+            "What is the type of document that you are submitting to prove whether or not eligible.",
+          t3: "Income Statement",
+          t4: "Customs Report",
+          t5: "Audited Reports",
+          t6: "Official Contracts",
+          t7: "Attached Document",
+          t8: "File Name",
+          t9: "Attachment Type",
+          t10: "Drag and drop file to upload documentation",
+          t11: "File size should be less than 5 MB.",
+          t13: "Choose only file with extension Doc,Docx,Jpg,PDF,xls,xlsx",
+          btn: "Add New Attachment",
+          btn2: "Continue",
+        },
+        c6: {
+          t1:
+            "I Hereby certify that I am authorized to complete this form for the taxable person and that all information contained is correct.",
+          t2: "ID type",
+          t3: "ID Number",
+          t4: "Date",
+          t5: "Name",
+          t6:
+            "I hereby declare that the above mentioned information is true and correct to the best of my knowledge and belief",
+        },
+        c7: {
+          t1: "I agree with these",
+          t2: "Instructions and Conditions",
+          btn: "Continue",
+        },
+        c8: {
+          t1: "Your VAT Registration Application is submitted successfully",
+          t2: "GAZT Acknowledges Your VAT Registration application",
+          t3: "Name:",
+          t4: "Ahmad Muhammed",
+          t5: "Application Number:",
+          t6: "1234567890",
+          t7: "Date:",
+          t8: "23/6/2020",
+          t9:
+            "Please retain this number for future reference and communication. GAZT will process your request and if needed  contact you. For further information, please contact Help Desk",
+          btn: "View Application Details",
+          btn2: "Go To Dashboard",
+        },
+        c9: {
+          title: "Financial Representative",
+          t1:
+            "This section is mandatory for Non-Residents. For Residents you can skip this section and continue with the registration process.",
+          t2: "TIN",
+          t3: "ID Type",
+          t4: "ID Number",
+          t5: "Date of Birth",
+          t6: "Name & Surname",
+          t9: "Last Name",
+          t7: "Mobile Number",
+          t8: "Email",
+          t10: "First Name",
+        },
+        back: "Back",
+        continue: "Continue",
+        taxMngmt: "Tax Management > VAT Services",
+        newAcc: "Add IBAN",
+        vatReg: " VAT Registration",
+        chooseDate: "Choose a date",
+        edit: "Edit",
+        finInfo: "Financial Information",
+        text1: "VAT Taxable Sales Value (Upcoming 12 months)",
+        text5: "VAT Taxable Sales Value (Last 12 months)",
+        text2: "Between 375,00 SAR and 1,000,000 SAR",
+        text3: "VAT Taxable Expenses Value (Upcoming 12 months)",
+        text4: "VAT Taxable Expenses Value (Last 12 months)",
+        attachments: "Attachments",
+        reptype: "Representative Type",
+        repType1: "Non Resident",
+        national: "National ID",
+        iqama: "Iqama ID",
+        gcc: "GCC ID",
+        tin: "TIN Number",
+        phNo: "Phone Number",
+        declaration: "Declaration",
+        contactName: "Contact Person Name",
+        confirm: "Confirm",
+        close: "Close",
+        addNewAttchmnt: "Add New Attachment",
+        delete: "Delete",
+        vatEligible: "VAT Eligibility Section:",
+        skip: "Skip",
+        name: "Name",
+        number: "Number",
+        successMsg: "Successfully uploaded the file",
+        m1: {
+          t1: "IBAN",
+          t2: "Add new IBAN",
+          btn1: "Add",
+        },
+        m2: {
+          t1: "ID Number",
+          t2: "DOB",
+          btn1: "Validate ID",
+        },
+        errorMsgs: {
+          selectIban: "Please select IBAN",
+          nameReq: "Name is required",
+          mobReq: "Mobile Number is required",
+          emailReq: "Please Enter the Email",
+          e1: "GCC ID should be between 7-15 digits",
+          e2: "Please enter only numeric value",
+          e3: "Invalid Date of Birth",
+          e4: "Invalid entry",
+          selectOne: "Please Select Any One Option",
+          selAttch: "Please select the attachment type",
+          e5: "Valid ID Number",
+          validIban: "Valid IBAN",
+          e6: "Please enter IBAN.",
+          fileError: "File size should be less than 5 MB",
+          mobStart: "Mobile Number should start with 009665",
+        },
+      },
+      establishment: {
+        title: "New Establishment Account",
+        header: {
+          h1: "Establishment Register",
+          h2: "Complete Information",
+          h3: "Password",
+        },
+        c1: {
+          title: "Establishment register",
+          in1: "ID Type",
+          in2: "ID Number",
+          in3: "Date of Birth",
+          in4: "First Name",
+          in5: "Last Name",
+          btn: "Continue",
+        },
+        c7: {
+          title:
+            "Please enter the verification code sent to mobile number xxxxxx0236",
+          in1: "Resend Verification code",
+        },
+        c2: {
+          title: "Passport Details",
+          in1: "Passport Number",
+          in2: "Issue City",
+          in3: "Issue Date",
+          in4: "Expiry Date",
+          in5: "Copy of Passport",
+        },
+        c3: {
+          title: "Contact Information",
+          in1: "Mobile Number",
+          in2: "Email",
+          in3: "Confirm Email",
+          btn: "Continue",
+        },
+        c4: {
+          title: "Create New Password",
+          in1: "New Password",
+          in2: "Confirm New Password",
+          subtitle: {
+            t1: "Password Strength:",
+            t2: "Strong",
+            t3: "Password should not be less than 8 characters",
+            t4: "Not exceed 16 characters",
+            t5: "English capital and small letters",
+            t6: "Numbers and symbols",
+          },
+        },
+        c5: {
+          title: "I agree with these Terms & Conditions and to proceed further",
+          btn: "Confirm",
+        },
+        c6: {
+          t1: "Registration Successful ",
+          t2: "You have Successfully registered to GAZT Services",
+          t3: "You have received an SMS with the TIN number.",
+          t4:
+            "You can use the TIN number and the set password to login in future",
+          btn: "Go To Dashboard",
+        },
+        c8: {
+          title: "Facility Information",
+          in1: "TIN",
+          in2: "Reporting Branch",
+          in3: "What is your Residency Statues?",
+          in4: "Non-Resident",
+          in5: "Resident",
+          in6: "Type of legal entity",
+          in7: "Permanent  Establishment",
+          in8: "Non-Permanent  Establishment",
+          in9: "Permanent Company status",
+        },
+        c9: {
+          title: "Facility Branches",
+          in1: "Branch Name",
+          in2: "CRLicense No.",
+          in3: "Branch city",
+          in4: "Type",
+          btn: "Add New Branch",
+        },
+        c10: {
+          title: "Facility Financial Information",
+          in1: "Accounting Type/Method",
+          in2: "Capital",
+          in3: "Calendar Type to select the End of financial year ?",
+          in4: "Hijri",
+          in5: "Gregorian",
+          in6: "End of Financial",
+          in7: "Business Commencement Date",
+          in8: "Taxable Date",
+        },
+        c11: {
+          title: "New Branch Details",
+          in1: "Branch Name *",
+          subtitle: "Type of identification?",
+          in3: "CR only",
+          in4: "Licenses only",
+          in5: "CR and Licenses",
+          in6:
+            "You can add multiple licenses numbers (maximum 4), and select only one main license that is linked to the main activity for this branch ",
+          in7: "Add Commercial Number",
+          in8: "Add Licenses Number",
+        },
+        c12: {
+          title: "License Details",
+          subtitle: "Main Activity",
+          in1: "Issue Country",
+          in2: "Issue By ",
+          in3: "Issued City",
+          in4: "License Number",
+          in5: "Valid From ",
+          in6: "Copy Of License",
+          in7: "Main Group of Activity",
+          in8: "Sub Group Of Activity",
+          in9: "Main Activity",
+          btn: "Add New License",
+        },
+        c13: {
+          title: "Address Details",
+          in1: "City",
+          in2: "Province",
+          in3: "Country",
+          in4: "Street Name",
+          in5: "Postal Code",
+          in6: "Building Number",
+          in7: "Unit Number",
+          btn1: "Save",
+          btn2: "Cancel",
+        },
+        c14: {
+          in1: "Accounting Method",
+          in2: "Estimated Method"
+        }, c15: {
+          in1: "Day",
+          in2: "Month"
+        },
+        err: {
+          e1:
+            "Passport Details are mandatory for Non-Saudi Individuals. Please provide all necessary details below",
+          e2: "Please enter passport number",
+          e3: "Please select issue country",
+          e4: "Please enter issue date",
+          e5: "Issue date should not be future date",
+          e6: "Passport issue date should not be less than date of birth",
+          e7: "Please enter Expiry Date",
+          e8: "Expiry date should not be past date",
+          e9: "Please provide a copy of above passport details",
+          e10: "Dear Taxpayer, kindly update your information through the Ministry of Commerce and Investment using the following link:https://mci.gov.sa/ar/eservices/Pages/default.aspx",
+          e11:"Please select Accounting Type/Method",
+          e12:"Please enter capital ",
+          e13:"Please select calendar type",
+          e14:"Please enetr end of financial day",
+          e15:"Please enetr end of financial month",
+          e16:"Please enter business commencement date",
+          e17:"Please enter business taxable date"
+        },
+      },
+      others: {
+        title: "New Other Account",
+        subtitle: {
+          t1: "Charities and non-profit Organizations",
+          t2: "Consortium",
+          t3: "Governmental and sub Governmental",
+          t4: "Inheritors",
+          t5: "Real Estate Contribution",
+          t6: "Investment Funds",
+          t7: "Freelancer & Professions",
+          t8: "Non-Resident Company ",
+          t9: "Natural Gas",
+          t10: "Oil & Hydrocarbon",
+          t11: "Auditor",
+          t12: "Non Regular Taxpayer",
+          t13: "ET Eligible persons",
+          t14: "",
+        },
+      },
+
+      quickActon: {
+        title: "Register in Excise Tax ",
+      },
+
+      QuickAction: {
+        t1: "Dashboard",
+        t2: "Quick Actions",
+        t6: "keyboard_arrow_right",
+        t5: "keyboard_arrow_left",
+        back: "Back",
+        continue: "Continue",
+        close: "Close",
+        yes: "Yes",
+        no: "No",
+        confirm: "Confirm",
+        backToDashboard: "Back to Dashboard",
+        national: "National ID",
+        iqama: "Iqama ID",
+        gcc: "GCC ID",
+        validIban: "Valid IBAN",
+        name: "Name",
+        egDesg: "e.g Owner, Manager, etc",
+        delete: "Delete",
+        m1: "Customize Quick Actions",
+        m2: "Select up to 4 quick actions to include in your Dashboard",
+        m3: "Proceed",
+        m4: 'Save'
+      },
+
+      excise: {
+        title: "Register in Excise Tax ",
+        header: {
+          h1: "Taxpayer Details",
+          h2: "Excise Details",
+          h3: "Declaration",
+        },
+        c1: {
+          title: "Taxpayer Details",
+          t1: "TIN",
+          t2: "IBAN",
+          t3: "Commercial Name",
+        },
+        c2: {
+          title: "Attachments",
+          t1: "Commercial registration to be register for Excise Tax",
+          t2: "CR Number 1",
+          t3: "CR Number 2",
+          t4: "CR Number 3",
+          t5: "CR Number Documents",
+          t6: "Attached Document",
+          t7: "Attached Other Document",
+          btn: "Add CR Number",
+        },
+        c3: {
+          title: "Contact Person Details",
+          t1: "ID Type",
+          t2: "ID Number",
+          t3: "Date of Birth",
+          t4: "Name",
+          t5: "Mobile number",
+          t6: "Email",
+          btn: "",
+        },
+        c4: {
+          title: "Address Details",
+          t1: "Building Number",
+          t2: "Street Name",
+          t3: "Nighbrhood",
+          t4: "Postal Code",
+          t5: "Additional Number",
+          t6: "Region",
+          t7: "City",
+          btn: "Continue",
+        },
+        c5: {
+          title: "Excise Details",
+          t1: "What kind of Excise Tax activities to be licensed?",
+          t2: "Import Excise Goods",
+          t3: "Produce Excise goods",
+          t4: "Both activities",
+          t6:
+            "Select the type of Excise goods from the drop down list to be registered for Excise Tax activities",
+          t7: "Type one",
+          t8: "Energy Drinks",
+          t9: "Tobacco & Related Products",
+          t10: "Do you want to apply for Tax Warehouse?",
+          t11: "Yes",
+          t12: "No",
+          btn: "Continue",
+          btn1: "Add Goods Type",
+        },
+        c6: {
+          t1:
+            "I Hereby certify that I am authorized to complete this form for the taxable person and that all information contained is correct.",
+          t2: "ID type",
+          t3: "ID Number",
+          t4: "Date",
+          t5: "Name",
+          t8:
+            "I hereby declare that the above mentioned information is true and correct to the best of my knowledge and belief",
+        },
+        c7: {
+          t1: "I agree with this Conditions and proceed further",
+          btn: "Confirm",
+        },
+        c8: {
+          t1: "Registration For Excise Tax Successful ",
+          t2: "GAZT Acknowledges Your Registration For Excise Tax",
+          t3: "Name:",
+          t4: "Ahmad Muhammed",
+          t5: "Application Number:",
+          t6: "1234567890",
+          t7: "Date:",
+          t8: "23/6/2020",
+          t9:
+            "Please retain this number for future reference and communication. GAZT will process your request and if needed  contact you. For further information, please contact Help Desk",
+          btn: "Download Acknowledgement ",
+          btn2: "Go To Dashboard",
+        },
+
+        goods: {},
+      },
+      idTypes: [
+        {
+          name: "National ID",
+          value: "ZS0001",
+        },
+        { name: "Iqama ID", value: "ZS0002" },
+        { name: "GCC ID", value: "ZS0003" },
+      ],
+      idTypes1: [
+        {
+          name: "National ID",
+          value: "ZS0001",
+        },
+        { name: "Iqama ID", value: "ZS0002" },
+        { name: "GCC ID", value: "ZS0003" },
+      ],
+      dashboard: {
+        title: "Quick Actions",
+        t1: "Customize",
+        subtitle: {
+          t1: "VAT Return",
+          t2: "Tax Certificates",
+          t3: "Bill Payments",
+          t4: "Zakat Return",
+        },
+        title2: "Bills",
+        title3: "Returns",
+        title4: "Tax Types",
+        bills: {
+          t1: "Paid",
+          t2: "Unpaid",
+          t3: "Partially",
+        },
+        returns: {
+          t1: "Submitted",
+          t2: "Unsubmitted",
+          t3: "Overdue",
+        },
+        subtitle2: {
+          t1: "VAT",
+          t2: "Excesie",
+          t3: "Zakat",
+          t4: "Witholding",
+        },
+        title5: "Help",
+        subtitle3: {
+          t1: "Contact Us",
+          t2: "FAQs",
+          t3: "Chat",
+        },
+        title6: "Inbox",
+        subtitle4: {
+          t1: "Mail Title 1",
+          d1: "Mail Description can ...",
+        },
+        title7: "Next Commitments",
+        subtitle5: {
+          t1: "Upcoming com.....1",
+          d1: "Commitment Details..",
+        },
+      },
+      errorMsgs: {
+        dateReq: "Date is Required",
+        ibanReq: "IBAN is Required",
+        tinReq: "Tin is Required",
+        idTypeReq: "ID Type is Required",
+        idNumReq: "ID Number is Required",
+        dobReq: "Date of Birth is Required",
+        minDate: "Date Should Not be Less then Current Date",
+        ibanErr1: "IBAN Number should start from SA",
+        chars: "Please Enter 24 characters",
+        alphaNm: "Please Enter Alphanumeric Value",
+        selectOne: "Please Select Any One Option",
+        tinStart: "TIN Should Start from 3",
+        tinLen: "TIN Should Contain 10 Characters",
+        idErr1: "ID Number Should be Numeric",
+        idLen: "ID Number should contain 10 digits",
+        idStrtNID: "ID Number Should Start from 1 for National ID",
+        idStrtIqama: "ID Number Should Start from 2 for Iqama ID",
+        tnC: "Please Accept Terms and Condition",
+        tnc2:
+          "The entered confirmation password does not match with the original entered password, kindly make sure that both entered passwords are the same",
+        tnc3: "Confirm Password is required",
+        iBanInvalid: "IBAN is Invalid",
+        crnReq: "CRN is Required",
+        namReq: "Name is Required",
+        datReq: "Date is Required",
+        minSel1: "Minimum of 1 Goods Type has to be Selected",
+      },
+      vatError: {
+        e1: "Date is Required.",
+        e2: "IBAN is Required.",
+        e3: "Tin is Required.",
+        e4: "ID Type is Required.",
+        e5: "ID Number is Required.",
+        e6: "Date of Birth is Required.",
+        e7: "Date Should Not be Less then Current Date.",
+        e8: "IBAN Number should start from SA.",
+        e9: "Please Enter 24 characters.",
+        e10: "Please Enter Alphanumeric Value.",
+        e11: "Please Select Any One Option.",
+        e12: "TIN Should Start from 3.",
+        e13: "TIN Should Contain 10 Characters.",
+        e14: "National ID should start with 1.",
+        e15: "Iqama ID should start with 2.",
+        e16: "Please Accept Terms and Condition.",
+        e17:
+          "IBAN should start with ‘SA’ and followed by 22 numeric values only",
+        e18: "Invalid Date",
+        e19: "GCC ID should be between 7-15 digits",
+        e20: "Please Enter Numeric Value",
+        e21: "Please enter IBAN.",
+      },
+      createPassword: {
+        c1: {
+          title: "Create New Password",
+          in1: "New Password",
+          in2: "Confirm New Password",
+          in3: "Password is required",
+          subtitle: {
+            t1: "Password Strength:",
+            t2: "Strong",
+            t3: "Password should not be less than 8 characters",
+            t4: "Not exceed 16 characters",
+            t5: "At Least one English capital and one small letters",
+            t6: "At Least one Numbers and one symbols",
+            t7: "Weak",
+            t8: "The new password and confirm password are matches",
+          },
+
+          tNc: "I agree with these Terms & Conditions and to proceed further",
+          t1: "I agree with these",
+          t2: "Instructions and Conditions",
+          btn: "Confirm",
+        },
+      },
+      acknowledgment: {
+        c1: {
+          t1: "Registration Successful ",
+          t2: "You have Successfully registered to GAZT Services",
+          t3: "You have received an SMS with the TIN number.",
+          t4:
+            "You can use the TIN number and the set password to login in future",
+          btn: "Go To Dashboard",
+        },
+        c2: {
+          t1: "Acknowledgement",
+          t2: "GAZT acknowledges the receipt of your registration application",
+          t3: "Name",
+          t4: "Application Number",
+          t5: "Date",
+        },
+      },
+      charity: {
+        title: "Charities and non-profit Organization",
+        header: {
+          h1: "Organization Information",
+          h2: "Complete Information",
+          h3: "Password",
+        },
+        c1: {
+          title: "Organization Information",
+          in1: "Tin",
+          in2: "Company ID",
+          in3: "Organization Name",
+          in4: "Reporting Branch",
+          in5: "City",
+          in6: "Date of Registration",
+          in7: "Email",
+          in8: "Confirm Email",
+          in9: "Address",
+          in10: "Attachment",
+          btn: "continue",
+        },
+        c2: {
+          title: "Financial Information",
+          in1: "Select to Type of Non- Profit organization",
+          in2: "Cooperative Societies",
+          in3: "Charitable Institutions",
+          in4: "Endowment Institutions",
+          in5: "Financial Year end for first year",
+          in6: "Financial Year End Later Year",
+          in7: "Day",
+          in8: "year",
+        },
+        c3: {
+          title: "Contact Information",
+          in1: "Mobile Number",
+          in2: "Email",
+          in3: "Confirm Email",
+          btn: "Continue",
+        },
+        c5: {
+          t1: "Acknowledgement",
+          t2: "GAZT acknowledges the receipt of your registration application",
+          t3: "Name",
+          t4: "Application Number",
+          t5: "Date",
+          btn: "Go To Login",
+        },
+        c9: {
+          title: "Facility Branches",
+          in1: "Branch Name",
+          in2: "CRLicense No.",
+          in3: "Branch city",
+          in4: "Type",
+          btn: "Add New Branch",
+        },
+        c10: {
+          title: "Facility Financial Information",
+          in1: "Account Method",
+          in2: "TIN in your country",
+          in9: "TAN in your country",
+          in10: "Capital Registration Date",
+          in11: "Capital amount (SAR)",
+          in3: "Calendar Type to select the End of financial year ?",
+          in4: "Hijri",
+          in5: "Gregorian",
+          in6: "End of Financial",
+          in7: "Business Commencement Date",
+          in8: "Taxable Date",
+        },
+        c11: {
+          title: "New Branch Details",
+          in1: "Branch Name",
+          in2: "Copy of Company Memorandum",
+          subtitle: "Type of identification",
+          in3: "CR only",
+          in4: "Licenses only",
+          in5: "CR and Licenses",
+          in7: "Add Commercial Number ",
+          in8: "Add Licenses Number ",
+          in6:
+            "You can add multiple licenses numbers (maximum 4), and select only one main license that is linked to the main activity for this branch ",
+        },
+        c12: {
+          title: "License Details",
+          title1: "Commercial Number Details",
+          subtitle: "Main Activity",
+          in1: "Issue Country",
+          in2: "Issue By ",
+          in3: "Issued City",
+          in4: "License Number",
+          in5: "Valid From ",
+          in6: "Copy Of License",
+          in7: "Main Group of Activity",
+          in8: "Sub Group Of Activity",
+          in9: "Main Activity",
+          in10: "Transfer copy of CR",
+          btn: "Add New License",
+        },
+        c13: {
+          title: "Address Details",
+          in1: "Country",
+          in2: "Province",
+          in3: "City",
+          in4: "District",
+          in5: "Street Name",
+          in6: "Building Number",
+          in7: "Unit Number",
+          in8: "Zip Code",
+          in9: "Additional Number",
+          btn1: "Save",
+          btn2: "Cancel",
+        },
+        c14: {
+          title: "Contact Person",
+          in1: "Tin",
+          in2: "ID Type",
+          in3: "ID Number",
+          in4: "Date of Birth",
+          in5: "First Name",
+          in6: "Last Name",
+          in7: "Start Date",
+          in8: "Mobile Number",
+          in9: "Email",
+          in10: "Confirm Email",
+          in11: "Copy Of General Manger ID",
+          in12: "Issue Country",
+        },
+      },
+      consortium: {
+        title: "New Consortium Account",
+        header: {
+          h1: "Organization Information",
+          h2: "Complete Information",
+          h3: "Password",
+        },
+        c1: {
+          title: "Organization Information",
+          in1: "TIN",
+          in2: "Company ID",
+          in3: "Company Name",
+          in4: "Contract Number",
+          in5: "Reporting Branch"
+        },
+        c2: {
+          title: "Contact Information",
+          in1: "Mobile Number",
+          in2: "Email",
+          in3: "Confirm Email"
+        },
+        c3: {
+          title: "Branches Details",
+          columns: {
+            c1: "Branch Name",
+            c2: "CR/License Number",
+            c3: "Branch City",
+            c4: "Type"
+          },
+          addbtn: "Add New Branch",
+          in1: "ID Number",
+          in2: "Date of Birth",
+          in3: "Name",
+          in4: "Mobile Number",
+          in5: "Email",
+          in6: "Confirm Email",
+          in7: "Other Attachment",
+          btn: "continue",
+        },
+        c4: {
+          title: "Shareholders Details",
+          columns: {
+            c1: "Name",
+            c2: "ID Type",
+            c3: "ID Number",
+            c4: "Capital Percentage",
+            c5: "Benefit Percentage"
+          },
+          addbtn: "Add New shareholders",
+        },
+        c5: {
+          title: "Financial Details",
+          in1: "Account Method",
+          in2: "TIN in your country",
+          in3: "TAN in your country",
+          in4: "Capital Registration Date",
+          in5: "Capital Amount(SAR)",
+          in6: "End of Financial",
+          in7: "Day",
+          in8: "Month",
+          in9: "Business Commencement Date",
+          in10: "Taxable Date",
+          label1: "Calendar Type to select the End of financial year ?",
+          label2: "Hijri",
+          label3: "Gregorian",
+        },
+        err: {
+          in1: "is Required!",
+          in2: "should be atleast 10 characters long!",
+          in3: "can be atmax 10 characters long!",
+          in4: "must be Numeric",
+          in5: "is Invalid",
+          in6: "Email and Confirm Email should be same"
+        },
+        c6: {
+          title: "New Branch Details",
+          s1: "Branch Details",
+          in1: "Branch Name",
+          in2: "Copy of Company Memorandum"
+        },
+        c7: {
+          title: "Activity Details",
+          label1: "Type of identification",
+          label2: "Add Commercial Number ",
+          label3: "Add Licenses Number ",
+          label4: "Add Contract Details",
+          hint1: "You can add multiple licenses numbers (maximum 4), and select only one main license that is linked to the main activity for this branch",
+          hint2: "You can add multiple licenses numbers (maximum 4), and select only one main license that is linked to the main activity for this branch",
+          hint3: "You can add multiple licenses numbers (maximum 4), and select only one main license that is linked to the main activity for this branch",
+          idtypeLabel1: "Commercial Number Details",
+          idtypeLabel2: "License Details",
+          idtypeLabel3: "Contract Details",
+          in1: "Main Activity",
+          in2: "Issue Country",
+          in3: "Issue By ",
+          in4: "Issued City",
+          in5: "License Number",
+          in6: "Valid From ",
+          in7: "Copy Of License",
+          in8: "Copy Of CR",
+          in9: "Copy Of Contract",
+          in10: "Main Group of Activity",
+          in11: "Sub Group Of Activity",
+          in12: "Main Activity",
+          in13: "Transfer copy of CR",
+          btn: "Add New Commercial Number",
+          btn2: "Add New License",
+          btn3: "Add New Contract"
+        },
+        c8: {
+          title: "Address Details",
+          in1: "Country",
+          in2: "Province",
+          in3: "City",
+          in4: "District",
+          in5: "Street Name",
+          in6: "Building Number",
+          in7: "Zip Code",
+          in8: "Additional Number",
+          in9: "Unit Number"
+        },
+        c9: {
+          title: "Contact Person",
+          in1: "Tin",
+          in2: "ID Type",
+          in3: "ID Number",
+          in4: "Issue Country",
+          in5: "Date of Birth",
+          in6: "First Name",
+          in7: "Last Name",
+          in8: "Start Date",
+          in9: "Mobile Number",
+          in10: "Email",
+          in11: "Confirm Email",
+          in12: "Copy Of General Manger ID",
+
+        },
+
+        c10: {
+          header: "New Shareholder Details",
+          s1: "",
+          title: "Shareholder Details",
+          in1: "Share Capital",
+          in2: "Start Date of sharing Capital",
+          in3: "Share Profit",
+          in4: "Start Date of sharing Profit",
+        },
+        c11: {
+          title: "Shareholder Percentage Details",
+          subtitle: "Type of Share Percentage of a capital company",
+          in1: "Shareholder Type",
+          in2: "TIN",
+          in3: "ID Type",
+          in4: "ID Number",
+          in5: "Company Name",
+          in6: "Start Date",
+          in7: "End Date",
+          in8: "SaudiGCC Share",
+          in9: "Foreign Share ",
+          in10: "Copy Of Commercial Number",
+          rd1: "Established in KSA with 100% Saudi capital",
+          rd2: "Established in KSA with 100% non Saudi capital",
+          rd3: "Established in KSA with mixed capital",
+          rd4: "Established in one of the gulf countries",
+          rd5: "Established in other countries",
+        },
+        c12: {
+          title: "Communications details",
+          in1: "Mobile.",
+          in2: "Email *",
+          btn1: "Save",
+          btn2: "Cancel",
+        },
+        c13: {
+          in1: "Saudi Partner Share:",
+          in2: "Foreign Partner Share:",
+          in3: "Capital Share:",
+          in4: "Profit Share: ",
+        },
+
+        c14: {
+          t1: "Registration Successful ",
+          t2: "You have Successfully registered to GAZT Services",
+          t3: "You have received an SMS with the TIN number.",
+          t4:
+            "You can use the TIN number and the set password to login in future",
+          btn: "Go To Dashboard",
+        }
+      },
+
+      returns: {
+        t1: "Returns",
+        t2: "Back",
+        t3: "SAR",
+        t4: "No data available",
+        bill: {
+          t1: "Paid",
+          t2: "Unpaid",
+          t3: "Partially",
+        },
+        c1: {
+          t1: "Return Number",
+          t2: "Due Date",
+          t3: "Return Period",
+          t4: "Return Type",
+          t5: "Description",
+          t6: "Period",
+        },
+        c2: {
+          t1: "Tax Type",
+          t2: "Return Number",
+          t3: "Due Date",
+          t4: "Return Period",
+          t5: "Status",
+          t6: "Sub Status",
+          t7: "View More",
+          t8: "Period",
+        },
+        filter: {
+          title: "Filter",
+          t1: "Type",
+          t2: "Status",
+          t3: "Amount",
+          t4: "Date",
+          t5: "From",
+          t6: "To",
+          btn: "Apply",
+        },
+      },
+
+      bills: {
+        t1: "Bills",
+        t2: "Back",
+        t3: "SAR",
+        t4: "No data available",
+        t5: "keyboard_arrow_left",
+        t6: "keyboard_arrow_right",
+        bill: {
+          t1: "Paid",
+          t2: "Unpaid",
+          t3: "Partially",
+        },
+        c1: {
+          t1: "SADAD Number",
+          t2: "Due Date",
+          t3: "",
+          t4: "",
+        },
+        c2: {
+          t1: "Zakat/Tax Type",
+          t2: "Description",
+          t3: "Taxable Period",
+          t4: "Due Date",
+          t5: "SADAD Number",
+          t6: "Reference Number",
+          t7: "Invoice Due Amount",
+          t8: "Status",
+          t9: "View More",
+          t10: "Bill Details",
+        },
+        filter: {
+          title: "Filter",
+          t1: "Type",
+          t2: "Status",
+          t3: "Amount",
+          t4: "Date",
+          t5: "From",
+          t6: "To",
+          btn: "Apply",
+        },
+      },
+
+      taxLanding: {
+        heading: "Tax Management",
+        c1: "Zakat & CIT Services",
+        c2: "VAT Registration",
+        c3: "Excise Tax Registration",
+      },
+
+      newExcise: {
+        t1: "Tax Management",
+        t2: "Excise Tax Registration",
+        back: "Back",
+        continue: "Continue",
+        close: "Close",
+        yes: "Yes",
+        no: "No",
+        confirm: "Confirm",
+        backToDashboard: "Back to Dashboard",
+        national: "National ID",
+        iqama: "Iqama ID",
+        gcc: "GCC ID",
+        validIban: "Valid IBAN",
+        name: "Name",
+        egDesg: "e.g Owner, Manager, etc",
+        delete: "Delete",
+        chooseDate: "Choose a date",
+        s1: {
+          t1: "Commercial Registration",
+          t2: "Commercial Registration Number",
+          t3: "Add New Commercial Registration",
+          t4: "IBAN",
+          t5: "Add IBAN",
+        },
+        s2: {
+          t1: "Excise Activity",
+          t2: "Excise Type Activities",
+          t3: "Import Excise Goods",
+          t4: "Produce Excise Goods",
+          t5: "Both activities",
+          t6: "Information",
+          t7:
+            "The Excise Tax Registration Number has to be provided in import declaration.",
+          t8: "Excise Goods",
+          t9:
+            "Select type of Excise Goods to be registered for the Excise Tax activities.",
+          t10: "Tax Warehouse",
+          t11: "Do you want to apply for a Tax Warehouse?",
+          t12:
+            "If yes, a separate application for Tax Warehouse Licence has to be submitted after the Excise Tax registration is approved.",
+        },
+        s3: {
+          t1: "Contact Person Name",
+          t2: "Designation",
+          t3: "ID Type",
+          t4: "ID Number",
+          t5: "Date",
+          t6:
+            "I hereby certify that i am authorized to complete this form for the taxable person and that all information contained is correct.",
+        },
+        summary: {
+          c1: {
+            t1: "Taxpayer Details",
+            t2: "Commercial Registration Number",
+            t3: "Commercial Registration Name",
+          },
+          c2: {
+            t1: "IBAN",
+          },
+          c3: {
+            t1: "Excise Tax Details",
+            t2: "Excise Activity",
+            t3: "Excise Type Activities",
+            t4: "Import Excise Goods",
+            t5: "Produce Excise Goods",
+            t6: "Both activities",
+            t7: "Excise Goods",
+            t8: "Tax Warehouse",
+            t9: "Do you want to apply for a Tax Warehouse?",
+            t10: "Excise Goods",
+            yes: "Yes",
+            no: "No",
+          },
+          c4: {
+            t1: "Declaration",
+            t2: "Contact Person Name",
+            t3: "Designation",
+            t4: "ID Type",
+            t5: "ID Number",
+            t6: "Date",
+            t7: "I agree with these",
+            t8: "Instructions and Conditions",
+          },
+        },
+        s5: {
+          t1: "Excise Registration",
+          t2:
+            "Your Excise Registration Application is submitted successfully and is waiting GAZT's approval",
+          t3: "Name",
+          t4: "Application Number",
+          t5: "Date",
+          btn: "Excise Registration Services",
+        },
+        m1: {
+          t1: "IBAN",
+          t2: "Add new IBAN",
+          btn1: "Add",
+        },
+        m2: {
+          t1: "ID Number",
+          t2: "DOB",
+          btn1: "Validate ID",
+        },
+        errorMsgs: {
+          e1: "Minimum of 1 CR should be maintained.",
+          e2: "Please select CR number.",
+          e3: "Please enter IBAN.",
+          e4: "Please Select Any One Excise Activity.",
+          e5: "Please Select Atleast One Excise Good.",
+          e6: "Please Enter the Name",
+          e7: "Invalid entry",
+          e8: "Please Enter the Designation",
+          e9: "Please Select any one option",
+          e10: "Please enter the ID number",
+          e11: "GCC ID should be between 7-15 digits",
+          e12: "Please enter only numeric value",
+          e13: "Invalid Date of Birth",
+          e14: "Valid ID Number",
+        },
+      },
+
+      profile: {
+        labels: {
+          tin: "TIN",
+          active: "Active",
+          mainOutlet: "Main Outlet",
+          commReg: "Commercial Registration",
+          license: "License",
+          contactInfo: "Contact Information",
+          poc: "Point of Contact",
+          addPoc: "Add Point of Contact",
+          edit: "Edit",
+          delete: "Delete",
+          tpAcc: "Taxpayer Account",
+          regDetails: "Registration Details",
+          chgPwd: "Change Password",
+          userMngmt: "User Management",
+          deReg: "De-registration",
+          addPOC1: "Add Taxpayer Point of Contact",
+          editPoc: "Edit Taxpayer Point of Contact",
+          subHead: "Complete Point of Contact Information",
+          name: "Name",
+          pos: "Position",
+          phNo: "Phone Number",
+          email: "Email",
+          ext: "Extension",
+          add: "Add",
+          update: "Update",
+          lastAccessed: "The last time you accessed was on",
+          at: "at",
+          deleteInfo: "Do you want to delete?",
+          yes: "Yes",
+          no: "No",
+        },
+        errMsgs: {
+          e1: "You cannot add more than 2 point of contact",
+          e2: "Please Enter name",
+          e3: "Please Enter position",
+          e4: "Please Enter Mobile number",
+          e5: "Mobile number should start with 5",
+          e6: "Mobile number should be of 9 digits",
+          e7: "Invalid Email Address",
+          e8: "Please Enter Email Address",
+          e9: "One point of contact is mandatory",
+        },
+      },
+      updtMobile: {
+        title1: "Profile > ",
+        title2: "Update Mobile Number",
+        nwPhNo: "New Phone Number",
+        cnfrmPh: "Confirm New Phone Number",
+        confirm: "Confirm",
+        mobNum: "Mobile Number",
+        updMsg: "Your Phone Number is updated succesfully",
+        phNo: "Phone Number",
+        back: "Back",
+        resend: "Resend Verification Code",
+        goto: "Login",
+        errMsgs: {
+          e1: "Please Enter the Mobile Number",
+          e2: "Mobile verification code sent successfully",
+          e3: "Mobile Number should match",
+          e4: "Country Code should match",
+          e5: "Mobile number should not start with zero",
+          e6: "Mobile verification code sent successfully",
+        },
+      },
+      updtEmail: {
+        title1: "Profile > ",
+        title2: "Update Email",
+        nwEmail: "New Email",
+        cnfrmEmail: "Confirm New Email",
+        continue: "Continue",
+        currPwd: "Current Password",
+        confirm: "Confirm",
+        mobNum: "Mobile Number",
+        updMsg: "Your Email is updated succesfully",
+        phNo: "Phone Number",
+        back: "Back",
+        resend: "Resend Verification Code",
+        goto: "Login",
+        email: "Email",
+        errMsgs: {
+          e1: "Please Enter Valid Email ID",
+          e2: "Please enter current password",
+          e3: "Password is required",
+          e4: "Passwords should match",
+          e5: "Invalid Entry",
+          e6: "Emails should match",
+          e7: "Email verification code sent successfully",
+        },
+      },
+      regDeRegDetails: {
+        title1: "Profile > ",
+        title2: "Zakat & CIT De-registration > ",
+        regDetails: "Registration Details",
+        vatDetails: "VAT Details",
+        etDetails: "Excise Tax Details",
+        zakatDetails: "Zakat & CIT Details",
+        deRegDetails: "De-registration Details",
+        vatDeReg: "VAT De-registration",
+        etDeReg: "Excise De-registration",
+        zakatDereg: "Zakat & CIT De-registration",
+        outlet: "Outlets & Branches De-registration",
+        licenseDeReg: "License De-registration",
+        tinDeReg: "TIN De-registration",
+        back: "Back",
+        usrMngmt: "User Management",
+        usrAdmin: "User Administration",
+        taskAllocation: "Task Allocation",
+      },
+
+      form11:
+      { 
+        t3: "SAR",
+        VoidModal:{
+          p1:"Are you sure you want void draft return?",
+          btn1:"Ok",
+          btn2:"Cancel"
+      },
+      AmendModal:{
+        p:"Are you sure you want to Submit the return as the GAZT has the integration with different government entities. For example imports, Contracts, and No of Labors. If you want to edit the return click 'Cancel' ",
+        btn1:"Ok",
+        btn2:"Cancel"
+      },
+      creamburds:{
+          c1:"Returns",
+          c2:"Zakat & Corporate Income Tax Return",
+          c3:"Back",
+        },
+        cautionmessage:{
+         m1:"Caution, you must adjust the settings of the scanner so that the compressed files size less than 50MB. Single file size no exceeds 5MB. (Choose only file with extension .XLS, .XLSX, .DOC, .DOCX, .PDF, .JPG, .JPEG & .PNG)",
+        },
+		confirmation1:{
+			c1:"The data has been saved successfully",
+      c2:"Are you sure you want to upload the excel file?",
+      c3:"Please upload the correct excel file which you have downloaded.",
+      c4:"Choose only file with extension PDF, JPEG, PNG, JPG.",
+      c5:"File Content cannot be blank.",
+      c6:"You must adjust the settings of the scanner so that the compressed file size less than 5 MB."
+		},
+		notapllicable:{
+			l1:"Are you sure you want to choose 'Not Applicable'? ",
+		},
+		longterm:{
+      heading:"Long term loans and its equivalent",
+      heading1:"Long term loans and its equivalent form",
+			table:{
+				tr1:{
+					td1:"Loan Type",
+					td2:"Local/Foreign",
+					td3:"Amount for Due in 365 days or less",
+					td4:"Amount for Due after 365 days or less",
+					
+				},
+			},
+		},
+		incomeformmodal:{
+			heading:"Income from loans ",
+			table:{
+				tr1:{
+					th1:"Statement",
+					th2:"Value",
+					td1:"Total Revenues",
+					td2:"Income from loans interest",
+					td3:"Taxable income excluding the income from the loans interest (A)",
+					td4:"Allowable deducted expenses under the tax law",
+					td5:"Expenses from loans interests ",
+					td6:"Allowable deducted expenses under the tax law excluding the expenses from loans interests (B)",
+					td7:"The result of (A –B)",
+					td8:"The result of (A –B) 50%",
+					td9:"Add the income from the loans interests",
+					td10:"Income from loans interest + (50% (A-B))",
+					td11:"loans interests (interests and banking services) loaded on the accounts",
+					td12:"loans interests in excess of the allowable limit",
+					td13:"Non-Saudi share from Loan interest exceed legal threshold",
+					
+
+				},
+			},
+		},
+		sukuku:{
+      heading:"Investments in Government Sukuk",
+      heading1:"Investments in Government Sukuk form ",
+			table:{
+				tr1:{
+					td1:"Name of Sukuk/Bonds",
+					td2:"Maturity Date",
+					td3:"Amount for Due in 365 days or less",
+					td4:"Amount for Due after 365 days or less",
+					
+				},
+				
+			},
+			label:{
+					l1:"Amount for Due in 365 days or less",
+					l2:"Amount for Due after 365 days or less",
+					
+				},
+		},
+		longtermdebts:{
+      heading:"Long term debts and its equivalent",
+      heading1:"Long term loans and its equivalent form",
+			table:{
+				tr1:{
+					td1:"Debt Type",
+					td2:"Local/Foreign",
+					td3:"Amount for Due in 365 days or less",
+					td4:"Amount for Due after 365 days or less",
+				},
+			},
+		},
+    file:{
+        f1:"Drag and drop file to upload documentation",
+        f2:"Attachment is mandatory",
+        f3:"Local File",
+        f4:"Master File",
+      },
+	  
+      equity:{
+		  
+      heading:"Equity Equivalent Funds",
+      heading1:"Equity Equivalent Funds form",
+		  table:{
+			  tr1:{
+				  td1:"Statement",
+				  td2:"Amount",
+				  
+			  },
+		  },
+	  },	  
+  direction: {
+        d1: "Back",
+        d2: "Back to returns",
+      },
+  
+  btns: {
+
+        btncancel: "Cancel",
+        btnupdateinfo: "Update Information",
+        btncontinue: "Continue",
+        btndraft: "Save As Draft",
+        togglebtnapplicable: "Applicable",
+        notapplicablle: "Not Applicable",
+        btnedit: "Edit",
+        btnreview: "Review",
+        btndownloadformat: "Download Form Format",
+        btnsubmit: "Submit",
+        btndownloadform: "Download Form",
+        btnconfirmation: "Download Confirmation",
+        btnamned: "Amend",
+        btnacknwldge: "Acknowledgement",
+		btnsave:"Save",
+		btnclose:"Close",
+		btnclear:"clear",
+		btndone:"Done",
+		btnapply:"Apply",
+    btnok:"Ok",
+    btndownloadInvoice:"Invoice Letter"
+      },
+	  capitalzakatmodel:{
+      heading:"Capitals ",
+      heading1:"Capitals form ",
+		  
+		  table:{
+			  tr1:{
+			  td1:"Capital addition source",
+			  td2:"Beginning of period balance",
+			  td3:"Amount deducted from the capital during the current period",
+			  td4:"Additions to the capital during the year ",
+			  td5:"Date of capital addition",
+			  td6:"End of period balance",
+			  td7:" Utilized in Non-Zakatable item from Zakat base",
+			  td8:"Utilized in Zakatable item ",
+			  td9:"Date of end of financial year",
+			  td10:"Number of days",
+			  td11:"Capital subject to Zakat",
+			  },
+		  },
+		  label:{
+			  l1:"Beginning of period balance",
+			  l2:"Amount deducted from the capital <br> during the current period",
+			  l3:"End of period balance",
+			  l4:"Utilized in Non-Zakatable item from Zakat base",
+			  l5:"Utilized in Zakatable item",
+			  l6:"Date of end of financial year",
+		  },
+	  },
+  currentyearmodal:{
+    heading:"Adjusted carried forward CIT losses",
+    heading1:"Adjusted carried forward CIT losses form",
+    table:{
+      tr1:{
+        td1:"Adjusted carried forward CIT losses",
+        td2:"Adjusted declared net profit",
+        td3:"Losses deducted during the year",
+        td4:"End of year balance",
+      },
+    },
+  },
+  tonetprofit:{
+    heading:"Adjustment to net profit",
+    heading1:"Adjustment to net profit form",
+    table:{
+      tr1:{
+        td1:"Adjustment",
+        td2:"Statement",
+        td3:"Amount"
+      },
+    },
+  },
+  diprecation:{
+    heading:"Depreciations",
+    label:{
+      l1:"Group No",
+      l2:"The group value at the end of the previous year ",
+      l3:"The cost of previous year addition ",
+      l4:"The cost of current additions",
+      l5:"50% of the total cost of additions during the current and previous years ",
+      l6:"Compensation for assets which do not qualify for depreciation during the  previous year",
+      l7:"Compensation for assets which do not qualify for depreciation during the current year",
+      l8:"50% of the total value of compensation for assets which do not qualify for  depreciation during the previous and current years",
+      l9:"The remaining value of the group",
+      l10:"Depreciation / amortization ratio",
+      l11:"Depreciation / amortization value",
+      l12:"The remaining value of the group at the end of the current year",
+      l13:"Maintenance cost for the group",
+      l14:"Maintenance expenses exceeding 4%",
+      l15:"The remaining of the group at the end of the current year",
+      l16:"Land",
+      l17:"First",
+      l18:"Second",
+      l19:"Third",
+      l20:"Fourth",
+      l21:"Fifth",
+      l22:"Total",
+      
+      
+      
+    },
+  },
+  otherexpensmodal:{
+    
+    heading:{
+      h1:"Other Expenses ",
+      h11:"Other Expenses form ",
+    },
+    content:"Please select how to provide with the Other revenues data",
+    table:{
+      tr1:{
+        
+        td1:"Statement",
+        td2:"Amount",
+        
+      },
+    },
+  },
+  Royalsecurtiy:{
+    table:{
+      tr1:{
+        td1:"Id Type",
+        td2:"Id Number",
+        td3:"Beneficiary Name",
+        td4:"Internal / External",
+        td5:" Country",
+        td6:" Service Type",
+        td7:"Charged to the accounts",
+        td8:"Paid during the year",
+      },
+    },
+    label:{
+      l1:"Charged to the accounts Total",
+      l2:"Paid during the year Total",
+    },
+  },
+  RoyalityTechnicalSecurityModal:{
+    heading:"Royalties, technical services, consultancy and professional fees ",
+    heading1:"Royalties, technical services, consultancy and professional fees form",
+    content:"Please select how to provide with the Other revenues data",
+  },
+  
+  ProvisionsMadeDuringPeriodModal:{
+    heading:"Provisions ",
+    heading1:"Provisions form ",
+    content:"Please select how to provide with the Other revenues data",
+    table:{
+      tr1:{
+        td1:"Provision Type",
+        td2:"Beginning Balance",
+        td3:"Provisions created during the period",
+        td4:"Utilized during the period",
+        td5:"Settlements",
+        td6:"Ending Balance",
+      },
+    },
+    label:{
+      l1:"Beginning Balance",
+      l2:"Provisions created during the period",
+      l3:"Utilized during the period",
+      l4:"Settlements",
+      l5:"Ending Balance",
+    },
+  },
+  CloseBankingRevenueModal:{
+    confirmation:{
+      c1:"Are you sure to close  without saving data?",
+    },
+  },
+  CostOfFinancingModal:{
+    heading:{
+      h1:"Cost Of Revenues - Finance",
+      h2:"Please select how to provide with the Other revenues data",
+    },
+    table:{
+      tr1:{
+        th1:"Statement",
+        th2:"Amount",
+        td1:"Cost of Financing Form"
+      },
+    },
+  },
+  popup:{
+    addform:"Add Form",
+    addmultipleform:"Add Multiple Forms",
+    fillmanually:"Fill Manually",
+    uploadexcel:"Uploading Excel",
+    excelformat:"Excel Format",
+    total:"Total",
+    Forms:"How many forms would you like to add?",
+    confirmation:"Are you sure to close without saving data?",
+    modaltitle:"Modal title",
+  },
+  inputrange: {
+
+        range1: "Range of value allowed is 0 to 999,999,999,999.99",
+        range2: "Maximum 255 characters allowed",
+        range3: "Range of value allowed is 0.00 to 100.00",
+        range4: "Maximum 30 characters allowed",
+        range5: "Maximum 5 numbers allowed",
+        range6: "Range of value allowed -999,999,999,999.99 to 999,999,999,999.99",
+    range7: "Maximum 20 forms allowed",
+    range8:"Maximum 6 forms allowed",
+    range9:"Maximum 999 forms allowed",
+    range10:"Maximum 150 characters allowed",
+    range11:"Range of value allowed is 0",
+    range12:"Range of value allowed is 5 to 5",
+    range13:"Range of value allowed is 10 to 10",
+    range14:"Entered value must be greater than or equal to total non-zakatable assets",
+    range15:"Maximum 255 numbers allowed",
+    range16:"Minimum 10 digits to maximum 15 digits",
+    range17:"Mismatch in Total Assets & Liabilities. Please rectify",
+    range20:"Range of value allowed -99,999,999,999.99 to 999,999,999,999.99",
+    
+      },
+
+         step1:{
+            creamburds:{
+              c1:"Returns",
+              c2:"Zakat & Corporate Income Tax Return",
+              c3:"Back",
+            },
+            cardheadings:{
+              heading1:"Taxpayer Details",
+              heading2:"Tax Return Details",
+              heading3:"Registration Information",
+            },
+            pageheadings:{
+              p1:"Zakat & Corporate Income Tax Return",
+            },
+            pageheadingtagline:{
+              t1:"Please review and confirm the registration details are correct",
+            },
+            table:{
+              th1:"Shareholder Distribution",
+              th2:"Saudi",
+              th3:"Non-Saudi",
+              td1:"Capital shares",
+              td2:"Profit shares",
+              
+
+            },
+            labels:{
+              l1:"Taxpayer's Name",
+              l2:"Branch",
+              l3:"Email",
+              l4:"Address",
+              l5:"Mobile Number",
+              l6:"Return Type",
+              l7:"Financial Year",
+              l8:"Period Date",
+              l9:"Number of Outlets",
+              l10:"Main Outlet",
+              l11:"Residency Status",
+              l12:"Accounting Method",
+              l13:"Financial Period Ending (DD-MM)",
+            },
+           
+            btns:{
+                  btnupdateinf:"Update Information",
+                  btncontinue:"Continue",
+
+                },
+              
+          },
+          
+          step2:{
+            creamburds:{
+              c1:"Returns",
+              c2:"Zakat & Corporate Income Tax Return",
+              c3:"Back",
+            },
+            cardheadings:{
+              heading1:"Share Distribution",
+              heading2:"Revenue",
+              heading3:"Other Revenues",
+              heading4:"Cost of Revenues",
+      heading5:"Cost and Expenses",
+              
+            },
+            grandtotal:{
+              g1:"Total Revenues",
+              g2:"Net Profit (Loss)",
+
+            },
+            pageheadings:{
+              p1:"Income Statement",
+            },
+            pageheadingtagline:{
+              t1:"Please review and confirm the payment details are correct",
+            },
+           
+            labels:{
+              l1:"Saudi Shareholder Capital (%)",
+              l2:"Saudi Shareholder Profit (%)",
+              l3:"Start Date",
+              l4:"Number of days in the financial year",
+              l5:"Non-Saudi Shareholder Capital (%)",
+              l6:"Non-Saudi Shareholder Profit (%)  ",
+              l7:"End Date",
+              l8:"End Date",
+              l9:"Calendar Type"
+            },
+            btns:{
+                  btnupdateinf:"Update Information",
+                  btncontinue:"Continue",
+
+                },
+        
+      table:{
+    
+       tr1:{
+       
+       td1:"Revenue From Main Activity",
+       td2:"Main Income Revenue",
+       
+       },
+       
+    
+    },
+    table2:{
+    
+       tr1:{
+       
+       td1:"Gain (Losses) from Selling Securities",
+       td2:"Main Income Revenue",
+       td3:"Total Other Revenues",
+       
+       },
+       
+    
+    },
+    
+    table3:{
+    
+       tr1:{
+       
+       td1:"Cost of Main Activity",
+       td2:"Main Income Revenue",
+       td3:"Total Other Revenues",
+       
+       },
+       
+    
+    },
+    
+    table4:{
+    
+       tr1:{
+       
+       td1:"Salaries & House Allowance",
+       td2:"Book Depreciation",
+       td3:"Social Insurance Expenses (GOSI) - Saudis",
+       td4:"Social Insurance Expenses (GOSI) - Foreigners",
+       td5:"Repair & Maintenance Expenses",
+       td6:"Provisions Made During the Period",
+       td7:"Other Employees Benefits",
+       td8:"Donations",
+       td9:"Royalties, Technical Services, Consultancy & Professional Fees",
+       td10:"Other Expenses",
+       td11:"ZAKAT Expenses Loaded on Period Accounts",
+       td12:"Total Cost & Expenses",
+       
+       },
+       
+    
+    },
+              
+          },
+          step3:{
+      
+      pageheading:{
+        
+        p1:"Tax Calculation",
+        p2:"Please complete the below Details ",
+      },
+      heading:{
+        
+        h1:"Non-Saudi Share in Net Profit (Loss)",
+        h2:"Additions",
+        h3:"Deductions",
+      },
+      table:{
+        
+        tr1:{
+          
+          td1:"Depreciation Differences",
+          td2:"Maintenance cost exceed legal threshold",
+          td3:"Provisions expenses loaded on accounts for the period",
+          td4:"Adjustments to net profit",
+          td5:"Loan charges exceed legal threshold",
+          td6:"Non-Saudi's share of the company's share in the losses of the investee company",
+          td7:"Non-Saudi's share in capital losses realized from the disposal of securities traded in the financial market",
+          td8:"Differences in comparable prices for goods and services",
+          td9:"Total Additions",
+        },
+      },
+      table2:{
+        
+        tr1:{
+          
+          td1:"Non-Saudi's share in the utilized provisions which previously returned to the taxable amount",
+          td2:"Non-Saudi share in the realized capital gains from the disposal of securities traded in the financial market",
+          td3:"Non-Saudi's share in carried forward losses up to 25% of current year profit",
+          td4:"Non-Saudi share in the company's share in the profits of the investee company, which applied the provisions of doubleness",
+          td5:"Total Deductions",
+          
+        },
+      },
+      table3:{
+        
+        tr1:{
+          
+          td1:"Total Adjustments",
+          td2:"Net Profit (Loss) before exemptions",
+          td3:"Non-Saudi’s Share Losses (profit) from assets disposal",
+          td4:"Net adjusted profit (Taxable amount)",
+          td5:"Tax Amount",
+          
+        },
+      },
+    },
+          step4:{
+      pageheading:{
+        p1:"ZAKAT Calculation",
+        p2:"Please review and confirm the payment details are correct",
+      },
+      
+      file:{
+        f1:"Drag and drop file to upload documentation",
+        f2:"Attachment is mandatory",
+      },
+      heading:{
+        
+        h1:"Fund Sources",
+        h2:"Non-Zakatable Assets",
+        h3:"Zakatable Assets",
+      },
+      
+      table:{
+        tr1:{
+          
+          td1:"Capital",
+          td2:"Equity & it’s equivalent and internal fund sources",
+          td3:"Long-Term loans and it’s equivalent",
+          td4:"Negative fair value for long term derivatives",
+          td5:"Total Fund Sources",
+        },
+      },
+      
+      table1:{
+        tr1:{
+          
+          td1:"Net Fixed Assets",
+          td2:"Real Estates that transferred to Taxpayer through mortgage enforcement",
+          td3:"Investments in local companies that are subjected to ZAKAT",
+          td4:"Investments in outside companies that paid it’s ZAKAT separately",
+          td5:"Long-term Debts and it’s equivalent",
+          td6:"Investments in Debts that Government bears it’s ZAKAT",
+          td7:"Positive fair value for long-term derivates",
+          td8:"Legal Deposit to SAMA ",
+          td9:"Total Non-Zakatable Assets",
+        },
+      },
+      
+      table2:{
+        tr1:{
+          
+          td1:"Total Zakatable Assets",
+          td2:"Total Assets as per Financial Statements",
+          td3:"Percentage of Zakatable Assets to total Assets (%)",
+          td4:"Zakat Base before calculating Min & Max Limits",
+          td5:"Net Profit (Losses) per books",
+          td6:"Gross profit (loss) as per financial statements",
+          td7:"Minimum ZAKAT Base",
+          td8:"Maximum ZAKAT Base ",
+          td9:"Saudi Share for ZAKAT Base",
+          td10:"ZAKAT Amount of Outside Investment",
+          td11:"ZAKAT Amount",
+          td12:"Total ZAKAT Payable ",
+          td13:"Zakat Base After Limitations"
+          
+        },
+      },
+    },
+    step5:{
+      pageheading:{
+        p1:"Balance Sheet",
+        p2:"Please review and confirm the payment details are correct",
+      },
+      heading:{
+        h1:"Assets",
+        h2:"Liability & Equity",
+      },
+      
+      table:{
+        tr1:{
+          th1:"Current Assets",
+          th2:"Beginning Balance (SAR)",
+          th3:"Ending Balance (SAR)",
+          td1:"Cash in hand & at bank",
+          td2:"Short Term Investment",
+          td3:"Accounts Receivables & Debit Balances",
+          td4:"Merchandise Inventory",
+          td5:"Accured Revenues",
+          td6:"Prepaid Expenses",
+          td7:"Due from Related Parties",
+          td8:"Other Current Assets",
+          td9:"Total Current Assets",
+        },
+      },
+      table1:{
+        tr1:{
+          th1:"Non-Current Assets",
+          th2:"Beginning Balance (SAR)",
+          th3:"Ending Balance (SAR)",
+          td1:"Long-Term Investments",
+          td2:"Net Property (Net Book Value of Fixed Assets)",
+          td3:"Construction in Progress (Work in Progress)",
+          td4:"Establishment Expenses",
+          td5:"Other Non-Current Assets ",
+          td6:"Total Non-Current Assets",
+          
+        },
+      },
+      table2:{
+        tr1:{
+          th1:"Intangible Assets",
+          th2:"Beginning Balance (SAR)",
+          th3:"Ending Balance (SAR)",
+          td1:"Patent",
+          td2:"Goodwill",
+          td3:"Total Intangible Assets",
+          
+          
+        },
+      },
+      table3:{
+        tr1:{
+          th1:"CURRENT LIABILITIES",
+          th2:"Beginning Balance (SAR)",
+          th3:"Ending Balance (SAR)",
+          td1:"Short Term Notes Payable",
+          td2:"Payables",
+          td3:"Accrued Expenses",
+          td4:"Dividends Payable",
+          td5:"Accrued Premium of Long-Term Loans",
+          td6:"Short-Term Loans",
+          td7:"Payable to Related Parties",
+          td8:"Total current liabilities",
+          
+          
+        },
+      },
+      table4:{
+        tr1:{
+          th1:"NON-CURRENT LIABILITIES",
+          th2:"Beginning Balance (SAR)",
+          th3:"Ending Balance (SAR)",
+          td1:"Long-Term Loans",
+          td2:"Long-Term notes payable",
+          td3:"Other Allocations",
+          td4:"Current or the Partners",
+          td5:"Payable to related Parties",
+          td6:"Total non current liabilities",
+          
+          
+          
+        },
+      },
+      table5:{
+        tr1:{
+          th1:"SHAREHOLDER’S EQUITY",
+          th2:"Beginning Balance (SAR)",
+          th3:"Ending Balance (SAR)",
+          td1:"Capital",
+          td2:"Reserves",
+          td3:"Retained Earnings",
+          td4:"Other",
+          td5:"Total shareholders’ equity",
+          td6:"Total non current liabilities",
+          
+          
+          
+        },
+      },
+    },
+    step6:{
+      pageheading:{
+        p1:"Transfer Pricing",
+        p2:"Please review and confirm the payment details are correct",
+      },
+      confirmation:{
+        c1:"Do you have any related Party Transaction?",
+        c2:"Yes",
+        c3:"No",
+        c4:"B. Have You Or The Group Gone Through Business Restructuring During The Current Tax Filing Year? *",
+        c5:"C. Please Provide The Following Information In Accordance With Your Tax Return Declaration * :",
+        c6:"D. Has Transfer Pricing (TP) Documentation Been Maintained In Line With The KSA Transfer Pricing Bylaws? *",
+        c7:"Not Applicable",
+        c8:"E. Has The Company Conduced Non-Monetary/Free Of Charge Transactions With Related Parties? *",
+        c9:"F. Please Provide All Shareholder's Details As Described Below * :",
+        c10:"Are You Part Of MNE-Group That Qualifies For Country By Country Reporting?",
+        c11:"A. Please Provide All Related Party Transactions Details * :",
+        c12:"Related Party Transactions Form",
+        c13:"Shareholder's Details Form"
+      },
+      label:{
+        l1:"A. What is the legal name of the ultimate Parent Entity? *",
+        l2:"B. What is the Tax Identification Number for ultimate Parent Entity? *",
+        l3:"C. Tax Jurisdiction of the UPE *",
+        l4:"D. Financial Year end of the UPE *",
+        l5:"E. Legal Name Of The Filing Entity *",
+        l6:"F. What is Tax Identification Number(TIN) for the filling entitiy? *",
+        l7:"G. Jurisdiciton of the Filling CbC Report *",
+        l8:"H. Financial year end of the Filling Entity *",
+      },
+      table:{
+        tr1:{
+          td1:"Transactions",
+          td2:"Description",
+          td3:"Name of Related Party",
+          td4:"Jurisdiction",
+          td5:"Transaction Nature",
+          td6:"Amount",
+          td7:"TP Method",
+        },
+      },
+      table2:{
+        tr1:{
+          td1:"Total Revenue (SAR)",
+          td2:"Total Expense (SAR)",
+          td3:"Net Profit / (Loss) (SAR)",
+          td4:"Jurisdiction",
+          td5:"Transaction Nature",
+          td6:"Amount",
+          td7:"TP Method",
+        },
+      },
+      table3:{
+        tr1:{
+          td1:"Transaction Description",
+          td2:"Counter Party",
+          td3:"Jurisdiction",
+          
+        },
+      },
+      table4:{
+        tr1:{
+          td1:"Name of Shareholder",
+          td2:"Jurisdiction",
+          td3:"Ownership Percentage (%)",
+          
+          
+        },
+      },
+    },
+    step7:{
+      pageheading:{
+        p1:"Summary",
+        
+      },
+      
+      bill:{
+        
+        b1:"We have received your return with reference number",
+        b2:"For the Period From",
+        b3:"Return Reference Number:",
+        b4:"CIT Difference",
+        b5:"The total tax payable is deducted from it",
+        b6:"First Advance payment :",
+        b7:"Second advance payment",
+        b8:"Third advance payment",
+        b9:"Total on account payments",
+        b10:"Payments for Contract Release",
+        b11:"Tax differences to be paid (over-paid)",
+        
+      },
+      card:{
+        c1:"Fines",
+        c2:"Late filling penalties",
+        c3:"Late payment penalties",
+        c4:"Advance payments penalties",
+        c5:"Total fines ",
+        c6:"Total Income Tax And fine Payable",
+        c7:"Zakat Differences",
+        c8:"Zakat due by the Saudi partner",
+        c9:"Payments for Contract Release ",
+        c10:"Total Zakat Payable",
+        c11:"Total Payable",
+        c12:"Sadad Bill No",
+        c13:"Total Zakat Payable",
+        c14:"Sadad Bill No",
+        c15:"Total Income Tax payable",
+        c16:"Name",
+        c17:"GAZT Acknowledges the submition of your Return",
+        c18:"Taxable period"
+      },
+    },
+    step9:{
+      pageheading:{
+        p1:"Income Statement",
+      },
+      questions:{
+        q1:"a. What is the Legal name of the Ultimate Parent Entity(UPE)?",
+        q2:"b. What is the tax identification number (TIN) for Ultimate parent entity(UPE)?",
+        q3:"c. Tax Jurisdiction of the UPE",
+        q4:"d. Financial year end of the UPE",
+        q5:"e. Legal name of the filing entity",
+        q6:"f. What is tax identification number(TIN) for the filing entity?",
+        q7:"g. Jurisdiction of the filing CbC Report",
+        q8:"h. Financial year end of the filling entity",
+        
+      },
+      confirmation:{
+        c1:"A. Please provide all related party transactions details:",
+        c2:"B. Have you or the group gone through business restructuring during the current tax filing year?",
+        c3:"Yes",
+        c4:"No",
+        c5:"C. Please Provide The Following Information In Accordance With Your Tax Return Declaration:",
+        c6:"D. Has The Company Conduced Non-Monetary/Free Of Charge Transactions With Related Parties?",
+        c7:"E. Please Provide All Shareholder's Details As Described Below:",
+        c8:"Are you part of MNE-GROUP that Qualifies for country by country Reporting?(You will need to say YES if the Group turnover is in Excess of SAR 3.2 Billion)",
+      },
+      headings:{
+        h1:"Revenue",
+        h2:"Other Revenues",
+        h3:"Costs of Revenues",
+        h4:"Costs and Expenses",
+        h5:"Tax Calculation",
+        h6:"Additions",
+        h7:"Zakat Calculation",
+        h8:"Fund Sources",
+        h9:"Attach Chartered Account Certification",
+        h10:"Upload copy of Financial Statement",
+      },
+      label:{
+        l1:"Revenue From Main Activity",
+        l2:"Main Income Revenue",
+        l3:"Gain(Losses) from Selling Securities",
+        l4:"Other Revenues",
+        l5:"Total Other Revenues ",
+        l6:"Total Revenues",
+        l7:"Cost of Main Activity",
+        l8:"Salaries and House Allowance",
+        l9:"Book Depreciation",
+        l10:"Social Insurance Expenses (GOSI) - Saudis",
+        l11:"Social Insurance Expenses (GOSI) - Foreigners",
+        l12:"Repair & Maintenance Expenses",
+        l13:"Provisions Made During the Period ",
+        l14:"Other Employees Benefits",
+        l15:"Donations ",
+        l16:"Royalties, Technical Services, Consultancy and Professional Fees",
+        l17:" Other Expenses",
+        l18:"ZAKAT Expenses Loaded on Period Accounts ",
+        l19:"Total Cost And Expenses ",
+        l20:"Net Profit (Loss)",
+        l21:"Non-Saudi Share in Net Profit (Loss)",
+        l22:"Depreciation Differences",
+        l23:"Maintenance cost exceed legal threshold",
+        l24:"Provisions expenses loaded on accounts for the period",
+        l25:"Adjustments to net profit",
+        l26:"Loan charges exceed legal threshold ",
+        l27:"Non-Saudi's share of the company's share in the losses of the investee company",
+        l28:"Non-Saudi's share in capital losses realized from the disposal of securities traded in the financial market",
+        l29:"Differences in comparable prices for goods and services  ",
+        l30:"Total Additions ",
+        l31:"Net Profit (Loss)",
+        l32:"Deductions",
+        l33:"Non-Saudi's share in the utilized provisions which previously returned to the taxable amount",
+        l34:"Non-Saudi share in the realized capital gains from the disposal of securities traded in the financial market",
+        l35:"Non-Saudi's share in carried forward losses up to 25% of current year profit",
+        l36:"Non-Saudi share in the company's share in the profits of the investee company, which applied the provisions of doubleness",
+        l37:"Total Deductions",
+        l38:"Total Adjustments",
+        l39:"Net profit (Loss) before exemptions",
+        l40:"Non-Saudi's Share in Losses (profit) from assets disposal",
+        l41:"Net adjusted profit (Taxable amount)",
+        l42:"Tax Amount",
+        l43:"Capital ",
+        l44:"Equity and its equivalent and internal fund sources",
+        l45:"Long-term loans and its equivalent",
+        l46:"Negative fair value for long term derivatives",
+        l47:"Total Fund Sources",
+        l48:"Non-Zakatable Assets",
+        l49:"Net fixed assets",
+        l50:"Real Estates that transferred to taxpayer through mortgage enforcement",
+        l51:"Investments in local companies that are subjected to ZAKAT",
+        l52:"Investments in outside companies that paid it's ZAKAT separately",
+        l53:"Long-term Debts and its equivalent",
+        l54:"Investments in debts that government bears it's ZAKAT ",
+        l55:"Positive fair value for long-term derivatives",
+        l56:" Legal deposit to SAMA",
+        l57:"Total Non-Zakatable Assets",
+        l58:"Total Zakatable assets",
+        l59:"Total assets as per financial statements",
+        l60:"Percentage of Zakatable assets to total assets (%)",
+        l61:"Zakat base before calculating Min and Max limits",
+        l62:"Net profit (losses) per books",
+        l63:" Gross profit (loss) as per financial statements",
+        l64:"Minimum Zakat Base",
+        l65:"Maximum Zakat Base ",
+        
+        l66:"Saudi Share For Zakat Base",
+        l67:"Zakat Amount Of Outside Investment",
+        l68:"Zakat Amount ",
+        l69:"Assets",
+        l70:"Current Assets",
+        l71:"Cash in hand and at bank",
+        l72:"Short Term Investments ",
+        l73:"Accounts Receivables and Debit Balances",
+        l74:"Accrued Revenues",
+        l75:"Merchandise Inventory",
+        l76:"Prepaid Expenses",
+        l77:"Due from Related Parties",
+        l78:"Other Current Assets",
+        l79:"Total Current Assets",
+        l80:"Non-Current Assets ",
+        l81:"Long-Term Investments ",
+        l82:"Net Property (Net Book Value of Fixed Assets)",
+        l83:"Construction in Progress (Work in Progress)",
+        l84:"Establishment Expenses",
+        l85:"Short Term Investments ",
+        l86:"Other Non-Current Assets",
+        l87:"Total Non-current Assets",
+        l88:"Intangible Assets",
+        l89:"Patent",
+        l90:"Goodwill",
+        l91:"Total Intangible Assets",
+        l92:"Liability and Equity ",
+        l93:"Current Liabilities ",
+        l94:"Short Term Notes Payable",
+        l95:"Payables",
+        l96:"Accrued Expenses",
+        l97:"Dividends Payable",
+        l98:"Accrued Premium of Long-Term Loans",
+        l99:"Short-Term Loans",
+        l100:"Payable to Related Parties",
+        l101:"Total current liabilities",
+        l102:"Non-Current Liabilities",
+        l103:"Long-Term Loans",
+        l104:"Long-Term notes payable",
+        l105:"Other Allocations",
+        l106:"Current or the Partners",
+        l107:"Payable to related Parties",
+        l108:"Total non current liabilities",
+        l109:"Shareholder's Equity",
+        l110:"Capital",
+        l111:"Reserves",
+        l112:"Retained Earnings",
+        l113:"Other",
+        l114:"Total shareholders’ equity",
+        l115:"Do you have any related party Transaction?",
+        
+        
+      },
+      table:{
+        tr1:{
+          td1:"Transactions",
+          td2:"Description",
+          td3:"Name of Related Party",
+          td4:"Jurisdiction",
+          td5:"Transaction Nature",
+          td6:"Amount",
+          td7:"TP Method",
+      
+        },
+      },
+      table2:{
+        tr1:{
+          th1:"Total Revenue (SAR) ",
+          th2:"Total Expense (SAR) ",
+          th3:"Net Profit / (Loss) (SAR)",
+          
+      
+        },
+      },
+      table3:{
+        tr1:{
+          
+          td1:"Transaction Description",
+          td2:"Counter Party",
+          td3:"Jurisdiction",
+          
+      
+        },
+      },
+      table4:{
+        tr1:{
+          
+          td1:"Name of Shareholder",
+          td2:"Jurisdiction",
+          td3:"Ownership Percentage (%) ",
+          
+      
+        },
+      },
+    },
+    screen2:{
+      heading:"Zakat & Corporate Income Tax Return",
+      
+      labels:{
+              l1:"Taxpayer's Name",
+              l2:"Branch",
+              l3:"Email",
+              l4:"Address",
+              l5:"Mobile Number",
+              l6:"Return Type",
+              l7:"Financial Year",
+              l8:"Period Date",
+              l9:"Number of Outlets",
+              l10:"Main Outlet",
+              l11:"Residency Status",
+              l12:"Accounting Method",
+              l13:"Financial Period Ending (DD-MM)",
+            },
+      cardheadings:{
+              heading1:"Taxpayer Details",
+              heading2:"Tax Return Details",
+              heading3:"Registration Information",
+      heading4:"Income Statement",
+      heading5:"Revenues",
+      heading6:" Zakat Calculation",
+      heading7:"Balance Sheet",
+      heading8:"Assets",
+      heading9:"Liability & Equity",
+      heading10:"Total Liability & Equity",
+      heading11:"Transfer Pricing",
+            },
+      
+            pageheadings:{
+              p1:"Zakat & Corporate Income Tax Return",
+            },
+            pageheadingtagline:{
+              t1:"Please review and confirm the registration details are correct",
+            },
+      table:{
+              th1:"Shareholder Distribution",
+              th2:"Saudi",
+              th3:"Non-Saudi",
+              td1:"Capital shares",
+              td2:"Profit shares",
+              
+
+            },
+      card2:{
+        labels:{
+          l1:"Main Income Revenue",
+          l2:"Total Other Revenues",
+          l3:"Total Revenues",
+          l4:"Cost and Expenses",
+          l5:"Financial Period Ending (DD-MM)",
+          l6:"Net Profit (Loss)",
+          l7:"Total Fund Sources",
+          l8:"Total Non-Zakatable Assets",
+          l9:"ZAKAT Amount",
+          l10:"Total ZAKAT Payable",
+          l11:"Total Current Assets",
+          l12:"Total Intangible Assets",
+          l13:"Total Assets",
+          l14:"Related Party Transaction",
+          l15:"MNE-Grou qualifies for country by country reporting?",
+          l16:"No",
+          l17:"Legal name of the ultimate Parent Entity",
+          l18:"TIN for ultimate Parent Entity? ",
+          l19:"Tax Jurisdiction of the UPE",
+          l20:"Financial Year end of the UPE ",
+          l21:"TIN for the Filling Entitiy",
+          l22:"Jurisdiciton of the Filling CbC Report",
+          l23:"Financial year end of the Filling Entity",
+          l24:"Total Payable",
+          
+          
+        },
+      },
+    },
+    gainlospopup:{
+      heading:{
+        h1:"Gain (Losses) from Selling Securities",
+        h2:"Please select how to provide with the Securities Selling Gain (Losses) data",
+        h3:"Gain (Losses) from Selling Securities form ",
+      },
+      table:{
+        tr1:{
+          td1:"Company",
+          td2:"Selling Amount",
+          td3:"Cost",
+          td4:"Profit (Loss)",
+        },
+      },
+      labels:{
+        l1:"Selling Amount Total",
+        l2:"Cost Total",
+        l3:"Profit (Loss) Total",
+        // l2:"",
+        // l1:"Selling Amount Total",
+        // l2:"",
+        // l1:"Selling Amount Total",
+        // l2:"",
+      },
+      
+    },
+    closemodal:{
+      confirmation:{
+        c1:"Are you sure to close without saving data?",
+      },
+    },
+    mulitpleformsmodal:{
+      confirmation:{
+        c1:"How many forms would you like to add?",
+      },
+    },
+    revenuemodal:{
+      heading:"Other Revenues",
+      heading1:"Other Revenues form",
+      heading2:"Please select how to provide with the Other revenues data",
+      table:{
+        tr1:{
+          td1:"Statement",
+          td2:"Amount",
+          td3:"Total",
+        },
+      },
+    },
+    closerevenuemodal:{
+      confirmation:{
+        c1:"Are you sure to close without saving data?",
+      },
+    },
+    multiplerevenueform:{
+      confirmation:{
+        c1:"How many forms would you like to add?",
+      },
+      
+    },
+    CostOfRevenueOptionsModal:{
+      confirmation:{
+        c1:"Confirmation",
+      },
+      label:{
+        l1:"Banking",
+        l2:"Financial Activities",
+      },
+    },
+    CostOfBankingModal:{
+      
+      heading:{
+        h1:"Cost Of Revenues - Bank",
+        h2:"Cost Of Revenues - Bank form",
+        
+        
+      },
+      content:"Please select how to provide with the Other revenues data",
+      table:{
+        tr1:{
+          td1:"Statement",
+          td2:"Address",
+          td3:"Deposit Term",
+          td4:"Value",
+        },
+      },
+      
+    },
+    BankingRevenueFormsModal:{
+      confirmation:{
+        c1:"How many forms would you like to add?",
+      },
+    },
+    s1:{
+            t1: "Return Details",
+            t2: "Return",
+            t3: "Financial Year",
+            t4: "Period Date",
+          },
+         
+         
+        
+       
+        
+          SuccessModal:{
+            p1:"Data was saved successfully",
+            btn1:"Ok"
+          },
+          NegativeFailrModal:{
+            p1:"Negative fair value derivatives for year or more",
+            btn1:"Ok"
+          },
+          LongTermDebtsEquivalentInfoModal:{
+            p1:"Debts of the taxpayer that are fully or partially due in one year or more, whether considered short or long term debt",
+            btn1:"Ok"
+          },
+          instructions:{
+            l1:"1.This return concerns taxpayers who are accountable according to the regulations and instructions concerning the provisions of Zakat, Zakat Calculation Rules for financing activities, and tax that are set by the General Authority of Zakat and Tax.",
+            l2:"2.The return and its attachments must be filled in Arabic, and the payment of zakat/tax due must be made within 120 days from the end of the financial year.",
+            l3:"3.The burden of proof regarding the validity of the taxpayer’s return concerning revenues, expenses and other data lies on the taxpayer. When a taxpayer is unable to verify the validity of the return, the Authority may, in addition to the imposition of any other statutory sanctions, refuse to accept any expenses that have not been validated or make an estimated assessment in accordance to the Authority’s view and according to the circumstances and facts associated with the situation and information available to the Authority.",
+            l4:"4.The return submitted must include the results of the main activity and any other sub-activities.",
+            l5:"5.The return shall not be valid unless its fields are complete including the filing of all required lists and attachments.",
+            l6:"6.The return shall be considered as filed by a formal notice from the Authority in all its electronic forms or official letters, and payment of the tax due should be based on it.",
+            l7:"7.All data related to the return must be updated before its filing, this includes; financial activities, addresses, and contract data"
+          }
+
+      },
+     
+      zacatcit:{
+        p1:"Search",
+        c1:{
+          t1:"Reference Number",
+          t2:"Due Date"
+        },
+        filter:{
+          title:"Filter",
+          t1:"All",
+          t2:"Zakat & CIT",
+           t3:"VAT",
+           t4:"Excise Tax",
+           t5:"Withholding Tax"
+        }
+
+      }
+      
+    },
+    arb: {
+      dir: "rtl",
+      otp: {
+        title:
+          "يرجى إدخال رمز التحقق المرسل من خلال الرسائل النصية إلى رقم الجوال",
+        verifyTitle: "إعادة إرسال رمز التحقق",
+      },
+      signup: {
+        title: "انشاء حساب جديد",
+        subtitle: {
+          t1: "شركة",
+          t2: "مؤسسة",
+          t3: "فردي",
+          t4: "آخرى",
+        },
+      },
+      dashboard: {
+        title: "الوصول السريع",
+        t1: "تعديل",
+        subtitle: {
+          t1: "إقرارات ضريبة القيمة المضافة",
+          t2: "الشهادات الضريبية",
+          t3: "دفع الفواتير",
+          t4: "دفع الفواتير",
+        },
+        title2: "الفواتير",
+        title3: "الإقرارات",
+        title4: "أنواع الضرائب",
+        bills: {
+          t1: "مدفوعة",
+          t2: "جزئيا",
+          t3: " غير مدفوعة",
+        },
+        returns: {
+          t1: "تم تقديمها",
+          t2: "لم يتم تقديمها  ",
+          t3: "متأخرة ",
+        },
+        subtitle2: {
+          t1: "ضريبة القيمة المضافة",
+          t2: "ضريبة السل�� الإنتقائية",
+          t3: "الزكاة",
+          t4: "ضريبة الاستقطاع",
+        },
+        title5: "المساعدة",
+        subtitle3: {
+          t1: "تواصل معنا",
+          t2: "الأسئلة الشائعة",
+          t3: "المحادثة",
+        },
+        title6: "صندوق الوارد",
+        subtitle4: {
+          t1: "عنوان البريد",
+          d1: "محتوى البريد...........",
+        },
+        title7: "الإلتزامات",
+        subtitle5: {
+          t1: "لاتوجد إلتزامات قادمة",
+          d1: "محتوى البريد...........",
+        },
+      },
+      individual: {
+        title: "حساب فردي جديد",
+        header: {
+          h1: "التسجيل الفردي",
+          h2: "عرض المعلومات",
+          h3: "كلمة المرور",
+        },
+        c1: {
+          title: "التسجيل الفردي",
+          in1: "نوع الهوية",
+          in2: "رقم الهوية",
+          in3: "تاريخ الميلاد",
+          btn: "استمر",
+        },
+        c7: {
+          title: "التسجيل الفردي",
+          in1: "نوع الهوية",
+          in2: "رقم الهوية",
+          in3: "الاسم",
+        },
+        c2: {
+          title: "العنوان الوطني",
+          in1: "المدينة",
+          in2: "الحي",
+          in3: "اسم الشارع",
+          in4: "الرمز البريدي",
+          in5: "رقم المبنى",
+          in6: "رقم الوحدة",
+          btn: "",
+        },
+        c3: {
+          title: "بيانات التواصل",
+          in1: "رقم الجوال",
+          in2: "البريد الإلكتروني",
+          in3: "تأكيد البريد الإلكتروني",
+          btn: "استمر",
+        },
+        c4: {
+          title: "انشاء كلمة المرور الجديدة",
+          in1: "كلمة المرور الجديدة",
+          in2: "تأكيد كلمة المرور الجديدة",
+          subtitle: {
+            t1: "قوة كلمة المرور:",
+            t2: "قوية",
+            t3: "يجب ألا تقل كلمة المرور عن 8 أحرف",
+            t4: "كلمة المرور لا تتجاوز 16 حرفًا",
+            t5: "كلمة المرور يجب أن تحتوي أحرف كبيرة وصغيرة بالغة الإنجليزية",
+            t6: "أرقام ورموز",
+            t7: "Weak",
+            t8: "The new password and confirm password are matches",
+          },
+        },
+        c5: {
+          title: "أوافق على هذه الشروط والأحكام ",
+          btn: "تأكيد",
+        },
+        c6: {
+          t1: "تم التسجيل بنجاح",
+          t2: "لقد تم التسجيل بنجاح في خدمات الهيئة العامة للزكاة والدخل",
+          t3: " تم إرسال رسالة نصية قصيرة تحوي الرقم المميز ",
+          t4:
+            "يمكنك استخدام الرقم المميز وكلمة المرور المُدخله مسبقاً لتسجيل الدخول في المستقبل",
+          btn: "الذهاب إلى لوحة التحكم",
+        },
+        c8: {
+          t1:
+            "يرجى إدخال رمز التحقق المرسل من خلال الرسائل النصية إلى رقم الجوال ",
+          t2: "إعادة إرسال رمز التحقق",
+        },
+        m: {
+          t1: "National address",
+          t2: "You have many national addresses, Please select one of them",
+          btn: "Save",
+        },
+        indErr: {
+          e1: "الرجاء إدخال حروف فقط",
+          e2: "الرجاء إدخال حروف و ارقام فقط",
+          e3: "الرجاء إدخال ارقام فقط",
+          e4: "الرجاء إدخال الإسم",
+          e5: "الرجاء إدخال اسم المدينة",
+          e6: "الرجاء إدخال اسم الحي",
+          e7: "الرجاء ادخال اسم الشارع",
+          e8: "الرجاء إدخال الرقم البريدي",
+          e9: "الرجاء إدخال رقم المبنى",
+          e10: "الرجاء إدخال رقم الوحدة",
+          e11: "الرجاء إدخال رقم الجوال",
+          e12: "الرجاء إدخال البريد الإلكتروني",
+          e13:
+            "يجب أن يكون البريد الإلكتروني وتأكيد البريد الإلكتروني متطابقين",
+          e14: "الرجاء تحديد خيار واحد على الأقل",
+          e15: "الرجاء تحديد خيار واحد فقط",
+          e16: "الرجاء إدخال بريد إلكترروني صحيح",
+          e17: "يوجد رقم مميز سابق مرتبط برقم الهوية ",
+          e18: "رقم الهوية صحيح",
+          e19: "تم ارسال رمز الحقق. الرجاء إدخال الرمز",
+          e20: "رمز التحقق غير صحيح",
+          e21: "تاريخ الميلاد لايمكن أن يكون فى المستقبل",
+          e22: "يجب أن لا يبدأ رقم الهاتف المحمول بـ 0 ",
+        },
+      },
+      vat: {
+        title: "التسجيل في ضريبة القيمة المضافة",
+        header: {
+          h1: "تفاصيل المكلف",
+          h2: "تفاصيل ضريبة القيمة المضافة",
+          h3: "التعهد",
+        },
+        c1: {
+          title: "تفاصيل المكلف",
+          t1: "تاريخ بداية الخضوع لضريبة القيمة المضافة",
+          t2: "مستورد أو مصدر",
+          t3: "مستورد",
+          t4: "مصدر",
+          t5: "مستورد ومصدر",
+        },
+        c2: {
+          title: "الحساب البنكي",
+          t1: "الرجاء اختيار رقم الحساب البنكي",
+          t3: "SA32...…………………………………………………………54",
+          t4: "SA32...…………………………………………………………33",
+          btn: "إضافة حساب جديد",
+          btn2: "التالي",
+        },
+        c3: {
+          title: "تفاصيل المبيعات",
+          t1:
+            "في الـ 12 شهرًا القادمة [بما في ذلك هذا الشهر] ، ما القيمة الإجمالية للمبيعات الخاضعة لضريبة القيمة المضافة؟",
+          t2:
+            "خلال آخر 12 شهرًا [وقت التسجيل] ، ما هو إجمالي قيمة المبيعات الخاضعة للضريبة على ضريبة القيمة المضافة؟",
+        },
+        c4: {
+          title: "تفاصيل المصروفات",
+          t1:
+            "خلال الـ 12 شهرًا القادمة [بما في ذلك هذا الشهر] ، ما قيمة إجمالي النفقات الضريبة على ضريبة القيمة المضافة؟",
+          t2:
+            "خلال آخر 12 شهرًا [في وقت التسجيل] ، ما هي قيمة إجمالي نفقاتك الضريبة على ضريبة القيمة المضافة؟",
+          t5: "أكثر من أو يساوي",
+          t4: " 187،500 ريال سعودي",
+          t3: "أقل من",
+          t6: " 187،500 ريال سعودي",
+          t7: "أكثر من",
+          t8: "40،000،000 ريال سعودي",
+          t9: "أقل من 187,500 ريال سعودي",
+        },
+        c5: {
+          title: "المرفقات",
+          t1: " الرجاء تقديم المستندات المطلوبة لإثبات أحقيتك ",
+          t12:
+            "بالتسجيل في ضريبة القيمة المضافة , وفي حالة عدم تقديم تلك المستندات , فمن المرجح أن تتم عملية التدقيق على مدى 6 أشهر المقبلة .",
+          t2: "نوع المستندات المقدمة لإثبات أحقيتك بالتسجيل",
+          t3: "عقد رسمي",
+          t4: "تقارير مدققة",
+          t5: "بيانات الجمارك",
+          t6: "قائمة الدخل",
+          t7: "الملف المرفق",
+          t8: "اسم الملف",
+          t9: "نوع المرفق",
+          t10: "إسحب وأسقط ملف لتحميل الوثائق",
+          t11: "بأقصى حجم 50 ميجا بايت",
+          t13: " الرجاء اختيار فقط الملفات بصيغة: Doc, Docx, Jpg, PDF, Xlsx, Xls",
+          btn: "إضافة مرفق جديد",
+          btn2: "متابعه",
+        },
+        c6: {
+          t1:
+            "أقر بموجب هذا أنني مفوض لاستكمال هذا النموذج للشخص الخاضع للضريبة وأن جميع المعلومات الواردة صحيحة.",
+          t2: "نوع الهوية",
+          t3: "رقم الهوية",
+          t4: "التاريخ",
+          t5: "الاسم",
+          t6:
+            "المفوضين أدناه مخولون بتقديم هذا النموذج وفقًا للوائح ضريبة السلع الانتقائية وأن جميع المعلومات الواردة في هذه الوثيقة صحيحة ودقيقة",
+        },
+        c7: {
+          t1: "أوافق على",
+          t2: "الشروط والأحكام",
+          btn: "المتابعه",
+        },
+        c8: {
+          t1: "تم تقديم طلب تسجيل ضريبة القيمة المضافة بنجاح",
+          t2:
+            "تقر الهيئة العامة للزكاة والدخل بتسجيلك في ضريبة السلع الانتقائية",
+          t3: "الاسم",
+          t4: "Ahmad Muhammed",
+          t5: "رقم الطلب",
+          t6: "1234567890",
+          t7: "التاريخ:",
+          t8: "23/6/2020",
+          t9:
+            "يرجى الاحتفاظ برقم الطلب للرجوع إليه والتواصل من خلاله . ستقوم الهيئة بمعالجة الطلب الخاص بك . لمزيد من المعلومات ، يرجى الاتصال بخدمة العملاء",
+          btn: "عرض تفاصيل الطلب",
+          btn2: "الذهاب إلى لوحة التحكم",
+        },
+        c9: {
+          title: "الممثل المالي",
+          t1:
+            "هذا القسم إلزامي لغير المقيمين. بالنسبة للمقيمين يمكنك تخطي هذا القسم والاستمرار في عملية التسجيل",
+          t2: "الرقم المميز",
+          t3: "نوع الهوية",
+          t4: "رقم الهوية",
+          t5: "تاريخ الميلاد",
+          t6: "الإسم واللقب",
+          t9: "الاسم الاخير",
+          t7: "رقم الجوال",
+          t8: "البريد الإلكتروني",
+          t10: "الاسم الأول",
+        },
+        back: "رجوع",
+        continue: "التالي",
+        taxMngmt: "إدارة الضرائب > خدمات ضريبة القيمة المضافة",
+        newAcc: "حساب جديد",
+        vatReg: "تسجيل ضريبة القيمة المضافة",
+        chooseDate: "إختر التاريخ",
+        edit: "تعديل",
+        finInfo: "معلومات مالية",
+        text1: "قيمة المبيعات الخاضعة للضريبة (12 شهراً القادمة)",
+        text5: "قيمة المبيعات الخاضعة للضريبة (آخر 12 شهرًا)",
+        text2: "بين 375,00 ريال و1,000,000 ريال",
+        text3: "القيمة الخاضعة للضريبة (12 شهراً القادمة)",
+        text4: "قيمة المصروفات الخاضعة للضريبة (آخر 12 شهرًا)",
+        attachments: "المرفقات",
+        reptype: "نوع الممثل",
+        repType1: "غير مقيم",
+        national: "هوية وطنية",
+        iqama: "هوية مقيم",
+        gcc: "هوية خليجية",
+        tin: "الرقم المميز ",
+        phNo: "رقم الجوال",
+        declaration: "التعهد",
+        conatctName: "اسم جهة الإتصال",
+        confirm: "تأكيد",
+        close: "إغلاق",
+        addNewAttchmnt: "أضف مرفق جديد",
+        delete: "مسح",
+        vatEligible: "قسم الخضوع لضريبة القيمة المضافة :",
+        skip: "تخطى",
+        name: "الأسم",
+        number: "رقم",
+        successMsg: "تم تحميل الملف بنجاح",
+        m1: {
+          t1: "رقم الآيبان",
+          btn1: "التحقق من صحة الآيبان",
+          t2: "إضافة رقم الآيبان",
+        },
+        m2: {
+          t1: "رقم الهوية",
+          t2: "تاريخ الميلاد",
+          btn1: "التحقق من الهوية",
+        },
+        errorMsgs: {
+          selectIban: "الرجاء ادخال رقم الآيبان",
+          nameReq: "يجب ادخال الاسم",
+          mobReq: "رقم الجوال إلزامي",
+          emailReq: "الرجاء إدخال البريد الإلكتروني",
+          e1: "رقم هوية الخليجيين يجب ان تكون من 7 الى 15 رقم",
+          e2: "الرجاء ادخال ارقام فقط",
+          e3: "تاريخ ميلاد غير صالح",
+          e4: "إدخال غير صالح",
+          selectOne: "الرجاء تحديد خيار واحد على الأقل",
+          selAttch: "فضلًا اختر نوع المرفق ",
+          e5: "رقم الهوية صحيح",
+          validIban: "الآيبان صحيح",
+          e6: "الرجاء ادخال رقم الآيبان",
+          fileError: "يجب ان يكون حجم الملف المرفق اقل من 5 ميجا",
+          mobStart: "يجب ان يبدأ رقم الهاتف الجوال بـ 009665",
+        },
+      },
+      QuickAction: {
+        t1: "الشاشة الرئيسية",
+        t2: "الوصول السريع",
+        t5: "keyboard_arrow_right",
+        t6: "keyboard_arrow_left",
+        back: "رجوع",
+        continue: "Continue",
+        close: "Close",
+        yes: "Yes",
+        no: "No",
+        confirm: "Confirm",
+        backToDashboard: "Back to Dashboard",
+        national: "National ID",
+        iqama: "Iqama ID",
+        gcc: "GCC ID",
+        validIban: "Valid IBAN",
+        name: "Name",
+        egDesg: "e.g Owner, Manager, etc",
+        delete: "Delete",
+        m1: "تعديل خدمات الوصول السريع",
+        m2: "تستطيع تحديد اربع خدمات لاضافتها في الشاشة الرئيسية",
+        m3: "التالي",
+        m4: "حفظ"
+      },
+
+      excise: {
+        title: "التسجيل في ضريبة السلع الانتقائية",
+        header: {
+          h1: "تفاصيل دافع الضرائب",
+          h2: "تفاصيل ضريبة السلع الانتقائية",
+          h3: "التعهد",
+        },
+        c1: {
+          title: "تفاصيل دافع الضرائب",
+          t1: "الرقم المميز",
+          t2: "رقم الايبان",
+          t3: "الاسم التجاري",
+        },
+        c2: {
+          title: "المرفقات",
+          t1: "السجلات التجارية المسجلة المتعلقة بالضريبة الإنتقائية",
+          t2: "وثائق السجلات التجارية",
+          t3: "الملف المرفق",
+          t4: "إرفاق مستند آخر",
+          t5: "",
+          t6: "",
+          btn: "إضافة رقم سجل تجاري",
+        },
+        c3: {
+          title: "تفاصيل جهة الاتصال",
+          t1: "نوع الهوية",
+          t2: "رقم الهوية",
+          t3: "تاريخ الميلاد",
+          t4: "الاسم",
+          t5: "رقم الجوال",
+          t6: "البريد الإلكتروني",
+        },
+        c4: {
+          title: "تفاصيل العنوان",
+          t1: "الحي",
+          t2: "اسم الشارع",
+          t3: "رقم البناية",
+          t4: "الرمز البريدي",
+          t5: "الرقم الإضافي",
+          t6: "المنطقة",
+          t7: "المدينة",
+          btn: "المتابعه",
+        },
+        c5: {
+          title: "تفاصيل ضريبة السلع الانتقائية",
+          t1: "ما نوع الأنشطة الضريبية المطلوب ترخيصها؟ ",
+          t2: "استيراد السلع الإنتقائية",
+          t3: "انتاج السلع الإنتقائية",
+          t4: "كلاهما",
+          t5: "Type 4",
+          t6:
+            "ما هو إجمالي قيمة ضريبة القيمة المضافة الخاضع للضريبة خلال 12 شهرا الماضية من بداية التسجيل؟",
+          t7: "Type one",
+          t8: "مشروبات الطاقة",
+          t9: "التبغ والمنتجات ذات الصلة",
+          t10: "هل تريد مخازن ضريبية؟",
+          t11: "نعم",
+          t12: "لا",
+          btn: "المتابعه",
+          btn1: "أضف نوع السلع",
+        },
+        c6: {
+          t1:
+            "أقر بموجب هذا أنني مفوض لاستكمال هذا النموذج للشخص الخاضع للضريبة وأن جميع المعلومات الواردة صحيحة.",
+          t2: "نوع الهوية",
+          t3: "رقم الهوية",
+          t4: "التاريخ",
+          t5: "اسم جهة الاتصال",
+          t8:
+            "المفوضين أدناه مخولون بتقديم هذا النموذج وفقًا للوائح ضريبة السلع الانتقائية وأن جميع المعلومات الواردة في هذه الوثيقة صحيحة ودقيقة",
+        },
+        c7: {
+          t1: "أوافق على هذه الشروط والأحكام",
+          btn: "المتابعه",
+        },
+        c8: {
+          t1: "تم التسجيل في ضريبة السلع الانتقائية بنجاح",
+          t2:
+            "تقر الهيئة العامة للزكاة والدخل بتسجيلك في ضريبة السلع الانتقائية",
+          t3: "الاسم",
+          t4: "Ahmad Muhammed",
+          t5: "رقم الطلب",
+          t6: "1234567890",
+          t7: "التاريخ:",
+          t8: "23/6/2020",
+          t9:
+            "يرجى الاحتفاظ برقم الطلب للرجوع إليه والتواصل من خلاله . ستقوم الهيئة بمعالجة الطلب الخاص بك  . لمزيد من المعلومات ، يرجى الاتصال بخدمة العملاء",
+          btn: "تنزيل الإقرار",
+          btn2: "الذهاب إلى لوحة التحكم",
+        },
+      },
+      Government: {
+        title: "الجهات الحكومية و الشّبه الحكومية",
+
+        header: {
+          h1: "معلومات المنظمة",
+          h2: "إكمال البيانات",
+          h3: "كلمة المرور",
+        },
+        c1: {
+          title: "معلومات المنظمة",
+          in1: "الرقم المميز",
+          in2: "رقم هوية الشركة",
+          in3: "اسم الجهة الحكومية",
+          btn: "متابعه",
+        },
+        c2: {
+          title: "معلومات الإتصال",
+          in1: "رقم الجوال",
+          in2: "البريد الإلكتروني",
+          in3: "تأكيد البريد الإلكتروني",
+          btn: "متابعه",
+        },
+        err: {
+          t1: "الرقم المميز يجب ان يبدأ برقم 3",
+          t2: "الرقم المميز يجب ان يحتوي على 10 ارقام",
+          t3: "رقم الشركة يجب ان يبدا بـرقم 7",
+          t4: "رقم الهوية يجب ان يحتوي على 10 ارقام",
+          t5: "الرجاء ادخال رقم الشركة",
+          t6: "الرقاء ادخال اسم الجهة الحكومية",
+          t7: "الرجاء ادخال الرقم المميز",
+          t8: "رقم الشركة صحيح",
+          t9: "خطأ في الرقم المرسل للجوال"
+        }
+      },
+      company: {
+        title: "حساب شركة جديد",
+        branch: {
+          t1: "Branch Details",
+          t2: "Activity Details",
+          t3: "Address Details",
+          t4: "Contact Person",
+          btn1: "Save",
+          btn2: "إلغاء",
+        },
+        header: {
+          h1: "التسجيل شركة",
+          h2: "عرض المعلومات",
+          h3: "كلمة المرور",
+        },
+        c1: {
+          title: "التسجيل شركة",
+          in1: "نوع الهوية",
+          in2: "رقم الهوية",
+          in3: "تاريخ الميلاد",
+          in4: "الاسم الأول",
+          in5: "اسم العائلة",
+        },
+        c7: {
+          title:
+            "يرجى إدخال رمز التحقق المرسل من خلال الرسائل النصية إلى رقم الجوال ",
+          in1: "إعادة إرسال رمز التحقق",
+        },
+        c2: {
+          title: "تفاصيل جواز السفر",
+          in1: "رقم جواز السفر ",
+          in2: "دولة الإصدار",
+          in3: "تاريخ الإصدار",
+          in4: "تاريخ الإنتهاء",
+          in5: "نسخة من جواز السفر",
+        },
+        c3: {
+          title: "معلومات التواصل",
+          in1: "رقم الجوال",
+          in2: "البريد الإلكتروني",
+          in3: "تأكيد البريد الإلكتروني",
+          btn: "متابعه",
+        },
+        c4: {
+          title: "تسجيل مؤسسة",
+          in1: "كلمة المرور الجديدة",
+          in2: "تأكيد كلمة المرور الجديدة",
+          subtitle: {
+            t1: "قوة كلمة المرور:",
+            t2: "قوية",
+            t3: "يجب ألا تقل كلمة المرور عن 8 أحرف",
+            t4: "كلمة المرور لا تتجاوز 16 حرفًا",
+            t5: "كلمة المرور يجب أن تحتوي أحرف كبيرة وصغيرة بالغة الإنجليزية",
+            t6: "أرقام ورموز",
+          },
+        },
+        c5: {
+          title: "أوافق على هذه الشروط والأحكام ",
+          btn: "تأكيد",
+        },
+        c6: {
+          t1: "تم التسجيل بنجاح",
+          t2: "لقد تم التسجيل بنجاح في خدمات الهيئة العامة للزكاة والدخل",
+          t3: " تم إرسال رسالة نصية قصيرة تحوي الرقم المميز ",
+          t4:
+            "يمكنك استخدام الرقم المميز وكلمة المرور المُدخله مسبقاً لتسجيل الدخول في المستقبل",
+          btn: "الذهاب إلى لوحة التحكم",
+        },
+        c8: {
+          title: "معلومات المنشأة",
+          in1: "الرقم المميز",
+          in2: " *  فرع الهيئة الرئيسي",
+          subtitle1: " حالة الإقامة ؟ ",
+          in3: "غير مقيم",
+          in4: "مقيم",
+          subtitle2: " نوع الكيان القانوني ",
+          in5: "جميع الدخل محصل في المملكة العربية السعودية",
+          in6: "الإدارة العليا تقع في المملكة العربية السعودية",
+          subtitle3: "* نوع الكيان القانوني",
+          in7: "رأس مال",
+          in8: "شخصي",
+          in9: "مهني",
+          in10: "مهني",
+
+          // in10:"Does all income derived from KSA",
+          in11: "Is top management of the company in KSA",
+          in12: "Attachment",
+          in13: "Capital",
+          in14: "Personal",
+          in15: "Professional",
+          in16: "",
+        },
+        c9: {
+          title: " فروع المنشأة",
+          in1: "اسم الفرع",
+          in2: "رقم السجل التجاري/ الرخصة",
+          in3: "المدينة",
+          in4: "النوع",
+          btn: "إضافة فرع جديد",
+        },
+        c10: {
+          title: "التفاصيل المالية ",
+          in1: " طريقة المحاسبة",
+          in2: "الرقم المميز في بلدك",
+          in3: "رقم الحساب الضريبي في بلدك",
+          in4: "تاريخ تسجيل رأس المال",
+          in5: "(مبلغ رأس المال (ر.س",
+          in6: " الرجاء اختيار نوع التقويم لتحديد نهاية السنة المالية؟ ",
+          in7: "هجري",
+          in8: "ميلادي",
+          in9: " نهاية السنة المالية",
+          in10: "تاريخ بدء الأعمال",
+          in11: "تاريخ الخضوع للضريبة",
+        },
+        c11: {
+          title: "تفاصيل الفرع الجديد",
+          in1: "اسم الفرع",
+          in2: "نسخة من العقد",
+          subtitle: "نوع الاثبات",
+          in3: "إضافة سجل تجاري",
+          in4: "إضافة رخص تجارية",
+          in5:
+            "يمكنك إضافة رخص تجارية متعددة (بحد أقصى 4) ، وتحديد رخصة تجارية رئيسية واحده فقط تكون مرتبطه بالنشاط الرئيسي لهذا الفرع",
+        },
+        c12: {
+          title: "تفاصيل الرخصة التجارية",
+          subtitle: "نشاط رئيسي",
+          in1: "دولة الإصدار",
+          in2: "جهة الإصدار ",
+          in3: "مدينة الإصدار",
+          in4: "رقم الرخصة التجارية",
+          in5: "صالحه من تاريخ ",
+          in6: "نسخة من الرخصة التجارية",
+          in7: "المجموعة الرئيسية للنشاط",
+          in8: "المجموعة الفرعية للنشاط",
+          in9: "النشاط الرئيسي",
+          btn: "Add New License",
+        },
+        c13: {
+          title: "تفاصيل العنوان",
+          in1: "الدولة",
+          in2: "المقاطعة",
+          in3: "المدينة",
+          in4: "اسم الشارع",
+          in5: "رقم المبنى",
+          in6: "الرمز البريدي",
+          in7: "التفاصيل المالية",
+          in8: "رقم الوحدة",
+          btn1: "حفظ",
+          btn2: "إلغاء",
+        },
+        c14: {
+          title: " تفاصيل الشركاء",
+          in1: "الاسم",
+          in2: "نوع الهوية",
+          in3: "رقم الهوية",
+          in4: "نسبة رأس المال",
+          in5: "نسبة الفائدة",
+          btn: "إضافة شريك جديد",
+        },
+        c15: {
+          header: "تفاصيل الشريك الجديد",
+          title: "تفاصيل نسبة المساهمة",
+          in1: "مشاركة رأس المال",
+          in2: "تاريخ بدء مشاركة رأس المال",
+          in3: "مشاركة الأرباح",
+          in4: "تاريخ بدء مشاركة الأرباح",
+        },
+        c16: {
+          title: "تفاصيل الشريك",
+          subtitle: "نوع الحصة نسبة شركة الأموال",
+          in1: "نوع الشريك",
+          in2: "الرقم المميز",
+          in3: "نوع الهوية",
+          in4: "رقم الهوية",
+          in5: "اسم الشركة",
+          in6: "تاريخ البداية",
+          in7: "تاريخ النهاية",
+          in8: "نسبة شراكة السعودي/ الخليجي",
+          in9: "تأسست في إحدى دول الخليج",
+          in10: "نسخة من السجل التجاري",
+          rd1: "% تأسست في المملكة العربية السعودية برأس مال سعودي 100",
+          rd2: "% تأسست في المملكة العربية السعودية برأس مال غير سعودي 100",
+          rd3: "تأسست في المملكة العربية السعودية برأس مال مختلط",
+          rd4: "تأسست في إحدى دول الخليج",
+          rd5: "تأسست في دول أخرى",
+        },
+        c17: {
+          title: "تفاصيل الاتصال",
+          in1: "رقم الجوال",
+          in2: "البريد الإلكتروني",
+          btn1: "حفظ",
+          btn2: "إلغاء",
+        },
+        c18: {
+          in1: ":نسبة الشركاء السعوديين",
+          in2: ":نسبة الشركاء الغير سعوديين",
+          in3: ":نسبة رأس المال",
+          in4: ":نسبة الفائدة",
+        },
+      },
+      establishment: {
+        title: "حساب مؤسسة جديد",
+        header: {
+          h1: "تسجيل مؤسسة ",
+          h2: "عرض المعلومات",
+          h3: "كلمة المرور",
+        },
+        c1: {
+          title: "تسجيل مؤسسة ",
+          in1: "نوع الهوية",
+          in2: "رقم الهوية",
+          in3: "تاريخ الميلاد",
+          btn: "استمر",
+        },
+        c7: {
+          title:
+            "يرجى إدخال رمز التحقق المرسل من خلال الرسائل النصية إلى رقم الجوال xxxxxx0236 ",
+          in1: "إعادة إرسال رمز التحقق",
+        },
+        c2: {
+          title: "تفاصيل جواز السفر",
+          in1: "رقم الجواز",
+          in2: "مدينة الإصدار",
+          in3: "تاريخ الإصدار",
+          in4: "تاريخ الإنتهاء",
+          in5: "نسخة من الجواز",
+        },
+        c3: {
+          title: "بيانات التواصل",
+          in1: "رقم الجوال",
+          in2: "البريد الإلكتروني",
+          in3: "تأكيد البريد الإلكتروني",
+          btn: "استمر",
+        },
+        c4: {
+          title: "انشاء كلمة المرور الجديدة",
+          in1: "كلمة المرور الجديدة",
+          in2: "تأكيد كلمة المرور الجديدة",
+          subtitle: {
+            t1: "قوة كلمة المرور:",
+            t2: "قوية",
+            t3: "يجب ألا تقل كلمة المرور عن 8 أحرف",
+            t4: "كلمة المرور لا تتجاوز 16 حرفًا",
+            t5: "كلمة المرور يجب أن تحتوي أحرف كبيرة وصغيرة بالغة الإنجليزية",
+            t6: "أرقام ورموز",
+          },
+        },
+        c5: {
+          title: "أوافق على هذه الشروط والأحكام ",
+          btn: "تأكيد",
+        },
+        c6: {
+          t1: "تم التسجيل بنجاح",
+          t2: "لقد تم التسجيل بنجاح في خدمات الهيئة العامة للزكاة والدخل",
+          t3: " تم إرسال رسالة نصية قصيرة تحوي الرقم المميز ",
+          t4:
+            "يمكنك استخدام الرقم المميز وكلمة المرور المُدخله مسبقاً لتسجيل الدخول في المستقبل",
+          btn: "الذهاب إلى لوحة التحكم",
+        },
+        c8: {
+          title: "معلومات المنشأة",
+          in1: "الرقم المميز",
+          in2: "فرع الهيئة الرئيسي",
+          in3: "حالة الإقامة ؟ ",
+          in4: "غير مقيم",
+          in5: "مقيم",
+          in6: "نوع الكيان القانوني ",
+          in7: "منشأة دائمة",
+          in8: "منشأة غير دائمة",
+          in9: "حالة المنشأة الدائمة",
+        },
+        c9: {
+          title: "فروع المنشأة",
+          in1: "اسم الفرع",
+          in2: "رقم السجل التجاري/ الرخصة",
+          in3: "المدينة",
+          in4: "النوع",
+          btn: "إضافة فرع جديد",
+        },
+        c10: {
+          title: "التفاصيل المالية للمنشأة",
+          in1: "طريقة المحاسبة",
+          in2: "رأس المال ",
+          in3: "الرجاء اختيار نوع التقويم لتحديد نهاية السنة المالية؟ ",
+          in4: "هجري",
+          in5: "ميلادي",
+          in6: "نهاية السنة المالية",
+          in7: "تاريخ بدء الأعمال",
+          in8: "تاريخ الخضوع للضريبة",
+        },
+        c11: {
+          title: "تفاصيل الفرع الجديد",
+          in1: "اسم الفرع",
+          subtitle: "نوع الإثبات",
+          in3: "سجل تجاري فقط",
+          in4: "رخصة تجارية فقط",
+          in5: "سجل تجاري ورخصه ",
+          in6:
+            "يمكنك إضافة رخص تجارية متعددة (بحد أقصى 4) ، وتحديد رخصة تجارية رئيسية واحده فقط تكون مرتبطه بالنشاط الرئيسي لهذا الفرع",
+          in7: "Add Commercial Number",
+          in8: "Add Licenses Number",
+        },
+        c12: {
+          title: "تفاصيل الرخصة التجارية",
+          subtitle: "نشاط رئيسي",
+          in1: "دولة الإصدار",
+          in2: "جهة الإصدار",
+          in3: "مدينة الإصدار",
+          in4: "مدينة الإصدار",
+          in5: "صالحه من تاريخ",
+          in6: "نسخة من الرخصة التجارية",
+          in7: "المجموعة الرئيسية للنشاط",
+          in8: "المجموعة الفرعية للنشاط",
+          in9: "النشاط الرئيسي",
+          btn: "إضافة رخصة جديده",
+        },
+        c13: {
+          title: "تفاصيل العنوان",
+          in1: "المدينة",
+          in2: "المحافظة",
+          in3: "دولة",
+          in4: "اسم الشارع",
+          in5: "الرمز البريدي",
+          in6: "رقم المبنى",
+          in7: "رقم الوحده",
+          btn1: "حفظ",
+          btn2: "إلغاء",
+        },
+        c14: {
+          in1: "حسابات",
+          in2: "تقديري"
+        }, c15: {
+          in1: "Day",
+          in2: "Month"
+        },
+        err: {
+          e1:
+            "تفاصيل جواز السفر الزامية للمكلفين الغير سعوديين. الرجاء قم بتعبئة تفاصيل جواز السفر المطلوبة",
+          e2: "الرجاء إدخال رقم الجواز",
+          e3: "الرجاء اختيار دولة الإصدار",
+          e4: "الرجاء إدخال تاريخ الإصدار",
+          e5: "تاريخ الإصدار لا يمكن ان يكون في المستقبل",
+          e6: "تاريخ إصدار الجواز  يجب ان يكون اكبر من تاريخ الميلاد",
+          e7: "الرجاء إدخال تاريخ إنتهاء الجواز",
+          e8: "تاريخ الإنتهاء يجب ان لايكون اصغر من التاريخ الحال",
+          e9: "نسخة جواز السفر",
+          e10: "عزيزي المكلف, يرجى تحديث بياناتك في وزارة التجارة والاستثمار عن طريق الرابط التالي https://mci.gov.sa/ar/eservices/Pages/default.aspx",
+          e11:"Please select Accounting Type/Method",
+          e12:"Please enter capital ",
+          e13:"Please select calendar type",
+          e14:"Please enetr end of financial day",
+          e15:"Please enetr end of financial month",
+          e16:"Please enter business commencement date",
+          e17:"Please enter business taxable date"
+        },
+      },
+      others: {
+        title: "انشاء حساب جديد",
+        subtitle: {
+          t1: "الجمعيات الخيرية والمنظمات غير الربحية",
+          t2: "اتحادات",
+          t3: "حكومية وشبه حكومية",
+          t4: "الورثه",
+          t5: "المساهمة العقارية",
+          t6: "صناديق الاستثمار",
+          t7: "الأعمال الحرة والمهن",
+          t8: "شركة غير مقيمة",
+          t9: "الغاز الطبيعي",
+          t10: "النفط والهيدروكربون",
+          t11: "مدقق حسابات",
+          t12: "مكلف غير منتظم",
+          t13: "أخرى",
+          t14: "",
+        },
+      },
+      errorMsgs: {
+        dateReq: "التاريخ مطلوب",
+        ibanReq: "الآيبان المطلوب",
+        tinReq: "الرقم المميز مطلوب",
+        idTypeReq: "نوع الهوية مطلوب",
+        idNumReq: "رقم الهوية  مطلوب",
+        dobReq: "تاريخ الميلاد مطلوب",
+        minDate: "يجب ألا يكون التاريخ أقل من التاريخ الحالي",
+        ibanErr1: "رقم الايبان يجب ان يبدا بSA",
+        chars: "الرجاء إدخال 24 حرفًا",
+        alphaNm: "الرجاء إدخال قيمة أبجدية رقمية",
+        selectOne: "الرجاء قم باختيار واحد",
+        tinStart: "الرقم المميز يجب أن يبدأ من 3",
+        tinLen: "الرقم المميز يجب ان يحتوي على 10 حروف",
+        idErr1: "رقم الهوية يجب ان يكون رقماً",
+        idLen: "رقم الهوية يجب ان يتكون من 10 خانات",
+        idStrtNID: "رقم الهوية الوطنية يجب أن يبدأ برقم 1",
+        idStrtIqama: "رقم الأقامة يجب أن يبدأ برقم 2",
+        tnC: "يرجى قبول الشروط والأحكام",
+        tnc2:
+          "تأكيد كلمة المرور المدخل لا يتطابق مع كلمة المرور الأصلية التي تم إدخالها، يرجى التأكد من تطابق كلمتا المرور",
+        tnc3: "تأكيد كلمة المرور مطلوب",
+        iBanInvalid: "رقم الايبان غير صحيح",
+        crnReq: "CRN is Required",
+        namReq: "Name is Required",
+        datReq: "Date is Required",
+        minSel1: "Minimum of 1 Goods Type has to be Selected",
+      },
+      vatError: {
+        e1: "يجب تحديد التاريخ",
+        e2: "الآيبان المطلوب .",
+        e3: "القصدير مطلوب.",
+        e4: "الرجاء اختيار نوع الهوية",
+        e5: "الرجاء ادخال رقم الهوية",
+        e6: "الرجاء ادخال تاريخ الميلاد",
+        e7: "يجب ألا يكون التاريخ أقل من التاريخ الحالي.",
+        e8: "رقم الايبان يجب ان يبدا بSA .",
+        e9: "الرجاء إدخال 24 حرفًا.",
+        e10: "الرجاء إدخال قيمة أبجدية رقمية.",
+        e11: "الرجاء تحديد خيار واحد على الأقل",
+        e12: "الرقم المميز يجب أن يبدأ من 3 .",
+        e13: "رقم الهوية الوطنية يجب أن يتكون من 10 أرقام .",
+        e14: "رقم الهوية الوطنية يجب أن يبدأ برقم 1 .",
+        e15: "رقم الأقامة يجب أن يبدأ برقم 2 .",
+        e16: "يرجى قبول الشروط والأحكام.",
+        e17: "يجب أن يبدأ الآيبان ب 'SA' ويتبعه 22 رقماٌ فقط",
+        e18: "التاريخ غير صحيح",
+        e19: "رقم هوية الخليجيين يجب ان تكون من 7 الى 15 رقم",
+        e20: "الرجاء إدخال ارقام فقط",
+        e21: "الرجاء ادخال رقم الآيبان",
+      },
+      createPassword: {
+        c1: {
+          title: "انشاء كلمة المرور الجديدة",
+          in1: "كلمة المرور الجديدة",
+          in2: "تأكيد كلمة المرور الجديدة",
+          in3: "كلمة المرور مطلوبة",
+          subtitle: {
+            t1: "قوة كلمة المرور:",
+            t2: "قوية",
+            t3: "يجب ألا تقل كلمة المرور عن 8 أحرف",
+            t4: "كلمة المرور لا تتجاوز 16 حرفًا",
+            t5: "كلمة المرور يجب أن تحتوي أحرف كبيرة وصغيرة بالغة الإنجليزية",
+            t6: "أرقام ورموز",
+            t7: "ضعيفة",
+            t8: "كلمة المرور الجديدة وتأكيد كلمة المرور متطابقتان",
+          },
+          tNc: "أوافق على هذه الشروط والأحكام ",
+          t1: "أوافق على",
+          t2: "الشروط والأحكام",
+          btn: "تأكيد",
+        },
+      },
+      idTypes: [
+        {
+          name: "الهوية الوطنية",
+          value: "ZS0001",
+        },
+        { name: "الإقامة", value: "ZS0002" },
+        { name: "هوية مواطني دول الخليج", value: "ZS0003" },
+      ],
+      idTypes1: [
+        {
+          name: "هوية وطنية",
+          value: "ZS0015",
+        },
+        { name: "هوية مقيم", value: "ZS0016" },
+        { name: "هوية خليجية", value: "ZS0017" },
+      ],
+      acknowledgment: {
+        c1: {
+          t1: "تم التسجيل بنجاح",
+          t2: "لقد تم التسجيل بنجاح في خدمات الهيئة العامة للزكاة والدخل",
+          t3: " تم إرسال رسالة نصية قصيرة تحوي الرقم المميز ",
+          t4:
+            "يمكنك استخدام الرقم المميز وكلمة المرور المُدخله مسبقاً لتسجيل الدخول في المستقبل",
+          btn: "الذهاب إلى لوحة التحكم",
+        },
+        c2: {
+          t1: "إشعار إستلام",
+          t2: "تقر الهيئة العامة للزكاة والدخل باستلام طلب التسجيل الخاص بك",
+          t3: "الاسم",
+          t4: "رقم الطلب",
+          t5: "التاريخ",
+        },
+      },
+      charity: {
+        title: "الجمعيات الخيرية والمنظمات غير الربحية",
+        header: {
+          h1: "معلومات المنظمة",
+          h2: "إكمال البيانات",
+          h3: "كلمة المرور",
+        },
+        c1: {
+          title: "معلومات المنظمة",
+          in1: "الرقم المميز",
+          in2: "رقم هوية الشركة",
+          in3: "اسم المنظمة",
+          in4: "فرع الهيئة الرئيسي",
+          in5: "City",
+          in6: "Date of Registration",
+          in7: "Email",
+          in8: "Confirm Email",
+          in9: "Address",
+          in10: "Attachment",
+          btn: "continue",
+        },
+        c2: {
+          title: "Financial Information",
+          in1: "حدد نوع المنظمة غير الربحية",
+          in2: "مؤسسات الوقف",
+          in3: "المؤسسات الخيرية",
+          in4: "الجمعيات التعاونية",
+          in5: "Financial Year end for first year",
+          in6: "Financial Year End Later Year",
+          in7: "Day",
+          in8: "year",
+        },
+        c3: {
+          title: "Contact Information",
+          in1: "رقم الجوال",
+          in2: "البريد الإلكتروني",
+          in3: " تأكيد البريد الإلكتروني",
+          btn: "متابعه",
+        },
+        c5: {
+          t1: "Acknowledgement",
+          t2: "GAZT acknowledges the receipt of your registration application",
+          t3: "Name",
+          t4: "Application Number",
+          t5: "Date",
+          btn: "Go To Login",
+        },
+        c9: {
+          title: "Facility Branches",
+          in1: "Branch Name",
+          in2: "CRLicense No.",
+          in3: "Branch city",
+          in4: "Type",
+          btn: "Add New Branch",
+        },
+        c10: {
+          title: "Facility Financial Information",
+          in1: "Account Method",
+          in2: "TIN in your country",
+          in9: "TAN in your country",
+          in10: "Capital Registration Date",
+          in11: "Capital amount (SAR)",
+          in3: "Calendar Type to select the End of financial year ?",
+          in4: "Hijri",
+          in5: "Gregorian",
+          in6: "End of Financial",
+          in7: "Business Commencement Date",
+          in8: "Taxable Date",
+        },
+        c11: {
+          title: "New Branch Details",
+          in1: "Branch Name",
+          in2: "Copy of Company Memorandum",
+          subtitle: "Type of identification",
+          in3: "CR only",
+          in4: "Licenses only",
+          in5: "CR and Licenses",
+          in7: "Add Commercial Number ",
+          in8: "Add Licenses Number ",
+          in6:
+            "You can add multiple licenses numbers (maximum 4), and select only one main license that is linked to the main activity for this branch ",
+        },
+        c12: {
+          title: "License Details",
+          title1: "Commercial Number Details",
+          subtitle: "Main Activity",
+          in1: "Issue Country",
+          in2: "Issue By ",
+          in3: "Issued City",
+          in4: "License Number",
+          in5: "Valid From ",
+          in6: "Copy Of License",
+          in7: "Main Group of Activity",
+          in8: "Sub Group Of Activity",
+          in9: "Main Activity",
+          in10: "Transfer copy of CR",
+          btn: "Add New License",
+        },
+        c13: {
+          title: "Address Details",
+          in1: "Country",
+          in2: "Province",
+          in3: "City",
+          in4: "District",
+          in5: "Street Name",
+          in6: "Building Number",
+          in7: "Unit Number",
+          in8: "Zip Code",
+          in9: "Additional Number",
+          btn1: "Save",
+          btn2: "Cancel",
+        },
+        c14: {
+          title: "Contact Person",
+          in1: "Tin",
+          in2: "ID Type",
+          in3: "ID Number",
+          in4: "Date of Birth",
+          in5: "First Name",
+          in6: "Last Name",
+          in7: "Start Date",
+          in8: "Mobile Number",
+          in9: "Email",
+          in10: "Confirm Email",
+          in11: "Copy Of General Manger ID",
+          in12: "Issue Country",
+        },
+      },
+      consortium: {
+        title: "New Consortium Account",
+        header: {
+          h1: "Organization Type",
+          h2: "Complete Information",
+          h3: "Password",
+        },
+        c1: {
+          title: "Contact Information",
+          in1: "Contact Number",
+          in2: "Contract Date",
+          in3: "Contact Attachment",
+          in4: "Start Date of Consortium",
+          in5: "Expected End Date of The Consirtium",
+          in6: "Purpose of The Consirtium",
+        },
+        c2: {
+          title: "Companies within the Consortium Information",
+          in1: "Director of the consortium",
+          in2: "Company Details",
+          in3: "TIN",
+          in4: "Company Name",
+          btn: "Add New Company",
+        },
+        c3: {
+          title: "Delegated Representative Information",
+          in1: "ID Number",
+          in2: "Date of Birth",
+          in3: "Name",
+          in4: "Mobile Number",
+          in5: "Email",
+          in6: "Confirm Email",
+          in7: "Other Attachment",
+          btn: "continue",
+        },
+        err: {
+          in1: "is Required!",
+          in2: "should be atleast 10 characters long!",
+          in3: "can be atmax 10 characters long!",
+          in4: "must be Numeric",
+        },
+        c4: {
+          title:
+            "Please enter the verification code sent to mobile number xxxxxx0236",
+          in1: "Resend Verification code",
+        },
+        c5: {
+          t1: "Registration Successful ",
+          t2: "You have Successfully registered to GAZT Services",
+          t3: "You have received an SMS with the TIN number.",
+          t4:
+            "You can use the TIN number and the set password to login in future",
+          btn: "Go To Dashboard",
+        },
+      },
+      returns: {
+        t1: "الإقرارات",
+        t2: "عودة",
+        t3: "ريال سعودي",
+        t4: "لا يوجد بيانات",
+        bill: {
+          t1: "مدفوعة",
+          t2: "جزئيا",
+          t3: " غير مدفوعة",
+        },
+        c1: {
+          t1: "رقم الإقرار",
+          t2: "تاريخ الاستحقاق",
+          t3: "فترة الإقرار",
+          t4: "نوع الإقرار",
+          t5: "الوصف",
+          t6: "الفترة",
+        },
+        c2: {
+          t1: "نوع الضريبة",
+          t2: "رقم الإقرار",
+          t3: "تاريخ الاستحقاق",
+          t4: "فترة الإقرار",
+          t5: "حالة",
+          t6: "الحالة الفرعية",
+          t7: "عرض المزيد",
+          t9: "عرض المزيد",
+          t8: "الفترة",
+        },
+        filter: {
+          title: "بحث مخصص",
+          t1: "النوع",
+          t2: "الحالة",
+          t3: "المبلغ",
+          t4: "التاريخ",
+          t5: "من",
+          t6: "إلى",
+          btn: "تطبيق",
+        },
+      },
+      bills: {
+        t1: "الفواتير",
+        t2: "عودة",
+        t3: "ريال سعودي",
+        t4: "لا يوجد بيانات",
+        t5: "keyboard_arrow_right",
+        t6: "keyboard_arrow_left",
+        bill: {
+          t1: "مدفوعة",
+          t2: "جزئيا",
+          t3: " غير مدفوعة",
+        },
+        c1: {
+          t1: "رقم فاتورة سداد",
+          t2: "تاريخ الاستحقاق",
+          t3: "",
+          t4: "",
+        },
+        c2: {
+          t1: "نوع الضريبة أو الزكاة",
+          t2: "الوصف",
+          t3: "الفترة الخاضعة للضريبة",
+          t4: "تاريخ الاستحقاق",
+          t5: "رقم فاتورة سداد",
+          t6: "الرقم المرجعي",
+          t7: "مبلغ الفاتورة المستحقة",
+          t8: "الحالة",
+          t9: "عرض المزيد",
+          t10: "تفاصيل الفاتورة",
+        },
+        filter: {
+          title: "بحث مخصص",
+          t1: "النوع",
+          t2: "الحالة",
+          t3: "المبلغ",
+          t4: "التاريخ",
+          t5: "من",
+          t6: "إلى",
+          btn: "تطبيق",
+        },
+      },
+      taxLanding: {
+        heading: "إدارة الضرائب",
+        c1: "إقرارات الزكاة وضريبة الدخل",
+        c2: "التسجيل في ضريبة القيمة المضافة",
+        c3: "التسجيل في ضريبة السلع الانتقائية",
+      },
+      newExcise: {
+        t1: "إدارة الضرائب",
+        t2: "التسجيل في ضريبة السلع الانتقائية",
+        back: "رجوع",
+        continue: "التالي",
+        close: "إغلاق",
+        yes: "نعم",
+        no: "لا",
+        confirm: "تأكيد",
+        backToDashboard: "رجوع",
+        national: "هوية وطنية",
+        iqama: "هوية مقيم",
+        gcc: "هوية خليجية",
+        validIban: "الآيبان صحيح",
+        name: "الاسم",
+        egDesg: "مثال:  مالك ، مدير، إلخ",
+        delete: "مسح",
+        chooseDate: "اختر التاريخ",
+        s1: {
+          t1: "السجل التجاري",
+          t2: "رقم السجل التجاري",
+          t3: "أضف السجل التجاري",
+          t4: "الحساب البنكي",
+          t5: "حساب جديد",
+        },
+        s2: {
+          t1: "النشاط الضريبي",
+          t2: "نوع النشاط الضريبي",
+          t3: "استيراد السلع الانتقائية ",
+          t4: "إنتاج السلع الانتقائية",
+          t5: "كلا النشاطين",
+          t6: "معلومة:",
+          t7: "يجب تقديم رقم تسجيل الضريبة الانتقائية في بيان الاستيراد.",
+          t8: "السلع الانتقائية",
+          t9:
+            "حدد نوع السلع الانتقائية المراد تسجيلها في أنشطة الضريبة الانتقائية.",
+          t10: "مستودع الضرائب",
+          t11: "هل تريد التقدم بطلب للحصول على مستودع ضريبي؟",
+          t12:
+            "إذا كانت الإجابة بنعم ، فيجب تقديم طلب منفصل للحصول على ترخيص المستودع الضريبي بعد الموافقة على تسجيل الضريبة الانتقائية.",
+        },
+        s3: {
+          t1: "اسم جهة الإتصال",
+          t2: "الصفة",
+          t3: "نوع الهوية",
+          t4: "رقم الهوية",
+          t5: "التاريخ",
+          t6:
+            "أقر  بموجب هذا بأنني مفوض لتعبئة هذا النموذج للشخص الخاضع للضريبة وأن جميع المعلومات الواردة صحيحة.",
+        },
+        summary: {
+          c1: {
+            t1: "تفاصيل المكلف",
+            t2: "رقم السجل التجاري",
+            t3: "اسم السجل التجاري",
+          },
+          c2: {
+            t1: "آيبان",
+          },
+          c3: {
+            t1: "تفاصيل الضريبة الانتقائية",
+            t2: "النشاط الضريبي",
+            t3: "نوع النشاط الضريبي",
+            t4: "ستيراد السلع الانتقائية",
+            t5: "إنتاج السلع الانتقائية",
+            t6: "كلا النشاطين",
+            t7: "السلع الانتقائية",
+            t8: "مستودع الضرائب",
+            t9: "هل تريد التقدم بطلب للحصول على مستودع ضريبي؟",
+            t10: "نوع السلع الانتقائية",
+          },
+          c4: {
+            t1: "التعهد",
+            t2: "اسم جهة الإتصال",
+            t3: "الصفة",
+            t4: "نوع الهوية",
+            t5: "رقم الهوية",
+            t6: "التاريخ",
+            t7: "أوافق على",
+            t8: "الشروط والأحكام",
+          },
+        },
+        s5: {
+          t1: "تسجيل الضريبة",
+          t2: "تم استلام طلبكم بنجاح، بانتظار موافقة الهيئة",
+          t3: "اسم",
+          t4: "رقم الطلب",
+          t5: "التاريخ",
+          btn: "خدمة تسجيل الضريبة",
+        },
+        m1: {
+          t1: "رقم الآيبان",
+          t2: "إضافة رقم الآيبان",
+          btn1: "التحقق من صحة الآيبان",
+        },
+        m2: {
+          t1: "رقم الهوية",
+          t2: "تاريخ الميلاد",
+          btn1: "التحقق من الهوية",
+        },
+        errorMsgs: {
+          e1: "يجب اختيار سجل تجاري واحد كحد أدنى",
+          e2: "اختر السجل التجاري من القائمة المنسدلة",
+          e3: "الرجاء ادخال الآيبان",
+          e4: "الرجاء اختيار اياً من الأنشطة الضريبية",
+          e5: "يرجى تحديد نوع واحد من السلع كحد ادنى",
+          e6: "الرجاء ادخال الاسم",
+          e7: "إدخال غير صالح",
+          e8: "الرجاء ادخال المسمى الوظيفي",
+          e9: "الرجاء تحديد خيار واحد على الأقل",
+          e10: "الرجاء ادخال رقم الهوية",
+          e11: "رقم هوية الخليجيين يجب ان تكون من 7 الى 15 رقم",
+          e12: "الرجاء ادخال ارقام فقط",
+          e13: "تاريخ ميلاد غير صالح",
+          e14: "رقم الهوية صحيح",
+        },
+      },
+      profile: {
+        labels: {
+          tin: "الرقم المميز",
+          active: "Active",
+          mainOutlet: "الفرع الرئيسي",
+          commReg: "السجل التجاري",
+          license: "الرخصة ",
+          contactInfo: "بيانات التواصل",
+          poc: "جهات الاتصال",
+          addPoc: "إضافة جهة اتصال",
+          edit: "تعديل",
+          delete: "مسح",
+          tpAcc: "حساب المكلف",
+          regDetails: "تفاصيل التسجيل",
+          chgPwd: "تغيير كلمة المرور",
+          userMngmt: "إدارة المستخدمين",
+          deReg: "إيقاف التسجيل",
+          addPOC1: "إضافة جهة اتصال للمكلف",
+          editPoc: "تعديل جهة اتصال للمكلف",
+          subHead: "أكمل تفاصيل جهة الاتصال",
+          name: "الاسم",
+          pos: "الوظيفة",
+          phNo: "رقم الجوال",
+          email: "البريد الالكتروني",
+          ext: "رقم التحويلة",
+          add: "إضافة",
+          update: "تحديث",
+          lastAccessed: "آخر مرة قمت فيها بالدخول كانت في",
+          at: "عند",
+          deleteInfo: "هل ترغب بالحذف",
+          yes: "نعم",
+          no: "لا",
+        },
+        errMsgs: {
+          e1: "لايمكنك إضافة اكثر من جهتي اتصال للمكلف",
+          e2: "الرجاء ادخال الاسم",
+          e3: "الرجاء ادخال الوظيفة",
+          e4: "الرجاء ادخال رقم الجوال",
+          e5: "رقم الجوال يجب ان يبدأ ب  5",
+          e6: "رقم الجوال يجب أن يتكون من 9 خانات",
+          e7: "بريد الكتروني غير صحيح",
+          e8: "الرجاء ادخال  البريد الالكتروني",
+          e9: "على الأقل جهة اتصال واحدة للمكلف ضرورية",
+        },
+      },
+      updtMobile: {
+        title1: "الملف الشخصي > ",
+        title2: "تغيير رقم الجوال",
+        nwPhNo: "رقم الجوال الجديد",
+        cnfrmPh: "تأكيد رقم الجوال الجديد",
+        confirm: "تأكيد",
+        mobNum: "رقم الجوال",
+        updMsg: "تم تغيير رقم الجوال بنجاح",
+        phNo: "رقم الجوال",
+        back: "رجوع",
+        resend: "إعادة إرسال رمز التحقق",
+        goto: "تسجيل الدخول",
+        errMsgs: {
+          e1: "الرجاء إدخال رقم الجوال",
+          e2: "تم إرسال رمز التحقق للجوال بنجاح",
+          e3: "يجب تطابق رقم الجوال",
+          e4: "يجب تطابق رمز البلد ",
+          e5: " رقم الهاتف المحمول يجب أن لايبدأ بصفر",
+          e6: "تم إرسال رمز التحقق للجوال بنجاح",
+        },
+      },
+      updtEmail: {
+        title1: "الملف الشخصي > ",
+        title2: "تغيير البريد الإلكتروني",
+        nwEmail: "البريد الالكتروني الجديد",
+        cnfrmEmail: "تأكيد البريد الالكتروني الجديد",
+        continue: "التالي",
+        currPwd: "كلمة المرور الحالية",
+        confirm: "تأكيد",
+        mobNum: "رقم الجوال",
+        updMsg: "تم تغيير البريد الإلكتروني بنجاح",
+        phNo: "رقم الجوال",
+        back: "رجوع",
+        resend: "إعادة إرسال رمز التحقق",
+        goto: "تسجيل الدخول",
+        email: "الايميل",
+        errMsgs: {
+          e1: "البريد الإلكتروني المدخل غير صحيح",
+          e2: "الرجاء إدخال كلمة المرور الحالية",
+          e3: "الرجاء إدخال كلمة المرور ",
+          e4: "يجب تطابق حقلي كلمة المرور الجديدة و تأكيد كلمة المرور",
+          e5: "إدخال غير صالح",
+          e6: "يجب تطابق البريد الإلكتروني",
+          e7: "تم إرسال رمز التحقق للبريد الإلكتروني بنجاح",
+        },
+      },
+      regDeRegDetails: {
+        title1: "الملف الشخصي > ",
+        title2: "إلغاء التسجيل في الزكاة او ضريبة الدخل > ",
+        regDetails: "تفاصيل التسجيل",
+        vatDetails: "تفاصيل ضريبة القيمة المضافة",
+        etDetails: "تفاصيل الضريبة الإنتقائية",
+        zakatDetails: "تفاصيل الزكاة و ضريبة الدخل",
+        deRegDetails: "تفاصيل الغاء التسجيل ",
+        vatDeReg: "إلغاء التسجيل في ضريبة القيمة المضافة",
+        etDeReg: "إلغاء التسجيل في ضريبة السلع الإنتقائية",
+        zakatDereg: "إلغاء التسجيل في الزكاة ��و ضريبة الدخل",
+        outlet: "إلغاء تسجيل الفروع",
+        licenseDeReg: "إلغاء تسجيل الرخصة",
+        tinDeReg: "إلغاء الرقم المميز",
+        back: "رجوع",
+        usrMngmt: "إدارة المستخدم",
+        usrAdmin: "إدارة المستخدمين",
+        taskAllocation: "تحديد المهمة",
+      },
+	   form11:
+      {
+        t3: "ريال سعودي",
+      VoidModal:{
+        p1:"هل انت متأكد من مسح بيانات الاقرار؟",
+        btn1:"حسنا",
+        btn2:"إلغاء"
+      },
+      AmendModal:{
+        p:"قر واتعهد بصحة المعلومات والبيانات المقدمة في الإقرار، كما أعلم بأن الهيئة العامة للزكاة والدخل لديها ارتباط مع جهات أخرى تستطيع عن طريقها الحصول على أي معلومات ومنها على سبيل المثال:العقود، الاستيرادات، عدد موظفي المنشأة...إلخ.",
+        btn1:"حسنا",
+        btn2:"إلغاء"
+      },
+      creamburds:{
+          c1:"الإقرارات",
+          c2:"إقرار الزكاة وضريبة الدخل على الشركات",
+          c3:"الرجوع",
+        },
+        cautionmessage:{
+          m1:"تحذير ، يجب عليك ضبط إعدادات الماسح الضوئي بحيث لا يتجاوز حجم الملف المضغوط أقل من 50 ميجا بايت ، ولا يتجاوز حجم الملف الواحد 5 ميجا بايت. (اختر ملفًا بملحق .XLS ، .XLSX ، .DOC ، .DOCX ، .PDF ، .JPG و .JPEG و .PNG)'",
+         },
+		confirmation1:{
+			c1:"تم حفظ البيانات بنجاح",
+      c2:"هل أنت متأكد أنك تريد رفع ملف اكسل؟",
+      c3:"الرجاء رفع ملف الاكسل الصحيح الذي قمت بتنزيله",
+      c4:"اختر ملفًا بامتداد PDF و JPEG و PNG و JPG فقط.",
+      c5:"لا يمكن أن يكون محتوى الملف فارغًا.",
+      c6:"يجب عليك ضبط إعدادات الماسح الضوئي بحيث يقل حجم الملف المضغوط عن 5 ميجا بايت."
+		},
+		notapllicable:{
+			l1:"هل تريد فعلا اختيار لاينطبق؟",
+		},
+		longterm:{
+      heading:"القروض طويلة الأجل وما يعادلها",
+      heading1:"نموذج القروض طويلة الأجل",
+			table:{
+				tr1:{
+					td1:"نوع الدين",
+					td2:"محلي / أجنبي",
+					td3:"تستحق خلال 365 يوم أو أقل",
+					td4:"تستحق بعد أكثر من 365 يوم",
+					
+				},
+			},
+		},
+		incomeformmodal:{
+			heading:"عوائد القروض ",
+			table:{
+				tr1:{
+					th1:"البيان",
+					th2:"القيمة",
+					td1:"إجمالي الإيرادات ",
+					td2:"الدخل من عوائد القروض",
+					td3:"الدخل الخاضع للضريبة مستبعدًا منه الدخل من عوائد القروض (أ)",
+					td4:"المصاريف الجائزة الحسم بموجب النظام الضريبي ",
+					td5:"مصاريف عوائد القروض ",
+					td6:"المصاريف الجائزة الحسم بموجب النظام الضريبي مستبعدًا منها مصاريف عوائد القروض (ب) ",
+					td7:"ناتج (أ) - (ب)",
+					td8:"ناتج 50% من (أ) - (ب)",
+					td9:"يضاف الدخل من عوائد القروض ",
+					td10:"الدخل من عوائد القروض مضافًا 50% من ناتج (أ) - (ب)",
+					td11:"عوائد ال   قروض ( الفوائد والخدمات البنكية ) المحملة على الحسابات",
+					td12:"عوائد القروض الغير مسموح حسمها ",
+					td13:"نصيب الجانب الضريبي من عوائد القروض الزائدة عن الحد المسموح به × نسبة الجانب الضريبي",
+					
+
+				},
+			},
+		},
+		sukuku:{
+      heading:"الاستثمارات في أدوات الدين الحكومية",
+      heading1:"نموذج الاستثمار في صكوك حكومية",
+			table:{
+				tr1:{
+					td1:"اسم الصكوك/السندات",
+					td2:"تاريخ الاستحقاق",
+					td3:"تستحق خلال 365 يوم أو أقل",
+					td4:"تستحق بعد أكثر من 365 يوم",
+					
+					
+				},
+				
+			},
+			label:{
+					l1:"تستحق خلال 365 يوم أو أقل",
+					l2:"تستحق بعد أكثر من 365 يوم",
+					
+				},
+		},
+		longtermdebts:{
+      heading:"لديون طويلة الأجل التي للمكلف ومافي حكمها",
+      heading1:"نموذج القروض طويلة الأجل",
+			table:{
+				tr1:{
+					td1:"نوع الدين",
+					td2:"محلي / أجنبي",
+					td3:"تستحق خلال 365 يوم أو أقل",
+					td4:"تستحق بعد أكثر من 365 يوم",
+				},
+			},
+		},
+    file:{
+        f1:"سحب وإفلات الملف لتحميل الوثائق",
+        f2:"المرفق إلزامي",
+        f3:"الملف المحلي",
+        f4:"الملف الرئيسي",
+      },
+	  
+      equity:{
+		  
+      heading:"صناديق الأسهم المعادلة",
+      heading1:"نموذج صناديق الأسهم المعادلة",
+		  table:{
+			  tr1:{
+				  td1:"البيان",
+				  td2:"المبلغ",
+				  
+			  },
+		  },
+	  },	  
+  direction: {
+        d1: "الرجوع",
+        d2: "الرجوع إلى الإقرارات",
+      },
+  
+  btns: {
+
+        btncancel: "إلغاء",
+        btnupdateinfo: "تحديث المعلومات",
+        btncontinue: "استمر",
+        btndraft: "حفظ كمسودّة",
+        togglebtnapplicable: "المعمول بها",
+        notapplicablle: "لا ينطبق",
+        btnedit: "تعديل",
+        btnreview: "مراجعة",
+        btndownloadformat: "تحميل نموذج الإقرار",
+        btnsubmit: "تقديم",
+        btndownloadform: "تحميل النموذج",
+        btnconfirmation: "تحميل التأكيد",
+        btnamned: "تعديل",
+        btnacknwldge: "تأكيد",
+		btnsave:"حفظ",
+		btnclose:"إغلاق",
+		btnclear:"مسح",
+		btndone:"تم",
+		btnapply:"حفظ",
+    btnok:"موافق",
+    btndownloadInvoice:"خطاب الفاتورة"
+      },
+	  capitalzakatmodel:{
+      heading:"رأس المال",
+      heading1:"نموذج رأس المال ",
+		  
+		  table:{
+			  tr1:{
+			  td1:"مصدر الإضافة في رأس المال",
+			  td2:"رصيد بداية الفترة",
+			  td3:"النقص في رأس المال خلال العام",
+			  td4:"الاضافة لرأس المال خلال العام ",
+			  td5:"تاريخ زيادة رأس المال",
+			  td6:"رصيد نهاية الفترة",
+			  td7:"استُخدم في بند غير زكوي من وعاء الزكاة",
+			  td8:"المستخدم في بند من بنود الموجودات الزكوية ",
+			  td9:"تاريخ نهاية السنة المالية",
+			  td10:"عدد الأيام",
+			  td11:"رأس المال الخاضع للزكاة",
+			  },
+		  },
+		  label:{
+			  l1:"رصيد بداية الفترة",
+			  l2:"النقص في رأس المال خلال العام",
+			  l3:"رصيد نهاية الفترة",
+			  l4:"المستخدم في بند من بنود الموجودات غير الزكوية",
+			  l5:"المستخدم في بند من بنود الموجودات الزكوية",
+			  l6:"تاريخ نهاية السنة المالية",
+		  },
+	  },
+  currentyearmodal:{
+    heading:"الخسائر المرحلة المعدلة ضريبياً",
+    heading1:"الخسائر المرحلة المعدلة ضريبياً form",
+    table:{
+      tr1:{
+        td1:"الخسائر المرحلة المعدلة ضريبياً",
+        td2:"صافي الربح المعدل طبقاً لإقرار المكلف للجانب الضريبي",
+        td3:"الخسائر المخصومة خلال العام",
+        td4:"رصيد نهاية الفترة",
+      },
+    },
+  },
+  tonetprofit:{
+    heading:"التعديلات على صافي الربح",
+    heading1:"تعديل على شكل صافي الربح",
+    table:{
+      tr1:{
+        td1:"التعديلات على صافي الربح ",
+        td2:"البيان",
+        td3:"المبلغ"
+      },
+    },
+  },
+  diprecation:{
+    heading:"الاستهلاك",
+    label:{
+      l1:"رقم المجموعة",
+      l2:"قيمة المجموعة في نهاية السنة السابقة ",
+      l3:"تكلفة إضافة العام السابق ",
+      l4:"تكلفة الاضافات الحالية",
+      l5:"يجب ان لا تكون قيمه الحقل أكبر من مجموع 'قيمة المجموعة في نهاية السنة السابق 'و' 50% من مجموع تكلفة الإضافات خلال العام الحالي والسابق' ",
+      l6:"التعويض عن الأصول غير المؤهلة للاستهلاك خلال العام السابق",
+      l7:"التعويضات عن الاصول المستبعدة خلال العام الحال",
+      l8:"50%من مجموع التعويضات عن الاصول المستبعدة خلال العام الحالي والسابق ",
+      l9:"القيمة المتبقية للمجموعة",
+      l10:"نسبة الإهلاك / الإطفاء",
+      l11:"قيمة الإهلاك / الإطفاء",
+      l12:"باقي قيمة المجموع في نهاية السنة الحالية",
+      l13:"قيمة الصيانة الخاصة بالمجموعة ",
+      l14:"مصاريف الصيانة الزائد عن نسبة 4",
+      l15:"باقي قيمة المجموعة في نهاية السنة الحالية",
+      l16:"الأراضي",
+      l17:"الأولى ",
+      l18:"الثانية",
+      l19:"الثالثة ",
+      l20:"الرابعة",
+      l21:"الخامسة",
+      l22:"المجموع",
+      
+      
+      
+    },
+  },
+  otherexpensmodal:{
+    
+    heading:{
+      h1:"مصاريف أخرى",
+      h11:"مصاريف أخرى ",
+    },
+    content:"يرجى تحديد كيفية تقديم بيانات الإيرادات الأخرى",
+    table:{
+      tr1:{
+        
+        td1:"البيان",
+        td2:"المبلغ ",
+        
+      },
+    },
+  },
+  Royalsecurtiy:{
+    table:{
+      tr1:{
+        td1:"نوع الهوية ",
+        td2:"رقم الهوية",
+        td3:"اسم الجهة المستفيدة",
+        td4:"داخلي / خارجي",
+        td5:"البلد ",
+        td6:"نوع الخدمة ",
+        td7:"المحمل على الحسابات ",
+        td8:"المدفوع خلال العام ",
+      },
+    },
+    label:{
+      l1:"المحملة على حسابات المجموع",
+      l2:"مدفوعة خلال العام الإجمالي",
+    },
+  },
+  RoyalityTechnicalSecurityModal:{
+    heading:"الإتاوات وأتعاب فنية واستشارية ومهنية ",
+    heading1:"الإتاوات وأتعاب فنية واستشارية ومهنية",
+    content:"يرجى تحديد كيفية تقديم بيانات الإيرادات الأخرى",
+  },
+  
+  ProvisionsMadeDuringPeriodModal:{
+    heading:"المخصصات",
+    heading1:"نموذج المخصصات ",
+    content:"يرجى تحديد كيفية تقديم بيانات الإيرادات الأخرى",
+    table:{
+      tr1:{
+        td1:"نوع المخصص",
+        td2:"رصيد أول المدة",
+        td3:"المكون خلال العام",
+        td4:"المستخدم خلال العام",
+        td5:"التسويات",
+        td6:"رصيد نهاية المدة ",
+      },
+    },
+    label:{
+      l1:"رصيد أول المدة",
+      l2:"المكون خلال العام",
+      l3:"المستخدم خلال العام",
+      l4:"التسويات",
+      l5:"رصيد نهاية المدة ",
+    },
+  },
+  CloseBankingRevenueModal:{
+    confirmation:{
+      c1:"هل أنت متأكد من الإغلاق دون حفظ البيانات؟",
+    },
+  },
+  CostOfFinancingModal:{
+    heading:{
+      h1:"تكلفة الإيرادات - التمويل",
+      h2:"يرجى تحديد كيفية تقديم بيانات الإيرادات الأخرى",
+    },
+    table:{
+      tr1:{
+        th1:"البيان",
+        th2:"سعر البيع ",
+        td1:"نموذج تكلفة التمويل"
+      },
+    },
+  },
+  popup:{
+    addform:"أضف النموذج",
+    addmultipleform:"إضافة اكثر من نموذج",
+    fillmanually:"املأ يدويًا",
+    uploadexcel:"تحميل إكسل",
+    excelformat:"نموذج اكسل",
+    total:"المجموع",
+    Forms:"كم عدد النماذج التي تريد إضافتها؟",
+    confirmation:"هل أنت متأكد من الإغلاق دون حفظ البيانات؟",
+    modaltitle:"عنوان مشروط",
+  },
+  inputrange: {
+
+        range1: "نطاق القيمة المسموح بها هو من 0 إلى 999,999,999,999.99",
+        range2: "الحد الأقصى المسموح به 255 حرفًا",
+        range3: "نطاق القيمة المسموح به هو من 0.00 إلى 100.00",
+        range4: "الحد الأقصى المسموح به 30 حرفًا",
+        range5: "الحد الأقصى المسموح به 5 أرقام",
+        range6: "نطاق القيمة المسموح به -999،999،999،999.99 إلى 999،999،999،999.99",
+    range7: "الحد الأقصى المسموح به 20 حرفًا",
+    range8:"يسمح بحد أقصى 6 حرفًا",
+    range9:"الحد الأقصى المسموح به 999 نموذج",
+    range10:"يسمح بحد أقصى 150 حرفًا",
+    range11:"نطاق القيمة المسموح به هو من 0 إلى 100",
+    range12:"نطاق القيمة المسموح به هو من 5 إلى 5",
+    range13:"نطاق القيمة المسموح به هو من 10 إلى 10",
+    range14:"يجب أن تكون القيمة المدخلة أكبر من أو تساوي إجمالي الأصول غير الخاضعة للزكاة",
+    range15:"الحد الأقصى المسموح به 255 حرفًا",
+    range16:"من 10 أرقام كحد أدنى إلى 15 رقمًا كحد أقصى",
+    range17:"عدم تطابق إجمالي الأصول والخصوم. الرجاء التصحيح",
+    range20: "نطاق القيمة المسموح به -99،999،999،999.99 إلى 999،999،999،999.99",
+    
+      },
+
+         step1:{
+            creamburds:{
+              c1:"الإقرارات",
+              c2:"إقرار الزكاة وضريبة الدخل على الشركات",
+              c3:"الرجوع",
+            },
+            cardheadings:{
+               heading1:"تفاصيل المكلف",
+				heading2:"تفاصيل الإقرار الضريبي",
+				heading3:"معلومات التسجيل",
+            },
+            pageheadings:{
+              p1:"إقرار الزكاة وضريبة الدخل على الشركات",
+            },
+            pageheadingtagline:{
+              t1:"يرجى مراجعة وتأكيد صحة تفاصيل التسجيل",
+            },
+            table:{
+              th1:"توزيع المساهمين",
+              th2:"سعودي",
+              th3:"غير سعودي",
+              td1:"حصص الأرباح",
+              td2:"حصص الأرباح",
+              
+
+            },
+            labels:{
+              l1:"اسم المكلف",
+            l2:"الفرع",
+            l3:"البريد الإلكتروني",
+            l4:"العنوان",
+            l5:"رقم الجوال",
+            l6:"نوع الإقرار",
+            l7:"السنة الماليــــــــة",
+            l8:"الفترة",
+            l9:"عدد الفروع",
+            l10:"الفرع الرئيسي",
+            l11:"حالة الاقامة ",
+            l12:"طريقة المحاسبة ",
+            l13:"نهاية الفترة المالية (شهر - يوم)",
+            },
+           
+            btns:{
+                  btnupdateinf:"تحديث المعلومات",
+                  btncontinue:"استمر",
+
+                },
+              
+          },
+          
+          step2:{
+            creamburds:{
+              c1:"الإقرارات",
+              c2:"إقرار الزكاة وضريبة الدخل على الشركات",
+              c3:"الرجوع",
+            },
+            cardheadings:{
+              heading1:"توزيع الأسهم",
+              heading2:"الإيرادات",
+              heading3:"إيرادات أخرى",
+              heading4:"تكلفة الإيرادات ",
+      heading5:"التكلفة والمصروفات",
+              
+            },
+            grandtotal:{
+              g1:"إجمالي الإيرادات ",
+              g2:"صافي الربح (الخسارة)",
+
+            },
+            pageheadings:{
+              p1:"قائمة الدخل",
+            },
+            pageheadingtagline:{
+              t1:"يرجى مراجعة وتأكيد صحة تفاصيل التسجيل",
+            },
+           
+            labels:{
+              l1:"حصة رأس المال للمساهم السعودي (%)",
+              l2:"نسبة أرباح المساهم السعودي (%)",
+              l3:"بداية الفترة",
+              l4:"عدد أيام السنة المالية",
+              l5:"حصة رأس المال للمساهم الاجنبي (%)",
+              l6:"نسبة أرباح المساهم الاجنبي (%)   ",
+              l7:"نهاية الفترة",
+              l8:"نهاية الفترة",
+              l9:"نوع التقويم"
+             
+            },
+            btns:{
+                  btnupdateinf:"تحديث المعلومات",
+                  btncontinue:"استمر",
+
+                },
+        
+      table:{
+    
+       tr1:{
+       
+       td1:"إيرادات النشاط الرئيسي",
+       td2:"إيراد الدخل الرئيسي",
+       
+       },
+       
+    
+    },
+    table2:{
+    
+       tr1:{
+       
+       td1:"مكاسب (خسائر) بيع أوراق مالية",
+       td2:"إيراد الدخل الرئيسي",
+       td3:"إجمالي الإيرادات الأخرى",
+       
+       },
+       
+    
+    },
+    
+    table3:{
+    
+       tr1:{
+       
+       td1:"تكلفة الإيرادات من النشاط الرئيسي",
+       td2:"إيراد الدخل الرئيسي",
+       td3:"إجمالي الإيرادات الأخرى",
+       
+       },
+       
+    
+    },
+    
+    table4:{
+    
+       tr1:{
+       
+       td1:"الرواتب الأساسية وبدل السكن",
+       td2:"الاستهلاك الدفتري بالحسابات",
+       td3:"مصاريف التأمينات الاجتماعية - السعوديون",
+       td4:"مصاريف التأمينات الاجتماعية - الأجانب",
+       td5:"مصاريف الصيانة والإصلاح",
+       td6:"المخصصات المكونة خلال العام",
+       td7:"مزايا أخرى للموظفين",
+       td8:"تبرعات مدفوعة",
+       td9:"الإتاوات وأتعاب فنية واستشارية ومهنية",
+       td10:"مصاريف أخرى",
+       td11:"مصروف زكاة محمل على حسابات الفترة",
+       td12:"التكاليف والمصاريف",
+       
+       },
+       
+    
+    },
+              
+          },
+          step3:{
+      
+      pageheading:{
+        
+        p1:"احتساب الضريبة ",
+        p2:"الرجاء استكمال التفاصيل أدناه ",
+      },
+      heading:{
+        
+        h1:"حصة غير السعوديين في صافي الربح (الخسارة)",
+        h2:"الإضافات",
+        h3:"الحسميات",
+      },
+      table:{
+        
+        tr1:{
+          
+          td1:"فروقات استهلاك",
+          td2:"مصاريف الصيانة الزائدة عن الحد المسموح به",
+          td3:"مخصصات محملة على حسابات الفترة",
+          td4:"التعديلات على صافي الربح",
+          td5:"حصته من عوائد القروض الزائدة عن الحد المسموح به",
+          td6:"حصته من حصة الشركة في خسائر الشركة المستثمر فيها",
+          td7:"حصته في الخسائر الرأسمالية المتحققة من التخلص من الأوراق المالية المتداولة في السوق المالية ",
+          td8:"الفروقات عن الأسعار الجارية للمواد والخدمات",
+          td9:"مجموع الإضافات",
+        },
+      },
+      table2:{
+        
+        tr1:{
+          
+          td1:"حصته في المستخدم من المخصصات السابق ردها للوعاء",
+          td2:"حصته في المكاسب الرأسمالية المتحققة من التخلص من الأوراق المالية المتداولة في السوق المالية",
+          td3:"حصته في الخسائر المرحلة المعدلة بحد أقصى 25% من حصته في الربح طبقًا لإقراره",
+          td4:"حصته في حصة الشركة في أرباح الشركة المستثمر فيها التي تسري عليها أحكام الازدواج",
+          td5:"مجموع الحسميات",
+          
+        },
+      },
+      table3:{
+        
+        tr1:{
+          
+          td1:"إجمالي التعديلات",
+          td2:"صـافـي الـربــح / (الخسارة) المعدلة قبل الإعفاءات",
+          td3:"حصته من الخسائر (الأرباح ) الرأسمالية من بيع الموجودات",
+          td4:"صافي الربح المعدل الخاضع ",
+          td5:"مبلغ الضريبة",
+          
+        },
+      },
+    },
+          step4:{
+      pageheading:{
+        p1:"احتساب الزكاة",
+        p2:"يرجى مراجعة وتأكيد صحة تفاصيل التسجيل",
+      },
+      
+      file:{
+        f1:"سحب وإفلات الملف لتحميل الوثائق",
+        f2:"المرفق إلزامي",
+      },
+      heading:{
+        
+        h1:"مصادر الأموال",
+        h2:"الموجودات غير الزكوية",
+        h3:"الموجودات الزكوية",
+      },
+      
+      table:{
+        tr1:{
+          
+          td1:"رأس المال",
+          td2:"حقوق الملكية وما في حكمها ومصادر الأموال الداخلية",
+          td3:"الديون طويلة الأجل على المكلف ومافي حكمها",
+          td4:"القيمة العادلة السلبية للمشتقات المستحقة طويلة الأجل",
+          td5:"إجمالي مصادر الأموال",
+        },
+      },
+      
+      table1:{
+        tr1:{
+          
+          td1:"صافي الموجودات الثابتة",
+          td2:"العقارات التي آلت بموجب التنفيذ على رهن",
+          td3:"الاستثمارات في منشآت داخلية خاضعة للزكاة ",
+          td4:"الاستثمارات في منشآت خارجية تسدد زكاتها بشكل منفصل",
+          td5:"لديون طويلة الأجل التي للمكلف ومافي حكمها",
+          td6:"استثمارات في أدوات الدين الحكومية التي تتحمل الدولة زكاتها",
+          td7:"القيمة العادلة الموجبة للمشتقات المستحقة طويلة الأجل",
+          td8:"الوديعة النظامية لدى مؤسسة النقد العربي السعودي (يُرفق شهادة) ",
+          td9:"إجمالي الموجودات غير الزكوية ",
+        },
+      },
+      
+      table2:{
+        tr1:{
+          
+          td1:"إجمالي الموجودات الزكوية ",
+          td2:"إجمالي الموجودات من واقع القوائم المالية",
+          td3:"نسبة الموجودات الزكوية إلى إجمالي الموجودات",
+          td4:"الوعاء الزكوي قبل احتساب الحد الأدنى و الأعلى",
+          td5:"صافي أرباح المكلف الدفترية بعد تعديلها بمصروف الزكاة المحمل",
+          td6:"مجمل الربح(الخسارة) كما في القوائم المالية",
+          td7:"الحد الأدنى لوعاء الزكاة",
+          td8:"الحد الأعلى لوعاء الزكاة  ",
+          td9:"حصة الجانب الزكوي من الوعاء",
+          td10:"زكاة الاستثمارات الخارجية",
+          td11:"زكاة الاستثمارات الخارجية",
+          td12:"إجمالي الزكاة المستحقة ",
+          td13:"الوعاء الزكوي بعد الحدود"
+          
+        },
+      },
+    },
+    step5:{
+      pageheading:{
+        p1:"المركز المالي",
+        p2:"يرجى مراجعة وتأكيد صحة تفاصيل التسجيل",
+      },
+      heading:{
+        h1:"أصول",
+        h2:"الخصوم وحقوق الملكية",
+      },
+      
+      table:{
+        tr1:{
+          th1:"أصول متداولة",
+          th2:"رصيد بداية الفترة (ريال سعودي) ",
+          th3:"رصيد نهاية الفترة (ريال سعودي) ",
+          td1:"نقد بالصندوق ولدى البنوك",
+          td2:"استثمارات قصيرة الأجل",
+          td3:"مدينون وأرصدة مدينة",
+          td4:"مخزون سلعي",
+          td5:"إيرادات مستحقة",
+          td6:"مصاريف مدفوعة مقدما",
+          td7:"مستحق من أطراف ذات علاقة",
+          td8:"أصول متداولة أخرى",
+          td9:"إجمالي الاصول متداولة",
+        },
+      },
+      table1:{
+        tr1:{
+          th1:"أصول غير متداولة",
+          th2:"رصيد بداية الفترة (ريال سعودي) ",
+          th3:"رصيد نهاية الفترة (ريال سعودي) ",
+          td1:"استثمارات طويلة الأجل",
+          td2:"صافي القيمة الدفترية للأصول الثابتة",
+          td3:"إنشاءات تحت التنفيذ",
+          td4:"مصاريف تأسيس",
+          td5:"أصول غير متداولة أخرى ",
+          td6:"إجمالي الأصول غير متداولة",
+          
+        },
+      },
+      table2:{
+        tr1:{
+          th1:"أصول غير ملموسة",
+          th2:"رصيد بداية الفترة (ريال سعودي) ",
+          th3:"رصيد نهاية الفترة (ريال سعودي)",
+          td1:"براءة اختراع",
+          td2:"شهرة المحل",
+          td3:"إجمالي الأصول غير الملموسة",
+          
+          
+        },
+      },
+      table3:{
+        tr1:{
+          th1:"خصوم متداولة",
+          th2:"رصيد بداية الفترة (ريال سعودي) ",
+          th3:"رصيد نهاية الفترة (ريال سعودي)",
+          td1:"أوراق دفع قصيرة الأجل ",
+          td2:"دائنون",
+          td3:"مصاريف مستحقة",
+          td4:"توزيعات أرباح مستحقة",
+          td5:"قسط مستحق من القروض طويلة الأجل",
+          td6:"قروض قصيرة الأجل",
+          td7:"مستحق لأطراف ذات علاقة",
+          td8:"إجمالي الخصوم المتداولة",
+          
+          
+        },
+      },
+      table4:{
+        tr1:{
+          th1:"خصوم غير متداولة",
+          th2:"رصيد بداية الفترة (ريال سعودي) ",
+          th3:"رصيد نهاية الفترة (ريال سعودي)",
+          td1:"قروض طويلة الأجل",
+          td2:"أوراق دفع طويلة الأجل",
+          td3:"مخصصات أخرى",
+          td4:"جاري الشركاء",
+          td5:"مستحق لأطراف ذات علاقة",
+          td6:"إجمالي الإلتزامات غير المتداولة",
+          
+          
+          
+        },
+      },
+      table5:{
+        tr1:{
+          th1:"حقوق الشركاء",
+          th2:"رصيد بداية الفترة (ريال سعودي) ",
+          th3:"رصيد نهاية الفترة (ريال سعودي)",
+          td1:"رأس المال",
+          td2:"احتياطات",
+          td3:"أرباح / (خسائر) الفترة",
+          td4:"أخرى",
+          td5:"إجمالي حقوق الملكية",
+          td6:"إجمالي الإلتزامات غير المتداولة",
+          
+          
+          
+        },
+      },
+    },
+    step6:{
+      pageheading:{
+        p1:"تسعير المعاملات",
+        p2:"يرجى مراجعة وتأكيد صحة تفاصيل التسجيل",
+      },
+      confirmation:{
+        c1:"هل لديك أي عمليات مع اطراف ذوي علاقة او اطراف خاضعين لسيطرة مشتركة؟",
+        c2:"نعم ",
+        c3:"لا",
+        c4:"*ب. هل تمت هناك أي اعمال إعادة هيكلة للمجموعة او للمكلف خلال السنة الضريبية الحالية ؟",
+        c5:"*ت. الرجاء تقديم المعلومات التالية بناء على المعلومات المقدمة في الإفصاح الضريبي/الزكوي:",
+        c6:" * ث. هل تم تجهيز والاحتفاظ بوثائق تسعير المعاملات بما يتماشى مع الانظمة والتعليمات الصادرة في هذا الصدد ؟",
+        c7:"لا ينطبق",
+        c8:"ج. هل قامت الشركة بأجراء أي عمليات غير مالية/بدون مقابل مالي مع اطراف ذوي علاقة او اطراف خاضعين لسيطرة مشتركة*؟",
+        c9:"ح. الرجاء تقديم المعلومات التالية عن الملاك (حاملين الأسهم) *:",
+        c10:"هل أنت جزء من مجموعة متعددة الجنسيات - المجموعة المؤهلة لتقرير كل دولة ؟",
+        c11:"أ. الرجاء تقديم جميع التفاصيل الخاصة بالعمليات مع اطراف ذوي علاقة او اطراف خاضعين لسيطرة مشتركة: *",
+        c12:"نموذج معاملات الأطراف ذات الصلة",
+        c13:"نموذج بيانات المساهمين"
+      },
+      label:{
+        l1:" *أ. ما هو الاسم القانوني للشركة الام النهائية؟",
+        l2:"*ب. ما هو الرقم الضريبي المميز للشركة الام النهائية؟ ",
+        l3:"ت. دولة إقامة الشركة الام النهائية.",
+        l4:"ث. السنة المالية للشركة الام النهائية.*",
+        l5:"ج. الاسم القانوني للكيان المبلغ.*",
+        l6:"H. ما هو رقم التعريف الضريبي لكيان الإيداع*",
+        l7:"خ. دولة إقامة الكيان المبلغ .*",
+        l8:"د. السنة المالية للكيان المبلغ. *",
+      },
+      table:{
+        tr1:{
+          td1:"المعاملات",
+          td2:"الوصف",
+          td3:"إسم الطرف ذوي العلاقة أوالطرف الخاضع لسيطرة مشتركة",
+          td4:"الدولة",
+          td5:"طبيعة المعاملة",
+          td6:"القيمة (بالريال السعودي)",
+          td7:"طريقة تسعير المعاملات",
+        },
+      },
+      table2:{
+        tr1:{
+          td1:"اجمالي الإيرادات (ريال سعودي)",
+          td2:"اجمالي المصاريف (ريال سعودي)",
+          td3:"صافي الأرباح / (الخسائر) (ريال سعودي)",
+          td4:"الدولة",
+          td5:"طبيعة المعاملة",
+          td6:"المبلغ",
+          td7:"طريقة تسعير المعاملات",
+        },
+      },
+      table3:{
+        tr1:{
+          td1:"وصف العمليات",
+          td2:"الطرف المقابل",
+          td3:"الدولة",
+          
+        },
+      },
+      table4:{
+        tr1:{
+          td1:"اسم المالك (حامل السهم)",
+          td2:"الدولة",
+          td3:"نسبة الملكية",
+          
+          
+        },
+      },
+    },
+    step7:{
+      pageheading:{
+        p1:"ملخص",
+        
+      },
+      
+      bill:{
+        
+        b1:"تم إستلام إقرارك بالرقم المرجعي",
+        b2:"للفترة من",
+        b3:"الرقم المرجعي للإقرار:",
+        b4:"الفرق الضريبي",
+        b5:"إجمالي الضرائب المستحقة يحسم منه",
+        b6:"الدفعة المعجلة الأولى المسددة :",
+        b7:"الدفعة المعجلة الثانية المسددة ",
+        b8:"الدفعة المعجلة الثالثة المسددة ",
+        b9:"مجموع المسدد تحت الحساب",
+        b10:"قيمة الدفعات للعقود المفرج عنها",
+        b11:"فروقات الضريبة المطلوب دفعها أو (المسددة بالزيادة) ",
+        
+      },
+      card:{
+        c1:"الغرامات",
+        c2:"غرامة عدم تقديم الإقرار ",
+        c3:"غرامة التأخر في السداد",
+        c4:"غرامات الدفعات المعجلة",
+        c5:"إجمالي الغرامات",
+        c6:"إجمالي ضريبة الدخل و الغرامات المستحقة ",
+        c7:"فروق الزكاة",
+        c8:"الزكاة المستحقة على الشريك السعودي",
+        c9:"قيمة الدفعات للعقود المفرج عنها",
+        c10:"إجمالي الزكاة المستحقة ",
+        c11:"الإجمالي المستحق ",
+        c12:"رقم سداد",
+        c13:"صافي الزكاة المستحقة",
+        c14:"رقم سداد",
+        c15:"إجمالي ضريبة الدخل المستحقة",
+        c16:"الاسم",
+        c17:"تقر الهيئة العامة للزكاة والدخل بتقديم إقرارك",
+        c18:"الللإقرارفترة الخاضعة ",
+      },
+    },
+    step9:{
+      pageheading:{
+        p1:"قائمة الدخل ",
+      },
+      questions:{
+        q1:"أ. ما هو الاسم القانوني للشركة الام النهائية؟",
+        q2:"ب. ما هو الرقم الضريبي المميز للشركة الام النهائية؟",
+        q3:"ت. دولة إقامة الشركة الام النهائية.",
+        q4:"ث. السنة المالية للشركة الام النهائية.",
+        q5:"ج. الاسم القانوني للكيان المبلغ.",
+        q6:"ح. ما هو الرقم الضريبي المميز للكيان المبلغ؟",
+        q7:"خ. دولة إقامة الكيان المبلغ",
+        q8:"د. السنة المالية للكيان المبلغ.",
+        
+      },
+      confirmation:{
+        c1:"أ. الرجاء تقديم جميع التفاصيل الخاصة بالعمليات مع اطراف ذوي علاقة او اطراف خاضعين لسيطرة مشتركة",
+        c2:"B. ب. هل تمت هناك أي اعمال إعادة هيكلة للمجموعة او للمكلف خلال السنة الضريبية الحالية ؟?",
+        c3:"نعم",
+        c4:"لا",
+        c5:"ت. الرجاء تقديم المعلومات التالية بناء على المعلومات المقدمة في الإفصاح الضريبي/الزكوي",
+        c6:"ج. هل قامت الشركة بأجراء أي عمليات غير مالية/بدون مقابل مالي مع اطراف ذوي علاقة او اطراف خاضعين لسيطرة مشتركة؟",
+        c7:"E. Please Provide All Shareholder's Details As Described Below:",
+        c8:"2. هل أنت جزء من مجموعة شركات متعددة الجنسيات - المجموعة المؤهلة لتقرير كل دولة ؟ ( تحتاج للجواب بنعم اذا كان مجموع الإيرادات الموحدة للمجموعة تزيد عن 3.2 مليار ريال )",
+      },
+      headings:{
+        h1:"الإيرادات",
+        h2:"إيرادات أخرى",
+        h3:"تكلفة الإيرادات",
+        h4:"التكاليف والمصاريف ",
+        h5:"احتساب الضريبة ",
+        h6:"الإضافات",
+        h7:"احتساب الزكاة",
+        h8:"مصادر الأموال",
+        h9:"ارفاق الإقرار المصادق عليه",
+        h10:"إرفاق ميزانية معتمدة",
+      },
+      label:{
+        l1:"إيرادات النشاط الرئيسي",
+        l2:"إيراد الدخل الرئيسي",
+        l3:"مكاسب (خسائر) بيع أوراق مالية",
+        l4:"إيرادات أخرى",
+        l5:"إجمالي الإيرادات الأخرى ",
+        l6:"إجمالي الإيرادات",
+        l7:"تكلفة الإيرادات من النشاط الرئيسي",
+        l8:"الرواتب الأساسية وبدل السكن",
+        l9:"الاستهلاك الدفتري بالحسابات",
+        l10:"مصاريف التأمينات الاجتماعية - السعوديون",
+        l11:"مصاريف التأمينات الاجتماعية - الأجانب ",
+        l12:"مصاريف الصيانة والإصلاح",
+        l13:"المخصصات المكونة خلال العام",
+        l14:"مزايا أخرى للموظفين ",
+        l15:"تبرعات مدفوعة ",
+        l16:"الإتاوات وأتعاب فنية واستشارية ومهنية",
+        l17:"مصاريف أخرى",
+        l18:"مصروف زكاة محمل على حسابات الفترة ",
+        l19:"إجمالي التكاليف والمصاريف ",
+        l20:"صـافـي الـربــح / (الخسارة) المعدلة قبل الإعفاءات",
+        l21:"Non-Saudi Share in Net Profit (Loss)",
+        l22:"فروقات استهلاك",
+        l23:"مصاريف الصيانة الزائدة عن الحد المسموح به",
+        l24:"مخصصات محملة على حسابات الفترة",
+        l25:"التعديلات على صافي الربح",
+        l26:"حصته من عوائد القروض الزائدة عن الحد المسموح به",
+        l27:"حصته من حصة الشركة في خسائر الشركة المستثمر فيها",
+        l28:"حصته في الخسائر الرأسمالية المتحققة من التخلص من الأوراق المالية المتداولة في السوق المالية ",
+        l29:"الفروقات عن الأسعار الجارية للمواد والخدمات   ",
+        l30:"مجموع الإضافات ",
+        l31:"صافي الربح/ الخسارة الدفترية",
+        l32:"الحسميات",
+        l33:"حصته في المستخدم من المخصصات السابق ردها للوعاء",
+        l34:"حصته في المكاسب الرأسمالية المتحققة من التخلص من الأوراق المالية المتداولة في السوق المالية",
+        l35:"حصته في الخسائر المرحلة المعدلة بحد أقصى 25% من حصته في الربح طبقًا لإقراره",
+        l36:"حصته في حصة الشركة في أرباح الشركة المستثمر فيها التي تسري عليها أحكام الازدواج",
+        l37:"مجموع الحسميات",
+        l38:"إجمالي التعديلات",
+        l39:"صـافـي الـربــح / (الخسارة) المعدلة قبل الإعفاءات",
+        l40:"حصته من الخسائر (الأرباح ) الرأسمالية من بيع الموجودات",
+        l41:"صافي الربح المعدل الخاضع ",
+        l42:"مبلغ الضريبة",
+        l43:"رأس المال ",
+        l44:"حقوق الملكية وما في حكمها ومصادر الأموال الداخلية",
+        l45:"الديون طويلة الأجل على المكلف ومافي حكمها ",
+        l46:"القيمة العادلة السلبية للمشتقات المستحقة طويلة الأجل",
+        l47:"إجمالي مصادر الأموال",
+        l48:"جمالي الموجودات غير الزكوية",
+        l49:"صافي الموجودات الثابتة",
+        l50:"العقارات التي آلت بموجب التنفيذ على رهن ",
+        l51:"الاستثمارات في منشآت داخلية خاضعة للزكاة ",
+        l52:"الاستثمارات في منشآت خارجية تسدد زكاتها بشكل منفصل",
+        l53:"الديون طويلة الأجل التي للمكلف ومافي حكمها",
+        l54:"استثمارات في أدوات الدين الحكومية التي تتحمل الدولة زكاتها  ",
+        l55:"القيمة العادلة الموجبة للمشتقات المستحقة طويلة الأجل ",
+        l56:"الوديعة النظامية لدى مؤسسة النقد العربي السعودي (يُرفق شهادة)",
+        l57:"إجمالي الموجودات غير الزكوية ",
+        l58:"إجمالي الموجودات الزكوية ",
+        l59:"إجمالي الموجودات من واقع القوائم المالية ",
+        l60:"نسبة الموجودات الزكوية إلى إجمالي الموجودات",
+        l61:"الوعاء الزكوي قبل احتساب الحد الأدنى و الأعلى ",
+        l62:"صافي أرباح المكلف الدفترية بعد تعديلها بمصروف الزكاة المحمل",
+        l63:"مجمل الربح(الخسارة) كما في القوائم المالية",
+        l64:"الحد الأدنى لوعاء الزكاة",
+        l65:"الحد الأعلى لوعاء الزكاة ",
+        l66:"صة الجانب الزكوي من الوعاء",
+        l67:"زكاة الاستثمارات الخارجية ",
+        l68:"الزكاة الشرعية  ",
+        l69:"أصول",
+        l70:"أصول متداولة",
+        l71:"نقد بالصندوق ولدى البنوك",
+        l72:"استثمارات قصيرة الأجل ",
+        l73:"مدينون وأرصدة مدينة",
+        l74:"يرادات مستحقة",
+        l75:"مخزون سلعي ",
+        l76:"مصاريف مدفوعة مقدما",
+        l77:"مستحق من أطراف ذات علاقة",
+        l78:"أصول متداولة أخرى",
+        l79:"إجمالي الاصول متداولة",
+        l80:"أصول غير متداولة ",
+        l81:"استثمارات طويلة الأجل",
+        l82:"صافي القيمة الدفترية للأصول الثابتة",
+        l83:"إنشاءات تحت التنفيذ",
+        l84:"مصاريف تأسيس",
+        l85:"استثمارات قصيرة الأجل ",
+        l86:"أصول غير متداولة أخرى",
+        l87:"إجمالي الأصول غير متداولة",
+        l88:"أصول غير ملموسة",
+        l89:"براءة اختراع",
+        l90:"شهرة المحل",
+        l91:"إجمالي الأصول غير الملموسة",
+        l92:"الخصوم وحقوق الملكية ",
+        l93:"خصوم متداولة ",
+        l94:"أوراق دفع قصيرة الأجل",
+        l95:"دائنون",
+        l96:"مصاريف مستحقة",
+        l97:"توزيعات أرباح مستحقة",
+        l98:"قسط مستحق من القروض طويلة الأجل",
+        l99:"قروض قصيرة الأجل",
+        l100:"مستحق لأطراف ذات علاقة",
+        l101:"جمالي الخصوم المتداولة",
+        l102:"خصوم غير متداولة",
+        l103:"قروض طويلة الأجل",
+        l104:"أوراق دفع طويلة الأجل",
+        l105:"مخصصات أخرى",
+        l106:"جاري الشركاء",
+        l107:"مستحق لأطراف ذات علاقة",
+        l108:"إجمالي الإلتزامات غير المتداولة",
+        l109:"Shareholder's Equity",
+        l110:"رأس المال",
+        l111:"احتياطات",
+        l112:"أرباح / (خسائر) الفترة",
+        l113:"أخرى",
+        l114:"إجمالي حقوق الملكية",
+        l115:"هل لديك أي عمليات مع اطراف ذوي علاقة او اطراف خاضعين لسيطرة مشتركة؟",
+        
+        
+      },
+      table:{
+        tr1:{
+          td1:"المعاملات",
+          td2:"الوصف",
+          td3:"إسم الطرف ذوي العلاقة أوالطرف الخاضع لسيطرة مشتركة",
+          td4:"الدولة",
+          td5:"طبيعة المعاملة",
+          td6:"القيمة (بالريال السعودي)",
+          td7:"طريقة تسعير المعاملات",
+      
+        },
+      },
+      table2:{
+        tr1:{
+          th1:"اجمالي الإيرادات (ريال سعودي) ",
+          th2:"اجمالي المصاريف (ريال سعودي) ",
+          th3:"صافي الأرباح / (الخسائر) (ريال سعودي)",
+          
+      
+        },
+      },
+      table3:{
+        tr1:{
+          
+          td1:"العموصف ليات",
+          td2:"الطرف المقابل",
+          td3:"الدولة",
+          
+      
+        },
+      },
+      table4:{
+        tr1:{
+          
+          td1:"اسم المالك (حامل السهم)",
+          td2:"ت. دولة إقامة الشركة الام النهائية.",
+          td3:"نسبة الملكية ",
+          
+      
+        },
+      },
+    },
+    screen2:{
+      heading:"إقرار الزكاة وضريبة الدخل على الشركات",
+      
+      labels:{
+              l1:"اسم المكلف",
+            l2:"الفرع",
+            l3:"البريد الإلكتروني",
+            l4:"العنوان",
+            l5:"رقم الجوال",
+            l6:"نوع الإقرار",
+            l7:"السنة الماليــــــــة",
+            l8:"الفترة",
+            l9:"عدد الفروع",
+            l10:"الفرع الرئيسي",
+            l11:"حالة الاقامة ",
+            l12:"طريقة المحاسبة ",
+            l13:"نهاية الفترة المالية (شهر - يوم)",
+            },
+      cardheadings:{
+              heading1:"المعلومات الاساسية ",
+              heading2:"تفاصيل الإقرار الضريبي",
+              heading3:"معلومات التسجيل",
+			  heading4:"قائمة الدخل",
+			  heading5:"Revenues",
+			  heading6:" احتساب الزكاة",
+			  heading7:"المركز المالى",
+			  heading8:"صول",
+			  heading9:"الخصوم وحقوق الملكية",
+			  heading10:"إجمالي الخصوم وحقوق الملكية",
+			  heading11:"تسعير المعاملات",
+            },
+      
+            pageheadings:{
+              p1:"إقرار الزكاة وضريبة الدخل على الشركات",
+            },
+            pageheadingtagline:{
+              t1:"يرجى مراجعة وتأكيد صحة تفاصيل التسجيل",
+            },
+      table:{
+              th1:"توزيع المساهمين",
+              th2:"سعودي",
+              th3:"غير سعودي",
+              td1:"أسهم رأس المال",
+              td2:"حصص الأرباح",
+              
+
+            },
+      card2:{
+        labels:{
+          l1:"إيراد الدخل الرئيسي",
+          l2:"إجمالي الإيرادات الأخرى",
+          l3:"جمالي الإيرادات",
+          l4:"التكاليف والمصاريف",
+          l5:"نهاية الفترة المالية (شهر - يوم) ",
+          l6:"صافي الربح (الخسارة)",
+          l7:"إجمالي مصادر الأموال",
+          l8:"إجمالي الموجودات غير الزكوية ",
+          l9:"الزكاة الشرعية",
+          l10:"إجمالي الزكاة المستحقة",
+          l11:"إجمالي الاصول متداولة",
+          l12:"إجمالي الأصول غير الملموسة",
+          l13:"إجمالي الأصول",
+          l14:"عمليات مع أطراف ذوي علاقة او أطراف خاضعين لسيطرة مشتركة",
+          l15:"جزء من مجموعة متعددة الجنسيات - المجموعة المؤهلة لتقرير كل دولة ؟",
+          l16:"لا",
+          l17:"ما هو الاسم القانوني للشركة الام النهائية؟",
+          l18:"الرقم المميز للشركة الام النهائية ",
+          l19:"ت. دولة إقامة الشركة الام النهائية.",
+          l20:"ث. السنة المالية للشركة الام النهائية. ",
+          l21:"الرقم المميز للكيان المبلغ",
+          l22:"دولة إقامة الكيان المبلغ ",
+          l23:"د. السنة المالية للكيان المبلغ",
+          l24:"الإجمالي المستحق",
+          
+          
+        },
+      },
+    },
+    gainlospopup:{
+      heading:{
+        h1:"مكاسب (خسائر) بيع أوراق مالية",
+        h2:"يرجى تحديد كيفية تقديم بيانات مكاسب (خسائر) بيع الأوراق المالية",
+        h3:"نموذج مكاسب (خسائر) بيع أوراق مالية ",
+      },
+      table:{
+        tr1:{
+          td1:"الشركة",
+          td2:"سعر البيع",
+          td3:"التكلفة",
+          td4:"الربح (الخسارة)",
+        },
+      },
+      labels:{
+        l1:"مجموع مبلغ المبيعات",
+        l2:"التكلفة الإجمالية",
+        l3:"إجمالي المكاسب (خسائر)",
+        // l2:"",
+        // l1:"Selling Amount Total",
+        // l2:"",
+        // l1:"Selling Amount Total",
+        // l2:"",
+      },
+      
+    },
+    closemodal:{
+      confirmation:{
+        c1:"هل أنت متأكد من الإغلاق دون حفظ البيانات؟",
+      },
+    },
+    mulitpleformsmodal:{
+      confirmation:{
+        c1:"كم عدد النماذج التي تريد إضافتها؟",
+      },
+    },
+    revenuemodal:{
+      heading:"إيرادات أخرى",
+      heading1:"إيرادات أخرى",
+      heading2:"يرجى تحديد كيفية تقديم بيانات الإيرادات الأخرى",
+      table:{
+        tr1:{
+          td1:"البيان",
+          td2:"المبلغ",
+          td3:"المجموع",
+        },
+      },
+    },
+    closerevenuemodal:{
+      confirmation:{
+        c1:"هل أنت متأكد من الإغلاق دون حفظ البيانات؟",
+      },
+    },
+    multiplerevenueform:{
+      confirmation:{
+        c1:"كم عدد النماذج التي تريد إضافتها؟",
+      },
+      
+    },
+    CostOfRevenueOptionsModal:{
+      confirmation:{
+        c1:"التأكيد",
+      },
+      label:{
+        l1:"البنوك",
+        l2:"الشركات التمويلية",
+      },
+    },
+    CostOfBankingModal:{
+      
+      heading:{
+        h1:"كلفة الإيرادات - البنوك ",
+        h2:"تكلفة الإيرادات - نموذج بنكي",
+        
+        
+      },
+      content:"يرجى تحديد كيفية تقديم بيانات الإيرادات الأخرى",
+      table:{
+        tr1:{
+          td1:"البيان",
+          td2:"العنوان ",
+          td3:"مدة الوديعة",
+          td4:"القيمة",
+        },
+      },
+      
+    },
+    BankingRevenueFormsModal:{
+      confirmation:{
+        c1:"عدد النماذج المراد إضافتها؟",
+      },
+    },
+    s1:{
+            t1: "تفاصيل الاقرار",
+            t2: "الاقرار",
+            t3: "السنة الماليــــــــة",
+            t4: "الفترة",
+          },
+          SuccessModal:{
+            p1:"تم حفظ البيانات بنجاح",
+            btn1:"حسنا"
+          }, 
+          NegativeFailrModal:{
+            p1:"مشتقات القيمة العادلة السالبة لمدة سنة أو أكثر",
+            btn1:"حسنا"
+          },
+          LongTermDebtsEquivalentInfoModal:{
+            p1:"ديون المكلف المستحقة كليًا أو جزئيًا خلال سنة أو أكثر ، سواء كانت ديونًا قصيرة الأجل أو طويلة الأجل",
+            btn1:"حسنا"
+          }
+          ,
+      instructions:{
+        l1:"هذا الإقرار خاص بالمكلفين الذين يحاسبون طبقاً للأنظمة واللوائح والتعليمات المعمول بها لدى الهيئة العامة للزكاة والدخل والخاصة بأحكام جباية الزكاة وقواعد حساب زكاة أنشطة التمويل وتحصيل الضريبة.",
+        l2:"يجب تعبئة الإقرار ومرفقاته باللغة العربية وتسديد الزكاة/الضريبة المستحقة من واقعه خلال مائة وعشرين يوماً من انتهاء السنة المالية",
+        l3:"يقع عبء إثبات صحة ما ورد في إقرار المكلف من إيرادات ومصروفات وأي بيانات أخرى على المكلف، وفي حالة عدم تمكنه من إثبات صحة ما ورد في إقراره، يجوز للهيئة، إضافة إلى تطبيق أي جزاءات نظامية أخرى، عدم إجازة المصروف الذي لا يتم إثبات صحته من قبل المكلف أو القيام بربط تقديري وفقا لوجهة نظر الهيئة في ضوء الظروف والحقائق المرتبطة بالحالة والمعلومات المتاحة للهيئة.",
+        l4:"يجب أن يتضمن الإقرار المقدم نتائج النشاط الرئيسي والأنشطة الفرعية الأخرى",
+        l5:"لا يعتد بالإقرار ما لم تكن حقوله مكتملة مع تعبئة كافة الكشوف والمرفقات المطلوبة",
+        l6:"يعد الإقرار مقدما بموجب إشعار رسمي من قبل الهيئة بكل أشكاله سواء الإلكترونية أو الورقية، ويكون السداد بموجبه.",
+        l7:"يجب تحديث جميع بيانات الأنشطة التمويلية وكذلك عنوان المنشاة وبيانات الاتصال قبل تقديم الاقرا"
+      }
+      }, 
+      zacatcit:{
+        p1:"بحث",
+        c1:{
+          t1:"الرقم المرجعي",
+          t2:"تاريخ الاستحقاق"
+        },
+      },
+    
+     
+    },
+  },
+}

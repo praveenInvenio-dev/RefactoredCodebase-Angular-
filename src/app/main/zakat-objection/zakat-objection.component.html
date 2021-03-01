@@ -1,0 +1,398 @@
+<div class="container alignStart" style="max-width: 899px" [dir]="lang['dir']">
+  <div>
+    <!--header start-->
+    <div class="row">
+      <div class="col-md-12">
+        <span class="bcTitle unicodeDir">{{ lang["bctitle1"] }} &gt; </span>
+        <span class="bcTitleActive"> {{ lang["zakatObjectionDetails"] }}</span>
+      </div>
+    </div>
+    <div class="row mt-3" style="width: 100%">
+      <div class="col-md-12 px-0">
+        <div class="stepHeader row">
+          <span class="stepBack col-md-6">
+            <img
+              [src]="
+                lang['dir'] === 'ltr'
+                  ? 'assets/image/arrow-left-green.svg'
+                  : 'assets/image/arrow-right-green.svg'
+              "
+              style="width: 24px"
+            />
+
+            {{ lang["back"] }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12 row vCenter justify-content-between mx-0">
+        <div class="pageTitle">
+          {{ lang["zakatObjection"] }}
+        </div>
+        <div class="tag32 tag-success">{{ lang["approved"] }}</div>
+      </div>
+    </div>
+
+    <!--header end-->
+    <div class="my-3">
+      <form style="width: 100%">
+        <div class="row">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit()">
+              <div
+                class="border textDark py-3 col-md-12 col-sm-12 col-xs-12 removePadding mb-3"
+              >
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div><img src="assets/image/summary.svg" /></div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["taxPayerForm"]["details"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["tin"] }}
+                    </div>
+                    <div class="value fwb">1234567890</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["name"] }}
+                    </div>
+                    <div class="value fwb">Zaed Hardy</div>
+                  </div>
+                </div>
+
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["license"] }}
+                    </div>
+                    <div class="value fwb">Q1234567</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["outlet"] }}
+                    </div>
+                    <div class="value fwb">Hardy Store</div>
+                  </div>
+                </div>
+
+                <div class="Rectangle-12New"></div>
+
+                <div class="vCenterSingle px-3 taxpayer-card-section">
+                  <div class="value mb-1 textGray sstroman">
+                    {{ lang["taxPayerForm"]["address"] }}
+                  </div>
+                  <div class="value fwb">Zaed Hardy</div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/return.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["objectionDetails"]["zakat"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["referenceNumber"] }}
+                    </div>
+                    <div class="value textDark">1234567890</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["assessmentYear"] }}
+                    </div>
+                    <div class="value textDark">2019</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["period"] }}
+                    </div>
+                    <div class="value textDark">
+                      01st Jan 2019 - 31st Dec 2019
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["currency"] }}
+                    </div>
+                    <div class="value textDark">SAR</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["returns"]["assessmentAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["revisedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground bottomRadius"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["objectionDetails"]["disputedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/return.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["objectionDetails"]["zakat"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["referenceNumber"] }}
+                    </div>
+                    <div class="value textDark">1234567890</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["assessmentYear"] }}
+                    </div>
+                    <div class="value textDark">2019</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["period"] }}
+                    </div>
+                    <div class="value textDark">
+                      01st Jan 2019 - 31st Dec 2019
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["currency"] }}
+                    </div>
+                    <div class="value textDark">SAR</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["returns"]["assessmentAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["revisedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground bottomRadius"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["objectionDetails"]["disputedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/attach.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["descriptionAndAttachment"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objection"] }}
+                    </div>
+                    <div class="value textDark">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["attachment"] }}
+                    </div>
+                    <div class="row mx-0">
+                      <div class="value textDark">File1.pdf</div>
+                      <img
+                        class="mx-2"
+                        src="assets/image/pdf.svg"
+                        [alt]="lang['attachment']"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon"></div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["authorizedRepresentative"]["title"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["fullName"] }}
+                    </div>
+                    <div class="value textDark">Noura Hardy</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["designation"] }}
+                    </div>
+                    <div class="value textDark">Designation 1</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["buildingName"] }}
+                    </div>
+                    <div class="value textDark">Building 1</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{
+                        lang["authorizedRepresentative"]["levelAndStreetNumber"]
+                      }}
+                    </div>
+                    <div class="value textDark">Level 1 - Street 2</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["city"] }}
+                    </div>
+                    <div class="value textDark">Riyadh</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["phoneNumber"] }}
+                    </div>
+                    <div class="value textDark">+966 551 234 567</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["email"] }}
+                    </div>
+                    <div class="value textDark">noura@gmail.com</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["fax"] }}
+                    </div>
+                    <div class="value textDark">551 234 568</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="col-md-6 px-0 row mx-0 vCenter">
+                    <div class="roundedIcon">
+                      <img src="assets/image/declaration.svg" />
+                    </div>
+                    <div class="sectionTitle fwb px-2">
+                      {{ lang["declarationModule"]["title"] }}
+                    </div>
+                  </div>
+                  <div class="col-md-6 px-0 justify-content-end row mx-0">
+                    <button class="textButton">{{ lang["edit"] }}</button>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["declarationModule"]["name"] }}
+                    </div>
+                    <div class="value textDark">Zaed Hardy</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["declarationModule"]["position"] }}
+                    </div>
+                    <div class="value textDark">Owner</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mx-0 vCenter mt-5 mobileResponsiveClass">
+                <button class="buttonDanger">
+                  {{ lang["objectionAndWithdrawl"] }}
+                </button>
+                <button
+                  class="btnPrimary continue mx-3"
+                  mat-raised-button
+                  type="submit"
+                >
+                  {{ lang["escalationToAppealComitee"] }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1292 @@
+<div
+  class="container alignStart"
+  style="max-width: 899px"
+  [dir]="lang['dir']"
+  *ngIf="!objectionSubmitted"
+>
+  <div>
+    <!--header start-->
+    <div class="row">
+      <div class="col-md-12">
+        <span class="bcTitle unicodeDir"
+          >{{ lang["bctitle1"] }} &gt; {{ lang["bctitle2"] }} &gt;</span
+        >
+        <span class="bcTitleActive"> {{ lang["bctitle3"] }}</span>
+      </div>
+    </div>
+    <div class="row mt-3" style="width: 100%">
+      <div class="col-md-12 px-0">
+        <div class="stepHeader row">
+          <span class="stepBack col-md-6" (click)="back()">
+            <img
+              [src]="
+                lang['dir'] === 'ltr'
+                  ? 'assets/image/arrow-left-green.svg'
+                  : 'assets/image/arrow-right-green.svg'
+              "
+              style="width: 24px"
+            />
+
+            {{ lang["back"] }}</span
+          >
+          <span class="stepNumber col-md-6 px-0">
+            <img
+              [ngClass]="lang['dir'] === 'rtl' ? 'rotateImage' : ''"
+              [src]="lang['process'][processActive - 1]['step']"
+              style="width: 106px"
+            />
+            <img
+              src="assets/image/check.svg"
+              alt="check"
+              class="mx-2"
+              *ngIf="processActive === 7"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="pageTitle">
+          {{ lang["process"][processActive - 1]["title"] }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="value textGray">
+          {{ lang["process"][processActive - 1]["subtitle"] }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New mt-3"></div>
+    <!--header end-->
+    <div class="my-3">
+      <form style="width: 100%">
+        <!--form 1-->
+        <div class="row" *ngIf="processActive === 1">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit()">
+              <div class="mt-3">
+                <div
+                  class="taxpayer-card border textDark py-3 col-md-12 col-sm-12 col-xs-12"
+                >
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                    <div><img src="assets/image/summary.svg" /></div>
+                    <div class="sectionTitle fwb px-2">
+                      {{ lang["taxPayerForm"]["details"] }}
+                    </div>
+                  </div>
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="row vCenter px-3 taxpayer-card-section">
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang["taxPayerForm"]["tin"] }}
+                      </div>
+                      <div class="value fwb">
+                        {{ objectionDetails?.ATin }}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang["taxPayerForm"]["name"] }}
+                      </div>
+                      <div class="value fwb">
+                        {{ objectionDetails?.ATpNm }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="Rectangle-12New"></div>
+                  <div class="row vCenter px-3 taxpayer-card-section">
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang["taxPayerForm"]["license"] }}
+                      </div>
+                      <div class="value fwb">Q1234567</div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang["taxPayerForm"]["outlet"] }}
+                      </div>
+                      <div class="value fwb">Hardy Store</div>
+                    </div>
+                  </div>
+
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="vCenterSingle px-3 taxpayer-card-section">
+                    <div class="value mb-1 textGray">
+                      {{ lang["taxPayerForm"]["address"] }}
+                    </div>
+                    <div class="value fwb">
+                      {{ objectionDetails?.Line1
+                      }}{{
+                        objectionDetails?.Line2
+                          ? ", " + objectionDetails?.Line2
+                          : ""
+                      }}{{
+                        objectionDetails?.Line3
+                          ? ", " + objectionDetails?.Line3
+                          : ""
+                      }}{{
+                        objectionDetails?.Line4
+                          ? ", " + objectionDetails?.Line4
+                          : ""
+                      }}{{
+                        objectionDetails?.Line5
+                          ? ", " + objectionDetails?.Line5
+                          : ""
+                      }}{{
+                        objectionDetails?.Line6
+                          ? ", " + objectionDetails?.Line6
+                          : ""
+                      }}{{
+                        objectionDetails?.Line7
+                          ? ", " + objectionDetails?.Line7
+                          : ""
+                      }}{{
+                        objectionDetails?.Line8
+                          ? ", " + objectionDetails?.Line8
+                          : ""
+                      }}{{
+                        objectionDetails?.Line9
+                          ? ", " + objectionDetails?.Line9
+                          : ""
+                      }}
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btnPrimary continue"
+                  mat-raised-button
+                >
+                  {{ lang.continue }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--form 2-->
+        <!-- <div class="row" *ngIf="processActive === 2">
+          <div class="col-md-12">
+            <div class="row justify-content-between removeMargin">
+              <div class="return-card border py-3 mb-3">
+                <div class="verticallyCenter px-3">
+                  <div class="sectionTitle fwb">
+                    {{ lang["returns"]["zakat"] }}
+                  </div>
+                  <div class="caption">{{ lang["returns"]["amended"] }}</div>
+                </div>
+                <div class="divider"></div>
+
+                <div class="row verticallyCenter px-3 removeMargin">
+                  <div class="col-xs-6">
+                    <div class="caption">{{ lang["returns"]["year"] }}</div>
+                    <div class="value fwb">2019</div>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <div class="caption">
+                      {{ lang["returns"]["assessmentAmount"] }}
+                    </div>
+                    <div class="value fwb">1,00,000 SAR</div>
+                  </div>
+                </div>
+              </div>
+              <div class="return-card border py-3 mb-3">
+                <div class="verticallyCenter px-3">
+                  <div class="sectionTitle fwb">
+                    {{ lang["returns"]["zakat"] }}
+                  </div>
+                  <div class="caption">{{ lang["returns"]["amended"] }}</div>
+                </div>
+                <div class="divider"></div>
+
+                <div class="row verticallyCenter px-3 removeMargin">
+                  <div class="col-xs-6">
+                    <div class="caption">{{ lang["returns"]["year"] }}</div>
+                    <div class="value fwb">2019</div>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <div class="caption">
+                      {{ lang["returns"]["assessmentAmount"] }}
+                    </div>
+                    <div class="value fwb">1,00,000 SAR</div>
+                  </div>
+                </div>
+              </div>
+              <div class="return-card return-card-inactive border py-3 mb-3">
+                <div class="verticallyCenter px-3">
+                  <div class="sectionTitle fwb">
+                    {{ lang["returns"]["zakat"] }}
+                  </div>
+                  <div class="caption">{{ lang["returns"]["amended"] }}</div>
+                </div>
+                <div class="divider"></div>
+
+                <div class="row verticallyCenter px-3 removeMargin">
+                  <div class="col-xs-6">
+                    <div class="caption">{{ lang["returns"]["year"] }}</div>
+                    <div class="value fwb">2019</div>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <div class="caption">
+                      {{ lang["returns"]["assessmentAmount"] }}
+                    </div>
+                    <div class="value fwb">1,00,000 SAR</div>
+                  </div>
+                </div>
+              </div>
+              <div class="return-card return-card-inactive border py-3 mb-3">
+                <div class="verticallyCenter px-3">
+                  <div class="sectionTitle fwb">
+                    {{ lang["returns"]["zakat"] }}
+                  </div>
+                  <div class="caption">{{ lang["returns"]["amended"] }}</div>
+                </div>
+                <div class="divider"></div>
+
+                <div class="row verticallyCenter px-3 removeMargin">
+                  <div class="col-xs-6">
+                    <div class="caption">{{ lang["returns"]["year"] }}</div>
+                    <div class="value fwb">2019</div>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <div class="caption">
+                      {{ lang["returns"]["assessmentAmount"] }}
+                    </div>
+                    <div class="value fwb">1,00,000 SAR</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="btnPrimary continue"
+              mat-raised-button
+              type="submit"
+              (click)="onSubmit2()"
+            >
+              {{ lang["continue"] }}
+            </button>
+          </div>
+        </div> -->
+        <!--form 3-->
+        <div class="row" *ngIf="processActive === 2">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit2()">
+              <ng-container
+                *ngFor="let returnObj of returns.controls; index as returnIndex"
+              >
+                <div class="border mb-3 py-3 removeMargin removePadding">
+                  <div class="row col-md-12 removeMargin removePadding">
+                    <div class="col-md-6 sectionTitle">
+                      {{ lang["objectionDetails"]["zakat"] }}
+                    </div>
+                    <div class="col-md-6 justifyContentEnd row removePadding">
+                      <img
+                        src="assets/image/delete.svg"
+                        alt="Delete"
+                        *ngIf="returns['length'] > 1"
+                        class="pointer"
+                        (click)="removeReturn(returnIndex)"
+                      />
+                      <img
+                        src="assets/image/cirlce-arrow-up.svg"
+                        class="mx-1 pointer"
+                        (click)="toggleReturn(returnIndex)"
+                      />
+                      <!-- <img src="assets/image/circle-arrow-up.svg" class="mx-10"/> -->
+                    </div>
+                  </div>
+                  <ng-container *ngIf="closedReturns.indexOf(returnIndex) < 0">
+                    <div class="Rectangle-12New mt-3"></div>
+                    <div class="row vCenter px-3 taxpayer-card-section">
+                      <div class="col-md-6">
+                        <div class="value textGray">
+                          {{ lang["objectionDetails"]["referenceNumber"] }}
+                        </div>
+                        <input
+                          class="commonInput"
+                          [formControl]="returnObj['controls']['refNumber']"
+                          (blur)="getReferenceNumberDetails(returnIndex)"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <div class="value textGray">
+                          {{ lang["objectionDetails"]["assessmentYear"] }}
+                        </div>
+                        <div class="value textDark">
+                          {{ returns?.value[returnIndex]["assessmentYear"] }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="Rectangle-12New mt-3"></div>
+                    <div class="row vCenter px-3 taxpayer-card-section">
+                      <div class="col-md-6">
+                        <div class="value textGray">
+                          {{ lang["objectionDetails"]["period"] }}
+                        </div>
+                        <div class="value textDark">
+                          {{ returns?.value[returnIndex]["period"] }}
+                          <!-- 01st Jan 2019 - 31st Dec 2019 -->
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="value textGray">
+                          {{ lang["objectionDetails"]["currency"] }}
+                        </div>
+                        <div class="value textDark">
+                          {{ returns?.value[returnIndex]["currency"] }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="Rectangle-12New mt-3"></div>
+                    <div
+                      class="row col-md-12 removeMargin removePadding primaryBackground"
+                      style="height: 72px; align-items: center"
+                    >
+                      <div class="col-md-6 value textDark">
+                        {{ lang["objectionDetails"]["assessmentAmount"] }}
+                      </div>
+                      <div class="col-md-6 justifyContentEnd row removePadding">
+                        <div class="value textDark">0.00</div>
+                      </div>
+                    </div>
+                    <div class="row removeMargin pt-2">
+                      <div class="col-md-6 textDark sectionTitle">
+                        {{ lang["objectionDetails"]["returnDetails"] }}
+                      </div>
+                      <div class="col-md-6 row justify-content-end px-0">
+                        <button class="textButton">
+                          {{ lang["objectionDetails"]["viewReturn"] }}
+                        </button>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <!-- <div class="col-md-9 row pt-2 mx-0 value sstroman textGray">
+                  {{ lang["objectionDetails"]["disputeText"] }}
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value valueBold">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["currentAssets"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    {{ lang["objectionDetails"]["beginingBalance"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    {{ lang["objectionDetails"]["endingBalance"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["cashInHand"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <span class="paddingX"> 0.00 </span>
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["shortTermInvestment"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <span class="paddingX"> 0.00 </span>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["accountReceivables"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["merchandiseInventory"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <span class="paddingX"> 0.00 </span>
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["accuredRevenues"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["prepaidExpenses"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <span class="paddingX"> 0.00 </span>
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <span class="paddingX"> 0.00 </span>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["dueFromRelatedParties"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mx-0 vCenter mt-3 value sstroman">
+                  <div class="col-md-6">
+                    {{ lang["objectionDetails"]["otherAssets"] }}
+                  </div>
+                  <div class="col-md-3 row mx-0 px-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                  <div class="col-md-3 row mx-0 justify-content-end">
+                    <input class="numberInput" placeholder="0.00" />
+                  </div>
+                </div> -->
+                </div>
+                <div
+                  class="row border mb-3 py-3 removeMargin removePadding primaryBackground mt-3"
+                >
+                  <div class="row col-md-12 removeMargin removePadding">
+                    <div class="col-md-6 sectionTitle">
+                      {{ lang["objectionDetails"]["totalRevisedAmount"] }}
+                    </div>
+                    <div class="col-md-6 justifyContentEnd row removePadding">
+                      <div class="value textDark fw500">1,000.00SAR</div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="row border mb-3 py-3 removeMargin removePadding primaryBackground"
+                >
+                  <div class="row col-md-12 removeMargin removePadding">
+                    <div class="col-md-6 sectionTitle">
+                      {{ lang["objectionDetails"]["disputedAmount"] }}
+                    </div>
+                    <div class="col-md-6 justifyContentEnd row removePadding">
+                      <div class="value textDark fw500">500.00SAR</div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <!-- <div class="row border mb-3 py-3 removeMargin removePadding">
+                <div class="row col-md-12 removeMargin removePadding">
+                  <div class="col-md-6 sectionTitle">
+                    {{ lang["objectionDetails"]["zakat"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <img
+                      src="assets/image/circle-arrow-down.svg"
+                      class="mx-1 pointer"
+                    />
+                  </div>
+                </div>
+              </div> -->
+              <div class="border p-3 pointer" (click)="addReturn()">
+                <img src="assets/image/add.svg" alt="add" class="mie-2" />
+                {{ lang.addForm }}
+              </div>
+              <button
+                class="btnPrimary continue mt-5"
+                mat-raised-button
+                type="submit"
+              >
+                {{ lang["continue"] }}
+              </button>
+            </form>
+          </div>
+        </div>
+        <!--form 4-->
+        <div class="row" *ngIf="processActive === 3">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit3()">
+              <div
+                class="row mx-0 justify-content-between border zs-paymentTitle"
+              >
+                <span class="sectionTitle textDark">{{
+                  lang["payment"]["paymentAmount"]
+                }}</span>
+                <span class="textDark value">1,000.00 {{ lang["sar"] }}</span>
+              </div>
+              <div class="mt-5">
+                <div class="value sstroman textGray">
+                  {{ lang["payment"]["selectMethod"] }}
+                </div>
+                <div class="mt-3 row col-md-12">
+                  <div
+                    class="selector-card border pb-3 px-3 col-md-3"
+                    [ngClass]="
+                      paymentType === 'sadad' ? 'selector-card-active' : ''
+                    "
+                    (click)="changePaymentType('sadad')"
+                  >
+                    <div class="value fwb">
+                      {{ lang["payment"]["sadadPayment"] }}
+                    </div>
+                  </div>
+                  <div
+                    class="selector-card border pb-3 px-3 mx-3 col-md-3"
+                    [ngClass]="
+                      paymentType === 'bankGuarantee'
+                        ? 'selector-card-active'
+                        : ''
+                    "
+                    (click)="changePaymentType('bankGuarantee')"
+                  >
+                    <div class="value fwb">
+                      {{ lang["payment"]["bankGuarantee"] }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ng-container *ngIf="paymentType === 'sadad'">
+                <div
+                  class="border textDark py-3 col-md-12 col-sm-12 col-xs-12 removePadding mb-3 mt-5"
+                >
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                    <div><img src="assets/image/return.svg" /></div>
+                    <div class="sectionTitle fwb px-2">
+                      {{ lang["payment"]["sadadInvoice"] }}
+                    </div>
+                  </div>
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="row vCenter px-3 taxpayer-card-section">
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray sstroman">
+                        {{ lang["payment"]["zakatInvoiceNumber"] }}
+                      </div>
+                      <div class="value fwb">1234567890</div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray sstroman">
+                        {{ lang["payment"]["zakatPayableAmount"] }}
+                      </div>
+                      <div class="value fwb">500.00{{ lang["sar"] }}</div>
+                    </div>
+                  </div>
+
+                  <div class="Rectangle-12New"></div>
+                  <div class="row vCenter px-3 taxpayer-card-section">
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray sstroman">
+                        {{ lang["payment"]["citInvoiceNumber"] }}
+                      </div>
+                      <div class="value fwb">12345679</div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray sstroman">
+                        {{ lang["payment"]["citPayableAmount"] }}
+                      </div>
+                      <div class="value fwb">500.00{{ lang["sar"] }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="border mt-5 px-3 py-3">
+                  <div class="row mx-0">
+                    <img
+                      src="../../../assets/image/information.svg"
+                      alt="info"
+                    />
+                    <div class="caption zs-infoTitle">
+                      {{ lang["payment"]["infoTitle"] }}
+                    </div>
+                  </div>
+                  <div class="caption textGray mt-2">
+                    {{ lang["payment"]["infoBody"] }}
+                  </div>
+                </div>
+                <div class="mt-5 check">
+                  <mat-checkbox class="checkboxAckCss">
+                    {{ lang["payment"]["acknowledgement"] }}
+                  </mat-checkbox>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="paymentType === 'bankGuarantee'">
+                <div>
+                  <div class="check">
+                    <mat-checkbox class="checkboxAckCss">
+                      {{ lang["payment"]["bankGuaranteeCheckbox1"] }}
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div>
+                  <div class="check">
+                    <mat-checkbox class="checkboxAckCss">
+                      {{ lang["payment"]["bankGuaranteeCheckbox2"] }}
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div>
+                  <div class="check">
+                    <mat-checkbox class="checkboxAckCss">
+                      {{ lang["payment"]["bankGuaranteeCheckbox3"] }}
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div class="row justify-content-between mx-0 mt-3">
+                  <div
+                    class="card-uploaded border mb-3"
+                    *ngFor="let attachment of bankGuaranteeAttachments"
+                  >
+                    <div class="card-delete">
+                      <img src="assets/image/delete.svg" />
+                    </div>
+                    <div class="card-file-content">
+                      <img src="assets/image/generic-documents.png" />
+                      <div class="value textDark mt-1 card-main-text fwb">
+                        File.pdf
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="card-upload border mb-3"
+                    (click)="fileInput.click()"
+                    appDragDrop
+                    (onFileDropped)="uploadFiles($event, 'ZOBG')"
+                  >
+                    <div class="card-upload-content">
+                      <input
+                        hidden
+                        type="file"
+                        #fileInput
+                        (change)="uploadFiles($event.target.files, 'ZOBG')"
+                        id="bankGuaranteeAttachments"
+                      />
+                      <img src="assets/image/attach.svg" />
+                      <div class="value textPrimary mt-1 card-main-text fwb">
+                        {{ lang["dragAndDrop"] }}
+                      </div>
+                      <div class="caption textGray mt-1">
+                        20MB {{ lang["max"] }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <button
+                class="btnPrimary continue mt-5"
+                mat-raised-button
+                type="submit"
+              >
+                {{ lang["continue"] }}
+              </button>
+            </form>
+          </div>
+        </div>
+        <!--form 5-->
+        <div class="row" *ngIf="processActive === 4">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit4()">
+              <div class="col-md-12 removePadding">
+                <div class="matLabel labelMarginBottom">
+                  {{ lang["objection"] }}
+                </div>
+                <div class="common-text-area-container">
+                  <textarea class="common-text-area"></textarea>
+                  <span
+                    [ngClass]="
+                      lang['dir'] == 'ltr'
+                        ? 'common-text-area-counter-ltr'
+                        : 'common-text-area-counter-rtl'
+                    "
+                    >0 /1000</span
+                  >
+                </div>
+              </div>
+              <div class="row justify-content-between mx-0 mt-3">
+                <div
+                  class="card-uploaded border mb-3"
+                  *ngFor="let attachment of mainAttachments"
+                >
+                  <div class="card-delete">
+                    <img src="assets/image/delete.svg" />
+                  </div>
+                  <div class="card-file-content">
+                    <img src="assets/image/generic-documents.png" />
+                    <div class="value textDark mt-1 card-main-text fwb">
+                      File.pdf
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="card-upload border mb-3"
+                  (click)="fileInput.click()"
+                  appDragDrop
+                  (onFileDropped)="uploadFiles($event, 'OB20')"
+                >
+                  <div class="card-upload-content">
+                    <input
+                      hidden
+                      type="file"
+                      #fileInput
+                      (change)="uploadFiles($event.target.files, 'OB20')"
+                      id="mainAttachments"
+                    />
+                    <img src="assets/image/attach.svg" />
+                    <div class="value textPrimary mt-1 card-main-text fwb">
+                      {{ lang["dragAndDrop"] }}
+                    </div>
+                    <div class="caption textGray mt-1">
+                      20MB {{ lang["max"] }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btnPrimary continue mt-5"
+                mat-raised-button
+                type="submit"
+              >
+                {{ lang["continue"] }}
+              </button>
+            </form>
+          </div>
+        </div>
+        <!--form 6-->
+        <div class="row" *ngIf="processActive === 5">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit5()">
+              <div class="row removeMargin justify-content-between">
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["authorizedRepresentative"]["fullName"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["authorizedRepresentative"]["designation"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["authorizedRepresentative"]["phoneNumber"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["authorizedRepresentative"]["buildingName"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["authorizedRepresentative"]["fax"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{
+                      lang["authorizedRepresentative"]["levelAndStreetNumber"]
+                    }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["authorizedRepresentative"]["email"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["authorizedRepresentative"]["city"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+              </div>
+              <button
+                class="btnPrimary continue mt-5"
+                mat-raised-button
+                type="submit"
+              >
+                {{ lang["continue"] }}
+              </button>
+            </form>
+          </div>
+        </div>
+        <!--form 7-->
+        <div class="row" *ngIf="processActive === 6">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit6()">
+              <div class="row removeMargin justify-content-between">
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["declarationModule"]["name"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+                <div class="authorizedInput">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang["declarationModule"]["position"] }}
+                  </div>
+                  <input class="commonInput" />
+                  <div class="matLabel helperMarginTop"></div>
+                </div>
+              </div>
+              <div class="check vCenter row mx-0">
+                <mat-checkbox class="checkboxAckCss"> </mat-checkbox>
+                <div
+                  class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+                >
+                  {{ lang["declarationModule"]["declaration"] }}
+                </div>
+              </div>
+              <button
+                class="btnPrimary continue mt-5"
+                mat-raised-button
+                type="submit"
+              >
+                {{ lang["continue"] }}
+              </button>
+            </form>
+          </div>
+        </div>
+        <!--form 8-->
+        <div class="row" *ngIf="processActive === 7">
+          <div class="col-md-12">
+            <form (ngSubmit)="onSubmit7()">
+              <div
+                class="border textDark py-3 col-md-12 col-sm-12 col-xs-12 removePadding mb-3"
+              >
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div><img src="assets/image/summary.svg" /></div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["taxPayerForm"]["details"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["tin"] }}
+                    </div>
+                    <div class="value fwb">1234567890</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["name"] }}
+                    </div>
+                    <div class="value fwb">Zaed Hardy</div>
+                  </div>
+                </div>
+
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["license"] }}
+                    </div>
+                    <div class="value fwb">Q1234567</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value mb-1 textGray sstroman">
+                      {{ lang["taxPayerForm"]["outlet"] }}
+                    </div>
+                    <div class="value fwb">Hardy Store</div>
+                  </div>
+                </div>
+
+                <div class="Rectangle-12New"></div>
+
+                <div class="vCenterSingle px-3 taxpayer-card-section">
+                  <div class="value mb-1 textGray sstroman">
+                    {{ lang["taxPayerForm"]["address"] }}
+                  </div>
+                  <div class="value fwb">Zaed Hardy</div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/return.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["objectionDetails"]["zakat"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["referenceNumber"] }}
+                    </div>
+                    <div class="value textDark">1234567890</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["assessmentYear"] }}
+                    </div>
+                    <div class="value textDark">2019</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["period"] }}
+                    </div>
+                    <div class="value textDark">
+                      01st Jan 2019 - 31st Dec 2019
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["currency"] }}
+                    </div>
+                    <div class="value textDark">SAR</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["returns"]["assessmentAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["revisedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground bottomRadius"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["objectionDetails"]["disputedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/return.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["objectionDetails"]["zakat"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["referenceNumber"] }}
+                    </div>
+                    <div class="value textDark">1234567890</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["assessmentYear"] }}
+                    </div>
+                    <div class="value textDark">2019</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["period"] }}
+                    </div>
+                    <div class="value textDark">
+                      01st Jan 2019 - 31st Dec 2019
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objectionDetails"]["currency"] }}
+                    </div>
+                    <div class="value textDark">SAR</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["returns"]["assessmentAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground borderBottom"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["revisedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+                <div
+                  class="row col-md-12 removeMargin removePadding primaryBackground bottomRadius"
+                  style="height: 72px; align-items: center"
+                >
+                  <div class="col-md-6 value textDark fw400 sstroman">
+                    {{ lang["objectionDetails"]["disputedAmount"] }}
+                  </div>
+                  <div class="col-md-6 justifyContentEnd row removePadding">
+                    <div class="value textDark fw500">0.00</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/attach.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["descriptionAndAttachment"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["objection"] }}
+                    </div>
+                    <div class="value textDark">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["attachment"] }}
+                    </div>
+                    <div class="row mx-0">
+                      <div class="value textDark">File1.pdf</div>
+                      <img
+                        class="mx-2"
+                        src="assets/image/pdf.svg"
+                        [alt]="lang['attachment']"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon"></div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang["authorizedRepresentative"]["title"] }}
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["fullName"] }}
+                    </div>
+                    <div class="value textDark">Noura Hardy</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["designation"] }}
+                    </div>
+                    <div class="value textDark">Designation 1</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["buildingName"] }}
+                    </div>
+                    <div class="value textDark">Building 1</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{
+                        lang["authorizedRepresentative"]["levelAndStreetNumber"]
+                      }}
+                    </div>
+                    <div class="value textDark">Level 1 - Street 2</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["city"] }}
+                    </div>
+                    <div class="value textDark">Riyadh</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["phoneNumber"] }}
+                    </div>
+                    <div class="value textDark">+966 551 234 567</div>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["email"] }}
+                    </div>
+                    <div class="value textDark">noura@gmail.com</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["authorizedRepresentative"]["fax"] }}
+                    </div>
+                    <div class="value textDark">551 234 568</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12 col-sm-12 border px-0 mb-3">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="col-md-6 px-0 row mx-0 vCenter">
+                    <div class="roundedIcon">
+                      <img src="assets/image/declaration.svg" />
+                    </div>
+                    <div class="sectionTitle fwb px-2">
+                      {{ lang["declarationModule"]["title"] }}
+                    </div>
+                  </div>
+                  <div class="col-md-6 px-0 justify-content-end row mx-0">
+                    <button class="textButton">{{ lang["edit"] }}</button>
+                  </div>
+                </div>
+                <div class="Rectangle-12New"></div>
+                <div class="row vCenter px-3 taxpayer-card-section">
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["declarationModule"]["name"] }}
+                    </div>
+                    <div class="value textDark">Zaed Hardy</div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="value textGray sstroman">
+                      {{ lang["declarationModule"]["position"] }}
+                    </div>
+                    <div class="value textDark">Owner</div>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btnPrimary continue mt-5"
+                mat-raised-button
+                type="submit"
+              >
+                {{ lang["confirm"] }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="container alignStart"
+  style="max-width: 670px"
+  [dir]="lang['dir']"
+  *ngIf="objectionSubmitted"
+>
+  <div class="mt-5">
+    <div class="row justify-content-center mx-0">
+      <img src="assets/image/success.svg" alt="Success" />
+    </div>
+    <div
+      class="row justify-content-center mx-0 pageTitle textDark mt-4"
+      style="text-align: center"
+    >
+      {{ lang["successScreen"]["objectionRequest"] }}
+    </div>
+    <div class="value sstroman textGray mt-3" style="text-align: center">
+      {{ lang["successScreen"]["successMessage"] }}
+    </div>
+    <div class="row justify-content-center mx-0">
+      <div
+        class="col-md-9 border row vCenter mt-3 justify-content-between py-2"
+      >
+        <div class="value sstroman textGray">
+          {{ lang["successScreen"]["referenceNumber"] }}
+        </div>
+        <div class="value textDark fw500">1234567890123</div>
+      </div>
+    </div>
+    <div class="row justify-content-center mx-0 mt-5">
+      <button class="btnPrimary" mat-raised-button>
+        {{ lang["successScreen"]["confirmation"] }}
+      </button>
+    </div>
+    <div class="row justify-content-center mx-0 mt-5">
+      <button class="btnSecondary">{{ lang["successScreen"]["form"] }}</button>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

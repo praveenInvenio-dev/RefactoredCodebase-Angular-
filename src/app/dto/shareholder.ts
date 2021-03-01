@@ -1,0 +1,40 @@
+export class Shareholder {
+    Shattfg: String = "";
+    Shbirthdt: String = null;
+    ShbirthdtC: String = "";
+    Shcap: String = "";
+    Shcapenddt: String = "";
+    ShcapenddtC: String = "";
+    Shcapstartdt: String = "";
+    ShcapstartdtC: String = "";
+    Shenddt: String = "";
+    ShenddtC: String = "";
+    Shforeignshare: String = "";
+    Shgccattfg: boolean = false;
+    Shissuecountry: String = "";
+    Shleapplicable: String = "";
+    Shletype: String = "";
+    Shnm1: String = "";
+    Shnm2: String = "";
+    Shno: String = "";
+    Sholdfg: String = "";
+    Shotherattfg: Boolean = false;
+    Shprof: Number = 0.00;
+    Shprofenddt: any = null;
+    ShprofenddtC: any = "";
+    Shprofstartdt: any = null;
+    ShprofstartdtC: String = "";
+    Shrbvalue: String = "";
+    Shreltp: String = "";
+    Shsagccshare: String = "";
+    Shsellergpart: String = "";
+    Shsellerstartdt: any = null;
+    Shstartdt: any = null;        
+    Shtin: String = "";
+    Shtp: String = "";
+    DataVersion: string;
+    LineNo: number = 0;
+    Caltp: any;
+    RankingOrder:string="";
+}
+

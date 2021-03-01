@@ -1,0 +1,61 @@
+input[type="text"]:disabled {
+    background-color: #f8f8f8 !important;
+}
+.white-space-pre{
+    white-space:pre !important;
+}
+
+.pointer-none{
+    pointer-events: none !important;
+}
+/*For invalid inputs*/
+.border-red{
+    border: 1px solid red !important;
+}
+
+/* for Right Arrow*/
+.rightArrow{
+    height:24px !important;
+    width:24px !important;
+  }
+
+  .arabic-btn {
+      float:left !important;
+  }
+  .opacity-0 {
+    opacity: 0 !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+/* attachment upload css by bhargavi*/
+.upload-text-items {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+  
+  .custom-upload-file {
+    z-index: 999999 !important;
+    cursor: pointer;
+  }
+  
+  .cardh219 {
+    height: 216px !important;
+  }
+  
+  .opacity-0 {
+    opacity: 0 !important;
+  }
+  
+  .h-216 {
+    height: 216px !important;
+  }
+
+  /* for popup close button alignment in arabic*/
+  .arabic-btn {
+    float:left !important;
+    padding-left: 10px;
+  
+  }

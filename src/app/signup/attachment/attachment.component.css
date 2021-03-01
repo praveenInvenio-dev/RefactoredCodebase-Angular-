@@ -1,0 +1,173 @@
+.uploadfilecontainer {
+    /* background-image: url("../../assets/cloud-2044823_960_720.png"); */
+    background-color: #ffffff !important;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 140px;
+    width: 80%;
+    margin: 20px auto;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+  }
+  
+  .files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 5px;
+    color: #1c8adb;
+  }
+  
+  .files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .files-list .delete-file img {
+    width: 30px;
+  }
+  
+  .fileUploadTxt {
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #006450;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  .fileUploadTxt1 {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: center;
+    color: #999999;
+  }
+  
+  .fileSize {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: center;
+    color: #999999;
+  }
+  
+  .fileName {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #232323;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .tnc {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+  }
+  
+  .attachtxt1 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #232323;
+  }
+  
+  .mat-expansion-panel-header {
+    height: 90px !important;
+  }
+  
+  .btnCss3 {
+    height: 48px;
+    border-radius: 14px;
+    background-color: #d99a29;
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .exciseSecondTitle {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #232323;
+  }
+  
+  .exciseSecondTitle1 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+  }
+    
+
+  .btnCss {
+    border: none;
+    width: 207px;
+    height: 48px;
+    border-radius: 14px;
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    background-color: #d2a02a;
+  }

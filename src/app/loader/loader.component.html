@@ -1,0 +1,37 @@
+<!-- <div [class.hidden]="!show">
+    <div class="loader-overlay">
+      <div *ngIf="show" class="loader"></div>
+    </div>
+  </div> -->
+
+
+<div class="modal" id="loader" data-backdrop="static" data-keyboard="false" style="background-color:whitesmoke;opacity: 0.8;">
+    <div class="modal-dialog  modal-sm modal-dialog-centered">
+        <div class="modal-content h-100 " style="border: none;  background-color: rgba(0,0,0,.0001) !important">
+
+            <!-- Modal body -->
+            <div class="modal-body" style="left:30%">
+                 <!-- <img  src="../../assets/images/loader.gif" />  -->
+                <mat-spinner class="text-center" mode="indeterminate"></mat-spinner>
+                <!-- <p-progressSpinner></p-progressSpinner> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal2" ngDraggable>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

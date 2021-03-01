@@ -1,0 +1,1449 @@
+<div
+  *ngIf="showApp"
+  class="container alignStart textDark"
+  style="max-width: 936px; font-family: SSTArabic-Roman"
+  [dir]="lang.dir == 'ltr' ? 'ltr' : 'rtl'"
+>
+  <div *ngIf="!showSuccess">
+    <div class="row mb-4">
+      <div class="col-md-12 mt-3">
+        <span class="bcTitle unicodeDir"
+          ><a
+            style="text-decoration: none; color: inherit"
+            [routerLink]="['/mains/installmentplan']"
+            >{{ lang.bc1 }} &gt;</a
+          ></span
+        >
+
+        <span style="padding-inline-start: 2px" class="bcTitle bcTitleActive"
+          ><a style="text-decoration: none; color: inherit">{{
+            lang.bc2
+          }}</a></span
+        >
+      </div>
+    </div>
+    <div class="row mt-3 py-2" style="width: 100%">
+      <div class="col-md-12" style="padding-inline-end: 0">
+        <div class="stepHeader row">
+          <span class="stepBack col-md-6" (click)="back()">
+            <img
+              [src]="
+                lang['dir'] == 'ltr'
+                  ? 'assets/image/arrow-left-green.svg'
+                  : 'assets/image/arrow-right-green.svg'
+              "
+              style="width: 24px"
+            />
+            {{ lang.back }}</span
+          >
+          <span
+            style="padding-right: 0; padding-left: 0"
+            class="stepNumber col-md-6"
+            *ngIf="fbNum === null"
+          >
+            <img
+              *ngIf="optionActive != 4"
+              [ngClass]="lang.dir == 'rtl' ? 'rotateSteps' : ''"
+              src="{{ lang.menu[optionActive - 1].step }}"
+              style="width: 106px; height: 16px"
+            />
+            <img
+              *ngIf="optionActive == 4"
+              [ngClass]="lang.dir == 'rtl' ? 'rotateSteps' : ''"
+              src="{{ lang.menu[optionActive - 1].step }}"
+              style="width: 80px; height: 16px"
+            />
+            <img
+              *ngIf="optionActive == 5"
+              style="padding-inline-start: 4px"
+              src="assets/image/check.svg"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="pageTitle">
+          {{ lang.menu[optionActive - 1].title }}
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="value textGray">
+          {{ lang.menu[optionActive - 1].subtitle }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New mt-3"></div>
+
+    <!-- header end -->
+
+    <div class="mt-3 mb-3">
+      <form style="width: 100%; font-family: SSTArabic-Roman">
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 1
+
+
+
+                -------------------------------------------->
+        <div class="row" *ngIf="optionActive === 1">
+          <div class="col-md-12">
+            <form [formGroup]="fg1" (ngSubmit)="onSubmit()">
+              <div class="mt-3">
+                <div
+                  class="taxpayer-card border textDark py-3 col-md-12 col-sm-12 col-xs-12"
+                >
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                    <div class="oval"><img src="assets/image/user.svg" /></div>
+                    <div class="sectionTitle fwb px-2">
+                      {{ lang.f1.taxpayerDetails }}
+                    </div>
+                  </div>
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="row vCenter px-3 taxpayer-card-section">
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">{{ lang.f1.tin }}</div>
+                      <div class="value fwb">{{ data["Partner"] }}</div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">{{ lang.f1.name }}</div>
+                      <div class="value fwb">{{ data["Partnernm"] }}</div>
+                    </div>
+                  </div>
+
+                  <div class="Rectangle-12New"></div>
+                  <div class="row vCenter px-3 taxpayer-card-section">
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f1.accountNumber }}
+                      </div>
+                      <div class="value fwb">{{ data["Vtref"] }}</div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f1.address }}
+                      </div>
+                      <div
+                        class="value fwb"
+                        *ngIf="data['VTADSet']['results'].length > 0"
+                      >
+                        {{
+                          data["VTADSet"].results[0].RegionDesc
+                            ? data["VTADSet"].results[0].RegionDesc + ", "
+                            : ""
+                        }}
+                        {{
+                          data["VTADSet"].results[0].City
+                            ? data["VTADSet"].results[0].City +
+                              (data["VTADSet"].results[0].PostalCd ? ", " : "")
+                            : ""
+                        }}
+                        {{ data["VTADSet"].results[0].PostalCd }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12New"></div>
+                  <div class="row vCenter px-3 taxpayer-card-section">
+                    <div class="col-md-12">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f1.dueAmount }}
+                      </div>
+                      <div class="value fwb">
+                        {{ data["TotInvAmt"] | number: "0.2" }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="check" style="margin-bottom: 56px">
+                  <mat-checkbox
+                    class="checkboxAckCss"
+                    formControlName="check1"
+                    [ngClass]="{
+                      'checkbox-error': formSubmit && !fg1.value.check1
+                    }"
+                  >
+                    {{ lang.f1.term }}
+                  </mat-checkbox>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btnPrimary"
+                  style="min-width: 207px !important"
+                  mat-raised-button
+                >
+                  {{ lang.continue }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 2
+
+
+
+                -------------------------------------------->
+        <div class="row" *ngIf="optionActive === 2">
+          <div class="col-md-12">
+            <form [formGroup]="fg2" (ngSubmit)="onSubmit2()">
+              <div class="row mt-3">
+                <div class="col-md-12 mt-3 mx-0">
+                  <div class="row">
+                    <div
+                      class="col-md-6 mt-3"
+                      *ngFor="
+                        let tab of data['VTIASet']['results'];
+                        let index = index
+                      "
+                    >
+                      <mat-card
+                        class="border py-3"
+                        [ngClass]="[
+                          highlightedBatch.indexOf(tab) !== -1
+                            ? 'return-card2'
+                            : 'return-card-inactive2',
+                          formSubmit && highlightedBatch.length === 0
+                            ? 'input-error'
+                            : ''
+                        ]"
+                        (click)="selectBills(tab)"
+                      >
+                        <div class="verticallyCenter px-3" style="height: 32%">
+                          <div class="text-bold fwb mb-2">
+                            {{ lang.f2.vat }}
+                          </div>
+                          <div class="caption mt-2">{{ lang.f2.caption }}</div>
+                        </div>
+                        <div class="divider"></div>
+
+                        <div class="row px-3">
+                          <div class="col-md-12">
+                            <div class="text-bold mt-3 mb-3">
+                              {{
+                                getFormattedAmount(tab.Betrh) | number: "0.2"
+                              }}
+                              {{ lang.sar }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row px-3 mt-3">
+                          <div class="col-md-6">
+                            <div class="text-14">{{ lang.f2.sadNumber }}</div>
+                            <div class="text-19 fwb">{{ tab.SadadNo }}</div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="text-14">{{ lang.f2.tax_period }}</div>
+                            <div class="text-19 fwb">
+                              {{ tab.Taxperioddsc }}
+                            </div>
+                          </div>
+                        </div>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12 mt-3 mx-0">
+                  <div
+                    class="tag-success-installment row mx-1 justify-content-between px-3"
+                  >
+                    <div [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'">
+                      <div class="primary-centre-text">
+                        {{ lang.f2.amt }}
+                      </div>
+                    </div>
+                    <div class="align-left-text">
+                      <div>
+                        {{
+                          getFormattedAmount(selectedTotAmount) | number: "0.2"
+                        }}
+                        {{ lang.sar }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-5 mx-0">
+                <!-- <button mat-button matStepperPrevious>Back</button> -->
+                <button class="btnPrimary" style="width: 22%" mat-button>
+                  {{ lang.continue }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 3
+
+
+
+                -------------------------------------------->
+
+        <div class="row" *ngIf="optionActive === 3">
+          <div class="col-md-12">
+            <form [formGroup]="fg3" (ngSubmit)="onSubmit3()">
+              <div
+                class="row mt-3"
+                [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+              >
+                <div class="col-md-12 column-title mt-3 mx-0">
+                  {{ lang.f3.freq }}
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12 mt-3 mx-0">
+                  <div class="row">
+                    <div class="col-md-3" style="padding-inline-start: 0">
+                      <div
+                        class="mx-3"
+                        [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                      >
+                        <mat-card
+                          class="cardActive"
+                          formControlName="selectFreq"
+                          name="selectFreq"
+                          ngDefaultControl
+                        >
+                          <div class="title-card">
+                            {{ lang.f3.monthly }}
+                          </div>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row mt-3"
+                [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+              >
+                <div class="col-md-12 column-title mt-3 mx-0">
+                  {{ lang.f3.sch }}
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12 mt-3 mx-0">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-card style="max-width: 100%">
+                        <div
+                          class="value"
+                          [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                        >
+                          {{ lang.f3.label1 }}
+                        </div>
+                        <div
+                          class="value mt-3 mb-3"
+                          [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                        >
+                          <h6>{{ gridsize.value }}</h6>
+                        </div>
+                        <div class="row align-center">
+                          <div class="col-md-12">
+                            <mat-card
+                              class="card px-3"
+                              style="border-radius: 15px; padding: 0px"
+                            >
+                              <!-- <mat-slider #gridsize (change)="updateSetting($event)" step="1"
+                                                                            min="1" max="{{maxFreq}}" value="gridsize" tickInterval="5"
+                                                                            formControlName="gridsize" name="gridsize" ngDefaultControl>
+                                                                        </mat-slider> -->
+                              <mat-slider
+                                #gridsize
+                                [disabled]="sliderDisabled"
+                                max="12"
+                                min="2"
+                                tickInterval="1"
+                                value="gridsize"
+                                formControlName="gridsize"
+                                (change)="updateSetting($event)"
+                              >
+                              </mat-slider>
+                            </mat-card>
+                          </div>
+                          <div class="col-md-12 mb-3 mt-2">
+                            <span
+                              class="placeholder"
+                              style="font-size: 12px"
+                              [ngClass]="
+                                lang.dir === 'rtl' ? 'fl-right' : 'fl-left'
+                              "
+                              >{{ lang.f3.min }} . {{ lang.f3.two }}</span
+                            >
+                            <span
+                              class="placeholder"
+                              style="font-size: 12px"
+                              [ngClass]="
+                                lang.dir === 'rtl' ? 'fl-left' : 'fl-right'
+                              "
+                              >{{ lang.f3.max }}
+                              .
+                              {{ lang.f3.twelve }}</span
+                            >
+                          </div>
+                           
+                        </div>
+                      </mat-card>
+                      <!-- <div *ngIf="submitted && fC.gridsize.errors"
+                                                            class="col-md-12 mx-3 invalid-feedback">
+                                                            <div *ngIf="fC.gridsize.errors.required">{{lang.screen2.req}}</div>
+                                                        </div> -->
+                    </div>
+                    <!-- <div class="col-md-6">
+                                      <mat-card [ngClass]="
+                                          submitted && fC.gridsize2.errors
+                                            ? 'input-error'
+                                            : 'card-uploaded'
+                                        " style="max-width: 100%">
+                                        <div class="value" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                          {{ lang.filter.label4 }}
+                                        </div>
+                                        <div class="value mt-3 mb-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                          <h6>
+                                            {{
+                                              getFormattedAmount(gridsize2.value)
+                                                | currency: "SAR"
+                                                | slice: 3
+                                            }}
+                                            {{ lang.screen1.sar }}
+                                          </h6>
+                                        </div>
+                                        <div class="row align-center">
+                                          <div class="col-md-12">
+                                            <mat-card class="card px-3" style="border-radius: 15px; padding: 0px">
+                                              <mat-slider #gridsize2 (change)="updateInstallment($event.value)" min="{{ minInstall }}"
+                                                value="gridsize2" [max]="maxInstall" mask="separator" thousandSeparator=","
+                                                [tickInterval]="insInter" formControlName="gridsize2">
+                                              </mat-slider>
+                                            </mat-card>
+                                          </div>
+                                          <div class="col-md-12 mb-3 mt-2">
+                                            <span class="placeholder" style="font-size: 12px"
+                                              [ngClass]="dir === 'rtl' ? 'fl-right' : 'fl-left'">{{ lang.screen2.min }}
+                                              .
+                                              {{
+                                                getFormattedAmount(minInstall)
+                                                  | currency: "SAR"
+                                                  | slice: 3
+                                              }}
+                                              {{ lang.screen1.sar }}</span>
+                                            <span class="placeholder" style="font-size: 12px"
+                                              [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'">{{ lang.screen2.max }}
+                                              .
+                                              {{
+                                                getFormattedAmount(maxInstall)
+                                                  | currency: "SAR"
+                                                  | slice: 3
+                                              }}
+                                              {{ lang.screen1.sar }}</span>
+                                          </div>
+                                           
+                                        </div>
+                                      </mat-card>
+                                      
+                                    </div> -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-md-12 mt-3 mx-0">
+                  <div class="tag-success-installment row mx-1">
+                    <div
+                      class="col-md-6"
+                      [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                    >
+                      <div class="primary-centre-text">
+                        {{ lang.f2.amt }}
+                      </div>
+                    </div>
+                    <div class="col-md-6 align-left-text">
+                      <div>
+                        {{
+                          getFormattedAmount(selectedTotAmount) | number: "0.2"
+                        }}
+                        {{ lang.sar }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12 mt-3 mx-0">
+                  <div class="tag-success-installment row mx-1">
+                    <div
+                      class="col-md-6"
+                      [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                    >
+                      <div class="primary-centre-text">
+                        {{ lang.f3.label3 }}
+                      </div>
+                    </div>
+                    <div class="col-md-6 align-left-text">
+                      <div>
+                        {{
+                          (installmentPlanGenerated
+                            ? getFormattedAmount(planData["Peneltyamt"])
+                            : 0.0
+                          ) | number: "0.2"
+                        }}
+                        {{ lang.sar }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12 mt-3 mx-0">
+                  <div class="tag-success-installment row mx-1">
+                    <div
+                      class="col-md-6"
+                      [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                    >
+                      <div class="primary-centre-text">
+                        {{ lang.f3.label4 }}
+                      </div>
+                    </div>
+                    <div class="col-md-6 align-left-text">
+                      <div>
+                        {{
+                          (installmentPlanGenerated
+                            ? getFormattedAmount(planData["Totdueamt"])
+                            : 0.0
+                          ) | number: "0.2"
+                        }}
+                        {{ lang.sar }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="row mt-3"
+                [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+              >
+                <div class="col-md-12 column-title mt-3 mx-0">
+                  <button
+                    class="btnSecondary"
+                    (click)="
+                      installmentPlanGenerated
+                        ? displayInstallmentSchedule()
+                        : generateSch()
+                    "
+                    type="button"
+                    [ngClass]="{
+                      'input-error': formSubmit && !installmentPlanGenerated
+                    }"
+                    mat-button
+                  >
+                    {{
+                      installmentPlanGenerated ? lang.f3.label5 : lang.f3.label6
+                    }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="row mt-5 mx-0">
+                <button
+                  class="btnPrimary"
+                  type="submit"
+                  style="width: 22%"
+                  mat-button
+                >
+                  {{ lang.continue }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 4
+
+
+
+                -------------------------------------------->
+
+        <div class="row" *ngIf="optionActive === 4">
+          <div class="col-md-12">
+            <form [formGroup]="fg4" (ngSubmit)="onSubmit4()">
+              <div class="mt-3">
+                <div class="form-3-container" style="margin-bottom: 56px">
+                  <div class="row">
+                    <div
+                      *ngFor="
+                        let attach of fg4.get('doc')['controls'];
+                        let j = index
+                      "
+                      class="col-md-6 col-sm-12 col-xs-12 mb-3"
+                    >
+                      <div
+                        class="card-uploaded border"
+                        style="min-width: unset; max-width: 438px"
+                      >
+                        <div class="card-delete">
+                          <img
+                            (click)="
+                              deleteAttachmentFromSer(
+                                attach['controls']['id'].value,
+                                attach['controls']['did'].value,
+                                j
+                              )
+                            "
+                            src="assets/image/delete.svg"
+                          />
+                        </div>
+
+                        <div class="card-file-content">
+                          <img
+                            src="assets/images/generic-documents.png"
+                            style="width: 24px; margin: 0 auto"
+                          />
+
+                          <div
+                            class="value textDark mt-1 card-main-text fwb"
+                            style="overflow-x: auto; overflow-y: hidden"
+                          >
+                            {{ attach["controls"]["name"].value }}
+                          </div>
+                          <!-- <div class="caption textGray mt-1">{{  attach['controls'].hasOwnProperty('size') ? attach['controls']['size'].value: '  '}}</div> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                      <div
+                        class="card-upload border"
+                        style="
+                          min-width: unset;
+                          max-width: 438px;
+                          cursor: pointer;
+                        "
+                        (click)="
+                          fg4['value']['doc']['length'] < 5
+                            ? fileInput.click()
+                            : false
+                        "
+                        appDragDrop
+                        (onFileDropped)="
+                          fg4['value']['doc']['length'] < 5
+                            ? uploadFiles($event)
+                            : false
+                        "
+                        [ngClass]="
+                          fg4['value']['doc']['length'] === 5
+                            ? 'disableDraganddrop'
+                            : ''
+                        "
+                      >
+                        <div class="card-upload-content">
+                          <input
+                            hidden
+                            type="file"
+                            #fileInput
+                            (change)="uploadFiles($event.target.files)"
+                            onclick="this.value = null"
+                          />
+                          <img src="assets/image/attach-gray.svg" />
+                          <div
+                            class="value textPrimary mt-1 card-main-text fwb"
+                          >
+                            {{ lang.f4.drag }}
+                          </div>
+                          <div class="caption textGray mt-1" dir="ltr">
+                            {{ lang.mbMax }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3 p-3 border mx-0">
+                    <div class="info-icon">
+                      <img src="assets/image/information.svg" />
+                    </div>
+                    <div class="col-11 px-0">
+                      <ol class="col-11">
+                        <li>{{ lang.attachInstructions1 }}</li>
+                        <li>{{ lang.attachInstructions2 }}</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btnPrimary"
+                  style="min-width: 207px !important"
+                  mat-raised-button
+                >
+                  {{ lang.continue }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ---------------------------------------------------------------------------------------------
+
+
+                    Summary
+
+
+                    -------------------------------------------------------- -->
+
+        <form [formGroup]="fg5" *ngIf="optionActive == 5">
+          <div
+            class="taxpayer-card border textDark py-3 col-md-12 col-sm-12 col-xs-12 mt-3 mb-0"
+          >
+            <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+              <div class="oval"><img src="assets/image/user.svg" /></div>
+              <div class="sectionTitle fwb px-2">
+                {{ lang.f1.taxpayerDetails }}
+              </div>
+            </div>
+            <div class="Rectangle-12New"></div>
+
+            <div class="row vCenter px-3 taxpayer-card-section">
+              <div class="col-md-6">
+                <div class="value mb-1 textGray">{{ lang.f1.tin }}</div>
+                <div class="value fwb">{{ planData["Partner"] }}</div>
+              </div>
+              <div class="col-md-6">
+                <div class="value mb-1 textGray">{{ lang.f1.name }}</div>
+                <div class="value fwb">{{ planData["Partnernm"] }}</div>
+              </div>
+            </div>
+
+            <div class="Rectangle-12New"></div>
+            <div class="row vCenter px-3 taxpayer-card-section">
+              <div class="col-md-6">
+                <div class="value mb-1 textGray">
+                  {{ lang.f1.accountNumber }}
+                </div>
+                <div class="value fwb">{{ planData["Vtref"] }}</div>
+              </div>
+              <div class="col-md-6">
+                <div class="value mb-1 textGray">
+                  {{ lang.f1.address }}
+                </div>
+                <div
+                  class="value fwb"
+                  *ngIf="planData['VTADSet']['results'].length > 0"
+                >
+                  {{
+                    data["VTADSet"].results[0].RegionDesc
+                      ? data["VTADSet"].results[0].RegionDesc + ", "
+                      : ""
+                  }}
+                  {{
+                    data["VTADSet"].results[0].City
+                      ? data["VTADSet"].results[0].City +
+                        (data["VTADSet"].results[0].PostalCd ? ", " : "")
+                      : ""
+                  }}
+                  {{ data["VTADSet"].results[0].PostalCd }}
+                </div>
+              </div>
+            </div>
+            <div class="Rectangle-12New"></div>
+            <div class="row vCenter px-3 taxpayer-card-section">
+              <div class="col-md-12">
+                <div class="value mb-1 textGray">
+                  {{ lang.f1.dueAmount }}
+                </div>
+                <div class="value fwb">
+                  {{ planData["TotInvAmt"] | number: "0.2" }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card border" style="max-width: 100%">
+                    <div class="row mt-3">
+                      <div
+                        class="col-md-6"
+                        [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                      >
+                        <div class="circle-icon mx-3">
+                          <img class="px-3" src="assets/image/bill.png" />
+                        </div>
+                        <span class="column-title fwb">{{
+                          lang.f5.bills
+                        }}</span>
+                      </div>
+                      <div
+                        class="col-md-6"
+                        [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                        *ngIf="fbNum === null"
+                      >
+                        <div
+                          class="mt-3 px-3 card-edit"
+                          [ngClass]="
+                            lang.dir === 'rtl' ? 'fl-left' : 'fl-right'
+                          "
+                          (click)="step(2)"
+                        >
+                          {{ lang.edit }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-12 mt-3">
+                        <mat-divider style="position: inherit"></mat-divider>
+                      </div>
+                    </div>
+                    <div
+                      class="row"
+                      *ngFor="
+                        let bill of highlightedBatch;
+                        let index = index;
+                        last as isLast
+                      "
+                    >
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="row px-3">
+                              <div class="col-md-6">
+                                <div
+                                  class="value fwb mt-3 mb-3"
+                                  [ngClass]="
+                                    lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                  "
+                                >
+                                  {{ lang.f5.bill }}
+                                  {{ index + 1 }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row px-3">
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <div class="card-column-label">
+                                  {{ lang.f5.billType }}
+                                </div>
+                                <!-- <div class="card-column-value">
+                                                                                  {{ bill.Abtyp }}
+                                                                              </div> -->
+
+                                <div class="card-column-value">
+                                  {{ lang.f2.vat }}
+                                </div>
+                              </div>
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <div class="card-column-label">
+                                  {{ lang.f2.sadNumber }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{ bill.SadadNo }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12 mt-3">
+                                <mat-divider
+                                  style="position: inherit"
+                                ></mat-divider>
+                              </div>
+                            </div>
+                            <div class="row px-3 mt-3 mb-3">
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <div class="card-column-label">
+                                  {{ lang.f2.tax_period }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{ bill.Taxperioddsc }}
+                                </div>
+                              </div>
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <div class="card-column-label">
+                                  {{ lang.f5.amt }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{
+                                    getFormattedAmount(bill.Betrh)
+                                      | currency: "SAR"
+                                      | slice: 3
+                                  }}
+                                  {{ lang.sar }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row" *ngIf="!isLast">
+                              <div class="col-md-12 mt-3">
+                                <mat-divider
+                                  style="position: inherit"
+                                ></mat-divider>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card border" style="max-width: 100%">
+                    <div class="row mt-3">
+                      <div
+                        class="col-md-6"
+                        [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                      >
+                        <div class="circle-icon mx-3">
+                          <img class="px-3" src="assets/image/bill.png" />
+                        </div>
+                        <span class="column-title fwb">{{
+                          lang.f3.title
+                        }}</span>
+                      </div>
+                      <div
+                        class="col-md-6"
+                        [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                        *ngIf="fbNum === null"
+                      >
+                        <div
+                          class="mt-3 px-3 card-edit"
+                          [ngClass]="
+                            lang.dir === 'rtl' ? 'fl-left' : 'fl-right'
+                          "
+                          (click)="step(3)"
+                        >
+                          {{ lang.edit }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-12 mt-3">
+                        <mat-divider style="position: inherit"></mat-divider>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mt-3">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="row px-3">
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <div class="card-column-label">
+                                  {{ lang.f3.freq }}
+                                </div>
+                                <div class="card-column-value">
+                                  <span>{{ lang.f3.monthly }}</span>
+                                </div>
+                              </div>
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <div class="card-column-label">
+                                  {{ lang.f3.label1 }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{ fg3.controls.gridsize.value }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 mt-3">
+                            <mat-divider
+                              style="position: inherit"
+                            ></mat-divider>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 mt-3 mb-3">
+                            <div class="row px-3">
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <!-- <div
+                                  class="card-column-label"
+                                  [ngClass]="
+                                    lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                  "
+                                >
+                                  {{ lang.f2.amt }}
+                                </div>
+                                <div
+                                  class="card-column-value"
+                                  [ngClass]="
+                                    lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                  "
+                                >
+                                  {{ planData["Totliablityamt"] }}
+                                  {{ lang.sar }}
+                                </div> -->
+                                <button
+                                  class="btnSecondary"
+                                  (click)="displayInstallmentSchedule()"
+                                  type="button"
+                                  mat-button
+                                >
+                                  {{ lang.f3.label5 }}
+                                </button>
+                              </div>
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                                *ngIf="fbNum !== null"
+                              >
+                                <button
+                                  class="btnSecondary"
+                                  (click)="displayAgreementSchedulePlan()"
+                                  type="button"
+                                  mat-button
+                                >
+                                  {{ lang.displayAgreementSchedulePlan }}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-0">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card border" style="max-width: 100%">
+                    <div class="row mt-3">
+                      <div
+                        class="col-md-6"
+                        [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                      >
+                        <div class="circle-icon mx-3">
+                          <img class="px-3" src="assets/image/attach.png" />
+                        </div>
+                        <span class="column-title fwb">{{
+                          lang.f4.attachments
+                        }}</span>
+                      </div>
+                      <div
+                        class="col-md-6"
+                        [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                        *ngIf="fbNum === null"
+                      >
+                        <div
+                          class="mt-3 px-3 card-edit"
+                          [ngClass]="
+                            lang.dir === 'rtl' ? 'fl-left' : 'fl-right'
+                          "
+                          (click)="step(4)"
+                        >
+                          {{ lang.edit }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-12 mt-3">
+                        <mat-divider style="position: inherit"></mat-divider>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mt-3">
+                        <div class="row">
+                          <div class="col-md-12 mb-3">
+                            <div class="row px-3">
+                              <div
+                                class="col-md-6"
+                                [ngClass]="
+                                  lang.dir === 'rtl' ? 'textAr' : 'textEn'
+                                "
+                              >
+                                <div class="card-column-label">
+                                  {{ lang.f4.attachment }}
+                                </div>
+                                <div class="card-column-value">
+                                  <ng-container
+                                    *ngFor="let each of getControls()"
+                                  >
+                                    <span
+                                      style="
+                                        padding-inline-end: 15px;
+                                        display: inline-block;
+                                      "
+                                      *ngIf="each.id == 'ZVTA'"
+                                      >{{ each.name }}
+                                      <img
+                                        src="assets/images/generic-documents.png"
+                                        style="width: 24px; margin: 0 auto"
+                                    /></span>
+                                  </ng-container>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-0">
+              <div class="tag-success-installment row mx-1">
+                <div
+                  class="col-md-6"
+                  [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                >
+                  <div class="primary-centre-text">
+                    {{ lang.f2.amt }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{ getFormattedAmount(selectedTotAmount) | number: "0.2" }}
+                    {{ lang.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-0">
+              <div class="tag-success-installment row mx-1">
+                <div
+                  class="col-md-6"
+                  [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                >
+                  <div class="primary-centre-text">
+                    {{ lang.f3.label3 }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{
+                      getFormattedAmount(planData["Peneltyamt"]) | number: "0.2"
+                    }}
+                    {{ lang.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-0">
+              <div class="tag-success-installment row mx-1">
+                <div
+                  class="col-md-6"
+                  [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+                >
+                  <div class="primary-centre-text">
+                    {{ lang.f3.label4 }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{
+                      getFormattedAmount(planData["Totdueamt"]) | number: "0.2"
+                    }}
+                    {{ lang.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-5 mx-0">
+            <button
+              class="btnPrimary"
+              style="width: 22%"
+              mat-button
+              (click)="initiateConditionsModal()"
+              *ngIf="fbNum === null"
+              type="submit"
+            >
+              {{ lang.confirm }}
+            </button>
+          </div>
+        </form>
+      </form>
+    </div>
+  </div>
+  <!-- end of !showSuccess -->
+
+  <div class="row mt-3" *ngIf="showSuccess">
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row align-center">
+        <img class="px-3" style="height: 12vh" src="assets/image/success.svg" />
+      </div>
+    </div>
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row align-center Installment-Plans">
+        {{ lang.success.title }}
+      </div>
+    </div>
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row align-center card-column-label">
+        {{ lang.success.message }}
+      </div>
+    </div>
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row align-center">
+        <div class="confirmation-input-box">
+          <div class="col-md-6">
+            <div
+              class="card-column-label"
+              [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+            >
+              {{ lang.success.name }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-column-value" style="float: right">
+              {{ submitData["Partnernm"] }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-center mt-3">
+        <div class="confirmation-input-box">
+          <div class="col-md-6">
+            <div
+              class="card-column-label"
+              [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+            >
+              {{ lang.success.applicationNumber }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-column-value" style="float: right">
+              {{ submitData["Fbnumz"] }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-center mt-3">
+        <div class="confirmation-input-box">
+          <div class="col-md-6">
+            <div
+              class="card-column-label"
+              [ngClass]="lang.dir === 'rtl' ? 'textAr' : 'textEn'"
+            >
+              {{ lang.success.date }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-column-value" style="float: right">
+              {{ currentDate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-12 mt-3 mx-3">
+      <div class="row align-center mt-3 mx-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+          <button class="btnPrimary" mat-button (click)="downloadAck()">
+            <span class="acknowledgement-btn">{{
+              lang.success.acknowledgement
+            }}</span>
+          </button>
+        </div>
+
+        <div class="col-md-2"></div>
+      </div>
+    </div> -->
+    <div class="col-md-12 mt-3 mx-3">
+      <div class="row mt-3 mx-3 align-center">
+        <span
+          class="btnSecondary acknowledgement-btn"
+          [routerLink]="['/mains/dashboard']"
+          >{{ lang.success.redirect }}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of container -->
+
+<div
+  class="modal textDark"
+  id="terms"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+  style="font-family: SSTArabic-Roman"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('terms')"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3">{{ lang.termsModal.title }}</div>
+          <div class="dark fbl value mb-3">{{lang.termsModal.subtitle}}</div>
+          <div class="lightCard py-3 pr-3 mb-3">
+            <ul class="modalInstructions f12 gray">
+              <li>{{ lang.termsModal.i1 }}</li>
+              <li>{{ lang.termsModal.i2 }}</li>
+              <li>{{ lang.termsModal.i3 }}</li>
+              <li>{{ lang.termsModal.i4 }}</li>
+            </ul>
+          </div>
+
+          <div class="col-md-12 check row">
+            <mat-checkbox
+              class="checkboxAckCss"
+              [(ngModel)]="isAgree"
+              [ngClass]="{
+                'checkbox-error': instructionSubmitted && !isAgree
+              }"
+            >
+              {{ lang.termsModal.agree }}
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary"
+              (click)="startProcess()"
+              style="min-width: 207px"
+              mat-raised-button
+            >
+              {{ lang.termsModal.btnTitle }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div
+  class="modal textDark"
+  id="conditions"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+  style="font-family: SSTArabic-Roman"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('conditions')"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3">
+            {{ lang.conditionsModal.title }}
+          </div>
+          <div class="lightCard py-3 pr-3 mb-3 lightCardHeight">
+            <ul class="modalInstructions f12 gray">
+              <li *ngFor="let item of lang.conditionsModal.listOfConditions">
+                {{ item }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-12 check row">
+            <mat-checkbox
+              class="checkboxAckCss"
+              [(ngModel)]="isDeclarationAgreed"
+              [ngClass]="{
+                'checkbox-error': formSubmit && !isDeclarationAgreed
+              }"
+            >
+              {{ lang.conditionsModal.declaration }}
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary"
+              (click)="preSubmitRequest()"
+              style="min-width: 207px"
+              mat-raised-button
+            >
+              {{ lang.confirm }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

@@ -1,0 +1,61 @@
+{
+  "data": [
+  {
+    "branchName": 62515,
+    "city": "BRANCH CITY A",
+    "type": "MAIN",
+    "firstName": "Holly",
+    "name": "BRANCH NAME A",
+    "email": "holly@dundermifflin.com",
+    "crLicense": 1405605858624,
+    "updatedAt": 1416928146449,
+    "remoteList": [
+      {
+        "portalId": 62515,
+        "ownerId": 64,
+        "remoteId": "137304",
+        "remoteType": "HUBSPOT",
+        "active": true
+      }
+    ]
+  },
+  {
+    "branchName": 62516,
+    "city": "BRANCH CITY B",
+    "type": "SUB",
+    "firstName": "Michael",
+    "name": "BRANCH NAME B",
+    "email": "michael@dundermifflin.com",
+    "crLicense": 1405605858732,
+    "updatedAt": 1416928145437,
+    "remoteList": [
+      {
+        "portalId": 62515,
+        "ownerId": 65,
+        "remoteId": "153112",
+        "remoteType": "HUBSPOT",
+        "active": true
+      }
+    ]
+  },
+  {
+    "branchName": 62517,
+    "city": "BRANCH CITY C",
+    "type": "SUB",
+    "firstName": "Michael",
+    "name": "BRANCH NAME C",
+    "email": "michael@dundermifflin.com",
+    "crLicense": 1405605858732,
+    "updatedAt": 1416928145437,
+    "remoteList": [
+      {
+        "portalId": 62515,
+        "ownerId": 65,
+        "remoteId": "153112",
+        "remoteType": "HUBSPOT",
+        "active": true
+      }
+    ]
+  }
+]
+}

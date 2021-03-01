@@ -1,0 +1,699 @@
+.exciseTitle1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+}
+.viewMore {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: start;
+  color: #006450;
+}
+
+.sideNumber {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 6px;
+  float: right;
+}
+
+.exciseSecondTitle {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.exciseSecondTitle1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.uploadfilecontainer {
+  /* background-image: url("../../assets/cloud-2044823_960_720.png"); */
+  background-color: #ffffff !important;
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: center;
+  height: 140px;
+  width: 80%;
+  margin: 20px auto;
+  border: none;
+  border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 10px auto;
+  background: #ffffff;
+  border: 1px dashed;
+  border-radius: 12px;
+  padding: 5px;
+  color: #1c8adb;
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.files-list .delete-file img {
+  width: 30px;
+}
+
+.fileUploadTxt {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #006450;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.fileUploadTxt1 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #999999;
+}
+
+.fileSize {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #999999;
+}
+
+.fileName {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #232323;
+}
+
+.btnOne {
+  height: 56px;
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+  background-color: #ffffff;
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #006450;
+}
+
+.titleTwo {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.labelTxtCss {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  text-align: start;
+}
+
+.accLabel {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #006450;
+}
+
+.acctxt1 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 15px;
+}
+
+.acctxt2 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.acctxt3 {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.acctxt2Active {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.acctxt3Active {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.btnCss {
+  width: 207px;
+  height: 48px;
+  border-radius: 14px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  background-color: #d2a02a;
+}
+
+.btnCss2 {
+  height: 48px;
+  border-radius: 14px;
+  background-color: #d99a29;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.btnCss3 {
+  height: 48px;
+  border-radius: 14px;
+  background-color: #ffffff;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #d99a29;
+}
+
+.infoBoxCss {
+  height: 80px;
+  padding: 20px;
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+}
+
+.infoTxt1 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #151515;
+}
+
+.infoTxt2 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.exciseGoodCss {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.exciseCardTxt1 {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.exciseCardTxt1In {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #151515;
+}
+
+.summaryCss1 {
+  width: 48px;
+  height: 48px;
+  background: #e5efed;
+  border-radius: 50%;
+  text-align: center;
+  margin-right: 10px;
+  position: relative;
+  bottom: 8px;
+}
+
+.summaryCss2 {
+  width: 24px;
+  margin: 0;
+  position: relative;
+  top: 25%;
+}
+
+.summaryCss3 {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+  text-align: start;
+}
+
+.summaryCss4 {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: right;
+  color: #006450;
+}
+
+.summaryCss5 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+  text-align: start;
+}
+
+.summaryCss6 {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+  text-align: start;
+}
+
+.summaryCss7 {
+  /* object-fit: contain;
+  font-family: Montserrat; */
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.17px;
+  color: #00664f;
+}
+.summaryCss7 .summaryCss8 {
+  color: #232323;
+}
+
+.exciseAccCss1 {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+  color: #232323;
+}
+
+.exciseAccCss2 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #999999;
+}
+
+.exciseAccCssBox {
+  margin-left: 30%;
+  margin-right: 30%;
+  height: 56px;
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+}
+
+.exciseAccCssBox1 {
+  text-align: start;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 12px;
+  left: 10px;
+}
+
+.exciseAccCssBox2 {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: right;
+  color: #232323;
+  float: right;
+  position: relative;
+  right: 15px;
+}
+
+.exciseAccCssBox2Arb {
+  font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #232323;
+    float: left;
+    position: relative;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}
+
+.cardActive {
+  height: 100px;
+  width: 207px;
+  background-image: url("../../../assets/image/selected.svg");
+  background-position: center;
+}
+
+.cardInActive {
+  height: 100px;
+  width: 207px;
+  background-image: url("../../../assets/image/selected-copy-2.svg");
+  background-position: center;
+}
+
+.accCardbck {
+  height: 136px;
+  background-image: url("../../../assets/image/selected-copy-2@2x.png");
+  background-position: center;
+}
+
+.accCardbckActive {
+  height: 136px;
+  background-image: url("../../../assets/image/selected@2x.png");
+  background-position: center;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  height: 32px !important;
+  width: 32px !important;
+  border-radius: 6px !important;
+}
+
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate {
+  background-color: #13614c !important; /* Red background for example */
+}
+
+
+.ackTxtvalue{
+  font-family: SSTArabic-Medium;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: 0.17px;
+  text-align: start;
+}
+
+.tnc{
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+}
+
+.btn-secondary {
+  background-color: none!important;
+  border-color: none!important;
+}
+
+::ng-deep #testForm .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: unset;
+}
+
+.btnCssDisabled {
+  width: 207px;
+  height: 48px;
+  border-radius: 14px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff!important;
+  background-color: #d2a02a80;
+}
+
+.acctxt1Arb {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+}
+
+
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}
+
+.exciseTitle1:hover{
+  color: #151515;
+}
+
+
+
+/* Steps CSS*/
+
+.process-steps {
+  font-family: SSTArabic-Roman;
+}
+
+.process-steps ul {
+  box-sizing: content-box;
+  clear: both;
+  margin: 0 !important;
+  padding: 0;
+  display: inline-block;
+  text-align: center;
+}
+
+.process-steps ul li {
+  box-sizing: content-box;
+  list-style: none;
+  float: left;
+  margin: 0 8px;
+}
+
+.process-steps ul li a {
+  box-sizing: content-box;
+  display: table-cell;
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  color: #999999;
+  border-radius: 100%;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0px 0px 4px #ebebeb;
+  font-size: 16px
+}
+
+.process-steps ul li a:after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 1px;
+  background-color: #ebebeb;
+  top: 48%;
+  left: 100%;    
+}
+
+.process-steps ul li:last-child a:after {
+  content: none !important;
+}
+
+.process-steps ul li a.active {
+  background: #006450;
+  color: #fff;
+}
+
+.process-steps ul li a.completed {
+  background: #006450;
+  color: #fff;
+}
+
+.process-steps ul .line {
+  position: absolute;
+  top: 50%;
+  width: 100%
+}
+
+[dir=rtl] .process-steps ul li {
+  float: right;
+}
+
+[dir=rtl] .process-steps ul li a:after {
+  right: 100%;
+}

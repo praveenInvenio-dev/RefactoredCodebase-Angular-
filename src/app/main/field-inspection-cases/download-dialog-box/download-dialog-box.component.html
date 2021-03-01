@@ -1,0 +1,91 @@
+<div class="container col-md-12" [dir]="dir" style="padding:5%">
+    <div class="row d-block dialog-container" style="display:flex;margin-top: -15px;">
+        <img src=" assets/images/close.svg" alt="close" [ngClass]="dir==='ltr' ? 'float-right' : 'float-left'" (click)="onCrossClick()" />
+    </div>
+    <div class="row d-block dialog-container" style="display:flex; margin-top: 2.5em">
+        <div class="pageTitle" [ngClass]="dir==='ltr' ? 'float-left' : 'float-right'" style="color: var(--dark);margin-inline-start: 8%;font-family: SST Arabic;">
+            {{translation.downloadHeader}}
+        </div>
+    </div>
+    <div class="row" style="margin-top: 16px;margin-inline-start: 8%;">
+        <div class="download-dialog-subheading">
+            {{translation.downloadSubheading}}
+        </div>
+    </div>
+    <div class="row" style="margin-top: 32px; margin-bottom: 8px;margin-inline-start: 8%;">
+        <div class="dialog-subheading">
+            {{translation.statement}}
+        </div>
+    </div>
+    <div class="row" style="margin-inline-start: 8%;">
+        <!-- [ngClass]="data.dir === 'rtl' ? 'acc-arabic' : ''" -->
+        <div class="dateRangePicker">
+            <input readonly (click)=" picker.open()" [(ngModel)]="fromDate" (dateChange)="dateChange()" matInput [matDatepicker]="picker" name="fromdate" style="border: none" [placeholder]="translation.from" (dateChange)="changesToDate()" [max]="toDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker" matDatepickerToggleIcon="none"></mat-datepicker-toggle>
+            <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+            </mat-datepicker>
+            <span style="display: flex">
+          <img
+            [src]=" dir=='ltr' ? 'assets/image/arrow-right-green.svg' : 'assets/image/arrow-left-green.svg'"
+        /></span>
+            <input readonly (click)="picker1.open()" [(ngModel)]="toDate" (dateChange)="dateChange()" matInput [matDatepicker]="picker1" name="todate" style="border: none;text-align: start;" [placeholder]="translation.to" (dateChange)="changesFromDate()" [min]="fromDate"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker1">
+                <mat-icon matDatepickerToggleIcon class="d-flex" [ngClass]="dir==='ltr' ? 'float-right' : 'float-left'">
+                    <img src="assets/image/calendar.svg" alt="calendar" />
+                </mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+            </mat-datepicker>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 2.5em">
+        <div class="w-100 d-flex" style="padding-bottom: 10px">
+            <div style="margin-top:5%; margin-inline-start: 50%;">
+                <button class="btnPrimary popup-button" mat-raised-button style="width: 207px; height: 48px; margin-inline-end: 10px;font-family:SSTArabic-Bold;cursor: pointer" (click)=" exportexcel() " [disabled]="filteretData.length === 0">
+              {{translation.download}} 
+            </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="excelTable " style="display: none; " #excelTable>
+    <table>
+        <thead>
+            <tr>
+                <th>{{excel.c2.t1}}</th>
+                <th>{{excel.c2.t2}}</th>
+                <th>{{excel.c2.t3}}</th>
+                <th>{{excel.c2.t4}}</th>
+                <th>{{excel.c2.t5}}</th>
+                <th>{{excel.c2.t6}}</th>
+                <th>{{excel.c2.t7}}</th>
+                <th>{{excel.c2.t8}}</th>
+                <th>{{excel.c2.t9}}</th>
+                <th>{{excel.c2.t10}}</th>
+                <th>{{excel.c2.t11}}</th>
+                <th>{{excel.c2.t12}}</th>
+                <th>{{excel.c2.t13}}</th>
+                <th>{{excel.c2.t14}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of filteretData ">
+                <td>{{ item.Fbnum }}</td>
+                <td> {{item.constructorDate}}</td>
+                <td>{{ item.City }}</td>
+                <td>{{ item.ViolationTy }}</td>
+                <td>{{ item.District }}</td>
+                <td>{{ item.ViolationDesc }}</td>
+                <td>{{ item.Street }}</td>
+                <td>{{ item.PenaltyAmount }}</td>
+                <td>{{ item.TpName }}</td>
+                <td>{{ item.Gpart }}</td>
+                <td>{{ item.TpRepPos }}</td>
+                <td>{{ item.TpRep }}</td>
+                <td>{{ item.PaymentStatus }}</td>
+                <td>{{ item.ViolatedGoods }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

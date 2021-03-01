@@ -1,0 +1,41 @@
+<div class="row mt-4" dir="{{ direction }}">
+    <div class="col-md-12">
+        <div class="row mt-4">
+            <div class="col-md-12 vBox"  dir="ltr">
+                <input #e1 type="password" class="Verif-box ash" maxlength="1" placeholder="*"
+                    (keyup)="keyUpEvent($event, 1)" [disabled]="counter===0" />
+                <input #e2 type="password" class="Verif-box ash" maxlength="1" placeholder="*"
+                    (keyup)="keyUpEvent($event, 2)" [disabled]="counter===0" />
+                <input #e3 type="password" class="Verif-box ash" maxlength="1" placeholder="*"
+                    (keyup)="keyUpEvent($event, 3)" [disabled]="counter===0"/>
+                <input #e4 type="password"  style="color: transparent;text-shadow: 0 0 0 black" class="Verif-box ash" maxlength="1" placeholder="*"
+                    (keyup)="keyUpEvent($event, 4)" [disabled]="counter===0"/> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-2" style="color: red;">
+                {{errMsg.s1.err.e6}}
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="smallHeading" style="text-align: left;">
+                    <img src="assets/image/forgotClock.svg" /> &nbsp; <span>{{counterDisplay}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="resend">
+                    <span>
+                        <button [ngClass]="!enableResendButton? 'disabled' : 'resend'" [disabled]="!enableResendButton"
+                            (click)="resendOTP()">{{lang.verifyTitle}}</button></span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

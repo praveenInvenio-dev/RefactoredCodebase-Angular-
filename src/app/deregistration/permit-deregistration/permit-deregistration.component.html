@@ -1,0 +1,963 @@
+<div class="container" [dir]="dir">
+    <div class="row mt-3" *ngIf="!show">
+        <div class="col-md-12">
+            <span class="title1" [style.float]="dir==='rtl'?'right':'left'" [routerLink]="['/mains/profile']" style="cursor: pointer;">{{lang.title1}} &nbsp;</span>
+            <span class="title1" [style.float]="dir==='rtl'?'right':'left'" [routerLink]="['/mains/deregister']" style="cursor: pointer;">{{lang.title2}} &nbsp;</span>
+            <span class="title1" [style.float]="dir==='rtl'?'right':'left'" [routerLink]="['/mains/zakat-deregister']" style="cursor: pointer;">{{lang.title3}} &nbsp;</span>
+            <span class="title1" style="color: #151515" [style.float]="dir==='rtl'?'right':'left'" [style.margin-right]="dir === 'rtl' ? '3px' : ''" [style.margin-left]="dir === 'ltr' ? '3px' : ''"> {{lang.title4}}</span>
+        </div>
+    </div>
+    <div class="row mt-4" style="width: 100%" *ngIf="!show">
+        <div class="col-md-12 pr-0">
+            <div class="viewMore">
+                <span style="cursor: pointer" (click)="back()">
+          <img [src]="img" style="width: 24px" />
+          {{lang.back}}</span>
+                <span class="sideNumber" [style.float]="dir ==='rtl' ? 'left' : 'right'">
+          <img src="{{ menu[optionActive - 1].t3 }}" style="width: 106px" /> &nbsp;
+          <img *ngIf="optionActive==5" src="assets/image/check_vat.svg" style="width: 24px" />
+        </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4" style="text-align: start;" *ngIf="!show">
+        <div class="col-md-12">
+            <div class="exciseSecondTitle">
+                {{ menu[optionActive - 1].t1 }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2" style="text-align: start;" *ngIf="!show">
+        <div class="col-md-12">
+            <div class="exciseSecondTitle1">
+                {{ menu[optionActive - 1].t2 }}
+            </div>
+        </div>
+    </div>
+    <div class="Rectangle-12New mt-3" *ngIf="!show"></div>
+
+    <div class="mt-3 mb-3" *ngIf="!show">
+        <form style="width: 100%">
+            <div class="row" *ngIf="optionActive === 1">
+                <div class="col-md-12">
+                    <form (ngSubmit)="onSubmit()">
+
+
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-5 mt-2" style="display: inherit; padding-right: 0;" *ngFor="let item of outlets; let i = index">
+                                <div class="mr-3">
+                                    <mat-card [ngClass]="item.flag ? 'cardActive' : 'cardInActive'" (click)="selectedOutlet(i)" class="mr-0">
+                                        <div [ngClass]="dir==='rtl' ? 'acctxt1Arb' : 'acctxt1'">
+                                            <div [ngClass]="item.flag ? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                                <div class="row mt-3 mb-4">
+                                                    <div class="col-md-12 storeName" [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                        {{item?.AOutletNameTb}}
+                                                    </div>
+                                                </div>
+                                                <mat-divider [style.background-color]="item?.flag ? 'rgba(255, 255, 255, 0.1)' : 'rgba(235, 235, 235, 0.2)' "></mat-divider>
+                                                <div class="row">
+                                                    <div class="col-md-6 mt-4">
+                                                        <div class="acctxt1">
+                                                            <div class="row" style="text-align: start;">
+                                                                <div class="col-md-12 address" [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                                    {{lang.addr}}</div>
+                                                                <div class="col-md-12 address1 mt-1 text-truncate" matTooltip="{{item?.AOutletCompAddr}}" [style.color]="!item?.flag ? '#232323' : '#ffffff'">{{item?.AOutletCompAddr}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mt-4">
+                                                        <div class="acctxt1">
+                                                            <div class="row" style="text-align: start;">
+                                                                <div class="col-md-12 address" [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                                    {{lang.outNm}}</div>
+                                                                <div class="col-md-12 address1 mt-1" [style.color]="!item?.flag ? '#232323' : '#ffffff'">{{item?.AOutletNoTb}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback" *ngIf="submitted && !outletSelectedFlag">
+                                {{lang.errs.slct1outlt}}
+                            </div>
+                        </div>
+
+                        <div class="mt-4 mb-5" style="text-align: start">
+                            <button mat-button type="submit" class="btnCss mt-5" (click)="onSubmit()">{{lang.continue}}</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="row" *ngIf="optionActive === 2">
+                <div class="col-md-12">
+                    <form [formGroup]="deregForm" (ngSubmit)="onSubmit1()">
+                        <ng-container formArrayName="outletFormArray">
+
+                            <mat-accordion class="example-headers-align" *ngFor="let outletForm of deregForm.get('outletFormArray')['controls']; let i = index" [formGroupName]="i">
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <span class="outletName" [style.margin-right]="dir == 'rtl' ? 0 : ''">{{lang.outlt}} {{outletForm?.getRawValue()?.AOutletNoTb}}</span>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+
+                                    <div class="row" *ngIf="outletForm.value.mainActivitySelected">
+                                        <div class="col-md-6">
+                                            <div class="registerLabelCss required">{{lang.slctprmt}}</div>
+                                            <mat-form-field appearance="outline">
+                                                <mat-select formControlName="slctPrmtMnActvty">
+
+                                                    <mat-option [value]="permit?.APermitNoTb" *ngFor="let permit of getSubActivities(outletForm.value.permitsArr)" (click)="fetchActivity(outletForm, permit)">
+                                                        {{ permit?.APermitNoTb }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <div *ngIf="(submitted1 || outletForm.get('slctPrmtMnActvty').touched) && outletForm.get('slctPrmtMnActvty').errors" class="invalid-feedback">
+                                                <div *ngIf="(submitted1 || outletForm.get('slctPrmtMnActvty').touched) && outletForm.get('slctPrmtMnActvty').errors.required">
+                                                    {{lang.errs.slctprmterr}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="registerLabelCss required">{{lang.slctMnActvty}}</div>
+                                            <mat-form-field appearance="outline">
+                                                <mat-select formControlName="slctMnActvty">
+                                                    <mat-option [value]="actvty?.Activity" *ngFor="let actvty of activityOptions">{{actvty?.Text}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <div *ngIf="(submitted1 || outletForm.get('slctMnActvty').touched) && outletForm.get('slctMnActvty').errors" class="invalid-feedback">
+                                                <div *ngIf="(submitted1 || outletForm.get('slctMnActvty').touched) && outletForm.get('slctMnActvty').errors.required">
+                                                    {{lang.errs.slctMnActvty}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3" style="text-align: start;">
+                                        <div class="col-md-12">
+                                            <div class="exciseSecondTitle1">
+                                                {{lang.slctPrmts}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ng-container formArrayName="permitsArr">
+                                        <div class="row mt-1 pl-2 pr-2" *ngFor="let item of outletForm.get('permitsArr')['controls']; let k = index" [formGroupName]="k">
+                                            <div class="col-md-7 mt-2 pl-0 pr-0" style="display: inherit;">
+                                                <div class="mr-3">
+                                                    <mat-card [ngClass]="item?.getRawValue()?.isSelected ? 'cardActive' : 'cardInActive'" (click)="selectedLicense(outletForm, item)">
+                                                        <div [ngClass]="dir==='rtl' ? 'acctxt1Arb' : 'acctxt1'">
+                                                            <div [ngClass]="item?.getRawValue()?.isSelected ? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                                                <div class="row mt-3 mb-4">
+                                                                    <div class="col-md-12 storeName">
+                                                                        {{ item?.getRawValue()?.APermitTypeTb == 'BUP002' ? lang.crNum : item?.getRawValue()?.APermitTypeTb == 'ZS0007' ? lang.contractNum : lang.licensNum }}
+                                                                    </div>
+                                                                </div>
+                                                                <mat-divider [style.background-color]="item?.flag ? 'rgba(255, 255, 255, 0.1)' : 'rgba(235, 235, 235, 0.2)' "></mat-divider>
+                                                                <div class="row">
+                                                                    <div class="col-md-6 mt-4">
+                                                                        <div class="acctxt1">
+                                                                            <div class="row" style="text-align: start;">
+                                                                                <div class="col-md-12 address">{{lang.prmtNo}}</div>
+                                                                                <div class="col-md-12 address1 mt-1">{{item?.getRawValue()?.APermitNoTb}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 mt-4">
+                                                                        <div class="acctxt1">
+                                                                            <div class="row" style="text-align: start;">
+                                                                                <div class="col-md-12 address">{{lang.vldFrm}}</div>
+                                                                                <div class="col-md-12 address1 mt-1">
+                                                                                    {{formatDate(item?.getRawValue()?.APermitValfrDtTb.substring(6,item?.getRawValue()?.APermitValfrDtTb.length-2)) | date}}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </mat-card>
+                                                </div>
+                                            </div>
+                                            <div class="invalid-feedback" *ngIf="submitted1 && !outletForm?.getRawValue()?.activitySelected">
+                                                {{lang.errs.slct1}}
+                                            </div>
+                                            <div class="row pl-2 pr-2" *ngIf="item?.getRawValue()?.isSelected">
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss required">{{lang.dregDt}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput [matDatepicker]="picker" formControlName="deregDate" [max]="enddate" (keypress)='restrictAlphabetss($event)' 
+                                                        (dateChange)="getdateErr(item.get('deregDate').value);compareDates(item.get('deregDate').value, item?.getRawValue()?.APermitValfrDtTb.substring(6,item?.getRawValue()?.APermitValfrDtTb.length-2))">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                                                        </mat-datepicker>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('deregDate').touched) && item.get('deregDate').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('deregDate').touched) && item.get('deregDate').errors.required">
+                                                            {{lang.errs.dregDtErr}}
+                                                        </div>
+                                                    </div> 
+                                                    <div *ngIf="(submitted1 || item.get('deregDate').touched) && dtVldtnFlag" class="invalid-feedback">
+                                                        {{lang.errs.drgDtVldtn}}
+                                                    </div>
+                                                    <div *ngIf="(submitted1 || item.get('deregDate').touched) && dtVldtnFlag1" class="invalid-feedback">
+                                                        {{lang.errs.drgDtVldtn1}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss required">{{lang.dregReason}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select formControlName="deregReason">
+                                                            <mat-option value="1" (click)="selectedReason('1', item)">{{lang.closed}}
+                                                            </mat-option>
+                                                            <mat-option value="3" (click)="selectedReason('3', item)">{{lang.trnsfr}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('deregReason').touched) && item.get('deregReason').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('deregReason').touched) && item.get('deregReason').errors.required">
+                                                            {{lang.errs.dregReasonErr}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss" [ngClass]="{ 'required': item?.getRawValue()?.deregReason == 3 } ">{{lang.tin}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput placeholder="" maxlength="10" formControlName="tin" (blur)="tinValidation(item?.getRawValue()?.tin, item)" (keypress)="restrictAlphabetss($event)">
+                                                    </mat-form-field>
+                                                    <div *ngIf="tinErr" class="invalid-feedback">
+                                                        <p>{{ tinMsg }}</p>
+                                                    </div>
+                                                    <div *ngIf="(submitted1 || item.get('tin').touched) && item.get('tin').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('tin').touched) && item.get('tin').errors.required">
+                                                            {{lang.errs.tinReq}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss" [ngClass]="{ 'required': item?.getRawValue()?.deregReason == 3 } ">{{lang.idTyp}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select formControlName="idType">
+                                                            <mat-option [value]="idTypes[0].value" (click)="onChange(idTypes[0].value, item)">{{idTypes[0].name}}
+                                                            </mat-option>
+                                                            <mat-option [value]="idTypes[1].value" (click)="onChange(idTypes[1].value, item)">{{idTypes[1].name}}
+                                                            </mat-option>
+                                                            <mat-option [value]="idTypes[2].value" (click)="onChange(idTypes[2].value, item)">{{idTypes[2].name}}
+                                                            </mat-option>
+                                                            <mat-option [value]="idTypes[3].value" (click)="onChange(idTypes[3].value, item)">{{idTypes[3].name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('idType').touched) && item.get('idType').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('idType').touched) && item.get('idType').errors.required">
+                                                            {{lang.errs.slctIDTypErr}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss" [ngClass]="{ 'required': item?.getRawValue()?.deregReason == 3 } ">{{lang.idNum}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <input matInput placeholder="" maxlength="15" formControlName="idNum" (blur)="IDtypeValidation(item?.getRawValue()?.idType, item?.getRawValue()?.idNum, item)"
+                                                        (keypress)='restrictAlphabets($event)'>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('idNum').touched) && item.get('idNum').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('idNum').touched) && item.get('idNum').errors.required">
+                                                            {{lang.errs.entrIDNumErr}}
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="idErr && item?.getRawValue()?.idNum !== ''" class="invalid-feedback">
+                                                        <p>{{idMsg}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss" [ngClass]="{ 'required': item?.getRawValue()?.deregReason == 3 } ">{{lang.dtofBrth}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput [matDatepicker]="picker1" formControlName="dob" [max]="enddate" (keypress)='restrictAlphabetss($event)' 
+                                                        (dateChange)="getdateErr(item.get('dob').value);compareDates1(item.get('deregDate').value, item.get('dob').value, item?.getRawValue()?.APermitValfrDtTb);validateID2();">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+                                                        </mat-datepicker>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('dob').touched) && item.get('dob').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('dob').touched) && item.get('dob').errors.required">
+                                                            {{lang.errs.entrDtofBrth}}
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="(submitted1 || item.get('dob').touched) && dobVldtnFlag" class="invalid-feedback">
+                                                        {{lang.errs.dobVldtn}}
+                                                    </div>
+                                                    <div *ngIf="(submitted1 || item.get('dob').touched) && dobVldtnFlag1" class="invalid-feedback">
+                                                        {{lang.errs.dobVldtn}}
+                                                    </div>
+                                                    <div *ngIf="dobErr && submitted1" class="invalid-feedback">
+                                                        <p>{{dobMsg}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss" [ngClass]="{ 'required': item?.getRawValue()?.deregReason == 3 } ">{{lang.name}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <input matInput placeholder="" maxlength="30" formControlName="name" (keypress)='allowAlphabets($event)'>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('name').touched) && item.get('name').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('name').touched) && item.get('name').errors.required">
+                                                            {{lang.errs.entrNameErr}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss" [ngClass]="{ 'required': item?.getRawValue()?.deregReason == 3 } ">{{lang.familyName}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <input matInput placeholder="" maxlength="30" formControlName="familyName" (keypress)='allowAlphabets($event)'>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('familyName').touched) && item.get('familyName').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('familyName').touched) && item.get('familyName').errors.required">
+                                                            {{lang.errs.entrFmlyName}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss">{{lang.fatherName}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <input matInput placeholder="" maxlength="30" formControlName="fName" (keypress)='allowAlphabets($event)'>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('fName').touched) && item.get('fName').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('fName').touched) && item.get('fName').errors.required">
+                                                            {{lang.errs.entrFatherNameErr}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="registerLabelCss">{{lang.gfName}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <input matInput placeholder="" maxlength="30" formControlName="gfName" (keypress)='allowAlphabets($event)'>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(submitted1 || item.get('gfName').touched) && item.get('gfName').errors" class="invalid-feedback">
+                                                        <div *ngIf="(submitted1 || item.get('gfName').touched) && item.get('gfName').errors.required">
+                                                            {{lang.errs.entrGFName}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </ng-container>
+
+                        <div class="mt-4 mb-5" style="text-align: start">
+                            <button mat-button type="submit" class="btnCss mt-5" (click)="onSubmit1()">{{lang.continue}}</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="row" *ngIf="optionActive === 3">
+
+                <form [formGroup]="attchForm" (ngSubmit)="onSubmit3()">
+                    <div class="row mt-3">
+                        <ng-container formArrayName="doc">
+                            <ng-container *ngFor="let attach of attchForm.get('doc')['controls']; let j = index;">
+                                <div class="col-md-6" [formGroupName]="j">
+                                    <ng-container>
+                                        <div class="labelTxtCss mt-2">
+                                            <p class="salesTxt" [ngClass]="{'required': attach.value.isRequired}">
+                                                {{ attach.value.docName }}<span *ngIf="attach.value.isRequired"> ({{lang.mandatory}})</span></p>
+                                        </div>
+                                        <mat-card style="height: 216px;border: 1px dashed #ebebeb;" *ngIf="!attach.value.flag">
+                                            <div class="uploadfilecontainer" (click)="openAttachModal(attach.value.docType, j)" *ngIf="attach.value.isRequired">
+
+                                                <div class="row text-center mt-5">
+                                                    <div class="col-md-12">
+                                                        <img src="assets/image/attach.svg" style="width: 24px;">
+                                                        <div class="fileUploadTxt">{{lang.attchTxt1}}
+                                                        </div>
+                                                        <div class="fileUploadTxt1">{{lang.attchTxt2}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="uploadfilecontainer" *ngIf="!attach.value.isRequired" style="opacity: 0.25;">
+
+                                                <div class="row text-center mt-5">
+                                                    <div class="col-md-12">
+                                                        <img src="assets/image/attach.svg" style="width: 24px;">
+                                                        <div class="fileUploadTxt">{{lang.attchTxt1}}
+                                                        </div>
+                                                        <div class="fileUploadTxt1">{{lang.attchTxt2}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-card>
+                                        <!-- <div *ngIf="submitted2 && attach.value.isRequired && attach.value.name == ''" class="mt-2 invalid-feedback">
+                                            {{lang.errs.attchReq}}
+                                        </div> -->
+
+                                        <div *ngIf="attach.value.flag" >
+                                            <mat-card style="height: 216px;margin-top:10px;border: 1px solid #999999;">
+                                                <div (click)="openAttachModal(attach.value.docType, j)">
+                                                    <div class="row text-center mt-5">
+                                                        <div class="col-md-12">
+                                                            <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                                            <p class="fileName"> {{ attach.value.name }} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </mat-card>
+
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </form>
+
+                <div class="mt-4 mb-5" style="text-align: start">
+                    <button mat-button type="submit" class="btnCss mt-5" (click)="onSubmit2()">{{lang.continue}}</button>
+                </div>
+            </div>
+            <div class="row" *ngIf="optionActive === 4">
+                <div class="col-md-12">
+                    <form [formGroup]="decForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="registerLabelCss required">{{lang.decName}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input matInput placeholder="" maxlength="40" formControlName="name" (keypress)='allowAlphabets($event)'>
+                                </mat-form-field>
+                                <div *ngIf="(submitted3 || decForm.get('name').touched) && decForm.get('name').errors" class="invalid-feedback">
+                                    <div *ngIf="(submitted3 || decForm.get('name').touched) && decForm.get('name').errors.required">
+                                        {{lang.errs.provdName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="registerLabelCss required">{{lang.cntctNo}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input matInput placeholder="" maxlength="14" formControlName="cNo" (keypress)='restrictAlphabets($event)'>
+                                </mat-form-field>
+                                <div *ngIf="(submitted3 || decForm.get('cNo').touched) && decForm.get('cNo').errors" class="invalid-feedback">
+                                    <div *ngIf="(submitted3 || decForm.get('cNo').touched) && decForm.get('cNo').errors.required">
+                                        {{lang.errs.cntctErr1}}
+                                    </div>
+                                    <div *ngIf="(submitted3 || decForm.get('cNo').touched) && decForm.get('cNo').errors.pattern">
+                                        {{lang.errs.cntctErr2}}
+                                    </div>
+                                    <div *ngIf="(submitted3 || decForm.get('cNo').touched) && decForm.get('cNo').errors.minlength">
+                                        {{lang.errs.cntctErr3}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="registerLabelCss required">{{lang.desig}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input matInput placeholder="" maxlength="40" formControlName="desg" (keypress)='allowAlphabets($event)'>
+                                </mat-form-field>
+                                <div *ngIf="(submitted3 || decForm.get('desg').touched) && decForm.get('desg').errors" class="invalid-feedback">
+                                    <div *ngIf="(submitted3 || decForm.get('desg').touched) && decForm.get('desg').errors.required">
+                                        {{lang.errs.provdDesg}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="registerLabelCss required">{{lang.Date}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput [matDatepicker]="picker2" formControlName="decDt" [max]="enddate" (keypress)='restrictAlphabetss($event)'>
+                                    <!-- [readonly]="inputReadonly"  -->
+                                    <!-- [ngClass]="{ 'is-invalid': submitted3 && attch.Decdate.errors }"> -->
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2 [calendarHeaderComponent]="headerComponent">
+                                    </mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-md-12 registerLabel2Css">
+                                <mat-checkbox class="checkboxAckCss" ngDefaultControl [(ngModel)]="decFg" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                                {{lang.dclrMsg}}<span style="color: #00664f;cursor: pointer;"></span>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted3 && !decFg" class="mt-2 invalid-feedback">
+                            {{lang.errs.provdDec}}
+                        </div>
+                        <div class="mt-4 mb-5" style="text-align: start">
+                            <button mat-button type="submit" class="btnCss mt-5" (click)="onSubmit3()">{{lang.continue}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div *ngIf="optionActive === 5">
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <mat-accordion *ngFor="let outletForm of deregForm.get('outletFormArray')['controls']; let i = index">
+                            <mat-expansion-panel [expanded]="i == 0">
+                                <mat-expansion-panel-header style="height: 70px;">
+                                    <mat-panel-title>
+                                        <div class="row mt-3">
+                                            <div class="col-md-11" style="display: inherit;">
+                                                <div class="summaryCss1" [style.left]="dir === 'rtl' ? '10px' : ''">
+                                                    <img class="summaryCss2" src="assets/image/tax-establishments.svg">
+                                                </div>
+
+                                                <div class="summaryCss3" style="width: 100%;">
+                                                    {{outletForm?.getRawValue()?.AOutletNoTb}} - {{outletForm?.getRawValue()?.AOutletNameTb}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                            </div>
+                                        </div>
+
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+
+                                <mat-divider></mat-divider>
+                                <div class="row mt-4 mb-4">
+                                    <div class="col-md-6">
+                                        <div class="summaryCss5">{{lang.addr}}</div>
+                                        <div class="summaryCss6">
+                                            {{outletForm?.getRawValue()?.AOutletCompAddr}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="summaryCss5">{{lang.outltTyp}}</div>
+                                        <div class="summaryCss6">
+                                            {{outletForm?.getRawValue()?.AOutletMainFlagTb == '1' ? 'Main-outlet' : 'Sub-outlet'}}</div>
+                                    </div>
+                                </div>
+                                <mat-divider></mat-divider>
+                                <ng-container *ngFor="let permit of outletForm?.getRawValue()?.permitsArr">
+
+                                    <div class="row mb-3" *ngIf="permit.deregReason != ''">
+                                        <div class="col-md-6 mt-4 ">
+                                            <div class="summaryCss5">{{lang.prmtNo}}</div>
+                                            <div class="summaryCss6">
+                                                {{permit?.APermitNoTb}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 ">
+                                            <div class="summaryCss5">{{lang.prmtTyp}}</div>
+                                            <div class="summaryCss6">
+                                                {{ permit?.APermitTypeTb == 'BUP002' ? lang.crNum : permit?.APermitTypeTb == 'ZS0007' ? lang.contractNum : lang.licensNum }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 ">
+                                            <div class="summaryCss5">{{lang.vldFrm}}</div>
+                                            <div class="summaryCss6">
+                                                {{formatDate(permit?.APermitValfrDtTb.substring(6,permit?.APermitValfrDtTb.length-2)) | date}}</div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 ">
+                                            <div class="summaryCss5">{{lang.dregDt}}</div>
+                                            <div class="summaryCss6">
+                                                {{getFormattedDate(permit?.deregDate) | date}} </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 ">
+                                            <div class="summaryCss5">{{lang.dregReason}}</div>
+                                            <div class="summaryCss6">{{permit?.deregReason == '1' ? lang.closed : lang.trnsfr}}</div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit?.APermitMainActFlagTb == '1'">
+                                            <div class="summaryCss5">{{lang.slctprmt}}</div>
+                                            <div class="summaryCss6">{{outletForm?.getRawValue()?.slctPrmtMnActvty }}</div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit?.APermitMainActFlagTb == '1'">
+                                            <div class="summaryCss5">{{lang.slctMnActvty}}</div>
+                                            <div class="summaryCss6">
+                                                {{outletForm?.getRawValue()?.slctMnActvtyTxt }} </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3'">
+                                            <div class="summaryCss5">{{lang.tin}}</div>
+                                            <div class="summaryCss6">
+                                                {{permit?.tin}} </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3'">
+                                            <div class="summaryCss5">{{lang.idTyp}}</div>
+                                            <div class="summaryCss6">{{getIdTypeName(permit?.idType)}}</div>
+                                        </div>
+                                        <mat-divider></mat-divider>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3'">
+                                            <div class="summaryCss5">{{lang.idNum}}</div>
+                                            <div class="summaryCss6">
+                                                {{permit?.idNum}} </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3'">
+                                            <div class="summaryCss5">{{lang.name}}</div>
+                                            <div class="summaryCss6">{{permit?.name}}</div>
+                                        </div>
+                                        <mat-divider></mat-divider>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3' && permit?.familyName != ''">
+                                            <div class="summaryCss5">{{lang.familyName}}</div>
+                                            <div class="summaryCss6">
+                                                {{permit?.familyName}} </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3' && permit?.fName != ''">
+                                            <div class="summaryCss5">{{lang.fatherName}}</div>
+                                            <div class="summaryCss6">
+                                                {{permit?.fName}} </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3' && permit?.gfName !== ''">
+                                            <div class="summaryCss5">{{lang.gfName}}</div>
+                                            <div class="summaryCss6">{{permit?.gfName}}</div>
+                                        </div>
+                                        <mat-divider></mat-divider>
+                                        <div class="col-md-6 mt-4 " *ngIf="permit.deregReason == '3' && (permit?.dob != null)">
+                                            <div class="summaryCss5">{{lang.dtofBrth}}</div>
+                                            <div class="summaryCss6">{{getFormattedDate(permit?.dob) | date}}</div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                        <mat-card class="mt-3">
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-11" style="display: inherit;">
+                                    <div class="summaryCss1" [style.left]="dir === 'rtl' ? '10px' : ''">
+                                        <img class="summaryCss2" src="assets/image/main-attach.svg">
+                                    </div>
+                                    <div class="summaryCss3">{{menu[2].t1}}</div>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="row mt-4 mb-4" *ngIf="(myFiles['DR11'].length > 0 && myFiles['DR11'][0].Flag) || (myFiles['DR07'].length > 0 && myFiles['DR07'][0].Flag)">
+                                <div class="col-md-6" style="text-align: start;" *ngIf="myFiles['DR11'].length > 0 && myFiles['DR11'][0].Flag">
+                                    <div class="summaryCss5">{{attchTypes[0]}} </div>
+                                    <div class="summaryCss6" *ngFor="let item of myFiles['DR11']">
+                                        <span *ngIf="item.Flag">
+                                            {{item.Filename}} <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" *ngIf="myFiles['DR07'].length > 0 && myFiles['DR07'][0].Flag">
+                                    <div class="summaryCss5">{{attchTypes[1]}}</div>
+                                    <div class="summaryCss6" *ngFor="let item of myFiles['DR07']">
+                                        <span *ngIf="item.Flag">
+                                            {{item.Filename}} <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-divider *ngIf="showSeparator()"></mat-divider>
+                            <div class="row mt-4 mb-4" *ngIf="(myFiles['DR10'].length > 0 && myFiles['DR10'][0].Flag) || (myFiles['DR12'].length > 0 && myFiles['DR12'][0].Flag)">
+                                <div class="col-md-6" *ngIf="myFiles['DR10'].length > 0 && myFiles['DR10'][0].Flag">
+                                    <div class="summaryCss5">{{attchTypes[2]}}</div>
+                                    <div class="summaryCss6" *ngFor="let item of myFiles['DR10']">
+                                        <span *ngIf="item.Flag">
+                                            {{item.Filename}} <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" *ngIf="myFiles['DR12'].length > 0 && myFiles['DR12'][0].Flag">
+                                    <div class="summaryCss5"> {{attchTypes[3]}}</div>
+                                    <div class="summaryCss6" *ngFor="let item of myFiles['DR12']">
+                                        <span *ngIf="item.Flag">
+                                        {{item.Filename}} <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+
+                        <mat-card class="mt-3">
+
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-11" style="display: inherit;">
+                                    <div class="summaryCss1" [style.left]="dir === 'rtl' ? '10px' : ''">
+                                        <img class="summaryCss2" src="assets/image/declaration.svg">
+                                    </div>
+
+                                    <div class="summaryCss3">{{lang.declrtn}}</div>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="row mt-4 mb-2">
+
+                                <div class="col-md-6">
+                                    <div class="summaryCss5">{{lang.decName}}</div>
+                                    <div class="summaryCss6">{{requestObj.ADecName}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="summaryCss5">{{lang.cntctNo}}</div>
+                                    <div class="summaryCss6"> {{requestObj.ADecTelNo.substr(2)}}</div>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-md-6">
+                                    <div class="summaryCss5">{{lang.desig}}</div>
+                                    <div class="summaryCss6"> {{requestObj.ADecDesig}} </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="summaryCss5">{{lang.Date}}</div>
+                                    <div class="summaryCss6"> {{ ackDate | date}} </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+
+                <div style="text-align: start;"><button mat-button type="submit" class="btnCss mt-5" (click)="onSubmit4()">{{lang.cnfrm}}</button></div>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="show">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="mt-5" style="height:159px">
+                    <img src="assets/image/success.svg" width="112px">
+                </div>
+                <div class="exciseAccCss1">
+                    {{lang.lsDereg}}
+                </div>
+                <div class="exciseAccCss2 mt-2" style="text-align: center;">
+                    {{lang.ackTxt1}} <br> {{lang.ackTxt2}} <br> {{lang.ackTxt3}}
+                </div>
+                <div class="row">
+                    <div class="exciseAccCssBox mt-4 col-5" style="text-align: center;">
+                        <div class="exciseAccCssBox1 row">
+                            <div class="col-md-6" [style.padding-right]="dir === 'rtl' ? '33px' : ''">{{lang.cmmrclName}}</div>
+                            <div class="col-md-6 text-truncate" [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'" [style.direction]="isEnglish(name) ? 'ltr' : 'rtl'"> {{name}}  </div>
+                        </div>
+                    </div>
+                    <div class="exciseAccCssBox mt-3 col-5" style="text-align: center;">
+                        <div class="exciseAccCssBox1">
+                            <span [style.margin-right]="dir === 'rtl' ? '20px' : ''">{{lang.refNo}}</span>
+                            <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'"> {{refNo}} </span>
+                        </div>
+                    </div>
+                    <div class="exciseAccCssBox mt-3 col-5" style="text-align: center;">
+                        <div class="exciseAccCssBox1">
+                            <span [style.margin-right]="dir === 'rtl' ? '20px' : ''">{{lang.subDt}}</span>
+                            <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'">{{ ackDate | date }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button type="button" class="btnCss3 mt-4 mb-5" (click)="ackDownload()">{{lang.dwnldCnfrm}}</button>
+                </div>
+                <div>
+                    <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;" (click)="goto()">{{lang.ZakatNCIT}}</button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="modal" id="aftsubmit" data-keyboard="false" data-backdrop="static" [dir]="dir">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div class="ackScreenTitle2">{{ resText }}</div>
+                        <!-- <div class="ackScreenTitle2">{{ resText1 }}</div> -->
+                        <div class="mt-3 mb-2">
+                            <button mat-button *ngIf="!err206 && !err112" style="
+                    width: auto;
+                    border: none;
+                    color: #d2a02a;
+                    font-size: 16px;
+                  " data-dismiss="modal" class="btnTCss" [routerLink]="['/mains/dashboard']">
+                {{lang.goto}}
+              </button>
+                            <button mat-button *ngIf="err206 || err112" style="
+                    width: auto;
+                    border: none;
+                    color: #d2a02a;
+                    font-size: 16px;
+                  " data-dismiss="modal" class="btnTCss" (click)="cancelDraft()">
+                {{lang.ok}}
+              </button>
+                            <button mat-button *ngIf="err206 || err112" style="
+                    width: auto;
+                    border: none;
+                    color: #d2a02a;
+                    font-size: 16px;
+                  " data-dismiss="modal" class="btnTCss" [routerLink]="['/mains/dashboard']">
+                {{lang.cancel}}
+              </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="attch" data-keyboard="false" data-backdrop="static" [dir]="dir">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [style.margin-left]="dir == 'rtl' ? 0 : ''">
+                      <span aria-hidden="true"><img src="assets/image/close.svg" class="" data-dismiss="modal" style="width: 20px; height: 20px;"></span>
+                    </button>
+                    
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body pl-5 pr-5" style="min-height: 600px;max-height: 600px;" [style.overflow-y]="tempFiles.length > 2 ? 'scroll' : ''">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tnc">
+                            {{modalTitle}} 
+                        </div>
+                    </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mt-4" style="text-align: start; ">
+                    <div class="col-md-12 exciseSecondTitle1">
+                        <!-- <textarea id="text" disabled> -->
+{{lang.txt1}} <br>
+{{lang.txt2}} <br>
+{{lang.txt3}} <br> 
+{{lang.txt4}} <br>
+<!-- {{lang.txt5}} <br> -->
+                        <!-- </textarea> -->
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <ng-container>
+                        <ng-container *ngFor="let attach of tempFiles; let j = index;">
+                            <div class="col-md-6 mt-3">
+                                <div *ngIf="attach.Flag">
+                                    <mat-card style="height: 216px;border: 1px solid #ebebeb;" *ngIf="attach.Flag">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img src="assets/image/delete.svg" style="width: 24px;" [style.float]="dir=='ltr' ? 'right' : 'left'" (click)="deleteAttachment(j, attach.Dotyp);deleteAttachmentFromSer(attach.Dotyp, attach.did)">
+                                            </div>
+                                        </div>
+                                        <div class="uploadfilecontainer">
+                                            <div class="row text-center mt-3">
+                                                <div class="col-md-12 text-overflow-wrap">
+                                                    <a href="{{attach.DocUrl}}" target="_blank" style="text-decoration:none; color: white;">
+                                                        <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                                        <p class="fileName"> {{ attach.Filename }} </p>
+                                                        <div class="fileSize" *ngIf="attach.ZfileSize">{{ attach.ZfileSize }} MB</div>
+                                                        <!-- <div class="fileSize">{{ attach.lastModifiedDate | date: 'full' }}</div> -->
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                                <mat-card style="height: 216px;border: 1px solid #ebebeb;" *ngIf="!attach.Flag && j <= 4">
+                                    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event, j);getFileDetails($event, attchIndex, attach.Dotyp)">
+
+                                        <input hidden type="file" #fileInput (change)="uploadFile($event.target.files, j);getFileDetails($event, attchIndex, attach.Dotyp)">
+                                        <div class="row text-center mt-5">
+                                            <div class="col-md-12">
+                                                <img src="assets/image/attach.svg" style="width: 24px;">
+                                                <div class="fileUploadTxt">{{lang.attchTxt1}}
+                                                </div>
+                                                <div class="fileUploadTxt1">{{lang.attchTxt2}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: none">
+                <div class="row">
+                    <button mat-button data-dismiss="modal" class="btnCss">
+                        {{lang.continue}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="aftSelect1" data-keyboard="false" data-backdrop="static" [dir]="dir">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div>
+                            <div class="registerLabelCss">
+                                {{lang.idNum}}<span style="color: red;">*</span>
+                            </div>
+                            <mat-form-field appearance="outline">
+                                <input matInput [ngModel]="id1" (ngModelChange)="id1 = $event; validateID1()" (blur)="validateID1()" maxlength="10" (keypress)='restrictAlphabets($event)'>
+                            </mat-form-field>
+                            <div *ngIf="idErr1" class="invalid-feedback">
+                                {{ idMsg }}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="registerLabelCss">
+                                {{lang.dtofBrth}}<span style="color: red;">*</span>
+                            </div>
+                            <form #testForm="ngForm" id="testForm">
+                                <mat-form-field appearance="outline">
+                                    <input matInput [matDatepicker]="picker9" [min]="startDate1" [max]="enddate" [(ngModel)]="dob1" name="sd" placeholder="" (keypress)='restrictAlphabetss($event)'>
+                                    <mat-datepicker-toggle matSuffix [for]="picker9"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker9 [calendarHeaderComponent]="headerComponent">
+                                    </mat-datepicker>
+                                </mat-form-field>
+                            </form>
+                            <div *ngIf="dobErr && !testForm.touched" class="invalid-feedback">
+                                <p>{{dobMsg}}</p>
+                            </div>
+                            <div *ngIf="testForm.touched && !dob1" class="invalid-feedback">{{lang.errs.e3}}</div>
+                            <div *ngIf="testForm.invalid  && dob1" class="invalid-feedback">{{lang.errs.e3}}</div>
+                        </div>
+
+                        <div class="mt-3 mb-2">
+                            <button mat-button (click)="validateID2();onSubmitf(testForm);" style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                " class="btnTCss">
+                {{lang.valdateID}}
+              </button>
+                            <button mat-button style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                " data-dismiss="modal" (click)="reset()" class="btnTCss">
+                {{lang.close}}
+              </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<notifier-container [dir]="dir"></notifier-container>

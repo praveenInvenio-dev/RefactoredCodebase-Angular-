@@ -1,0 +1,237 @@
+.continue {
+  min-width: 207px !important;
+}
+
+.stepBack {
+  user-select: none;
+}
+
+.zakatForm {
+  padding: 24px;
+}
+
+.taxpayer-card {
+  margin-bottom: 56px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.taxpayer-card-section {
+  min-height: 96px;
+}
+
+.vCenter {
+  align-items: center;
+}
+.vCenterSingle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.returnCardsBlock {
+  padding: 0 15px;
+}
+
+.removePadding {
+  padding: 0;
+}
+
+.return-card {
+  min-width: 420px;
+}
+
+.removeMargin {
+  margin: 0;
+}
+.rotateImage {
+  transform: rotate(180deg);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.primaryBackground {
+  background-color: rgba(0, 100, 80, 0.1);
+}
+
+.fw500 {
+  font-weight: 500;
+}
+
+.fw400 {
+  font-weight: 400;
+}
+
+.sstroman {
+  font-family: SSTArabic-Roman !important;
+}
+
+.bottomRadius {
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.borderBottom {
+  border-bottom: 1px solid white;
+}
+
+.value {
+  font-family: SSTArabic-Medium;
+}
+
+.valueBold {
+  font-family: SSTArabic-Bold;
+  font-weight: bold;
+}
+
+.numberInput {
+  width: 160px;
+  height: 32px;
+  text-align: end;
+  border: 1px solid #999999;
+  padding: 0 15px;
+  border-radius: 14px;
+}
+
+.paddingX {
+  padding: 0 15px;
+}
+
+.sectionTitle,
+.pageTitle {
+  font-family: SSTArabic-Bold;
+}
+
+.bcTitleActive,
+.caption {
+  font-family: SSTArabic-Roman;
+}
+
+.card-upload,
+.card-uploaded,
+.authorizedInput {
+  min-width: 410px;
+}
+
+.commonInput {
+  width: 410px;
+}
+
+.roundedIcon {
+  height: 48px;
+  width: 48px;
+  background-color: rgba(0, 100, 80, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textButton {
+  outline: none;
+  color: #006450;
+  font-weight: bold;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.common-text-area-container {
+  position: relative;
+  max-width: 900px;
+  font-family: SSTArabic-Roman;
+}
+
+.common-text-area {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 103px;
+  /* position: relative; */
+  width: 100%;
+  padding-bottom: 20px;
+  padding-inline-start: 15px;
+  padding-inline-end: 11%;
+  padding-top: 10px;
+  resize: none;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  color: var(--dark);
+  line-height: 24px;
+  height: 96px !important;
+  border: solid 1px var(--gray);
+  border-radius: var(--inputBorderRadius);
+}
+
+.common-text-area:hover {
+  border: solid 2px var(--dark);
+}
+
+.common-text-area:focus,
+.common-text-area:active {
+  border: solid 2px var(--primary) !important;
+}
+
+.common-text-area-counter-ltr {
+  position: absolute;
+  right: 3%;
+  display: inline-block;
+  bottom: 7%;
+  color: var(--gray);
+  font-size: bold;
+}
+
+.common-text-area-counter-rtl {
+  position: absolute;
+  left: 3%;
+  display: inline-block;
+  bottom: 7%;
+  color: var(--gray);
+  font-size: bold;
+}
+
+.zs-paymentTitle {
+  background-color: rgba(0, 100, 64, 0.1);
+  padding: 24px;
+}
+
+.zs-infoTitle {
+  color: #151515;
+  font-family: SSTArabic-Roman;
+  align-self: center;
+  margin-inline-start: 5px;
+}
+
+.mie-2 {
+  margin-inline-end: 10px !important;
+}
+
+@media (max-width: 500px) {
+  .return-card,
+  .card-upload,
+  .card-uploaded,
+  .authorizedInput {
+    min-width: 100%;
+  }
+  .commonInput {
+    width: 100%;
+  }
+}
+
+::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-radius: 6px !important;
+}

@@ -1,0 +1,1242 @@
+<div class="container " *ngIf='bills' [dir]="dir">
+    <div class="row" style="margin-left: 0%;margin-right: 0%;">
+        <div class="col-md-12" style="display: contents;">
+            <div class="billsTitle"><span *ngIf="returnType !== null">{{selectedTab}}</span> {{lang.t1}} </div>
+        </div>
+    </div>
+    <div class="row mt-3" *ngIf="returnType === null">
+        <div class="col-md-12">
+            <!-- [selectedIndex]=2 -->
+            <!-- [(selectedIndex)]="selectedTab1" -->
+            <mat-tab-group [(selectedIndex)]="selectedTab1" (selectedTabChange)="changeReturnsTab($event,'html')">
+                <mat-tab *ngFor="let tab of returnsTabs; let index = index" [label]="tab"
+                    (click)="changeReturnsTab(tab,'html')">
+                    <div class="row mt-3">
+                        <div class="col-md-10">
+                            <div class="form-inline" id="returnSearch">
+                                <span class="form-group" style="margin-top: 20px; margin-left: 10px;width: 100%;">
+                                    <input type="search" class="form-control form-control-lg" [(ngModel)]="searchText"
+                                        placeholder="{{search}}" style="  height: 48px;
+                                    border-radius: 14px;
+                                    border: solid 1px #999999;width: 97%;">
+                                    <!-- <input type="text" class="form-control" id="inputSuccess4"> -->
+                                    <span [ngClass]="dir === 'rtl' ? 'imgSearchAr' : 'imgSearchEn'"
+                                        *ngIf="searchText?.length === 0"> <img src="assets/images/search.png"
+                                            width="24px"></span>
+
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row mt-4" style="text-align: start;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <img src="assets/image/filter.svg" data-toggle="modal" data-target="#myModal"
+                                            (click)="displayType(tab);reset()"
+                                            [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'">
+                                        <img [src]="img2" [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                            (click)="changeView()" />
+                                        <img [src]='img1' [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                            (click)="changeView()" />
+                                        <img *ngIf="tab=='Withholding Tax' || tab=='ضريبة الإستقطاع'"
+                                            src="assets/images/icon-plus.svg"
+                                            [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'" alt=""
+                                            style="width:24px; height:24px" (click)="AddForm6()" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-12">
+                                    <div [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                        style="background-color: transparent;">
+                                    </div>
+                                    <div class="navTxtActive"
+                                        [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                        [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                        [style.margin-right]="dir === 'rtl' ? '20px':'0px'"
+                                        [style.background-color]="viewBills?'transparent':'#d99a29'">
+                                    </div>
+                                    <div class="navTxtActive"
+                                        [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                        [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                        [style.margin-right]="dir === 'rtl' ? '10px':'0px'"
+                                        [style.background-color]="viewBills?'#d99a29':'transparent'"></div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="returnsData.length===0">
+
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div style="    font-size: 20px;
+                                color: #999999;
+                                font-family: SSTArabic-Medium;">{{lang.t4}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="returnsData.length>0">
+                        <div class="row mt-3 mb-2" *ngIf="!viewBills" style="text-align: start;">
+                            <div (click)="onReturnSelect(item)" class="col-md-6 pointer-hand"
+                                *ngFor="let item of returnsData | filter:searchText; let i=index">
+                                <mat-card class="matborder" style="height:auto;">
+                                    <!-- <div class="row mt-2 mb-2">
+                                        <div class="col-md-12">
+                                            <img src="assets/image/dots.svg"
+                                                [ngClass]="dir === 'rtl' ? 'filterIcon1Ar' : 'filterIcon1En'">
+                                        </div>
+                                    </div> -->
+                                    <div class="row mt-2 mb-2">
+                                        <div class="col-md-8">
+                                            <span class="cardTxt1Css">{{item.TaxtpText}}</span>
+                                            <div class="cardTxt2Css">
+                                                {{item.RetStatTxt}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <div class="filtercp" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                                *ngIf="item.status ==='Submitted'|| item.status ==='تم تقديمه'">
+                                                <span class="cardTxt5Cssp">
+                                                    {{item.status}}</span>
+                                            </div>
+                                            <div class="filtercu" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                                *ngIf="item.status ==='Overdue' || item.status ==='متأخرة'">
+                                                <span class="cardTxt5Cssu">
+                                                    {{item.status}}</span>
+                                            </div>
+                                            <div class="filtercover" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                                *ngIf="item.status ==='Unsubmitted' || item.status ==='لم يتم تقديمه'">
+                                                <span class="cardTxt5CssOver">
+                                                    {{item.status}}</span>
+                                            </div>
+
+                                            <!-- <div class="filtercpp" [style.margin-right]="dir === 'rtl'? '-10px': '0px'"
+                                                *ngIf="item.RetStatTxt ==='Partially Paid' || item.Status ===' غير مدفوعة'">
+                                                <span class="cardTxt5Csspp">
+                                                    Partially</span>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <mat-divider></mat-divider>
+
+                                    <div class="row mt-4">
+
+                                        <div class="col-md-6" (mouseover)="showTooltip()">
+                                            <span class="cardTxt2Css">{{lang.c1.t3}}</span>
+                                            <!-- <div class="cardTxt3Css" *ngIf="item.year === 1">
+                                                {{item.AbrzuC | date}} - {{item.AbrzoC | date}}
+                                            </div> -->
+                                            <div class="cardTxt3Css" data-toggle="tooltip"
+                                                title='{{item.AbrzuCtxt}} - {{item.AbrzoCtxt}}'>
+                                                {{item.AbrzuCtxt}} - {{item.AbrzoCtxt}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" (mouseover)="showTooltip()">
+                                            <span class="cardTxt2Css">{{lang.c1.t4}}</span>
+                                            <div class="cardTxt3Css" data-toggle="tooltip" title={{item.FbtText}}>
+                                                {{item.FbtText}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+
+                                        <div class="col-md-6" (mouseover)="showTooltip()">
+                                            <span class="cardTxt2Css">{{lang.c1.t5}}</span>
+                                            <div class="cardTxt3Css" data-toggle="tooltip" title={{item.TaxPeriod}}>
+                                                {{item.TaxPeriod}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="cardTxt2Css">{{lang.c1.t6}}</span>
+                                            <div class="cardTxt3Css">
+                                                {{item.Persl}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+
+                                        <div class="col-md-6">
+                                            <span class="cardTxt2Css">{{lang.c1.t1}}</span>
+                                            <div class="cardTxt3Css">
+                                                {{item.Fbnum}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" (mouseover)="showTooltip()">
+                                            <span class="cardTxt2Css">{{lang.c1.t2}}</span>
+                                            <div class="cardTxt3Css" data-toggle="tooltip" title={{item.DueDtCtxt}}>
+                                                {{item.DueDtCtxt}}
+                                            </div>
+                                            <!-- <div class="cardTxt3Css" *ngIf="item.year === 1">
+                                                {{item.DueDtC | date}}
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mt-3 ml-1 mr-1 mb-2" *ngIf="viewBills">
+                            <table style="width:100%">
+                                <tr class="tabHeader">
+                                    <ng-container *ngIf="dir !== 'rtl'">
+                                        <th colspan="3" style="text-align: center;">{{lang.c2.t1}}</th>
+                                    </ng-container>
+                                    <ng-container *ngIf="dir === 'rtl'">
+                                        <th colspan="3" style="text-align: center;"
+                                            [style.border-right]="dir === 'rtl' ? ('1px solid #bbb'):''"
+                                            [style.border-top-left-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                            [style.border-top-right-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                            {{lang.c2.t1}}
+                                        </th>
+                                    </ng-container>
+                                    <th colspan="3" style="text-align: center;width:80px !important">{{lang.c2.t2}}</th>
+                                    <th colspan="3" style="text-align: center;">{{lang.c2.t3}}</th>
+
+                                    <th colspan="3" style="text-align: center;">{{lang.c2.t4}}</th>
+                                    <th colspan="3" style="text-align: center;">{{lang.c2.t8}}</th>
+
+                                    <th style="text-align: center;" colspan="3">{{lang.c2.t5}}</th>
+                                    <!-- <th colspan="3">{{lang.c2.t6}}</th> -->
+                                    <!-- <th colspan="3">{{lang.c2.t7}}</th> -->
+                                    <ng-container *ngIf="dir !== 'rtl'">
+                                        <th style="text-align: center;" colspan="3">{{lang.c2.t6}}</th>
+                                    </ng-container>
+                                    <ng-container *ngIf="dir === 'rtl'">
+                                        <th style="text-align: center;" colspan="3"
+                                            [style.border-top-right-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                            [style.border-top-left-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                            {{lang.c2.t6}}
+                                        </th>
+                                    </ng-container>
+                                </tr>
+                                <ng-container
+                                    *ngFor="let item of returnsData | filter:searchText; trackBy: trackByMethod; let i=index">
+                                    <tr class="tabheader2" *ngIf="i<=count" (click)="onReturnSelect(item)">
+                                        <ng-container *ngIf="dir === 'rtl'">
+                                            <td colspan="3" style="text-align: center;" *ngIf="i!==count">
+                                                {{item.TaxtpText}}
+                                            </td>
+                                            <td colspan="3" style="text-align: center;"
+                                                [style.border-bottom-right-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                                [style.border-bottom-left-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                                *ngIf="i===count">
+                                                {{item.TaxtpText}}
+                                            </td>
+                                        </ng-container>
+
+
+                                        <ng-container *ngIf="dir !== 'rtl'">
+                                            <td colspan="3" style="text-align: center;">{{item.TaxtpText}}</td>
+                                        </ng-container>
+
+
+                                        <td colspan="3" style="text-align: center;">{{item.Fbnum}}</td>
+                                        <!-- <td colspan="3" style="text-align: center;" *ngIf="item.year === 1">
+                                            {{item.DueDtC  | date }}</td>
+                                        <td colspan="3" style="text-align: center;" *ngIf="item.year === 1">
+                                            {{item.AbrzuC | date}} -
+                                            {{item.AbrzoC | date}}</td> -->
+
+                                        <td colspan="3" style="text-align: center;">
+                                            {{item.DueDtCtxt}}</td>
+                                        <td colspan="3" style="text-align: center;">
+                                            {{item.AbrzuCtxt}} - {{item.AbrzoCtxt}}
+                                        </td>
+                                        <td colspan="3" style="text-align: center;">{{item.Persl}}</td>
+                                        <td colspan="3">
+
+                                            <div class="filtercpt2"
+                                                *ngIf="item.status ==='Unsubmitted' || item.status ==='لم يتم تقديمه'">
+                                                <span class="cardTxt5CssOver">
+                                                    {{item.status}}</span>
+                                            </div>
+
+                                            <div class="filtercpt"
+                                                *ngIf="item.status ==='Submitted'|| item.status ==='تم تقديمه'">
+                                                <span class="cardTxt5Cssp">
+                                                    {{item.status}}</span>
+                                            </div>
+                                            <div class="filtercut"
+                                                *ngIf="item.status ==='Overdue' || item.status ==='متأخرة'">
+                                                <span class="cardTxt5Cssu">
+                                                    {{item.status}}</span>
+                                            </div>
+                                        </td>
+                                        <ng-container *ngIf="dir !== 'rtl'">
+                                            <td colspan="3" style="text-align: center;">
+
+                                                <div class="filtercpt" *ngIf="item.newStatus === '001'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercppt" *ngIf="item.newStatus === '002'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+
+                                                <div class="filtercut" *ngIf="item.newStatus === '004'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercpt2" *ngIf="item.newStatus === '003'">
+                                                    <span class="cardTxt5CssOver">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <!-- <div class="filtercpt"
+                                                    *ngIf="item.RetStatTxt ==='Unsubmitted' || item.Status ==='جزئيا'">
+                                                    <span class="cardTxt5CssOver">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div> -->
+                                                <!-- <div class="filtercut"
+                                                    *ngIf="item.RetStatTxt ==='To be filled' || item.Status ==='جزئيا'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div> -->
+                                                <!-- <div class="filtercpt">
+                                                <span class="cardTxt5CssOver">
+                                                    {{item.RetStatTxt}}</span>
+                                            </div> -->
+
+
+
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="dir === 'rtl'">
+                                            <td colspan="3" style="text-align: center;" *ngIf="i!==count">
+                                                <!-- <div class="filtercpt"
+                                                    *ngIf="item.RetStatTxt ==='مسدد' || item.RetStatTxt ==='مفوتر' || item.RetStatTxt ==='مفوترة'|| item.RetStatTxt ==='تم تقديمه'|| item.RetStatTxt ==='الأمانة – انتهاء التصعيد'|| item.RetStatTxt ==='تم التعديل'|| item.RetStatTxt ==='تم تقديم التعديل'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercppt"
+                                                    *ngIf="item.RetStatTxt ==='إنتظار الموافقة' || item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='محفوظ كمسودة تعديل'|| item.RetStatTxt ==='الأمانة –قيد التصعيد'|| item.RetStatTxt ==='في قائمة المشرفين'|| item.RetStatTxt ==='لدى المشرف للمراجعه' || item.RetStatTxt==='لدى الموظف للمراجعه'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+
+                                                <div class="filtercut"
+                                                    *ngIf="item.RetStatTxt ==='Unpaid'|| item.RetStatTxt ==='لم يتم تقديمه' || item.RetStatTxt ==='جاهز للتعبئة و الحفظ كمسودة'|| item.RetStatTxt ==='مسدد جزئياً' || item.RetStatTxt ==='في طور المعالجة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مرفوض' || item.RetStatTxt ==='جاهز للتعبئة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مع المكلف لتقديم نواقص اضافية' || item.RetStatTxt ==='تعديل المسودة بواسطة المكلف'|| item.RetStatTxt ==='جاهز للتعبئة والحفظ كمسودة'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div> -->
+                                                <div class="filtercpt" *ngIf="item.newStatus === '001'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercppt" *ngIf="item.newStatus === '002'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+
+                                                <div class="filtercut" *ngIf="item.newStatus === '004'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercpt2" *ngIf="item.newStatus === '003'">
+                                                    <span class="cardTxt5CssOver">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+
+                                            </td>
+
+                                            <td colspan="3"
+                                                [style.border-bottom-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                                [style.border-bottom-right-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                                *ngIf="i===count">
+
+                                                <!-- <div class="filtercpt"
+                                                    *ngIf="item.RetStatTxt ==='مسدد' || item.RetStatTxt ==='مفوتر'|| item.RetStatTxt ==='تم تقديمه'|| item.RetStatTxt ==='الأمانة – انتهاء التصعيد'|| item.RetStatTxt ==='تم التعديل'|| item.RetStatTxt ==='تم تقديم التعديل'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercppt"
+                                                    *ngIf="item.RetStatTxt ==='إنتظار الموافقة' || item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='محفوظ كمسودة تعديل'|| item.RetStatTxt ==='الأمانة –قيد التصعيد'|| item.RetStatTxt ==='في قائمة المشرفين'|| item.RetStatTxt ==='لدى المشرف للمراجعه' || item.RetStatTxt==='لدى الموظف للمراجعه'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                            
+                                                <div class="filtercut"
+                                                    *ngIf="item.RetStatTxt ==='Unpaid'|| item.RetStatTxt ==='لم يتم تقديمه' || item.RetStatTxt ==='جاهز للتعبئة و الحفظ كمسودة'|| item.RetStatTxt ==='مسدد جزئياً' || item.RetStatTxt ==='في طور المعالجة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مرفوض' || item.RetStatTxt ==='جاهز للتعبئة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مع المكلف لتقديم نواقص اضافية' || item.RetStatTxt ==='تعديل المسودة بواسطة المكلف'|| item.RetStatTxt ==='جاهز للتعبئة والحفظ كمسودة'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div> -->
+                                                <div class="filtercpt" *ngIf="item.newStatus === '001'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercppt" *ngIf="item.newStatus === '002'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+
+                                                <div class="filtercut" *ngIf="item.newStatus === '004'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                                <div class="filtercpt2" *ngIf="item.newStatus === '003'">
+                                                    <span class="cardTxt5CssOver">
+                                                        {{item.RetStatTxt}}</span>
+                                                </div>
+                                            </td>
+                                        </ng-container>
+
+                                        <!-- <td colspan="3" style="text-align: right;">
+                                            {{item.Betrw | currency:'SAR'  | slice:3}} {{lang.t3}}</td> -->
+                                        <!-- <ng-container *ngIf="dir !== 'rtl'">
+                                            <td colspan="3">
+                                                <span class="cardTxt5Css "
+                                                    [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']">
+                                                    {{item.Status}}</span>
+                                            </td>
+    
+                                        </ng-container>
+    
+                                        <ng-container *ngIf="dir === 'rtl'">
+                                            <td colspan="3" *ngIf="i!==count">
+                                                <span class="cardTxt5Css "
+                                                    [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']">
+                                                    {{item.Status}}</span>
+                                            </td>
+    
+                                            <td colspan="3"
+                                                [style.border-bottom-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                                [style.border-bottom-right-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                                *ngIf="i===count">
+                                                <span class="cardTxt5Css "
+                                                    [ngClass]="[item.Status==='Paid'  || item.Status ==='مدفوعة'? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']">
+                                                    {{item.Status}}</span>
+                                            </td>
+                                        </ng-container> -->
+
+                                    </tr>
+                                </ng-container>
+
+
+
+                            </table>
+                            <div class="row" style="width:100%">
+                                <div class="col-md-12">
+                                    <div class="viewMore" *ngIf="searchText === ''">
+                                        <span style="cursor: pointer;margin-left: 5px;" (click)="viewMore()"
+                                            *ngIf="count<(returnsData.length-1)">{{lang.c2.t7}}</span>
+                                        <span [ngClass]="dir === 'rtl' ? 'sideNumberArb' : 'sideNumber'">
+                                            {{count + 1}} / {{returnsData.length}} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+
+    <div class="row mt-3" *ngIf="returnType !== null">
+        <div class="col-md-12">
+            <div class="row mt-3">
+                <div class="col-md-10">
+                    <div class="form-inline" id="returnSearch">
+                        <span class="form-group" style="margin-top: 20px; margin-left: 10px;width: 100%;">
+                            <input type="search" class="form-control form-control-lg" [(ngModel)]="searchText"
+                                placeholder="{{search}}" style="  height: 48px;
+                            border-radius: 14px;
+                            border: solid 1px #999999;width: 97%;">
+                            <!-- <input type="text" class="form-control" id="inputSuccess4"> -->
+                            <span [ngClass]="dir === 'rtl' ? 'imgSearchAr' : 'imgSearchEn'"
+                                *ngIf="searchText?.length === 0"> <img src="assets/image/search.svg"
+                                    width="24px"></span>
+
+                        </span>
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+                    <div class="row mt-4" style="text-align: start;">
+                        <div class="col-md-12">
+                            <div>
+                                <img src="assets/image/filter.svg" data-toggle="modal" data-target="#myModal"
+                                    (click)="displayType('');reset()"
+                                    [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'">
+                                <img [src]="img2" [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                    (click)="changeView()">
+                                <img [src]='img1' [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                    (click)="changeView()">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-12">
+                            <div [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                style="background-color: transparent;">
+                            </div>
+                            <div class="navTxtActive" [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                [style.margin-right]="dir === 'rtl' ? '20px':'0px'"
+                                [style.background-color]="viewBills?'transparent':'#d99a29'">
+                            </div>
+                            <div class="navTxtActive" [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                [style.margin-right]="dir === 'rtl' ? '10px':'0px'"
+                                [style.background-color]="viewBills?'#d99a29':'transparent'"></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div *ngIf="returnsData.length===0">
+
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <div style="    font-size: 20px;
+                        color: #999999;
+                        font-family: SSTArabic-Medium;">{{lang.t4}}</div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="returnsData.length>0">
+                <div class="row mt-3 mb-2" *ngIf="!viewBills" style="text-align: start;">
+                    <div (click)="onReturnSelect(item)" class="col-md-6 pointer-hand"
+                        *ngFor="let item of returnsData | filter:searchText; let i=index">
+                        <mat-card class="matborder" style="height: auto;">
+                            <!-- <div class="row mt-2 mb-2">
+                                <div class="col-md-12">
+                                    <img src="assets/image/dots.svg"
+                                        [ngClass]="dir === 'rtl' ? 'filterIcon1Ar' : 'filterIcon1En'">
+                                </div>
+                            </div> -->
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-8">
+                                    <span class="cardTxt1Css">{{item.TaxtpText}}</span>
+                                    <div class="cardTxt2Css">
+                                        {{item.RetStatTxt}}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="filtercp" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                        *ngIf="item.status ==='Submitted'|| item.status ==='تم تقديمه'">
+                                        <span class="cardTxt5Cssp">
+                                            {{item.status}}</span>
+                                    </div>
+                                    <div class="filtercu" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                        *ngIf="item.status ==='Overdue' || item.status ==='متأخرة'">
+                                        <span class="cardTxt5Cssu">
+                                            {{item.status}}</span>
+                                    </div>
+                                    <div class="filtercover" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                        *ngIf="item.status ==='Unsubmitted' || item.status ==='لم يتم تقديمه'">
+                                        <span class="cardTxt5CssOver">
+                                            {{item.status}}</span>
+                                    </div>
+
+                                    <!-- <div class="filtercpp" [style.margin-right]="dir === 'rtl'? '-10px': '0px'"
+                                        *ngIf="item.RetStatTxt ==='Partially Paid' || item.Status ===' غير مدفوعة'">
+                                        <span class="cardTxt5Csspp">
+                                            Partially</span>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+
+                            <div class="row mt-4">
+
+                                <div class="col-md-6">
+                                    <span class="cardTxt2Css">{{lang.c1.t3}}</span>
+                                    <!-- <div class="cardTxt3Css" *ngIf="item.year === 1">
+                                        {{item.AbrzuC | date}} - {{item.AbrzoC | date}}
+                                    </div> -->
+                                    <div class="cardTxt3Css">
+                                        {{item.AbrzuCtxt}} - {{item.AbrzoCtxt}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="cardTxt2Css">{{lang.c1.t4}}</span>
+                                    <div class="cardTxt3Css">
+                                        {{item.FbtText}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+
+                                <div class="col-md-6">
+                                    <span class="cardTxt2Css">{{lang.c1.t5}}</span>
+                                    <div class="cardTxt3Css">
+                                        {{item.TaxPeriod}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="cardTxt2Css">{{lang.c1.t6}}</span>
+                                    <div class="cardTxt3Css">
+                                        {{item.Persl}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+
+                                <div class="col-md-6">
+                                    <span class="cardTxt2Css">{{lang.c1.t1}}</span>
+                                    <div class="cardTxt3Css">
+                                        {{item.Fbnum}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="cardTxt2Css">{{lang.c1.t2}}</span>
+                                    <div class="cardTxt3Css">
+                                        {{item.DueDtCtxt}}
+                                    </div>
+                                    <!-- <div class="cardTxt3Css" *ngIf="item.year === 1">
+                                        {{item.DueDtC | date}}
+                                    </div> -->
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+
+
+
+                <div class="row mt-3 ml-1 mr-1 mb-2" *ngIf="viewBills">
+                    <table style="width:100%">
+                        <tr class="tabHeader">
+                            <ng-container *ngIf="dir !== 'rtl'">
+                                <th colspan="3" style="text-align: center;">{{lang.c2.t1}}</th>
+                            </ng-container>
+                            <ng-container *ngIf="dir === 'rtl'">
+                                <th colspan="3" style="text-align: center;"
+                                    [style.border-right]="dir === 'rtl' ? ('1px solid #bbb'):''"
+                                    [style.border-top-left-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                    [style.border-top-right-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                    {{lang.c2.t1}}
+                                </th>
+                            </ng-container>
+                            <th colspan="3" style="text-align: center;width:80px !important">{{lang.c2.t2}}</th>
+                            <th colspan="3" style="text-align: center;">{{lang.c2.t3}}</th>
+
+                            <th colspan="3" style="text-align: center;">{{lang.c2.t4}}</th>
+                            <th colspan="3" style="text-align: center;">{{lang.c2.t8}}</th>
+
+                            <th style="text-align: center;" colspan="3">{{lang.c2.t5}}</th>
+                            <!-- <th colspan="3">{{lang.c2.t6}}</th> -->
+                            <!-- <th colspan="3">{{lang.c2.t7}}</th> -->
+                            <ng-container *ngIf="dir !== 'rtl'">
+                                <th style="text-align: center;" colspan="3">{{lang.c2.t6}}</th>
+                            </ng-container>
+                            <ng-container *ngIf="dir === 'rtl'">
+                                <th style="text-align: center;" colspan="3"
+                                    [style.border-top-right-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                    [style.border-top-left-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                    {{lang.c2.t6}}
+                                </th>
+                            </ng-container>
+                        </tr>
+                        <ng-container
+                            *ngFor="let item of returnsData | filter:searchText; trackBy: trackByMethod; let i=index">
+                            <tr class="tabheader2" *ngIf="i<=count">
+                                <ng-container *ngIf="dir === 'rtl'">
+                                    <td colspan="3" style="text-align: center;" *ngIf="i!==count">
+                                        {{item.TaxtpText}}
+                                    </td>
+                                    <td colspan="3" style="text-align: center;"
+                                        [style.border-bottom-right-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                        [style.border-bottom-left-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                        *ngIf="i===count">
+                                        {{item.TaxtpText}}
+                                    </td>
+                                </ng-container>
+
+
+                                <ng-container *ngIf="dir !== 'rtl'">
+                                    <td colspan="3" style="text-align: center;">{{item.TaxtpText}}</td>
+                                </ng-container>
+
+
+                                <td colspan="3" style="text-align: center;">{{item.Fbnum}}</td>
+                                <!-- <td colspan="3" style="text-align: center;" *ngIf="item.year === 1">
+                                    {{item.DueDtC  | date }}</td>
+                                <td colspan="3" style="text-align: center;" *ngIf="item.year === 1">
+                                    {{item.AbrzuC | date}} -
+                                    {{item.AbrzoC | date}}</td> -->
+
+                                <td colspan="3" style="text-align: center;">
+                                    {{item.DueDtCtxt}}</td>
+                                <td colspan="3" style="text-align: center;">
+                                    {{item.AbrzuCtxt}} - {{item.AbrzoCtxt}}
+                                </td>
+                                <td colspan="3" style="text-align: center;">{{item.Persl}}</td>
+                                <td colspan="3">
+
+                                    <div class="filtercpt2"
+                                        *ngIf="item.status ==='Unsubmitted' || item.status ==='لم يتم تقديمه'">
+                                        <span class="cardTxt5CssOver">
+                                            {{item.status}}</span>
+                                    </div>
+
+                                    <div class="filtercpt"
+                                        *ngIf="item.status ==='Submitted'|| item.status ==='تم تقديمه'">
+                                        <span class="cardTxt5Cssp">
+                                            {{item.status}}</span>
+                                    </div>
+                                    <div class="filtercut" *ngIf="item.status ==='Overdue' || item.status ==='متأخرة'">
+                                        <span class="cardTxt5Cssu">
+                                            {{item.status}}</span>
+                                    </div>
+                                </td>
+                                <ng-container *ngIf="dir !== 'rtl'">
+                                    <td colspan="3" style="text-align: center;">
+
+                                        <div class="filtercpt" *ngIf="item.newStatus === '001'">
+                                            <span class="cardTxt5Cssp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercppt" *ngIf="item.newStatus === '002'">
+                                            <span class="cardTxt5Csspp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+
+                                        <div class="filtercut" *ngIf="item.newStatus === '004'">
+                                            <span class="cardTxt5Cssu">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercpt2" *ngIf="item.newStatus === '003'">
+                                            <span class="cardTxt5CssOver">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <!-- <div class="filtercpt"
+                                            *ngIf="item.RetStatTxt ==='Unsubmitted' || item.Status ==='جزئيا'">
+                                            <span class="cardTxt5CssOver">
+                                                {{item.RetStatTxt}}</span>
+                                        </div> -->
+                                        <!-- <div class="filtercut"
+                                            *ngIf="item.RetStatTxt ==='To be filled' || item.Status ==='جزئيا'">
+                                            <span class="cardTxt5Cssu">
+                                                {{item.RetStatTxt}}</span>
+                                        </div> -->
+                                        <!-- <div class="filtercpt">
+                                        <span class="cardTxt5CssOver">
+                                            {{item.RetStatTxt}}</span>
+                                    </div> -->
+
+
+
+                                    </td>
+                                </ng-container>
+
+                                <ng-container *ngIf="dir === 'rtl'">
+                                    <td colspan="3" style="text-align: center;" *ngIf="i!==count">
+                                        <!-- <div class="filtercpt"
+                                            *ngIf="item.RetStatTxt ==='مسدد' || item.RetStatTxt ==='مفوتر' || item.RetStatTxt ==='مفوترة'|| item.RetStatTxt ==='تم تقديمه'|| item.RetStatTxt ==='الأمانة – انتهاء التصعيد'|| item.RetStatTxt ==='تم التعديل'|| item.RetStatTxt ==='تم تقديم التعديل'">
+                                            <span class="cardTxt5Cssp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercppt"
+                                            *ngIf="item.RetStatTxt ==='إنتظار الموافقة' || item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='محفوظ كمسودة تعديل'|| item.RetStatTxt ==='الأمانة –قيد التصعيد'|| item.RetStatTxt ==='في قائمة المشرفين'|| item.RetStatTxt ==='لدى المشرف للمراجعه' || item.RetStatTxt==='لدى الموظف للمراجعه'">
+                                            <span class="cardTxt5Csspp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+
+                                        <div class="filtercut"
+                                            *ngIf="item.RetStatTxt ==='Unpaid'|| item.RetStatTxt ==='لم يتم تقديمه' || item.RetStatTxt ==='جاهز للتعبئة و الحفظ كمسودة'|| item.RetStatTxt ==='مسدد جزئياً' || item.RetStatTxt ==='في طور المعالجة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مرفوض' || item.RetStatTxt ==='جاهز للتعبئة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مع المكلف لتقديم نواقص اضافية' || item.RetStatTxt ==='تعديل المسودة بواسطة المكلف'|| item.RetStatTxt ==='جاهز للتعبئة والحفظ كمسودة'">
+                                            <span class="cardTxt5Cssu">
+                                                {{item.RetStatTxt}}</span>
+                                        </div> -->
+                                        <div class="filtercpt" *ngIf="item.newStatus === '001'">
+                                            <span class="cardTxt5Cssp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercppt" *ngIf="item.newStatus === '002'">
+                                            <span class="cardTxt5Csspp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+
+                                        <div class="filtercut" *ngIf="item.newStatus === '004'">
+                                            <span class="cardTxt5Cssu">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercpt2" *ngIf="item.newStatus === '003'">
+                                            <span class="cardTxt5CssOver">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+
+                                    </td>
+
+                                    <td colspan="3" [style.border-bottom-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                        [style.border-bottom-right-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                        *ngIf="i===count">
+
+                                        <!-- <div class="filtercpt"
+                                            *ngIf="item.RetStatTxt ==='مسدد' || item.RetStatTxt ==='مفوتر'|| item.RetStatTxt ==='تم تقديمه'|| item.RetStatTxt ==='الأمانة – انتهاء التصعيد'|| item.RetStatTxt ==='تم التعديل'|| item.RetStatTxt ==='تم تقديم التعديل'">
+                                            <span class="cardTxt5Cssp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercppt"
+                                            *ngIf="item.RetStatTxt ==='إنتظار الموافقة' || item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='تعديل المسودة بواسطة الهيئة'|| item.RetStatTxt ==='محفوظ كمسودة تعديل'|| item.RetStatTxt ==='الأمانة –قيد التصعيد'|| item.RetStatTxt ==='في قائمة المشرفين'|| item.RetStatTxt ==='لدى المشرف للمراجعه' || item.RetStatTxt==='لدى الموظف للمراجعه'">
+                                            <span class="cardTxt5Csspp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                    
+                                        <div class="filtercut"
+                                            *ngIf="item.RetStatTxt ==='Unpaid'|| item.RetStatTxt ==='لم يتم تقديمه' || item.RetStatTxt ==='جاهز للتعبئة و الحفظ كمسودة'|| item.RetStatTxt ==='مسدد جزئياً' || item.RetStatTxt ==='في طور المعالجة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مرفوض' || item.RetStatTxt ==='جاهز للتعبئة' || item.RetStatTxt ==='محفوظ كمسودة' || item.RetStatTxt ==='مع المكلف لتقديم نواقص اضافية' || item.RetStatTxt ==='تعديل المسودة بواسطة المكلف'|| item.RetStatTxt ==='جاهز للتعبئة والحفظ كمسودة'">
+                                            <span class="cardTxt5Cssu">
+                                                {{item.RetStatTxt}}</span>
+                                        </div> -->
+                                        <div class="filtercpt" *ngIf="item.newStatus === '001'">
+                                            <span class="cardTxt5Cssp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercppt" *ngIf="item.newStatus === '002'">
+                                            <span class="cardTxt5Csspp">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+
+                                        <div class="filtercut" *ngIf="item.newStatus === '004'">
+                                            <span class="cardTxt5Cssu">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                        <div class="filtercpt2" *ngIf="item.newStatus === '003'">
+                                            <span class="cardTxt5CssOver">
+                                                {{item.RetStatTxt}}</span>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <!-- <td colspan="3" style="text-align: right;">
+                                    {{item.Betrw | currency:'SAR'  | slice:3}} {{lang.t3}}</td> -->
+                                <!-- <ng-container *ngIf="dir !== 'rtl'">
+                                    <td colspan="3">
+                                        <span class="cardTxt5Css "
+                                            [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']">
+                                            {{item.Status}}</span>
+                                    </td>
+
+                                </ng-container>
+
+                                <ng-container *ngIf="dir === 'rtl'">
+                                    <td colspan="3" *ngIf="i!==count">
+                                        <span class="cardTxt5Css "
+                                            [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']">
+                                            {{item.Status}}</span>
+                                    </td>
+
+                                    <td colspan="3"
+                                        [style.border-bottom-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                        [style.border-bottom-right-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                        *ngIf="i===count">
+                                        <span class="cardTxt5Css "
+                                            [ngClass]="[item.Status==='Paid'  || item.Status ==='مدفوعة'? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']">
+                                            {{item.Status}}</span>
+                                    </td>
+                                </ng-container> -->
+
+                            </tr>
+                        </ng-container>
+
+
+
+                    </table>
+                    <div class="row" style="width:100%">
+                        <div class="col-md-12">
+                            <div class="viewMore" *ngIf="searchText === ''">
+                                <span style="cursor: pointer;margin-left: 5px;" (click)="viewMore()"
+                                    *ngIf="count<(returnsData.length-1)">{{lang.c2.t7}}</span>
+                                <span [ngClass]="dir === 'rtl' ? 'sideNumberArb' : 'sideNumber'">
+                                    {{count + 1}} / {{returnsData.length}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal" style="border-radius: 14px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header" style="border-bottom: none !important;">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 100%;"
+                        [style.text-align]="dir === 'rtl' ? 'end' : 'end'"><img src="assets/image/close.svg" /></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="text-align: start;margin-left: 5%;margin-right: 5%;">
+                            <div class="col-md-12">
+                                <div class="filter1">{{lang.filter.title}}</div>
+
+                                <div class="row mt-4" *ngIf="returnsTabs2?.length>0">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t1}}</div>
+                                        <div style="display: flex;">
+                                            <ng-container *ngFor="let item of returnsTabs2 ; let i=index">
+                                                <div class="filter3 mt-3 mr-3"
+                                                    [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    (click)="changeTabz(i)">
+                                                    <span class="filter4">
+                                                        {{item.name}}
+                                                    </span>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t2}}</div>
+                                        <div style="display: flex;">
+                                            <ng-container *ngFor="let item of returnStatusesNew ; let i=index">
+                                                <div class="mt-3 mr-3" [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    (click)="changeType(item.name,i)">
+                                                    <span class="filter4">
+                                                        <img [src]="item.img" /> {{item.name}}
+                                                    </span>
+
+                                                </div>
+                                                <!-- <div class="mt-3 mr-3" [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    *ngIf="item.name === 'Unsubmitted' || item.name ==='جزئيا'"
+                                                    (click)="changeType(item.name,i)">
+
+                                                    <span class="filter4">
+                                                        <img src="assets/images/stroke-4012.svg" /> {{lang.bill.t2}}
+                                                    </span>
+
+                                                </div>
+                                                <div *ngIf="item.name === 'Partially' || item.name ===' غير مدفوعة'"
+                                                    class=" mt-3 mr-3" [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    (click)="changeType(item.name, i)">
+
+                                                    <span class="filter4">
+                                                        <img src="assets/images/group.svg" /> {{lang.bill.t3}}
+                                                    </span>
+                                                </div> -->
+                                            </ng-container>
+
+
+
+                                            <!-- <div class="filter3 mt-3 mr-3" *ngFor="let item of statuses ; let i=index">
+                                                <span class="filter4">
+                                                    <img src="assets/images/stroke-4012.svg" />  {{item}}
+                                                </span>
+                                            </div>
+
+                                            <div class="filter3 mt-3 mr-3" *ngFor="let item of statuses ; let i=index">
+                                                <span class="filter4">
+                                                    <img src="assets/images/group.svg" />  {{item}}
+                                                </span>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t3}}</div>
+
+                                        <div class="outBoxFilter">
+                                            <span class="filter222">{{lang.filter.t5}}</span>
+
+                                            <input matInput type="text" style="border: none;position: relative;
+                                            top: 3px;
+                                            left: 10px;" [(ngModel)]="from" name="form">
+                                            <span class="filter222"><img src="assets/images/arrow-right.svg" />
+                                                {{lang.filter.t6}}</span>
+                                            <input matInput type="text" style="border: none;position: relative;
+                                            top: 3px;
+                                            left: 10px;" [(ngModel)]="to" name="to">
+
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t4}}</div>
+
+
+                                        <div class="outBoxFilter">
+                                            <div class="row">
+                                                <div class="col-md-6" style="display: inherit;">
+                                                    <span class="filter22">{{lang.filter.t5}}</span>
+
+                                                    <input matInput [matDatepicker]="picker" [(ngModel)]="fromDate"
+                                                        (dateChange)="changesToDate()" name="fromdate"
+                                                        style="border: none;" placeholder="">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                                                    </mat-datepicker>
+                                                </div>
+                                                <div class="col-md-6" style="display: inherit;">
+                                                    <span class="filter22"> <img src="assets/images/arrow-right.svg" />
+                                                        {{lang.filter.t6}}</span>
+                                                    <input matInput [matDatepicker]="picker1" [(ngModel)]="toDate"
+                                                        name="todate" (dateChange)="changesFromDate()"
+                                                        style="border: none;" placeholder="">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1
+                                                        [calendarHeaderComponent]="headerComponent">
+                                                    </mat-datepicker>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div *ngIf="dateErr" class="invalid-feedback mt-2">
+                                            <p>{{dateMsg}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+
+                                        <button mat-button type="submit" class="btnCss mt-5" [disabled]="dateErr"
+                                            (click)="filterList()" data-dismiss="modal">{{lang.filter.btn}}</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf='billDetails' [dir]="dir">
+    <div class="row" style="text-align: start;">
+        <div class="col-md-12">
+            <span class="exciseTitle1">{{lang.t1}} > </span><span class="exciseTitle1"
+                style="color: #151515;">{{lang.c2.t10}}</span>
+        </div>
+    </div>
+    <div class="row mt-3" style="width:100%">
+        <div class="col-md-12">
+            <div class="viewMore" (click)="back();" style="cursor: pointer;">
+                <span style="cursor: pointer;"> <img src="assets/image/arrow-left.svg" style="width: 24px;">
+                    &nbsp;&nbsp; {{lang.t2}}</span>
+                <!-- <span class="sideNumber"> <img src={{menu[optionSlected-1].t3}} style="width: 66px;"> </span> -->
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- <div class="row">
+
+            <span class="exciseTitle1">Bills > </span><span class="exciseTitle1" style="color: #151515;">&nbsp; Bill
+                Details </span>
+        </div>
+        <div class="row mt-3" style="width:100%">
+            <div class="col-md-12">
+                <span class="label" (click)="back();" style="cursor: pointer;">
+                    <img src="assets/image/arrow-left.svg" style="width: 24px;"> Back</span>
+            </div>
+        </div> -->
+
+
+        <div class="row mt-3" style="text-align: start;">
+            <div class="col-md-6">
+                <span for="" class="title"> {{billDetailsobj.Abtypt}} </span>
+            </div>
+            <div class="col-md-6">
+                <span [style.float]="dir === 'rtl' ? 'left' : 'right'">
+                    <div class="filter3Paid"
+                        *ngIf="billDetailsobj.Status === 'Paid'  || billDetailsobj.status ==='مدفوعة'">
+                        <span class="filter4p">
+                            <img src="assets/images/check.svg" /> {{billDetailsobj.Status}}
+                        </span>
+
+                    </div>
+                    <div class="filter3unpaid"
+                        *ngIf="billDetailsobj.Status === 'Unpaid' || billDetailsobj.Status ==='جزئيا'">
+                        <span class="filter4u">
+                            <img src="assets/images/stroke-4012.svg" /> {{billDetailsobj.Status}}
+                        </span>
+
+                    </div>
+                    <div class="filter3partial"
+                        *ngIf="billDetailsobj.Status === 'Partially' || billDetailsobj.Status ===' غير مدفوعة'">
+                        <span class="filter4pp">
+                            <img src="assets/images/group.svg" /> {{billDetailsobj.Status}}
+                        </span>
+
+                    </div>
+                </span>
+                <!-- <span class="cardTxt4Css P">{{billDetailsobj.Status}}
+                </span> -->
+            </div>
+        </div>
+
+
+        <mat-card class="mt-3" style="text-align: start;">
+            <div class="row mt-2 mb-2">
+                <div class="col-md-11" style="display: inherit;">
+                    <div class="summaryCss1">
+                        <img class="summaryCss2" src="assets/image/details.svg">
+                    </div>
+
+                    <div class="summaryCss3">{{lang.c2.t10}}</div>
+                </div>
+                <div class="col-md-1">
+                    <div class="summaryCss4"></div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div class="row mt-4 mb-4">
+                <div class="col-md-6">
+                    <div class="summaryCss5">{{lang.c2.t1}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Abtypt}}</div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="summaryCss5">{{lang.c2.t2}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Txt30}}</div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div class="row mt-4 mb-4">
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t3}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Period}}</div>
+
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t4}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Faedn | date}}</div>
+                </div>
+            </div>
+
+
+            <mat-divider></mat-divider>
+
+
+            <div class="row mt-4 mb-3">
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t5}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Vtre2}}</div>
+
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t6}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Fbnum}}</div>
+                </div>
+            </div>
+
+        </mat-card>
+
+
+        <div class="row invoiceCard mt-3">
+            <div class="col-md-6 ">
+                <p class="invoiceLabel  ml:23px;">{{lang.c2.t7}}</p>
+            </div>
+            <div class="col-md-6 ">
+                <span class="invoiceText mr:23px;"
+                    [style.float]="dir === 'rtl' ? 'left' : 'right'">{{billDetailsobj.Betrw | currency:'SAR' | slice:3}}
+                    {{lang.t3}}</span>
+            </div>
+        </div>
+        <!-- <div class="row" style=" margin-top: 57px;display: none;">
+        <div class="col-md-12">
+            <button mat-raised-button class="invoiceBtn">Invoice</button>
+        </div>
+    </div> -->
+    </div>
+</div>
+
+
+
+<!-- Added by Praveen kumar on 15-NOV-2020 -->
+<div class="modal modal-filter fade" id="AddForm6Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" dir={{dir}}>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 class="mb-12">{{lang.form6Details.yearMonth.title}} </h2>
+                <label class="mb-24 text-Gray font-16">{{lang.form6Details.yearMonth.subtitle}}</label>
+                <div class="form-group">
+
+                    <div class="d-flex mb-24">
+                        <label class="custom-green-radio mr-24 text-Eerie-Black">{{lang.form6Details.yearMonth.c1}}
+                            <input type="radio" name="CalendarType" value="H" [(ngModel)]="CalendarType"
+                                (change)="CalendarTypeChange()">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="custom-green-radio text-Eerie-Black">{{lang.form6Details.yearMonth.c2}}
+                            <input type="radio" name="CalendarType" value="G" [(ngModel)]="CalendarType"
+                                (change)="CalendarTypeChange()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="row mb-56">
+                        <div class="col-sm-5">
+                            <p class="font-16 text-Gray  mb-0">{{lang.form6Details.yearMonth.i1}}</p>
+
+                            <select [(ngModel)]="createdform6year" placeholder="2018" class="input165 custom-select">
+                                <option *ngFor="let year of MonthsYearsSet[0]?.Year" [value]="year.Text">{{year.Text}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <p class="font-16 text-Gray  mb-0">{{lang.form6Details.yearMonth.i2}}</p>
+
+                            <select [(ngModel)]="createdform6month" placeholder="05" class="input165 custom-select">
+                                <option *ngFor="let month of MonthsYearsSet[1]?.Month" [value]="month.Text">
+                                    {{month.Text}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-link mr-24"
+                        data-dismiss="modal">{{lang.form6Details.yearMonth.btn2}}</button>
+
+                    <button class="btn btn-primary " data-dismiss="modal"
+                        [disabled]="createdform6year=='' || createdform6month==''"
+                        (click)="Form6Creation()">{{lang.form6Details.yearMonth.btn1}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div [dir]="dir">
+    <notifier-container></notifier-container>
+</div>

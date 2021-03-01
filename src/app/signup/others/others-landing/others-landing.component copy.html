@@ -1,0 +1,141 @@
+
+ <!-- <div dir={{direction}} >
+  <nav class="navbar navbar-expand-sm  navbar-dark  fixed-top" style="box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  margin-left: 10%;margin-right: 10%;height: 130px; background-image: url('assets/images/header02.jpg');">
+
+      <div class="row text-center mb-5" style="width: 100%;position: relative;">
+          <div class="col-md-12">
+              <div id="textbox">
+                  <div class="alignleft">
+                      <div class="card cardz" style="border-radius:50%;width: 50px; height: 50px;" [routerLink]="['/home']">
+
+                          <div class="card-body">
+                              <div class="text-center" style="    position: relative;
+                              bottom: 9px;
+                              right: 3px">
+                            <i class="fa fa-arrow-left" style="font-size: 15px;" aria-hidden="true"></i>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="alignright">
+                      <div class="card cardz" style="border-radius:50%;width: 50px; height: 50px;float: right;">
+                          <div class="card-body">
+                              <div class="text-center" style="position: relative;
+                              bottom: 10px;
+                              right: 6px;">
+                                  <img src="assets/images/chat01.png" alt="Logo">
+                              </div>
+                               <!-- <i class="fa fa-user" style="font-size: 25px;" aria-hidden="true"></i>  -->
+                       </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+
+  </nav>
+  <nav class="navbar navbar-expand-sm  navbar-dark  fixed-top" style="
+
+  margin-top: 70px;margin-left: 10%;margin-right: 10%">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="titleCssS">
+                  <!-- Create New Individual Account -->
+                   {{lang.title}}
+              </div>
+          </div>
+      </div>
+  </nav>  -->
+
+  <div class="container" style="margin-top: 100px;">
+      <div class="row outerDiv">
+          <div class="col-md-3">
+              <mat-card class="cardHover">
+                  <div class="text-center">
+                       <div class="">
+                          <img src="assets/images/charity.png" alt="Logo" style="width: 50px;">
+                      </div>
+                      <p class="insideCard">Charities and non-profit Organizations </p>
+                  </div>
+              </mat-card>
+          </div>
+          <div class="col-md-3">
+              <mat-card  class="cardHover" [routerLink]="['establishment']">
+                  <div class="text-center">
+                       <div>
+                          <img src="assets/images/consortium.png" alt="Logo" style="width: 50px;">
+                      </div>
+                      <p class="insideCard"><br>Consortium</p>
+                  </div>
+              </mat-card>
+          </div>
+          <div class="col-md-3">
+              <mat-card  class="cardHover" [routerLink]="['/individual']">
+                  <div class="text-center">
+                       <div>
+                          <img src="assets/images/govt.png" alt="Logo" style="width: 50px;">
+                      </div>
+                      <p class="insideCard">Governmental and sub Governmental</p>
+                  </div>
+              </mat-card>
+          </div>
+          <div class="col-md-3">
+              <mat-card  class="cardHover">
+                  <div class="text-center">
+                       <div>
+                          <img src="assets/images/inheritors.png" alt="Logo" style="width: 50px;">
+                      </div>
+                      <p class="insideCard"><br>Inheritors</p>
+                  </div>
+              </mat-card>
+          </div>
+      </div>
+      <br>
+      <div class="row outerDiv">
+        <div class="col-md-3">
+            <mat-card class="cardHover">
+                <div class="text-center">
+                     <div>
+                        <img src="assets/images/realEstate.png" alt="Logo" style="width: 50px;">
+                    </div>
+                    <p class="insideCard">Real state Contribution </p>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card  class="cardHover" [routerLink]="['establishment']">
+                <div class="text-center">
+                     <div>
+                        <img src="assets/images/investment.png" alt="Logo" style="width: 50px;">
+                    </div>
+                    <p class="insideCard">Investment Funds</p>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card  class="cardHover" [routerLink]="['/individual']">
+                <div class="text-center">
+                     <div>
+                        <img src="assets/images/freelance.png" alt="Logo" style="width: 50px;">
+                    </div>
+                    <p class="insideCard">Freelancer & Professions</p>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-3">
+            <mat-card  class="cardHover">
+                <div class="text-center">
+                     <div>
+                        <img src="assets/images/other.png" alt="Logo" style="width: 50px">
+                    </div>
+                    <p class="insideCard">Others</p>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+  </div>
+</div> 

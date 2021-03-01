@@ -1,0 +1,610 @@
+<div class="container alignStart" [dir]="lang.dir" *ngIf="!bondsSubmitted">
+    <!-- <div class="row">
+      <div class="col-md-10 container" *ngIf="optionActive === 2||optionActive === 3||optionActive === 4">
+        <span class="exciseTitle1 unicodeDir bcTitle" 
+          > {{ lang.bc1 }}</span>  <span class="exciseTitle1 unicodeDir bcTitle">&gt;</span> <span class="exciseTitle1 unicodeDir bcTitle" 
+          > {{ lang.bc2 }}</span> <span class="exciseTitle1 unicodeDir bcTitle">&gt;</span>  <span class="exciseTitle1 unicodeDir bcTitle" 
+          >{{ lang.bc3 }}</span> <span class="exciseTitle1 unicodeDir bcTitle">&gt; </span
+        ><span class="exciseTitle1 bcTitleActive" style="
+        font-size: 16px;">{{ lang.bc4 }}</span>
+      </div>
+      <div class="col-md-10 container" *ngIf="optionActive === 1">
+        <span class="exciseTitle1 unicodeDir bcTitle"
+          >{{ lang.bc1 }}</span> <span class="exciseTitle1 unicodeDir bcTitle">&gt;</span><span class="exciseTitle1 unicodeDir bcTitle"> {{ lang.bc2 }}</span><span class="exciseTitle1 unicodeDir bcTitle"> &gt;</span> <span class="exciseTitle1 bcTitleActive" style="
+        font-size: 16px;">{{ lang.bc3 }} </span>
+      </div>
+    </div> -->
+    
+  
+    <div class="col-md-10 container">
+      <div class="  row mb-4">
+        <div class="col-md-12">
+
+        <div style="margin-top: 24px;" *ngIf="optionActive === 2||optionActive === 3||optionActive === 4">
+          <span class="exciseTitle1 unicodeDir bcTitle"  (click)="taxManagementClicked()"
+            > {{ lang.bc1 }}</span>  <span class="exciseTitle1 unicodeDir bcTitle"> &gt; </span> <span class="exciseTitle1 unicodeDir bcTitle"  (click)="zakatServicesClicked()"
+            > {{ lang.bc2 }}</span> <span class="exciseTitle1 unicodeDir bcTitle"> &gt; </span>  <span class="exciseTitle1 unicodeDir bcTitle" 
+            (click)="zakatTaxCertificateClicked()">{{ lang.bc3 }}</span> <span class="exciseTitle1 unicodeDir bcTitle"> &gt;  </span
+          ><span class=" bcTitleActive" style="
+          font-size: 16px;">{{ lang.bc4 }}</span>
+        </div>
+        <div *ngIf="optionActive === 1" style="margin-top: 24px;">
+          <span class="exciseTitle1 unicodeDir bcTitle" (click)="taxManagementClicked()"
+            >{{ lang.bc1 }}</span> <span class="exciseTitle1 unicodeDir bcTitle"> &gt; </span><span class="exciseTitle1 unicodeDir bcTitle" (click)="zakatServicesClicked()"> {{ lang.bc2 }}</span><span class="exciseTitle1 unicodeDir bcTitle">  &gt; </span> <span class=" bcTitleActive" style="
+          font-size: 16px;" >{{ lang.bc3 }} </span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3" style="width: 100%">
+        <div class="col-md-12">
+            <div class="stepHeader row">
+                <span class="stepBack col-md-6" (click)="back()">
+                    <img [src]="lang['dir'] =='ltr'?'assets/image/arrow-left-green.svg':'assets/image/arrow-right-green.svg'"
+                        style="width: 24px">
+                    {{lang.back}}</span>
+                <span *ngIf="optionActive!==1&&!isViewOnly" class="stepNumber col-md-6">
+                    <img [ngClass]="lang.dir=='rtl'?'rotateSteps':''" src="{{ lang.menu[optionActive - 1].step }}"
+                        style="width: auto;height: 16px;" />  
+                    <img *ngIf="optionActive==4 " class="m-0 p-1"   src="assets/image/check.svg" />
+                </span>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div  class="pageTitle" *ngIf="!isViewOnly" >
+                {{ lang.menu[optionActive - 1].title }}
+            </div>
+            <div  class="pageTitle" *ngIf="isViewOnly" >
+              {{ lang.zakatCertificateRequest}}
+          </div>
+            <!-- *ngIf="mainPage==true && showApp ==false" -->
+        </div>
+        <div class="col-md-12">
+          <div *ngIf="optionActive!==1&&!isViewOnly" class="row mt-2">
+            <div class="col-md-12">
+                <div class="value textGray">
+                  {{ lang.menu[optionActive - 1].subtitle }}
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="optionActive==1">
+        <div class="layoutOptions">
+           
+          <img [ngClass]="layoutType == 'grid'?'layoutId layoutId-active' : 'layoutId filterContrast'"   (click)="changeLayoutType('grid')" [src]="layoutType=='grid'?'  assets/image/card-green.svg':'assets/image/cards.svg'" >
+          <img [ngClass]="layoutType == 'table'?'layoutId layoutId-active' : 'layoutId filterContrast'" (click)="changeLayoutType('table')" src="assets/image/table.svg">
+
+        </div>
+
+        <div class="mt-4 row">
+          <div class="searchBar col">
+           
+              <input id="SearchInput" [placeholder]="lang.search" (mouseover)="onSearchHoverIn()"  (mouseout)="onSearchFocusOut()" (input)="onSearchFocusIn()"  (blur)="onSearchFocusOut()"  class="commonInput"    [(ngModel)]="searchText"  type="search"/>
+            
+              <span *ngIf="showSearch" 
+                  [ngClass]="lang.dir=='ltr'?'searchIcon-ltr':'searchIcon-rtl'"  class="searchIcon"><img
+                      src="assets/images/search.svg" /></span>
+          </div>
+        
+      </div>
+
+
+        <div *ngIf="layoutType=='grid'"  class="row mt-5" style="margin-bottom: 56px;">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="mb-2 cardCntrMb">
+                    <div class="add-card-large  col-md-6 " style="height: 172px;max-width: 438px;"  (click)="onSubmit()">
+                        <img class="px-2" src="assets/image/add.svg">
+                        <div class="value fwb textPrimary mx-1 mt-2">{{lang.addReqText}}</div>
+                    </div>
+                </div>
+            </div>  
+            <ng-container *ngFor="let each of SubmitedCertificateList | filter:searchText">
+            <div class="col-md-6 col-sm-12 col-xs-12 mb-2" style="cursor: pointer;" (click)="landindPageListItemTapped(each)" >
+              <!-- (click)="addRulingRequest(each.Fbnum)" -->
+                <div class="mb-2 cardCntrMb"  >
+                    <div class="filing-card textDark border" style="height: 172px; max-width: 438px;">
+                        <div class="row filing-card-upper px-3">
+                            <div class="col-md-6">
+                                <div class="value  fwb">{{each.FbtText}}</div>
+                            </div>
+                            <div class="col-md-6" style="justify-content: flex-end;
+                        display: flex;">
+                                <div *ngIf="each.Fbsta=='IP015'||each.Fbsta=='IP016'||each.Fbsta=='IP021'||each.Fbsta=='IP011'"  class="tag32 tag-partial" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.StatText}}</div>
+                                <div  *ngIf="each.Fbsta=='IP014'||each.Fbsta=='IP018'" class="tag32 tag-success" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.StatText}}</div>
+                                <div  *ngIf="each.Fbsta=='IP019'" class="tag32 tag-danger" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.StatText}}</div>
+                                <div  *ngIf="each.Fbsta=='IP017'||each.Fbsta=='IP020'" class="tag32 tag-danger" style="height: fit-content;width:unset;padding:10px;padding: 7px 10px;">{{each.StatText}}</div>
+                            </div>
+                        </div>
+                        <div class="divider">
+                        </div>
+                        <div class="row filing-card-down px-3" style="height: 67px;">
+                          <div class="col-6 mobpad1">
+                           <div class="caption textGray">{{lang.fbNumber}}</div> 
+                            <div class="value  fwb">{{each.Fbnum }}</div>
+                          </div>
+                          <div class="col-6 mobpad1">
+                            <div class="caption textGray"> {{lang.date}} </div> 
+                             <div class="value  fwb" >{{each.CrdtText | date: 'dd/MM/yyyy' }}</div>
+                           </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </ng-container>
+        </div>
+
+
+        <div *ngIf="layoutType=='table'"  class="row mt-5" style="margin-bottom: 56px;">
+            <div class="col-12">
+                <div class="mb-2 border">
+                    <div class="row" style="height: 44px;margin: 0; cursor: pointer;"  (click)="onSubmit()">
+                        <img class="col-auto" src="assets/image/add.svg">
+                        <div style=" margin-inline-start: 0; padding-inline-start: 0;" class="value fwb textPrimary mt-2  col">{{lang.addReqText}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <table  [hidden]="isListEmptyCheck()" style="width:100%;table-layout: fixed; margin-left:15px;margin-right: 15px;">
+                <tr class="tabHeader" >
+                    <ng-container *ngIf="lang.dir !== 'rtl'">
+                        <th colspan="8">{{lang.applicationtype}}</th>
+                    </ng-container>
+                    <ng-container *ngIf="lang.dir === 'rtl'">
+                        <th colspan="8" [style.border-right]="lang.dir === 'rtl' ? ('1px solid #bbb'):''"
+                            [style.border-top-left-radius]="lang.dir === 'rtl' ? '0px' : '16px'"
+                            [style.border-top-right-radius]="lang.dir === 'rtl' ? '16px' : '0px'">{{lang.applicationtype}}
+                        </th>
+                        <!-- {{lang.fbNumber}} -->
+                    </ng-container>
+                    <th colspan="8">{{lang.fbNumber}}</th>
+                    <th colspan="8">{{lang.date}}</th>
+                    
+                    <ng-container *ngIf="lang.dir !== 'rtl'">
+                        <th colspan="8">{{lang.status}}</th>
+                    </ng-container>
+                    <ng-container *ngIf="lang.dir === 'rtl'">
+                        <th colspan="8" [style.border-top-right-radius]="lang.dir === 'rtl' ? '0px' : '16px'"
+                            [style.border-top-left-radius]="lang.dir === 'rtl' ? '16px' : '0px'">{{lang.status}}
+                        </th>
+                    </ng-container>
+                </tr>
+                <ng-container *ngFor="let each of SubmitedCertificateList | filter:searchText; let i=index">
+                  <!-- *ngIf="(each.Fbust == selectedStatus || selectedStatus=='01') && (each.Fbtyp == 'TPEV')" -->
+                    <tr class="tabheader2" style="cursor: pointer;"  (click)="landindPageListItemTapped(each)"    >
+                        <ng-container *ngIf="lang.dir === 'rtl'">
+                            <!-- <td colspan="8" >{{each.FbtText}}
+                            </td> -->
+                            <td colspan="8"
+                                [style.border-bottom-right-radius]="lang.dir === 'rtl' ? '16px' : '0px'"
+                                [style.border-bottom-left-radius]="lang.dir === 'rtl' ? '0px' : '0px'"
+                               
+                                >
+                                {{each.FbtText}}
+                            </td>
+                        </ng-container>
+
+
+                        <ng-container *ngIf="lang.dir !== 'rtl'">
+                            <td colspan="8">{{each.FbtText}}</td>
+                        </ng-container>
+                        <td colspan="8">{{each.Fbnum  }}</td>
+
+                        <td colspan="8">{{each.CrdtText | date: 'dd/MM/yyyy' }}</td>
+                      
+                       
+                        <ng-container *ngIf="lang.dir !== 'rtl'">
+                            <td colspan="8">
+                                <span  class="tag32 tag-partial"  *ngIf="each.Fbsta=='IP015'||each.Fbsta=='IP016'||each.Fbsta=='IP021'||each.Fbsta=='IP011'"  style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                padding: 8px 21px 8px 22px;font-size: 16px;" >
+                                    {{each.StatText }}</span>
+                                    <span  *ngIf="each.Fbsta=='IP014'||each.Fbsta=='IP018'" class="tag32  tag-success" style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                padding: 8px 21px 8px 22px;font-size: 16px;" >
+                                    {{each.StatText }}</span>
+                                    <span  *ngIf="each.Fbsta=='IP019'" class="tag32 tag-danger" style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                padding: 8px 21px 8px 22px;font-size: 16px;" >
+                                    {{each.StatText }}</span>
+                                    <span  *ngIf="each.Fbsta=='IP017'||each.Fbsta=='IP020'" class="tag32  tag-unsubmit" style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                padding: 8px 21px 8px 22px;font-size: 16px;" >
+                                    {{each.StatText }}</span>
+                                    
+                            </td>
+
+                        </ng-container>
+                        <!-- [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']" -->
+                        <ng-container *ngIf="lang.dir === 'rtl'">
+                            <!-- <td colspan="8" > 
+                                <span
+                                   >
+                                    {{each.StatText}}</span>
+                            </td> -->
+
+                             <td colspan="8"
+                                [style.border-bottom-left-radius]="lang.dir === 'rtl' ? '16px' : '0px'"
+                                [style.border-bottom-right-radius]="lang.dir === 'rtl' ? '0px' : '0px'"
+                               
+                                
+                                >
+                                <span *ngIf="each.Fbsta=='IP015'||each.Fbsta=='IP016'||each.Fbsta=='IP021'||each.Fbsta=='IP011'" class="tag32 tag-partial" style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                padding: 8px 21px 8px 22px;"  >
+                                    {{each.StatText}}</span>
+                                    <span  *ngIf="each.Fbsta=='IP014'||each.Fbsta=='IP018'" class="tag32 tag-success" style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                    padding: 8px 21px 8px 22px;"  >
+                                        {{each.StatText}}</span>
+                                        <span *ngIf="each.Fbsta=='IP019'" class="tag32 tag-danger"  style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                        padding: 8px 21px 8px 22px;"  >
+                                            {{each.StatText}}</span>   
+                                      <span  *ngIf="each.Fbsta=='IP017'||each.Fbsta=='IP020'" class="tag32 tag-unsubmit" style="height: fit-content;width:unset ; margin: 16px 0 16px 17px;
+                                            padding: 8px 21px 8px 22px;"  >
+                                                {{each.StatText}}</span>
+                            </td> 
+                        </ng-container>
+
+                    </tr>
+                </ng-container>
+
+
+
+            </table>
+        </div>
+
+
+
+
+
+    </div>
+    <div *ngIf="optionActive==1" class="row mt-2">
+        <div class="col-md-12">
+            <div class="value textGray">
+                {{ lang.menu[optionActive - 1].subtitle }}
+            </div>
+        </div>
+    </div>
+    <div *ngIf="optionActive!==1" class="Rectangle-12New mt-3"></div>
+      <br /><br />
+      <div class="row" style="margin-inline-start: 0;padding: 0;" *ngIf="optionActive === 2" >        
+  <div class=" col-xs-12 col-sm-6 mb-2"  style="margin-inline-start: 0;padding-inline-start: 0;">
+                <div class="matLabel  labelMarginBottom " >{{ lang.fCerType }}</div>
+               <div>
+                 <mat-select  required class="commonMatSelect" [value]="selectedCertificate" [ngClass]="certificateTypeHasError?'inputErr':''" style="min-width: unset;max-width:unset;width: 100% !important;"  (selectionChange)="changedCertificateType($event)">
+                <mat-option *ngFor="let item of DropDownItem"  [value]="item" style="font-family: SSTArabic-Roman;color: 232323 !important;"> {{item.TrantypeText}} </mat-option>
+            </mat-select></div> 
+                <div  class=" invalid-feedback1  mt-1 matLabel "  *ngIf="certificateTypeHasError"></div>     
+            </div>
+             <div class=" col-xs-12 col-sm-6 mb-2 " style="margin-inline-start: 0;padding-inline-start: 0;">
+              <div class="matLabel  labelMarginBottom">{{lang.fTaxPer}}</div>
+              <mat-select required class="commonMatSelect " style="min-width: unset;max-width:unset;width: 100% !important;"  [ngClass]="TaxYearHasError?'inputErr':''" [value]="selectedYear" (selectionChange)="changedTaxYear($event)">
+                  <mat-option *ngFor="let item of TaxYearDropDownItem" [value]="item" style="font-family: SSTArabic-Roman;color: 232323 !important;"> {{item.Txt50}} </mat-option>      
+              </mat-select>
+              <div class="invalid-feedback1  mt-1 matLabel  " *ngIf="TaxYearHasError"></div>
+          </div>
+          <div class=" col-xs-12 col-sm-6 mb-2" style="margin-inline-start: 0;padding-inline-start: 0;">
+            <div class="matLabel labelMarginBottom ">{{ lang.fCerNo }}</div>
+            <input required  class="commonMatSelect" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"  style="min-width: unset;max-width:unset;width: 100% !important;" style="min-width: unset;max-width:unset;width: 100% !important;"  type="text" [formControl]="certificateNumberSummery" name="cnumber"/>
+        </div>
+     
+     
+
+
+
+
+
+            
+           
+           
+          
+            <div class="col-12 p-0"  style="margin-top: 56px;">
+                            <button class="btnPrimary"  type="button" (click)="onSubmit2()" mat-raised-button>
+                {{ lang.continue }}
+              </button>
+        </div>
+      
+      </div>  
+      <!-- form 3 -->
+      <div class="row" *ngIf="optionActive === 3">
+        <div class="col-md-12">
+          <form (ngSubmit)="onSubmit3()" [formGroup]="requestRulingFormGroup2">
+            <br />
+            <div class="row justify-content-between removeMargin" >
+              <div class="col-md-6 card-uploadAttach uploaded border mb-3" *ngFor="let attach of requestRulingFormGroup2.get('doc')['controls']; let j = index;">
+                <div class="card-delete">
+                  <img src="assets/image/delete.svg" (click)="deleteAttachmentFromSer(attach['controls']['id'].value, attach['controls']['did'].value,j)" />
+                </div>
+                <div class="card-file-content">
+                  <img [src]="isPdf( attach['controls']['name'].value) || (attach['controls'].hasOwnProperty('ext') && attach['controls']['ext'].value =='pdf')
+                  ? 'assets/images/generic-documents.png'   
+                  : 'assets/images/generic-documents.png'" style="width: 24px;
+                  margin: 0 auto;"/>
+                  <div class="value textDark mt-1 card-main-text fwb">
+                    {{ attach['controls']['name'].value }}
+                  </div>
+                </div>
+              </div>
+              <div class="card-uploadAttach border mb-3"  *ngIf="GetVisibilityOfAddAttachment()" (click)="fileInput.click()" appDragDrop
+              (onFileDropped)="uploadFiles($event)" >
+                <div class="card-upload-content">
+                  <input hidden type="file" #fileInput
+                  (change)="uploadFiles($event.target.files)"  onclick="this.value = null"/>
+                  <img src="assets/image/attach.svg" />
+                  <div class="value textPrimary mt-1 card-main-text fwb">
+                   {{lang.drag}}
+                  </div>
+                  <div class="caption textGray mt-1">{{lang.mbMax}}</div>
+                </div>
+              </div>
+            </div>
+            <br /><br />
+            <div>
+              <button class="btnPrimary " mat-raised-button>
+                {{ lang.continue }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- form 4 -->
+      <div class="row" *ngIf="optionActive === 4 && !isViewOnly">
+        <div class="col-md-12">
+          <form (ngSubmit)="onSubmit4()">
+
+            <div class="row block" [ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+              <div class="row border" style="width: 100%">
+                <div class="col-md-6 sectionTitle block-2">
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                    <div class="roundedIcon">
+                      <img src="assets/image/details.svg" />
+                    </div>
+                    <div class="sectionTitle fwb px-2">  {{ lang.menu[1].title }} </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6 justifyContentEnd row">
+                  <div class="edit-button " (click)="certificateDetailEdit()">{{ lang.edit }} </div>
+                </div>
+  
+                <div class="hr"></div>
+  
+                <div class="col-md-6 block-5">
+                  <div class="matLabel block-4"> {{lang.fCerType}}  </div>
+                  <span class="Placeholder-text-Copy block-3 col-md-6"
+                    >{{certificatetypeSummery}}</span
+                  >
+                </div>
+  
+                <div class="col-md-6 block-5">
+                  <div class="matLabel block-4">{{ lang.fTaxPer }}</div>
+                  <span class="Placeholder-text-Copy block-3 col-md-6"
+                    >{{certificateyearSummery}}</span
+                  >
+                </div>
+  
+                <div class="hr"></div>
+  
+                <div class="col-md-6 block-5">
+                  <div class="matLabel block-4">{{ lang.fCerNo }}</div>
+                  <span class="Placeholder-text-Copy block-3 col-md-6" style="overflow-wrap: anywhere; "
+                    >{{certificateNumberSummery.value}}</span
+                  >
+                </div>
+              </div>
+            </div>
+  
+            <br /><br />
+  
+            <div class="row block" [ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+              <div class="row border" style="width: 100%">
+                <div class="col-md-6 sectionTitle block-2">
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                    <div class="roundedIcon">
+                      <img src="assets/image/attach.png" />
+                    </div>
+                    <div class="sectionTitle fwb px-2">{{ lang.menu[2].title }}</div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6 justifyContentEnd row">
+                  <div class="edit-button" (click)="editAttachment()" >{{ lang.edit }}</div>
+                </div>
+  
+                <div class="hr"></div>
+  
+                <div class="col-md-6 block-5" >
+                  <div class="matLabel block-4">
+                   {{ lang.attachRequestLetter }}  
+                  </div>
+                <div *ngFor="let attach of requestRulingFormGroup2.get('doc')['controls'];">
+                  <span  class="value textDark mt-1 card-main-text fwb block-6" 
+                  style="overflow-wrap: anywhere; "
+                  > {{ attach['controls']['name'].value }}</span
+                  >
+
+                  <!-- 'assets/image/pdf.svg'  -->
+                  <img [src]="  isPdf( attach['controls']['name'].value) || (attach['controls'].hasOwnProperty('ext') && attach['controls']['ext'].value =='pdf')
+                  ? 'assets/images/generic-documents.png'
+                  : 'assets/images/generic-documents.png'" style="width: 24px;
+                  margin: 0 auto;" />
+                </div>
+
+                </div>
+  
+
+              </div>
+            </div>
+  
+            <br /><br />
+  
+            <div>
+              <button class="btnPrimary " mat-raised-button>
+               {{lang.confirm}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row" *ngIf="optionActive === 4 &&isViewOnly">
+        <div class="col-md-12">
+          <form >
+
+            <div class="row block" [ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+              <div class="row border" style="width: 100%">
+                <div class="col-md-6 sectionTitle block-2">
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                    <div class="roundedIcon">
+                      <img src="assets/image/details.svg" />
+                    </div>
+                    <div class="sectionTitle fwb px-2">  {{ lang.menu[1].title }} </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6 justifyContentEnd row">
+                  <!-- <div class="edit-button " (click)="certificateDetailEdit()">{{ lang.edit }} </div> -->
+                </div>
+  
+                <div class="hr"></div>
+  
+                <div class="col-md-6 block-5">
+                  <div class="matLabel block-4"> {{lang.fCerType}}  </div>
+                  <span class="Placeholder-text-Copy block-3 col-md-6"
+                    >{{dataForAlreadySubmittedCertificate.d.CertTpDes}}</span
+                  >
+                </div>
+  
+                <div class="col-md-6 block-5">
+                  <div class="matLabel block-4">{{ lang.fTaxPer }}</div>
+                  <span class="Placeholder-text-Copy block-3 col-md-6"
+                    >{{dataForAlreadySubmittedCertificate.d.PeriodDes}}</span
+                  >
+                </div>
+  
+                <div class="hr"></div>
+  
+                <div class="col-md-6 block-5">
+                  <div class="matLabel block-4">{{ lang.fCerNo }}</div>
+                  <span class="Placeholder-text-Copy block-3 col-md-6" style="overflow-wrap: anywhere; "
+                    >{{dataForAlreadySubmittedCertificate.d.ACertificateNum}}</span
+                  >
+                </div>
+              </div>
+            </div>
+  
+            <br /><br />
+  
+            <div class="row block" [ngStyle]="{'margin-inline-start': lang.dir==='rtl' ? '15px' : ''}">
+              <div class="row border" style="width: 100%">
+                <div class="col-md-6 sectionTitle block-2">
+                  <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                    <div class="roundedIcon">
+                      <img src="assets/image/attach.png" />
+                    </div>
+                    <div class="sectionTitle fwb px-2">{{ lang.menu[2].title }}</div>
+                  </div>
+                </div>
+  
+                <div class="col-md-6 justifyContentEnd row">
+                  <!-- <div class="edit-button" (click)="editAttachment()" >{{ lang.edit }}</div> -->
+                </div>
+  
+                <div class="hr"></div>
+  
+                <div class="col-md-6 block-5" >
+                  <div class="matLabel block-4">
+                   {{ lang.attachRequestLetter }}  
+                  </div>
+                <div *ngFor="let attach of dataForAlreadySubmittedCertificate.d.AttDetSet.results">
+                  <span (click)="downloadAttachemnt(attach.DocUrl)" class="value textDark mt-1 card-main-text fwb block-6" 
+                  style="overflow-wrap: anywhere;cursor: pointer; "
+                  > {{ attach.Filename}}</span
+                  >
+                  <img [src]="'assets/images/generic-documents.png'" style="width: 24px;
+                  margin: 0 auto;" />
+                </div>
+
+                </div>
+  
+
+              </div>
+            </div>
+  
+            <br /><br />
+  
+            <div >
+              <button class="btnPrimary " (click)="downloadAckForSubmittedRequest()" style="width: fit-content;" mat-raised-button>
+             {{lang.downloadAck}}
+              </button>
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- form 5 success screen -->
+  <div class="container alignStart" [dir]="lang.dir" *ngIf="bondsSubmitted">
+    <div class="mini-container mt-5">
+      <img src="assets/image/success.svg" class="Success block-9" />
+      <br /><br /><br />
+      <div class="pageTitle block-8">{{lang.zakatCertificateRequest}}</div>
+      <div class="sub-heading" style="margin-top: 14px;">
+        {{lang.yourZakatCertificateRequestsuccessfullysubmitted}}
+      </div>
+      <br /><br />
+      <div class="row justify-content-center mx-0">
+        <div
+          class="col-md-9 border row vCenter mt-3 justify-content-between py-2 block-13" style="height: 56px;"
+        >
+          <div class="value textGray">{{lang.referenceNumber}}</div>
+          <div class="value textDark fw500" style="font-family: SSTArabic-Medium;">{{generatedFbNum}}</div>
+        </div>
+      </div>
+      <br /><br />
+      <button class="btnPrimary  block-9" (click)="DownloadCertificateAcknowledgemnet()"  mat-raised-button>
+        {{lang.downloadConfirmation}}
+      </button>
+      <br /><br />
+      <div class="dashboard-heading btn block-9" style="font-family: SSTArabic-Medium; justify-content: center;  text-align: center;" (click)="zakatTaxCertificateClicked()">{{lang.zakatTaxCertificate}}</div>
+      <br /><br /><br />
+    </div>
+  </div>
+
+  <div class="modal" id="terms" data-keyboard="false" data-backdrop="static" [dir]="lang.dir">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="px-4 py-3  col-md-12 ">
+                    <div class="col-md-12 alignEnd"> 
+                      <img src="assets/image/close.svg" class="modalCloseIcon"
+                            (click)="closeModal('terms')" />
+                    </div>
+                    <div class="dark fbl f28 mt-4 mb-3" > {{lang.instructionTitle}}</div>
+                    <div class="lightCard py-3 pr-3 " style="vertical-align: middle;">
+
+                        <ul style="list-style: none;" class="modalInstructions f12 gray">
+                            <li>{{lang.instructionLine1}}</li>
+                            <li *ngIf="lang.dir=='rtl'">{{lang.instructionLine2}}</li>
+                            <li *ngIf="lang.dir=='rtl'">{{lang.instructionLine3}}</li>
+                            <li *ngIf="lang.dir=='rtl'">{{lang.instructionLine4}}</li>
+                        </ul>
+                    </div>                   
+                    <div  class="check mt-4" >
+                        <mat-checkbox class="check checkboxAckCssnew" style="font-family: SSTArabic-Medium;" [ngClass]="!isAgree && termAndConditionFlag?'inputError':''" [(ngModel)]="isAgree">
+                         {{lang.instructionCheckboxText}}
+                        </mat-checkbox>
+                    </div>
+                    <div class=" mt-4 mb-2 alignEnd">
+                        <button class="btnPrimary" (click)="startProcess()"    mat-raised-button>{{ lang.continue }}</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <notifier-container></notifier-container>

@@ -1,0 +1,75 @@
+.tnc-dialog-container .tnc-dialog-content-wrapper {
+  width: 634px;
+}
+
+.tnc-x-container {
+  height: 24px;
+  margin-top: 9px;
+  margin-right: 0em;
+  margin-left: 0em;
+  cursor: pointer;
+}
+.pageTitle{
+  font-family: SSTArabic-Bold;
+  color: #232323;
+}
+.tnc-content-container {
+  min-height: 144px;
+  margin-right: 7px;
+  border-radius: 14px;
+  border: 1px solid var(--light);
+}
+
+.tnc-content {
+  margin: 16px 16px;
+  margin-right: 23px;
+
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--gray);
+}
+
+.tnc-checkbox {
+  display: inline-flex;
+  height: 24px;
+  width: 24px;
+  border-radius: 6px;
+  border: 1px solid var(--primary);
+}
+
+.tnc-checkbox-selected {
+  background-color: var(--primary);
+}
+
+.tnc-checkbox > img {
+  height: 12px;
+  width: 16px;
+  margin: 5px 3px;
+}
+
+.tnc-checkbox-label {
+  display: inline-flex;
+  margin-right: 16px;
+  margin-left: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'SSTArabic-Roman';
+}
+
+/* Override */
+.tnc-dialog-container .mat-dialog-content {
+  padding: 0;
+}
+
+span.mat-button-wrapper {
+  font-family: SST;
+  font-size: 16px;
+  font-weight: bold;
+  max-width: 220px;
+  height: 48px;
+}
+
+mat-dialog-container#mat-dialog-0 {
+  border-radius: 14px !important;
+  max-width: 708px;
+}

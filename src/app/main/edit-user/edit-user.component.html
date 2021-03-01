@@ -1,0 +1,294 @@
+<div class="alignStart addUserRoot" [dir]="direction">
+  <div class="addUserMiddle col-md-8" [dir]="direction">
+    <div a class="addUserBack" [dir]="direction"> 
+      <div class="addUserLocation">
+        <span class="addUsrSpan1" (click)="navigateToProfile()" style="cursor: pointer;">
+          {{
+            direction == "rtl"
+              ? addUserConstants["profile"]["arb"]
+              : addUserConstants["profile"]["eng"]
+          }}
+        </span>
+        <span class="addUsrSpan1">></span>
+        <span class="addUsrSpan1"  style="cursor: pointer;" (click)="navigateToUsermanagement()">
+          {{
+            direction == "rtl"
+              ? addUserConstants["umm"]["arb"]
+              : addUserConstants["umm"]["eng"]
+          }}
+        </span>
+        <span class="addUsrSpan1">></span>
+        <span class="addUsrSpan2">
+          {{
+            direction == "rtl"
+              ? addUserConstants["editUser"]["arb"]
+              : addUserConstants["editUser"]["eng"]
+          }}
+        </span>
+      </div>
+      <div class="auBack" (click)="gotoUserDetails()">
+        <span class="addUsrSpan2">
+          <img
+            [src]="
+              direction === 'ltr'
+                ? 'assets/image/arrow-left-green.svg'
+                : 'assets/image/arrow-right-green.svg'
+            "
+          /> </span
+        ><span class="adduseHspan2">
+          {{
+            direction == "rtl"
+              ? addUserConstants["Back"]["arb"]
+              : addUserConstants["Back"]["eng"]
+          }}
+        </span>
+      </div>
+      <div [dir]="direction">
+        <div class="addUserH" [dir]="direction">
+          {{
+            direction == "rtl"
+              ? addUserConstants["editUser"]["arb"]
+              : addUserConstants["editUser"]["eng"]
+          }}
+        </div>
+        <div class="addUserCompleteDetails">
+          {{
+            direction == "rtl"
+              ? addUserConstants["completeDetailsBelow"]["arb"]
+              : addUserConstants["completeDetailsBelow"]["eng"]
+          }}
+        </div>
+
+        <form class="form" (ngSubmit)="submit()" [formGroup]="form">
+          <div class="addUserForm row">
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["IdentityType"]["arb"]
+                    : addUserConstants["IdentityType"]["eng"]
+                }}
+              </div>
+              <input
+                class="commonInputx"
+                disabled="true"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['IdentityType']['arb']
+                    : addUserConstants['IdentityType']['eng']
+                "
+                formControlName="idType"
+              />
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom" [dir]="direction">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["IdentificationNumber"]["arb"]
+                    : addUserConstants["IdentificationNumber"]["eng"]
+                }}
+              </div>
+              <input
+                class="commonInputx"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['IdentificationNumber']['arb']
+                    : addUserConstants['IdentificationNumber']['eng']
+                "
+                disabled="true"
+                formControlName="idNo"
+              />
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["Name"]["arb"]
+                    : addUserConstants["Name"]["eng"]
+                }}
+              </div>
+              <input
+                class="commonInputx"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['Name']['arb']
+                    : addUserConstants['Name']['eng']
+                "
+                formControlName="name"
+                (input)="nameValidator($event)"
+              />
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["Branch"]["arb"]
+                    : addUserConstants["Branch"]["eng"]
+                }}
+              </div>
+              <mat-select
+                class="commonMatSelectx"
+                placeholder="Branch"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['Branch']['arb']
+                    : addUserConstants['Branch']['eng']
+                "
+                formControlName="branch"
+              >
+                <mat-option
+                  [value]="branchIndex"
+                  *ngFor="let i of new_branch; index as branchIndex"
+                >
+                  {{ i["BranchNm"] }}</mat-option
+                >
+              </mat-select>
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.branch.touched || formGroupValidator) &&
+                  form.controls.branch.invalid
+                "
+              >
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["pleaseSelectBranch"]["arb"]
+                    : addUserConstants["pleaseSelectBranch"]["eng"]
+                }}
+              </div>
+            </div>
+
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["DateofBirth"]["arb"]
+                    : addUserConstants["DateofBirth"]["eng"]
+                }}
+              </div>
+
+              <div class="commomDatePickerx row justify-content-between mx-0">
+                <input formControlName="dob" disabled="true" />
+                <mat-datepicker-toggle matSuffix>
+                  <mat-icon matDatepickerToggleIcon class="zs-dateicon" style="vertical-align: top;">
+                    <img src="assets/image/calendar.svg" alt="calendar" />
+                  </mat-icon>
+                </mat-datepicker-toggle>
+              </div>
+            </div>
+
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["PhoneNumber"]["arb"]
+                    : addUserConstants["PhoneNumber"]["eng"]
+                }}
+              </div>
+
+              <div class="zs-mobileNumberContainer" dir="ltr" [ngClass]=" (form.controls.phone.touched || formGroupValidator) &&
+              form.controls.phone.invalid?'inputErr':''">
+                <input disabled class="zs-mobileCode" value="00966" />
+                <input [dir]="direction" 
+                  class="commonInputx " [ngClass]="{'zs-mobileNumberar': direction === 'rtl', 'zs-mobileNumberen':direction !== 'rtl' }"        
+                 
+                  [placeholder]="
+                    direction == 'rtl'
+                      ? addUserConstants['PhoneNumber']['arb']
+                      : addUserConstants['PhoneNumber']['eng']
+                  "
+                  formControlName="phone"
+                  (input)="numberValidator($event)"
+                  maxlength="9"
+                />
+              </div>
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.phone.touched || formGroupValidator) &&
+                  form.controls.phone.invalid
+                "
+              >
+                {{
+                  form.value["phone"].charAt(0) == 5
+                    ? pleaseEnterMobile
+                    : mobNoShouldStartWithFive
+                }}
+              </div>
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["Email"]["arb"]
+                    : addUserConstants["Email"]["eng"]
+                }}
+              </div>
+              <input dir="ltr" [ngStyle]="{'text-align': direction == 'rtl' ? ' end' : 'start' }"
+                 [ngClass]="(form.controls.email.touched || formGroupValidator) &&
+                form.controls.email.invalid?'commonInputxError':'commonInputx'"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['Email']['arb']
+                    : addUserConstants['Email']['eng']
+                "
+                formControlName="email"
+              />
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.email.touched || formGroupValidator) &&
+                  form.controls.email.invalid
+                "
+              >
+              <span *ngIf=" direction == 'rtl'">
+                {{
+                  form.controls.email.touched &&
+                  form.controls["email"].value !== ""
+                    ? addUserConstants["invalidEmail"]["arb"]: addUserConstants["pleaseEnterEmail"]["arb"]
+                  
+
+
+                }}
+
+              </span>
+              <span *ngIf=" direction != 'rtl'">
+                {{
+                  form.controls.email.touched &&
+                  form.controls["email"].value !== ""
+                    ? addUserConstants["invalidEmail"]["eng"]: addUserConstants["pleaseEnterEmail"]["eng"]
+                  
+
+
+                }}
+
+              </span>
+
+
+
+
+
+
+              </div>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6 addBtn">
+              <button
+                class="btnPrimary col-md-6 btnFonxt"
+                mat-raised-button
+                (click)="postUser()"
+              >
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["update"]["arb"]
+                    : addUserConstants["update"]["eng"]
+                }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <notifier-container></notifier-container>
+</div>

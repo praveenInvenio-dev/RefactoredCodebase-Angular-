@@ -1,0 +1,746 @@
+<mat-card class="mt-3">
+    <mat-card-content>
+        <div class="sideHeading">
+            {{lang?.c4?.title}}
+            <mat-icon *ngIf="shareHoldersList.length>0" [ngClass]="
+            direction === 'rtl'
+              ? 'checkCircleARB'
+              : 'checkCircleENG'
+          ">check_circle
+            </mat-icon>
+            <p class="Rectangle-12"></p>
+        </div>
+        <form class="search-field">
+            <mat-form-field>
+                <input type="text" matInput (keyup)="searchShareholdersList($event.target.value)">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </form>
+
+        <table class="sh-table" mat-table [dataSource]="sholdersListdataSource" matSort #shDisplayTable>
+            <ng-container matColumnDef="sholderName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <span [style.float]="direction === 'rtl'? 'left': 'right'">{{lang.c4.columns.c1}}</span>
+                </th>
+                <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let sholder">{{sholder?.sholderName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="idType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{lang.c4.columns.c2}}
+                </th>
+                <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let sholder">
+                    {{ sholder?.idType }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="idNumber">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{lang.c4.columns.c3}}
+                </th>
+                <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let sholder">{{ sholder?.idNumber }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="shareCapital">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{lang.c4.columns.c4}}
+                </th>
+                <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let sholder">{{ sholder?.shareCapital }}%</td>
+            </ng-container>
+            <ng-container matColumnDef="shareProfit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    {{lang.c4.columns.c5}}
+                </th>
+                <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let sholder">{{ sholder?.shareProfit }}%</td>
+            </ng-container>
+
+            <ng-container matColumnDef="update">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td class="width-50"
+                    [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let sholder">
+                    <button mat-icon-button (click)="editShareholder(sholder.sholderFormData)">
+                        <mat-icon class="mat-18" [style.color]="'#d2a02a'">edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td class="width-50"
+                    [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                    *matCellDef="let sholder">
+                    <button mat-icon-button color="warn" (click)="confirmDeleteShareholder(sholder.sholderFormData)">
+                        <mat-icon class="mat-18">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="branchDisplayColumns2"></tr>
+            <tr mat-row *matRowDef="let row; columns: branchDisplayColumns2"></tr>
+        </table>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <button mat-button [ngClass]="direction === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button"
+                    style="width: auto;" (click)="addNewShareholder()">
+                    <!-- Add New Share holders -->
+                    {{lang?.c4?.addbtn}}
+                </button>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-12">
+                <div class="d-flex text-left">
+                    <div>
+                        <div class="d-flex flex-column">
+                            <div class="font-weight-bold ">{{lang?.c11?.spsharelbl}} : </div>
+                            <div class="font-weight-bold">{{lang?.c11?.fpsharelbl}} : </div>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="d-flex flex-column">
+                            <div class="pl-3 pr-3">
+                                <span class="text-warning">{{lang?.c11?.cslbl}}</span> : {{
+                                registrationObj?.Sapartnershare}}%
+                            </div>
+                            <div class="pl-3 pr-3">
+                                <span class="text-warning">{{lang?.c11?.cslbl}}</span> : {{
+                                registrationObj?.Forpartnershare}}%
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <div class="pl-3 pr-3">
+                                <span class="text-warning">{{lang?.c11?.pslbl}}</span> :
+                                {{registrationObj?.Saprofitshare}}%
+                            </div>
+                            <div class="pl-3 pr-3">
+                                <span class="text-warning">{{lang?.c11?.pslbl}}</span> :
+                                {{registrationObj?.Forprofitshare}}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+
+
+<div id="addShareholderDetailsModal" class="modal fade" dir="{{ direction }}" data-keyboard="false"
+    data-backdrop="static">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-white text-center">
+                <p class="modal-title  text-white text-center">
+                    {{lang?.c10?.header ||'Title'}}</p>
+            </div>
+            <form [formGroup]="shareHolderDetailsForm" autocomplete="off" #sholderFormDirective="ngForm"
+                autocomplete="off">
+                <div class="modal-body">
+                    <div [hidden]="showAttachments">
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <mat-vertical-stepper [linear]="true" #shareholderStepper>
+                                    <mat-step [stepControl]="shareHolderDetailsForm.get('shareHolderDetails')"
+                                        [label]="lang?.c10?.title">
+                                        <form formGroupName="shareHolderDetails" autocomplete="off">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="registerLabelCss required">{{lang?.c10?.in1}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <!-- shcapmaxlength -->
+                                                        <!-- (input)="restricTo100($event,shareHolderDetailsForm.get('shareHolderDetails').get('shareCapital'),1);"  -->
+                                                        <input matInput maxlength="8" [dropSpecialCharacters]="false"
+                                                            mask="0*.0000" [validation]="false"
+                                                            formControlName="shareCapital" />
+                                                        <span matSuffix>%</span>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareCapital').hasError('required')">
+                                                            {{lang?.err?.entervalidPercentage}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareCapital').hasError('percentage')">
+                                                            {{lang?.err?.enterCorrectPercentage}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="registerLabelCss required">{{lang?.c10?.in2}}</div>
+
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput [matDatepicker]="shcpstdt" #shcpstdtRef
+                                                            formControlName="shareCapitalStartDate" />
+                                                        <mat-datepicker-toggle matSuffix [for]="shcpstdt">
+                                                        </mat-datepicker-toggle>
+                                                        <mat-datepicker [calendarHeaderComponent]="headerComponent"
+                                                            #shcpstdt></mat-datepicker>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareCapitalStartDate').hasError('required')">
+                                                            <span *ngIf="shcpstdtRef.value">
+                                                                {{lang?.err?.invldDt}}
+                                                            </span>
+                                                            <span *ngIf="!shcpstdtRef.value">
+                                                                {{lang?.err?.enterStartDate}}
+                                                            </span>
+                                                        </mat-error>
+                                                        <!-- <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareCapitalStartDate').hasError">
+                                                            Please enter 
+                                                        </mat-error> -->
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareCapitalStartDate').hasError('futureDate')">
+                                                            {{lang?.err?.scstdtfutureDate}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <!-- <pre>
+                                                        Error :: {{shareHolderDetailsForm.get('shareHolderDetails').get('shareCapitalStartDate').hasErrors() | json }}
+                                                    </pre> -->
+                                                </div>
+                                                <div class="w-100"></div>
+                                                <div class="col">
+                                                    <div class="registerLabelCss required">{{lang?.c10?.in3}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <!-- [maxlength]="shpfmaxlength" -->
+                                                        <!-- (input)="restricTo100($event,shareHolderDetailsForm.get('shareHolderDetails').get('shareProfit'),2);"  -->
+                                                        <input matInput maxlength="8" [dropSpecialCharacters]="false"
+                                                            mask="0*.0000" [validation]="false"
+                                                            formControlName="shareProfit" />
+                                                        <span matSuffix>%</span>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareProfit').hasError('required')">
+                                                            {{lang?.err?.entervalidPercentage}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareProfit').hasError('percentage')">
+                                                            {{lang?.err?.enterCorrectPercentage}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="registerLabelCss required">{{lang?.c10?.in4}}</div>
+
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput [matDatepicker]="shpstdt" #shpstdtRef
+                                                            formControlName="shareProfitStartDate" />
+                                                        <mat-datepicker-toggle matSuffix [for]="shpstdt">
+                                                        </mat-datepicker-toggle>
+                                                        <mat-datepicker [calendarHeaderComponent]="headerComponent"
+                                                            #shpstdt></mat-datepicker>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareProfitStartDate').hasError('required')">
+                                                            <span *ngIf="shpstdtRef.value">
+                                                                {{lang?.err?.invldDt}}
+                                                            </span>
+                                                            <span *ngIf="!shpstdtRef.value">
+                                                                {{lang?.err?.enterStartDate}}
+                                                            </span>
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderDetails').get('shareProfitStartDate').hasError('futureDate')">
+                                                            {{lang?.err?.spstdtfutureDate}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </mat-step>
+                                    <mat-step [stepControl]="shareHolderDetailsForm.get('shareHolderPercentageDetails')"
+                                        [label]="lang?.c11?.title">
+                                        <form formGroupName="shareHolderPercentageDetails" autocomplete="off">
+                                            <div class="row align-items-end">
+                                                <div class="col-4">
+                                                    <div class="registerLabelCss required">{{lang?.c11?.in1}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select formControlName="shareHolderType">
+                                                            <mat-option [value]="shtp.key"
+                                                                *ngFor="let shtp of shareHolderTypesList">
+                                                                {{ shtp.text }}</mat-option>
+                                                        </mat-select>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('shareHolderType').hasError('required')">
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="registerLabelCss"
+                                                        [ngClass]="{required: Taxtpdetermination == '5'}">
+                                                        {{lang?.c11?.in2}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput (change)="onShareholderTINChange()"
+                                                            maxlength="10" mask="0000000000" formControlName="tinNumber"
+                                                            [validation]="false" />
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('tinNumber').hasError('required')">
+                                                            <!-- {{lang?.c11?.in2}} {{lang.err.in1}} -->
+                                                            {{lang?.err?.enterTin}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="!shareHolderDetailsForm.get('shareHolderPercentageDetails').get('tinNumber').hasError('pattern') && shareHolderDetailsForm.get('shareHolderPercentageDetails').get('tinNumber').hasError('minlength')">
+                                                            {{lang?.err?.tinNumberMinlength}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('tinNumber').hasError('pattern')">
+                                                            {{lang?.err?.tinNumberStartWith}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="registerLabelCss required">{{lang?.c11?.in3}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select formControlName="idType"
+                                                            (selectionChange)="onShareholderIdTypeChange()">
+                                                            <mat-option [value]="idType.Key"
+                                                                *ngFor="let idType of shIdTypesList">
+                                                                {{ idType.Text }}</mat-option>
+                                                        </mat-select>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('idType').hasError('required')">
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4"
+                                                    *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='FS0002'">
+                                                    <div class="registerLabelCss required">{{lang?.c9?.in4}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select formControlName="issueCountry">
+                                                            <mat-option [value]="country.Land1"
+                                                                *ngFor="let country of countiesList">
+                                                                {{ country.Landx50 }}</mat-option>
+                                                        </mat-select>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('issueCountry').hasError('required')">
+                                                            {{lang?.err?.selectIssueCountry}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="registerLabelCss required">{{lang?.c11?.in4}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input (change)="onShareholderIdNumberChange('idnumber')"
+                                                            type="text" matInput formControlName="idNumber"
+                                                            [mask]="cpIdNumberMask" [validation]="false" />
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('idNumber').hasError('required')">
+                                                            {{lang?.err?.enterIDNumber}}
+                                                        </mat-error>
+
+                                                        <mat-error
+                                                            *ngIf="!shareHolderDetailsForm.get('shareHolderPercentageDetails').get('idNumber').hasError('pattern') && shareHolderDetailsForm.get('shareHolderPercentageDetails').get('idNumber').hasError('minlength')">
+                                                            <span
+                                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0001'">
+                                                                {{lang?.err?.nationalIDMinLength}}
+                                                            </span>
+                                                            <span
+                                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0002'">
+                                                                {{lang?.err?.iqamaIDMinLength}}
+                                                            </span>
+                                                            <span
+                                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0003'">
+                                                                {{lang?.err?.gccIDMinlength}}
+                                                            </span>
+                                                            <span
+                                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0005'">
+                                                                {{lang?.err?.companyIDMinlength}}
+                                                            </span>
+                                                        </mat-error>
+
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('idNumber').hasError('pattern')">
+                                                            <span
+                                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0001'">
+                                                                {{lang?.err?.nationalIDStartWith}}
+                                                            </span>
+                                                            <span
+                                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0002'">
+                                                                {{lang?.err?.iqamaIDStartWith}}
+                                                            </span>
+                                                            <span
+                                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0005'">
+                                                                {{lang?.err?.companyIDStartwith}}
+                                                            </span>
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4" [hidden]="hideCompanyName()">
+                                                    <div class="registerLabelCss required">{{lang?.c11?.in5}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput formControlName="companyName" />
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('companyName').hasError('required')">
+                                                            {{lang?.err?.enterCompanyName}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4" [hidden]="hideSharedolderFields()">
+                                                    <div class="registerLabelCss required">{{lang?.c9?.in5}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput [matDatepicker]="shdob" #shdobRef
+                                                            (dateChange)="onShareholderIdNumberChange('dob')"
+                                                            formControlName="dateOfBirth" />
+                                                        <mat-datepicker-toggle matSuffix [for]="shdob">
+                                                        </mat-datepicker-toggle>
+                                                        <mat-datepicker [calendarHeaderComponent]="headerComponent"
+                                                            #shdob></mat-datepicker>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('dateOfBirth').hasError('required')">
+                                                            <span *ngIf="shdobRef.value">
+                                                                {{lang?.err?.invldDt}}
+                                                            </span>
+                                                            <span *ngIf="!shdobRef.value">
+                                                                {{lang?.err?.enterDateOfBirth}}
+                                                            </span>
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('dateOfBirth').hasError('futureDate')">
+                                                            {{lang?.err?.dobFutureDate}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4" [hidden]="hideSharedolderFields()">
+                                                    <div class="registerLabelCss required">{{lang?.c9?.in6}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput formControlName="firstName" maxlength="40"
+                                                            (keypress)='allowAlphabets($event)' />
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('firstName').hasError('required')">
+                                                            {{lang?.err?.enterFirstName}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4" [hidden]="hideSharedolderFields()">
+                                                    <div class="registerLabelCss required">{{lang?.c9?.in7}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput formControlName="lastName" maxlength="40"
+                                                            (keypress)='allowAlphabets($event)' />
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('lastName').hasError('required')">
+                                                            {{lang?.err?.enterLastName}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="registerLabelCss required">{{lang?.c9?.in8}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput [matDatepicker]="shcstdt" #shcstdtRef
+                                                            formControlName="startDate" />
+                                                        <mat-datepicker-toggle matSuffix [for]="shcstdt">
+                                                        </mat-datepicker-toggle>
+                                                        <mat-datepicker [calendarHeaderComponent]="headerComponent"
+                                                            #shcstdt></mat-datepicker>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('startDate').hasError('required')">
+                                                            <span *ngIf="shcstdtRef.value">
+                                                                {{lang?.err?.invldDt}}
+                                                            </span>
+                                                            <span *ngIf="!shcstdtRef.value">
+                                                                {{lang?.err?.enterStartDate}}
+                                                            </span>
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('startDate').hasError('futureDate')">
+                                                            {{lang?.err?.startDateFutureDate}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col-4"
+                                                    *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType">
+                                                    <!-- *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType!='ZS0001' && shareHolderDetailsForm.value.shareHolderPercentageDetails.idType!='ZS0002' && shareHolderDetailsForm.value.shareHolderPercentageDetails.idType!='ZS0005' && shareHolderDetailsForm.value.shareHolderPercentageDetails.idType!='ZS0003'" -->
+                                                    <div class="registerLabelCss required">{{getFileLabel()}}</div>
+
+                                                    <!-- <div class="registerLabelCss required" *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0001'">{{lang?.err?.copyOfNationalID}}</div>
+                                                    <div class="registerLabelCss required" *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0002'">{{lang?.err?.copyOfIquamaID}}</div>
+                                                    <div class="registerLabelCss required" *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0003'">{{lang?.err?.copyOfGCCID}}</div>
+                                                    <div class="registerLabelCss required" *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0005'">{{lang?.err?.copyOfCompanyID}}</div>
+                                                     -->
+                                                    <!-- (click)="fileInput7.click();" -->
+                                                    <mat-form-field
+                                                        (click)="onClickFileControl('RG09','SH',shareHolderDetailsForm.get('shareHolderPercentageDetails').get('idNumber').value,shareHolderDetailsForm.get('shareHolderPercentageDetails').get('copyOfFile'),getFileLabel(),'ID1');"
+                                                        (blur)="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('copyOfFile').markAsTouched();"
+                                                        appearance="outline" class="attachment-field pointer-hand">
+                                                        <input matInput style="display: none;"
+                                                            formControlName="copyOfFile" />
+                                                        <input type="file" #fileInput7 style="display: none;" />
+                                                        <span class="w-75 d-inline-block text-truncate pointer-hand">
+                                                            {{shareHolderDetailsForm.get('shareHolderPercentageDetails').get('copyOfFile').value}}
+                                                        </span>
+                                                        <span class="material-icons float-right pointer-hand">
+                                                            attach_file
+                                                        </span>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('copyOfFile').hasError('required')">
+                                                            {{lang?.err?.addAttachment}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+
+                                                </div>
+                                            </div>
+                                            <div class="row"
+                                                *ngIf="shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0005' || shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0012' || shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0011'">
+                                                <div class="col-12 mt-4 mb-4 ">
+                                                    <div class="sideHeading required">{{lang?.c11?.subtitle}}</div>
+                                                    <div class="text-error small text-left" *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('typeOfSharePercentage').touched && shareHolderDetailsForm.get('shareHolderPercentageDetails').get('typeOfSharePercentage').hasError('required')">{{lang?.err?.selectAnyOne}}</div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="row typeofsharepercentage">
+                                                        <div class="col-6 mb-4"
+                                                            *ngFor="let sptypes of sharePercentageTypes">
+                                                            <!-- {{shareHolderDetailsForm.value.shareHolderPercentageDetails.idType}}
+                          {{sptypes?.id}} -->
+                                                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                <!-- 'disabled':shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0012' || shareHolderDetailsForm.value.shareHolderPercentageDetails.idType=='ZS0011' -->
+                                                                <label class="btn btn-block rounded" [ngClass]="{
+                                                                    'btn-warning': sptypes?.id==shareHolderDetailsForm.getRawValue().shareHolderPercentageDetails.typeOfSharePercentage,
+                                                                    'btn-warning-outline':sptypes?.id!=shareHolderDetailsForm.getRawValue().shareHolderPercentageDetails.typeOfSharePercentage, 
+                                                                    'disabled':typeOfSharePercentageData?.ShType
+                                                                }">
+                                                                    <i class="fa-lg align-middle"
+                                                                        [ngClass]="{'ion-checkmark-circled': sptypes?.id==shareHolderDetailsForm.getRawValue().shareHolderPercentageDetails.typeOfSharePercentage,'ion-ios-circle-outline':sptypes?.id!=shareHolderDetailsForm.getRawValue().shareHolderPercentageDetails.typeOfSharePercentage}"></i>
+                                                                    &nbsp;
+                                                                    <input type="checkbox"
+                                                                        (change)="onsharePercentageTypeChange(sptypes)">
+                                                                    <span>&#x202a;{{sptypes?.label}}&#x202c;</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+                                                    <!-- <mat-radio-group aria-label="Select an option" name="r2"
+                        formControlName="typeOfSharePercentage">
+                        <mat-radio-button [value]="sptypes.id" *ngFor="let sptypes of sharePercentageTypes"
+                          [ngClass]="{'sharepercentage': sptypes?.id!=shareHolderDetailsForm.value.shareHolderPercentageDetails.typeOfSharePercentage,'selected-sharepercentage': sptypes?.id==shareHolderDetailsForm.value.shareHolderPercentageDetails.typeOfSharePercentage}"
+                          class="mr-2 radioCss mb-4">{{sptypes.label}}
+                        </mat-radio-button>
+                      </mat-radio-group> -->
+
+
+
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="registerLabelCss required">{{lang?.c11?.in8}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <!-- [maxlength]="sgccsmaxlength" -->
+                                                        <!-- (input)="restricTo100($event,shareHolderDetailsForm.get('shareHolderPercentageDetails').get('saudiGccShare'),3);"  -->
+                                                        <input matInput maxlength="8" [dropSpecialCharacters]="false"
+                                                            mask="0*.0000" [validation]="false"
+                                                            formControlName="saudiGccShare" />
+                                                        <span matSuffix>%</span>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('saudiGccShare').hasError('required')">
+                                                            {{lang?.err?.entervalidPercentage}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('saudiGccShare').hasError('percentage')">
+                                                            {{lang?.err?.enterCorrectPercentage}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="registerLabelCss required">{{lang?.c11?.in9}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <!-- [maxlength]="fsmaxlength" -->
+                                                        <!-- (input)="restricTo100($event,shareHolderDetailsForm.get('shareHolderPercentageDetails').get('foreignShare'),4);"  -->
+                                                        <input matInput maxlength="8" [dropSpecialCharacters]="false"
+                                                            mask="0*.0000" [validation]="false"
+                                                            formControlName="foreignShare" />
+                                                        <span matSuffix>%</span>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('foreignShare').hasError('required')">
+                                                            {{lang?.err?.entervalidPercentage}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('shareHolderPercentageDetails').get('foreignShare').hasError('percentage')">
+                                                            {{lang?.err?.enterCorrectPercentage}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </mat-step>
+                                    <mat-step [stepControl]="shareHolderDetailsForm.get('communicationDetails')"
+                                        [label]="lang?.c12?.title">
+                                        <form formGroupName="communicationDetails" autocomplete="off">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="registerLabelCss required">{{lang?.c12?.in1}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput formControlName="mobileNumber" mask="0{14}"
+                                                            [validation]="false" maxlength="14"/>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('communicationDetails').get('mobileNumber').hasError('required')">
+                                                            {{lang?.err?.enterMobileNumber}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('communicationDetails').get('mobileNumber').hasError('minlength')">
+                                                            {{lang?.err?.bcpMobileNumberMaxLength}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="registerLabelCss required">{{lang?.c12?.in2}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput formControlName="email" maxlength="260" />
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('communicationDetails').get('email').hasError('required')">
+                                                            {{lang?.err?.enterEmail}}
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="shareHolderDetailsForm.get('communicationDetails').get('email').value && shareHolderDetailsForm.get('communicationDetails').get('email').invalid">
+                                                            {{lang?.err?.emailinvalid}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </mat-step>
+                                    <ng-template matStepperIcon="create">
+                                        <mat-icon>brightness_1</mat-icon>
+                                    </ng-template>
+                                    <ng-template matStepperIcon="edit">
+                                        <mat-icon>brightness_1</mat-icon>
+                                    </ng-template>
+                                    <ng-template matStepperIcon="done">
+                                        <mat-icon>check_circle</mat-icon>
+                                    </ng-template>
+                                    <ng-template matStepperIcon="number" let-index="index" let-active="active">
+                                        <mat-icon *ngIf="!shareholderStepper.selected.interacted">panorama_fish_eye
+                                        </mat-icon>
+                                        <mat-icon *ngIf="shareholderStepper.selected.interacted">brightness_1</mat-icon>
+                                    </ng-template>
+                                </mat-vertical-stepper>
+                            </div>
+                        </div>
+                        <div class="pl-4 pr-4  d-flex justify-content-start mt-4 mb-4">
+                            <button (click)="saveShareholder();" mat-raised-button class="rounded btnCss save-btn">
+                                {{ lang?.c12?.btn1 || 'Save'}}
+                            </button>&nbsp;&nbsp;
+                            <button mat-button class="rounded text-muted cancel-button" data-dismiss="modal">{{
+                                lang?.c12?.btn2 ||
+                                'Cancel' }}</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!showAttachments" class="container-attachments-list">
+                        <!-- <ng-container *ngTemplateOutlet="attachmentsTemplate"></ng-container> -->
+                        <signup-attachments [viewType]="'inline'" [attachmentsList]="attachmentsList"
+                            [ReturnIdx]="registrationObj.ReturnIdx" (onFileUploadSuccess)="onFileUploadSuccess($event)"
+                            (onClose)="onAttachmentsClose($event);"></signup-attachments>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal sh-info-modal " id="confirmDeleteShareholderModal" data-keyboard="false" data-backdrop="static"
+    [dir]="direction">
+    <div class="modal-dialog modal-lg max-width-550 modal-dialog-centered">
+
+        <div class="modal-content">
+            <div class="modal-header text-white text-center">
+                <p class="modal-title  text-white text-center">
+                    <!-- {{lang?.c6?.title || 'Title'}} -->
+                    {{lang?.confirm}}
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-3">
+                    <div class="col-12">
+
+                        <div *ngIf="selectedLanguage == 'en'">
+                            Are you sure Shareholder {{deleteShareHolderObj?.shareHolderDetails?.shNo}} should be
+                            deleted? All entered
+                            details will be lost.
+                        </div>
+                        <div class="text-left" *ngIf="selectedLanguage == 'ar'">
+                            <span>هل انت متأكد من حذف بيانات المساهم</span>
+                            <span>{{deleteShareHolderObj?.shareHolderDetails?.shNo}}
+                                ?</span>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3 mb-2 text-right">
+                        <button mat-button class="rounded text-muted cancel-button" data-dismiss="modal"
+                            (click)="deleteShareHolderObj={};"> {{lang?.cancel}}</button>
+                        &nbsp;&nbsp;
+                        <button (click)="deleteShareholder(deleteShareHolderObj);" mat-raised-button
+                            class="rounded save-btn btn-bg-success">
+                            {{lang?.ok}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal sh-info-modal " id="tinInYourCountryInfoModal" data-keyboard="false" data-backdrop="static"
+    [dir]="direction">
+    <div class="modal-dialog modal-lg max-width-550">
+
+        <div class="modal-content">
+            <div class="modal-header text-white text-center">
+                <p class="modal-title  text-white text-center">
+                    {{lang?.confirm}}
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-3">
+                    <div class="col-12 text-left">
+                        {{lang?.err?.tinInYourCountryAlert}}
+                    </div>
+                    <div class="col-12 mt-3 mb-2 text-right">
+                        <button mat-raised-button class="rounded save-btn btn-bg-success" type="button"
+                            style="width: auto;" (click)="closeModal('tinInYourCountryInfoModal')">{{lang?.ok}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal sh-info-modal" id="shErrorMsgsModal" data-keyboard="false" data-backdrop="static" [dir]="direction">
+    <div class="modal-dialog modal-lg max-width-550">
+        <div class="modal-content">
+            <div class="modal-header text-white text-center">
+                <p class="modal-title  text-white text-center">
+                    <i class="fa fa-info-circle"></i>&nbsp;{{lang?.error}}
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-3">
+                    <div class="col-12 text-left text-error">
+                        <h6 *ngFor="let error of errorMsgsList" class="font-weight-normal font-14">{{error?.message}}
+                        </h6>
+                    </div>
+                    <div class="col-12 mt-3 mb-2 text-right">
+                        <button mat-raised-button class="rounded save-btn btn-bg-success" type="button"
+                            style="width: auto;" (click)="closeModal('shErrorMsgsModal')">{{lang?.ok}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <notifier-container [dir]="direction"></notifier-container> -->

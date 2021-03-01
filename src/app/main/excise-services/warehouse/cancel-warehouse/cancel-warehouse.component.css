@@ -1,0 +1,37 @@
+.pt-15 {
+    padding-top: 15px;
+}
+
+.pl-30 {
+    padding-left: 30px;
+}
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;        
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.error{
+    color:red;
+}
+
+.datepickerIcon{
+    position: absolute;
+    right: 3%;
+    top: 38%;
+}
+.datepickerIcon1{
+    position: absolute;
+    right: 3%;
+    top: 26%;
+}
+.max-width-782 {
+    max-width: 782px !important;
+}
+
+.lang-arabic .ar-mt-10{margin-top:10px !important}
+
+.input::placeholder, textarea::placeholder {
+    color:lightgray !important;
+}

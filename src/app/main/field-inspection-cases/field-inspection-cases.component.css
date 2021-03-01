@@ -1,0 +1,456 @@
+.FieldsTitle {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #232323;
+    margin-inline-start: 2%;
+}
+
+.FieldsTitle2 {
+    object-fit: contain;
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #999999;
+    position: relative;
+    top: 20px;
+}
+
+.row {
+    margin-top: -8px;
+}
+
+.filing-card-upper {
+    height: 80px;
+}
+
+.filing-card {
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+    text-align: start;
+    width: 437px;
+    height: 247px;
+    margin: 32px 1px 0 25px;
+    padding: 27px 0 32px 1px;
+    border-radius: 14px;
+    /* border: solid 1px var(--neutral-fills-neutral-010); */
+    cursor: pointer;
+    border: solid 1px #ebebeb;
+    margin-top: 24px !important;
+}
+
+.Terciary {
+    width: 68px;
+    height: 24px;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    margin-inline-start: 0.7%;
+    object-fit: contain;
+}
+
+.divider {
+    background-color: var(--light);
+    opacity: 1;
+}
+
+.tag-partial {
+    background-color: rgba(217, 154, 41, 0.2);
+    color: var(--secondary);
+}
+
+.tag32 {
+    height: 32px;
+    width: 84px;
+    border-radius: 14px;
+    border: solid 1px var(--light);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 16px;
+}
+
+.filterIconEn {
+    width: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-top: 1%;
+}
+
+.filterIconAr {
+    width: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.filterLineEn {
+    width: 24px;
+    float: left;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #d99a29;
+}
+
+.filterLineAr {
+    height: 4px;
+    border-radius: 2px;
+    background-color: #d99a29;
+    width: 24px;
+    float: right;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: none !important;
+}
+
+.imgSearchEn {
+    position: relative;
+    right: 40px;
+}
+
+.imgSearchAr {
+    position: relative;
+    left: 40px;
+}
+
+.tabHeader {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #151515;
+}
+
+.tabheader2 {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #999999;
+    cursor: pointer;
+}
+
+.tabheader2:hover {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #999999;
+    box-shadow: 0 4px 8px 0 rgba(35, 35, 35, 0.1);
+    cursor: pointer;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 350px;
+}
+
+table tr th,
+table tr td {
+    border: 0.5px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    text-align: center;
+    height: 64px;
+    padding: 5px;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+    border: 0.5px solid #ebebeb;
+}
+
+table tr th {
+    background: #ffffff;
+    border-top: 1px solid #ebebeb;
+    text-align: center;
+}
+
+
+/* top-left border-radius */
+
+table tr:first-child th:first-child {
+    border-top-left-radius: 16px;
+}
+
+
+/* top-right border-radius */
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 16px;
+}
+
+
+/* bottom-left border-radius */
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 16px;
+}
+
+
+/* bottom-right border-radius */
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 16px;
+}
+
+.fieldTitle1 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+    cursor: pointer;
+}
+
+.back {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: start;
+    margin-inline-start: 12%;
+    color: #006450;
+}
+
+.heading {
+    font-family: SSTArabic-Bold;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #232323;
+    margin-inline-start: 13.5%;
+}
+
+.valueHeading {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.values {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #232323;
+}
+
+.cardStyle {
+    width: 48px;
+    height: 48px;
+    background: #e5efed;
+    border-radius: 50%;
+    text-align: center;
+    margin-inline-end: 10px;
+    position: relative;
+    bottom: 8px;
+}
+
+.imgStyle {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin: 0;
+    position: relative;
+    top: 25%;
+}
+
+.headingStyle {
+    font-family: SSTArabic-Bold;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: #232323;
+    margin-inline-end: 10px;
+}
+
+.imgSearchEn {
+    position: relative;
+    right: 40px;
+}
+
+.imgSearchAr {
+    position: relative;
+    left: 40px;
+}
+
+.Download {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.matborder {
+    height: 247px;
+    width: 437px;
+    border-radius: 14px;
+    border: solid 1px #ebebeb;
+    margin-top: 25px;
+    margin-inline-start: 25px;
+    cursor: pointer;
+}
+
+.cardTxt1Css {
+    width: 282px;
+    font-family: SSTArabic-Bold;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: #232323;
+    white-space: nowrap;
+}
+
+.cardTxt2Css {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #999999;
+    margin-top: 1%;
+    margin-bottom: 4%;
+}
+
+.cardTxt3Css {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #232323;
+    margin-bottom: 6%;
+}
+
+#casesearch .form-control:focus {
+    box-shadow: 0 0 0 0.1rem #006450!important
+}
+
+.filtercp {
+    padding: 2px 10px 5px 10px;
+    height: 34px;
+    border-radius: 14px;
+    background-color: #e5efed;
+    width: 100px;
+    text-align: center;
+    float: right;
+    position: relative;
+}
+
+.filtercu {
+    padding: 2px 10px 5px 10px;
+    height: 34px;
+    border-radius: 14px;
+    background-color: #f6e6e8;
+    width: 100px;
+    text-align: center;
+    float: right;
+    position: relative;
+}
+
+.filtercpp {
+    text-align: center;
+    padding: 2px 10px 5px 10px;
+    height: 34px;
+    border-radius: 14px;
+    background-color: #f7ebd4;
+    width: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.cardTxt5Cssp {
+    color: #006450;
+    font-size: 12px;
+    font-family: 'SSTARABIC-ROMAN';
+}
+
+.tileActive {
+    border-bottom: 5px solid var(--secondary);
+    padding-bottom: 1rem;
+  }
+  
+  .tileIcon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .mis-10 {
+    margin-inline-start: 10px;
+  }
+  
+  .mainHeader {
+    width: 86%;
+  }
+
+  .backBtn {
+    margin-bottom: 3%;
+    cursor: pointer;
+    font-weight: 600;
+    width: 68px;
+    height: 24px;
+    font-family: 'SSTArabic-Bold';
+    color: #006450;
+  }
+
+  .penaltyAmount {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: SST ARABIC;
+    clear: both;
+    white-space: nowrap;
+  }
+  
+  .statusContainer {
+    margin: auto; 
+    padding: 8px 10px 5px 10px; 
+    float: none;
+  }

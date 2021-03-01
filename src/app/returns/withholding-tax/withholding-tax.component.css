@@ -1,0 +1,165 @@
+.mat-datepicker
+{    
+    z-index: 999999999999 !important;
+}
+.events-none
+{
+    pointer-events: none;
+}
+.imgwidth
+{
+    height:100px;
+    width:100px;
+}
+.cursor-pointer{
+	cursor:pointer;
+}
+/*Error messages boreder-red*/
+input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched{
+    border: 1px solid red !important;
+  }  
+/* Added by hema on 19-11-2020*/ 
+
+  .hidden {
+    visibility: hidden;
+  }
+  .loader-overlay {
+    position: absolute;
+    width: 100%;
+    z-index: 500000;
+    top: 0;
+  }
+  .loader {
+    height: 4px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+  .loader:before {
+    display: block;
+    position: absolute;
+    content: "";
+    left: -200px;
+    width: 200px;
+    height: 4px;
+    background-color: blue;
+    animation: loading 2s linear infinite;
+  }
+  @keyframes loading {
+    from {left: -200px; width: 30%;}
+    50% {width: 30%;}
+    70% {width: 70%;}
+    80% {left: 50%;}
+    95% {left: 120%;}
+    to {left: 100%;}
+  }
+/* Added by hema on 19-11-2020 ends */
+
+/* file  upload css added by bhargavi*/
+
+.upload-text-items {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.custom-upload-file {
+  z-index: 999999 !important;
+  cursor: pointer;
+}
+
+.cardh219 {
+  height: 216px !important;
+}
+
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+.h-216 {
+  height: 216px !important;
+}
+
+.pointer-none {
+  pointer-events: none !important;
+}
+
+.disabledIP
+{
+  pointer-events: none !important;
+  background-color: #e9ecef !important;
+}
+.arabic-position {
+  position: left !important;
+}
+.border-red {
+  border: 1px solid red !important;
+}
+
+.arabic-btn {
+  float:left !important;
+  padding-left: 10px;
+
+}
+
+/* After adding multiple forms getting scroll bar css 
+body.modalopen{
+
+  height:unset !important;
+  overflow:scroll !important;
+}
+*/
+/*For MatIcon position*/
+.mat-calendar {
+  position: absolute;
+    top: 39px;
+    right: 20px;
+    transform: translateY(-50%);
+}
+button.mat-focus-indicator.mat-icon-button.mat-button-base {
+  background-color: #fff !important;
+  padding: 0px !important;
+  border-radius: 0% !important;
+  height: 0px;
+}
+.mat-icon-button {
+  padding: 0;
+  min-width: 0;
+  width: 40px;
+  height: 0px;
+flex-shrink: 0;
+  line-height: 0px;
+    border-radius: 0% !important;
+    background-color: #fff !important;
+}
+/* for arabic alignment */
+ td.ar-text-left .mat-calendar {
+  left: 20px !important;
+  }
+  /* for calendericon hover effects*/
+
+  /*for Upload Excel css*/
+  .custom-upload-file{
+    opacity: 0;
+    transform: Y(-50%);
+    width:100%;
+    height:100%;
+    z-index: 99;
+}
+.upload-excel-file{
+    left:0% !important;
+    top:0% !important;
+    transform:unset !important
+}
+.vat-steps a img{padding:8px;}
+.cursor-pointer{
+    cursor: pointer !important;
+}
+/* .download-btn{margin-bottom: 95px !important;} */
+.download-btn a{margin-right: 5px;}
+.download-btn a>img{margin-right: 5px;}
+.download-btn a{background: rgba(0,100,80,.1);border:0px;color:#000;border-radius: 5px;padding: 7px 12px 12px;box-shadow: 0 2px 4px 0 rgb(35 35 35 / 10%);text-decoration: none !important;}
+.download-btn a:hover{background: rgba(0,100,80,.1);color:#000;}
+  

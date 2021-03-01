@@ -1,0 +1,71 @@
+.error{
+    color: red;
+}
+.uploadfilecontainer{background-color: transparent!important;}
+
+.datePickers {
+    position: absolute;
+    right: 3%;
+    top: 26%;
+}
+.datePickers1 {  
+    position: absolute;
+    right: 3%;
+    top: 37%;
+}
+.locationImg {
+    position: absolute;
+    right: 4%;
+    top: 31%;
+}
+.cardh440{width: 440px!important;}
+
+.input-161 {
+    width: 161px;
+    min-height: 32px;
+    max-height: 32px;
+    padding: 1px 16px 4px;
+    font-weight: normal !important;
+}
+
+.bg-Watercourse-opa1 {
+    background: rgba(0, 100, 80, 0.1);   
+}
+
+.countryCode {
+    width: 60px;
+    border-bottom-left-radius: 14px;
+    border-top-left-radius: 14px;
+    border: 1px solid #999999;
+    padding: 10px;
+    outline: none;
+}
+
+.dashboard {
+    color: #d99a29 !important;
+}
+
+
+/* .lang-arabic .ar-right30{margin-right: 29px;} */
+.lang-arabic .ar-mt-10{margin-top:10px !important;}
+.lang-arabic .pl-4 {padding-right: 1.5rem!important;}
+
+.lang-arabic label {
+    font-size: 14px;
+    color: #999999;
+}
+.lang-arabic .datePickers1 {top:34px}
+.border-red
+{
+    border-color: red !important;
+}
+
+.right7{right: 7%;}
+a.collapsed img {
+	transform: rotate(-180deg) !important;
+}
+
+.ml-20{margin-left: 20px;}
+.lang-arabic .right7 {
+    right: 90%;
+}

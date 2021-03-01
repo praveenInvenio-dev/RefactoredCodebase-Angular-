@@ -1,0 +1,93 @@
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;        
+}
+.cursor
+{
+    cursor: pointer;
+}
+.collapse-edit{
+    position: absolute;
+    right: 50px;
+}
+.error-color{
+    color:red;
+}
+.error{
+    color:red;
+}
+.scroll-modelbody{
+    height: 550px;overflow-y: scroll;
+}
+.tablebankguarantee td
+{
+    padding: 24px 6px 20px 20px !important;
+}
+.ml-13{margin-left: 13px;}
+.p-13{padding: 13px 24px;}
+.max-width-895{
+        min-width:895px !important
+    
+    }
+    a.collapsed img{
+        transform: rotate(-180deg) !important;
+        }
+        input::placeholder, textarea::placeholder{
+  
+            color:lightgray   !important;
+        }
+
+        .lang-arabic .collapse-edit {
+            /* position: relative !important; */
+            right: 86% !important;
+        }
+        .lang-arabic .table-dropdown-arrow{margin-right: -18px;}
+
+        .datePickers1 {position:absolute;right: 3%;}
+        .lang-arabic .datePickers1 {position:absolute;left:3% !important;}
+        .uploadfilecontainer{background-color: transparent !important;}
+
+        .countryCode{
+            width: 60px;
+            border-bottom-left-radius: 14px;
+            border-top-left-radius: 14px;
+            border: 1px solid #999999;
+            padding: 10px;
+            outline: none;
+        }
+        /* .lang-arabic .custom-phone-number{
+            border-bottom-left-radius: 14px !important;
+            border-top-left-radius: 14px !important;
+            border-bottom-right-radius: 0px !important;
+            border-top-right-radius: 0px !important;
+            
+          } */
+          .text-center-align{
+              text-align: center;
+          }
+
+          .lang-arabic .error-color{
+            float: right !important;
+        }
+        .lang-arabic .error{
+            float: right !important;
+        }
+
+        .lang-arabic .pl-4 {
+            padding-right: 1.5rem!important;
+        }
+
+        /* border red for invalid inputs*/
+        .border-red {
+            border: 0px solid red !important;
+          }
+           /* border red for invalid inputs*/
+        .red-border {
+            border: 1px solid red !important;
+          }
+         .custom-option-small-6{border: none;
+            height: 104px !important;
+            padding: 10px 24px !important;}
+        .lang-arabic .custom-option-small-6{border: none;
+                height: 104px !important;
+                padding: 10px 37px !important;}

@@ -1,0 +1,47 @@
+.locationImg{position: absolute;
+    right: 20px;
+    top: 41px;}
+    .datepickerIcon1{
+        position: absolute;
+        right: 3%;
+        /* top: 38%; */
+    }
+    .max-width-782 {
+        max-width: 782px !important;
+    }
+    .error{
+        color:red;
+    }
+    .lable-switch > label::before {    
+        left: 0;        
+    }
+    .uploadfilecontainer{background-color: transparent !important;}
+
+    .lang-arabic .lable-switch > label::after {
+        left: 23px !important;
+    }
+
+    .cursor-pointer{cursor: pointer;}
+    .disablePointer
+    {
+        pointer-events: none;
+    }
+    .disabled
+    {
+        pointer-events: none;
+    }
+    app-approval-rejection .mark-dark-green, app-branch-info .mark-dark-green, app-employee-info .mark-dark-green, app-taxpayer-activity .mark-dark-green, app-vat-deregistration-details .mark-dark-green, app-request-amend-vatgroup .mark-dark-green, app-request-disband-vatgroup .mark-dark-green, app-vatgroup-registration-app .mark-dark-green, app-display-registration .mark-dark-green, app-change-registration .mark-dark-green, app-warehouse .mark-dark-green, app-consolidated-accounts .mark-dark-green, app-excise-tax-deregistration .mark-dark-green, app-display-amendent-exice-registration .mark-dark-green{
+        background-size: unset !important;
+    }
+    .table td {
+        padding: 15px;
+    }
+
+    .countryCode{
+        width: 60px;
+        border-bottom-left-radius: 14px;
+        border-top-left-radius: 14px;
+        border: 1px solid #999999;
+        padding: 10px;
+        outline: none;
+    }

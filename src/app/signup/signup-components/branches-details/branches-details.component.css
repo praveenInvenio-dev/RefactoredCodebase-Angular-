@@ -1,0 +1,48 @@
+.address-card {
+  background-image: url("../../../../assets/image/selected-copy-2@2x.png");
+  background-position: center;
+  color: #232323;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.address-card:hover, .address-card.selected {
+  background-image: url("../../../../assets/image/selected@2x.png");
+  background-position: center;
+  color: #fff !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.width-18 {
+  width: 18px !important;
+}
+
+.font-14 {
+  font-size: 14px !important;
+}
+
+.text-error {
+  color: #f44336 !important;
+}
+
+.bg-error {
+  background-color: #f44336 !important;
+  color: #fff !important;
+}
+
+.mat-select-panel {
+  max-width: 670px !important;
+}
+
+.mci-save-button {
+  background: #d39e00 !important;
+  padding: 0.5rem !important;
+  color: #fff !important;
+  border-radius: 0.75rem!important;
+  cursor: pointer !important;
+  height: 35px !important;
+  font-family: SSTArabic-Roman !important;
+  line-height: 1 !important;
+  width: 115px !important;
+}

@@ -1,0 +1,613 @@
+<div class="container " *ngIf='bills' [dir]="dir">
+    <div class="row" style="margin-left: 0%;margin-right: 0%;">
+        <div class="col-md-12" style="display: contents;">
+            <div class="billsTitle">{{lang.t1}} </div><span class="billsTitle2"
+                [style.left]="dir === 'rtl' ? '-10px' : '10px'"
+                *ngIf="unpaidTot>0">{{unpaidTot | currency:'SAR' | slice:3}} &nbsp; {{lang.t3}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <mat-tab-group mat-align-tabs="start" (selectedTabChange)="changeTab($event)">
+                <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab" (click)="changeTab(tab)">
+                    <div class="row mt-3">
+                        <div class="col-md-10">
+                            <div class="form-inline" id="billsearch">
+                                <span class="form-group" style="margin-top: 20px; margin-left: 10px;width: 100%;">
+                                    <input type="search" class="form-control form-control-lg" [(ngModel)]="searchText"
+                                        placeholder="{{search}}" style="  height: 48px;
+                                    border-radius: 14px;
+                                    border: solid 1px #999999;width: 97%;">
+                                    <!-- <input type="text" class="form-control" id="inputSuccess4"> -->
+                                    <span [ngClass]="dir === 'rtl' ? 'imgSearchAr' : 'imgSearchEn'"
+                                        *ngIf="searchText?.length === 0">
+                                        <img src="assets/images/search.png" width="24px">
+
+
+                                    </span>
+
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row mt-4" style="text-align: start;">
+                                <div class="col-md-12">
+                                    <div>
+                                        <img src="assets/image/filter.svg" data-toggle="modal" data-target="#myModal"
+                                            (click)="displayType(tab);reset()"
+                                            [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'">
+                                        <img [src]="img2" [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                            (click)="changeView()">
+                                        <img [src]='img1' [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                            (click)="changeView()">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-12">
+                                    <div [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                        style="background-color: transparent;">
+                                    </div>
+                                    <div class="navTxtActive"
+                                        [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                        [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                        [style.margin-right]="dir === 'rtl' ? '20px':'0px'"
+                                        [style.background-color]="viewBills?'transparent':'#d99a29'">
+                                    </div>
+                                    <div class="navTxtActive"
+                                        [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                        [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                        [style.margin-right]="dir === 'rtl' ? '10px':'0px'"
+                                        [style.background-color]="viewBills?'#d99a29':'transparent'"></div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="data2.length<=0">
+
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div style="    font-size: 20px;
+                                color: #999999;
+                                font-family: SSTArabic-Medium;">{{lang.t4}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="data2.length>0">
+
+                        <div class="row mt-3 mb-2" *ngIf="!viewBills" style="text-align: start;">
+                            <div class="col-md-6" *ngFor="let item of data2 | filter:searchText; let i=index">
+                                <mat-card class="matborder" (click)="details(item)">
+                                    <div class="row mt-2 mb-2">
+                                        <div class="col-md-8">
+                                            <span class="cardTxt1Css">{{item.Abtypt}}</span>
+                                            <div class="cardTxt2Css">
+                                                {{item.Txt30}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <div class="filtercp" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                                *ngIf="item.Status ==='Paid' || item.Status ==='مدفوع'">
+                                                <span class="cardTxt5Cssp">
+                                                    {{item.Status}}</span>
+                                            </div>
+                                            <div class="filtercu" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                                *ngIf="item.Status ==='Unpaid' || item.Status ==='غير مدفوع'">
+                                                <span class="cardTxt5Cssu">
+                                                    {{item.Status}}</span>
+                                            </div>
+                                            <div class="filtercpp" [style.float]="dir === 'rtl'? 'left': 'right'"
+                                                *ngIf="item.Status ==='Partially' || item.Status ==='جزئي'">
+                                                <span class="cardTxt5Csspp">
+                                                    {{item.Status}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <mat-divider></mat-divider>
+
+                                    <div class="row mt-4 mb-2">
+                                        <div class="col-md-12 mb-3">
+                                            <span class="cardTxt1Css">{{item.Betrw | currency:'SAR'  | slice:3}}
+                                                {{lang.t3}}</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="cardTxt2Css">{{lang.c1.t1}}</span>
+                                            <div class="cardTxt3Css">
+                                                {{item.Vtre2}}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="cardTxt2Css">{{lang.c1.t2}}</span>
+                                            <div class="cardTxt3Css">
+                                                {{item.DueDtCtxt}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mt-3 ml-1 mr-1 mb-2" *ngIf="viewBills">
+                            <table style="width:100%">
+                                <tr class="tabHeader">
+                                    <ng-container *ngIf="dir !== 'rtl'">
+                                        <th colspan="3">{{lang.c2.t1}}</th>
+                                    </ng-container>
+                                    <ng-container *ngIf="dir === 'rtl'">
+                                        <th colspan="3" [style.border-right]="dir === 'rtl' ? ('1px solid #bbb'):''"
+                                            [style.border-top-left-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                            [style.border-top-right-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                            {{lang.c2.t1}}
+                                        </th>
+                                    </ng-container>
+                                    <th colspan="3" style="width: 20% !important;">{{lang.c2.t2}}</th>
+                                    <th colspan="3">{{lang.c2.t3}}</th>
+                                    <th colspan="3">{{lang.c2.t4}}</th>
+                                    <th colspan="3">{{lang.c2.t5}}</th>
+                                    <th colspan="3">{{lang.c2.t6}}</th>
+                                    <th colspan="3">{{lang.c2.t7}}</th>
+                                    <ng-container *ngIf="dir !== 'rtl'">
+                                        <th colspan="3">{{lang.c2.t8}}</th>
+                                    </ng-container>
+                                    <ng-container *ngIf="dir === 'rtl'">
+                                        <th colspan="3" [style.border-top-right-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                            [style.border-top-left-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                            {{lang.c2.t8}}
+                                        </th>
+                                    </ng-container>
+                                </tr>
+                                <ng-container *ngFor="let item of data2  | filter:searchText; let i=index">
+                                    <tr class="tabheader2" *ngIf="i<=count" (click)="details(item)">
+                                        <ng-container *ngIf="dir === 'rtl'">
+                                            <td colspan="3" *ngIf="i!==count">{{item.Abtypt}}
+                                            </td>
+                                            <td colspan="3"
+                                                [style.border-bottom-right-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                                [style.border-bottom-left-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                                *ngIf="i===count">
+                                                {{item.Abtypt}}
+                                            </td>
+                                        </ng-container>
+
+
+                                        <ng-container *ngIf="dir !== 'rtl'">
+                                            <td colspan="3">{{item.Abtypt}}</td>
+                                        </ng-container>
+
+
+                                        <td colspan="3">{{item.Txt30}}</td>
+                                        <td colspan="3">{{item.from}}</td>
+                                        <td colspan="3">{{item.DueDtCtxt }}</td>
+                                        <td colspan="3">{{item.Vtre2}}</td>
+                                        <td colspan="3">{{item.Fbnum}}</td>
+                                        <td colspan="3" style="text-align: right;">
+                                            {{item.Betrw | currency:'SAR'  | slice:3}} {{lang.t3}}</td>
+                                        <ng-container *ngIf="dir !== 'rtl'">
+                                            <td colspan="3" style="text-align: center;">
+
+
+                                                <!-- <div class="filtercppt"
+                                                >
+                                                <span class="cardTxt5Csspp">
+                                                    {{item.Status}}</span>
+                                            </div> -->
+
+                                                <div class="filtercpar"
+                                                    *ngIf="item.Status ==='Partially' || item.Status ==='جزئي'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.Status}}</span>
+                                                </div>
+
+                                                <div class="filtercpt"
+                                                    *ngIf="item.Status ==='Paid'|| item.Status ==='مدفوع'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.Status}}</span>
+                                                </div>
+                                                <div class="filtercut"
+                                                    *ngIf="item.Status ==='Unpaid' || item.Status ==='غير مدفوع'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.Status}}</span>
+                                                </div>
+
+
+                                                <!-- <span class="cardTxt5Css "
+                                                [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوع' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='غير مدفوع' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ==='جزئي'? 'text-warning':'']">
+                                                {{item.Status}}</span> -->
+                                            </td>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="dir === 'rtl'">
+                                            <td colspan="3" *ngIf="i!==count" style="text-align: center;">
+                                                <!-- <span class="cardTxt5Css "
+                                                [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوع' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='غير مدفوع' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ==='جزئي'? 'text-warning':'']">
+                                                {{item.Status}}</span> -->
+                                                <div class="filtercpar"
+                                                    *ngIf="item.Status ==='Partially' || item.Status ==='جزئي'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.Status}}</span>
+                                                </div>
+
+                                                <div class="filtercpt"
+                                                    *ngIf="item.Status ==='Paid'|| item.Status ==='مدفوع'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.Status}}</span>
+                                                </div>
+                                                <div class="filtercut"
+                                                    *ngIf="item.Status ==='Unpaid' || item.Status ==='غير مدفوع'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.Status}}</span>
+                                                </div>
+
+                                            </td>
+
+                                            <td colspan="3" style="text-align: center;"
+                                                [style.border-bottom-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                                [style.border-bottom-right-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                                *ngIf="i===count">
+                                                <!-- <span class="cardTxt5Css "
+                                                [ngClass]="[item.Status==='Paid'  || item.Status ==='مدفوع'? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='غير مدفوع' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ==='جزئي'? 'text-warning':'']">
+                                                {{item.Status}}</span> -->
+
+                                                <div class="filtercpar"
+                                                    *ngIf="item.Status ==='Partially' || item.Status ==='جزئي'">
+                                                    <span class="cardTxt5Csspp">
+                                                        {{item.Status}}</span>
+                                                </div>
+
+                                                <div class="filtercpt"
+                                                    *ngIf="item.Status ==='Paid'|| item.Status ==='مدفوع'">
+                                                    <span class="cardTxt5Cssp">
+                                                        {{item.Status}}</span>
+                                                </div>
+                                                <div class="filtercut"
+                                                    *ngIf="item.Status ==='Unpaid' || item.Status ==='غير مدفوع'">
+                                                    <span class="cardTxt5Cssu">
+                                                        {{item.Status}}</span>
+                                                </div>
+
+                                            </td>
+                                        </ng-container>
+
+                                    </tr>
+                                </ng-container>
+
+
+
+                            </table>
+                            <div class="row" style="width:100%">
+                                <div class="col-md-12">
+                                    <div class="viewMore">
+                                        <span style="cursor: pointer;margin-left: 5px;" (click)="viewMore()"
+                                            *ngIf="count<(data2.length-1)">{{lang.c2.t9}}</span>
+                                        <span [ngClass]="dir === 'rtl' ? 'sideNumberArb' : 'sideNumber'">
+                                            {{count + 1}} / {{data2.length}} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal" style="border-radius: 14px;">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header" style="border-bottom: none !important;">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 100%;"
+                        [style.text-align]="dir === 'rtl' ? 'end' : 'end'"><img src="assets/image/close.svg" /></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row" style="text-align: start;margin-left: 5%;margin-right: 5%;">
+                            <div class="col-md-12">
+                                <div class="filter1">{{lang.filter.title}}</div>
+
+                                <div class="row mt-4" *ngIf="tab2?.length>0">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t1}}</div>
+                                        <div style="display: flex;">
+                                            <ng-container *ngFor="let item of tab2 ; let i=index">
+                                                <div class="filter3 mt-3 mr-3"
+                                                    [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    (click)="changeTabz(i)">
+                                                    <span class="filter4">
+                                                        {{item.name}}
+                                                    </span>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t2}}</div>
+                                        <div style="display: flex;">
+                                            <ng-container *ngFor="let item of statusesNew ; let i=index">
+                                                <div *ngIf="item.name === 'Paid'  || item.name ==='مدفوع'"
+                                                    class="mt-3 mr-3" [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    (click)="changeType(item.name,i)">
+                                                    <span class="filter4">
+                                                        <img src="assets/images/check.svg" /> {{lang.bill.t1}}
+                                                    </span>
+
+                                                </div>
+                                                <div class="mt-3 mr-3" [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    *ngIf="item.name === 'Unpaid' || item.name ==='غير مدفوع'"
+                                                    (click)="changeType(item.name,i)">
+
+                                                    <span class="filter4">
+                                                        <img src="assets/images/stroke-4012.svg" /> {{lang.bill.t2}}
+                                                    </span>
+
+                                                </div>
+                                                <div *ngIf="item.name === 'Partially' || item.name ==='جزئي'"
+                                                    class=" mt-3 mr-3" [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                                                    (click)="changeType(item.name, i)">
+
+                                                    <span class="filter4">
+                                                        <img src="assets/images/group.svg" /> {{lang.bill.t3}}
+                                                    </span>
+                                                </div>
+                                            </ng-container>
+
+
+
+                                            <!-- <div class="filter3 mt-3 mr-3" *ngFor="let item of statuses ; let i=index">
+                                                <span class="filter4">
+                                                    <img src="assets/images/stroke-4012.svg" />  {{item}}
+                                                </span>
+                                            </div>
+
+                                            <div class="filter3 mt-3 mr-3" *ngFor="let item of statuses ; let i=index">
+                                                <span class="filter4">
+                                                    <img src="assets/images/group.svg" />  {{item}}
+                                                </span>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t3}}</div>
+
+                                        <div class="outBoxFilter">
+                                            <span class="filter222">{{lang.filter.t5}}</span>
+
+                                            <input matInput type="text" style="border: none;position: relative; 
+                                            left: 10px;" [(ngModel)]="from" (blur)="chnagesFromAmt()" name="form">
+                                            <span class="filter222"><img src="assets/images/arrow-right.svg" />
+                                                {{lang.filter.t6}}</span>
+                                            <input matInput type="text" (blur)="chnagesFromAmt()" style="border: none;position: relative;
+                                            left: 10px;" [(ngModel)]="to" name="to">
+
+                                        </div>
+                                        <div *ngIf="amtErr" class="invalid-feedback mt-2">
+                                            <p>{{amtMsg}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="filter2">{{lang.filter.t4}}</div>
+
+                                        <div class="outBoxFilter">
+                                            <div class="row">
+                                                <div class="col-md-6" style="display: inherit;">
+                                                    <span class="filter22">{{lang.filter.t5}}</span>
+
+                                                    <input matInput [matDatepicker]="picker" [(ngModel)]="fromDate"
+                                                        (dateChange)="changesToDate()" name="fromdate"
+                                                        style="border: none;" placeholder="">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                                                    </mat-datepicker>
+                                                </div>
+                                                <div class="col-md-6" style="display: inherit;">
+                                                    <span class="filter22"> <img src="assets/images/arrow-right.svg" />
+                                                        {{lang.filter.t6}}</span>
+                                                    <input matInput [matDatepicker]="picker1"  [(ngModel)]="toDate"
+                                                        name="todate" (dateChange)="changesFromDate()"
+                                                        style="border: none;" placeholder="">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1
+                                                        [calendarHeaderComponent]="headerComponent">
+                                                    </mat-datepicker>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div *ngIf="dateErr" class="invalid-feedback mt-2">
+                                            <p>{{dateMsg}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+
+                                        <button mat-button type="submit" class="btnCss mt-5" [disabled]="dateErr || amtErr" (click)="filterList()"
+                                            data-dismiss="modal">{{lang.filter.btn}}</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf='billDetails' [dir]="dir">
+    <div class="row" style="text-align: start;">
+        <div class="col-md-12">
+            <span class="exciseTitle1"> <span (click)="back();">{{lang.t1}} </span>
+                <mat-icon class="backIcon1">{{lang.t6}}</mat-icon>
+            </span><span class="exciseTitle1" style="color: #151515;">{{lang.c2.t10}}</span>
+        </div>
+    </div>
+    <div class="row mt-3" style="width:100%">
+        <div class="col-md-12">
+            <div class="viewMore" (click)="back();" style="cursor: pointer;">
+                <span style="cursor: pointer;">
+                    <mat-icon class="backIcon">{{lang.t5}}</mat-icon>
+                    {{lang.t2}}
+                </span>
+                <!-- <span class="sideNumber"> <img src={{menu[optionSlected-1].t3}} style="width: 66px;"> </span> -->
+            </div>
+        </div>
+    </div>
+    <div>
+        <!-- <div class="row">
+
+            <span class="exciseTitle1">Bills > </span><span class="exciseTitle1" style="color: #151515;">&nbsp; Bill
+                Details </span>
+        </div>
+        <div class="row mt-3" style="width:100%">
+            <div class="col-md-12">
+                <span class="label" (click)="back();" style="cursor: pointer;">
+                    <img src="assets/image/arrow-left.svg" style="width: 24px;"> Back</span>
+            </div>
+        </div> -->
+
+
+        <div class="row mt-3" style="text-align: start;">
+            <div class="col-md-6">
+                <span for="" class="title"> {{billDetailsobj.Abtypt}} </span>
+            </div>
+            <div class="col-md-6">
+                <span [style.float]="dir === 'rtl' ? 'left' : 'right'">
+                    <div class="filter3Paid"
+                        *ngIf="billDetailsobj.Status === 'Paid'  || billDetailsobj.Status ==='مدفوع'">
+                        <span class="filter4p">
+                            <img src="assets/images/check.svg" /> {{billDetailsobj.Status}}
+                        </span>
+
+                    </div>
+                    <div class="filter3unpaid"
+                        *ngIf="billDetailsobj.Status === 'Unpaid' || billDetailsobj.Status ==='غير مدفوع'">
+                        <span class="filter4u">
+                            <img src="assets/images/stroke-4012.svg" /> {{billDetailsobj.Status}}
+                        </span>
+
+                    </div>
+                    <div class="filter3partial"
+                        *ngIf="billDetailsobj.Status === 'Partially' || billDetailsobj.Status ==='جزئي'">
+                        <span class="filter4pp">
+                            <img src="assets/images/group.svg" /> {{billDetailsobj.Status}}
+                        </span>
+
+                    </div>
+                </span>
+                <!-- <span class="cardTxt4Css P">{{billDetailsobj.Status}}
+                </span> -->
+            </div>
+        </div>
+
+
+        <mat-card class="mt-3" style="text-align: start;">
+            <div class="row mt-2 mb-2">
+                <div class="col-md-11" style="display: inherit;">
+                    <div class="summaryCss1">
+                        <img class="summaryCss2" src="assets/image/details.svg">
+                    </div>
+
+                    <div class="summaryCss3">{{lang.c2.t10}}</div>
+                </div>
+                <div class="col-md-1">
+                    <div class="summaryCss4"></div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div class="row mt-4 mb-4">
+                <div class="col-md-6">
+                    <div class="summaryCss5">{{lang.c2.t1}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Abtypt}}</div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="summaryCss5">{{lang.c2.t2}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Txt30}}</div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div class="row mt-4 mb-4">
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t3}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.from}}</div>
+
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t4}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.DueDtCtxt}}</div>
+                </div>
+            </div>
+
+
+            <mat-divider></mat-divider>
+
+
+            <div class="row mt-4 mb-3">
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t5}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Vtre2}}</div>
+
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="summaryCss5">{{lang.c2.t6}}</div>
+                    <div class="summaryCss6"> {{billDetailsobj.Fbnum}}</div>
+                </div>
+            </div>
+
+        </mat-card>
+
+
+        <div class="row invoiceCard mt-3">
+            <div class="col-md-6 ">
+                <p class="invoiceLabel  ml:23px;">{{lang.c2.t7}}</p>
+            </div>
+            <div class="col-md-6 ">
+                <span class="invoiceText mr:23px;"
+                    [style.float]="dir === 'rtl' ? 'left' : 'right'">{{billDetailsobj.Betrw | currency:'SAR'  | slice:3}}
+                    {{lang.t3}}</span>
+            </div>
+        </div>
+        <!-- <div class="row" style=" margin-top: 57px;display: none;">
+        <div class="col-md-12">
+            <button mat-raised-button class="invoiceBtn">Invoice</button>
+        </div>
+    </div> -->
+    </div>
+</div>

@@ -1,0 +1,247 @@
+<app-header [direction]="direction" [title]="lang.title" [url]="url"></app-header>
+<div class="container" style="margin-top: 150px;" dir={{direction}}>
+    <div class="row" *ngIf="!showVerification && !show">
+        <div class="col-md-12">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div [ngClass]="optionActive === 1 ? 'viewCssActive' : 'viewCss'" (click)="backClick(1)">
+                        <div class="card cardz" [ngClass]="optionActive === 1 ? 'cardCss' : 'cardCssActive'">
+                            <div class="card-body">
+                                <i class="fa fa-check-circle"
+                                    [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="showOne"
+                                    aria-hidden="true"></i>
+                                <p class="ellipse-inner" [style.left]="direction === 'rtl' ? '-4px' : '4px'"
+                                    *ngIf="!showOne"></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <p [ngClass]="optionActive === 1 ? 'txtCss' : 'txtCssActive'"> {{lang.header.h1}}
+                    </p>
+                    <!-- <hr *ngIf="optionActive !== 1" [ngClass]="direction === 'rtl' ? 'hrCssActive' : 'hrEngcssActive'">
+              <hr *ngIf="optionActive === 1" [ngClass]="direction === 'rtl' ? 'hrCss' : 'hrEngcss'"> -->
+                </div>
+                <div class="col-md-4">
+                    <div [ngClass]="optionActive === 2 ? 'viewCssActive' : 'viewCss'">
+                        <div class="card cardz" [ngClass]="optionActive === 2 ? 'cardCss' : 'cardCssActive'">
+
+                            <div class="card-body">
+                                <i class="fa fa-check-circle"
+                                    [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="showTwo"
+                                    aria-hidden="true"></i>
+                                <p class="ellipse-inner" *ngIf="!showTwo"
+                                    [style.left]="direction === 'rtl' ? '-4px' : '4px'"
+                                    [style.background]="defaultValue === 1 ? 'white' : ''"
+                                    [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'">
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <p [ngClass]="optionActive === 2 ? 'txtCss' : 'txtCssActive'"
+                        [style.color]="defaultValue === 1 ? '#c0c0c0' : ''"
+                        [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+                        {{lang.header.h2}}
+                    </p>
+                    <!-- <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss2Active">
+              <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss3Active"> -->
+                    <hr class="hrCss2">
+                    <hr class="hrCss3">
+                </div>
+                <div class="col-md-4">
+                    <div [ngClass]="optionActive === 3 ? 'viewCssActive' : 'viewCss'" >
+                        <div class="card cardz" [ngClass]="optionActive === 3 ? 'cardCss' : 'cardCssActive'">
+
+                            <div class="card-body">
+                                <!-- <i class="fa fa-arrow-left" style="font-size: 25px;" aria-hidden="true"></i> -->
+                                <i class="fa fa-check-circle"
+                                    [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="show"
+                                    aria-hidden="true"></i>
+
+                                <p class="ellipse-inner" *ngIf="!show"
+                                    [style.left]="direction === 'rtl' ? '-4px' : '4px'"
+                                    [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'"
+                                    [style.background]="defaultValue === 3 ||defaultValue === 1 ? 'white' : ''">
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <p [ngClass]="optionActive === 3 ? 'txtCss' : 'txtCssActive'"
+                        [style.color]="defaultValue === 3 || defaultValue === 1 ? '#c0c0c0' : ''"
+                        [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+                        {{lang.header.h3}}</p>
+                    <!-- <hr *ngIf="show" [ngClass]="direction === 'rtl' ? 'hrCsss4' : 'hrEngCsss4'">
+              <hr *ngIf="!show" [ngClass]="direction === 'rtl' ? 'hrCss4' : 'hrEngCss4'"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!show && !showVerification">
+
+
+        <div class="row rowCss mt-2" *ngIf="optionActive === 1">
+            <div class="col-md-12">
+                <mat-card>
+                    <mat-card-content>
+                        <div class="sideHeading">
+                            {{lang.c1.title}} <span
+                                *ngIf="governmentDTO.cId !== '' && governmentDTO.gName !== '' && !nameErr3 && !nameErr1 && !nameErr2">
+                                <i class="fa fa-check-circle" aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i>
+                            </span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c1.in2}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder=""
+                                        (ngModelChange)="governmentDTO.cId = $event; validate(governmentDTO,3)"
+                                        [ngModel]="governmentDTO.cId" maxlength="10" name="cId"
+                                        (keypress)='restrictAlphabets($event)' (blur)="getCompanyValidated()">
+                                </mat-form-field>
+                                <div class="invalid-feedback" *ngIf="nameErr3">
+                                    {{cMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c1.in3}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" [disabled]="tinExist"
+                                        (ngModelChange)="governmentDTO.gName = $event; validate(governmentDTO,1)"
+                                        [ngModel]="governmentDTO.gName" maxlength="40" name="gName">
+                                </mat-form-field>
+                                <div class="invalid-feedback" *ngIf="nameErr1">
+                                    {{nameMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4" *ngIf="tinExist">
+                                <div class="registerLabelCss">{{ lang.c1.in1}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput type="text" [disabled]="tinExist"
+                                        (ngModelChange)="governmentDTO.tin = $event; validate(governmentDTO,2)"
+                                        [ngModel]="governmentDTO.tin" maxlength="10" name="num1"
+                                        (keypress)='restrictAlphabets($event)'>
+                                </mat-form-field>
+                                <div class="invalid-feedback" *ngIf="nameErr2">
+                                    {{tinMsg}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="mt-3">
+                    <mat-card-content>
+                        <div class="sideHeading">
+                            {{lang.c2.title}} <span
+                                *ngIf="governmentDTO.MobileNo !== '' && governmentDTO.email !== '' && governmentDTO.cemail !== '' && !nameErr8 && !nameErr9 && !nameErr10">
+                                <i class="fa fa-check-circle" aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i>
+                            </span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c2.in1}} <span style="color: red;">*</span></div>
+
+                                <div id="custom" style="direction: initial">
+                                    <mat-select id="code" class="custom" style="width: 30%;" [(ngModel)]="cncode"
+                                        name="cncode">
+                                        <mat-select-trigger>
+                                            +{{cncode}}
+                                          </mat-select-trigger>
+                                        <mat-option [value]="item.Telefto" *ngFor="let item of codes"
+                                            (click)="getMaxLength(item.maxLength)">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span> +{{item.Telefto}} &nbsp;&nbsp;&nbsp;&nbsp; </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ item.Landx50 }}
+                                                </div>
+                                            </div>
+
+                                        </mat-option>
+
+                                    </mat-select>
+                                    <input matInput type="text"
+                                        (ngModelChange)="governmentDTO.MobileNo = $event; validate(governmentDTO,8)"
+                                        (keypress)='restrictAlphabets($event)' [ngModel]="governmentDTO.MobileNo"
+                                        maxlength={{maxLength}} name="MobileNo" class="custom" placeholder=""
+                                        style="width: 70%; padding-left: 12px;">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="nameErr8" style="margin-top: 11px !important">
+                                    {{msMsg}}
+                                </div>
+                            </div>
+                         
+
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c2.in2}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput
+                                        (ngModelChange)="governmentDTO.email = $event; validate(governmentDTO,9)"
+                                        [ngModel]="governmentDTO.email" maxlength="240" name="email" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <div class="invalid-feedback" *ngIf="nameErr9">
+                                    {{eMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c2.in3}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput
+                                        (ngModelChange)="governmentDTO.cemail = $event; validate(governmentDTO,10)"
+                                        [ngModel]="governmentDTO.cemail" maxlength="240" name="cemail">
+                                </mat-form-field>
+                                <div class="invalid-feedback" *ngIf="nameErr10">
+                                    {{ceMsg}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <div class="mt-3">
+                    <button mat-raised-button (click)="onSubmit1()" [ngClass]="direction === 'rtl' ?
+                    'btnArbCss' : 'btnCss'">
+                        {{lang.c1.btn}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="row rowCss mt-2" *ngIf="optionActive === 2">
+            <div class="mt-3">
+                <button mat-raised-button (click)="NextStep(3)" [ngClass]="direction === 'rtl' ?
+                'btnArbCss' : 'btnCss'">
+                    {{lang.c1.btn}}</button>
+            </div>
+        </div>
+        <app-Create-Password (completed)="submit($event)" [type2]="type2" *ngIf="optionActive === 3"></app-Create-Password>
+    </div>
+</div>
+
+<app-acknowledgment *ngIf="show" [no]="no" [name]="name" [type]="type"></app-acknowledgment>
+
+<app-otp-verification *ngIf="showVerification && !show" [resend]="resend" [mobile]="mobile"
+    (validateOTP)="getOTPFromUser($event)" (resend)="resendOTP()"></app-otp-verification>
+
+<notifier-container></notifier-container>
+
+<ng-template #customNotification let-notificationData="notification">
+    <div *ngFor="let item of errd">
+        <div *ngIf="item.code !== '/IWBEP/CX_MGW_BUSI_EXCEPTION'">
+            {{item.message}}
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,70 @@
+mat-slider {
+  width: 300px;
+}
+.custom-mat-slider-w mat-slider {
+  width: 370px;
+}
+/* ::ng-deep .mat-slider-wrapper {
+  .mat-slider-thumb-container {
+    .mat-slider-thumb-label {
+      width: auto;
+      height: 50px;
+      top: -62px;
+      right: -25px;
+    }
+  }
+} */
+
+.importH3{    margin-left: 27px;
+  margin-top: 10px;}
+  .getdata{width: 30%;
+    margin-left: 10px;}
+    .datepicker1{    position: absolute;
+      right: 20px;}
+      .date-control-groupVat {
+        display: flex;
+        height: auto;
+        /* border: 1px solid #999999; */
+        border-radius: 14px;
+    }
+    .scroll-model{height: 500px;
+      overflow-y: scroll;}
+
+
+      .lang-arabic .btn.btn-primary {
+        margin-left: 0 !important;
+    }
+.cursor-pointer{cursor: pointer;}
+    .lang-arabic .pr-5 {
+     padding-right: 0!important; 
+  }
+  .heightpdng-104{height: 104px;padding:10px 15px}
+  .widthpadng-206{width: 206px;height: 104px;padding:10px 15px}
+  .height-40{height: 40px;}
+  .lang-arabic .getdata{width: 200px !important;}
+  .disablePointer
+  {
+    pointer-events: none !important;
+  }
+  .datepicker4{    position: absolute;
+    top: 31px;
+    right: 20px;}
+    .modal-body-4{margin-top: 55px !important;}
+
+    .mat-slider-wrapper
+    {
+      width: 370px !important;
+    }
+
+    .error-border{
+      border: red 1px solid !important;
+    }
+    .error-border:focus ,.error-border:hover
+    {
+      border: red 1px solid !important;
+    }
+    .lang-arabic .ar-mr-10{margin-right: 10px !important;}
+    .lang-arabic .datepicker4 {
+      top: 34px;
+      right: 88% !important;
+  }

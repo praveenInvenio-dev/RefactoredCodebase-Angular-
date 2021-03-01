@@ -1,0 +1,1047 @@
+<!-- starting step-1 code -->
+<div *ngIf="Step==1" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a routerLink="/mains/tax" onclick="return false" class="text-Gray"> {{lang.nav.t1}} </a><a  onclick="return false" class="text-Gray"> {{lang.nav.t4}} </a>{{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a routerLink="/mains/tax"
+                class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+        </div>
+
+        <div class="d-flex justify-content-between mb-24 align-items-center">
+            <div class="inner">
+                <h2 class="mb-12">{{lang.step1.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step1.t2}}</div>
+            </div>
+
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative">
+                    <li><a href="#" onclick="return false" class="active">{{lang.nav1.t1}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t2}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t3}}</a></li>
+                    <li class="ar-ml-15"><a href="#" onclick="return false">{{lang.nav1.t4}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t5}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span>{{lang.step1.taxpayer1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.taxpayer2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Gpartx}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.FullName}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+			<div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Actnm}}
+                    </div>
+                </div>
+				<div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Crno}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            
+			<div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{Address?.Addr}}
+                    </div>
+                </div>
+				<div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Taxdt | date}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-24">
+                    <button class="btn btn-primary mr-10"
+                        (click)="continueFirstScreen()">{{lang.step1.btn1}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INSTRUCTIONS MODAL STARTS -->
+    <button [hidden]="true" #infoModal data-toggle="modal" data-target="#infoModal" data-backdrop="static"
+        data-keyboard="false"></button>
+    <div class="modal modal-filter fade" id="infoModal" role="dialog">
+        <div class="modal-dialog max-width-708">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+
+                <div class="modal-body px-60 py-40" [formGroup]="InstructionFormGroup">
+                    <h2 class="mb-24">{{lang.step1.popup1.t1}}</h2>
+                    <div class="card-inner mb-24">
+                        <div class="d-flex mb-10">
+                            <img src="assets/images/icon-info.svg" class="mr-10" alt="">
+                            <span class="font-12 text-Nero">
+                                {{lang.step1.popup1.t2}}
+                            </span>
+                        </div>
+
+                        <div class="font-12 text-Gray mb-16">
+                            {{lang.step1.popup1.t3}}
+                        </div>
+
+                        <ul class="font-12 text-Gray p-0 m-0 last-child-mb-0 list-style-none last-child-mb-0">
+                            <li class="mb-16">
+                                {{lang.step1.popup1.t4}}
+                            </li>
+                            <li>
+                                {{lang.step1.popup1.t5}}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="inner mb-56">
+                        <label class="custom-checkBox d-flex align-items-center h-32">
+                            <span class="ml-1 font-12 font-weight-500 pt-10">{{lang.step1.popup1.t6}} </span>
+                            <input type="checkbox" formControlName="agree">
+                            <span class="checkmark checkmark-24 mt-2"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group text-right mb-16 ">
+                        <button class="btn btn-primary arBtn-left"
+                            [disabled]="!InstructionFormGroup.valid || InstructionFormGroup.value.agree == false"
+                            (click)="termsAndConditionsOfInstructionAcceptance()">{{lang.step1.popup1.btn}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- INSTRUCTIONS MODAL ENDS -->
+</div>
+<!-- Ending step-1 code -->
+
+<!-- starting step-2 code -->
+<div *ngIf="Step==2" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a routerLink="/mains/tax" onclick="return false" class="text-Gray"> {{lang.nav.t1}} </a><a  onclick="return false" class="text-Gray"> {{lang.nav.t4}} </a>{{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back1()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+        </div>
+
+        <div class="d-flex justify-content-between mb-24 align-items-center">
+            <div class="inner">
+                <h2 class="mb-12">{{lang.step1.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step1.t2}}</div>
+            </div>
+
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative">
+                    <li><a href="#" onclick="return false" class="active">{{lang.nav1.t1}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t2}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t3}}</a></li>
+                    <li class="ar-ml-15"><a href="#" onclick="return false">{{lang.nav1.t4}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t5}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <form [formGroup]="DeregisterFormGroup">
+            <div class="row mb-32">
+                <div class="col-md-12">
+                    <div class="text-Gray font-12 mb-16">
+                        {{lang.step1.t3}}
+                    </div>
+
+                    <div class="d-flex" [ngClass]="{'disabled1': rejectionStatus == true}">
+                        <div class="card mr-24 p-15 cursor-pointer"
+                            [ngClass]="RequestTypeValue == 'D' ? 'mark-dark-green' : 'mark-light-gray'"
+                            style="width: 206px;height: 104px;padding:10px 15px;" (click)="requestType('D')" >
+                            <p class="m-0 font-weight-500 font-16 mt-auto"
+                                [ngClass]="RequestTypeValue == 'D' ? 'text-white' : 'text-black'">{{lang.step1.t4}} </p>
+                        </div>
+
+                        <div class="card mr-24 p-15 cursor-pointer"
+                            [ngClass]="RequestTypeValue == 'S' ? 'mark-dark-green' : 'mark-light-gray'"
+                            style="width: 206px;height: 104px;padding:10px 15px;" (click)="requestType('S')">
+                            <p class="m-0 font-weight-500 font-16 mt-auto"
+                                [ngClass]="RequestTypeValue == 'S' ? 'text-white' : 'text-black'">{{lang.step1.t5}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="RequestTypeValue == 'S'">
+                <div class="row mb-56">
+                    <div class="col-sm-6">
+                        <div class="form-group mb-0">
+                            <label class="white-space-nowrap mr-2">{{lang.step1.t6}}</label>
+                            <div class="d-flex">
+                                <input type="text" class="form-control card" [matDatepicker]="start"
+                                    placeholder="{{lang.step3.placeholder4}}" formControlName="startDate"
+                                    (dateChange)="startEvent($event)">
+                                <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+                                <mat-datepicker #start [calendarHeaderComponent]="headerComponent"></mat-datepicker>
+                            </div>
+                            <span class="error"
+                                *ngIf="DeregisterFormGroup.controls['startDate'].errors?.invalid">{{lang.step1.t14}}</span>
+                            <span class="error"
+                                *ngIf="DeregisterFormGroup.controls['startDate'].errors?.error">{{LastICRErrorMsg}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group mb-0">
+                            <label class="white-space-nowrap mr-2">{{lang.step1.t7}}</label>
+                            <div class="d-flex">
+                                <input type="text" class="form-control card" [matDatepicker]="end"
+                                    placeholder="{{lang.step3.placeholder5}}" formControlName="endDate"
+                                    (dateChange)="endEvent($event)">
+                                <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+                                <mat-datepicker #end [calendarHeaderComponent]="headerComponent"></mat-datepicker>
+                            </div>
+                            <span class="error"
+                                *ngIf="DeregisterFormGroup.controls['endDate'].errors?.invalid">{{lang.step1.t8}}</span>
+                            <span class="error"
+                                *ngIf="DeregisterFormGroup.controls['endDate'].errors?.icrDate">{{lang.step1.t15}}</span>
+                            <span class="error"
+                                *ngIf="DeregisterFormGroup.controls['endDate'].errors?.error">{{SuspensionDetailsErrorMsg}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-24">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group mb-0">
+                            <label>{{lang.step1.t9}}</label>
+                            <div *ngIf="SuspensionDetails">
+                                <span class="text-Eerie-Black font-16 font-weight-500">{{SuspensionFrom | date}}</span>
+                                to <span class="text-Eerie-Black font-16 font-weight-500">{{SuspensionTo | date}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group mb-0">
+                            <label>{{lang.step1.t10}}</label>
+                            <div *ngIf="SuspensionDetails">
+                                <span class="text-Eerie-Black font-16 font-weight-500">{{NextFillingFrom | date}}</span>
+                                to <span class="text-Eerie-Black font-16 font-weight-500">{{NextFillingTo |
+                                    date}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group mb-0">
+                            <label>{{lang.step1.t11}}</label>
+                            <div *ngIf="SuspensionDetails">
+                                <span class="text-Eerie-Black font-16 font-weight-500">{{DueDate | date}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-56">
+                <div class="col-sm-12 col-md-12">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step1.t12}}</label>
+                        <div class="custom-dropdown position-relative card">
+                            <select class="form-control default-arrow-hide" formControlName="reason"
+                                (change)='onReasonSelected($event.target.value)'>
+                                <option *ngFor="let res of Reasons" [value]="res.Reason">{{res.Rdesc}}</option>
+                            </select>
+                            <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-56" *ngIf="ShowReasonOthers">
+                <div class="col-sm-12 col-md-12">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step1.t13}}</label>
+                        <textarea type="text" class="form-control card" formControlName="others"></textarea>
+                    </div>
+                    <!-- <span *ngIf="DeregisterFormGroup.controls['others'].errors?.pattern">
+                        1. Only alphabets allowed
+                        2. Maximum 140 characters
+                    </span> -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-24">
+                        <button class="btn btn-primary mr-10" [disabled]="!DeregisterFormGroup.valid"
+                            (click)="continueSecondScreen()">{{lang.step1.btn1}}</button>
+                        <button class="btn btn-primary" [disabled]="!DeregisterFormGroup.valid"
+                            (click)="saveDeregisterDetails()">{{lang.step1.btn2}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Ending step-2 code -->
+
+<!-- starting step-3 code -->
+<div *ngIf="Step==3" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a routerLink="/mains/tax" onclick="return false" class="text-Gray"> {{lang.nav.t1}} </a><a  onclick="return false" class="text-Gray"> {{lang.nav.t4}} </a>{{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back2()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+        </div>
+
+        <div class="d-flex justify-content-between mb-24 align-items-center">
+            <div class="inner">
+                <h2 class="mb-12">{{lang.step2.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step2.t2}} </div>
+            </div>
+
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative">
+                    <li><a href="#" onclick="return false" class="active"><img src="assets/images/icon-wcheck.svg"
+                                alt=""></a></li>
+                    <li><a href="#" onclick="return false" class="active">{{lang.nav1.t2}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t3}}</a></li>
+                    <li class="ar-ml-15"><a href="#" onclick="return false">{{lang.nav1.t4}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t5}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <form [formGroup]="AttchmentFormGroup">
+            <div formArrayName="attachControls">
+                <div *ngFor="let rowItems of AttchmentFormGroup.get('attachControls')['controls']; let i = index;">
+                    <div [formGroupName]="i">
+                        <div class="row mb-16">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group mb-0">
+                                    <label>{{lang.step2.t3}}</label>
+                                    <div class="text-right mtd-25 ar-delete" *ngIf="i > 0"><img
+                                            src="assets/images/icon-delete.svg" (click)="deleteAttachmentRow(i)"></div>
+                                    <div class="custom-dropdown position-relative card">
+                                        <select class="form-control default-arrow-hide"
+                                            formControlName="attachmentType" (change)="onAttchTypeSelection($event.target.value, i)">
+                                            <option *ngFor="let item of AttachmentSelectList" [value]="item.DmsTp">
+                                                {{item.Txt50}}</option>
+                                        </select>
+                                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute"
+                                            alt="">
+                                    </div>
+                                    <span class="error" *ngIf="AttchmentFormGroup.get('attachControls')['controls'][i].errors?.invalid">
+                                        {{lang.step3.already}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-32">
+                            <div class="col-sm-12 col-md-6">
+                                <span *ngFor="let item of AttachmentSelectList">
+                                    <p class="mb-16 font-16"
+                                        *ngIf="AttchmentFormGroup.get('attachControls')['controls'][i].value.attachmentType == item.DmsTp">
+                                        {{item.Txt50}}</p>
+                                </span>
+                                <div class="cardh216 card p-24 d-flex justify-content-center align-items-center"
+                                    style="border: 1px dashed #bbbbbb;">
+                                    <div class="bg-white m-0 font-weight-500 font-16 text-center"
+                                        style="padding:20px 40px;">
+                                        <div class="uploadfilecontainer bg-white"
+                                            (click)="AttachFiles[i]?.length < 5 && fileInput.click()" appDragDrop
+                                            (onFileDropped)="AttachFiles[i]?.length < 5 && uploadFile($event, i)">
+                                            <input hidden type="file" #fileInput
+                                                (change)="AttachFiles[i]?.length < 5 && uploadFile($event.target.files, i)">
+                                            <div class="row text-center">
+                                                <div class="col-md-12">
+                                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                                    <div class="fileUploadTxt font-weight-500 green">{{lang.nav1.dragDrop}}
+                                                    </div>
+                                                    <div class="fileUploadTxt1 font-weight-500 green">{{lang.nav1.max}}</div>
+                                                </div>
+                                            </div>
+                                            <span *ngIf="FilesizeError">{{lang.nav1.filevalidationmsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6" *ngFor="let file of AttachFiles[i]; let j = index;">
+                                <div>
+                                    
+                                    <p class="mb-16 font-16">{{file.attachTypeName}}</p>
+                                    <div class="cardh216 card p-24" style="border:1px solid gray">
+                                        <div class="d-flex justify-content-end"><img src="assets/images/icon-delete.svg"
+                                                (click)="deleteAttachment(j, i);"></div>
+                                        <div class="d-flex justify-content-center align-items-center h-100">
+                                            <div class="m-0 font-weight-500 font-16 text-center">
+                                                <img src="assets/images/pdf.svg" class="mb-10" *ngIf="file.type == 'pdf'">
+                                                <img src="assets/images/icon-excel.svg" class="mb-10" *ngIf="file.type == 'xlsx'">
+                                                <img src="assets/images/icon-jpg.svg" class="mb-10" *ngIf="file.type == 'jpeg'">
+                                                <img src="assets/images/icon-png.svg" class="mb-10" *ngIf="file.type == 'png'">
+                                                <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'msword'">
+                                                <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'docx'"> 
+                                                <p class="FileName"> {{ file.name }}.{{ file.type }}</p>
+                                                <div class="FileSize">{{ file.size }} MB</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-56">
+                <div class="col-md-6 col-sm-12">
+                    <div class="card p-16">
+                        <div class="d-flex align-items-center"
+                            (click)="AttchmentFormGroup.get('attachControls')['controls'].length >= 1 && AttachFiles.length >= 1 && addAttachmentRow()">
+                            <img src="assets/images/icon-plus.svg" class="h-24" alt="">
+                            <p class="text-Watercourse font-weight-bold pl-4 pr-5 mb-0">{{lang.step2.t4}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-24">
+                        <button class="btn btn-primary mr-10"
+                            [disabled]="!AttchmentFormGroup.valid || AttachFiles.length == 0"
+                            (click)="continueThirdScreen()">{{lang.step2.btn1}}</button>
+                        <button class="btn btn-primary"
+                            [disabled]="!AttchmentFormGroup.valid || AttachFiles.length == 0"
+                            (click)="saveAttachmentDetails()">{{lang.step2.btn2}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Ending step-3 code -->
+
+<!-- starting step-4 code -->
+<div *ngIf="Step==4" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a routerLink="/mains/tax" onclick="return false" class="text-Gray">{{lang.nav.t1}} </a><a  onclick="return false" class="text-Gray"> {{lang.nav.t4}} </a>{{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back3()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+        </div>
+
+        <div class="d-flex justify-content-between mb-24 align-items-center">
+            <div class="inner">
+                <h2 class="mb-12">{{lang.step3.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step3.t2}} </div>
+            </div>
+
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative">
+                    <li><a href="#" onclick="return false" class="active"><img src="assets/images/icon-wcheck.svg"
+                                alt=""></a></li>
+                    <li><a href="#" onclick="return false" class="active"><img src="assets/images/icon-wcheck.svg"
+                                alt=""></a></li>
+                    <li><a href="#" onclick="return false" class="active">{{lang.nav1.t3}}</a></li>
+                    <li class="ar-ml-15"><a href="#" onclick="return false">{{lang.nav1.t4}}</a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t5}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <form [formGroup]="DeclarationFormGroup">
+            <div class="row mb-24">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.t3}}</label>
+                        <div class="custom-dropdown position-relative card">
+                            <select class="form-control default-arrow-hide" placeholder="Select Id Type"
+                                formControlName="idType" (change)="onIdTypeSelection($event.target.value)">
+                                <option *ngFor="let item of IdTypeList" [value]="item.idKey">{{item.idText}}</option>
+                            </select>
+                            <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.t4}}</label>
+                        <input type="text" class="form-control card" 
+                            formControlName="idNumber" (change)="onIdNoChange($event.target.value)" minlength="7" maxlength="16">
+                    </div>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['idNumber'].errors?.pattern">
+                        {{lang.step3.t41}}
+                    </span>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['idNumber'].errors?.minlength">
+                        {{lang.step3.t42}}
+                    </span>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['idNumber'].errors?.maxlength">
+                        {{lang.step3.t43}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-39">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.t5}}</label>
+                        <div>
+                            <input type="text" class="form-control card" [matDatepicker]="picker3"
+                                placeholder="{{lang.step3.placeholder3}}" formControlName="date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker3" [disabled]="true"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                            <img src="./images/icon-calendar.svg" class="mr-15" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.t6}}</label>
+                        <input type="text" class="form-control card" 
+                            formControlName="name">
+                    </div>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['name'].errors?.pattern">
+                        {{lang.step3.t61}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-40 mt-40">
+                <div class="col-md-12">
+                    <div class="card p-24 card-shadow-none">
+                        <div class="d-flex">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                            <span class="font-12 text-Gray">
+                                {{lang.step3.t7}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-24 pt-55p">
+                        <button class="btn btn-primary mr-10" [disabled]="!DeclarationFormGroup.valid"
+                            (click)="continueFourthScreen()">{{lang.step3.btn1}}</button>
+                        <button class="btn btn-primary" [disabled]="!DeclarationFormGroup.valid"
+                            (click)="saveDeclarationDetails()">{{lang.step3.btn2}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Ending step-4 code -->
+
+<!-- starting step-5 code -->
+<div *ngIf="Step==5" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a routerLink="/mains/tax" onclick="return false" class="text-Gray">{{lang.nav.t1}} </a><a  onclick="return false" class="text-Gray"> {{lang.nav.t4}} </a>{{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back4()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+        </div>
+
+        <div class="d-flex justify-content-between mb-24 align-items-center">
+            <div class="inner">
+                <h2 class="mb-12">{{lang.step4.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step4.t2}} </div>
+            </div>
+
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative">
+                    <li><a href="#" onclick="return false" class="active"><img src="assets/images/icon-wcheck.svg"
+                                alt=""></a></li>
+                    <li><a href="#" onclick="return false" class="active"><img src="assets/images/icon-wcheck.svg"
+                                alt=""></a></li>
+                    <li><a href="#" onclick="return false" class="active"><img src="assets/images/icon-wcheck.svg"
+                                alt=""></a></li>
+                                <li class="ar-ml-15"><a href="#" onclick="return false" class="active"><img src="assets/images/icon-wcheck.svg"
+                                    alt=""></a></li>
+                    <li><a href="#" onclick="return false">{{lang.nav1.t5}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class=""
+                            alt=""></span>{{lang.step1.taxpayer1}}
+                </h3>
+                <a (click)="setTaxpayerDetails()" style="display: none;"
+                    class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.step4.edit}}</a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.taxpayer2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Gpartx}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.FullName}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.taxpayer4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Actnm}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Crno}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step1.taxpayer6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{Address?.Addr}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step1.taxpayer7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{WholeData?.Taxdt | date}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class=""
+                            alt=""></span>{{lang.step4.t3}}
+                </h3>
+                <a (click)="setDeRegisterFormControls()"
+                    class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.step4.edit}}</a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step4.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{RequestName}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{ReasonValue}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6" *ngIf="ReasonValue == 'Others (please specify)'">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.t6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeregisterData.Others}}
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="RequestTypeValue == 'S'">
+                <div class="border-bottom-whisper"> </div>
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray  mb-0 text-wrap">{{lang.step4.t7}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeregisterData.StartDate | date}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0 text-wrap">{{lang.step4.t8}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeregisterData.EndDate  | date}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"> </div>
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray  mb-0">{{lang.step4.t9}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{lang.step4.t19}}: {{DeregisterData.SusFrom | date }} {{lang.step4.t18}}: {{DeregisterData.SusTo | date}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step4.t10}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{lang.step4.t19}}: {{DeregisterData.NextFilFrom | date }} {{lang.step4.t18}}: {{DeregisterData.NextFilTo | date}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="border-bottom-whisper"> </div>
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray  mb-0">{{lang.step4.t11}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeregisterData.DueDate | date}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-attachment-2.svg"
+                            class="" alt=""></span> {{lang.step4.t12}}
+                </h3>
+                <a (click)="setAttachments()"
+                    class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.step4.edit}}</a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6 col-md-6 mb-32" *ngFor="let set of AttachFiles">
+                    <p class="font-16 text-Gray mb-0">{{set[0].attachTypeName}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center">
+                        {{set[0].name}}.{{set[0].type}} <img src="assets/images/pdf.svg" class="ml-50" alt="" *ngIf="set[0].type == 'pdf'">
+                        <img src="assets/images/icon-excel.svg" class="mb-10 ml-50" *ngIf="set[0].type == 'xlsx'">
+                        <img src="assets/images/icon-jpg.svg" class="mb-10 ml-50" *ngIf="set[0].type == 'jpeg'">
+                        <img src="assets/images/icon-png.svg" class="mb-10 ml-50" *ngIf="set[0].type == 'png'">
+                        <img src="assets/images/icon-doc.svg" class="mb-10 ml-50" *ngIf="set[0].type == 'msword'">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-56">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-declaration.svg"
+                            class="" alt=""></span> {{lang.step4.t13}}
+                </h3>
+                <a (click)="setDeclarationFormControls()"
+                    class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.step4.edit}}</a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.t14}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{IdTypeName}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.t15}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData.IdNo}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.t16}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData.Date | date}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.t17}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData.Name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-24">
+            <div class="col-md-12">
+                <button class="btn btn-primary mr-10" (click)="continueFifthScreen()"  [disabled]="isConfirm">{{lang.step4.btn1}}</button>
+                <button class="btn btn-primary" (click)="saveSummaryDetails()">{{lang.step4.btn2}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ending step-5 code -->
+
+<!-- starting step-6 code -->
+<div *ngIf="Step==6" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="text-center">
+            <div class="text-center mb-40">
+                <img src="assets/images/icon-success.svg" alt="">
+            </div>
+
+            <h2 class="mb-12">{{lang.step5.t1}}</h2>
+            <div class="text-Gray font-16 mb-24">{{lang.step5.t2}}</div>
+
+            <div class="inner mb-56">
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails card-shadow-none">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.step5.t3}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{FullName}}
+                    </span>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails card-shadow-none">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.step5.t4}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{ReferenceNo}}
+                    </span>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between item-cardetails card-shadow-none">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.step5.t5}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData.Date | date}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-24 text-center  d-flex flex-column justify-content-center align-items-center">
+                <button class="btn btn-link d-inline-block" routerLink="/mains/tax">{{lang.step5.t6}} </button>
+                <button class="btn btn-primary d-inline-block mb-40"
+                    (click)="DownloadFormMethod()">{{lang.step5.t7}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ending step-6 code -->
+<div class="modal" id="idDegisterofVAT" data-keyboard="false" data-backdrop="static" [dir]="direction" style="margin-top: 7%">
+    <div class="modal-dialog  modal-md">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="clearPopup()">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="IdTypeOwnerShipFormgroup">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div>
+                                <div class="registerLabelCss">{{lang.step3.t22.t1}}<span style="color: red;">*</span>
+                                </div>
+                                <mat-form-field appearance="outline" [ngClass]="{'border-red':uid.errors?.pattern}">
+                                    <input matInput formControlName="Idnumber" (ngModelChange)="id1 = $event;" #uid
+                                        pattern="^[0-9]*$"  maxlength="10"
+                                        (keypress)="NumberAllow($event)" (input)="isNumberValid()">
+                                </mat-form-field>
+                                <span class="error"
+                                    *ngIf="IdTypeOwnerShipFormgroup.controls['Idnumber'].errors?.pattern">                                    
+                                </span>
+                              
+                                 <!-- <span class="error"
+                                    *ngIf="isNationalEnterValidNumber">
+                                    {{lang.step3.t44}}
+                                </span> 
+                                <span class="error"
+                                    *ngIf="isIqamaEnterValidNumber">
+                                    {{lang.step3.t45}}
+                                </span>  -->
+                                <span class="error"
+                                    *ngIf="isNationalValidNumber">
+                                    {{lang.step3.t46}}
+                                </span> 
+                                <span class="error"
+                                    *ngIf="isIqamaValidNumber">
+                                    {{lang.step3.t45}}
+                                </span> 
+                            </div>
+
+                            <div>
+                                <div class="registerLabelCss">{{lang.step3.t22.t2}}<span style="color: red;">*</span>
+                                </div>
+
+                                <mat-form-field appearance="outline" [ngClass]="{'border-red':uid.errors?.pattern}">
+                                    <input matInput [matDatepicker]="picker3" autocomplete="off" [max]="enddate" #uid
+                                    name="dob" id="dob"   formControlName="Dob" name="sd">
+                                    <mat-datepicker-toggle matSuffix [for]="picker3" class="datePickers"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker3 [calendarHeaderComponent]="headerComponent">
+                                    </mat-datepicker>
+                                </mat-form-field>
+                                <div *ngIf="IdTypeOwnerShipFormgroup.controls['Dob'].invalid && IdTypeOwnerShipFormgroup.controls['Dob'].touched" class="invalid-feedback">
+                                    {{lang.step3.t48}}</div>
+
+                                  
+                            </div>
+                            <div class="mt-3 mb-2 text-right">
+                                <button class="btn btn-primary" [disabled]="IdTypeOwnerShipFormgroup.invalid"
+                                    (click)="validateWHDeclarationIdz();">{{lang.step3.t22.btn1}}</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="errormodel">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner mb-16">
+                    <div *ngIf="isNationalEnterValidNumber" class="font-12 text-Gray">
+                        {{lang.step3.t44}}
+                    </div>
+                    <div *ngIf="isIqamaEnterValidNumber" class="font-12 text-Gray">
+                        {{lang.step3.t45}}
+                    </div>
+                </div>
+                <div class="form-group text-right" [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang.step3.btn3}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="errorInstructions">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <div class="text-center border-red">
+                    {{AttachmentTypeName}}
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-32">
+                    <div class="col-md-12">
+                        <div class="card p-24 card-shadow-none">
+                            <div class="row">
+                                <div class="d-flex col-md-10 col-sm-12 mb-24">
+                                    <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                                    <span class="font-12 text-Nero error">
+                                        {{lang.step2.ins1}}
+                                    </span>
+                                </div>
+                            </div>
+                            <ol class="font-12 text-Gray p-0 m-0 pl-12">
+                                <li class="mb-16 error">
+                                    {{lang.step2.ins2}}
+                                </li>
+                                <li class="mb-16 error">
+                                    {{lang.step2.ins3}}
+                                </li>
+                                <li class="mb-16 error">               
+                                    {{lang.step2.ins4}}
+                                </li>
+                               
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group text-right" [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang.step4.s4.btn3}}</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<notifier-container></notifier-container>

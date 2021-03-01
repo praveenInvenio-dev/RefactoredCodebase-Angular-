@@ -1,0 +1,590 @@
+<div class="container alignStart" *ngIf="field" [dir]="dir">
+  <div class="row" style="text-align: start; margin-bottom: 3%">
+    <div class="col-md-12" style="margin-inline-start: 1.8%; margin-top: 3%">
+      <span class="fieldTitle1">
+        <span
+          (click)="backTo('')"
+          [style.margin-inline-start]="dir === 'rtl' ? '0px' : '-2px'"
+          >{{ lang.t4 }}</span
+        >
+        <mat-icon
+          class="backIcon1"
+          style="
+            top: 0px;
+            font-size: 16px;
+            font-weight: normal;
+            margin-inline-start: 4px;
+            width: 14px;
+          "
+          >{{ lang.t7 }}</mat-icon
+        >
+        <span
+          (click)="backTo('002')"
+          [style.margin-inline-start]="dir === 'rtl' ? '0px' : '-2px'"
+          >{{ lang.t5 }}</span
+        >
+        <mat-icon
+          class="backIcon1"
+          style="
+            top: 0px;
+            font-size: 16px;
+            font-weight: normal;
+            margin-inline-start: 4px;
+            width: 14px;
+          "
+          >{{ lang.t7 }}</mat-icon
+        >
+      </span>
+      <span
+        class="fieldTitle1"
+        [style.margin-inline-start]="dir === 'rtl' ? '0px' : '-2px'"
+        style="color: #151515"
+        >{{ lang.t1 }}</span
+      >
+    </div>
+  </div>
+
+  <span class="stepBack col-md-6" [dir]="dir" style="text-align: start" (click)="backTo('002')">
+    <img
+      src="assets/image/arrow-right-green.svg"
+      *ngIf="dir === 'rtl'"
+      class="arrow-left"
+    />
+    <img
+      src="assets/image/arrow-left.svg"
+      *ngIf="dir === 'ltr'"
+      class="arrow-left"
+    />
+    <span class="backBtn">{{ lang.t2 }}</span>
+    <br />
+  </span>
+
+  <div
+    class="col-md-12 row mt-1 justify-content-between align-items-center mainHeader"
+  >
+    <div class="FieldsTitle" style="margin-inline-start: 2%">
+      {{ lang.t1 }}
+    </div>
+    <div>
+      <span [ngClass]="!viewFieldCases ? 'tileActive' : ''">
+        <img [src]="img2" (click)="changeView('grid')" class="tileIcon" />
+      </span>
+      <span [ngClass]="viewFieldCases ? 'tileActive' : ''" class="mis-10">
+        <img [src]="img1" (click)="changeView('list')" class="tileIcon" />
+      </span>
+    </div>
+  </div>
+
+  <div
+    class="Rectangle-12New my-3"
+    style="width: 81.5%; margin-inline-start: 2%"
+  ></div>
+
+  <div class="col-md-10" style="display: grid; grid-template-columns: 96% 6%">
+    <div class="form-inline" id="casesearch" style="display: contents">
+      <span
+        class="form-group"
+        style="
+          margin-top: 2%;
+          margin-bottom: 1%;
+          margin-left: 10px;
+          width: 112.5%;
+        "
+      >
+        <input
+          type="search"
+          class="form-control form-control-lg"
+          [(ngModel)]="searchText"
+          placeholder="{{ search }}"
+          style="
+            height: 48px;
+            border-radius: 14px;
+            border: solid 1px #999999;
+            width: 88%;
+          "
+          [style.margin-right]="dir === 'rtl' ? '1%' : '10px'"
+        />
+        <span
+          [ngClass]="dir === 'rtl' ? 'imgSearchAr' : 'imgSearchEn'"
+          *ngIf="searchText?.length === 0"
+        >
+          <img src="assets/images/search.png" width="24px" />
+        </span>
+      </span>
+    </div>
+    <span style="display: flex; justify-content: flex-end; margin-top: 55%">
+      <img
+        src="assets/images/download.svg"
+        class="Download"
+        (click)="fieldDownload()"
+      />
+    </span>
+  </div>
+
+  <div style="display: grid; width: 80.5%">
+    <div
+      class="row mt-3 mb-2"
+      *ngIf="!viewFieldCases"
+      style="text-align: start"
+    >
+      <div class="col-md-6" *ngFor="let item of etData | filter: searchText">
+        <mat-card class="matborder" (click)="fieldCaseDetails(item)">
+          <div class="row mt-2 mb-2">
+            <div class="col-md-8">
+              <span class="cardTxt1Css">{{ lang.t1 }}</span>
+              <div class="cardTxt2Css">
+                {{ item.Fbnum }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <!-- <div class=" tag32 tag-success" style="margin-inline-start: 15px;">{{item.PaymentStatus}}</div> -->
+              <div
+                class="filtercp"
+                style="margin-inline-start: 15px"
+                *ngIf="
+                  item.PaymentStatus === 'Paid' ||
+                  item.PaymentStatus === 'مدفوع'
+                "
+              >
+                <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+              </div>
+              <div
+                class="filtercpp"
+                style="margin-inline-start: 15px"
+                *ngIf="
+                  item.PaymentStatus === 'Partially' ||
+                  item.PaymentStatus === 'جزئي'
+                "
+              >
+                <span class="cardTxt5Csspp"> {{ item.PaymentStatus }}</span>
+              </div>
+              <div
+                class="filtercp"
+                style="margin-inline-start: 15px"
+                *ngIf="
+                  item.PaymentStatus === 'Billed' ||
+                  item.PaymentStatus === 'فاتورة'
+                "
+              >
+                <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="row mt-4 mb-2">
+            <div class="col-md-6">
+              <!-- <span class="cardTxt2Css">{{lang.c1.t1}}</span> -->
+              <div class="cardTxt3Css penaltyAmount">
+                {{ numberWithCommas(item.PenaltyAmount) }} {{ lang.trans.waers }}
+              </div>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+              <span class="cardTxt2Css">{{ lang.c1.t3 }}</span>
+              <div class="cardTxt3Css">
+                {{ item.Fbnum }}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <span class="cardTxt2Css">{{ lang.c1.t4 }}</span>
+              <div class="cardTxt3Css">
+                {{ getDate(item.InspDate) }}
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 ml-1 mr-1 mb-2" *ngIf="viewFieldCases">
+    <table style="width: 82%; margin-inline-start: 1.8%">
+      <tr class="tabHeader">
+        <ng-container *ngIf="dir !== 'rtl'">
+          <th colspan="3">{{ lang.c1.t1 }}</th>
+        </ng-container>
+        <ng-container *ngIf="dir === 'rtl'">
+          <th
+            colspan="3"
+            [style.border-right]="dir === 'rtl' ? '1px solid #bbb' : ''"
+            [style.border-top-left-radius]="dir === 'rtl' ? '0px' : '16px'"
+            [style.border-top-right-radius]="dir === 'rtl' ? '16px' : '0px'"
+          >
+            {{ lang.c1.t1 }}
+          </th>
+        </ng-container>
+        <th colspan="3">{{ lang.c1.t3 }}</th>
+        <th colspan="3">{{ lang.c1.t4 }}</th>
+        <ng-container *ngIf="dir !== 'rtl'">
+          <th colspan="3">{{ lang.c1.t2 }}</th>
+        </ng-container>
+        <ng-container *ngIf="dir === 'rtl'">
+          <th
+            colspan="3"
+            [style.border-top-right-radius]="dir === 'rtl' ? '0px' : '16px'"
+            [style.border-top-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+          >
+            {{ lang.c1.t2 }}
+          </th>
+        </ng-container>
+      </tr>
+      <tr
+        class="tabheader2"
+        *ngFor="let item of etData | filter: searchText; let itemIndex = index"
+        (click)="fieldCaseDetails(item)"
+      >
+        <ng-container *ngIf="dir === 'rtl'">
+          <td
+            colspan="3"
+            [style.border-bottom-right-radius]="
+              itemIndex === etData.length - 1 ? '16px' : '0px'
+            "
+            [style.border-bottom-left-radius]="
+              itemIndex === etData.length - 1 ? '0px' : '0px'
+            "
+          >
+            {{ numberWithCommas(item.PenaltyAmount) }} {{ lang.trans.waers }}
+          </td>
+        </ng-container>
+
+        <ng-container *ngIf="dir !== 'rtl'">
+          <td colspan="3">
+            {{ numberWithCommas(item.PenaltyAmount) }} {{ item.Waers }}
+          </td>
+        </ng-container>
+
+        <td colspan="3">{{ item.Fbnum }}</td>
+        <td colspan="3">
+          {{ getDate(item.InspDate) }}
+          <!-- <div class="filtercp" style="margin: auto;padding: 8px 10px 5px 10px;float: none;" *ngIf="item.PaymentStatus==='Paid' || item.Status==='مدفوع'">
+                        <span class="cardTxt5Cssp">
+                            {{item.PaymentStatus}}</span>
+                    </div>
+                    <div class="filtercpp" style="margin: auto;padding: 8px 10px 5px 10px;float: none;" *ngIf="item.Status ==='Partially' || item.Status ==='جزئي'">
+                        <span class="cardTxt5Csspp">
+                        {{item.PaymentStatus}}</span>
+                    </div>
+                    <div class="filtercp" style="margin: auto;padding: 8px 10px 5px 10px;float: none;" *ngIf="item.PaymentStatus==='Billed' || item.Status==='فاتورة'">
+                        <span class="cardTxt5Cssp">
+                            {{item.PaymentStatus}}</span>
+                    </div> -->
+        </td>
+        <ng-container *ngIf="dir === 'rtl'">
+          <td
+            colspan="3"
+            [style.border-bottom-right-radius]="
+              itemIndex === etData.length - 1 ? '0px' : '0px'
+            "
+            [style.border-bottom-left-radius]="
+              itemIndex === etData.length - 1 ? '16px' : '0px'
+            "
+          >
+            <!-- {{getDate(item.InspDate)}} -->
+            <div
+              class="filtercp"
+              style="margin: auto; padding: 8px 10px 5px 10px; float: none"
+              *ngIf="
+                item.PaymentStatus === 'Paid' || item.PaymentStatus === 'مدفوع'
+              "
+            >
+              <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+            </div>
+            <div
+              class="filtercpp"
+              style="margin: auto; padding: 8px 10px 5px 10px; float: none"
+              *ngIf="
+                item.PaymentStatus === 'Partially' ||
+                item.PaymentStatus === 'جزئي'
+              "
+            >
+              <span class="cardTxt5Csspp"> {{ item.PaymentStatus }}</span>
+            </div>
+            <div
+              class="filtercp"
+              style="margin: auto; padding: 8px 10px 5px 10px; float: none"
+              *ngIf="
+                item.PaymentStatus === 'Billed' ||
+                item.PaymentStatus === 'فاتورة'
+              "
+            >
+              <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+            </div>
+            <div
+              class="filtercp statusContainer"
+              *ngIf="
+                (item.PaymentStatus === 'Invoiced' || item.PaymentStatus === 'مفوترة') ||
+                (item.PaymentStatus === 'Paid off' || item.PaymentStatus === 'مسددة')
+              "
+              >
+              <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container *ngIf="dir !== 'rtl'">
+          <td colspan="3">
+            <!-- {{getDate(item.InspDate)}} -->
+            <div
+              class="filtercp"
+              style="margin: auto; padding: 8px 10px 5px 10px; float: none"
+              *ngIf="
+                item.PaymentStatus === 'Paid' || item.PaymentStatus === 'مدفوع'
+              "
+            >
+              <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+            </div>
+            <div
+              class="filtercpp"
+              style="margin: auto; padding: 8px 10px 5px 10px; float: none"
+              *ngIf="
+                item.PaymentStatus === 'Partially' ||
+                item.PaymentStatus === 'جزئي'
+              "
+            >
+              <span class="cardTxt5Csspp"> {{ item.PaymentStatus }}</span>
+            </div>
+            <div
+              class="filtercp"
+              style="margin: auto; padding: 8px 10px 5px 10px; float: none"
+              *ngIf="
+                item.PaymentStatus === 'Billed' ||
+                item.PaymentStatus === 'فاتورة'
+              "
+            >
+              <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+            </div>
+            <div
+              class="filtercp statusContainer"
+              *ngIf="
+                (item.PaymentStatus === 'Invoiced' || item.PaymentStatus === 'مفوترة') ||
+                (item.PaymentStatus === 'Paid off' || item.PaymentStatus === 'مسددة')
+              "
+              >
+              <span class="cardTxt5Cssp"> {{ item.PaymentStatus }}</span>
+            </div>
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="container" *ngIf="fieldCaseDetail" [dir]="dir">
+  <div
+    class="row"
+    style="text-align: start"
+    [style.margin-inline-start]="dir === 'rtl' ? '-4%' : ''"
+  >
+    <div
+      class="col-md-12"
+      style="margin-top: 3%"
+      [style.margin-right]="dir === 'rtl' ? '-3.5%;' : ''"
+    >
+      <span class="fieldTitle1">
+        <span
+          (click)="backTo('')"
+          [style.margin-left]="dir === 'rtl' ? '-3px' : '-20px'"
+          >{{ lang.t4 }}
+        </span>
+        <mat-icon
+          class="backIcon1"
+          [style.margin-left]="dir === 'rtl' ? '5px' : ''"
+          style="top: 0px; font-size: 16px; font-weight: normal; width: 14px"
+          >{{ lang.t7 }}</mat-icon
+        >
+        <span
+          (click)="backTo('002')"
+          [style.margin-left]="dir === 'rtl' ? '-3px' : '-1px'"
+          >{{ lang.t5 }}
+        </span>
+        <mat-icon
+          class="backIcon1"
+          [style.margin-left]="dir === 'rtl' ? '5px' : ''"
+          style="top: 0px; font-size: 16px; font-weight: normal; width: 14px"
+          >{{ lang.t7 }}</mat-icon
+        >
+        <span
+          (click)="back()"
+          [style.margin-left]="dir === 'rtl' ? '-3px' : '-1px'"
+          >{{ lang.t1 }}
+        </span>
+        <mat-icon
+          class="backIcon1"
+          [style.margin-left]="dir === 'rtl' ? '5px' : ''"
+          style="top: 0px; font-size: 16px; font-weight: normal; width: 14px"
+          >{{ lang.t7 }}</mat-icon
+        >
+      </span>
+      <span
+        class="fieldTitle1"
+        [style.margin-left]="dir === 'rtl' ? '-3px' : '-1px'"
+        style="color: #151515"
+        >{{ lang.t8 }}</span
+      >
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3" *ngIf="fieldCaseDetail" [dir]="dir" style="width: 100%">
+  <div class="col-md-12">
+    <div class="back" (click)="back()" style="cursor: pointer; margin-top: 1%">
+      <span class="stepBack col-md-6">
+        <img
+          src="assets/image/arrow-right-green.svg"
+          *ngIf="dir === 'rtl'"
+          [style.margin-right]="dir === 'rtl' ? '-3%' : ''"
+          class="arrow-left"
+        />
+        <img
+          src="assets/image/arrow-left.svg"
+          *ngIf="dir === 'ltr'"
+          class="arrow-left"
+        />
+        <span class="backBtn">{{ lang.t2 }}</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="fieldCaseDetail" [dir]="dir">
+  <div class="row" style="text-align: start; margin-top: 2%">
+    <div class="col-md-12" style="display: contents">
+      <div class="heading" style="font-size: 28px; margin-bottom: 1.5%">
+        {{ lang.t1 }}
+      </div>
+    </div>
+    <div
+      class="col-md-4"
+      [style.margin-inline-start]="dir === 'rtl' ? '15%' : '13.5%'"
+      style="justify-content: flex-end; display: flex; margin-top: 0.5%"
+    >
+      <!-- <div class="tag32 tag-success" style="font-size: 16px;font-family: 'SSTARABIC-ROMAN';">{{fieldObj.PaymentStatus}}</div> -->
+      <div
+        class="filtercp"
+        *ngIf="
+          fieldObj.PaymentStatus === 'Paid' ||
+          fieldObj.PaymentStatus === 'مدفوع'
+        "
+      >
+        <span class="cardTxt5Cssp"> {{ fieldObj.PaymentStatus }}</span>
+      </div>
+      <div
+        class="filtercpp"
+        *ngIf="
+          fieldObj.PaymentStatus === 'Partially' ||
+          fieldObj.PaymentStatus === 'جزئي'
+        "
+      >
+        <span class="cardTxt5Csspp"> {{ fieldObj.PaymentStatus }}</span>
+      </div>
+      <div
+        class="filtercp"
+        *ngIf="
+          fieldObj.PaymentStatus === 'Billed' ||
+          fieldObj.PaymentStatus === 'فاتورة'
+        "
+      >
+        <span class="cardTxt5Cssp"> {{ fieldObj.PaymentStatus }}</span>
+      </div>
+    </div>
+  </div>
+  <mat-card
+    class="mt-3"
+    style="text-align: start; width: 66.5%; margin-inline-start: 13%"
+  >
+    <div class="row mt-2 mb-2">
+      <div class="col-md-11" style="display: inherit">
+        <div class="cardStyle">
+          <img class="imgStyle" src="assets/image/details.svg" />
+        </div>
+        <div class="headingStyle">{{ lang.t9 }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row mt-4 mb-4">
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t1 }}</div>
+        <div class="values">{{ fieldObj.Fbnum }}</div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t2 }}</div>
+        <div class="values">{{ getDate(fieldObj.InspDate) }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row mt-4 mb-4">
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t3 }}</div>
+        <div class="values">{{ fieldObj.City }}</div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t4 }}</div>
+        <div class="values">{{ fieldObj.ViolationTy }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row mt-4 mb-3">
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t5 }}</div>
+        <div class="values">{{ fieldObj.District }}</div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t6 }}</div>
+        <div class="values">{{ fieldObj.ViolationDesc }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row mt-4 mb-3">
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t7 }}</div>
+        <div class="values">{{ fieldObj.Street }}</div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t8 }}</div>
+        <div class="values">
+          {{ numberWithCommas(fieldObj.PenaltyAmount) }} {{ lang.trans.waers }}
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row mt-4 mb-3">
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t9 }}</div>
+        <div class="values">{{ fieldObj.TpName }}</div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t10 }}</div>
+        <div class="values">{{ fieldObj.Gpart }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row mt-4 mb-3">
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t11 }}</div>
+        <div class="values">{{ fieldObj.TpRepPos }}</div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t12 }}</div>
+        <div class="values">{{ fieldObj.TpRep }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row mt-4 mb-3">
+      <div class="col-md-6 mt-4">
+        <div class="valueHeading">{{ lang.c2.t14 }}</div>
+        <div class="values">{{ fieldObj.ViolatedGoods }}</div>
+      </div>
+      <!-- <div class="col-md-6 mt-4">
+                <div class="valueHeading">{{lang.c2.t13}}</div>
+                <div class="values">{{fieldObj.PaymentStatus}}</div>
+            </div> -->
+    </div>
+  </mat-card>
+</div>

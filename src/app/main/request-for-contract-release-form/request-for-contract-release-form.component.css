@@ -1,0 +1,724 @@
+.rfcr-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+  justify-items: center !important;
+  align-content: center !important;
+  max-width: 898px;
+  width: 898px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.rfcr.invalid-feedback {
+  margin-top: 5px !important;
+}
+.form-upload-name {
+  display:flex;
+  word-break: break-all;
+  font-weight: bold;
+  text-align: center;
+}
+.modal-rflg {
+  max-width: 708px;
+}
+.bg_white {
+  background-color: #ffffff !important;
+}
+.filterIconEn {
+  width: 24px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.filterIconAr {
+  width: 24px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.filterIcon1En {
+  width: 24px;
+  float: right;
+  cursor: pointer;
+}
+.filterIcon1Ar {
+  width: 24px;
+  float: left;
+  cursor: pointer;
+}
+.filterLineEn {
+  width: 24px;
+  float: left;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d99a29;
+}
+.filterLineAr {
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d99a29;
+  width: 24px;
+  float: right;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+.rfcr_totalDues_container {
+  height: 69px;
+  background-color: #e5efed;
+  margin: 23px 0px 23px 0px;
+  text-align: start;
+}
+.flex-col{
+  display: flex;
+   flex-direction: column;
+}
+.Information {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  margin-right: 8px;
+  object-fit: contain;
+  text-align: start;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+::ng-deep .mat-input-element::placeholder {
+  text-align: start !important;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.margin-top {
+  margin-top: 24px;
+}
+.margin-bottom {
+  margin-bottom: 24px;
+}
+.margin-b-16 {
+  margin-bottom: 16px;
+}
+.margin-t-40 {
+  margin-top: 40px;
+}
+.margin-b-40 {
+  margin-bottom: 40px;
+}
+.margin-t-32 {
+  margin-top: 32px;
+}
+.margin-t-16 {
+  margin-top: 16px;
+}
+.margin-t-50{
+  margin-top: 50px;
+}
+.margin-t-56 {
+  margin-top: 56px;
+}
+.back-button {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #006450;
+}
+.searchBar {
+  width: 95%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.searchBar .commonInput {
+  width: 95%;
+  max-width: 95%;
+  min-width: 95%;
+}
+.searchIcon {
+  position: relative;
+}
+.searchIcon-ltr {
+  left: -34px;
+}
+.searchIcon-rtl {
+  left: 34px;
+}
+.searchIcon img {
+  margin-bottom: 5px;
+}
+.searchIcon:hover {
+  cursor: pointer;
+  filter: invert(31%) sepia(12%) saturate(5153%) hue-rotate(131deg)
+    brightness(88%) contrast(102%);
+}
+.contact-release-add-card {
+  width: 437px;
+  height: 169px;
+  padding: 0 0 0 0;
+}
+.contact-release-add-card2 {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 437px;
+  height: 169px;
+  background-color: white;
+  padding: 16px;
+}
+.contact-release-top-card ,.contact-release-bottom-card{
+  height: 50%;
+}
+.modalCloseIcon {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+}
+.modalInstructions {
+  object-fit: contain;
+  list-style: none;
+  line-height: 1.33;
+  padding: 16px 16px 12px 23px;
+}
+.modal-header{
+  border-bottom: none !important;
+}
+.input-container {
+  height: 80px;
+}
+.f12 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+}
+.f16 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px; 
+}
+.f16-m {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+}
+.f20 {
+  font-family: SSTArabic-Roman;
+  font-size: 20px;
+}
+.f28 {
+  font-family: SSTArabic-Roman;
+  font-size: 28px;
+}
+.rfcr_li {
+  margin-bottom: 16px;
+}
+
+.transform-img {
+  width: 24px;
+  transform: scaleX(-1.5);
+}
+.auth-img {
+  width: 24px;
+}
+.rfcr{
+  font-family: SSTArabic-Roman;
+}
+.rfcr-subtitle {
+  object-fit: contain;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #999999;
+  text-align: start;
+  letter-spacing: normal;
+}
+
+.rfcr-subtitle-rtl {
+  direction: ltr;
+  float: right;
+}
+
+.tag36 {
+  height: 36px;
+  width: 84px;
+  border-radius: 14px;
+  border: solid 1px var(--light);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 16px;
+}
+
+.details-img {
+  width: 24px;
+  height: 24px;
+  margin: 12px 12px 12px 12px;
+  align-content: center;
+  object-fit: contain;
+}
+.Oval {
+  display: flex;
+  flex-direction: column;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #ebebeb;
+  border: solid 1px #ebebeb;
+}
+.rfcr-summary-desc {
+  display:flex;
+  object-fit: contain;
+  width: 430px;
+  max-width: 430px ;
+  max-height:auto;
+  -ms-word-break: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.rfcr-summary-desc:hover,
+.rfcr-summary-desc:active {
+  white-space: normal;
+  object-fit: contain;
+}
+.Approved {
+  background-color: rgba(0, 100, 80, 0.1);
+  text-align: center;
+  color: var(--primary);
+}
+
+.Pending {
+  background-color: rgba(217, 154, 41, 0.2);
+  text-align: center;
+
+  color: var(--secondary);
+}
+.Rejected {
+  background-color: rgba(170, 12, 25, 0.1);
+  text-align: center;
+  color: var(--error);
+}
+.designation {
+  width: 784px;
+  height: 48px;
+}
+.no-cursor{
+  pointer-events: none; 
+  cursor: not-allowed! important;
+}
+.dues_card {
+  width: 897px;
+  height: 69px;
+  padding: 23px 35px 22px 25px;
+  margin: 24px 1px 56px 6px;
+  border-radius: 14px;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+}
+.dues_card_content {
+  opacity: 1;
+}
+.dues_caption2-section {
+  height: 72px;
+}
+.summary-card {
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+}
+.summary-card {
+  margin-bottom: 56px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.taxpayer-card-section,
+.summary-card-section {
+  display:flex;
+  flex-direction: row;
+  min-height: 100px;
+  max-height: auto;
+  padding: 0 24px 0 24px !important;
+}
+
+.summary-header-without-button {
+  height: 96px;
+}
+
+.summary-header-with-button {
+  height: 96px;
+}
+
+.vCenter {
+  align-items: center;
+}
+.vCenterSingle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardGap {
+  margin-bottom: 24px;
+}
+
+.rotateSteps {
+  transform: rotate(180deg);
+  width: 106px;
+
+}
+.image{
+  width: 24px;
+   margin: 0 auto;
+}
+.exciseAccCssBox {
+  margin-left: 30%;
+  margin-right: 30%;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+}
+
+.exciseAccCssBox1 {
+  text-align: start;
+  position: relative;
+  top: 12px;
+  left: 16px;
+
+}
+.row-rtl{
+  display:flex;
+  flex-direction: row-reverse;
+}
+.exciseAccCssBox2 {
+  position: relative;
+  top: 12px;
+  right: 16px;
+
+}
+.btnTertiary {
+  min-width: 207px;
+  background: none;
+  color: var(--primary);
+  text-align: center;
+  height: 48px;
+  border: none;
+}
+
+.btnTertiary:hover {
+  cursor: pointer;
+}
+
+.btnFourth {
+  min-width: 207px !important;
+  background: transparent;
+  box-shadow: none;
+  color: var(--secondary);
+  text-align: center;
+  height: 24px;
+  border: none;
+  outline: none;
+}
+.btnFourth:hover {
+  cursor: pointer;
+  box-shadow: none;
+}
+.textDanger {
+  color: var(--error);
+}
+.rfcrAttachment {
+  height: 24px;
+  width: 24px;
+  margin: 0 auto;
+}
+.inputErr {
+  border: 1px solid red !important ;
+}
+.tabheader {
+  height: 24px;
+  color: #151515;
+  text-align: center;
+}
+.tabheader2 {
+  color: #999999;
+  cursor: pointer;
+  text-align: center;
+
+}
+.tabheader2:hover {
+  box-shadow: 0 4px 8px 0 rgba(35, 35, 35, 0.1);
+  border-radius: 14px;
+  border-collapse: collapse;
+  cursor: pointer;
+}
+#rfcrsearch .form-control:focus {
+  box-shadow: 0 2px 4px 0 #2323231a;
+}
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #ebebeb;
+  border-radius: 14px;
+  min-width: 350px;
+  text-align: center;
+}
+table tr th,
+table tr td {
+  border: 0.5px solid #ebebeb;
+  height: 64px;
+  padding: 5px;
+}
+table tr th:first-child,
+table tr td:first-child {
+  border: 0.5px solid #ebebeb;
+}
+table tr th {
+  background: #ffffff;
+  border-top: 1px solid #ebebeb;
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+  border-top-left-radius: 16px;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 16px;
+}
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+::ng-deep .mat-checkbox-layout {
+  margin-bottom: 0 !important;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-radius: 6px !important;
+}
+.font-500{
+  font-weight: 500;
+  font-family: SSTArabic-Medium;
+}
+::ng-deep .mat-checkbox-background {
+  border-radius: 6px !important;
+}
+::ng-deep .mat-button-wrapper{
+  font-family: SSTArabic-Bold;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate {
+  background-color: #006450 !important; /* Red background for example */
+}
+
+.textAr {
+  text-align: right;
+}
+
+.checkBoxText {
+  margin: 4px 0 4px 16px;
+  object-fit: contain;
+}
+.card-upload,
+.card-uploaded {
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+}
+.zs-document {
+  color: var(--dark);
+  cursor: pointer;
+}
+.tag-partial-bold {
+  background: no-repeat;
+}
+.filterModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .return-card,
+  .card-upload,
+  .card-uploaded,
+  rfcr.col-md-12,
+  .designation {
+    display: flex;
+    width: 100%;
+    height: unset;
+    flex-direction: column;
+    flex-wrap: wrap;
+    object-fit: contain;
+  }
+  .rfcr-container,
+  .rfcr_totalDues_container.contact-release-add-card,.contact-release-add-card2,
+  .dues_card,.rfcr.row.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    object-fit: contain;
+    height: unset;
+    orientation: potrait;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: auto;
+  }
+
+  .filterIcon1Ar,.filterIconEn, .filterIcon1En, .filterIconAr, .filterLineAr,.filterLineAr,.searchIcon,
+   .filterLineAr,.filterLineEn,.filterIcon {
+    display: none;
+  }
+  [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    object-fit: contain;
+    width: 100%;
+  }
+  .col-md-12 col-sm-12,
+  .col-md-6 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .commonInput {
+    width: 100% !important;
+  }
+
+  .summary-card-section,
+  .taxpayer-card-section {
+    min-height: 100px;
+    max-height: auto;
+  }
+  ::ng-deep .mat-checkbox-layout {
+    white-space: normal !important;
+  }
+}
+
+.common-text-area-container {
+  position: relative;
+  max-width: 900px;
+  font-family: SSTArabic-Roman;
+}
+
+.common-text-area {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  height: 103px;
+  /* position: relative; */
+  width: 100%;
+  padding-bottom: 20px;
+  padding-inline-start: 15px;
+  padding-inline-end: 11%;
+  padding-top: 10px;
+  resize: none;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  color: var(--dark);
+  line-height: 24px;
+  height: 96px !important;
+  border-radius: 14px;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+}
+.rfcr-shadow {
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1) !important;
+}
+
+.common-text-area:hover {
+  border: solid 2px var(--dark);
+}
+
+.common-text-area:focus,
+.common-text-area:active {
+  border: solid 2px var(--primary) !important;
+}
+
+.common-text-area-counter-ltr {
+  position: absolute;
+  right: 3%;
+  display: inline-block;
+  bottom: 7%;
+  color: var(--gray);
+  font-size: bold;
+}
+
+.common-text-area-counter-rtl {
+  position: absolute;
+  left: 3%;
+  display: inline-block;
+  bottom: 7%;
+  color: var(--gray);
+  font-size: bold;
+}
+.tag32 {
+  display: block;
+  width: 84px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  text-align:start;
+  margin: auto;
+}
+
+.border {
+  border: solid 1px #ebebeb;
+  border-radius: 14px;
+}
+.noborder {
+  border: none;
+}
+::ng-deep .mat-tooltip {
+  text-align: start;
+}
+.contain{
+  object-fit: contain;
+}
+.dateRangePicker input {
+  width: 100%;
+  height: unset;
+} 

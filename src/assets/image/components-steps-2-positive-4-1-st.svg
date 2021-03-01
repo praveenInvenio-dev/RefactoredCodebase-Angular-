@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="208" height="40" viewBox="0 0 208 40">
+    <defs>
+        <filter id="sihg2yvw3a" width="135%" height="135%" x="-17.5%" y="-12.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <filter id="pivvqmxz2c" width="135%" height="135%" x="-17.5%" y="-12.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <filter id="i5p8wcw3ce" width="135%" height="135%" x="-17.5%" y="-12.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <filter id="nr32x857ig" width="135%" height="135%" x="-17.5%" y="-12.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <circle id="lvhkvolf3b" cx="20" cy="20" r="20"/>
+        <circle id="wm3qz8x23d" cx="20" cy="20" r="20"/>
+        <circle id="6t2kw93xrf" cx="20" cy="20" r="20"/>
+        <circle id="l48dgqon0h" cx="20" cy="20" r="20"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g fill-rule="nonzero">
+                    <use fill="#000" filter="url(#sihg2yvw3a)" xlink:href="#lvhkvolf3b"/>
+                    <circle cx="20" cy="20" r="20" fill="#006450"/>
+                    <circle cx="20" cy="20" r="20"/>
+                </g>
+                <text fill="#FFF" font-family="SST-Medium, SST" font-size="16" font-weight="400">
+                    <tspan x="17.124" y="24">1</tspan>
+                </text>
+            </g>
+            <g>
+                <g fill-rule="nonzero" transform="translate(56)">
+                    <use fill="#000" filter="url(#pivvqmxz2c)" xlink:href="#wm3qz8x23d"/>
+                    <circle cx="20" cy="20" r="20" fill="#FFF"/>
+                    <circle cx="20" cy="20" r="20"/>
+                </g>
+                <text fill="#999" font-family="SST-Roman, SST" font-size="16" transform="translate(56)">
+                    <tspan x="16.252" y="24">2</tspan>
+                </text>
+            </g>
+            <g>
+                <g fill-rule="nonzero" transform="translate(112)">
+                    <use fill="#000" filter="url(#i5p8wcw3ce)" xlink:href="#6t2kw93xrf"/>
+                    <circle cx="20" cy="20" r="20" fill="#FFF"/>
+                    <circle cx="20" cy="20" r="20"/>
+                </g>
+                <text fill="#999" font-family="SST-Roman, SST" font-size="16" transform="translate(112)">
+                    <tspan x="16.236" y="24">3</tspan>
+                </text>
+            </g>
+            <path fill="#EBEBEB" fill-rule="nonzero" d="M40 20H56V21H40zM96 20H112V21H96z"/>
+            <g>
+                <g fill-rule="nonzero" transform="translate(168)">
+                    <use fill="#000" filter="url(#nr32x857ig)" xlink:href="#l48dgqon0h"/>
+                    <circle cx="20" cy="20" r="20" fill="#FFF"/>
+                    <circle cx="20" cy="20" r="20"/>
+                </g>
+                <text fill="#999" font-family="SST-Roman, SST" font-size="16" transform="translate(168)">
+                    <tspan x="15.836" y="24">4</tspan>
+                </text>
+            </g>
+            <path fill="#EBEBEB" fill-rule="nonzero" d="M152 20H168V21H152z"/>
+        </g>
+    </g>
+</svg>

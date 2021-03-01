@@ -1,0 +1,256 @@
+<div class="container" [dir]="dir">
+
+    <div *ngIf="!secondSet">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="taxMgt" style="text-align: start;">
+                    {{lang.heading}}
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6 mt-3" *ngIf="showZakat">
+                <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" (click)="showTile2('01', lang.c1)">
+                    <div>
+                        <div class="row text-center mt-4">
+                            <div class="col-md-12">
+                                <img src="assets/image/zakat.svg" style="width: 36px;">
+                                <div class="taxMgttxt2">{{lang.c1}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-6 mt-3" *ngIf="showVat">
+                <!-- //routerLink="/mains/newvat" -->
+                <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" (click)="showTile2('02', lang.c2)">
+                    <div>
+
+                        <div class="row text-center mt-4">
+                            <div class="col-md-12">
+                                <img src="assets/image/vat.svg" style="width: 36px;">
+                                <div class="taxMgttxt2">{{lang.c2}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-6 mt-3" *ngIf="showExcise">
+                <!-- routerLink="/mains/excise" -->
+                <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" (click)="showTile2('03', lang.c3)">
+                    <div>
+
+                        <div class="row text-center mt-4">
+                            <div class="col-md-12">
+                                <img src="assets/image/excise.svg" style="width: 36px;">
+                                <div class="taxMgttxt2">{{lang.c3}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+
+            <div class="col-md-6 mt-3" *ngIf="showVatElg">
+                <!-- routerLink="/mains/excise" -->
+                <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" (click)="showTile2('04', lang.c5)">
+                    <div>
+
+                        <div class="row text-center mt-4">
+                            <div class="col-md-12">
+                                <img src="assets/image/excise.svg" style="width: 36px;">
+                                <div class="taxMgttxt2">{{lang.c5}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+
+            <div class="col-md-6 mt-3" *ngIf="showZakat">
+                <!-- routerLink="/mains/excise" -->
+                <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" (click)="showTile2('05', lang.c4)">
+                    <div>
+
+                        <div class="row text-center mt-4">
+                            <div class="col-md-12">
+                                <img src="assets/image/excise.svg" style="width: 36px;">
+                                <div class="taxMgttxt2">{{lang.c4}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <div class="mt-3 quickActionTxt2">
+            {{lang.c8}}
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-6 mt-3 mb-3" *ngFor="let item of generalTiles">
+                <mat-card style="height: 80px;cursor: pointer;" *ngIf="item.Tileno !== '05'" (click)="showTile3(item)">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-2">
+                            <img src="assets/image/zakat.svg" style="width: 24px;" alt="Logo">
+                        </div>
+                        <div class="col-md-8" style="text-align: start;">
+                            <span class="quickActionTxt">{{item.Tilenm}}</span>
+                            <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+                        </div>
+
+                        <div class="col-md-2" style="text-align: end;">
+                            <img [src]="img" style="width: 15px; ">
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="secondSet">
+        <div class="row mt-3" style="text-align: start;">
+
+            <div class="col-md-12">
+                <span class="exciseTitle1"> <span (click)="back2();back()"> {{lang.heading}}</span>
+                </span>
+                <ng-container *ngFor="let item of name">
+                    <mat-icon class="backIcon1">{{icn}}</mat-icon>
+
+                    <span class="exciseTitle1" (click)="back()">{{item.val}}</span>
+
+                </ng-container>
+
+
+                <!-- <mat-icon class="backIcon1" *ngIf="name2 !== ''">{{icn}}</mat-icon>
+                <span class="exciseTitle1"  *ngIf="name2 !== ''" style="color: #151515;">{{name2}}</span> -->
+
+            </div>
+        </div>
+
+
+        <div class="row mt-3" style="width:100%">
+
+            <div class="col-md-12">
+                <div class="viewMore" (click)="back();" style="cursor: pointer;">
+                    <span style="cursor: pointer;">
+                        <mat-icon class="backIcon">{{lang.t2}}</mat-icon>
+                        {{lang.t1}}
+                    </span>
+                    <!-- <span class="sideNumber"> <img src={{menu[optionSlected-1].t3}} style="width: 66px;"> </span> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-md-12">
+                <div class="taxMgt" style="text-align: start;">
+                    {{name[name.length-1]?.val}}
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-md-6 mt-3" *ngFor="let item of listDashboard">
+                <mat-card style="height: 152px;margin-top:10px;cursor: pointer;">
+                    <div>
+
+                        <div class="row text-center mt-4">
+                            <div class="col-md-12">
+                                <img src="assets/image/excise.svg" style="width: 36px;">
+                                <div class="taxMgttxt2">{{item.Tilenm}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div> -->
+        <div class="row mt-3">
+
+            <div class="col-md-6 mt-3 mb-3" *ngFor="let item of listDashboard">
+                <mat-card style="height: 80px;cursor: pointer;" [routerLink]="item.AngUrl" (click)="showTile3(item)">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-2">
+                            <img src="assets/image/zakat.svg" style="width: 24px;" alt="Logo">
+                        </div>
+                        <div class="col-md-8" style="text-align: start;">
+                            <span class="quickActionTxt">{{item.Tilenm}}</span>
+                            <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+                        </div>
+
+                        <div class="col-md-2" style="text-align: end;">
+                            <img [src]="img" style="width: 15px; ">
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+
+        <!-- <div class="col-md-4">
+            <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" routerLink="/mains/vatServices/requestdisband">
+                <div>
+                    <div class="row text-center mt-4">
+                        <div class="col-md-12">
+                            <img src="assets/image/zakat.svg" style="width: 36px;">
+                            <div class="taxMgttxt2">Request For Disband VAT Group</div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div> -->
+
+    </div>
+
+    <!-- <div class="col-md-4">
+        <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" routerLink="/mains/consolidatedAccounts/cancel">
+            <div>
+                <div class="row text-center mt-4">
+                    <div class="col-md-12">
+                        <img src="assets/image/zakat.svg" style="width: 36px;">
+                        <div class="taxMgttxt2">Consolidated Accounts</div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-4">
+        <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" routerLink="/mains/vatServices">
+            <div>
+                <div class="row text-center mt-4">
+                    <div class="col-md-12">
+                        <img src="assets/image/vat.svg" style="width: 36px;">
+                        <div class="taxMgttxt2">Vat Services</div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-4">
+        <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" routerLink="/mains/exciseServices/warehouse">
+            <div>
+                <div class="row text-center mt-4">
+                    <div class="col-md-12">
+                        <img src="assets/image/vat.svg" style="width: 36px;">
+                        <div class="taxMgttxt2">Excise Services</div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div> -->
+
+    <!-- <div class="col-md-4">
+        <mat-card style="height: 152px;margin-top:10px;cursor: pointer;" routerLink="/mains/vatServices/vatElegibleChange">
+            <div>
+                <div class="row text-center mt-4">
+                    <div class="col-md-12">
+                        <img src="assets/image/vat.svg" style="width: 36px;">
+                        <div class="taxMgttxt2">Vat Elegible Change Registration</div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div> -->
+
+    <!-- DO NOT ADD ANY TILES -->
+
+</div>

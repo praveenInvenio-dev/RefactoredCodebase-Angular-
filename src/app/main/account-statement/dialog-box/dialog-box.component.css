@@ -1,0 +1,30 @@
+.acc-dialog-x-container {
+  height: 24px;
+  margin-top: 1em;
+  margin-right: 0em;
+  margin-left: 0em;
+  cursor: pointer;
+}
+
+.acc-dialog-subheading {
+  height: 16px;
+  object-fit: contain;
+  font-family: SST-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: var(--gray);
+}
+
+.acc-dialog-container .mat-dialog-container {
+  border-radius: 14px;
+  padding-bottom: 46px;
+  overflow: visible;
+}
+
+.cdk-overlay-backdrop {
+  z-index: 1050 !important;
+}

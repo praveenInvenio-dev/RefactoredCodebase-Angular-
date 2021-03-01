@@ -1,0 +1,35 @@
+<div class="container inbox">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div [ngClass]="lang === 'en' ? 'pageTitle' : 'pageTitle title-rtl'">
+        {{ lang === 'en' ? inboxConstants.pageTitle.en : inboxConstants.pageTitle.ar }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3"><!-- DONT DELETE -->
+    <div class="col-md-12">
+      <div [ngClass]="lang === 'en' ? 'tabs' : 'tabs tabs-rtl'">
+        <div class="onhover-hand" 
+          [ngClass]="
+        inbox == 1
+              ? 'tab tab-selected value'
+            : 'tab value'
+        " (click)="setInboxValue(1);">
+          {{ lang === 'en' ? inboxConstants.tabs.tab1.en : inboxConstants.tabs.tab1.ar }}
+        </div>
+        <div class="onhover-hand" [ngStyle]="
+        lang === 'ar'
+        ? { marginRight: '22px' }
+        : { marginRight: '0px' }
+    "
+          [ngClass]="inbox == 2? 'tab tab-selected value'  : 'tab value'" (click)="setInboxValue(2);">
+          {{ lang === 'en' ? inboxConstants.tabs.tab2.en : inboxConstants.tabs.tab2.ar }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-correspondance *ngIf="inbox==1"></app-correspondance>
+  <app-notifications *ngIf="inbox==2"></app-notifications><!-- DONT DELETE -->
+  
+</div>

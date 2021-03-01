@@ -1,0 +1,234 @@
+<div class="row">
+  <div class="col-md-12">
+    <div [ngClass]="lang === 'en' ? 'filters' : 'filters filters-rtl'">
+      <!-- <div [ngClass]="lang === 'en' ? 'filter-btn' : 'filter-btn-rtl'">
+        <img
+          src="assets/images/inbox/not-read.svg"
+          alt="unread"
+        />Unread
+      </div>
+      <div [ngClass]="lang === 'en' ? 'filter-btn' : 'filter-btn-rtl'">
+        <img src="assets/images/inbox/read.svg" alt="read" />Read
+      </div> -->
+      <div [ngClass]="lang === 'en' ? 'filter-btn' : 'filter-btn-rtl'" (click)="onFavoriteFilter()" [ngStyle]="{border: setFavoriteFilter ? '1px solid #999999' : ''}">
+        <img
+          [src]="
+            setFavoriteFilter
+              ? 'assets/images/inbox/favourite-fill.svg'
+              : 'assets/images/inbox/favourite.svg'
+          "
+          alt="favorite"
+        />{{lang === 'en' ? correspondanceConstants.filters.favorite.en : correspondanceConstants.filters.favorite.ar}}
+      </div>
+      <div [ngClass]="lang === 'en' ? 'filter-search' : 'filter-search-rtl'">
+        <input type="text" [placeholder]="lang === 'en' ? correspondanceConstants.filters.search.en : correspondanceConstants.filters.search.ar" [(ngModel)]="searchFilter" (ngModelChange)="onSearchFilter()" />
+        <img src="assets/images/inbox/search.svg" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mailbox">
+  <div [ngClass]="lang === 'en' ? 'mailbox-header' : 'mailbox-header-rtl'">
+    <!-- <div
+      [ngClass]="
+        lang === 'en' ? 'mailbox-header-select' : 'mailbox-header-select-rtl'
+      "
+    >
+      <img
+        [src]="
+          selectAll
+            ? 'assets/images/inbox/selected.svg'
+            : 'assets/images/inbox/oval-default.svg'
+        "
+        alt="select-all"
+        (click)="onSelectAll()"
+      />
+      Select All
+    </div> -->
+  </div>
+  <div [ngClass]="lang === 'en' ? 'mailbox-body' : 'mailbox-body-rtl'">
+    <div
+      [ngClass]="lang === 'en' ? 'mailbox-body-list' : 'mailbox-body-list-rtl'"
+      *ngIf="filteredList.length > 0; else noResults"
+    >
+      <div
+        [ngClass]="
+          lang === 'en' ? 'mailbox-list-item' : 'mailbox-list-item-rtl'
+        "
+        *ngFor="let item of filteredList; let i = index"
+        (click)="viewMessageIndex !== i && onViewMessage(i, item)"
+        [ngStyle]="{
+          background:
+            i === viewMessageIndex
+              ? 'linear-gradient(106deg, #009d88 3%, #006450 85%)'
+              : ''
+        }"
+      >
+        <!-- <img
+          class="mailbox-list-select"
+          [src]="
+            selectedMessages.indexOf(i) > -1
+              ? 'assets/images/inbox/selected.svg'
+              : 'assets/images/inbox/oval-default.svg'
+          "
+          alt="select"
+          [ngStyle]="{
+            display: selectedMessages.indexOf(i) > -1 ? 'unset' : 'none'
+          }"
+          (click)="onSelectMessage(i)"
+        />
+        <div
+          class="mailbox-list-unread"
+          [ngStyle]="{ display: item.status === 'unread' ? 'unset' : 'none' }"
+        ></div> -->
+        <div
+          class="mailbox-list-title"
+          [ngStyle]="{
+            color: i === viewMessageIndex ? '#fff' : ''
+          }"
+          [dir]="lang === 'en' ? 'ltr' : 'rtl'"
+        >
+          <p>
+            {{ item.Cotxt }}
+          </p>
+          <span
+            [ngStyle]="{
+              color: i === viewMessageIndex ? '#fff' : ''
+            }"
+            >{{ (item.date === 'undefined Invalid date' || item.date === 'Invalid date Invalid date') ? item.Cdate : item.date }}</span
+          >
+        </div>
+        <img
+          *ngIf="item.Zzfav || item.Zzfav === ''"
+          [ngClass]="
+            lang === 'en'
+              ? 'mailbox-list-favorite'
+              : 'mailbox-list-favorite-rtl'
+          "
+          [src]="
+            item.Zzfav === '1'
+              ? 'assets/images/inbox/favourite-fill.svg'
+              : 'assets/images/inbox/favourite-outline.svg'
+          "
+          alt="select"
+          [ngStyle]="{ display: item.Zzfav === '1' ? 'unset' : 'none' }"
+          (click)="onFavoriteMessage(item);$event.stopPropagation()"
+        />
+        <img
+          [ngClass]="
+            lang === 'en' ? 'mailbox-list-arrow' : 'mailbox-list-arrow-rtl'
+          "
+          [src]="i === viewMessageIndex ? 'assets/images/inbox/arrow-right-white.svg' : 'assets/images/inbox/arrow-right.svg'"
+          alt="arrow"
+        />
+      </div>  
+    </div>
+    <ng-template #noResults>
+      <div [ngClass]="lang === 'en' ? 'mailbox-body-list' : 'mailbox-body-list-rtl'">
+        <div class="mailbox-list-empty">
+          {{lang === 'en' ? correspondanceConstants.filters.empty.en : correspondanceConstants.filters.empty.ar}}
+        </div>
+      </div>
+    </ng-template>
+    <div class="mailbox-body-message">
+      <div class="mailbox-message-select" *ngIf="!viewMessage; else message">
+        <img src="assets/images/inbox/message.svg" alt="message" />
+        {{lang === 'en' ? correspondanceConstants.message.empty.en : correspondanceConstants.message.empty.ar}}
+      </div>
+      <ng-template #message>
+        <div class="mailbox-message-view">
+          <div
+            [ngClass]="
+              lang === 'en'
+                ? 'mailbox-message-header'
+                : 'mailbox-message-header-rtl'
+            "
+          >
+            <div>
+              <p
+                [ngClass]="
+                  lang === 'en'
+                    ? 'mailbox-message-title'
+                    : 'mailbox-message-title-rtl'
+                "
+              >
+                {{ viewMessage.title }}
+              </p>
+              <p
+                [ngClass]="
+                  lang === 'en'
+                    ? 'mailbox-message-subtitle'
+                    : 'mailbox-message-subtitle-rtl'
+                "
+              >
+                {{ viewMessage.date  }}
+              </p>
+            </div>
+            <img
+              *ngIf="viewMessage.Zzfav || viewMessage.Zzfav === ''"
+              [src]="
+                viewMessage.Zzfav === '1'
+                  ? 'assets/images/inbox/favourite-fill.svg'
+                  : 'assets/images/inbox/favourite-outline.svg'
+              "
+              alt="select"
+              (click)="onFavoriteMessage(viewMessage)"
+            />
+          </div>
+          <div
+            [ngClass]="
+              lang === 'en'
+                ? 'mailbox-message-content'
+                : 'mailbox-message-content-rtl'
+            "
+          >
+            <div *ngIf="viewMessage.body" [innerHTML]="viewMessage.body"></div>
+            <div *ngIf="viewMessage.Attfg === 'X'" [ngClass]="
+              lang === 'en'
+                ? 'mailbox-message-download'
+                : 'mailbox-message-download-rtl'
+            "
+            (click)="onDownloadAttachment(viewMessage)"
+            >
+              <img src="assets/image/pdf.svg" alt="file" />
+              <div class="mailbox-download-text">
+                <p class="mailbox-download-title">{{ viewMessage.title }}</p>
+                <div class="mailbox-download-subtitle">
+                  <p>PDF</p>
+                  <div></div>
+                  <p>{{lang === 'en' ? correspondanceConstants.download.en : correspondanceConstants.download.ar}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="mailbox-message-footer" [dir]="lang === 'en' ? 'ltr' : 'rtl'">
+              <div [ngClass]="lang === 'en' ? 'message-footer-info' : 'message-footer-info-rtl'">
+                <p>{{lang === 'en' ? correspondanceConstants.footer.tin.en : correspondanceConstants.footer.tin.ar}}: </p>
+                <span>{{ viewMessage.Gpart }}</span>
+              </div>
+              <div [ngClass]="lang === 'en' ? 'message-footer-info' : 'message-footer-info-rtl'">
+                <p>{{lang === 'en' ? correspondanceConstants.footer.refNo.en : correspondanceConstants.footer.refNo.ar}}: </p>
+                <span>{{ viewMessage.Ltrno }}</span>
+              </div>
+              <p class="footer-text">{{lang === 'en' ? correspondanceConstants.footer.info.en : correspondanceConstants.footer.info.ar}}:</p>
+              <div [ngClass]="lang === 'en' ? 'message-footer-info' : 'message-footer-info-rtl'">
+                <p>{{lang === 'en' ? correspondanceConstants.footer.web.en : correspondanceConstants.footer.web.ar}}: </p>
+                <span>www.gazt.gov.sa</span>
+              </div>
+              <div [ngClass]="lang === 'en' ? 'message-footer-info' : 'message-footer-info-rtl'">
+                <p>{{lang === 'en' ? correspondanceConstants.footer.call.en : correspondanceConstants.footer.call.ar}}: </p>
+                <span>{{ viewMessage.Hotline }}</span>
+              </div>
+              <div [ngClass]="lang === 'en' ? 'message-footer-info' : 'message-footer-info-rtl'">
+                <p>{{lang === 'en' ? correspondanceConstants.footer.email.en : correspondanceConstants.footer.email.ar}}: </p>
+                <span>info@gazt.gov.sa</span>
+              </div>
+              <p class="footer-text">{{lang === 'en' ? correspondanceConstants.footer.regards.en : correspondanceConstants.footer.regards.ar}}</p>
+              <p class="footer-text">{{lang === 'en' ? correspondanceConstants.footer.gazt.en : correspondanceConstants.footer.gazt.ar}}</p>
+              <img src="assets/images/positive.svg" />
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,542 @@
+<!-- <p>display-registration works!</p> -->
+<!-- display registration starts here -->
+<div *ngIf="Step==1" dir={{Direction}}>
+    <div class="container"> 
+        <div class="mb-24"> 
+            <a href="#" onclick="return false" class="text-Gray"> Tax Management > VAT Services >  </a> VAT Elegible Person Registration Details
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a routerLink="/mains/tax" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10" alt=""> Back
+            </a>           
+        </div>
+
+        <div class="mb-32">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="mb-12">VAT Elegible Person Registration Details</h2>
+                <span class="status status-h40 status-submitted font-16">Elegible</span>
+            </div>
+        </div>
+    
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg" class="" alt=""></span> Elegible Person Details
+                </h3>
+
+                <a data-toggle="collapse" href="#toggle1" role="button" aria-expanded="false" aria-controls="toggle1">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle1">
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Elegible Person category </p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ElegibleCategory}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Entity Name</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.EntityNm}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">ID Type</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.TypeTxt}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">ID Number</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Idnumber}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span>Entity Address
+                </h3>
+
+                <a data-toggle="collapse" href="#toggle2" role="button" aria-expanded="false" aria-controls="toggle2">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle2">
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Building Number </p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Building}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Street Name</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Street}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Province</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{Region1}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">City</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.City1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Quarter</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Quarter}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Postal Code </p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.PostCode1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Expected purchases on non-economic activities </p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Betrh | number}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Landline Number</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.TelNumber}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Email</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Email}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Mobile Number</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Mobile}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">IBAN</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DisplayMainData?.Iban}} 
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Preferred Refund frequency</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{RefundFrequency}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-attachment-2.svg" class="" alt=""></span> Entity Address Attachments
+                </h3>
+
+                <a data-toggle="collapse" href="#toggle4" role="button" aria-expanded="false" aria-controls="toggle4">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle4">
+                <p class="font-16 text-Gray mb-0 p-24">Supporting evidences</p>
+                <div class="row p-24">
+                    <div class="col-sm-6" *ngFor="let attach of FirstAttachmentList">
+                        <span *ngFor="let item of AttachmentSet">
+                            <p class="font-16 text-Gray mb-0" *ngIf="attach.Dotyp == item.DmsTp">{{item.DmsTxt}}</p>
+                        </span>
+                        <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center cursor-pointer" (click)="attachmentDownload(attach)">
+                            {{attach.Filename}} 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between ">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span> Contact Person Details
+                </h3>
+
+                <a data-toggle="collapse" href="#toggle3" role="button" aria-expanded="false" aria-controls="toggle3">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle3">
+                <div class="row p-24">
+                    <div class="col-sm-12">
+                        <div class="text-Eerie-Black font-16 font-weight-500 mb-10">
+                            Personal details
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">ID Type </p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{IdType1}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">ID Number</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Idnumber}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Date of Birth</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Birthdt}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">First Name </p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Firstnm}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Last Name</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Lastnm}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-12">
+                        <div class="text-Eerie-Black font-16 font-weight-500 mb-10">
+                            Home Address
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Building Number</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Building}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Street Name</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Street}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Province</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{Region2}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">City</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.City1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Quarter</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Quarter}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Postal Code</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.PostCode1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Landline</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.TelNumber}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Mobile Number</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Mobile}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Job Title</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Designation}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">Email</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{VTCPSet?.Email}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-attachment-2.svg" class="" alt=""></span> Contact Person Proof of Employment
+                </h3>
+
+                <a data-toggle="collapse" href="#toggle5" role="button" aria-expanded="false" aria-controls="toggle5">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle5">
+                <p class="font-16 text-Gray mb-0 p-24">Supporting evidences</p>
+                <div class="row p-24"> 
+                    <div class="col-sm-6" *ngFor="let attachSet of SecondAttachmentList">
+                        <span *ngFor="let item of AttachmentTypeList">
+                            <p class="font-16 text-Gray mb-0" *ngIf="attachSet.Dotyp == item.Key">{{item.Text}}</p>
+                        </span>
+                        <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center cursor-pointer" (click)="attachmentDownload(attachSet)">
+                            {{attachSet.Filename}}  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-24">
+            <button class="btn btn-primary" (click)="continueFirstScreen()">Change Registration</button>
+        </div>
+    </div>
+
+    <!-- Instructions modal starts here -->
+    <button [hidden]="true" #infoModal data-toggle="modal" data-target="#infoModal" data-backdrop="static" data-keyboard="false"></button>
+    <div class="modal modal-filter fade" id="infoModal" role="dialog">
+        <div class="modal-dialog max-width-708 pop-up-align-mddile">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/mains/tax">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body px-60 pt-40" [formGroup]="InstructionFormGroup">
+                    <h2 class="mb-24">Instructions</h2>
+                    <div class="card-inner mb-28">
+                        <div class="d-flex mb-10">
+                            <img src="assets/images/icon-info.svg" class="mr-10" alt="">
+                            <span class="font-12 text-Nero">
+                                Information
+                            </span>
+                        </div>
+                        <ol class="font-12 text-Gray p-0 m-0 pl-12">
+                            <li class="mb-16">
+                                Please fill the requested information for each step.
+                            </li>
+                            <li class="mb-16">
+                                The application cannot be successfully submitted until all of the mandatory fields have been completed.
+                            </li>
+                            <li>
+                                Please refer to the FAQ section before filling out the application form.
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="mb-60">
+                        <label class="custom-checkBox d-flex align-items-center h-32">
+                            <span class="ml-1 font-12 font-weight-500"> I accept that I have read and understood the above instructions.</span>
+                            <input type="checkbox" formControlName="agree">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-group text-right mb-16">
+                        <button class="btn btn-primary" [disabled]="!InstructionFormGroup.valid || InstructionFormGroup.value.agree == false" (click)="termsAndConditionsOfInstructionAcceptance()">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Instructions modal ends here -->
+</div>
+
+<div *ngIf="Step==2" dir={{Direction}}>
+    <div class="container" [formGroup]="DeclarationFormGroup">
+        <div class="mb-24">
+            <a href="#" onclick="return false" class="text-Gray"> Tax Management > VAT Services >  </a> VAT Elegible Person Registration Details
+        </div>
+        
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back1()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10" alt=""> Back
+            </a>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">Declaration</h2>
+			<div class="row">
+				<div class="col-md-9 col-sm-12">
+					<div class="text-Gray font-16">I hereby certify that I am authorized to complete this form for the taxable person 
+					    and that all information contained is correct 
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+		
+		<div class="card card-shadow-none mb-24">            			
+			<div class="collapse show multi-collapse" id="toggle1">
+				<div class="row p-24">
+					<div class="col-sm-6">
+						<p class="font-16 text-Gray mb-0">ID Type</p>
+						<div class="text-Eerie-Black font-16 font-weight-500">
+							{{IdType2}}
+						</div>
+                    </div>
+                    
+					<div class="col-sm-6">
+						<p class="font-16 text-Gray mb-0">ID Number</p>
+						<div class="text-Eerie-Black font-16 font-weight-500">
+							{{DisplayMainData?.IdnumberDec}}
+						</div>
+					</div>
+				</div>
+                <div class="border-bottom-whisper"></div>
+                
+				<div class="row p-24">					
+					<div class="col-sm-6">
+						<p class="font-16 text-Gray mb-0">Name</p>
+						<div class="text-Eerie-Black font-16 font-weight-500">
+							{{DisplayMainData?.Name}}
+						</div>
+                    </div>
+                    
+					<div class="col-sm-6">
+						<p class="font-16 text-Gray mb-0">Date</p>
+						<div class="text-Eerie-Black font-16 font-weight-500">
+							{{DisplayMainData?.Decdob}}
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+		
+		<div class="d-flex mb-24">
+			<label class="custom-checkBox d-flex align-items-center h-24">
+			    <span class="font-12 font-weight-500">  I hereby declare that the above mentioned information is true and correct to the best of my knowledge and belief.
+				</span>
+				<input type="checkbox" formControlName="check1">
+				<span class="checkmark checkmark-24 "></span>
+			</label>
+        </div>
+        
+		<div class="d-flex mb-24">
+			<label class="custom-checkBox d-flex align-items-center h-24">
+			    <span class="font-12 font-weight-500">  I hereby certify that I am authorized to complete this form for the taxable person and that all information contained is correct.
+				</span>
+				<input type="checkbox" formControlName="check2">
+				<span class="checkmark checkmark-24 "></span>
+			</label>
+        </div>
+        
+		<div class="d-flex mb-56">
+			<label class="custom-checkBox d-flex align-items-center h-24">
+			    <span class="font-12 font-weight-500">  Display previous information
+				</span>
+				<input type="checkbox" formControlName="check3">
+				<span class="checkmark checkmark-24 "></span>
+			</label>
+        </div>
+        
+        <div class="mb-24">
+			<button class="btn btn-primary mb-24" [disabled]="!DeclarationFormGroup.valid || DeclarationFormGroup.value.check1 == false || DeclarationFormGroup.value.check2 == false || DeclarationFormGroup.value.check3 == false" (click)="redirectTo()">Continue</button>
+		</div>
+    </div>
+</div>
+<!-- display registration ends here -->

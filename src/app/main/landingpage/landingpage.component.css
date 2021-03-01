@@ -1,0 +1,326 @@
+.navitemTxt {
+  font-family: SSTArabic-Light;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.navitemTxtActive {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.navTxtActive {
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d99a29;
+}
+
+.navTxtMsgActive {
+  width: 10px;
+  height: 10px;
+  /* margin: 7px 10px 11px 16px; */
+  background-color: #d99a29;
+}
+
+.navTxtInActive {
+  height: 4px;
+  border-radius: 2px;
+  background-color: none;
+}
+
+.quickActionTxt {
+  object-fit: contain;
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.navBarTitleNew {
+  object-fit: contain;
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.navTitleFav {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.returnTxt1 {
+  object-fit: contain;
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+  margin-left: 10px;
+}
+
+.returnTxt2 {
+  object-fit: contain;
+  font-family: SSTArabic-Medium;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  margin-left: 10px;
+}
+
+.quickAction {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.quickAction1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+  margin-left: 50px;
+}
+
+.notification-card {
+  position: relative;
+  bottom: 10px;
+  padding: 0px;
+  background-color: #95d600;
+}
+
+.content-card {
+  position: relative;
+  min-height: 750px;
+}
+
+.notification-title {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.notification-description {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.list-group {
+  padding-right: 0 !important;
+}
+
+.list-group-item {
+  cursor: pointer !important;
+  padding: 16px;
+  background: transparent;
+  border-radius: 0px !important;
+}
+
+.list-group,
+.list-group-item:first-child {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.list-group-item:not(:last-child):hover {
+  box-shadow: 0 4px 8px 0 #2323231a !important;
+  background: none;
+  border-color: #2323231a;
+}
+
+.list-group-item.selected {
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(106deg, rgb(0, 157, 136) 3%, rgb(0, 100, 80) 85%) repeat
+    scroll 0% 0%;
+  color: #fff !important;
+}
+
+.dot {
+  width: 10px !important;
+  height: 10px !important;
+  display: inline-block !important;
+  border-radius: 100% !important;
+}
+
+.dot-orange {
+  color: #d99a29 !important;
+  background-color: #d99a29 !important;
+}
+
+.text-muted {
+  color: #999999 !important;
+}
+
+.list-group-item.selected .text-muted {
+  color: #fff !important;
+}
+
+.pointer-hand {
+  cursor: pointer !important;
+}
+
+.empty-message {
+  position: absolute !important;
+  top: 40% !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: center !important;
+}
+
+.image-rtl {
+  transform: scaleX(-1);
+}
+
+.w-90 {
+  width: 90% !important;
+}
+
+.width-250 {
+  width: 250px !important;
+}
+
+.notifications-dropdown.dropdown-menu {
+  width: 250px !important;
+  top: auto !important;
+  right: 30px !important;
+  border-radius: 14px !important;
+  box-shadow: 0px 0px 8px 4px #2323231a !important;
+}
+
+.text-primary {
+  color: #006450 !important;
+}
+
+.taxMgttxt2 {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: black;
+}
+
+#applicationPendingModal {
+  font-family: SSTArabic-Roman !important;
+}
+
+#applicationPendingModal .modal-header {
+  border-top-left-radius: 11px !important;
+  border-top-right-radius: 11px !important;
+  display: inline-block;
+}
+
+#applicationPendingModal .modal-header,
+.modal-title {
+  background: #13614c !important;
+}
+
+/* only affix the top navbar on mobile */
+@media (max-width: 768px) {
+  .fixed-top-sm {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+  .ulsize {
+    position: relative;
+    top: 50px;
+    text-align: center;
+    overflow: auto;
+    max-height: 200px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 700px) {
+  .iconsize {
+    width: 24px;
+    margin-right: 25px;
+  }
+  .logosize {
+    width: 150px;
+  }
+  .secondNav {
+  }
+  .cardMargin {
+  }
+}
+
+@media (max-width: 500px) {
+  .cardMargin {
+    margin-top: 55px;
+  }
+  .secondNav {
+    position: relative;
+    top: -8px;
+  }
+  .iconsize {
+    width: 15px;
+    margin-right: 15px;
+  }
+
+  .logosize {
+    width: 100px;
+  }
+
+  .nameCss {
+    display: none;
+  }
+}

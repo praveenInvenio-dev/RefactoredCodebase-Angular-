@@ -1,0 +1,912 @@
+<!-- <p>excise-tax-deregistration works!</p> -->
+<div *ngIf="Step==1" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a href="#" onclick="return false" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a routerLink="/mains/tax" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="#" onclick="return false" class="active">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step1.t1}}</h2>
+            <div class="text-Gray font-16">{{lang.step1.t2}}</div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <form [formGroup]="TaxpayerFormGroup">
+            <div class="row mb-32">
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step1.t3}}</label>
+                        <input type="text" class="form-control card" placeholder="Enter Tin Number"
+                            formControlName="tinNumber" readonly>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step1.t4}}</label>
+                        <input type="text" class="form-control card" placeholder="Enter Full Name"
+                            formControlName="fullName" readonly>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step1.t5}}</label>
+                        <input type="text" class="form-control card" placeholder="Enter Fin Number"
+                            formControlName="finNumber" readonly>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step1.t6}}</label>
+                        <input type="text" class="form-control card" placeholder="Enter Legal Name"
+                            formControlName="legalName" readonly>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- <div class="table mb-40">
+            <table width="100%">
+                <thead>
+                    <th width="200" class="font-16 text-Eerie-Black font-weight-bold">
+                        SrNo
+                    </th>
+                    <th width="200" class="font-16 text-Eerie-Black font-weight-bold">
+                        Warehouse Type
+                    </th>
+                    <th width="200" class="font-16 text-Eerie-Black font-weight-bold">
+                        Warehouse No
+                    </th>
+                </thead>
+                <tbody *ngFor="let warehouseObj of WarehouseList">
+                    <td class="font-16 text-Eerie-Black">
+                        {{warehouseObj.Srno}}
+                    </td>
+                    <td class="font-16 text-Eerie-Black">
+                        {{warehouseObj.PurposeDesc}}
+                    </td>
+                    <td class="font-16 text-Eerie-Black">
+                        {{warehouseObj.Whno}}
+                    </td>
+                </tbody>
+            </table>
+            <span *ngIf="WarehouseList?.length == 0" style="align-items: center;">No Data</span>
+        </div> -->
+        <div class="table mb-40 table-responsive">
+            <table width="100%">
+                <tr class="w-100">
+                    <td class="font-16 text-Eerie-Black font-weight-bold" width="100%" colspan="5">
+                        <h3>{{lang.step1.t7}}</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-16 text-Eerie-Black font-weight-bold">
+                        {{lang.step1.t71}}
+                    </td>
+                    <td width="200" class="font-16 text-Eerie-Black font-weight-bold">
+                        {{lang.step1.t8}}
+                    </td>
+                    <td width="200" class="font-16 text-Eerie-Black font-weight-bold">
+                        {{lang.step1.t9}}
+                    </td>
+
+
+                </tr>
+                <tr *ngFor="let warehouseObj of WarehouseList">
+                    <td class="font-16 text-Eerie-Black">
+                        {{warehouseObj.Srno}}
+                    </td>
+                    <td class="font-16 text-Eerie-Black">
+                        {{warehouseObj.PurposeDesc}}
+                    </td>
+                    <td class="font-16 text-Eerie-Black">
+                        {{warehouseObj.Whno}}
+                    </td>
+                </tr>
+
+            </table>
+            <span *ngIf="WarehouseList?.length == 0" style="padding-left: 500px;">{{lang.step1.nodata}}</span>
+        </div>
+
+
+        <div class="mb-24">
+            <button class="btn btn-primary" data-toggle="modal"
+                (click)="continueFirstScreen()">{{lang.nav.continue}}</button>
+        </div>
+
+
+    </div>
+</div>
+
+<div *ngIf="Step==2" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a href="#" onclick="return false" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back1()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="#" onclick="return false" class="active2">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step2.t1}}</h2>
+            <div class="row">
+                <div class="col-lg-9 col-md-11 col-sm-12">
+                    <div class="text-Gray font-16">{{lang.step2.t2}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <form [formGroup]="ReasonFormGroup">
+            <div class="row mb-50" [ngClass]="{'disabled':approvalflag == true}">
+                <div class="col-sm-8">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step2.t3}}</label>
+                        <div class="custom-dropdown position-relative card">
+                            <select class="form-control default-arrow-hide" formControlName="reason"
+                                (change)='onReasonSelected($event.target.value)'>
+                                <option *ngFor="let res of ReasonList" [value]="res.Reason">{{res.Text}}</option>
+                            </select>
+                            <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-50" *ngIf="Others">
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step2.t4}}</label>
+                        <div class="position-relative">
+                            <textarea class="form-control h-96 card resize-none" placeholder="Enter reason"
+                                formControlName="otherOption"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-24">
+                <button class="btn btn-primary" [disabled]="!ReasonFormGroup.valid"
+                    (click)="continueSecondScreen()">{{lang.nav.continue}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="Step==3" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a href="#" onclick="return false" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back2()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="#" onclick="return false" class="active3">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step3.t1}}</h2>
+            <div class="text-Gray font-16">{{lang.step3.t2}}</div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <form [formGroup]="DeclarationFormGroup">
+            <div class="row mb-32" [ngClass]="{'disabled':approvalflag == true}">
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step3.t3}}</label>
+                        <input type="text" class="form-control card" maxlength="40" placeholder="Enter Contact Person Name"
+                            formControlName="contactName">
+                    </div>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['contactName'].errors?.maxlength">
+                        {{lang.step3.t13}}
+                    </span>
+                    <div class="error" *ngIf="DeclarationFormGroup.controls['contactName'].errors?.pattern">
+                        {{lang.step3.t4}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step3.t5}}</label>
+                        <input type="text" maxlength="40" class="form-control card" placeholder="Enter Designation"
+                            formControlName="designation" (input)="isdescrptnlengValid()">
+                    </div>
+                    <span class="error"  *ngIf="DeclarationFormGroup.controls['designation'].errors?.pattern">
+                        {{lang.step3.t14}}
+                    </span>
+                    <!-- <span class="error" *ngIf="isdescrptnleng">
+                        {{lang.step3.t14}}
+                    </span> -->
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step3.t7}}</label>
+                        <div class="custom-dropdown position-relative card">
+                            <select class="form-control default-arrow-hide" placeholder="Enter Id Type"
+                                formControlName="idType" (change)="onIdTypeSelection($event.target.value)">
+                                <option *ngFor="let item of IdTypeList" [value]="item.Key">{{item.Text}}</option>
+                            </select>
+                            <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6" [ngClass]="{'disabled':DeclarationFormGroup.value.idType != 'ZS0003'}">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step3.t8}}</label>
+                        <input type="text" class="form-control card" placeholder="Enter Id Number"
+                            formControlName="idNumber" (change)="onIdNoChange($event.target.value)">
+                    </div>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['idNumber'].errors?.pattern">
+                        {{lang.step3.t9}}
+                    </span>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['idNumber'].errors?.minlength">
+                        {{lang.step3.t10}}
+                    </span>
+                    <span class="error" *ngIf="DeclarationFormGroup.controls['idNumber'].errors?.maxlength">
+                        {{lang.step3.t11}}
+                    </span>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step3.t12}}</label>
+                        <div class="d-flex">
+                            <input type="   " class="form-control card" [matDatepicker]="picker4"
+                                placeholder="Choose Date" formControlName="date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker4" [disabled]="true" class="datepickerIcon1">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker4></mat-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-56">
+                <div class="col-lg-9 col-md-11 col-sm-12">
+                    <label class="custom-checkBox d-flex align-items-center h-32">
+                        <span class="ml-1 font-12 font-weight-500"> {{lang.step3.t13}}</span>
+                        <input type="checkbox" formControlName="agree">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-24">
+                <button class="btn btn-primary"
+                    [disabled]="!DeclarationFormGroup.valid || DeclarationFormGroup.value.agree == false"
+                    (click)="continueThirdScreen()">{{lang.nav.continue}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div *ngIf="Step==6" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a href="#" onclick="return false" class="text-Gray">{{lang.step3.nav.t1}}</a> {{lang.step3.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back6()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.step3.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="#" onclick="return false" class="active2">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step6.s1.t1}}</h2>
+            <!-- <div class="row">
+                <div class="col-lg-9 col-md-11 col-sm-12">
+                    <div class="text-Gray font-16">Complete the below Details
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <div class="row mb-56">
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12">
+                <p>{{lang.step6.s1.t2}}</p>
+            </div> -->
+            <div class="row mb-56">
+                <div class="col-lg-9 col-md-11 col-sm-12">
+                    <label class="custom-checkBox d-flex align-items-center h-32">
+                        <span class="ml-1 font-12 font-weight-500"> {{lang.step6.s1.t2}}</span>
+                        <input type="checkbox" [(ngModel)]="agree">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <button class="btn btn-primary" (click)="Step=4">{{lang.nav.continue}}</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="Step==4" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a href="#" onclick="return false" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a (click)="back3()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="#" onclick="return false" class="active3">
+                    <span></span>
+                </a>
+                <a href="#" onclick="return false" class="ml-10">
+                    <img src="assets/images/icon-gcheck.svg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step4.s1.t1}}</h2>
+            <div class="text-Gray font-16">{{lang.step4.s1.t2}}</div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <div class="card card-shadow-none mb-24">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-declaration.svg"
+                            class="" alt=""></span>{{lang.step4.s1.t3}}
+                </h3>
+                <a (click)="editStep1()"
+                    class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.nav.edit}}</a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p clss="font-16 text-Gray  mb-0">{{lang.step4.s1.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{TaxPayerDetails?.Gpart}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.s1.t5}} </p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{TaxPayerDetails?.TinNm}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step4.s1.t6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{TaxPayerDetails?.Psobkey}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.s1.t7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{TaxPayerDetails?.CrNm}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-24">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                            alt=""></span>{{lang.step4.s2.t1}}
+                </h3>
+                <!-- <a href="#" onclick="return false" class="text-Watercourse font-weight-bold font-16">Edit</a> -->
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <!-- <div class="row p-24" *ngIf="WarehouseList.length > 0">
+                <div *ngFor="let warehouseObj of WarehouseList">
+                    <div class="col-sm-12">
+                        <h3 class="d-flex align-items-center mb-24">{{warehouseObj?.Srno}}</h3>                    
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray  mb-0">{{lang.step4.s2.t2}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{warehouseObj?.PurposeDesc}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step4.s2.t3}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{warehouseObj?.Whno}}
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row p-24">
+                <div class="col-md-12" *ngFor="let warehouseObj of WarehouseList">
+                    <div *ngIf="WarehouseList.length > 0">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="d-flex align-items-center">{{warehouseObj?.Srno}}</h3>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <p class="font-16 text-Gray  mb-0">{{lang.step4.s2.t2}}</p>
+                                <div class="text-Eerie-Black font-16 font-weight-500">
+                                    {{warehouseObj?.PurposeDesc}}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 mb-24">
+                                <p class="font-16 text-Gray mb-0">{{lang.step4.s2.t3}}</p>
+                                <div class="text-Eerie-Black font-16 font-weight-500">
+                                    {{warehouseObj?.Whno}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-bottom-whisper"></div>
+        </div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class=""
+                            alt=""></span>{{lang.step4.s3.t1}}
+                </h3>
+                <a (click)="editStep2()"
+                    class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.nav.edit}}</a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step4.s3.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{ReasonName}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-24" *ngIf="Others">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step4.s3.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{ReasonData?.Others}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-32">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-declaration.svg"
+                            class="" alt=""></span>{{lang.step4.s4.t1}}
+                </h3>
+                <a (click)="editStep3()"
+                    class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.nav.edit}}</a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step4.s4.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData?.Name}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.s4.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData?.Designation}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.s4.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{IdTypeName}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.s4.t5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData?.IdNo}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <p class="font-16 text-Gray mb-0">{{lang.step4.s4.t6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{DeclarationData?.Date | date}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-shadow-none mb-32" *ngIf="approvalflag">
+            <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-declaration.svg"
+                            class="" alt=""></span>{{lang.step6.s1.t1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row p-24">
+                <div class="row mb-56">
+                    <div class="col-md-12 col-sm-12">
+                        <label class="custom-checkBox d-flex align-items-center h-32">
+                            <span class="ml-1 font-12 font-weight-500"> {{lang.step6.s1.t2}}</span>
+                            <input type="checkbox" [(ngModel)]="agree">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="d-flex mb-56">
+            <span class="ml-1 font-12 font-weight-500">{{lang.step4.s4.t7}} <a>{{lang.step4.s4.t8}}</a></span>
+        </div> -->
+
+        <div class="mb-24">
+            <button class="btn btn-primary" [disabled]="approvalflag==true&&agree==false" (click)="continueFourthScreen()">{{lang.nav.confirm}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==5" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="inner">
+            <div class="text-center mb-56">
+                <div class="text-center mb-40">
+                    <img src="assets/images/icon-success.svg" alt="">
+                </div>
+
+                <h2 class="mb-12">{{lang.step5.t1}}</h2>
+
+                <div class="text-Gray font-16 mb-56">{{lang.step5.t2}}</div>
+
+                <div class="inner">
+                    <div
+                        class="d-flex align-items-center justify-content-between mb-16 item-cardetails card-shadow-none">
+                        <span class="font-16 text-Gray  mb-0">
+                            {{lang.step5.t3}}
+                        </span>
+
+                        <span class="text-Eerie-Black font-16 font-weight-500">
+                            {{AcknowledgementData?.Name}}
+                        </span>
+                    </div>
+
+                    <div
+                        class="d-flex align-items-center justify-content-between mb-16 item-cardetails card-shadow-none">
+                        <span class="font-16 text-Gray  mb-0">
+                            {{lang.step5.t4}}
+                        </span>
+
+                        <span class="text-Eerie-Black font-16 font-weight-500">
+                            {{AcknowledgementData?.ReferenceNumber}}
+                        </span>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between item-cardetails card-shadow-none">
+                        <span class="font-16 text-Gray  mb-0">
+                            {{lang.step5.t5}}
+                        </span>
+
+                        <span class="text-Eerie-Black font-16 font-weight-500">
+                            {{AcknowledgementData?.Date | date}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-24 text-center  d-flex flex-column justify-content-center align-items-center">
+                <!-- <button class="btn btn-primary d-inline-block mb-40 ">Excise Regulations Services</button> -->
+                <button class="btn btn-link d-inline-block mr-0"
+                    routerLink="/mains/tax">{{lang.step5.dashboard}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="idDegisterExciseTax" data-keyboard="false" data-backdrop="static" [dir]="direction">
+    <div class="modal-dialog  modal-md">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="clearPopup()">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="IdTypeOwnerShipFormgroup">
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div>
+                                <div class="registerLabelCss">{{lang.step4.s4.t22.t1}}<span style="color: red;">*</span>
+                                </div>
+                                <mat-form-field appearance="outline" [ngClass]="{'border-red':uid.errors?.pattern}">
+                                    <input matInput formControlName="Idnumber" (ngModelChange)="id1 = $event;" #uid
+                                        pattern="^[0-9]*$" maxlength="10" (keypress)="NumberAllow($event)"
+                                        (input)="isNumberValid()">
+                                </mat-form-field>
+                                <span class="error"
+                                    *ngIf="IdTypeOwnerShipFormgroup.controls['Idnumber'].errors?.pattern">
+
+                                </span>
+                                <span class="error" *ngIf="isNationalEnterValidNumber">
+                                    {{lang.step4.s4.t44}}
+                                </span>
+                                <span class="error" *ngIf="isIqamaEnterValidNumber">
+                                    {{lang.step4.s4.t45}}
+                                </span>
+
+
+
+                                <!-- <span class="error"
+                                    *ngIf="IdTypeOwnerShipFormgroup.controls['Idnumber'].errors?.minlength">
+                                    {{lang.step11.t61}}
+                                </span> -->
+                                <!-- <span class="error"
+                                    *ngIf="IdTypeOwnerShipFormgroup.controls['Idnumber'].errors?.maxlength">
+                                    {{lang.step11.t7}}
+                                </span> -->
+                            </div>
+
+                            <div>
+                                <div class="registerLabelCss">{{lang.step4.s4.t22.t2}}<span style="color: red;">*</span>
+                                </div>
+
+                                <mat-form-field appearance="outline">
+                                    <input matInput [matDatepicker]="picker3" autocomplete="off" [max]="enddate"
+                                        formControlName="Dob" name="sd">
+                                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker3 [calendarHeaderComponent]="headerComponent">
+                                    </mat-datepicker>
+                                </mat-form-field>
+                                <span class="error"
+                                *ngIf="IdTypeOwnerShipFormgroup.controls['Dob'].hasError('required')">
+                                {{lang.step4.s4.t23}}
+                            </span>
+
+                            </div>
+                            <div class="mt-3 mb-2 text-right">
+                                <button class="btn btn-primary" [disabled]="IdTypeOwnerShipFormgroup.invalid && !Dob"
+                                    (click)="validateWHDeclarationIdz();">{{lang.step4.s4.t22.btn1}}</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="errormodel">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner mb-16">
+                    <div class="font-12 text-Gray">
+                        <!-- <div *ngIf="isNationalEnterValidNumber" class="font-12 text-Gray">
+                            {{lang.step4.s4.t44}}
+                        </div>
+                        <div *ngIf="isIqamaEnterValidNumber" class="font-12 text-Gray">
+                            {{lang.step4.s4.t45}}
+                        </div> -->
+                        <div class="font-12 text-Gray">  {{errorMessage}}</div>
+                    </div>
+                </div>
+                <div class="form-group text-right" [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang.step4.s4.btn3}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="processmodel" data-keyboard="false" data-backdrop="static" dir={{direction}}
+    [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-centered  modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div class="ackScreenTitle2">{{errorMessage}}</div>
+                        <div class="mt-3 mb-2">
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                data-dismiss="modal" class="btnTCss"
+                                [routerLink]="['/mains']">{{lang.nav.dashboard}}</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Instructions modal starts here -->
+<!-- <button [hidden]="true" #instructions data-toggle="modal" data-target="#instructions" data-backdrop="static" data-keyboard="false"></button> -->
+<div class="modal modal-filter fade" id="instructions" role="dialog">
+    <div class="modal-dialog max-width-708">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button aria-label="Close" class="close" routerLink="/mains/tax" data-dismiss="modal" type="button">
+                    <span class="material-icons font-28"> clear </span>
+                </button>
+            </div>
+            <!-- <div class="text-right modal-filter-head">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <img src="assets/images/icon-close.svg" alt="">
+                 </button>
+             </div> -->
+
+            <div class="modal-body px-60 pt-40" [formGroup]="InstructionFormGroup">
+                <h2 class="mb-24">{{lang.step1.popup.t1}}</h2>
+                <!-- <div class="card-inner mb-28">
+                     <div class="d-flex mb-10">
+                         <img src="assets/images/icon-info.svg" class="mr-10" alt="">
+                         <span class="font-12 text-Nero">
+                             Information
+                         </span>
+                     </div>
+                     <div class="font-12 text-Gray mb-16">
+                         If you are deregistering due to Bankruptcy, Liquidation, Merger or Acquisition or any other Reason(s) which relates to all tax types, 
+                         please proceed with the general Taxpayer's deregistration process which is available from GAZT Portal.
+                     </div>
+                     <ul class="font-12 text-Gray p-0 m-0 last-child-mb-0 list-style-none last-child-mb-0">
+                         <li class="mb-16">
+                             Please fill the requested information for each step. The application cannot be successfully submitted 
+                             until all of the mandatory fields and attachments have been completed.							</li>
+                         <li>
+                             Applicant should ensure that there is no pending return filing or any outstanding payment or pending application from his side before submitting this application.
+                         </li>
+                     </ul>
+                 </div> -->
+                <div class="card-inner mb-28">
+
+
+                    <ol class="font-12 text-Gray p-0 m-0 pl-12">
+                        <li class="mb-16">
+                            {{lang.step1.popup.t2}}
+                        </li>
+                        <li>
+                            {{lang.step1.popup.t3}}
+                        </li>
+                    </ol>
+
+
+                </div>
+                <div class="mb-60">
+                    <label class="custom-checkBox d-flex align-items-center h-32">
+                        <span class="ml-1 font-12 font-weight-500"> {{lang.step1.popup.t4}}</span>
+                        <input type="checkbox" formControlName="agree">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <div class="form-group text-right mb-16 ar-text-align-left">
+                    <button class="btn btn-primary"
+                        [disabled]="!InstructionFormGroup.valid || InstructionFormGroup.value.agree == false"
+                        (click)="termsAndConditionsOfInstructionAcceptance()">{{lang.step1.popup.btn}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="errormodel1">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner mb-16">
+                    <div class="font-12 text-Gray">
+                        {{errorMessage}}
+                    </div>
+                </div>
+                <div class="form-group text-right" [ngClass]="{'arabic-btn':Language == 'A'}">
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang.step1.btn3}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Instructions modal ends here -->
+<notifier-container></notifier-container>

@@ -1,0 +1,1508 @@
+<div class="container" dir="{{ dir }}">
+  <div>
+    <div *ngIf="hideBackbtn" class="row mt-3 mx-3 px-2" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+      <div class="col-md-12 mt-3">
+        <span class="breadTitle1" style="color: #999999; cursor: pointer"
+          routerLink="/mains/installmentplan">{{ lang.screen1.title }} > </span><span class="breadTitle1"
+          style="color: #151515">{{
+          lang.screen1.card1
+        }}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div *ngIf="hideBackbtn" class="stepHeader mt-3 mx-3 px-3">
+              <span class="stepBack" (click)="goBack(stepper)" *ngIf="dir === 'rtl'">
+                <img mat-raised-button src="assets/image/arrow-right-green.svg" />
+                {{ lang.screen2.back }}</span>
+              <span class="stepBack" (click)="goBack(stepper)" *ngIf="dir === 'ltr'">
+                <img mat-raised-button src="assets/image/arrow-left-green.svg" />
+                {{ lang.screen2.back }}</span>
+            </div>
+          </div>
+          <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textEn' : 'textAr'">
+            <span class="side-icon" style="margin-right: 30px">
+              <a><img class="search-icon" [ngClass]="dir === 'rtl' ? 'aR' : 'eN'" src="assets/image/1-st.svg" alt=""
+                  *ngIf="stepper.selectedIndex === 1" /></a>
+              <a><img class="search-icon" [ngClass]="dir === 'rtl' ? 'aR' : 'eN'" src="assets/image/2-nd.svg" alt=""
+                  *ngIf="stepper.selectedIndex === 2" /></a>
+              <a><img class="search-icon" [ngClass]="dir === 'rtl' ? 'aR' : 'eN'" src="assets/image/3-rd.svg" alt=""
+                  *ngIf="stepper.selectedIndex === 3" /></a>
+              <a><img class="search-icon" [ngClass]="dir === 'rtl' ? 'aR' : 'eN'" src="assets/image/4-th.svg" alt=""
+                  *ngIf="stepper.selectedIndex === 4" />&nbsp;<img class="search-icon" src="assets/image/check.svg"
+                  alt="" *ngIf="stepper.selectedIndex === 4" style="height: 24px; width: 24px" /></a>
+
+              <!-- <a><img class="search-icon" src="assets/image/6-th-vat.svg" alt=""
+                                    *ngIf="stepper.selectedIndex === 5"></a> -->
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal alignStart" id="filingterms" data-keyboard="false" data-backdrop="static" [dir]="lang.dir">
+      <div class="modal-dialog center" style="max-width: 900px">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="px-4 py-3 col-md-12">
+              <div class="col-md-12 alignEnd">
+                <img src="assets/image/close.svg" class="modalCloseIcon" (click)="closeModal('can')" />
+              </div>
+
+              <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+                {{ lang.instruction.mStep1 }}
+              </div>
+              <div class="lightCard py-3 pr-3 mb-3">
+                {{ lang.instruction.insthdr1 }}
+              </div>
+
+              <div class="lightCard py-3 pr-3 mb-3 border" style="padding: 8px">
+                <!-- <div class="modalInstructions f12 gray mb-1 font-color"
+                                    style="font-family:'SSTArabic-Bold';">{{ lang.instruction.content1 }}</div> -->
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst1 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst2 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst3 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-2 font-color">
+                  {{ lang.instruction.inst4 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst5 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst6 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst7 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst8 }}
+                </div>
+                <div class="modalInstructions f12 gray mb-1 font-color">
+                  {{ lang.instruction.inst9 }}
+                </div>
+              </div>
+
+              <div class="check row mx-0">
+                <mat-checkbox class="checkboxAckCss" [(ngModel)]="instructionsAccepted">
+                </mat-checkbox>
+                <div class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+                  style="font-size: 12px; font-weight: 600">
+                  {{ lang.instruction.checkLable }}
+                </div>
+              </div>
+
+              <div class="col-md-12 mt-4 mb-2 alignEnd">
+                <button class="btnPrimary btnprimary-width" (click)="closeModal('cnf')" mat-raised-button
+                  [disabled]="!instructionsAccepted">
+                  {{ lang.screen2.confirm }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 Installment-Plans mt-3 mx-3">
+              {{ lang.screen2.title1 }}
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 placeholder mx-3">
+              {{ lang.screen2.placeholder1 }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <mat-divider style="position: inherit"></mat-divider>
+            </div>
+          </div>
+          <div class="row mt-3" *ngIf="showType">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="mx-3">
+                  <mat-card [ngClass]="
+                      typeValue === '1' ? 'cardActive' : 'cardInActive'
+                    " (click)="goToType(stepper, '1')">
+                    <div class="title-card" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ lang.screen1.znc }}
+                    </div>
+                  </mat-card>
+                </div>
+                <div class="mx-3">
+                  <mat-card [ngClass]="
+                      typeValue === '2' ? 'cardActive' : 'cardInActive'
+                    " (click)="goToType(stepper, '2')">
+                    <div class="title-card" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ lang.screen1.tab3 }}
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3" *ngIf="showSubType">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="mx-3" *ngFor="let reqsType of instalmentType; let index = index">
+                  <mat-card [ngClass]="
+                      firstControl.selectRequestType.value === reqsType.TaxTyTxt
+                        ? 'cardActive'
+                        : 'cardInActive'
+                    " (click)="goToBills(stepper, reqsType.TaxTy)" *ngIf="reqsType.TaxTy != 00"
+                    formControlName="selectRequestType" name="selectRequestType" ngDefaultControl>
+                    <div class="title-card" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ reqsType.TaxTyTxt }}
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 Installment-Plans mt-3 mx-3">
+              {{ lang.screen2.title2 }}
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 placeholder mx-3">
+              {{ lang.screen2.placeholder2 }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <mat-divider style="position: inherit"></mat-divider>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-6 mt-3" *ngFor="let tab of zakatDetails; let index = index">
+                  <mat-card class="border py-3" [ngClass]="
+                      highlightedBatch.indexOf(tab) !== -1
+                        ? 'return-card2'
+                        : 'return-card-inactive2'
+                    " (click)="selectBills(tab)">
+                    <div class="verticallyCenter px-3" style="height: 32%">
+                      <div class="text-bold fwb mb-3" *ngIf="firstControl.selectRequestType.value === '01'">
+                        {{ lang.screen1.tab2 }}
+                      </div>
+                      <div class="text-bold fwb mb-3" *ngIf="firstControl.selectRequestType.value === '02'">
+                        {{ lang.screen1.int }}
+                      </div>
+                      <!-- <div class="caption pt-1">{{ lang.screen2.caption }}</div> -->
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row px-3">
+                      <div class="col-md-12">
+                        <div class="text-bold mt-3 mb-3">
+                          {{
+                            getFormattedAmount(tab.DueAmt)
+                              | currency: "SAR"
+                              | slice: 3
+                          }}
+                          {{ lang.screen1.sar }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row px-3 mt-3">
+                      <div class="col-md-6">
+                        <div class="text-14">{{ lang.zakatSc.invno }}</div>
+                        <div class="text-19 fwb">{{ tab.InvNo }}</div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="text-14">{{ lang.screen1.due_date }}</div>
+                        <div class="text-19 fwb">
+                          {{
+                            commonValidation.convertDateToStandard(tab.DueDt)
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="tag-success-installment row mx-1">
+                <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  <div class="primary-centre-text">
+                    {{ lang.screen2.amt }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{
+                      getFormattedAmount(selectedTotAmount)
+                        | currency: "SAR"
+                        | slice: 3
+                    }}
+                    {{ lang.screen1.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5 mx-3">
+            <!-- <button mat-button matStepperPrevious>Back</button> -->
+            <button class="btnPrimary" style="width: 22%" mat-button (click)="goInstallAgreement(stepper)">
+              {{ lang.screen2.button1 }}
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="">
+        <form [formGroup]="installmentAgreementGroup">
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 Installment-Plans mt-3 mx-3">
+              {{ lang.screen2.inst_agr }}
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 placeholder mx-3">
+              {{ lang.screen2.set_ins_plan }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <mat-divider style="position: inherit"></mat-divider>
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 column-title mt-3 mx-3">
+              {{ lang.screen2.rsn }}
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="matLabel">{{ lang.screen2.rsn }}</div>
+
+              <mat-select class="commonMatSelect mt-2" formControlName="reasonForReq" name="reasonForReq" [ngClass]="
+                  submitted && fC.reasonForReq.errors ? 'input-error' : ''
+                ">
+                <!-- [formControl] ="selectedYear" (selectionChange) ="getYearSelection()" -->
+                <mat-option *ngFor="let item of reqResonFor" [value]="item">
+                  {{ item.ReaReqInstTxt }}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 column-title mt-3 mx-3">
+              {{ lang.screen2.freq }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-3" *ngFor="let item of freqDetails; let i = index" style="padding-inline-start: 0">
+                  <div class="mx-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                    <mat-card [ngClass]="[
+                        fC.selectFreq.value === item.PymntFreq
+                          ? 'cardActive'
+                          : 'cardInActive',
+                        submitted && fC.selectFreq.errors
+                          ? 'input-error'
+                          : 'mx-3'
+                      ]" (click)="selectFrequency(item.PymntFreq)" formControlName="selectFreq" name="selectFreq"
+                      ngDefaultControl>
+                      <div class="title-card">
+                        {{ item.PymntFreqTxt }}
+                      </div>
+                    </mat-card>
+                  </div>
+                  <!-- <div
+                    class="mx-3"
+                    [ngClass]="
+                      submitted && fC.selectFreq.errors ? 'input-error' : 'mx-3'
+                    "
+                  >
+                    <mat-card
+                      [ngClass]="
+                        fC.selectFreq.value === item.PymntFreq
+                          ? 'cardActive'
+                          : 'cardInActive'
+                      "
+                      (click)="selectFrequency(item.PymntFreq)"
+                      formControlName="selectFreq"
+                      name="selectFreq"
+                      ngDefaultControl
+                    >
+                      <div class="title-card">
+                        {{ item.PymntFreqTxt }}
+                      </div>
+                    </mat-card>
+                  </div> -->
+                </div>
+                <!-- <div *ngIf="submitted && fC.selectFreq.errors" class="col-md-12 mx-3 invalid-feedback">
+                                    <div *ngIf="fC.selectFreq.errors.required">{{lang.screen2.req}}</div>
+                                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 column-title mt-3 mx-3">
+              {{ lang.screen2.ins_sch }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-card [ngClass]="
+                      submitted && fC.gridsize.errors
+                        ? 'input-error'
+                        : 'card-uploaded'
+                    " style="max-width: 100%">
+                    <div class="value" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ lang.screen2.no_ins }}
+                    </div>
+                    <div class="value mt-3 mb-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      <h6>{{ gridsize.value }}</h6>
+                    </div>
+                    <div class="row align-center">
+                      <div class="col-md-12">
+                        <mat-card class="card px-3" style="border-radius: 15px; padding: 0px">
+                          <!-- <mat-slider #gridsize (change)="updateSetting($event)" step="1"
+                                                        min="1" max="{{maxFreq}}" value="gridsize" tickInterval="5"
+                                                        formControlName="gridsize" name="gridsize" ngDefaultControl>
+                                                    </mat-slider> -->
+                          <mat-slider #gridsize [disabled]="sliderDisabled" [max]="maxFreq" min="1"
+                            [tickInterval]="tickInterval" value="gridsize" formControlName="gridsize"
+                            (change)="updateSetting($event)">
+                          </mat-slider>
+                        </mat-card>
+                      </div>
+                      <div class="col-md-12 mb-3 mt-2">
+                        <span class="placeholder" style="font-size: 12px"
+                          [ngClass]="dir === 'rtl' ? 'fl-right' : 'fl-left'">{{ lang.screen2.min }} . 1</span>
+                        <span class="placeholder" style="font-size: 12px"
+                          [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'">{{ lang.screen2.max }}
+                          .
+                          {{ maxFreq }}</span>
+                      </div>
+                       
+                    </div>
+                  </mat-card>
+                  <!-- <div *ngIf="submitted && fC.gridsize.errors"
+                                        class="col-md-12 mx-3 invalid-feedback">
+                                        <div *ngIf="fC.gridsize.errors.required">{{lang.screen2.req}}</div>
+                                    </div> -->
+                </div>
+                <div class="col-md-6">
+                  <mat-card [ngClass]="
+                      submitted && fC.gridsize2.errors
+                        ? 'input-error'
+                        : 'card-uploaded'
+                    " style="max-width: 100%">
+                    <div class="value" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ lang.filter.label4 }}
+                    </div>
+                    <div class="value mt-3 mb-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      <h6>
+                        {{
+                          getFormattedAmount(gridsize2.value)
+                            | currency: "SAR"
+                            | slice: 3
+                        }}
+                        {{ lang.screen1.sar }}
+                      </h6>
+                    </div>
+                    <div class="row align-center">
+                      <div class="col-md-12">
+                        <mat-card class="card px-3" style="border-radius: 15px; padding: 0px">
+                          <mat-slider #gridsize2 (change)="updateInstallment($event.value)" min="{{ minInstall }}"
+                            value="gridsize2" [max]="maxInstall" mask="separator" thousandSeparator=","
+                            [tickInterval]="insInter" formControlName="gridsize2">
+                          </mat-slider>
+                        </mat-card>
+                      </div>
+                      <div class="col-md-12 mb-3 mt-2">
+                        <span class="placeholder" style="font-size: 12px"
+                          [ngClass]="dir === 'rtl' ? 'fl-right' : 'fl-left'">{{ lang.screen2.min }}
+                          .
+                          {{
+                            getFormattedAmount(minInstall)
+                              | currency: "SAR"
+                              | slice: 3
+                          }}
+                          {{ lang.screen1.sar }}</span>
+                        <span class="placeholder" style="font-size: 12px"
+                          [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'">{{ lang.screen2.max }}
+                          .
+                          {{
+                            getFormattedAmount(maxInstall)
+                              | currency: "SAR"
+                              | slice: 3
+                          }}
+                          {{ lang.screen1.sar }}</span>
+                      </div>
+                       
+                    </div>
+                  </mat-card>
+                  <!-- <div *ngIf="submitted && fC.gridsize2.errors"
+                                        class="col-md-12 mx-3 invalid-feedback">
+                                        <div *ngIf="fC.gridsize2.errors.required">{{lang.screen2.req}}</div>
+                                    </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="tag-success-installment row mx-1">
+                <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  <div class="primary-centre-text">
+                    {{ lang.screen2.pr_amt }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{
+                      getFormattedAmount(periodicInstall)
+                        | currency: "SAR"
+                        | slice: 3
+                    }}
+                    {{ lang.screen1.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="tag-success-installment row mx-1">
+                <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  <div class="primary-centre-text">
+                    {{ lang.screen2.amt }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{
+                      getFormattedAmount(selectedTotAmount)
+                        | currency: "SAR"
+                        | slice: 3
+                    }}
+                    {{ lang.screen1.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 column-title mt-3 mx-3">
+              <button class="btnSecondary" mat-button (click)="displayForm()"
+                [disabled]="fC.gridsize2.value === '' ? true : false">
+                {{ lang.screen2.display_ins }}
+              </button>
+            </div>
+          </div>
+
+          <div class="row mt-5 mx-3">
+            <button class="btnPrimary" style="width: 22%" mat-button (click)="goToAttachment(stepper)">
+              {{ lang.screen2.button1 }}
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 Installment-Plans mt-3 mx-3">
+              {{ lang.screen2.attachments }}
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 placeholder mx-3">
+              {{ lang.screen2.placeholder3 }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <mat-divider style="position: inherit"></mat-divider>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  {{ lang.screen2.card_label1 }}
+                </div>
+                <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  {{ lang.screen2.card_label2 }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-card *ngIf="!flag" style="
+                          height: 219px;
+                          background-color: white !important;
+                        " class="zs-matCard" appDragDrop (click)="fileInput.click()"
+                        (onFileDropped)="uploadFiles($event, 'ZIP2')">
+                        <div class="uploadfilecontainer">
+                          <input hidden type="file" #fileInput (change)="uploadFiles($event.target.files, 'ZIP2')" />
+                          <div class="row text-center mt-5">
+                            <div class="col-md-12">
+                              <img src="assets/image/attach-gray.svg" style="width: 24px" alt="" />
+                              <div class="fileUploadTxt">
+                                {{ lang.screen2.file_op1 }}
+                              </div>
+                              <div class="fileUploadTxt1">
+                                5MB {{ lang.screen2.max }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-card>
+
+                      <div *ngFor="let attach of files1; let index = index">
+                        <mat-card class="border" style="height: 219px; width: 100%"
+                          [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'" *ngIf="flag">
+                          <div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <img src="assets/image/delete.svg" style="width: 24px" alt="" [ngClass]="
+                                    dir === 'rtl' ? 'fl-left' : 'fl-right'
+                                  " (click)="
+                                    deleteAttachments(attach, 'ZIP2', index)
+                                  " />
+                              </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                              <div class="col-md-12">
+                                <img src="assets/images/generic-documents.png" style="width: 24px" alt="" />
+                                <p class="fileName">{{ attach.Filename }}</p>
+                                <!-- <div class="fileSize">{{files2[0].size}} MB</div> -->
+                              </div>
+                            </div>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-card *ngIf="!flag2" style="
+                          height: 219px;
+                          background-color: white !important;
+                        " class="zs-matCard" appDragDrop (click)="fileInput.click()"
+                        (onFileDropped)="uploadFiles($event, 'ZIP3')">
+                        <div class="uploadfilecontainer">
+                          <input hidden type="file" #fileInput (change)="uploadFiles($event.target.files, 'ZIP3')" />
+                          <div class="row text-center mt-5">
+                            <div class="col-md-12">
+                              <img src="assets/image/attach-gray.svg" style="width: 24px" alt="" />
+                              <div class="fileUploadTxt">
+                                {{ lang.screen2.file_op1 }}
+                              </div>
+                              <div class="fileUploadTxt1">
+                                5MB {{ lang.screen2.max }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-card>
+
+                      <div *ngFor="let attach of files2; let index = index">
+                        <mat-card class="border" style="height: 219px; width: 100%"
+                          [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'" *ngIf="flag2">
+                          <div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <img src="assets/image/delete.svg" style="width: 24px" alt="" [ngClass]="
+                                    dir === 'rtl' ? 'fl-left' : 'fl-right'
+                                  " (click)="
+                                    deleteAttachments(attach, 'ZIP3', index)
+                                  " />
+                              </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                              <div class="col-md-12">
+                                <img src="assets/images/generic-documents.png" style="width: 24px" alt="" />
+                                <p class="fileName">{{ attach.Filename }}</p>
+                                <!-- <div class="fileSize">{{files2[0].size}} MB</div> -->
+                              </div>
+                            </div>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-card class="cardActive">
+                        <div class="title-card" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                          {{ lang.screen2.file_manually }}
+                        </div>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 tableItems">
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex; font-weight: bold">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.items }}
+                  </div>
+                  <div class="col-md-2" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.y1 }}
+                  </div>
+                  <div class="col-md-2" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.y2 }}
+                  </div>
+                  <div class="col-md-2" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.y3 }}
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.y }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" class="tag31 textAr" formControlName="Year1" [ngClass]="{
+                        'input-error': submitted && thirdControl.Year1.errors
+                      }" numbersOnly maxlength="4" minlength="3" placeholder="--" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" class="tag31 textAr" formControlName="Year2" [ngClass]="{
+                        'input-error': submitted && thirdControl.Year2.errors
+                      }" numbersOnly maxlength="4" minlength="3" placeholder="--" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" class="tag31 textAr" formControlName="Year3" [ngClass]="{
+                        'input-error': submitted && thirdControl.Year3.errors
+                      }" numbersOnly maxlength="4" minlength="3" placeholder="--" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.candb }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="CashBankY1" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.CashBankY1.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="CashBankY2" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.CashBankY2.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="CashBankY3" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.CashBankY3.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.sFInv }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="StiY1" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.StiY1.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="StiY2" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.StiY2.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="StiY3" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.StiY3.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.debts }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="DebitorsY1" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.DebitorsY1.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="DebitorsY2" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.DebitorsY2.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="DebitorsY3" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.DebitorsY3.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.invt }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="InventoryY1" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.InventoryY1.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="InventoryY2" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.InventoryY2.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="InventoryY3" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.InventoryY3.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.tCasset }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="TcAssetsY1" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.TcAssetsY1.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="TcAssetsY2" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.TcAssetsY2.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="TcAssetsY3" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.TcAssetsY3.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.zandT }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="ZakatY1" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.ZakatY1.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="ZakatY2" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.ZakatY2.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="ZakatY3" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.ZakatY3.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.tCLiab }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="TcLiabltyY1" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.TcLiabltyY1.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="TcLiabltyY2" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.TcLiabltyY2.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="TcLiabltyY3" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.TcLiabltyY3.errors
+                      }" decimals="2" (keyup)="onUp()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.revenue }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="RevenueY1" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.RevenueY1.errors
+                      }" decimals="2" (keyup)="callFunc()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="RevenueY2" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.RevenueY2.errors
+                      }" decimals="2" (keyup)="callFunc()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="RevenueY3" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.RevenueY3.errors
+                      }" decimals="2" (keyup)="callFunc()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.net_inc }}
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="NetIncomeY1" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.NetIncomeY1.errors
+                      }" decimals="2" (keyup)="callFunc()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="NetIncomeY2" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.NetIncomeY2.errors
+                      }" decimals="2" (keyup)="callFunc()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="NetIncomeY3" class="tag31 textAr" [ngClass]="{
+                        'input-error':
+                          submitted && thirdControl.NetIncomeY3.errors
+                      }" decimals="2" (keyup)="callFunc()" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-6" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.cashFlow }}
+                  </div>
+
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="NcFlowY1" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.NcFlowY1.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="NcFlowY2" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.NcFlowY2.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="NcFlowY3" class="tag31 textAr" [ngClass]="{
+                        'input-error': submitted && thirdControl.NcFlowY3.errors
+                      }" decimals="2" maxlength="12" mask="separator.2" thousandSeparator=","
+                      (blur)="validateNumbers()" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-3" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.prf_ratio }}
+                  </div>
+                  <div class="col-md-3" [ngClass]="{'textAr': dir === 'rtl'}" [matTooltip]="tooltip1"
+                    matTooltipClass="tooltip1">
+                    <img src="assets/image/information.svg" class="Information" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="ProfitRatioY1" [value]="
+                        thirdControl.ProfitRatioY1.value | number: '1.2-2'
+                      " class="no-border no-border-input textAr" appNumberInput decimals="2" [(ngModel)]="prft1"
+                      disabled />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="ProfitRatioY2" [value]="
+                        thirdControl.ProfitRatioY2.value | number: '1.2-2'
+                      " class="no-border no-border-input textAr" appNumberInput decimals="2" [(ngModel)]="prft2"
+                      disabled />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="ProfitRatioY3" [value]="
+                        thirdControl.ProfitRatioY3.value | number: '1.2-2'
+                      " class="no-border no-border-input textAr" appNumberInput decimals="2" [(ngModel)]="prft3"
+                      disabled />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3 borderBottom">
+                <div class="col-md-12 mb-3" style="display: inline-flex">
+                  <div class="col-md-3" [ngClass]="{'textAr': dir === 'rtl'}">
+                    {{ lang.screen2.cash_ratio }}
+                  </div>
+                  <div class="col-md-3" [ngClass]="{'textAr': dir === 'rtl'}" [matTooltip]="tooltip2"
+                    matTooltipClass="tooltip1">
+                    <img src="assets/image/information.svg" class="Information" />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="CashRatioY1"
+                      [value]="thirdControl.CashRatioY1.value | number: '1.2-2'"
+                      class="no-border no-border-input textAr" appNumberInput decimals="2" [(ngModel)]="cashBank1"
+                      disabled />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="CashRatioY2"
+                      [value]="thirdControl.CashRatioY2.value | number: '1.2-2'"
+                      class="no-border no-border-input textAr" appNumberInput decimals="2" [(ngModel)]="cashBank2"
+                      disabled />
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" label="year" formControlName="CashRatioY3"
+                      [value]="thirdControl.CashRatioY3.value | number: '1.2-2'"
+                      class="no-border no-border-input textAr" appNumberInput decimals="2" [(ngModel)]="cashBank3"
+                      disabled />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5 mx-3">
+            <button class="btnPrimary" style="width: 22%" mat-button (click)="goForward(stepper)">
+              {{ lang.screen2.button1 }}
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 Installment-Plans mt-3 mx-3">
+              {{ lang.screen2.title4 }}
+            </div>
+          </div>
+          <div class="row mt-3" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+            <div class="col-md-12 placeholder mx-3">
+              {{ lang.screen2.placeholder4 }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <mat-divider style="position: inherit"></mat-divider>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card border" style="max-width: 100%">
+                    <div class="row mt-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="circle-icon mx-3">
+                          <img class="px-3" src="assets/image/bill.png" />
+                        </div>
+                        <span class="column-title fwb">{{
+                          lang.screen2.bills
+                        }}</span>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="mt-3 px-3 card-edit" [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'"
+                          (click)="editBill(stepper, 1)">
+                          {{ lang.screen2.edit }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-12 mt-3">
+                        <mat-divider style="position: inherit"></mat-divider>
+                      </div>
+                    </div>
+                    <div class="row" *ngFor="
+                        let bill of highlightedBatch;
+                        let index = index;
+                        last as isLast
+                      ">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="row px-3">
+                              <div class="col-md-6">
+                                <div class="value fwb mt-3 mb-3" [ngClass]="
+                                    dir === 'rtl' ? 'textAr' : 'textEn'
+                                  ">
+                                  {{ lang.screen2.bill }}
+                                  {{ index + 1 }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row px-3">
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.zakatSc.bill_ty }}
+                                </div>
+                                <!-- <div class="card-column-value">
+                                                                    {{ bill.Abtyp }}
+                                                                </div> -->
+                                <div class="card-column-value" *ngIf="bill.Abtyp === 'ZAKT'">
+                                  {{ lang.screen1.tab2 }}
+                                </div>
+                                <div class="card-column-value" *ngIf="bill.Abtyp === 'ITAX'">
+                                  {{ lang.screen1.int }}
+                                </div>
+                              </div>
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.zakatSc.invno }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{ bill.InvNo }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12 mt-3">
+                                <mat-divider style="position: inherit"></mat-divider>
+                              </div>
+                            </div>
+                            <div class="row px-3 mt-3 mb-3">
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.screen1.due_date }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{
+                                    commonValidation.convertDateToStandard(
+                                      bill.DueDt
+                                    )
+                                  }}
+                                </div>
+                              </div>
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.screen2.amount }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{
+                                    getFormattedAmount(bill.DueAmt)
+                                      | currency: "SAR"
+                                      | slice: 3
+                                  }}
+                                  {{ lang.screen1.sar }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row" *ngIf="!isLast">
+                              <div class="col-md-12 mt-3">
+                                <mat-divider style="position: inherit"></mat-divider>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card border" style="max-width: 100%">
+                    <div class="row mt-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="circle-icon mx-3">
+                          <img class="px-3" src="assets/image/bill.png" />
+                        </div>
+                        <span class="column-title fwb">{{
+                          lang.screen2.inst_agr
+                        }}</span>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="mt-3 px-3 card-edit" [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'"
+                          (click)="editBill(stepper, 2)">
+                          {{ lang.screen2.edit }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-12 mt-3">
+                        <mat-divider style="position: inherit"></mat-divider>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mt-3">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="row px-3">
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.screen2.freq }}
+                                </div>
+                                <div class="card-column-value">
+                                  <span *ngIf="fC.selectFreq.value === '01' && dir === 'ltr'">Monthly</span>
+                                  <span *ngIf="fC.selectFreq.value === '01' && dir === 'rtl'">شهري</span>
+                                  <span *ngIf="fC.selectFreq.value === '02' && dir === 'ltr'">Quaterly</span>
+                                  <span *ngIf="fC.selectFreq.value === '02' && dir === 'rtl'">ربع سنوي</span>
+                                  <span *ngIf="fC.selectFreq.value === '03' && dir === 'ltr'">Half Quaterly</span>
+                                  <span *ngIf="fC.selectFreq.value === '03' && dir === 'rtl'">نصف سنوي</span>
+                                  <span *ngIf="fC.selectFreq.value === '04' && dir === 'rtl'">Yearly</span>
+                                  <span *ngIf="fC.selectFreq.value === '04' && dir === 'ltr'">سنويا</span>
+                                </div>
+                              </div>
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.screen2.no_ins }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{ gridsize.value }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 mt-3">
+                            <mat-divider style="position: inherit"></mat-divider>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 mt-3 mb-3">
+                            <div class="row px-3">
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label" [ngClass]="
+                                    dir === 'rtl' ? 'textAr' : 'textEn'
+                                  ">
+                                  {{ lang.filter.label4 }}
+                                </div>
+                                <div class="card-column-value" [ngClass]="
+                                    dir === 'rtl' ? 'textAr' : 'textEn'
+                                  ">
+                                  {{ gridsize2.value }} {{ lang.screen1.sar }}
+                                </div>
+                              </div>
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label" [ngClass]="
+                                    dir === 'rtl' ? 'textAr' : 'textEn'
+                                  ">
+                                  {{ lang.screen2.rsn }}
+                                </div>
+                                <div class="card-column-value" [ngClass]="
+                                    dir === 'rtl' ? 'textAr' : 'textEn'
+                                  ">
+                                  {{ fC.reasonForReq.value.ReaReqInstTxt }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card border" style="max-width: 100%">
+                    <div class="row mt-3">
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="circle-icon mx-3">
+                          <img class="px-3" src="assets/image/attach.png" />
+                        </div>
+                        <span class="column-title fwb">{{
+                          lang.screen2.attachments
+                        }}</span>
+                      </div>
+                      <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                        <div class="mt-3 px-3 card-edit" [ngClass]="dir === 'rtl' ? 'fl-left' : 'fl-right'"
+                          (click)="editBill(stepper, 3)">
+                          {{ lang.screen2.edit }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-12 mt-3">
+                        <mat-divider style="position: inherit"></mat-divider>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mt-3">
+                        <div class="row">
+                          <div class="col-md-12 mb-3">
+                            <div class="row px-3">
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.screen2.card_label1 }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{ file_name1 }} &nbsp;
+
+                                  <img src="assets/images/generic-documents.png" style="width: 24px" alt="" />
+                                </div>
+                              </div>
+                              <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                                <div class="card-column-label">
+                                  {{ lang.screen2.card_label2 }}
+                                </div>
+                                <div class="card-column-value">
+                                  {{ file_name2 }} &nbsp;
+                                  <img src="assets/images/generic-documents.png" style="width: 24px" alt="" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="tag-success-installment row mx-1">
+                <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  <div class="primary-centre-text">
+                    {{ lang.screen2.pr_amt }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{
+                      getFormattedAmount(periodicInstall)
+                        | currency: "SAR"
+                        | slice: 3
+                    }}
+                    {{ lang.screen1.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="tag-success-installment row mx-1">
+                <div class="col-md-6" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  <div class="primary-centre-text">
+                    {{ lang.screen2.amt }}
+                  </div>
+                </div>
+                <div class="col-md-6 align-left-text">
+                  <div>
+                    {{
+                      getFormattedAmount(selectedTotAmount)
+                        | currency: "SAR"
+                        | slice: 3
+                    }}
+                    {{ lang.screen1.sar }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5 mx-3">
+            <button class="btnPrimary" style="width: 22%" mat-button (click)="submitRequest(stepper)">
+              {{ lang.screen2.confirm }}
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+          <div class="row mt-3">
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row align-center">
+                <img class="px-3" style="height: 12vh" src="assets/image/success.svg" />
+              </div>
+            </div>
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row align-center Installment-Plans">
+                {{ lang.screen1.card1 }}
+              </div>
+            </div>
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row align-center card-column-label" *ngIf="insReq === '01'">
+                {{ lang.screen2.success_msg1 }}
+              </div>
+              <div class="row align-center card-column-label" *ngIf="insReq === '02'">
+                {{ lang.screen2.success_msg2 }}
+              </div>
+            </div>
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row align-center">
+                <div class="confirmation-input-box">
+                  <div class="col-md-6">
+                    <div class="card-column-label" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ lang.screen2.ref_num }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-column-value" style="float: right">
+                      {{ applicationReference }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-center mt-3">
+                <div class="confirmation-input-box">
+                  <div class="col-md-6">
+                    <div class="card-column-label" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ lang.screen2.sadNumber }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-column-value" style="float: right">
+                      {{ sadadNum }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-center mt-3">
+                <div class="confirmation-input-box">
+                  <div class="col-md-6">
+                    <div class="card-column-label" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                      {{ lang.screen1.dueAmtPyb }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card-column-value" style="float: right">
+                      {{
+                        getFormattedAmount(dpAmount)
+                          | currency: "SAR"
+                          | slice: 3
+                      }}
+                      {{ lang.screen1.sar }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row align-center mt-3">
+                <div class="card-column-label" [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'">
+                  <span>{{ lang.screen2.ack51 }} {{ lang.screen2.ack52 }}
+                    {{ lang.screen2.ack53 }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row align-center mt-3 mx-3">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                  <button class="btnPrimary" mat-button (click)="downloadConfirmation(applicationReference)">
+                    <span class="acknowledgement-btn">{{
+                      lang.screen2.dwnld_cnfrm
+                    }}</span>
+                  </button>
+                </div>
+                <div class="col-md-4">
+                  <button class="btnPrimary" mat-button (click)="downloadForm(applicationReference)">
+                    <span class="acknowledgement-btn">{{
+                      lang.screen2.dwldform
+                    }}</span>
+                  </button>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-3 mx-3">
+              <div class="row mt-3 mx-3 align-center">
+                <span class="btnSecondary acknowledgement-btn"
+                  [routerLink]="['/mains/dashboard']">{{ lang.screen2.go_dashboard }}</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

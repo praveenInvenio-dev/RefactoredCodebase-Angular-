@@ -1,0 +1,41 @@
+<div class="container-fluid" [dir]="direction" style="margin-top: 24px">
+  <div class="row">
+    <div class="col-md-12 p-0">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb acc-breadcrumb p-0 m-0">
+          <li class="breadcrumb-item acc-breadcrumb-item">
+            <a style="cursor: pointer">
+              {{ this.translation.tableHeader }}
+            </a>
+          </li>
+          <li
+            class="breadcrumb-item acc-breadcrumb-item active"
+            aria-current="page"
+          >
+            {{ this.translation.taxCategoryBreadcrumb }}
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-3 p-0">
+      <div
+        class="selector-card border pb-3 px-3"
+        [ngClass]="currentTaxType == 'D' ? 'selector-card-active' : ''"
+        (click)="gotoDirectTax()"
+      >
+        <div class="value fwb">{{ translation.directTaxBreadcrumb }}</div>
+      </div>
+    </div>
+    <div class="col-md-3 p-0">
+      <div
+        class="selector-card border pb-3 px-3"
+        [ngClass]="currentTaxType == 'I' ? 'selector-card-active' : ''"
+        (click)="gotoIndirectTax()"
+      >
+        <div class="value fwb">{{ translation.indirectTaxBreadcrumb }}</div>
+      </div>
+    </div>
+  </div>
+</div>

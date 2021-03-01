@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="59" height="35" viewBox="0 0 59 35">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g fill-rule="nonzero" transform="translate(-855 -326) translate(40 303) translate(815 23)">
+                        <rect width="59" height="35" rx="14"/>
+                        <rect width="59" height="35" fill="#006450" opacity=".1" rx="14"/>
+                        <rect width="59" height="35" rx="14" transform="rotate(-180 29.5 17.5)"/>
+                    </g>
+                    <g>
+                        <text fill="#006450" font-family="SST-Roman, SST" font-size="12" transform="translate(-855 -326) translate(40 303) translate(815 23)">
+                            <tspan x="12.92" y="22.5">Active</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

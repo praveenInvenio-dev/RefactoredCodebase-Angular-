@@ -1,0 +1,304 @@
+.disablePointer {
+    pointer-events: none;
+}
+.disablePointer1
+{
+    pointer-events: none;
+    background-color: lightgrey !important;
+}
+
+.w-260{
+    width:260px !important;
+}
+.mr-50 {
+    margin-right: 50px;
+}
+
+.table-fixed {
+    table-layout: fixed;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.custom-green-radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.custom-green-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.custom-green-radio:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.custom-green-radio input:checked~.checkmark {
+    background-color: #006450;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.custom-green-radio input:checked~.checkmark:after {
+    display: block;
+}
+
+.custom-green-radio .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.table-responsive {
+    overflow-x: auto !important;
+}
+
+body.modalopen {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+body.modalopen .modal {
+    overflow-y: auto !important;
+}
+
+.date-control-group input[type="date"] {
+    border: none;
+    border-radius: 100px !important;
+    width: 100%;
+}
+
+.mark-light-gray .text-white {
+    color: #000 !important;
+}
+
+select.input165 {
+    height: 36px;
+    padding: 0px 20px 0px 10px
+}
+
+.input165 {
+    height: 36px;
+}
+
+.border-gray {
+    border: 1px solid #808080;
+}
+
+
+/* FOR ARABIC STARTS */
+
+.lang-arabic .ar-flex-end {
+    justify-content: flex-end;
+}
+
+.lang-arabic .ar-flex-end button {
+    margin-right: 24px;
+}
+
+/* .lang-arabic .w-25.text-right {
+    text-align: left !important;
+} */
+
+.lang-arabic .mr-24 {
+    margin-right: 0 !important;
+    margin-left: 24px;
+}
+a img.mr-10{
+    margin-right: 4px !important;
+}
+.input165{
+    width:200px !important;
+    text-overflow: ellipsis;
+
+}
+.mark-dark-green .text-white {
+    color:#fff !important;
+}
+.modal-body .disablePointer{
+    pointer-events: none !important;
+}
+
+a.mr-24 img{
+    margin-bottom: 7px;
+}
+a.text-Watercourse{
+    color:#999999 !important;
+    
+}
+
+a.text-Watercourse:hover,  a.text-Watercourse:active, a.text-Watercourse:focus {
+    color:#006450 !important;
+    text-decoration: underline !important;
+}
+input:placeholder{
+    color:#757575 !important;
+}
+.text-danger{
+    font-size:14px !important;
+}
+.mark-dark-green, .mark-light-gray{
+    cursor:pointer !important;
+}
+.modal-dialog.modal-dialog-xlarge{
+    max-width:1200px !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 6px !IMPORTANT;
+  }
+  /* Track */
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #fff; 
+  }
+  /* Handle */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #999; 
+    height:1px;
+    border-radius:0px;
+    position:relative;
+  }
+  .table thead th {
+    font-size: 16px;
+    font-weight: 500 !important;
+}
+
+.modal-dialog.modal-dialog-large table thead tr th{
+    min-width:200px !important;
+}
+
+.mb-32.d-flex a.text-Watercourse{
+    color: #006450 !important;
+}
+.max-width-500.modal-dialog{
+    max-width: 450px !important;
+}
+.max-width-550.modal-dialog{
+    max-width: 550px !important;
+}
+.boder-dashed-1 {
+    border: 1px dashed #bbbbbb;
+}
+.cardh120{
+    height:160px !important;
+}
+.card a.d-flex:hover{
+    text-decoration: underline !important;
+}
+input[type=file]{
+    opacity: 0;
+}
+.custom-upload-file{
+    opacity: 0;
+    transform: Y(-50%);
+    width:100%;
+    height:100%;
+    z-index: 99;
+}
+.upload-excel-file{
+    left:0% !important;
+    top:0% !important;
+    transform:unset !important
+}
+.cursor-pointer{
+    cursor: pointer !important;
+}
+.attachement-file-icon {
+    transform: Y(-20%);
+    width:20px;
+    height:100px;
+    z-index: 999;
+
+}
+.table{
+    border-top:1px solid #ebebeb !important;
+}
+.date-control-group img{
+    display: none !important;
+}
+.light-text-Watercourse{
+    color:#579a8b;
+}
+.vat-steps a img{
+    padding:7px;
+}
+.lang-arabic .schdule-input-value input{
+    text-align: left !important;
+}
+.lang-arabic .modal-body .text-right{
+    text-align: left !important;
+}
+.modal-filter-head{
+    margin-bottom: 40px;
+}
+.modal-dialog.max-width-600 .modal-filter-head{
+    margin-bottom: unset !important;
+}
+.modal-dialog.max-width-600 .form-group.text-right{
+    display: flex !important;
+}
+
+.modal-dialog.max-width-550 .form-group.text-right{
+    display: flex !important;
+}
+.lang-arabic th.text-right.w-50{
+    text-align: left !important;
+    padding-left: 13% !important;
+}
+.lang-arabic .ar-input-right .modal-body td input.text-right{
+    text-align: right !important;
+}
+
+.lang-arabic div#RoyalityTechnicalSecurityModal td input.text-right{
+    text-align: right !important;
+}
+.lang-arabic .modal-body .input165{
+    
+    text-align: right !important;
+
+}
+
+.mat-input-element{
+    position: relative;
+}
+
+.mat-calendar{
+    position: absolute;
+    right: 22px;
+    margin-top: -5px;
+}
+
+.lang-arabic .mat-calendar{
+    position: absolute;
+    left: 22px !important;
+}

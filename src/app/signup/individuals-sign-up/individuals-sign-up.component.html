@@ -1,0 +1,966 @@
+<app-header [direction]="direction" [title]="lang.title" [url]="url"></app-header>
+
+<div class="container" style="margin-top: 150px;" dir={{direction}}>
+    <div class="row" *ngIf="!showVerification && !show">
+        <div class="col-md-12">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div [ngClass]="optionActive === 1 ? 'viewCssActive' : 'viewCss'" (click)="backClick(1)">
+                        <div class="card cardz" [ngClass]="optionActive === 1 ? 'cardCss' : 'cardCssActive'">
+                            <div class="card-body">
+                                <i class="fa fa-check-circle"
+                                    [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="showOne"
+                                    aria-hidden="true"></i>
+                                <p class="ellipse-inner" [style.left]="direction === 'rtl' ? '-4px' : '4px'"
+                                    *ngIf="!showOne"></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <p [ngClass]="optionActive === 1 ? 'txtCss' : 'txtCssActive'"> {{lang.header.h1}}
+                    </p>
+                    <!-- <hr *ngIf="optionActive !== 1" [ngClass]="direction === 'rtl' ? 'hrCssActive' : 'hrEngcssActive'">
+              <hr *ngIf="optionActive === 1" [ngClass]="direction === 'rtl' ? 'hrCss' : 'hrEngcss'"> -->
+                </div>
+                <div class="col-md-4">
+                    <div [ngClass]="optionActive === 2 ? 'viewCssActive' : 'viewCss'" (click)="backClick(2)">
+                        <div class="card cardz" [ngClass]="optionActive === 2 ? 'cardCss' : 'cardCssActive'">
+
+                            <div class="card-body">
+                                <i class="fa fa-check-circle"
+                                    [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="showTwo"
+                                    aria-hidden="true"></i>
+                                <p class="ellipse-inner" *ngIf="!showTwo"
+                                    [style.left]="direction === 'rtl' ? '-4px' : '4px'"
+                                    [style.background]="defaultValue === 1 ? 'white' : ''"
+                                    [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'">
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <p [ngClass]="optionActive === 2 ? 'txtCss' : 'txtCssActive'"
+                        [style.color]="defaultValue === 1 ? '#c0c0c0' : ''"
+                        [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+                        {{lang.header.h2}}
+                    </p>
+                    <!-- <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss2Active">
+              <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss3Active"> -->
+                    <hr class="hrCss2">
+                    <hr class="hrCss3">
+                </div>
+                <div class="col-md-4">
+                    <div [ngClass]="optionActive === 3 ? 'viewCssActive' : 'viewCss'" (click)="backClick(3)">
+                        <div class="card cardz" [ngClass]="optionActive === 3 ? 'cardCss' : 'cardCssActive'">
+
+                            <div class="card-body">
+                                <!-- <i class="fa fa-arrow-left" style="font-size: 25px;" aria-hidden="true"></i> -->
+                                <i class="fa fa-check-circle"
+                                    [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="show"
+                                    aria-hidden="true"></i>
+
+                                <p class="ellipse-inner" *ngIf="!show"
+                                    [style.left]="direction === 'rtl' ? '-4px' : '4px'"
+                                    [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'"
+                                    [style.background]="defaultValue === 3 ||defaultValue === 1 ? 'white' : ''">
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <p [ngClass]="optionActive === 3 ? 'txtCss' : 'txtCssActive'"
+                        [style.color]="defaultValue === 3 || defaultValue === 1 ? '#c0c0c0' : ''"
+                        [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+                        {{lang.header.h3}}</p>
+                    <!-- <hr *ngIf="show" [ngClass]="direction === 'rtl' ? 'hrCsss4' : 'hrEngCsss4'">
+              <hr *ngIf="!show" [ngClass]="direction === 'rtl' ? 'hrCss4' : 'hrEngCss4'"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!show && !showVerification">
+
+
+        <div class="row rowCss mt-2" *ngIf="optionActive === 1">
+            <div class="col-md-12">
+                <mat-card>
+                    <mat-card-content>
+
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <div class="sideHeading">
+                                    <span> {{lang.c1.title}}</span>
+                                    <p class="Rectangle-12"></p>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="sideHeading">
+                            {{lang.c1.title}} <span
+                                *ngIf="individualDto2.IdType !== '' && !idErr && individualDto2.IdNumber !== '' && (individualDto2.Birthdt !== null) && !dobErr1">
+                                <i class="fa fa-check-circle" aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i>
+                            </span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c1.in1}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-select [(ngModel)]="individualDto2.IdType" name="type1">
+                                        <mat-option [value]="idType.value" (click)="checkGcc(idType.value)"
+                                            *ngFor="let idType of idTypes">
+                                            {{idType.name}}</mat-option>
+                                        <!-- <mat-option value="ZS0002">{{idTypes.t2}}</mat-option>
+                            <mat-option value="ZS0003">{{idTypes.t3}}</mat-option> -->
+                                    </mat-select>
+                                </mat-form-field>
+                                <div *ngIf="idTErr" class="invalid-feedback">
+                                    <p>{{IDErrz.e4}}</p>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c1.in2}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" [ngModel]="individualDto2.IdNumber" maxlength="15"
+                                        (ngModelChange)="individualDto2.IdNumber = $event; IDtypeValidation1()"
+                                        name="num1" type="text" (keypress)='restrictAlphabets($event)'>
+                                </mat-form-field>
+                                <div *ngIf="idErr" class="invalid-feedback">
+                                    <div
+                                        *ngIf="individualDto2.IdNumber === '' || individualDto2.IdNumber === undefined">
+                                        <p>{{IDErrz.e5}}</p>
+                                    </div>
+                                    <p>{{idMsg}}</p>
+                                </div>
+                            </div>
+
+                            <!--
+                            <ngb-datepicker name="sss" class="custom-datepicker px-3 pt-1 pb-3" #dp outsideDays="hidden"
+                                [showWeekdays]="false" navigation="none">
+                                <ng-template ngbDatepickerContent>
+                                    <button (click)="testCal(1, $event)">test</button>
+                                    <div *ngFor="let month of dp.state.months">
+                                        <div class="text-primary p-1 font-weight-bold">
+                                            {{ month.year }}</div>
+                                        <ngb-datepicker class="border rounded">
+                                        </ngb-datepicker>
+                                    </div>
+                                </ng-template>
+                            </ngb-datepicker> -->
+
+
+
+                            <!--  <mat-form-field appearance="outline">
+                                <input matInput [matDatepicker]="picker" [min]="startDate" [max]="enddate" [(ngModel)]="datz" name="sd" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                                </mat-datepicker>
+                            </mat-form-field> -->
+                            <div class="col-md-4">
+
+                                <div class="registerLabelCss">{{ lang.c1.in3}}<span style="color: red;">*</span></div>
+                                <!-- <mat-form-field appearance="outline">
+                                    <input matInput placeholder="yyyy-mm-dd" [(ngModel)]="individualDto2.Birthdt"
+                                        name="dob" [maxDate]="maxDate" ngbDatepicker #d1="ngbDatepicker"
+                                        [footerTemplate]="footerTemplate">
+
+                                    <ng-template #footerTemplate>
+                                        <hr class="my-0">
+                                        <button class="btn btn-primary btn-sm m-2 float-left"
+                                            (click)="testCal(1, $event)">Hijri</button>
+                                        <button class="btn btn-primary btn-sm m-2 float-right"
+                                            (click)="testCal(2,$event)">English</button>
+                                    </ng-template>
+l
+                                    <mat-icon matSuffix (click)="d1.toggle()" style="color: #707070;cursor: pointer;">
+                                        date_range
+                                    </mat-icon>
+                                </mat-form-field> -->
+                                <mat-form-field appearance="outline">
+                                    <input matInput [matDatepicker]="picker" (dateChange)="getdateErr()"
+                                          [ngModel]="individualDto2.Birthdt"
+                                        (ngModelChange)="individualDto2.Birthdt = $event; validateDOB()" name="sd"
+                                        placeholder="" type="text" (keypress)='restrictAlphabetss($event)'>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                                    </mat-datepicker>
+                                </mat-form-field>
+                                <div *ngIf="dobErr" class="invalid-feedback">
+                                    <p>{{IDErrz.e6}}
+                                    </p>
+                                </div>
+                                <div *ngIf="dobErr1" class="invalid-feedback">
+                                    <p>
+                                        {{dateMsg}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="mt-3" *ngIf="showGcc">
+                    <!-- <mat-card-header class="cardHeader">
+                            <mat-card-title>National Address</mat-card-title>
+                        </mat-card-header> -->
+                    <mat-card-content>
+                        <!-- <div class="sideHeading">
+                            {{lang.c2.title}}
+                            <p class="Rectangle-12"></p>
+                        </div> -->
+                        <div class="sideHeading">
+                            {{lang.c2.title}} <span><i class="fa fa-check-circle" *ngIf="currentTab > optionActive"
+                                    aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+                            <!-- <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in1}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input [(ngModel)]="individualDto2.CityName" maxlength="40" name="CityName1"
+                                        matInput placeholder="CityName 1">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in2}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input [(ngModel)]="individualDto2.DistrictName" maxlength="40" name="DistrictName1"
+                                        matInput placeholder="Neighbourhood 1">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in3}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input [(ngModel)]="individualDto2.StreetName" maxlength="60" name="StreetName1"
+                                        matInput placeholder="Street 1">
+                                </mat-form-field>
+                            </div> -->
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in1}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input
+                                        (ngModelChange)="individualDto2.CityName = $event; validate(individualDto2,2)"
+                                        [ngModel]="individualDto2.CityName" maxlength="40" name="CityName" matInput
+                                        placeholder="">
+                                </mat-form-field>
+
+                                <div class="invalid-feedback" *ngIf="nameErr2">
+                                    {{cityMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in2}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input
+                                        (ngModelChange)="individualDto2.DistrictName = $event; validate(individualDto2,3)"
+                                        [ngModel]="individualDto2.DistrictName" maxlength="40" name="DistrictName"
+                                        matInput placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="dErr">
+                                    {{dMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr3">
+                                    {{dMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in3}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input
+                                        (ngModelChange)="individualDto2.StreetName = $event; validate(individualDto2,4)"
+                                        [ngModel]="individualDto2.StreetName" name="StreetName" maxlength="60" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="sErr">
+                                    {{sMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr4">
+                                    {{sMsg}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!--
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in4}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input [(ngModel)]="individualDto2.Zipcode" maxlength="5" name="Zipcode1" matInput
+                                        placeholder="Code 1">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in5}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input [(ngModel)]="individualDto2.BuildingNo" maxlength="20" name="BuildingNo1"
+                                        matInput placeholder="Number 1">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in6}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input [(ngModel)]="individualDto2.UnitNo" maxlength="10" name="UnitNo1" matInput
+                                        placeholder="Number 1">
+                                </mat-form-field>
+                            </div> -->
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in4}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input (ngModelChange)="individualDto2.Zipcode = $event; validate(individualDto2,5)"
+                                        [(ngModel)]="individualDto2.Zipcode" maxlength="5" name="Zipcode" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="zErr">
+                                    {{zMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr5">
+                                    {{zMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in5}}</div>
+                                <mat-form-field appearance="outline">
+
+                                    <input
+                                        (ngModelChange)="individualDto2.BuildingNo = $event; validate(individualDto2,6)"
+                                        [ngModel]="individualDto2.BuildingNo" maxlength="9" name="BuildingNo" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="bErr">
+                                    {{bMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr6">
+                                    {{bMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in6}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input (ngModelChange)="individualDto2.UnitNo = $event; validate(individualDto2,7)"
+                                        [ngModel]="individualDto2.UnitNo" maxlength="5" name="UnitNo" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="uErr">
+                                    {{uMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr7">
+                                    {{uMsg}}
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="mt-3" *ngIf="showGcc">
+                    <!-- <mat-card-header class="cardHeader">
+                            <mat-card-title>Contact Information</mat-card-title>
+                        </mat-card-header> -->
+                    <mat-card-content>
+                        <!-- <div class="sideHeading">
+                            {{lang.c3.title}}
+                            <p class="Rectangle-12"></p>
+                        </div> -->
+                        <div class="sideHeading">
+                            {{lang.c3.title}} <span><i class="fa fa-check-circle" *ngIf="currentTab > optionActive"
+                                    aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+                            <!-- <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in1}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+
+                                    <input [(ngModel)]="individualDto2.MobileNo" maxlength="10" name="MobileNo1"
+                                        matInput placeholder="Number 1">
+                                </mat-form-field>
+                                <div *ngIf="mErr" class="invalid-feedback">
+                                    <p>{{IDErrz.e17}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in2}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input [(ngModel)]="individualDto2.email" maxlength="241" name="email1" matInput
+                                        (blur)="validateEmail(individualDto2.email)" placeholder="Email 1">
+                                </mat-form-field>
+                                <div *ngIf="!emailErr" class="invalid-feedback">
+                                    <p>{{IDErrz.e18}}</p>
+                                </div>
+                            </div> -->
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in1}}<span style="color: red;">*</span></div>
+                                <!-- <mat-form-field appearance="outline">
+
+                                    <input (ngModelChange)="individualDto2.MobileNo = $event; validate(individualDto2,8)"
+                                        [ngModel]="individualDto2.MobileNo" maxlength="10" name="MobileNo" matInput
+                                        placeholder="">
+                                </mat-form-field> -->
+                                <!-- <div id="custom">
+                                    <mat-select id="code" class="custom" style="width: 30%;" [(ngModel)]="cncode"
+                                        name="cncode">
+                                        <mat-option [value]="item.Telefto" *ngFor="let item of codes">
+                                           <span *ngIf="cncode !== item.Telefto"> {{ item.Land1 }}</span>&nbsp; +{{item.Telefto}}</mat-option>
+                                      
+                                    </mat-select>
+                                    <input matInput type="text"
+                                        (ngModelChange)="individualDto2.MobileNo = $event; validate(individualDto2,8)"  (keypress)='restrictAlphabets($event)'
+                                        [ngModel]="individualDto2.MobileNo" maxlength="10" name="MobileNo"
+                                        class="custom" placeholder="" style="width: 70%; padding-left: 12px;">
+                                </div> -->
+                                <!-- <div class="invalid-feedback" *ngIf="msErr">
+                                    {{msMsg}}
+                                </div> -->
+                                <div style="margin-top: 25px;" class="invalid-feedback" *ngIf="nameErr8">
+                                    {{msMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in2}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input (ngModelChange)="individualDto2.email = $event; validate(individualDto2,9)"
+                                        [ngModel]="individualDto2.email" maxlength="240" name="email" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="eErr">
+                                    {{eMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr9">
+                                    {{eMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in3}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input (ngModelChange)="individualDto2.cemail = $event; validate(individualDto2,10)"
+                                        [ngModel]="individualDto2.cemail" maxlength="240" name="cemail" matInput
+                                        placeholder="">
+                                </mat-form-field>
+
+                                <div class="invalid-feedback" *ngIf="nameErr10">
+                                    {{ceMsg}}
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <div class="mt-3">
+                    <button mat-raised-button [disabled]="individualDto2.IdType === ''" [ngClass]="direction === 'rtl' ?
+                    'btnArbCss' : 'btnCss'" (click)="onSubmit1();">
+                        {{lang.c1.btn}}</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row rowCss mt-2" *ngIf="optionActive === 2">
+            <div class="col-md-12">
+
+                <mat-card>
+
+                    <mat-card-content>
+                        <!-- <div class="sideHeading">
+                            {{lang.c7.title}}
+                            <p class="Rectangle-12"></p>
+                        </div> -->
+                        <div class="sideHeading">
+                            {{lang.c7.title}} <span><i class="fa fa-check-circle" *ngIf="individualDto.Name !== ''"
+                                    aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c7.in1}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input [(ngModel)]="individualDto.IdType" disabled maxlength="6" name="idtype"
+                                        matInput placeholder="">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c7.in2}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput [(ngModel)]="individualDto.IdNumber" disabled maxlength="60"
+                                        name="IdNumber" placeholder="">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c7.in3}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+
+                                    <input matInput [disabled]="nameVal"
+                                        (ngModelChange)="individualDto.Name = $event; validate(individualDto,1)"
+                                        [ngModel]="individualDto.Name" maxlength="80" name="name" placeholder="">
+                                </mat-form-field>
+                                <div class="invalid-feedback" *ngIf="nameErr1">
+                                    {{nameMsg}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="mt-3">
+                    <!-- <mat-card-header class="cardHeader">
+                            <mat-card-title>National Address</mat-card-title>
+                        </mat-card-header> -->
+                    <mat-card-content>
+                        <!-- <div class="sideHeading">
+                            {{lang.c2.title}}
+                            <p class="Rectangle-12"></p>
+                        </div> -->
+                        <div class="sideHeading">
+                            {{lang.c2.title}} <span><i class="fa fa-check-circle"
+                                    *ngIf="!showc1 && individualDto.CityName !== '' && individualDto.DistrictName !== '' && individualDto.StreetName !== '' && individualDto.Zipcode !== '' && individualDto.BuildingNo !== '' && individualDto.UnitNo !== ''"
+                                    aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+                            <!-- <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in1}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+
+                                    <input (ngModelChange)="individualDto.CityName = $event; validate(individualDto,2)"
+                                        [ngModel]="individualDto.CityName" maxlength="40" name="CityName" matInput
+                                        placeholder="">
+                                </mat-form-field>
+
+                                <div class="invalid-feedback" *ngIf="nameErr2">
+                                    {{cityMsg}}
+                                </div>
+                            </div> -->
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in1}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-select  [(ngModel)]="individualDto.CityName" name="city2">
+                                        <mat-option [value]="item.CityName" (click)=" validateCity(individualDto.CityName)" *ngFor="let item of cityList  | sort: criteria">{{item.CityName}}</mat-option>
+
+                                    </mat-select>
+                                </mat-form-field>
+                                <div class="invalid-feedback" *ngIf="nameErr2">
+                                    {{cityMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in2}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input
+                                        (ngModelChange)="individualDto.DistrictName = $event; validate(individualDto,3)"
+                                        [ngModel]="individualDto.DistrictName" maxlength="40" name="DistrictName"
+                                        matInput placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="dErr">
+                                    {{dMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr3">
+                                    {{dMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in3}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input
+                                        (ngModelChange)="individualDto.StreetName = $event; validate(individualDto,4)"
+                                        [ngModel]="individualDto.StreetName" name="StreetName" maxlength="60" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="sErr">
+                                    {{sMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr4">
+                                    {{sMsg}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in4}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+
+                                    <input (ngModelChange)="individualDto.Zipcode = $event; validate(individualDto,5)"  (keypress)='restrictAlphabets($event)'
+                                        [(ngModel)]="individualDto.Zipcode" maxlength="5" name="Zipcode" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="zErr">
+                                    {{zMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr5">
+                                    {{zMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in5}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+
+                                    <input
+                                        (ngModelChange)="individualDto.BuildingNo = $event; validate(individualDto,6)"  (keypress)='restrictAlphabets($event)'
+                                        [ngModel]="individualDto.BuildingNo" maxlength="9" name="BuildingNo" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="bErr">
+                                    {{bMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr6">
+                                    {{bMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c2.in6}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input (ngModelChange)="individualDto.UnitNo = $event; validate(individualDto,7)"  (keypress)='restrictAlphabets($event)'
+                                        [ngModel]="individualDto.UnitNo" maxlength="9" name="UnitNo" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="uErr">
+                                    {{uMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr7">
+                                    {{uMsg}}
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="mt-3">
+                    <!-- <mat-card-header class="cardHeader">
+                            <mat-card-title>Contact Information</mat-card-title>
+                        </mat-card-header> -->
+                    <mat-card-content>
+                        <!-- <div class="sideHeading">
+                            {{lang.c3.title}}
+                            <p class="Rectangle-12"></p>
+                        </div> -->
+                        <div class="sideHeading">
+                            {{lang.c3.title}} <span><i class="fa fa-check-circle"
+                                    *ngIf="individualDto.MobileNo !=='' && individualDto.cemail !== '' && individualDto.email !== '' && !showc2"
+                                    aria-hidden="true"
+                                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in1}}<span style="color: red;">*</span></div>
+                                <!-- <mat-form-field appearance="outline">
+
+                                    <input (ngModelChange)="individualDto.MobileNo = $event; validate(individualDto,8)"
+                                        [ngModel]="individualDto.MobileNo" maxlength="10" name="MobileNo" matInput
+                                        placeholder="">
+                                </mat-form-field> -->
+                                <div id="custom"  style="direction: initial">
+                                    <mat-select id="code" class="custom" style="width: 30%;" [(ngModel)]="cncode" 
+                                        name="cncode">
+                                        <mat-select-trigger>
+                                            +{{cncode}}
+                                          </mat-select-trigger>
+                                        <mat-option [value]="item.Telefto" *ngFor="let item of codes"
+                                            (click)="getMaxLength(item.maxLength)">
+                                            <div class="row">
+                                                <div class="col-md-6" >
+                                                   <span> +{{item.Telefto}}  &nbsp;&nbsp;&nbsp;&nbsp; </span>
+                                                </div>
+                                                <div class="col-md-6" >
+                                                 {{ item.Landx50 }}
+                                                </div>
+                                            </div>
+        
+                                           </mat-option>
+                                        <!-- <mat-option value="ZS0002">{{ idTypes.t2 }}</mat-option>
+                                      <mat-option value="ZS0003">{{ idTypes.t3 }}</mat-option> -->
+                                    </mat-select>
+                                    <input matInput type="text"
+                                        (ngModelChange)="individualDto.MobileNo = $event; validate(individualDto,8)" (keypress)='restrictAlphabets($event)'
+                                        [ngModel]="individualDto.MobileNo" maxlength={{maxLength}} name="MobileNo2"
+                                        class="custom" placeholder="" style="width: 70%; padding-left: 12px;">
+                                </div>
+                                <!-- <div class="invalid-feedback" *ngIf="msErr">
+                                    {{msMsg}}
+                                </div> -->
+                                <div style="margin-top: 11px !important" class="invalid-feedback" *ngIf="nameErr8">
+                                    {{msMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in2}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input (ngModelChange)="individualDto.email = $event; validate(individualDto,9)"
+                                        [ngModel]="individualDto.email" maxlength="240" name="email" matInput
+                                        placeholder="">
+                                </mat-form-field>
+                                <!-- <div class="invalid-feedback" *ngIf="eErr">
+                                    {{eMsg}}
+                                </div> -->
+                                <div class="invalid-feedback" *ngIf="nameErr9">
+                                    {{eMsg}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c3.in3}}<span style="color: red;">*</span></div>
+                                <mat-form-field appearance="outline">
+                                    <input (ngModelChange)="individualDto.cemail = $event; validate(individualDto,10)"
+                                        [ngModel]="individualDto.cemail" maxlength="240" name="email" matInput
+                                        placeholder="">
+                                </mat-form-field>
+
+                                <div class="invalid-feedback" *ngIf="nameErr10">
+                                    {{ceMsg}}
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <div class="mt-3">
+                    <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'"
+                        (click)="onSubmit3()">{{lang.c3.btn}}</button>
+                </div>
+                <!-- getOtp2(individualDto, '') -->
+            </div>
+        </div>
+
+        <!-- <div class="row rowCss mt-2" *ngIf="optionActive === 3">
+            <div class="col-md-12">
+                <mat-card class="mt-3">
+                    <mat-card-content>
+                        <div class="sideHeading">
+                            {{lang.c4.title}}
+                            <p class="Rectangle-12"></p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-push-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p [ngClass]="direction === 'rtl' ? 'pwdArbScreenCss' : 'pwdScreenCss'">
+                                            {{lang.c4.in1}}</p>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="*********">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p [ngClass]="direction === 'rtl' ? 'pwdArbScreenCss' : 'pwdScreenCss'">
+                                            {{lang.c4.in2}}</p>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="*********">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-md-pull-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="height: 8px;border-radius: 3.5px;
+                                            background-color: #d2a02a;"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="textbox" style="color:  #13614c;;">
+                                            <div [ngClass]="direction === 'rtl' ? 'alignright' : 'alignleft'">
+                                                {{lang.c4.subtitle.t1}}
+                                            </div>
+                                            <div [ngClass]="direction === 'rtl' ? 'alignleft' : 'alignright'">
+                                                <b>
+                                                    {{lang.c4.subtitle.t2}}
+                                                </b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <p class="pwdcss">
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                            {{lang.c4.subtitle.t3}}
+                                        </p>
+                                        <p class="pwdcss">
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                            {{lang.c4.subtitle.t4}}
+                                        </p>
+                                        <p class="pwdcss">
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                            {{lang.c4.subtitle.t5}}
+                                        </p>
+                                        <p class="pwdcss">
+                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                            {{lang.c4.subtitle.t6}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="mt-3">
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p [ngClass]="direction === 'rtl' ? 'ackArbCss' : ''">
+                                    <mat-checkbox class="checkCss"></mat-checkbox> <b>{{lang.c5.title}}</b>
+                                </p>
+
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <div class="mt-3 mb-3">
+                    <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'"
+                        (click)="submit()">{{lang.c5.btn}}</button>
+                </div>
+            </div>
+        </div> -->
+        <!-- CREATE NEW PASSWORD - START -->
+        <app-Create-Password (completed)="submit($event)"  [type2]="type2" *ngIf="optionActive === 3"></app-Create-Password>
+    </div>
+    <!-- ACKNOWLEDGMNET SECTION - START -->
+    <!-- <app-acknowledgment *ngIf="show"></app-acknowledgment> -->
+    <app-acknowledgment *ngIf="show" [no]="no" [name]="name"  [type]="type"></app-acknowledgment>
+    <!-- ACKNOWLEDGMNET SECTION - END -->
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="address" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modalTitl justify-content-center">
+                <span class="modalText"> {{lang.m.t1}}</span>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="modalTxt2">
+                            {{lang.m.t2}}
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6" *ngFor="let item of individualDto1;let i=index">
+                        <mat-card class="boxCss" style=" background-position: center;"
+                            [style.background-image]="item.flag? backgroundImg1:backgroundImg">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <ul class="modalTxt3" [style.color]="item.flag? 'white':'black'">
+                                        <li>CityName: <span class="modalTxtBold">{{item.CityName}}</span>
+                                        </li>
+                                        <li>Quarter: <span class="modalTxtBold">{{item.DistrictName}}</span></li>
+                                        <li>Zip Code: <span class="modalTxtBold">{{item.Zipcode}}</span></li>
+                                        <li>Street Name: <span class="modalTxtBold">{{item.StreetName}}</span></li>
+                                        <li>Building Number: <span class="modalTxtBold">{{item.BuildingNo}}</span></li>
+                                        <li>Additional Number: <span class="modalTxtBold">{{item.AdditionalNo}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col md-3">
+                                    <label class="containers">
+                                        <input type="checkbox" [(ngModel)]="item.flag" name="flag{{i}}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <!-- <mat-checkbox  [(ngModel)]="item.flag" name="flag{{i}}">
+
+                                  </mat-checkbox> -->
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                    <div class="invalid-feedback" *ngIf="dataErr">
+                        {{dataMsg}}
+                    </div>
+                </div>
+
+                <div class="row mt-5 mb-3">
+                    <div class="col-md-12">
+                        <button mat-button class="btnCss" (click)="pushData()">{{lang.m.btn}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- VERIFICATION CARD - START -->
+<!-- <div class="row rowCss mt-2 vContainer" *ngIf="showVerification && !show">
+    <div class="col-md-12">
+        <mat-card class="mt-3" style="margin-left: 20%;
+        margin-right: 20%;">
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="vText">
+                            <span> {{ lang.c8.t1 }} {{mobileNum}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4" dir="ltr">
+                    <div class="col-md-12 vBox">
+                        <input type="password" class="Verif-box ash" maxlength="1" placeholder="*"
+                            (keyup)="keyUpEvent($event, 1)" />
+                        <input type="password" class="Verif-box ash" maxlength="1" placeholder="*"
+                            (keyup)="keyUpEvent($event, 2)" />
+                        <input type="password" class="Verif-box ash" maxlength="1" placeholder="*"
+                            (keyup)="keyUpEvent($event, 3)" />
+                        <input type="password" class="Verif-box ash" maxlength="1" placeholder="*"
+                            (keyup)="keyUpEvent($event, 4)" />
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="sideHeading timer">
+                            <span>0:{{ counter < 10 ? '0'+counter : counter }} </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="sideHeading resend">
+                            <span>
+                                <button class="resend" [disabled]="!enableResendButton"
+                                    (click)="resendOTP()">{{ lang.c8.t2 }}</button></span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div> -->
+<app-otp-verification *ngIf="showVerification && !show" [resend]="resend" [mobile]="mobile"
+    (validateOTP)="getOTPFromUser($event)" (resend)="resendOTP()"></app-otp-verification>
+<!-- VERIFICATION CARD - END -->
+
+
+<notifier-container></notifier-container>

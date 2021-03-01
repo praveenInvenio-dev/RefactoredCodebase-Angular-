@@ -1,0 +1,1123 @@
+<!-- <p>change-registration works!</p> -->
+<!-- change registration starts here -->
+<div *ngIf="Step==1" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container"> 
+        <div class="mb-24"> 
+            <a href="javascript:void(0)" class="text-Gray">{{lang.nav.t1}}  </a> {{lang.nav.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a href="javascript:void(0)" routerLink="/mains/tax" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="javascript:void(0)" class="active">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+				<a href="javascript:void(0)">
+                    <span></span>
+                </a>
+				<a href="javascript:void(0)">
+                    <span></span>
+                </a>
+				<a href="javascript:void(0)">
+                    <span></span>
+                </a>
+				<a href="javascript:void(0)">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+		
+		<div class="card card-shadow-none mb-56">            
+			<div class="p-24 d-flex align-items-center justify-content-between">
+				<h3 class="d-flex align-items-center mb-0">
+					<span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg" class="" alt=""></span> {{lang.step1.t1}}
+				</h3>
+			</div>
+            <div class="border-bottom-whisper"></div>
+
+			<div class="collapse show multi-collapse">		
+				<div class="row p-24">
+					<div class="col-sm-6">
+						<p class="font-16 text-Gray mb-0">{{lang.step1.t2}} </p>
+						<div class="text-Eerie-Black font-16 font-weight-500">
+							{{ElegibleCategory}}
+						</div>
+					</div>
+
+					<div class="col-sm-6">
+						<p class="font-16 text-Gray mb-0">{{lang.step1.t3}}</p>
+						<div class="text-Eerie-Black font-16 font-weight-500">
+							{{WholeData?.EntityNm}}
+						</div>
+					</div>
+				</div>
+				<div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Idnumber}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step1.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.TypeTxt}}
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+		
+		<div class=" mb-24">
+			<button class="btn btn-primary" (click)="continueFirstScreen()">{{lang.nav.continue}}</button>
+        </div>
+    </div>
+
+    <!-- Instructions modal starts here -->
+    <button [hidden]="true" #infoModal data-toggle="modal" data-target="#infoModal" data-backdrop="static" data-keyboard="false"></button>
+    <div class="modal modal-filter fade" id="infoModal" role="dialog">
+        <div class="modal-dialog max-width-708 pop-up-align-mddile">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" routerLink="/mains/tax">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body px-60 pt-40" [formGroup]="InstructionFormGroup">
+                    <h2 class="mb-24">{{lang.popup1.t1}}</h2>
+                    <div class="card-inner mb-28">
+                        <div class="d-flex mb-10">
+                            <img src="assets/images/icon-info.svg" class="mr-10" alt="">
+                            <span class="font-12 text-Nero">
+                                {{lang.popup1.t2}}
+                            </span>
+                        </div>
+                        <ol class="font-12 text-Gray p-0 m-0 pl-12">
+                            <li class="mb-16">
+                                {{lang.popup1.t3}}
+                            </li>
+                            <li class="mb-16">
+                                {{lang.popup1.t4}}
+                            </li>
+                            <li>
+                                {{lang.popup1.t5}} 
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="mb-60">
+                        <label class="custom-checkBox d-flex align-items-center h-32">
+                            <span class="ml-1 font-12 font-weight-500"> {{lang.popup1.t6}}</span>
+                            <input type="checkbox" formControlName="agree">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-group text-right mb-16 ar-text-align-left">
+                        <button class="btn btn-primary" [disabled]="!InstructionFormGroup.valid || InstructionFormGroup.value.agree == false" (click)="termsAndConditionsOfInstructionAcceptance()">{{lang.popup1.t7}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Instructions modal ends here -->
+</div>
+
+<div *ngIf="Step==2" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" [formGroup]="ChangeAddressFormGroup">
+        <div class="mb-24">
+            <a href="javascript:void(0)" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a href="javascript:void(0)" (click)="back1()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="javascript:void(0)" class="active2">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step2.t1}}</h2>
+            <div class="text-Gray font-16">{{lang.step2.t2}}  </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <div class="row mb-24">
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t3}}</label>
+                    <input type="text" class="form-control card" formControlName="buildingNo">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t4}}</label>
+                    <input type="text" class="form-control card" formControlName="streetName">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t5}}</label>
+                    <div class="custom-dropdown position-relative card">
+                        <select class="form-control default-arrow-hide" formControlName="province">
+                            <option *ngFor="let province of ProvinceSet" [value]="province.Bland">{{province.Bezei}}</option>
+                        </select>
+                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t6}}</label>
+                    <div class="custom-dropdown position-relative card">
+                        <select class="form-control default-arrow-hide" formControlName="city">
+                            <option *ngFor="let city of CitySet" [value]="city.CityName">{{city.CityName}}</option>
+                        </select>
+                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t7}}</label>
+                    <input type="text" class="form-control card" formControlName="quarter">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t8}}</label>
+                    <input type="text" class="form-control card" formControlName="postalCode">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t9}}</label>
+                    <input type="text" class="form-control card" formControlName="purchase">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t10}}</label>
+                    <input type="text" class="form-control card" formControlName="landline">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t15}}</label>
+                    <input type="text" class="form-control card" formControlName="email">
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+                <label>{{lang.step2.t11}}</label>
+                <div class="input-group phone-number-group mb-0">
+                    <input type="text" value="+966" class="countryCode" readonly>
+                    <input type="text" class="form-control custom-phone-number" formControlName="mobile">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t12}}</label>
+                    <input type="text" class="form-control card" formControlName="iban">
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step2.t13}}</label>
+                    <div class="custom-dropdown position-relative card">
+                        <select class="form-control default-arrow-hide" formControlName="frequency">
+                            <option *ngFor="let periodicity of FrequencyList" [value]="periodicity.Key">{{periodicity.Text}}</option>
+                        </select>
+                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex mb-56">
+            <label class="custom-checkBox d-flex align-items-center h-24">
+                <span class="font-12 font-weight-500">  {{lang.step2.t14}}
+                </span>
+                <input type="checkbox" formControlName="decFlag">
+                <span class="checkmark checkmark-24 "></span>
+            </label>
+        </div>
+
+        <div class="mb-24">
+            <button class="btn btn-primary" (click)="continueSecondScreen()">{{lang.nav.continue}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==3" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="mb-24">
+            <a href="javascript:void(0)" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}} 
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a href="javascript:void(0)" (click)="back2()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t2}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="javascript:void(0)" class="active3">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step3.t1}}</h2>
+            <div class="text-Gray font-16"> {{lang.step3.t2}} </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <div class="row mb-32">
+            <div class="col-sm-12 col-md-6">
+                <div class="cardh216 card p-24 d-flex justify-content-center align-items-center" style="border: 1px dashed #bbbbbb;"> 
+                    <div class="bg-white m-0 font-weight-500 font-16 text-center" style="padding:20px 40px;">
+                        <div class="uploadfilecontainer bg-white" (click)="fileInput.click()" appDragDrop
+                            (onFileDropped)="uploadFile($event)">
+                            <input hidden type="file" #fileInput
+                                (change)="uploadFile($event.target.files)">
+                            <div class="row text-center">
+                                <div class="col-md-12">
+                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                    <div class="fileUploadTxt">{{lang.step3.dragdrop}}
+                                    </div>
+                                    <div class="fileUploadTxt1">{{lang.step3.max}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <div *ngFor="let file of ChangeAttachFiles; let j = index;">
+                    <div class="cardh216 card p-24" style="border:1px solid gray">
+                        <div class="d-flex justify-content-end"><img src="assets/images/icon-delete.svg"
+                            (click)="deleteAttachment(j);"></div>
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/pdf.svg" class="mb-10" *ngIf="file.type == 'pdf'">
+                                <img src="assets/images/icon-excel.svg" class="mb-10" *ngIf="file.type == 'xlsx'">
+                                <img src="assets/images/icon-jpg.svg" class="mb-10" *ngIf="file.type == 'jpeg'">
+                                <img src="assets/images/icon-png.svg" class="mb-10" *ngIf="file.type == 'jpg'">
+                                <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'msword'">
+                                <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'docx'">
+                                <p class="FileName"> {{ file.name }}.{{ file.type }}</p>
+                                <div class="FileSize">{{ file.size }} MB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-24">
+                    <button class="btn btn-primary mr-10" (click)="continueThirdScreen()">{{lang.nav.continue}}</button>
+                </div>	
+            </div>					
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==4" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" [formGroup]="ChangeContactPersonFormGroup">
+        <div class="mb-24">
+            <a href="javascript:void(0)" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}} 
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a href="javascript:void(0)" (click)="back3()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="javascript:void(0)" class="active5">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step4.t1}}</h2>
+            <div class="text-Gray font-16"> {{lang.step4.t2}} </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <div class="row mb-56">
+            <div class="col-md-6 col-sm-12">
+                <div class="card p-16 cursor-pointer" data-toggle="modal" data-target="#addNew">
+                    <div class="d-flex align-items-center">
+                        <img src="assets/images/icon-plus-24.svg" class="" alt="">
+                        <p class="text-Watercourse font-weight-bold pl-4 mb-0">{{lang.step4.t3}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-24">
+            <div class="col-sm-12">
+                <p>{{lang.step4.t4}}</p>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t5}}</label>
+                    <div class="custom-dropdown position-relative card">
+                        <select class="form-control default-arrow-hide" formControlName="contactIdType">
+                            <option *ngFor="let id of IdTypeList" [value]="id.Key">{{id.Text}}</option>
+                        </select>
+                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t6}} </label>
+                    <input type="text" class="form-control card" formControlName="contactIdNumber">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t7}}</label>
+                    <div class="d-flex">
+                        <input type="text" class="form-control card" [matDatepicker]="dobdate" formControlName="contactDOB">
+                        <mat-datepicker-toggle matSuffix [for]="dobdate" class="datePickers1"></mat-datepicker-toggle>
+                        <mat-datepicker #dobdate></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t8}}</label>
+                    <input type="text" class="form-control card" formControlName="contactFirstName">
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t9}}</label>
+                    <input type="text" class="form-control card" formControlName="contactLastName">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-24">
+            <div class="col-sm-12">
+                <p>{{lang.step4.t10}}</p>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t11}}</label>
+                    <input type="text" class="form-control card" formControlName="contactBuildNo">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t12}}</label>
+                    <input type="text" class="form-control card" formControlName="contactStreet">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t13}}</label>
+                    <div class="custom-dropdown position-relative card">
+                        <select class="form-control default-arrow-hide" formControlName="contactProvince">
+                            <option *ngFor="let province of ProvinceSet" [value]="province.Bland">{{province.Bezei}}</option>
+                        </select>
+                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t14}}</label>
+                    <div class="custom-dropdown position-relative card">
+                        <select class="form-control default-arrow-hide" formControlName="contactCity">
+                            <option *ngFor="let city of CitySet" [value]="city.CityName">{{city.CityName}}</option>
+                        </select>
+                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t15}}</label>
+                    <input type="text" class="form-control card" formControlName="contactQuarter">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t16}}</label>
+                    <input type="text" class="form-control card" formControlName="contactPostalCode">
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t17}}</label>
+                    <input type="text" class="form-control card" formControlName="contactLandline">
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-sm-6">
+                <label>{{lang.step4.t18}}</label>
+                <div class="input-group phone-number-group mb-0">
+                    <input type="text" value="+966" class="countryCode" readonly>
+                    <input type="text" class="form-control custom-phone-number" formControlName="contactMobile">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t19}}</label>
+                    <input type="text" class="form-control card" formControlName="contactJobTitle">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step4.t20}}</label>
+                    <input type="text" class="form-control card" formControlName="contactEmail">
+                </div>
+            </div>
+        </div>
+    
+        <div class="mb-24">
+            <button class="btn btn-primary" (click)="continueFourthScreen()">{{lang.nav.continue}}</button>
+        </div>
+    </div>
+    
+    <!-- FILTER MODAL STARTS -->
+    <div class="modal modal-filter fade" id="addNew" role="dialog">
+        <div class="modal-dialog max-width-708 pop-up-align-mddile">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <img src="assets/images/icon-close.svg" alt="">
+                    </button>
+                </div>
+
+                <div class="modal-body px-60 pt-40">
+                    <h2 class="mb-24">{{lang.step4.t21}}</h2>
+                    <p class="mb-32">{{lang.step4.t22}}</p>
+                    
+                    <div class="form-group text-right mb-16 ar-text-align-left">
+                        <button type="button" class="btn btn-link text-Shiraz" (click)="close(false)">{{lang.nav.cancel}} </button>
+                        <button class="btn btn-primary" (click)="changePersonalDetails(true)">{{lang.nav.continue}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FILTER MODAL ENDS -->
+</div>
+
+<div *ngIf="Step==5" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" [formGroup]="ChangeDeclarationFormGroup">
+        <div class="mb-24">
+            <a href="javascript:void(0)" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a href="javascript:void(0)" (click)="back4()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="javascript:void(0)" class="active6">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)">
+                    <span></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step5.t1}}</h2>
+            <div class="text-Gray font-16"> {{lang.step5.t2}}</div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>	
+
+        <div class="row mb-24">		
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step5.t3}}</label>
+                    <div class="custom-dropdown position-relative card">
+                        <select class="form-control default-arrow-hide" formControlName="decIdType">
+                            <option *ngFor="let id of IdTypeList" [value]="id.Key">{{id.Text}}</option>
+                        </select>
+                        <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step5.t4}} </label>
+                    <input type="text" class="form-control card" formControlName="decIdNumber">
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step5.t5}}</label>
+                    <input type="text" class="form-control card" formControlName="decName">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group mb-24">
+                    <label>{{lang.step5.t6}}</label>
+                    <div class="d-flex">
+                        <input type="text" class="form-control card" [matDatepicker]="decdate" formControlName="decDate" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="decdate" class="datePickers1" [disabled]="true"></mat-datepicker-toggle>
+                        <mat-datepicker #decdate></mat-datepicker>
+                    </div>
+                </div>
+            </div>			
+        </div>
+
+        <div class="d-flex mb-24">
+            <label class="custom-checkBox d-flex align-items-center h-24">
+                <span class="font-12 font-weight-500"> {{lang.step5.t7}} 
+                </span>
+                <input type="checkbox" formControlName="decFlag1">
+                <span class="checkmark checkmark-24 "></span>
+            </label>
+        </div>
+
+        <div class="d-flex mb-56">
+            <label class="custom-checkBox d-flex align-items-center h-24">
+                <span class="font-12 font-weight-500"> {{lang.step5.t8}} 
+                </span>
+                <input type="checkbox" formControlName="decFlag2">
+                <span class="checkmark checkmark-24 "></span>
+            </label>
+        </div>
+
+        <div class="mb-24">
+            <button class="btn btn-primary" (click)="continueFifthScreen()">{{lang.nav.continue}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==6" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+     <div class="container"> 
+        <div class="mb-24">
+            <a href="javascript:void(0)" class="text-Gray"> {{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a href="javascript:void(0)" (click)="back5()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+
+            <div class="bullet-nav d-flex align-items-center">
+                <a href="javascript:void(0)" class="active6">
+                    <span></span>
+                </a>
+                <a href="javascript:void(0)" class="ml-10">
+                    <img src="assets/images/icon-gcheck.svg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step6.t1}}</h2>
+            <div class="text-Gray font-16"> {{lang.step6.t2}} </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>	
+        
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg" class="" alt=""></span> {{lang.step6.s1.t1}}
+                </h3>
+
+                <a data-toggle="collapse" href="#toggle1" role="button" aria-expanded="false" aria-controls="toggle1">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle1">
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s1.t2}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ElegibleCategory}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s1.t3}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.EntityNm}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s1.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Idnumber}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s1.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.TypeTxt}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-company.svg" class="" alt=""></span>{{lang.step6.s2.t1}}
+                </h3>
+
+                <a class='text-Watercourse font-weight-bold font-16 position-absolute right7 cursor-pointer' (click)="back2()">{{lang.nav.edit}}</a>
+                <a data-toggle="collapse" href="#toggle2" role="button" aria-expanded="false" aria-controls="toggle2">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle2">
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t2}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Building}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t3}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Street}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{AddressProvinceName}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.City1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t6}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Quarter}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t7}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.PostCode1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t8}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Betrh}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t9}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.TelNumber}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t10}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Email}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t11}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Mobile}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t12}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Iban}} 
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s2.t13}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{AddressPeriodicityName}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-attachment-2.svg" class="" alt=""></span>{{lang.step6.s2.t14}} 
+                </h3>
+
+                <a class='text-Watercourse font-weight-bold font-16 position-absolute right7 cursor-pointer' (click)="back3()">{{lang.nav.edit}}</a>
+                <a data-toggle="collapse" href="#toggle3" role="button" aria-expanded="false" aria-controls="toggle4">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle3">
+                <p class="font-16 text-Gray mb-0 ml-20">{{lang.step6.s2.t15}}</p>
+                <div class="row p-24">
+                    <div class="col-sm-6" *ngFor="let file of ChangeAttachFiles">
+                        <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center">
+                            {{ file.name }}.{{ file.type }} 
+                            <img src="assets/images/pdf.svg" class="mb-10 ml-20" *ngIf="file.type == 'pdf'">
+                            <img src="assets/images/icon-excel.svg" class="mb-10 ml-20" *ngIf="file.type == 'xlsx'">
+                            <img src="assets/images/icon-jpg.svg" class="mb-10 ml-20" *ngIf="file.type == 'jpeg'">
+                            <img src="assets/images/icon-png.svg" class="mb-10 ml-20" *ngIf="file.type == 'jpg'">
+                            <img src="assets/images/icon-doc.svg" class="mb-10 ml-20" *ngIf="file.type == 'msword'">
+                            <img src="assets/images/icon-doc.svg" class="mb-10 ml-20" *ngIf="file.type == 'docx'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow-none mb-56">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span>{{lang.step6.s3.t1}} 
+                </h3>
+
+                <a class='text-Watercourse font-weight-bold font-16 position-absolute right7 cursor-pointer' (click)="back4()">{{lang.nav.edit}}</a>
+                <a data-toggle="collapse" href="#toggle4" role="button" aria-expanded="false" aria-controls="toggle3">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle4">
+                <div class="row p-24">
+                    <div class="col-sm-12">
+                        <div class="text-Eerie-Black font-16 font-weight-500 mb-10">
+                            {{lang.step6.s3.t2}} 
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t3}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ContactIdTypeName}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Idnumber}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ContactDOB | date}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t6}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Firstnm}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t7}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Lastnm}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-12">
+                        <div class="text-Eerie-Black font-16 font-weight-500 mb-10">
+                            {{lang.step6.s3.t8}} 
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t9}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Building}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t10}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Street}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t11}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ContactProvinceName}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t12}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].City1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t13}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Quarter}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t14}} </p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].PostCode1}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t15}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].TelNumber}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t16}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Mobile}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t17}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Designation}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s3.t18}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.VTCPSet.results[0].Email}}
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div class="card card-shadow-none mb-24">            
+            <div class="p-24 d-flex align-items-center justify-content-between">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-company.svg" class="" alt=""></span>{{lang.step6.s4.t1}}
+                </h3>
+
+                <a class='text-Watercourse font-weight-bold font-16 position-absolute right7 cursor-pointer' (click)="back5()">{{lang.nav.edit}}</a>
+                <a data-toggle="collapse" href="#toggle5" role="button" aria-expanded="false" aria-controls="toggle2">
+                    <img src="assets/images/icon-arrow-up.svg" alt="">
+                </a>
+            </div>
+            <div class="border-bottom-whisper"></div>
+
+            <div class="collapse show multi-collapse" id="toggle5">
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s4.t2}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeclarationIdTypeName}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s4.t3}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.IdnumberDec}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s4.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{WholeData?.Name}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step6.s4.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeclarationDate | date}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-24">
+            <button class="btn btn-primary" (click)="continueSixthScreen()">{{lang.nav.confirm}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==7" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="inner">
+            <div class="text-center mb-56">
+                <div class="text-center mb-40">
+                    <img src="assets/images/icon-success.svg" alt="">
+                </div>
+                <h2 class="mb-12">{{lang.step7.t1}}</h2>
+                <div class="text-Gray font-16 mb-32">{{lang.step7.t2}} </div>				
+            </div>
+
+            <div class="mb-24 text-center d-flex flex-column justify-content-center align-items-center">
+                <button class="btn btn-primary d-inline-block mb-28">{{lang.step7.t3}}</button>
+                <button class="btn btn-link d-inline-block mr-0" routerLink="/mains/tax">{{lang.step7.t4}}  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<notifier-container></notifier-container>
+<!-- change registration ends here -->

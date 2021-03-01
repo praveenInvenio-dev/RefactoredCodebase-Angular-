@@ -1,0 +1,19 @@
+.cursor-pointer{
+    cursor: pointer !important;
+}
+.search-with-shadow {	
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    }
+
+a.collapsed img{
+        transform: rotate(-180deg) !important;
+    }    
+    .lang-arabic .ar-search-with-shadow {
+        top: 55% !important;
+        right: 96% !important;
+    }
+    .table td, .table th {
+        vertical-align: middle;
+    }

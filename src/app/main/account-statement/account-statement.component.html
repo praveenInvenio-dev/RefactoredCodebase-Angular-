@@ -1,0 +1,11 @@
+<div class="container p-0" style="max-width: 899px">
+  <ng-container *ngIf="stepNumber === 1">
+    <app-statement-category></app-statement-category>
+  </ng-container>
+  <ng-container *ngIf="stepNumber === 2">
+    <app-statement-list></app-statement-list>
+  </ng-container>
+  <ng-container *ngIf="stepNumber === 3">
+    <app-statement-detail></app-statement-detail>
+  </ng-container>
+</div>

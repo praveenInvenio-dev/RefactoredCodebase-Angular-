@@ -1,0 +1,133 @@
+{
+  "d": {
+    "__metadata": {
+      "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/ERGX_HDRSet(Fbtypz='RGEX',TxnTp='',Fbnum='',Lang='',Officer='',Gpart='',Status='')",
+      "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/ERGX_HDRSet(Fbtypz='RGEX',TxnTp='',Fbnum='',Lang='',Officer='',Gpart='',Status='')",
+      "type": "ZDP_ERGT_SRV.ERGX_HDR"
+    },
+    "EditFgz": "",
+    "Fbtypz": "RGEX",
+    "TxnTp": "",
+    "Fbustz": "E0001",
+    "Fbnum": "",
+    "PortalUsr": "",
+    "Lang": "",
+    "Operation": "",
+    "StepNumber": "00",
+    "ReturnId": "",
+    "Officer": "",
+    "Gpart": "",
+    "Status": "",
+    "UserTyp": "",
+    "GDTYPESet": {
+      "results": [
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='001',Lang='EN')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='001',Lang='EN')",
+            "type": "ZDP_ERGT_SRV.GDTYPE"
+          },
+          "GoodsTyp": "001",
+          "Lang": "EN",
+          "GoodsTxt": "TOBACCO & RELATED PRODUCTS"
+        },
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='002',Lang='EN')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='002',Lang='EN')",
+            "type": "ZDP_ERGT_SRV.GDTYPE"
+          },
+          "GoodsTyp": "002",
+          "Lang": "EN",
+          "GoodsTxt": "ENERGY DRINKS"
+        },
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='003',Lang='EN')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='003',Lang='EN')",
+            "type": "ZDP_ERGT_SRV.GDTYPE"
+          },
+          "GoodsTyp": "003",
+          "Lang": "EN",
+          "GoodsTxt": "SOFT DRINKS"
+        },
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='004',Lang='EN')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/GDTYPESet(GoodsTyp='004',Lang='EN')",
+            "type": "ZDP_ERGT_SRV.GDTYPE"
+          },
+          "GoodsTyp": "004",
+          "Lang": "EN",
+          "GoodsTxt": "SWEETENED BEVERAGES"
+        }
+      ]
+    },
+    "ATT_CRSet": {
+      "results": []
+    },
+    "BTNSet": {
+      "results": [
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('01')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('01')",
+            "type": "ZDP_ERGT_SRV.BTN"
+          },
+          "Fbtyp": "RGEX",
+          "Fbust": "E0001",
+          "Button": "01"
+        },
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('05')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('05')",
+            "type": "ZDP_ERGT_SRV.BTN"
+          },
+          "Fbtyp": "RGEX",
+          "Fbust": "E0001",
+          "Button": "05"
+        },
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('08')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('08')",
+            "type": "ZDP_ERGT_SRV.BTN"
+          },
+          "Fbtyp": "RGEX",
+          "Fbust": "E0001",
+          "Button": "08"
+        },
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('11')",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/BTNSet('11')",
+            "type": "ZDP_ERGT_SRV.BTN"
+          },
+          "Fbtyp": "RGEX",
+          "Fbust": "E0001",
+          "Button": "11"
+        }
+      ]
+    },
+    "crddSet": {
+      "results": [
+        {
+          "__metadata": {
+            "id": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/crddSet(0)",
+            "uri": "https://tstdg1as1.mygazt.gov.sa:8080/sap/opu/odata/SAP/ZDP_ERGT_SRV/crddSet(0)",
+            "type": "ZDP_ERGT_SRV.crdd"
+          },
+          "Mandt": "",
+          "FormGuid": "",
+          "DataVersion": "00000",
+          "LineNo": 0,
+          "RankingOrder": "00",
+          "CrNo": "4650216464",
+          "CrNm": "مغاسل سارة الحديثة لغسيل الملابس",
+          "CrActFg": ""
+        }
+      ]
+    }
+  }
+}

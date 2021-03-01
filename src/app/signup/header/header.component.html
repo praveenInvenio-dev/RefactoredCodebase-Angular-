@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-sm  navbar-dark  fixed-top mb-5" [ngClass]="direction === 'rtl' ? 'navBarArbCss' : 'navBarCss'" style="    margin-left: 14%;
+margin-right: 14%;height:100px">
+
+
+    <div style="width: 100%;    margin-top: 15px;">
+        <div [ngClass]="direction === 'rtl' ? 'alignright' : 'alignleft'">
+            <span class="navIconEngCss" *ngIf="direction === 'ltr'" routerLink={{url}}> <i
+                    class="fa fa-arrow-left" style="font-size: 12px;" aria-hidden="true"></i> Back</span>
+            <div class="navIconArbCss" *ngIf="direction === 'rtl'" routerLink={{url}}> رجوع <i
+                    class="fa fa-arrow-right" style="font-size: 12px;" aria-hidden="true"></i></div>
+            <p class="titleCssS" [style.right]="direction === 'rtl'? '0px': '10px'">
+                {{title}}
+            </p>
+            <!-- <div class="card cardz NavcardLeft" [routerLink]="['/home']">
+
+            <div class="card-body">
+                <div class="text-center"
+                    [ngClass]="direction === 'rtl' ? 'headerArbIcon' : 'headerIcon'">
+                    <i class="fa fa-arrow-left" style="font-size: 15px;" aria-hidden="true"></i> Back
+                </div>
+
+            </div>
+        </div> -->
+        </div>
+        <div [ngClass]="direction === 'rtl' ? 'alignleft' : 'alignright'">
+            <div class="card cardz NavcardRight">
+                <div class="card-body">
+                    <div class="text-center" [ngClass]="direction === 'rtl' ? 'headerArbImg' : 'headerImg'">
+                        <img src="assets/images/chat01.png" alt="Logo" style="width: 40px;">
+                    </div>
+                    <!-- <i class="fa fa-user" style="font-size: 25px;" aria-hidden="true"></i> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</nav>

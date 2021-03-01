@@ -1,0 +1,16 @@
+.btnCss {
+  color: white;
+  border-radius: 4.5px;
+  background-color: #d2a02a;
+}
+
+.txtBxEng {
+  float: right;
+  margin-right: 10px;
+}
+
+.txtBxArb {
+  float: left;
+  margin-left: 10px;
+}
+

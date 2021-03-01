@@ -1,0 +1,269 @@
+.taskAllocRoot {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.taskAllocMiddle {
+}
+
+.taskAllocLocation {
+  padding-top: 40px;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+  font-family: SSTArabic-Roman;
+}
+
+.taskAlloct1 {
+  padding: 1rem;
+  border-radius: 14px;
+  /* opacity: 0.1; */
+  border: 1px solid #ebebeb;
+}
+
+.taskAllocCards {
+  padding-top: 1rem;
+}
+
+.taProfile {
+  color: #999999;
+  font-size: 16px;
+}
+
+.taProfile2 {
+  font-size: 16px;
+  padding-inline-start: 0.5rem !important;
+}
+
+.taprofile2 {
+  color: #999999;
+  font-size: 16px;
+  padding-inline-start: 0.5rem !important;
+}
+
+.xyz {
+  color: #999999;
+  font-size: 16px;
+  padding-inline-start: 0.5rem !important;
+}
+
+.zs-taxttpta {
+  font-family: "SSTARABIC-BOLD";
+  font-size: 16px;
+  border-bottom: 3px solid #d99a29;
+  padding-bottom: 0.5px;
+  margin-inline-end: 2rem;
+}
+
+.taskAllocBacki {
+  display: flex;
+}
+
+.rtlfixer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.rtlfixer2 {
+  font-family: "SSTARABIC-BOLD";
+}
+
+.zs-taxttpta2 {
+  font-size: 16px;
+
+  padding-bottom: 0.5px;
+  margin-inline-end: 2rem;
+}
+
+.zs-customSlider.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: var(--primary);
+}
+
+.zs-customSlider.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: white;
+}
+
+.zs-customSlider.mat-slide-toggle .mat-slide-toggle-bar {
+  background-color: #999999;
+}
+
+.userMgmtBack {
+  color: #00644e;
+  font-size: 16px;
+  padding-top: 1.5rem;
+}
+
+.taTaskAlloc {
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  padding-top: 32px;
+}
+
+.taName {
+  padding-top: 1rem;
+  padding-inline-start: 1rem;
+  color: #999999;
+  font-size: 16px;
+  justify-content: flex-start;
+  display: flex;
+}
+
+.taNameValue {
+  font-size: 16px;
+  font-weight: 500;
+  padding-inline-start: 1rem;
+  color: black !important;
+  justify-content: flex-start;
+  display: flex;
+  font-family: SSTArabic-Medium;
+}
+
+.taSpanVat {
+  padding-inline-start: 36px;
+}
+
+.taskTabMenu {
+  border-bottom: solid 1px #ebebeb;
+  padding-top: 2.5rem;
+  /* padding-bottom: 0.5rem;  */
+  margin-inline-start: 0.5rem;
+  width: 99%;
+}
+
+.rnoText {
+  font-size: 20px;
+  font-weight: bold;
+  color: #232323;
+}
+
+.returnsAndObjections {
+  border-top-right-radius: 14px;
+  border-top-left-radius: 14px;
+
+  height: 72px;
+  border: 1px solid #ebebeb;
+  margin-top: 1.5rem;
+}
+
+.objectioItem {
+  border: 1px solid #ebebeb;
+  padding: 1rem;
+}
+
+.listOfServices {
+  border-radius: 14px;
+  height: fit-content;
+  border: 1px solid #ebebeb;
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem !important;
+}
+
+.rnoIma {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.ber {
+  /* font-weight: bold; */
+  font-size: 16px;
+  font-family: SSTArabic-Bold;
+}
+
+.hspanx {
+  font-weight: bold;
+  color: #006450;
+  font-family: "SSTArabic-Bold";
+  font-size: 16px;
+}
+
+.service {
+  padding-left: 25px;
+}
+
+.fontSetterta {
+  font-family: SSTArabic-Medium;
+}
+
+.taSpanZaka {
+  font-size: 16px;
+  padding-bottom: 4px solid orange;
+}
+
+.taSpanZakat {
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid orange !important;
+}
+
+.aService {
+  padding-inline-start: 1.5rem;
+  border-top: 1px solid #ebebeb;
+  padding-top: 1rem;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 1rem;
+}
+
+.hspanx:hover {
+  cursor: pointer;
+  font-weight: bold !important;
+}
+
+.losac {
+  padding-bottom: 1rem;
+}
+
+.taskAllocBack {
+  padding-top: 40px;
+}
+
+.imgsp {
+  padding-inline-end: 0.5rem;
+}
+
+.rnoh1 {
+  padding: 1rem;
+}
+
+.reqforcertificate {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.custom-card {
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.custom-card-title {
+  object-fit: contain;
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+  margin: 20px 16px;
+  text-align: start;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-action-icon {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  float: right;
+}

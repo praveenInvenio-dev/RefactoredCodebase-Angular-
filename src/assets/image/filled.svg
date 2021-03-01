@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="437" height="80" viewBox="0 0 437 80">
+    <defs>
+        <filter id="5vbtwda69a" width="103.2%" height="129.2%" x="-1.6%" y="-10.4%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="tqf8k6p50b" width="437" height="48" x="0" y="0" rx="14"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <path fill="#FFF" fill-opacity="0" d="M0 0H437V8H0z" transform="translate(-270 -633) translate(270 633) translate(0 72)"/>
+                <path fill="#FFF" fill-opacity="0" d="M0 0H435V8H0z" transform="translate(-270 -633) translate(270 633) translate(0 16)"/>
+                <text fill="#999" font-family="SST-Roman, SST" font-size="12" transform="translate(-270 -633) translate(270 633)">
+                    <tspan x="0" y="14">Date of Birth</tspan>
+                </text>
+                <g>
+                    <g fill-rule="nonzero" transform="translate(-270 -633) translate(270 633) translate(0 24)">
+                        <use fill="#000" filter="url(#5vbtwda69a)" xlink:href="#tqf8k6p50b"/>
+                        <rect width="437" height="48" fill="#FFF" rx="14"/>
+                        <rect width="436" height="47" x=".5" y=".5" stroke="#999" rx="14"/>
+                    </g>
+                    <g fill="#999" fill-rule="nonzero">
+                        <path d="M7.492 0c.237 0 .433.17.474.394l.007.087v1.522h8.053V.481c0-.236.17-.433.395-.473L16.508 0h3.005c.236 0 .432.17.473.394l.007.087v1.522h3.526c.236 0 .433.17.473.395l.008.086V23.52c0 .236-.17.433-.394.473l-.087.008H.481c-.236 0-.433-.17-.473-.394L0 23.519V2.484c0-.236.17-.432.394-.473l.087-.008h3.525V.481c0-.236.17-.433.395-.473L4.487 0h3.005zm15.546 8.011H.961v15.027h22.077V8.011zm-6.511 1.004c.245 0 .45.17.492.394l.008.087-.001 1.522h4.49c.236 0 .432.177.473.41l.008.09c0 .246-.17.45-.395.492l-.086.008h-4.49v3.007h4.49c.236 0 .432.177.473.41l.008.09c0 .246-.17.45-.395.492l-.086.008h-4.49v3.006h4.49c.236 0 .432.17.473.395l.008.087c0 .236-.17.432-.395.473l-.086.007h-4.49v1.523c0 .236-.176.432-.41.473l-.09.008c-.245 0-.449-.17-.491-.395l-.008-.086-.001-1.523h-4.008v1.523c0 .236-.177.432-.41.473l-.09.008c-.245 0-.45-.17-.492-.395l-.008-.086v-1.523H7.01v1.523c0 .236-.177.432-.41.473l-.09.008c-.245 0-.45-.17-.492-.395l-.008-.086v-1.523H2.484c-.236 0-.432-.17-.473-.394l-.008-.086c0-.237.17-.433.395-.474l.086-.007 3.526-.001v-3.006H2.484c-.236 0-.432-.177-.473-.41l-.008-.09c0-.245.17-.45.395-.492l.086-.008H6.01v-3.007H2.484c-.236 0-.432-.177-.473-.41l-.008-.09c0-.245.17-.45.395-.492l.086-.008H6.01V9.496c0-.236.177-.433.41-.473l.09-.008c.245 0 .45.17.492.394l.008.087v1.522h4.008V9.496c0-.236.177-.433.41-.473l.09-.008c.246 0 .45.17.492.394l.008.087v1.522h4.008V9.496c0-.236.178-.433.41-.473l.09-.008zm-5.509 7.01H7.01v3.006h4.008v-3.006zm5.008 0h-4.008v3.006h4.008v-3.006zm-5.008-4.007H7.01v3.007h4.008v-3.007zm5.008 0h-4.008v3.007h4.008v-3.007zM4.006 2.964H.962L.96 7.012h22.077V2.965l-3.045-.001v1.523c0 .237-.17.433-.394.474l-.086.007h-3.005c-.237 0-.433-.17-.474-.394l-.007-.087-.001-1.484H7.973v1.484c0 .237-.17.433-.394.474l-.087.007H4.487c-.236 0-.432-.17-.473-.394l-.007-.087-.001-1.523zM7.012.962H4.968v3.045h2.044V.962zm12.02 0h-2.044v3.045h2.044V.962z" transform="translate(-270 -633) translate(270 633) translate(0 24) translate(401 12)"/>
+                    </g>
+                    <g fill="#232323" font-family="SST-Roman, SST" font-size="16">
+                        <text transform="translate(-270 -633) translate(270 633) translate(0 24) translate(12 12)">
+                            <tspan x="0" y="17">01st Jan 1976</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

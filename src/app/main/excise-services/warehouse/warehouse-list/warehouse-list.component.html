@@ -1,0 +1,111 @@
+<!-- <p>warehouse-list works!</p> -->
+<div dir={{Direction}}  [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+	    <div class="mb-40">
+            <a href="#" onclick="return false" class="text-Gray">{{lang.nav.t1}}  </a> {{lang.nav.t2}}
+        </div>
+
+        <div class="mb-26 d-flex">
+            <a routerLink="/mains/tax" class="text-Watercourse font-weight-bold">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+            </a>
+		</div>
+        
+        <div class="custom-nav-tabs d-flex justify-content-between align-items-center">
+            <h2>{{lang.card.t1}}</h2>
+            <div class="d-flex icons-viewtype">
+                <a href="#" onclick="return false" class="active">
+                    <img src="assets/images/icon-cards-active.svg" alt="">
+                </a>
+                <a href="#" onclick="return false">
+                    <img src="assets/images/icon-list.svg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="tab-content custom-navtab-content">
+            <div class="tab-pane active">
+                <div class="d-flex align-items-center width100P mb-32">
+                    <div class="searchBox card position-relative">
+                        <img src="assets/images/icon-search.svg" alt="" class="position-absolute search-with-shadow ar-search-with-shadow">
+                        <input type="text" placeholder="{{lang.card.placeholder}}" class="placeholder-text-gray pl-30">
+                    </div>
+                    <img class="ml-15" src="assets/images/icon-filter.svg" alt="">
+                </div>
+
+                <div class="row d-flex">
+					<div class="col-sm-6" *ngFor="let item of WarehouseListData; let i = index;">
+                        <div *ngIf="WarehouseListData?.length > 0">
+                            <div class="card mb-24 position-relative">
+                                <div class="text-right p-24 pb-0">
+                                    <a class="text-link cursor-pointer ar-text-align-left" data-toggle="collapse" [attr.data-target]="'#collapseExample' + i">
+                                        <span class="material-icons">
+                                            more_horiz
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <div (click)="displayWarehouse()">
+                                    <div class="d-flex width100P align-items-center justify-content-between pt-10 p-24">
+                                        <div>
+                                            <h3 class="mb-1">
+                                                {{lang.card.t3}}
+                                            </h3>
+
+                                            <div class="font-12 text-Gray  mb-0">
+                                                {{item.Fbnum}}
+                                            </div>
+                                        </div>
+                                        
+                                        <span class="status status-submitted custom ">
+                                            {{item.StatusTxt}}
+                                        </span>
+                                    </div>
+                                    <div class="border-bottom-whisper"></div>
+
+                                    <div class="row p-24">
+                                        <div class="col-sm-6">
+                                            <p class="font-12 text-Gray  mb-0">{{lang.card.t4}}</p>
+                                            <div class="text-Eerie-Black font-16 font-weight-500">
+                                                {{item.Fin}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <p class="font-12 text-Gray mb-0">{{lang.card.t5}}</p>
+                                            <div class="text-Eerie-Black font-16 font-weight-500">
+                                                {{item.Actnm}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="collapse card card-popup position-absolute pop-up-right" id="collapseExample{{i}}">
+                                    <div class="item p-16 font-weight-500 cursor-pointer ar-text-left" (click)="modifyWarehouse()">
+                                        {{lang.card.t6}}
+                                    </div>
+                                    <div class="border-bottom-whisper"></div>
+
+                                    <div class="item p-16 text-Shiraz font-weight-bold mb-1 cursor-pointer ar-text-left" (click)="cancelWarehouse()">
+                                        {{lang.card.t7}}
+                                    </div>
+                                    <div class="border-bottom-whisper"></div>
+
+                                    <div class="item p-16 font-weight-500 cursor-pointer ar-text-left" (click)="reactivationWarehouse()">
+                                        {{lang.card.t8}}
+                                    </div>
+                                    <div class="border-bottom-whisper"></div>
+
+                                    <div class="item p-16 font-weight-500 cursor-pointer ar-text-left" (click)="renewalWarehouse()">
+                                        {{lang.card.t9}} 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

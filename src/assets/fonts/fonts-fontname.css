@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "SSTArabic-Bold";
+    src: url("./SSTArabic-Bold.ttf");
+  }
+  @font-face {
+    font-family: "SSTArabic-Light";
+    src: url("./SSTArabic-Light.ttf");
+  }
+  @font-face {
+    font-family: "SSTArabic-Medium";
+    src: url("./SSTArabic-Medium.ttf");
+  }

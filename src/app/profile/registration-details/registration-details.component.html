@@ -1,0 +1,86 @@
+<div class="container" [dir]="dir">
+  <div class="row mt-3">
+    <div class="col-md-12" >
+      <span class="title1" [style.float]="dir === 'rtl' ? 'right' : 'left'">{{lang.title1}}</span>
+      <span class="title1" style="color: #151515" [style.float]="dir === 'rtl' ? 'right' : 'left'"
+      [style.margin-right]="dir === 'rtl' ? '3px' : ''" [style.margin-left]="dir === 'ltr' ? '3px' : ''">{{lang.regDetails}}</span>
+    </div>
+  </div>
+  <div class="row mt-4" style="width: 100%">
+    <div class="col-md-12">
+      <div class="viewMore">
+        <span style="cursor: pointer" (click)="back()">
+          <img [src]="img" style="width: 24px" />
+          {{lang.back}}</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4" style="text-align: start">
+    <div class="col-md-12">
+      <div class="secondTitle">
+        {{lang.regDetails}}
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="row mt-5">
+      <div class="col-md-6 mt-3" *ngIf="showTile('02','09')">
+        <mat-card >
+          <div class="row" style="height: 50px; padding-top: 12px; cursor: pointer;" (click)="toVatUI5('vatDetails');">
+            <div
+              class="col-md-2"
+              style="text-align: start; width: 24px; height: 24px">
+              <img alt="Logo"  src="assets/image/password.svg">
+            </div>
+            <div class="col-md-8 placeholdertext">{{lang.vatDetails}}</div>
+            <div
+              class="col-md-2"
+              style="text-align: end; width: 24px; height: 24px">
+              <img [src]="img1" />
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="col-md-6 mt-3" *ngIf="showTile('03','43')">
+        <mat-card >
+          <div class="row" style="height: 50px; padding-top: 12px; cursor: pointer;" (click)="toExciseUI5('exciseDetails');">
+            <div
+              class="col-md-2"
+              style="text-align: start; width: 24px; height: 24px">
+              <img alt="Logo"  src="assets/image/password.svg">
+            </div>
+            <div class="col-md-8 placeholdertext">{{lang.etDetails}}</div>
+            <div
+              class="col-md-2"
+              style="text-align: end; width: 24px; height: 24px">
+              <img [src]="img1" />
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="col-md-6 mt-3" *ngIf="showTile('00','05') && showZakat('05','005')">
+        <mat-card>
+          <div class="row" style="height: 50px; padding-top: 12px; cursor: pointer;" (click)="toZakatUI5('zakatDetails');">
+            <div
+              class="col-md-2"
+              style="text-align: start; width: 24px; height: 24px">
+              <img alt="Logo"  src="assets/image/password.svg">
+            </div>
+            <div class="col-md-8 placeholdertext">{{lang.zakatDetails}}</div>
+            <div
+              class="col-md-2"
+              style="text-align: end; width: 24px; height: 24px">
+              <img [src]="img1" />
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+</div>

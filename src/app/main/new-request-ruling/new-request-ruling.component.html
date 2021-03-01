@@ -1,0 +1,1461 @@
+<div
+  class="container alignStart textDark"
+  style="max-width: 936px; font-family: SSTArabic-Roman"
+  [dir]="lang.dir == 'ltr' ? 'ltr' : 'rtl'"
+>
+  <div *ngIf="!showSuccess">
+    <div class="row mb-4">
+      <div class="col-md-12 mt-3">
+        <span class="bcTitle unicodeDir"
+          ><a
+            style="text-decoration: none; color: inherit"
+            (click)="backTo('')"
+            class="pointer"
+            >{{ lang.bc1 }} &gt;</a
+          ></span
+        >
+        <span class="bcTitle unicodeDir">
+          <a
+            style="text-decoration: none; color: inherit"
+            (click)="backTo('001')"
+            class="pointer"
+            >{{ lang.bc2 }} &gt;</a
+          ></span
+        >
+        <span style="padding-inline-start: 2px" class="bcTitle bcTitleActive"
+          ><a style="text-decoration: none; color: inherit">{{
+            lang.bc3
+          }}</a></span
+        >
+      </div>
+    </div>
+    <div class="row mt-3 py-2" style="width: 100%">
+      <div class="col-md-12" style="padding-inline-end: 0">
+        <div class="stepHeader row">
+          <span class="stepBack col-md-6" (click)="back()">
+            <img
+              [src]="
+                lang['dir'] == 'ltr'
+                  ? 'assets/image/arrow-left-green.svg'
+                  : 'assets/image/arrow-right-green.svg'
+              "
+              style="width: 24px"
+            />
+            {{ lang.back }}</span
+          >
+          <span
+            *ngIf="mainPage == false && showApp == true"
+            style="padding-right: 0; padding-left: 0"
+            class="stepNumber col-md-6"
+          >
+            <img
+              *ngIf="optionActive != 4"
+              [ngClass]="lang.dir == 'rtl' ? 'rotateSteps' : ''"
+              src="{{ lang.menu[optionActive - 1].step }}"
+              style="width: 106px; height: 16px"
+            />
+            <img
+              *ngIf="optionActive == 4 && isApplicationEditable"
+              [ngClass]="lang.dir == 'rtl' ? 'rotateSteps' : ''"
+              src="{{ lang.menu[optionActive - 1].step }}"
+              style="width: 80px; height: 16px"
+            />
+            <img
+              *ngIf="optionActive == 4 && isApplicationEditable"
+              style="padding-inline-start: 4px"
+              src="assets/image/check.svg"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div *ngIf="mainPage == false && showApp == true &&isApplicationEditable" class="pageTitle">
+          {{ lang.menu[optionActive - 1].title }}
+        </div>
+        <div *ngIf="mainPage == true && showApp == false" class="pageTitle">
+          {{ lang.bc3 }}
+        </div>
+        <div *ngIf="mainPage == false && showApp == true && optionActive==4 && !isApplicationEditable" class="pageTitle">
+          {{ lang.bc3 }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="mainPage == true && showApp == false">
+      <div class="layoutOptions">
+        <img
+          [ngClass]="
+            layoutType == 'grid'
+              ? 'layoutId layoutId-active'
+              : 'layoutId filterContrast'
+          "
+          (click)="changeLayoutType('grid')"
+          [src]="
+            layoutType == 'grid'
+              ? 'assets/image/card-green.svg'
+              : 'assets/image/cards.svg'
+          "
+        />
+        <img
+          [ngClass]="
+            layoutType == 'table'
+              ? 'layoutId layoutId-active'
+              : 'layoutId filterContrast'
+          "
+          (click)="changeLayoutType('table')"
+          src="assets/image/table.svg"
+        />
+      </div>
+
+      <div class="mt-4 row">
+        <div class="searchBar col">
+          <input
+            [placeholder]="lang.main.search"
+            class="commonInput"
+            (input)="onSearchFocusIn()"
+            (blur)="onSearchFocusOut()"
+            (mouseover)="onSearchHover()"
+            [(ngModel)]="searchText"
+            type="search"
+          />
+          <span
+            *ngIf="showSearch"
+            [ngClass]="lang.dir == 'ltr' ? 'searchIcon-ltr' : 'searchIcon-rtl'"
+            class="searchIcon"
+            ><img src="assets/images/search.svg"
+          /></span>
+        </div>
+        <div class="filterIcon col-auto" (click)="onClickFilterIcon()">
+          <img src="assets/image/filter.svg" />
+        </div>
+      </div>
+
+      <div
+        *ngIf="layoutType == 'grid'"
+        class="row mt-5"
+        style="margin-bottom: 56px"
+      >
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="mb-2 cardCntrMb">
+            <div
+              class="add-card-large col-md-6"
+              style="height: 160px; max-width: 438px"
+              (click)="addRulingRequest('','','')"
+            >
+              <img class="px-2" src="assets/image/add.svg" />
+              <div class="value fwb textPrimary mx-1 mt-2">
+                {{ lang.main.add }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-container *ngFor="let each of reqTiles | filter: searchText">
+          <div
+            class="col-md-6 col-sm-12 col-xs-12 mb-2 pointer"
+            *ngIf="
+              (each.Fbust == selectedStatus || selectedStatus == '01') &&
+              each.Fbtyp == 'TPEV'
+            "
+          >
+            <div class="mb-2 cardCntrMb" (click)="addRulingRequest(each.Fbnum,each.Fbust,each.FbustTxt)">
+              <div
+                class="filing-card textDark border"
+                style="height: 160px; max-width: 438px"
+              >
+                <div class="row filing-card-upper px-3">
+                  <div class="col-md-6">
+                    <div class="value fwb">{{ each.FullNm }}</div>
+                    <div class="caption textGray">{{ each.Fbnum }}</div>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    style="justify-content: flex-end; display: flex"
+                  >
+                    <div
+                      [ngClass]="statusColor(each.Fbust)"
+                      style="
+                        height: fit-content;
+                        width: unset;
+                        padding: 10px;
+                        font-size: 12px;
+                        padding: 7px 10px;
+                      "
+                    >
+                      {{ each.FbustTxt }}
+                    </div>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row filing-card-down px-3" style="height: 67px">
+                  <div class="col-6 mobpad1">
+                    <div class="caption textGray">
+                      {{ lang.list.reportDate }}
+                    </div>
+                    <div class="value fwb">{{ each.convertedDate }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div
+        *ngIf="layoutType == 'table'"
+        class="row mt-5"
+        style="margin-bottom: 56px"
+      >
+        <div class="col-12">
+          <div class="mb-2 border">
+            <div
+              class="row"
+              style="height: 44px; margin: 0; cursor: pointer"
+              (click)="addRulingRequest('','','')"
+            >
+              <img class="col-auto" src="assets/image/add.svg" />
+              <div class="value fwb textPrimary mt-2 mx-1 col">
+                {{ lang.main.add }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <table
+          *ngIf="count >= 0"
+          style="
+            width: 100%;
+            table-layout: fixed;
+            margin-left: 15px;
+            margin-right: 15px;
+          "
+          class="mt-3"
+        >
+          <tr class="tabHeader" *ngIf="showListHeader">
+            <ng-container *ngIf="lang.dir !== 'rtl'">
+              <th colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'">{{ lang.list.applicationNumber }}</th>
+            </ng-container>
+            <ng-container *ngIf="lang.dir === 'rtl'">
+              <th
+                colspan="8"
+                [style.border-top-left-radius]="
+                  lang.dir === 'rtl' ? '0px' : '16px'
+                "
+                [style.border-top-right-radius]="
+                  lang.dir === 'rtl' ? '16px' : '0px'
+                "
+                [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'"
+              >
+                {{ lang.list.applicationNumber }}
+              </th>
+            </ng-container>
+            <th colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'">{{ lang.list.reportDate }}</th>
+
+            <ng-container *ngIf="lang.dir !== 'rtl'">
+              <th colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'">{{ lang.list.status }}</th>
+            </ng-container>
+            <ng-container *ngIf="lang.dir === 'rtl'">
+              <th
+                colspan="8"
+                [style.border-top-right-radius]="
+                  lang.dir === 'rtl' ? '0px' : '16px'
+                "
+                [style.border-top-left-radius]="
+                  lang.dir === 'rtl' ? '16px' : '0px'
+                "
+                [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'"
+              >
+                {{ lang.list.status }}
+              </th>
+            </ng-container>
+          </tr>
+          <ng-container
+            *ngFor="let each of reqTiles | filter: searchText; let i = index"
+          >
+            <tr
+              class="tabheader2"
+              *ngIf="
+                (each.Fbust == selectedStatus || selectedStatus == '01') &&
+                each.Fbtyp == 'TPEV'
+              "
+              (click)="addRulingRequest(each.Fbnum,each.Fbust,each.FbustTxt)"
+            >
+              <ng-container *ngIf="lang.dir === 'rtl'">
+                <td colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'" *ngIf="i !== count">{{ each.Fbnum }}</td>
+                <td
+                  colspan="8"
+                  [style.border-bottom-right-radius]="
+                    lang.dir === 'rtl' ? '16px' : '0px'
+                  "
+                  [style.border-bottom-left-radius]="
+                    lang.dir === 'rtl' ? '0px' : '0px'
+                  "
+                  *ngIf="i === count"
+                  [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'"
+                >
+                  {{ each.Fbnum }}
+                </td>
+              </ng-container>
+
+              <ng-container *ngIf="lang.dir !== 'rtl'">
+                <td colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'">{{ each.Fbnum }}</td>
+              </ng-container>
+
+              <td colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'">{{ each.convertedDate }}</td>
+
+              <ng-container *ngIf="lang.dir !== 'rtl'">
+                <td colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'">
+                  <span
+                    class="cardTxt5Css"
+                    [ngClass]="statusColor(each.Fbust)"
+                    style="
+                      height: fit-content;
+                      width: unset;
+                      padding: 6px;
+                      max-width: 187px;
+                    "
+                  >
+                    {{ each.FbustTxt }}</span
+                  >
+                </td>
+              </ng-container>
+              <!-- [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']" -->
+              <ng-container *ngIf="lang.dir === 'rtl'">
+                <td colspan="8" [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'" *ngIf="i !== count">
+                  <span
+                    class="cardTxt5Css"
+                    [ngClass]="statusColor(each.Fbust)"
+                    style="
+                      height: fit-content;
+                      width: unset;
+                      padding: 6px;
+                      max-width: 187px;
+                    "
+                  >
+                    {{ each.FbustTxt }}</span
+                  >
+                </td>
+
+                <td
+                  colspan="8"
+                  [style.border-bottom-left-radius]="
+                    lang.dir === 'rtl' ? '16px' : '0px'
+                  "
+                  [style.border-bottom-right-radius]="
+                    lang.dir === 'rtl' ? '0px' : '0px'
+                  "
+                  *ngIf="i === count"
+                  [class]="lang.dir === 'rtl' ? 'pr-2' : 'pl-2'"
+                >
+                  <span
+                    class="cardTxt5Css"
+                    [ngClass]="statusColor(each.Fbust)"
+                    style="
+                      height: fit-content;
+                      width: unset;
+                      padding: 6px;
+                      max-width: 187px;
+                    "
+                  >
+                    {{ each.FbustTxt }}</span
+                  >
+                </td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </table>
+
+        <!-- <ng-container *ngFor="let each of listData['d']['ASSLISTSet']['results']">
+                <div class="col-12 border" *ngIf="each.Fbust == selectedStatus || selectedStatus=='01'"(click)="startProcess(each.Fbnum)" >
+                    <div class="row" >
+                        <div class="filing-card textDark border" style="height: 160px;">
+                            <div class="row filing-card-upper px-3">
+                                <div class="col-md-6">
+                                    <div class="value  fwb">{{each.FullNm}}</div>
+                                    <div class="caption textGray">{{each.Fbnum}}</div>
+                                </div>
+                                <div class="col-md-6" style="justify-content: flex-end;
+                            display: flex;">
+                                    <div class="tag32 tag-partial" style="height: fit-content;width:unset ;padding:10px">{{each.FbustTxt}}</div>
+                                </div>
+                            </div>
+                            <div class="divider">
+                            </div>
+                            <div class="row filing-card-down px-3" style="height: 67px;">
+                                <div class="col-6 mobpad1">
+                                    <div class="caption textGray">{{lang.list.reportDate}}</div>
+                                    <div class="value  fwb">{{formatDate(each.Receipt)}}</div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </ng-container> -->
+      </div>
+    </div>
+    <div *ngIf="mainPage == false && showApp == true && isApplicationEditable" class="row mt-2">
+      <div class="col-md-12">
+        <div class="value textGray">
+          {{ lang.menu[optionActive - 1].subtitle }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12" class="alignEnd"  *ngIf="mainPage== false && showApp == true && !isApplicationEditable" style="margin-top: -16px;">
+      <div [ngClass]="statusColor(statusCode)"  class="statusSummary">{{statusText}}</div>
+  </div>
+
+    <div
+      *ngIf="mainPage == false && showApp == true && isApplicationEditable"
+      class="Rectangle-12New mt-3"
+    ></div>
+
+    <!-- header end -->
+    <div class="mt-3 mb-3">
+      <form style="width: 100%; font-family: SSTArabic-Roman">
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 1
+
+
+
+                -------------------------------------------->
+        <div class="row" *ngIf="optionActive === 1">
+          <div class="col-md-12">
+            <form [formGroup]="requestRulingFormGroup" (ngSubmit)="onSubmit()">
+              <div class="mt-3">
+                <div class="row" style="margin-bottom: 56px">
+                  <div class="col-xs-12 col-sm-6 mt-2">
+                    <div class="matLabel labelMarginBottom">
+                      {{ lang.f1.label1 }}
+                    </div>
+                    <mat-select
+                      class="commonMatSelect"
+                      formControlName="reqType"
+                      [ngClass]="
+                        requestRulingFormGroup.controls.reqType.errors &&
+                        !isSubmit
+                          ? 'inputErr'
+                          : ''
+                      "
+                    >
+                      <mat-option value="rbSelf">
+                        {{ lang.f1.rbSelf }}</mat-option
+                      >
+                      <mat-option value="rbOnBeh">
+                        {{ lang.f1.rbOnBeh }}</mat-option
+                      >
+                    </mat-select>
+                    <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                  </div>
+                  <div class="col-xs-12 col-sm-6 mt-2">
+                    <div class="matLabel labelMarginBottom">
+                      {{ lang.f1.label2 }}
+                    </div>
+                    <mat-select
+                      class="commonMatSelect"
+                      formControlName="proType"
+                      [ngClass]="
+                        requestRulingFormGroup.controls.proType.errors &&
+                        !isSubmit
+                          ? 'inputErr'
+                          : ''
+                      "
+                    >
+                      <mat-option value="rbPublic">
+                        {{ lang.f1.rbPublic }}</mat-option
+                      >
+                      <mat-option value="rbPrivate">
+                        {{ lang.f1.rbPrivate }}</mat-option
+                      >
+                    </mat-select>
+                    <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btnPrimary"
+                  style="min-width: 207px !important"
+                  mat-raised-button
+                >
+                  {{ lang.continue }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 2
+
+
+
+                -------------------------------------------->
+        <div class="row" *ngIf="optionActive === 2">
+          <div class="col-md-12">
+            <form
+              [formGroup]="requestRulingFormGroup2"
+              (ngSubmit)="onSubmit2()"
+            >
+              <div class="mt-3">
+                <div class="form-3-container" style="margin-bottom: 56px">
+                  <div class="matLabel labelMarginBottom">
+                    {{ lang.f2.label1 }}
+                  </div>
+                  <div class="common-text-area-container mb-5">
+                    <textarea
+                      class="common-text-area"
+                      id="reportDetailNote"
+                      (input)="onInputChange()"
+                      formControlName="reportDetailNote"
+                      [ngClass]="
+                        requestRulingFormGroup2.controls.reportDetailNote
+                          .errors && !isSubmit
+                          ? 'inputErr'
+                          : ''
+                      "
+                    ></textarea>
+                    <!-- <span
+                                            [ngClass]="lang.dir=='ltr'?'common-text-area-counter-ltr':'common-text-area-counter-rtl'">0
+                                            /1000</span> -->
+                  </div>
+                  <div class="row">
+                    <ng-container  *ngFor="
+                    let attach of requestRulingFormGroup2.get('doc')[
+                      'controls'
+                    ];
+                    let j = index
+                  ">
+                    <div *ngIf="attach['controls']['id'].value == 'TPEB' || attach['controls']['id'].value.includes('TPE')"
+                      
+                      class="col-md-6 col-sm-12 col-xs-12 mb-3"
+                    >
+                      <div
+                        class="card-uploaded border"
+                        style="min-width: unset; max-width: 438px"
+                      >
+                        <div class="card-delete">
+                          <img
+                            (click)="
+                              deleteAttachmentFromSer(
+                                attach['controls']['id'].value,
+                                attach['controls']['did'].value,
+                                j
+                              )
+                            "
+                            src="assets/image/delete.svg"
+                          />
+                        </div>
+
+                        <div class="card-file-content">
+                          <img
+                            src="assets/images/generic-documents.png"
+                            style="width: 24px; margin: 0 auto"
+                          />
+
+                          <div
+                            class="value textDark mt-1 card-main-text fwb"
+                            style="overflow-x: auto; overflow-y: hidden"
+                          >
+                            {{ attach["controls"]["name"].value }}
+                          </div>
+                          <!-- <div class="caption textGray mt-1">{{  attach['controls'].hasOwnProperty('size') ? attach['controls']['size'].value: '  '}}</div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                    <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                      <div
+                        class="card-upload border"
+                        style="
+                          min-width: unset;
+                          max-width: 438px;
+                          cursor: pointer;
+                        "
+                        [ngClass]="getAttachmentCount()>=10?'fadeCard':''"
+                        (click)="fileInput.click()"
+                        appDragDrop
+                        (onFileDropped)="uploadFiles($event)"
+                      >
+                        <div class="card-upload-content">
+                          <input
+                            hidden
+                            type="file"
+                            #fileInput
+                            (change)="uploadFiles($event.target.files)"
+                            onclick="this.value = null"
+                          />
+                          <img src="assets/image/attach-gray.svg" />
+                          <div
+                            class="value textPrimary mt-1 card-main-text fwb"
+                          >
+                            {{ lang.f2.drag }}
+                          </div>
+                          <div class="caption textGray mt-1" dir="ltr">
+                            {{ lang.mbMax }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 
+                                    <div class="row">
+
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+
+
+                                            <div class="card-uploaded  border" style="min-width: unset;max-width:unset">
+
+                                                <div class="card-delete"><img src="assets/image/delete.svg" />
+                                                </div>
+                                                <div class="card-file-content">
+                                                    <img src="assets/image/pdf.svg" />
+                                                    <div class="value textDark mt-1  card-main-text fwb">File.pdf</div>
+                                                    <div class="caption textGray mt-1">20MB</div>
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+
+
+
+
+                                            <div class="card-upload border " style="min-width: unset;max-width:unset">
+
+
+                                                <div class="card-upload-content">
+                                                    <img src="assets/image/attach.svg" />
+                                                    <div class="value textPrimary mt-1 card-main-text fwb">
+                                                        {{lang.f2.dragText}}</div>
+                                                    <div class="caption textGray mt-1">20MB Max</div>
+
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div> -->
+                </div>
+
+                <button
+                  type="submit"
+                  class="btnPrimary"
+                  style="min-width: 207px !important"
+                  mat-raised-button
+                >
+                  {{ lang.continue }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 3
+
+
+
+                -------------------------------------------->
+
+        <div class="row" *ngIf="optionActive === 3">
+          <div class="col-md-12">
+            <form
+              [formGroup]="requestRulingFormGroup3"
+              (ngSubmit)="onSubmit3()"
+            >
+              <div class="mt-3">
+                <div class="row" style="margin-bottom: 25px">
+                  <div class="col-xs-12 col-sm-6 mb-2">
+                    <div class="matLabel mt-2 labelMarginBottom">
+                      {{ lang.f3.label1 }}
+                    </div>
+                    <mat-select
+                      class="commonMatSelect"
+                      style="
+                        min-width: unset;
+                        max-width: unset;
+                        width: 100% !important;
+                      "
+                      formControlName="idType"
+                      (selectionChange)="onIdSelect()"
+                      [ngClass]="
+                        requestRulingFormGroup3.controls.idType.errors &&
+                        !isSubmit
+                          ? 'inputErr'
+                          : ''
+                      "
+                    >
+                      <mat-option value="ZS0001"> {{ lang.f3.id1 }}</mat-option>
+                      <mat-option value="ZS0002"> {{ lang.f3.id2 }}</mat-option>
+                      <mat-option value="ZS0003">{{ lang.f3.id3 }}</mat-option>
+                    </mat-select>
+                    <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                  </div>
+                  <div class="col-xs-12 col-sm-6 mb-2">
+                    <div class="matLabel mt-2 labelMarginBottom">
+                      {{ lang.f3.label2 }}
+                    </div>
+                    <input
+                      class="commonInput"
+                      [placeholder]="lang.f3.label2"
+                      formControlName="idNum"
+                      [ngClass]="
+                        requestRulingFormGroup3.controls.idNum.errors &&
+                        !isSubmit
+                          ? 'inputErr'
+                          : ''
+                      "
+                      style="
+                        min-width: unset;
+                        max-width: unset;
+                        width: 100% !important;
+                      "
+                      (input)="onIdNumChange()"
+                      maxlength="15"
+                      onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                      [readOnly]="
+                        (isIdValidated == true &&
+                          requestRulingFormGroup3.controls.idType.value !=
+                            'ZS0003') ||
+                        (isIdValidated == false &&
+                          this.requestRulingFormGroup3.controls.idType.value !=
+                            'ZS0003')
+                      "
+                    />
+                    <div
+                      class="matLabel helperMarginTop text-danger"
+                      *ngIf="
+                        showIdNumError &&
+                        this.requestRulingFormGroup3.controls.idType.value ==
+                          'ZS0003'
+                      "
+                    >
+                      {{ lang.gccError }}
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 mb-2">
+                    <div class="matLabel mt-2 labelMarginBottom">
+                      {{ lang.f3.label3 }}
+                    </div>
+                    <input
+                      class="commonInput"
+                      [placeholder]="lang.f3.label3"
+                      formControlName="name"
+                      [ngClass]="
+                        requestRulingFormGroup3.controls.name.errors &&
+                        !isSubmit
+                          ? 'inputErr'
+                          : ''
+                      "
+                      style="
+                        min-width: unset;
+                        max-width: unset;
+                        width: 100% !important;
+                      "
+                      (input)="nameValidator($event)"
+                     
+                      maxlength="80"
+                    />
+                    <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                  </div>
+                </div>
+
+                <div class="check" style="margin-bottom: 56px">
+                  <mat-checkbox
+                    class="checkboxAckCss"
+                    formControlName="cbdeclaration"
+                    [ngClass]="{
+                      'checkbox-error':
+                        !requestRulingFormGroup3.value.cbdeclaration &&
+                        !isSubmit
+                    }"
+                  >
+                    {{ lang.f3.term }}
+                  </mat-checkbox>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btnPrimary"
+                  style="min-width: 207px !important"
+                  mat-raised-button
+                >
+                  {{ lang.continue }}
+                </button>
+              </div>
+
+              <!-- <div class="row" style="margin-bottom: 56px;">
+
+                                    <div class="col-xs-12 col-sm-6">
+
+                                        <div class="matLabel mt-2 required labelMarginBottom">{{lang.f3.label1}}</div>
+                                        <mat-select class="commonMatSelect">
+
+                                            <mat-option value="1"> option1</mat-option>
+                                            <mat-option value="2"> option2</mat-option>
+
+                                        </mat-select> -->
+              <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+              <!-- </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="matLabel mt-2 required labelMarginBottom">{{lang.f3.label2}}</div>
+                                        <input class="commonInput" placeholder="placeholder" /> -->
+              <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+              <!-- </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="matLabel mt-2 required labelMarginBottom">{{lang.f3.label3}}</div>
+                                        <input class="commonInput" placeholder="placeholder" /> -->
+              <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+              <!-- </div>
+
+
+
+                                    <div class="check mt-4" style="margin: 0 15px">
+                                        <mat-checkbox class="checkboxAckCss">
+                                            {{lang.f3.term}}
+                                        </mat-checkbox>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <button type="submit" class="btnPrimary" style="min-width: 207px !important;"
+                                    mat-raised-button>
+                                    {{ lang.continue }}
+                                </button>
+                            </div> -->
+            </form>
+          </div>
+        </div>
+
+        <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 4
+
+
+
+            -------------------------------------------->
+
+        <div class="row" *ngIf="optionActive === 4">
+          <div class="col-md-12">
+            <form
+              [formGroup]="requestRulingFormGroup4"
+              (ngSubmit)="onSubmit4()"
+            >
+              <div class="mt-3">
+                <!-----------------------------  
+                                
+                                    CARD1 
+                                
+                                --------------------------------------------->
+                <div class="summary-card cardGap border">
+                  <div class="row vCenter px-3 mx-0 summary-header-with-button">
+                    <div class="col-xs-6 col-md-6 vCenter row">
+                      <div><img src="assets/image/summary.png" /></div>
+                      <div class="sectionTitle fwb px-3">
+                        {{ lang.f1.title }}
+                      </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-6" style="text-align: end">
+                      <button
+                        type="button"
+                        (click)="step(1)"
+                        class="btnTertiary textPrimary"
+                        style="min-width: fit-content"
+                        *ngIf="isApplicationEditable"
+                      >
+                        {{ lang.edit }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="row vCenter px-3 summary-card-section">
+                    <div class="col-sm-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f1.label1 }}
+                      </div>
+                      <div class="value fwb">
+                        {{
+                          requestRulingFormGroup.controls.reqType.value ==
+                          "rbSelf"
+                            ? lang.f1.rbSelf
+                            : lang.f1.rbOnBeh
+                        }}
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f1.label2 }}
+                      </div>
+                      <div class="value fwb">
+                        {{
+                          requestRulingFormGroup.controls.reqType.value ==
+                          "rbPublic"
+                            ? lang.f1.rbPublic
+                            : lang.f1.rbPrivate
+                        }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-----------------------------  
+                                
+                                    CARD2
+                                
+                                --------------------------------------------->
+                <div class="summary-card cardGap border">
+                  <div class="row vCenter px-3 mx-0 summary-header-with-button">
+                    <div class="col-xs-6 col-md-6 vCenter row">
+                      <div class="oval">
+                        <img src="assets/image/details.svg" />
+                      </div>
+                      <div class="sectionTitle fwb px-3">
+                        {{ lang.f2.title }}
+                      </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-6" style="text-align: end">
+                      <button
+                        type="button"
+                        (click)="step(2)"
+                        class="btnTertiary textPrimary"
+                        style="min-width: fit-content"
+                        *ngIf="isApplicationEditable"
+                      >
+                        {{ lang.edit }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="row vCenter px-3 summary-card-section">
+                    <div class="col-12">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f2.label1 }}
+                      </div>
+                      <div class="value fwb" style="word-break: break-all">
+                        {{
+                          requestRulingFormGroup2.controls.reportDetailNote
+                            .value
+                        }}
+                      </div>
+                    </div>
+
+                    <div
+                      class="vCenterSingle px-3 taxpayer-card-section"
+                      style="height: unset; min-height: 96px"
+                    >
+                      <div class="value mb-1 textGray">
+                        {{ lang.f2.attachment }}
+                      </div>
+                      <!-- <div class="value fwb">File.pdf <span><img style="padding: 0 5px;
+                                                width: 28px;" src="assets/image/pdf.svg"></span>
+                                            </div> -->
+                      <div class="value fwb alignStart">
+                        <ng-container *ngFor="let each of getControls()">
+                          <span
+                            style="
+                              padding-inline-end: 15px;
+                              display: inline-block;
+                            "
+                            *ngIf="each.id == 'TPEB' || each.id.includes('TPE')"
+                            >{{ each.name }}
+                            <img
+                              src="assets/images/generic-documents.png"
+                              style="width: 24px; margin: 0 auto"
+                          /></span>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-----------------------------  
+                                
+                                    CARD4
+                                
+                                --------------------------------------------->
+                <div class="summary-card cardGap border">
+                  <div class="row vCenter px-3 mx-0 summary-header-with-button">
+                    <div class="col-xs-6 col-md-6 vCenter row">
+                      <div class="oval">
+                        <img src="assets/image/declaration.svg" />
+                      </div>
+                      <div class="sectionTitle fwb px-3">
+                        {{ lang.f3.title }}
+                      </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-6" style="text-align: end">
+                      <button
+                        type="button"
+                        (click)="step(3)"
+                        class="btnTertiary textPrimary"
+                        style="min-width: fit-content"
+                        *ngIf="isApplicationEditable"
+                      >
+                        {{ lang.edit }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="row vCenter px-3 summary-card-section">
+                    <div class="col-sm-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f3.label1 }}
+                      </div>
+                      <div
+                        class="value fwb"
+                        *ngIf="
+                          requestRulingFormGroup3.controls.idType.value ==
+                          'ZS0001'
+                        "
+                      >
+                        {{ lang.f3.id1 }}
+                      </div>
+                      <div
+                        class="value fwb"
+                        *ngIf="
+                          requestRulingFormGroup3.controls.idType.value ==
+                          'ZS0002'
+                        "
+                      >
+                        {{ lang.f3.id2 }}
+                      </div>
+                      <div
+                        class="value fwb"
+                        *ngIf="
+                          requestRulingFormGroup3.controls.idType.value ==
+                          'ZS0003'
+                        "
+                      >
+                        {{ lang.f3.id3 }}
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="value mb-1 textGray">
+                        {{ lang.f3.label2 }}
+                      </div>
+                      <div class="value fwb">
+                        {{ requestRulingFormGroup3.controls.idNum.value }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="Rectangle-12New"></div>
+
+                  <div class="vCenterSingle px-3 taxpayer-card-section">
+                    <div class="value mb-1 textGray">{{ lang.f3.label3 }}</div>
+                    <div class="value fwb" style="word-break: break-all">
+                      {{ requestRulingFormGroup3.controls.name.value }}
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                *ngIf="isApplicationEditable"
+                  type="submit"
+                  class="btnPrimary"
+                  style="min-width: 207px !important"
+                  mat-raised-button
+                >
+                  {{ lang.confirm }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!------------------------ 
+         
+        
+        
+        success  
+    
+    
+    -------------------------------->
+
+  <div *ngIf="showSuccess">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <div class="mt-5" style="height: 159px">
+          <img src="assets/image/success.svg" width="112px" />
+        </div>
+        <div class="pageTitle">
+          {{ lang.confirmPage.title }}
+        </div>
+        <div class="value textGray mt-2">
+          {{ lang.confirmPage.subtitle }}
+        </div>
+
+        <div class="exciseAccCssBox mt-4 col-12 col-xs-12 col-md-6">
+          <div class="exciseAccCssBox1 row">
+            <div class="col-6 alignStart">{{ lang.success.name }}</div>
+            <div class="exciseAccCssBox2 col-6 alignEnd">
+              {{ successData["Cnnm"] }}
+            </div>
+          </div>
+        </div>
+        <div class="exciseAccCssBox mt-3 col-12 col-xs-12 col-md-6">
+          <div class="exciseAccCssBox1 row">
+            <div class="col-6 alignStart">
+              {{ lang.success.applicationNumber }}
+            </div>
+            <div class="exciseAccCssBox2 col-6 alignEnd">
+              {{ successData["Fbnumz"] }}
+            </div>
+          </div>
+        </div>
+        <div class="exciseAccCssBox mt-3 col-12 col-xs-12 col-md-6">
+          <div class="exciseAccCssBox1 row">
+            <div class="col-6 alignStart">{{ lang.success.date }}</div>
+            <div class="exciseAccCssBox2 col-6 alignEnd">{{ currentDate }}</div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <button
+            class="btnFourth mt-4 mb-1"
+            type="button"
+            (click)="downloadAck()"
+            style="min-width: 207px !important"
+          >
+            {{ lang.success.acknowledgement }}
+          </button>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 mt-2 col-md-12">
+        <button
+          class="btnPrimary mt-5 pointer"
+          (click)="backTo('001')"
+          style="min-width: 207px !important"
+          mat-raised-button
+        >
+          {{ lang.confirmPage.btnTitle }}
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <button
+          class="btnFourth mt-4 mb-5"
+          [routerLink]="['/mains']"
+          style="min-width: 207px !important"
+        >
+          {{ lang.confirmPage.redirect }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal textDark"
+  id="terms"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+  style="font-family: SSTArabic-Roman"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('terms')"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3">{{ lang.termsModal.title }}</div>
+          <div class="lightCard py-3 pr-3 mb-3">
+            <ul class="modalInstructions f12 gray">
+              <li>{{ lang.termsModal.i1 }}</li>
+              <li>{{ lang.termsModal.i2 }}</li>
+              <li>{{ lang.termsModal.i3 }}</li>
+              <li>{{ lang.termsModal.i4 }}</li>
+              <li>{{ lang.termsModal.i5 }}</li>
+            </ul>
+          </div>
+
+          <div class="col-md-12 check row">
+            <mat-checkbox
+              class="checkboxAckCss"
+              [(ngModel)]="isAgree"
+              [ngClass]="{
+                'checkbox-error': isInstructionSubmitted && !isAgree
+              }"
+            >
+              {{ lang.termsModal.agree }}
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary"
+              (click)="acceptInstructions()"
+              style="min-width: 207px"
+              mat-raised-button
+            >
+              {{ lang.termsModal.btnTitle }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal textDark"
+  id="filter"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+  style="font-family: SSTArabic-Roman"
+  *ngIf="mainPage == true && showApp == false"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('filter')"
+            />
+          </div>
+
+          <div class="filterMargin row">
+            <div class="dark fbl f28 mt-4 mb-3">
+              {{ lang.filterModal.title }}
+            </div>
+            <div class="py-3 mb-3 filterModal">
+              <div>
+                <div class="matLabel labelMarginBottom">
+                  {{ lang.filterModal.label1 }}
+                </div>
+                <mat-select class="commonMatSelect" [(ngModel)]="formType">
+                  <mat-option value="req">{{ lang.f1.rbSelf }}</mat-option>
+                </mat-select>
+
+                <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+              </div>
+              <div class="mt-3">
+                <div class="matLabel labelMarginBottom">
+                  {{ lang.filterModal.label2 }}
+                </div>
+                <mat-select
+                  class="commonMatSelect"
+                  (selectionChange)="changeStatus()"
+                  [(ngModel)]="selectedStatus"
+                >
+                  <ng-container
+                    *ngFor="let each of listData['d']['STATUSSet']['results']"
+                  >
+                    <mat-option *ngIf="each.Estat != '01'" [value]="each.Estat">
+                      {{ each.Txt30 }}</mat-option
+                    >
+                    <mat-option *ngIf="each.Estat == '01'" [value]="each.Estat">
+                      {{ each.Txt30 }}</mat-option
+                    >
+                  </ng-container>
+                </mat-select>
+                <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4 mb-2 alignEnd" style="padding: 0">
+              <button
+                class="btnPrimary"
+                (click)="onApplyFilter()"
+                style="min-width: 207px; padding: 0"
+                mat-raised-button
+              >
+                {{ lang.filterModal.btnTitle }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- id validation modal -->
+
+<div
+  class="modal textDark"
+  [dir]="lang.dir"
+  id="aftSelect"
+  data-keyboard="false"
+  data-backdrop="static"
+  style="font-family: SSTArabic-Roman"
+  *ngIf="optionActive === 3"
+>
+  <div class="modal-dialog" style="max-width: 481px">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row text-center mt-3">
+          <div class="col-md-12">
+            <div class="row text-center">
+              <div class="col-md-12 alignEnd" style="padding-bottom: 14px">
+                <img
+                  src="assets/image/close.svg"
+                  class="modalCloseIcon"
+                  style="cursor: pointer"
+                  data-dismiss="modal"
+                  (click)="reset()"
+                />
+              </div>
+              <div class="col-md-12">
+                <div class="labelTxtCss" style="text-align: center">
+                  {{ lang.f3.label2 }}
+                </div>
+
+                <input
+                  class="commonInput"
+                  (blur)="idValidationOnBlur()"
+                  [ngClass]="idErr1 ? 'inputErr' : ''"
+                  (input)="onIdinputChange()"
+                  [placeholder]="lang.f3.label2"
+                  [value]="requestRulingFormGroup3['controls']['idNum'].value"
+                  [(ngModel)]="id1"
+                  name="id1"
+                  maxlength="10"
+                />
+
+                <div *ngIf="idErr1" class="invalid-feedback">
+                  <p
+                    style="
+                      margin-top: 10px;
+                      font-size: 14px;
+                      text-align: center;
+                    "
+                  >
+                    {{ idMsg }}
+                  </p>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  this.requestRulingFormGroup3.controls.idType.value != 'ZS0003'
+                "
+                class="col-md-12"
+              >
+                <div class="labelTxtCss mt-3" style="text-align: center">
+                  {{ lang.modal.dob }}
+                </div>
+
+                <div
+                  class="commomDatePicker"
+                  style="margin: 0 auto"
+                  [ngClass]="dobErr ? 'inputErr' : ''"
+                >
+                  <input
+                    readonly
+                    (click)="datePicker.open()"
+                    matInput
+                    [matDatepicker]="datePicker"
+                    (dateChange)="onDobChange()"
+                    name="dob1"
+                    [(ngModel)]="dob1"
+                    placeholder="dd-mm-yyyy"
+                    [max]="today"
+                    style="margin-inline-start: -43px; margin-top: 5px"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="datePicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datePicker> </mat-datepicker>
+                </div>
+
+                <!-- <div class="commomDatePicker" style="margin: 0 auto;">
+                    <input (click)="dd.toggle()" placeholder="yyyy-mm-dd" ngbDatepicker #dd="ngbDatepicker"
+                      name="dob1"   [(ngModel)]="dob1" />
+  
+                    <mat-icon matSuffix (click)="dd.toggle()" style="color: #707070; cursor: pointer;    top: 13%;
+                    position: relative;">
+                      date_range
+                    </mat-icon>
+                </div> -->
+                <div *ngIf="dobErr" class="invalid-feedback">
+                  <p
+                    style="
+                      margin-top: 10px;
+                      font-size: 14px;
+                      text-align: center;
+                    "
+                  >
+                    {{ dobMsg }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 mb-5 alignEnd">
+              <button
+                mat-button
+                (click)="validateID2()"
+                class="btnPrimary"
+                mat-raised-button
+              >
+                {{ lang.modal.validate }}
+              </button>
+              <!-- <button mat-button style="
+                    width: auto;
+                    border: none;
+                    color: #d2a02a;
+                    font-size: 16px;
+                    font-family: 'SST Arabic';
+
+                  " data-dismiss="modal"  (click)="reset()" class="btnTCss">
+                  {{lang.modal.close}}
+                </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

@@ -1,0 +1,528 @@
+.userMgmtRoot {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  text-align: start;
+ 
+}
+
+.zs-umMt {
+  padding-top: 1rem;
+}
+
+.zs-umMt:before {
+  content: "• ";
+}
+
+.btnSecum {
+  color: #aa0c19;
+  background-color: white;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.userMgmtMiddle {
+}
+
+.userMgmtspan {
+  padding-bottom: 0.4 rem;
+  width: 100%;
+}
+
+.userMgmtspan2 {
+  padding-bottom: 1rem;
+  margin-inline-start: 36px;
+  justify-self: start;
+}
+
+.mis-auto {
+  margin-inline-start: auto;
+}
+
+.userMgmtspan:hover {
+  cursor: pointer;
+}
+
+.userMgmtTabMenu {
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 0.3rem;
+  padding-top: 1rem;
+  margin-inline-start: 0.5rem;
+  width: 99%;
+  padding-bottom: 0 !important;
+}
+
+.userMgmtLocation {
+  padding-top: 40px;
+  font-size: 16px;
+  padding-inline-start: 0.2rem
+}
+
+.userMgmtBack {
+  padding-top: 40px;
+  font-size: 16px;
+}
+
+.userMgmtH {
+  padding-top: 32px;
+  font-size: 28px;
+  font-family: "SSTARABIC-BOLD";
+  padding-inline-start: 0.2rem
+}
+
+.modalPrum {
+  width: 140px;
+}
+
+.notcon {
+  display: none !important;
+}
+
+.userMgmtTabMenu span {
+  font-size: 16px;
+}
+
+.userMapAdd {
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+
+  align-items: center;
+  margin-top: 25px;
+  min-height: 163px;
+  position: relative;
+}
+
+.userMapAdd:hover {
+  cursor: pointer;
+}
+
+.userMapAdd1 {
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  height: 163px;
+  position: relative;
+}
+
+.userMapAdd1:hover {
+  cursor: pointer;
+}
+
+::ng-deep .modal-content {
+  border-radius: 14px !important;
+  margin-top: 5rem;
+  width: 100%;
+}
+
+::ng-deep .modal-title {
+  padding-top: 2rem;
+}
+
+::ng-deep .modal-header {
+  border: none !important;
+}
+
+.modal-body {
+  border: none;
+}
+
+.modelUsermanagement {
+  border-radius: 14px !important;
+}
+
+.umpop {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  right: 6%;
+  top: 35px;
+  height: fit-content;
+  width: 238px;
+  border-radius: 14px;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+}
+
+.inactiveMenuPlacer {
+  position: absolute;
+  top: 6rem;
+  right: 1.5rem;
+}
+
+.mymodal {
+  position: absolute;
+}
+
+.menuRender {
+  position: relative;
+}
+
+.umpop2 {
+  left: 6%;
+  right: unset;
+}
+
+.addUserBtn {
+}
+
+.pageTitle {
+  font-family: "SSTArabic-Bold";
+}
+
+.zs-umMt2 {
+  font-family: "SSTARABIC-ROMAN";
+}
+
+.zs-umMt {
+  font-family: "SSTARABIC-ROMAN";
+}
+
+.btnStyleum {
+  font-family: "SSTArabic-Bold";
+}
+
+.umpopOption {
+  font-weight: 500;
+  display: flex;
+  border-bottom: 1px solid #ebebeb;
+  padding: 1rem;
+  font-size: 16px;
+  font-family: SSTArabic-Medium;
+}
+
+.umpopOption:hover {
+  cursor: pointer;
+}
+
+.addUserFirstCard:hover {
+  cursor: pointer;
+}
+
+.usrSpan1 {
+  color: #999999;
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 0.5rem;
+  cursor:pointer;
+}
+
+.usrSpanx {
+  color: #999999;
+  font-family: SSTARABIC-ROMAN;
+  cursor:pointer;
+}
+
+
+.userMgmtspan2 {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #151515;
+  padding-bottom: 0.5rem !important;
+  margin-inline-start: 30px;
+  padding: unset !important;
+}
+
+.taprofile {
+  color: #151515;
+}
+
+.hspan2 {
+  color: #006450;
+  font-size: 16px;
+  font-weight: bold;
+  width: fit-content;
+}
+.activeTabStyle{
+  border-bottom: solid 4px #d99a29;
+  font-weight: bold;
+  font-family: 'SSTARABIC-LIGHT'
+
+}
+.inactiveTabStyle{
+  font-family: 'SSTARABIC-LIGHT'
+
+}
+.hspan2:hover {
+  cursor: pointer;
+}
+
+.transform{
+  transform: rotate(180deg);
+  
+}
+
+.userMapAddImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hspanx {
+  color: #006450;
+  font-family: SSTARABIC-BOLD;
+  width: fit-content;
+}
+
+.hspanx:hover {
+  cursor: pointer;
+}
+
+.userMapAddImg2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  padding-top: 0.5rem;
+  color: #006450 !important;
+  font-family: SSTArabic-BOLD;
+}
+
+
+
+.ListViewAddText
+{
+  color: #006450 !important;
+  font-family: SSTArabic-BOLD;
+  font-size: 16px;
+  font-weight: bold;
+
+}
+.ListViewAddText:hover 
+{ cursor: pointer;
+  text-decoration: none;
+  color: black;
+
+}
+.userMapAddImg2:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.zs-decbtaligner {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dots {
+  justify-content: flex-end;
+  display: flex;
+  padding-inline-end: 0.8rem;
+  padding-top: 0.8rem;
+  z-index: 1000;
+  width: 30px;
+  margin-inline-start: auto;
+}
+
+.userName {
+  padding-top: 0.3rem;
+}
+
+.test2 {
+  padding-bottom: 0.3rem;
+}
+
+.test2:hover {
+  cursor: pointer;
+}
+
+.test3:hover {
+  cursor: pointer;
+}
+
+.test3 {
+  padding-bottom: 0.3rem;
+}
+
+.usrActualName {
+  padding-inline-start: 1.5rem;
+  font-size: 20px;
+  font-weight: bold;
+  color: #232323;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: SSTARABIC-BOLD;
+}
+.marginAddAcc{
+  margin-top: 25px;
+}
+.addAccListheight{
+ height: 44px;
+ margin: 0;
+ cursor: pointer;
+}
+
+.filterContrast {
+  filter: contrast(0.1);
+}
+.activeViewIndicator{
+  border-bottom: 3px solid orange;
+
+}
+.taprofile2 {
+  color: #151515;
+  font-family: "SSTARABIC-ROMAN";
+}
+
+.usrBadge {
+  width: fit-content;
+  padding: 1rem;
+  height: 32px;
+  border-radius: 14px;
+  padding-inline-end: 1rem;
+  font-size: 12px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: SSTARABIC-ROMAN;
+}
+
+.usrBadge2 {
+  font-size: 12px !important;
+
+  padding-inline-end: 1rem;
+}
+
+.usrBranchName {
+  font-size: 12px;
+  font-weight: normal;
+  color: #999999;
+  padding-inline-start: 1.5rem;
+  padding-top: 1rem;
+  font-family: "SSTARABIC-ROMAN";
+}
+
+.zs-textReducer {
+  padding-top: 0.4rem;
+  font-size: 12px !important;
+}
+
+.usrBranchName2 {
+  font-size: 12px;
+  font-weight: normal;
+  color: #232323;
+  padding-inline-start: 1.5rem;
+  font-family: "SSTArabic-Medium";
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zs-modalCloser:hover {
+  cursor: pointer;
+}
+
+.userCardFoot {
+  display: flex;
+}
+
+.userMgmtspan3 {
+  justify-self: right;
+}
+
+.test {
+  padding-inline-start: 1rem;
+}
+
+.tabBuns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.userMgmtspan1:hover {
+  cursor: pointer;
+}
+
+.userMgmtspan2 {
+  cursor: pointer;
+}
+
+.dots:hover {
+  cursor: pointer;
+}
+
+.start {
+  margin-top: 3rem;
+  border-top-right-radius: 14px;
+  border-top-left-radius: 14px;
+}
+
+.glowClass:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(35, 35, 35, 0.1);
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-inline-end: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  text-align: center;
+}
+
+.name2 {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.txtSizeuml {
+  font-size: 12px;
+  font-family: SSTArabic-Roman;
+  color: #151515;
+  font-weight: bold;
+}
+
+.grayTxtList {
+  font-size: 12px;
+  font-family: SSTArabic-Roman;
+  color: #999999;
+}
+
+.userMgmtMap2 {
+  border-bottom-right-radius: unset;
+  border-bottom-left-radius: unset;
+  margin-top: 25px;
+}
+
+.name3 {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-inline-end: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  width: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.noMarginPadiingStart{
+  margin-inline-start: 0;padding-inline-start: 0;
+}
+.redBold{
+  color:#aa0c19;
+  font-weight:bold;
+}
+.blackNormal{
+  color:black;
+  font-weight:normal;
+}

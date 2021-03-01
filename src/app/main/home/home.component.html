@@ -1,0 +1,268 @@
+<div id="accordionExample" style="margin-top: 15px;">
+    <div class="card" style="  background: #2d624c;">
+        <div id="collapseOne" class="collapse" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        
+                        <div class="list-group list-group-root well">
+
+                            <a href="#item-1" class="list-group-item" data-toggle="collapse">
+                                <i class="glyphicon glyphicon-chevron-right"></i>Register
+                            </a>
+                          
+                            <div class="list-group collapse" id="item-1">
+
+                                <a [routerLink]="['/main/register/excise']" class="list-group-item"
+                                    data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Excise
+                                </a>
+                                <!-- <div class="list-group collapse" id="item-1-1">
+                          <a href="#" class="list-group-item">Item 1.1.1</a>
+                          <a href="#" class="list-group-item">Item 1.1.2</a>
+                          <a href="#" class="list-group-item">Item 1.1.3</a>
+                        </div> -->
+
+                                <a [routerLink]="['/main/register/vat']" class="list-group-item"
+                                    data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>VAT
+                                </a>
+
+                               
+                                <!-- <div class="list-group collapse" id="item-1-2">
+                          <a href="#" class="list-group-item">Item 1.2.1</a>
+                          <a href="#" class="list-group-item">Item 1.2.2</a>
+                          <a href="#" class="list-group-item">Item 1.2.3</a>
+                        </div> -->
+
+                                <!-- <a href="#item-1-3" class="list-group-item" data-toggle="collapse">
+                          <i class="glyphicon glyphicon-chevron-right"></i>Item 1.3
+                        </a> -->
+                                <!-- <div class="list-group collapse" id="item-1-3">
+                          <a href="#" class="list-group-item">Item 1.3.1</a>
+                          <a href="#" class="list-group-item">Item 1.3.2</a>
+                          <a href="#" class="list-group-item">Item 1.3.3</a>
+                        </div> -->
+
+                            </div>
+
+                            <a   class="list-group-item" [routerLink]="['/main/oldDashboard']" class="list-group-item">
+                                <i class="glyphicon glyphicon-chevron-right"></i>Old Dashboard
+                            </a>
+                            <div class="list-group collapse" id="item-2">
+                                <a [routerLink]="['/main/ui5']" class="list-group-item"
+                                data-toggle="collapse">
+                                <i class="glyphicon glyphicon-chevron-right"></i>UI5 Dashboard
+                            </a>
+                            </div>
+                            <!-- <a href="#item-2" class="list-group-item" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-chevron-right"></i>Item 2
+                      </a>
+                      <div class="list-group collapse" id="item-2">
+                        
+                        <a href="#item-2-1" class="list-group-item" data-toggle="collapse">
+                          <i class="glyphicon glyphicon-chevron-right"></i>Item 2.1
+                        </a>
+                        <div class="list-group collapse" id="item-2-1">
+                          <a href="#" class="list-group-item">Item 2.1.1</a>
+                          <a href="#" class="list-group-item">Item 2.1.2</a>
+                          <a href="#" class="list-group-item">Item 2.1.3</a>
+                        </div>
+                        
+                        <a href="#item-2-2" class="list-group-item" data-toggle="collapse">
+                          <i class="glyphicon glyphicon-chevron-right"></i>Item 2.2
+                        </a>
+                        <div class="list-group collapse" id="item-2-2">
+                          <a href="#" class="list-group-item">Item 2.2.1</a>
+                          <a href="#" class="list-group-item">Item 2.2.2</a>
+                          <a href="#" class="list-group-item">Item 2.2.3</a>
+                        </div>
+                        
+                        <a href="#item-2-3" class="list-group-item" data-toggle="collapse">
+                          <i class="glyphicon glyphicon-chevron-right"></i>Item 2.3
+                        </a>
+                        <div class="list-group collapse" id="item-2-3">
+                          <a href="#" class="list-group-item">Item 2.3.1</a>
+                          <a href="#" class="list-group-item">Item 2.3.2</a>
+                          <a href="#" class="list-group-item">Item 2.3.3</a>
+                        </div>
+                        
+                      </div>
+                      
+                      
+                      <a href="#item-3" class="list-group-item" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-chevron-right"></i>Item 3
+                      </a>
+                      <div class="list-group collapse" id="item-3">
+                        
+                        <a href="#item-3-1" class="list-group-item" data-toggle="collapse">
+                          <i class="glyphicon glyphicon-chevron-right"></i>Item 3.1
+                        </a>
+                        <div class="list-group collapse" id="item-3-1">
+                          <a href="#" class="list-group-item">Item 3.1.1</a>
+                          <a href="#" class="list-group-item">Item 3.1.2</a>
+                          <a href="#" class="list-group-item">Item 3.1.3</a>
+                        </div>
+                        
+                        <a href="#item-3-2" class="list-group-item" data-toggle="collapse">
+                          <i class="glyphicon glyphicon-chevron-right"></i>Item 3.2
+                        </a>
+                        <div class="list-group collapse" id="item-3-2">
+                          <a href="#" class="list-group-item">Item 3.2.1</a>
+                          <a href="#" class="list-group-item">Item 3.2.2</a>
+                          <a href="#" class="list-group-item">Item 3.2.3</a>
+                        </div>
+                        
+                        <a href="#item-3-3" class="list-group-item" data-toggle="collapse">
+                          <i class="glyphicon glyphicon-chevron-right"></i>Item 3.3
+                        </a>
+                        <div class="list-group collapse" id="item-3-3">
+                          <a href="#" class="list-group-item">Item 3.3.1</a>
+                          <a href="#" class="list-group-item">Item 3.3.2</a>
+                          <a href="#" class="list-group-item">Item 3.3.3</a>
+                        </div>
+                        
+                      </div>
+                       -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" dir={{direction}}>
+
+    <nav class="navbar navbar-expand-sm  navbar-dark  fixed-top "
+        [ngClass]="direction === 'rtl' ? 'navBarArbHCss' : 'navBarHCss'">
+        <a class="navbar-brand" style="cursor: pointer;">
+            <img src="assets/images/logo.png" (click)="redirect()" style="width:200px;">
+        </a>
+
+        <div class="collapse navbar-collapse">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <!-- <a class="nav-link" style="color: white;cursor: pointer;font-size: 20px"> Home</a> -->
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" style="color: white; cursor: pointer;font-size: 20px;">Register</a> -->
+                </li>
+            </ul>
+            <span class="form-inline my-2 my-lg-0">
+                <!-- <span [ngClass]="direction === 'rtl' ? 'fontCssAr2' : 'fontCss'">
+                    <span class="txtHCss"> عربى </span>
+                </span> -->
+                <span [ngClass]="direction === 'rtl' ? 'fontCssAr' : 'fontCss'"
+                    [style.border-right]="direction === 'rtl'? 'none': '1px solid white' ">
+                    <img src="assets/images/email.png" class="txtHCss" style="width: 30px;" alt="Logo">
+                    <!-- <i class="fa fa-envelope txtCss" aria-hidden="true"></i> -->
+                </span>
+                <span [ngClass]="direction === 'rtl' ? 'fontCssAr' : 'fontCss'" data-toggle="modal" data-target="#notification">
+                    <!-- <i class="fas fa-bell txtHCss"></i> -->
+                    <img src="assets/images/notify.png" class="txtHCss" style="width: 30px;" alt="Logo">
+                    <span style="width: 20px;
+                    height: 20px;background: #d2a02a;"></span>
+                </span>
+
+                <span [ngClass]="direction === 'rtl' ? 'fontCssAr' : 'fontCss'"
+                    [style.border-right]="direction === 'ltr'? 'none': '1px solid white' ">
+                    <span *ngIf="direction === 'rtl'">  {{name}} </span> <span *ngIf="direction === 'ltr'"> {{name}}</span>
+                </span>
+
+     
+                <span style=" width: 51px;
+                border-radius:50%;background: white;
+                height: 51px;
+                border: solid 1px #707070;justify-content: center;">
+                 <img src="assets/images/ChatBot@2x.png"  [ngClass]="direction === 'rtl' ? 'chatIconArbCss' : 'chatIconCss'"  alt="Logo">
+                </span>
+                <span [ngClass]="direction === 'rtl' ? 'fontCssAr1' : 'fontCss1'" data-toggle="collapse"
+                    href="#collapseOne">
+                    <span *ngIf="direction === 'rtl'" style="margin-right: 15px;
+                    margin-left: 15px;"> القائمة </span> <span *ngIf="direction === 'ltr'" style="margin-right: 15px;
+                    margin-left: 15px;"> Menu</span>
+                    <i class="fa fa-bars " [ngClass]="direction === 'rtl' ? 'textCss2Ar' : 'textCss2'"
+                        aria-hidden="true"></i>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+
+
+
+    <!-- <main role="main" class="container">
+        <div class="jumbotron">
+            <h1>Navbar example</h1>
+            <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll,
+                it will remain fixed to the top of your browser's viewport.</p>
+            <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+        </div>
+    </main> -->
+    <!-- <div class="row" style="margin-left: 0px;margin-right: 0px; margin-top: 10px;position: relative;
+    left: -90px;    margin-bottom: -20px;">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background: #f5f5f5;;
+                        color: #2e6350;
+                        font-weight: 600;">
+
+                    <li class="breadcrumb-item" *ngFor="let item of menu; let i = index"
+                        [class.active]="i===menu.length-1">
+                        <a (click)="reD()">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> {{item.name}}
+                        </a>
+                    </li>
+
+                </ol>
+            </nav>
+        </div>
+    </div> -->
+    <!-- 
+    <div class="row" *ngIf="show">
+        <div class="col-md-12">
+            <iframe src='https://pocngsda1.mygazt.gov.sa:8080/sap/bc/ui5_ui5/sap/zuibtpdashboard/index.html?sap-theme=sap_bluecrystal&sap-language=EN&sap-client=500&sap-locale=en' class="ifrmCss" ></iframe>
+
+        </div>
+    </div> -->
+
+    <!-- <button mat-button  [routerLink]="['/ui5']">test</button> -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+</div>
+
+
+<iframe [src]="url" ></iframe>
+
+
+
+  
+<!-- The Modal -->
+<div class="modal" id="notification">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+          
+        <div class="modal-header" style="height: 50px;">
+          <span class="headerTitle"> <i class="fa fa-info-circle" aria-hidden="true" style="color:#d2a02a"></i> Notification</span>
+          <button type="button" class="close" data-dismiss="modal" style="position: relative;
+          bottom: 8px;">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    Column data goes here
+                </div>
+            </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>

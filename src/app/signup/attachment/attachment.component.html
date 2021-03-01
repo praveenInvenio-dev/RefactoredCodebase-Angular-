@@ -1,0 +1,80 @@
+<div class="row" style="text-align: start;">
+    <div class="col-md-12">
+        <div class="tnc">
+            {{attchTile}}
+        </div>
+    </div>
+</div>
+
+<div class="Rectangle-12New mt-3"></div>
+<div class="row mt-4" style="text-align: start; ">
+    <div class="col-md-12">
+        <div class="exciseSecondTitle1">
+            {{lang1.txt1}}
+        </div>
+        <div class="exciseSecondTitle1">
+            {{lang1.txt2}} {{size}} MB
+        </div>
+        <div class="exciseSecondTitle1">
+            {{lang1.txt3}}
+        </div>
+        <div class="exciseSecondTitle1">
+            {{lang1.txt4}}
+        </div>
+        <!-- <div>
+            {{lang.txt5}}
+        </div> -->
+    </div>
+</div>
+<div class="row mt-3 mb-2" style="min-height: 500px;max-height: 500px;overflow:auto;">
+    <div class="col-md-6 mt-3 mb-3" *ngFor="let item of filez[attchId]?.at; let i=index">
+        <mat-card style="height: 216px;">
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="assets/image/delete.svg" style="width: 24px;float: right;"
+                            (click)="deleteAttachments(attchId,i)">
+                    </div>
+                </div>
+                <div class="row text-center mt-5">
+                    <div class="col-md-12">
+                        <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                        <!-- <img src="assets/image/Word-icon.png" *ngIf="files[j].name.includes('.doc') || files[j].name.includes('.docx')" style="width: 24px;">
+                  <img src="assets/image/excel.png" *ngIf="files[j].name.includes('.xls') || files[j].name.includes('.xlsx')" style="width: 24px;">
+                  <img src="assets/image/jpg.png" *ngIf="files[j].name.includes('.jpg') || files[j].name.includes('.jpeg')" style="width: 24px;"> -->
+                        <p class="fileName" title={{item.name}}> {{ item.name}} </p>
+                        <div class="fileSize" *ngIf="item.url !== ''">{{item.size}} MB</div>
+
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-6 mt-3 mb-3" *ngIf="filez[attchId]?.at.length < 5">
+        <mat-card style="height: 216px;border: 1px dashed #ebebeb;">
+            <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop
+                (onFileDropped)="uploadFile($event, attchId);">
+
+                <input hidden type="file" #fileInput (click)="fileInput.value = null"
+                    (change)="uploadFile($event.target.files, attchId);">
+                <div class="row text-center mt-5">
+                    <div class="col-md-12">
+                        <img src="assets/image/attach.svg" style="width: 24px;">
+                        <div class="fileUploadTxt">{{lang.c3.t7}}
+                        </div>
+                        <div class="fileUploadTxt1">{{lang1.txt6}} {{size}} MB</div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div class="row mt-3" style="text-align: start;">
+    <div class="col-md-12">
+        <button mat-button [style.float]="dir === 'rtl'? 'left':'right'" data-dismiss="modal"
+            class="btnCss">
+            {{lang.btn}}
+        </button>
+    </div>
+</div>

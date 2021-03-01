@@ -1,0 +1,488 @@
+<div [dir]="lang === 'ar' ? 'rtl' : 'ltr'" class="container view mt-4">
+  <div class="row">
+    <div class="col-md-12" [ngClass]="lang === 'ar' ? 'ar-align' : ''">
+      <span
+        class="exciseTitle1 unicodeDir"
+        [style.float]="lang === 'ar' ? 'rtl' : 'ltr'"
+        (click)="backTo('')"
+        >{{ stringConstants.main.nav.bc1 }}
+        &gt;
+      </span>
+      <span
+        class="exciseTitle1"
+        [style.float]="lang === 'ar' ? 'rtl' : 'ltr'"
+        (click)="backTo('003')"
+        >{{ stringConstants.main.nav.bc2 }} &gt;</span
+      >
+      <span
+        class="exciseTitle1"
+        [style.float]="lang === 'ar' ? 'rtl' : 'ltr'"
+        style="color: #151515"
+      >
+        {{ stringConstants.main.nav.bc3 }}</span
+      >
+    </div>
+  </div>
+  <div class="stepHeader row mt-24px">
+    <span class="stepBack col-md-6" (click)="back()">
+      <img
+        [src]="
+          lang === 'en'
+            ? 'assets/image/arrow-left-green.svg'
+            : 'assets/image/arrow-right-green.svg'
+        "
+        style="width: 24px"
+      />
+      {{ stringConstants.main.nav.back }}</span
+    >
+  </div>
+  <div class="report-title mt-24px">
+    <div class="pageTitle">
+      {{
+        view
+          ? stringConstants.main.title.view
+          : stringConstants.main.title.report
+      }}
+    </div>
+
+    <div
+      *ngIf="!view"
+      [ngClass]="lang === 'ar' ? 'layout-options-rtl' : 'layout-options'"
+    >
+      <div
+        [ngClass]="
+          tableView
+            ? 'layout-options-img'
+            : 'layout-options-img layout-options-active'
+        "
+        (click)="viewToggle(false)"
+      >
+        <img
+          [src]="
+            tableView
+              ? 'assets/image/gridSelection.svg'
+              : 'assets/image/card-green.svg'
+          "
+        />
+      </div>
+      <div
+        [ngClass]="
+          tableView
+            ? 'layout-options-img layout-options-active'
+            : 'layout-options-img'
+        "
+        (click)="viewToggle(true)"
+      >
+        <img
+          [src]="
+            tableView ? 'assets/image/table.svg' : 'assets/image/table-gray.svg'
+          "
+        />
+      </div>
+    </div>
+
+    <div
+      *ngIf="view"
+      [ngClass]="
+        formData.status === 'Processed'
+          ? 'list-item-status tag-success'
+          : 'list-item-status tag-partial'
+      "
+      [matTooltip]="formData.StatText"
+    >
+      <span>{{ formData.StatText }}</span>
+    </div>
+  </div>
+  <div *ngIf="!view" class="Rectangle-12New"></div>
+
+  <div *ngIf="!view" class="filters">
+    <div class="filter-search">
+      <input
+        type="text"
+        [placeholder]="stringConstants.main.search"
+        [(ngModel)]="searchFilter"
+        (ngModelChange)="onSearchFilter()"
+      />
+      <img
+        src="assets/images/inbox/search.svg"
+        alt=""
+        data-toggle="modal"
+        data-target="#myModal"
+      />
+    </div>
+
+    <img
+      [ngClass]="lang === 'ar' ? 'filters-img-rtl' : 'filters-img'"
+      src="assets/image/filter.svg"
+      data-toggle="modal"
+      data-target="#myModal"
+      (click)="resetSearchFilter()"
+    />
+  </div>
+
+  <div *ngIf="!view && tableView" class="table">
+    <div
+      [ngClass]="
+        lang === 'ar' ? 'form-list-add-rtl  mt-24px' : 'form-list-add mt-24px'
+      "
+      (click)="addNewReq()"
+    >
+      <img src="assets/image/add.svg" />
+      <span>{{ stringConstants.main.list.new }}</span>
+    </div>
+
+    <table class="mt-24px" style="width: 100%">
+      <tr [ngClass]="lang === 'ar' ? 'tabHeader-rtl' : 'tabHeader'">
+        <th colspan="3">
+          {{ stringConstants.main.list.date }}
+        </th>
+        <th colspan="3">{{ stringConstants.main.list.fname }}</th>
+        <th colspan="3">{{ stringConstants.main.list.fbnum }}</th>
+        <th colspan="3">
+          {{ stringConstants.main.list.status }}
+        </th>
+      </tr>
+      <ng-container *ngFor="let item of filteredList; let i = index">
+        <tr
+          [ngClass]="lang === 'ar' ? 'tabheader2-rtl' : 'tabheader2'"
+          (click)="viewForm(item.Fbnum, item.StatText)"
+        >
+          <td colspan="3">
+            {{ item.CrdtText }}
+          </td>
+          <td colspan="3">{{ item.FbtText }}</td>
+          <td colspan="3">{{ item.Fbnum }}</td>
+          <td colspan="3" style="text-align: center">
+            <div
+              [ngClass]="
+                item.StatText === 'Processed'
+                  ? 'list-item-status tag-success'
+                  : 'list-item-status tag-partial'
+              "
+              [matTooltip]="item.StatText"
+            >
+              <span>{{ item.StatText }}</span>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+
+  <div *ngIf="!view && !tableView" class="list">
+    <div
+      [ngClass]="
+        lang === 'ar'
+          ? 'list-item-rtl list-item-add'
+          : 'list-item list-item-add'
+      "
+      (click)="addNewReq()"
+    >
+      <img src="assets/image/add.svg" />
+      <span>{{ stringConstants.main.list.new }}</span>
+    </div>
+
+    <div
+      [ngClass]="lang === 'ar' ? 'list-item-rtl' : 'list-item'"
+      *ngFor="let item of filteredList; index as i"
+      (click)="viewForm(item.Fbnum, item.StatText)"
+    >
+      <!-- <div class="list-item-options">
+        <img src="assets/images/excise-goods/dots.svg" />
+      </div> -->
+      <div class="list-item-main">
+        <div class="list-item-title">
+          <p>{{ item.FbtText }}</p>
+          <!-- <span>{{ item.Fbguid }}</span> -->
+        </div>
+        <div
+          [ngClass]="
+            item.StatText === 'Processed'
+              ? 'list-item-status tag-success'
+              : 'list-item-status tag-partial'
+          "
+          [matTooltip]="item.StatText"
+        >
+          <span>{{ item.StatText }}</span>
+        </div>
+      </div>
+      <div class="list-item-divider"></div>
+      <div class="list-item-sub">
+        <div class="list-item-details">
+          <p>{{ stringConstants.main.list.fbnum }}</p>
+          <span>{{ item.Fbnum }}</span>
+        </div>
+        <div class="list-item-details">
+          <p>{{ stringConstants.main.list.date }}</p>
+          <span>{{ item.CrdtText }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Modal -->
+
+  <div class="modal" id="myModal" style="border-radius: 14px">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header" style="border-bottom: none !important">
+          <button type="button" class="close" data-dismiss="modal">
+            <img src="assets/image/close.svg" />
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container">
+            <div
+              class="row"
+              style="text-align: start; margin-left: 5%; margin-right: 5%"
+            >
+              <div class="col-md-12">
+                <div class="filter1">
+                  {{ stringConstants.main.filters.title }}
+                </div>
+
+                <div class="row mt-4">
+                  <div class="col-md-12"></div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <div class="filter2">
+                      {{ stringConstants.main.filters.label }}
+                    </div>
+                    <div class="modal-tags">
+                      <div
+                        *ngFor="let status of statusList; let i = index"
+                        class="mt-3 mr-3"
+                        [ngClass]="
+                          statusFilter.length < 1 && status.Estat === 'All'
+                            ? 'filter3Paid'
+                            : statusFilter.indexOf(status) > -1
+                            ? 'filter3Paid'
+                            : 'filter3'
+                        "
+                        (click)="
+                          status.Estat === 'All'
+                            ? resetStatusFilter()
+                            : onStatusFilter(status)
+                        "
+                      >
+                        <span class="filter4">
+                          <!-- <img src="assets/image/submitted.png" /> -->
+                          {{ status.Txt30 }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-5 mb-5">
+                <div class="col-md-12">
+                  <button
+                    class="btnPrimary mx-2"
+                    type="submit"
+                    mat-raised-button
+                    data-dismiss="modal"
+                    (click)="applyStatusFilter()"
+                  >
+                    {{ stringConstants.main.filters.btn }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Report -->
+
+  <div *ngIf="view" class="mt-32px" style="margin-bottom: 40px">
+    <div class="form-card">
+      <!-- <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  lang === 'ar' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/image/user.svg" />
+              </div>
+              <span>{{ stringConstants.add.user.title }}</span>
+            </div>
+          </div>
+          <div class="card-divider"></div> -->
+      <div class="form-card-lower">
+        <div class="form-card-detail">
+          <p>
+            {{ stringConstants.add.user.name }}
+          </p>
+          <span>{{ formData.AReceiveBy }}</span>
+        </div>
+
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.user.tin }}</p>
+          <span>{{ formData.AGpart }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card mt-24px">
+      <div class="form-card-upper">
+        <div class="form-card-title">
+          <div
+            [ngClass]="lang === 'ar' ? 'form-card-img-rtl' : 'form-card-img'"
+          >
+            <img src="assets/images/excise-goods/summary-goods.svg" />
+          </div>
+          <span>{{ stringConstants.add.invoice.title }}</span>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div *ngFor="let item of formData.payment_tp03Set.results; index as i">
+        <p
+          class="card-section-title"
+          [ngClass]="lang === 'ar' ? 'ar-align' : ''"
+        >
+          {{ stringConstants.add.invoice.title }} {{ i + 1 }}
+        </p>
+        <div class="form-card-lower">
+          <div class="form-card-detail">
+            <p>{{ stringConstants.add.invoice.invoice }}</p>
+            <span>{{ item.AInvoiceNo }}</span>
+          </div>
+          <div class="form-card-detail">
+            <p>{{ stringConstants.add.invoice.period }}</p>
+            <span>{{ item.APeriodKey }}</span>
+          </div>
+        </div>
+        <div class="form-card-lower">
+          <div class="form-card-detail">
+            <p>{{ stringConstants.add.invoice.amount }}</p>
+            <span>{{ item.AAmount }}</span>
+          </div>
+          <div class="form-card-detail">
+            <p>{{ stringConstants.add.invoice.amountNew }}</p>
+            <span>{{ item.ANewAmount }}</span>
+          </div>
+        </div>
+        <div
+          *ngIf="i !== formData.payment_tp03Set.results - 1"
+          class="card-divider"
+        ></div>
+      </div>
+    </div>
+
+    <div class="form-card mt-24px">
+      <div class="form-card-upper">
+        <div class="form-card-title">
+          <div
+            [ngClass]="lang === 'ar' ? 'form-card-img-rtl' : 'form-card-img'"
+          >
+            <img src="assets/image/attach.svg" />
+          </div>
+          <span>{{ stringConstants.add.process[1].title }}</span>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="form-card-lower">
+        <div class="form-card-detail">
+          <p>
+            {{ stringConstants.add.remarks }}
+          </p>
+          <span>{{ formData.AComments }}</span>
+        </div>
+        <div class="form-card-detail">
+          <p>
+            {{ stringConstants.add.notes }}
+          </p>
+          <span>{{ formData.znotesSet }}</span>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="form-card-lower">
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.attachment1 }}</p>
+          <span
+            class="form-filenames"
+            *ngFor="let file of formData.AttDetSet.results; index as i"
+            ><span *ngIf="file.Dotyp === 'N03A'">{{ file.Filename }}</span
+            ><img
+              *ngIf="file.Dotyp === 'N03A'"
+              [src]="
+                file.FileExtn === 'pdf'
+                  ? 'assets/image/pdf.svg'
+                  : 'assets/image/generic-documents.png'
+              "
+          /></span>
+        </div>
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.attachment2 }}</p>
+          <span
+            class="form-filenames"
+            *ngFor="let file of formData.AttDetSet.results; index as i"
+            ><span *ngIf="file.Dotyp === 'N03B'">{{ file.Filename }}</span
+            ><img
+              *ngIf="file.Dotyp === 'N03B'"
+              [src]="
+                file.FileExtn === 'pdf'
+                  ? 'assets/image/pdf.svg'
+                  : 'assets/image/generic-documents.png'
+              "
+          /></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="form-card mt-24px">
+          <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  lang === 'ar' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/images/excise-goods/summary-declaration.svg" />
+              </div>
+              <span>{{ stringConstants.add.process[2].title }}</span>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="form-card-lower">
+            <div class="form-card-detail">
+              <p>
+                {{ stringConstants.add.declaration.idType }}
+              </p>
+              <span>{{
+                requestReductionForm.controls['declaration'].value.idType
+              }}</span>
+            </div>
+            <div class="form-card-detail">
+              <p>
+                {{ stringConstants.add.declaration.dob }}
+              </p>
+              <span>{{ dob1 }}</span>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="form-card-lower">
+            <div class="form-card-detail" formArrayName="attachment1">
+              <p>{{ stringConstants.add.declaration.idNum }}</p>
+              <span>{{
+                requestReductionForm.controls['declaration'].value.idNum
+              }}</span>
+            </div>
+            <div class="form-card-detail" formArrayName="attachment2">
+              <p>{{ stringConstants.add.declaration.name }}</p>
+              <span>{{
+                requestReductionForm.controls['declaration'].value.name
+              }}</span>
+            </div>
+          </div>
+        </div> -->
+  </div>
+</div>

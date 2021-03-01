@@ -1,0 +1,135 @@
+.menu-title {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.menu-back {
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: start;
+    color: #006450;
+}
+
+.title {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #232323;
+}
+
+.sub-title {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.second-title {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+}
+
+.accCardbck {
+    background-image: url("../../../../assets/image/selected-copy-2@2x.png");
+    background-position: center;
+    color: #232323;
+}
+
+.accCardbck:hover {
+    background-image: url("../../../../assets/image/selected@2x.png");
+    background-position: center;
+    color: #fff;
+}
+
+.accCardbck:active {
+    height: 136px;
+    background-image: url("../../../../assets/image/selected@2x.png");
+    background-position: center;
+    color: #fff;
+}
+
+.accLabel {
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+}
+
+.custom-refund-button {
+    width: 100%;
+    height: 104px;
+    border-radius: 14px;
+    border: solid 1px #ebebeb;
+    text-align: start;
+}
+
+.cardActive {
+    height: 104px;
+    width: 100%;
+    background-image: url("../../../../assets/image/selected.svg");
+    background-size: cover;
+    background-repeat: none;
+}
+
+.cardInActive {
+    height: 104px;
+    width: 100%;
+    background-image: url("../../../../assets/image/selected-copy-2.svg");
+    background-size: cover;
+    background-repeat: none;
+}
+
+.action-txt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 15px;
+}
+
+.card-txt {
+    font-family: SSTArabic-Bold;
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.active-card-txt {
+    font-family: SSTArabic-Bold;
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #151515;
+}

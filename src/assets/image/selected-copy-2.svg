@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="214" height="112" viewBox="0 0 214 112">
+    <defs>
+        <filter id="xge73bjtsa" width="106.8%" height="113.5%" x="-3.4%" y="-4.8%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <rect id="ec6ecag8fb" width="206" height="104" x="0" y="0" rx="14"/>
+        <path id="kammzzvjic" d="M14 0h178c7.732 0 14 6.268 14 14v76c0 7.732-6.268 14-14 14H14c-7.732 0-14-6.268-14-14V14C0 6.268 6.268 0 14 0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(4 2)">
+        <use fill="#000" fill-rule="nonzero" filter="url(#xge73bjtsa)" xlink:href="#ec6ecag8fb"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M14 0h178c7.732 0 14 6.268 14 14v76c0 7.732-6.268 14-14 14H14c-7.732 0-14-6.268-14-14V14C0 6.268 6.268 0 14 0z"/>
+        <mask id="lg8xavejld" fill="#fff">
+            <use xlink:href="#kammzzvjic"/>
+        </mask>
+        <path stroke="#EBEBEB" stroke-opacity=".2" stroke-width="70" d="M67.022-1.17c12.841-.343 25.814 4.23 35.851 13.803h0l61.827 59.44c9.954 9.57 15.086 22.267 15.338 35.061.251 12.794-4.378 25.683-13.947 35.637-9.427 9.805-22.442 15.347-36.044 15.347h0H12.153c-13.807 0-26.307-5.597-35.356-14.645-9.048-9.048-14.644-21.548-14.644-35.355 0-12.798 4.907-25.108 13.71-34.396h0l56.21-59.305C41.57 4.397 54.23-.826 67.022-1.169z" mask="url(#lg8xavejld)"/>
+    </g>
+</svg>

@@ -1,0 +1,528 @@
+.title1 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.viewMore {
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: start;
+    color: #006450;
+    padding-left: 9px;
+}
+
+.secondTitle {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #232323;
+}
+
+.secondTitle1 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.placeholdertext {
+    width: 134px;
+    height: 24px;
+    font-family: SST-Roman;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #232323;
+    text-align: start;
+}
+
+.exciseSecondTitle {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: #232323;
+}
+
+.exciseSecondTitle1 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.cardActive {
+    background-image: url("../../../assets/image/selected-dereg.svg");
+    background-position: center;
+    width: 437px;
+    height: 169px;
+    margin: 32.5px 26px 24px 6px;
+    color: #ffffff !important;
+}
+
+
+/* .cardActive .address,
+.cardActive .address1,
+.cardActive .storeName  */
+
+.cardInActive {
+    width: 437px;
+    height: 169px;
+    margin: 32.5px 26px 24px 6px;
+    color: #232323 !important;
+    /* background-image: url("../../../assets/image/selected-copy-2.svg"); */
+    /* background-position: center; */
+}
+
+.accCardbck {
+    height: 136px;
+    background-image: url("../../../assets/image/selected-copy-2@2x.png");
+    background-position: center;
+}
+
+.accCardbckActive {
+    height: 136px;
+    background-image: url("../../../assets/image/selected@2x.png");
+    background-position: center;
+}
+
+.storeName {
+    width: 272px;
+    height: 24px;
+    font-family: SST;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: start;
+}
+
+.address {
+    width: 182px;
+    height: 16px;
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+}
+
+.address1 {
+    width: 182px;
+    height: 24px;
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+}
+
+.btnCss {
+    width: 207px;
+    height: 48px;
+    border-radius: 14px;
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    background-color: #d2a02a;
+}
+
+.btnCssDisabled {
+    width: 207px;
+    height: 49px;
+    border-radius: 14px;
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff!important;
+    background-color: #d2a02a80!important;
+}
+
+.sideNumber {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    color: #999999;
+    position: relative;
+    top: 6px;
+    float: right;
+}
+
+.summaryCss1 {
+    width: 48px;
+    height: 48px;
+    background: #e5efed;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 10px;
+    position: relative;
+    bottom: 8px;
+}
+
+.summaryCss2 {
+    width: 24px;
+    margin: 0;
+    position: relative;
+    top: 25%;
+}
+
+.summaryCss3 {
+    font-family: SSTArabic-Bold;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: #232323;
+}
+
+.summaryCss4 {
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: right;
+    color: #006450;
+}
+
+.summaryCss5 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+    text-align: start;
+}
+
+.summaryCss6 {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #232323;
+    text-align: start;
+}
+
+.summaryCss7 {
+    /* object-fit: contain;
+    font-family: Montserrat; */
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: 0.17px;
+    color: #00664f;
+}
+
+.summaryCss7 .summaryCss8 {
+    color: #232323;
+}
+
+.exciseAccCssBox2Arb {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #232323;
+    float: left;
+    position: relative;
+}
+
+.exciseAccCssBox2 {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: right;
+    color: #232323;
+    float: right;
+    position: relative;
+    right: 15px;
+}
+
+.exciseAccCss1 {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    text-align: center;
+    color: #232323;
+}
+
+.exciseAccCss2 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #999999;
+}
+
+.exciseAccCssBox {
+    margin-left: 30%;
+    margin-right: 30%;
+    height: 56px;
+    border-radius: 14px;
+    border: solid 1px #ebebeb;
+}
+
+.exciseAccCssBox1 {
+    text-align: start;
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+    position: relative;
+    top: 12px;
+    left: 10px;
+}
+
+.btnCss3 {
+    height: 48px;
+    border-radius: 14px;
+    background-color: #d99a29;
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.uploadfilecontainer {
+    /* background-image: url("../../assets/cloud-2044823_960_720.png"); */
+    background-color: #ffffff !important;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 140px;
+    width: 80%;
+    margin: 20px auto;
+    border: none;
+    border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    /*     background-color: #9ecbec !important; */
+    opacity: 0.8;
+}
+
+.files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 5px;
+    color: #1c8adb;
+}
+
+.files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.files-list .delete-file img {
+    width: 30px;
+}
+
+.fileUploadTxt {
+    font-family: SSTArabic-Bold;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #006450;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.fileUploadTxt1 {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: center;
+    color: #999999;
+}
+
+.fileSize {
+    font-family: SSTArabic-Roman;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: center;
+    color: #999999;
+}
+
+.fileName {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #232323;
+}
+
+.salesTxt {
+    font-family: SSTArabic-Roman;
+    line-height: 24px;
+    color: #232323;
+    text-align: start;
+    /* width: 316px; */
+    height: 24px;
+    margin: 32px 0px 16px 0px;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+}
+
+.outletName {
+    width: 100px;
+    height: 24px;
+    margin: 32px 361px 24px 6px;
+    font-family: SSTArabic;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: #232323;
+}
+
+.mat-accordion .mat-expansion-panel {
+    margin-bottom: 20px;
+    border-radius: 14px;
+}
+
+textarea {
+    resize: none;
+    /* overflow-y: scroll; */
+    height: 176px;
+    width: 100%;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate {
+    background-color: #13614c !important;
+    /* Red background for example */
+}
+
+::ng-deep .mat-checkbox-inner-container {
+    height: 32px !important;
+    width: 32px !important;
+}
+
+.tnc {
+    font-family: SSTArabic-Bold;
+    font-size: 28px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+  }

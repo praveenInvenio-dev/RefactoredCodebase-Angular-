@@ -1,0 +1,254 @@
+/* CHAT RELATED CSS STRATS HERE */
+
+.max-width-860 {
+    max-width: 860px;
+}
+
+.active-arrow {
+    top: 3px;
+}
+
+.custom.card {
+    flex-direction: unset !important;
+}
+
+.chat-main {
+    top: 50px;
+    right: 15px;
+    position: fixed;
+}
+
+img.active-arrow {
+    opacity: 0;
+}
+
+.chat ul>li.active img.active-arrow,
+.chat ul>li:active img.active-arrow,
+.chat ul>li:hover img.active-arrow {
+    opacity: 1;
+}
+
+.chat ul>li.active,
+.chat ul>li:hover {
+    background-image: linear-gradient(108deg, #009d88 3%, #006450 85%);
+}
+
+.chat ul>li.active .inner p,
+.chat ul>li.active .inner label,
+.chat ul>li:hover .inner p,
+.chat ul>li:hover .inner label {
+    color: #fff !important;
+}
+
+.chat ul>li.active .inner p {
+    font-weight: 500;
+}
+
+.chat ul>li:nth-child(1).active {
+    border-top-left-radius: 12px;
+}
+
+.chat input::placeholder {
+    color: #999999!important;
+    font-weight: normal !important;
+}
+
+.send-icon {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.border-right-whisper-1 {
+    border-right: 1px solid #ebebeb;
+}
+
+.default-line {
+    width: 21px;
+    height: 1px;
+    background-color: #999999;
+}
+
+.custom.notes {
+    bottom: 20px;
+}
+
+.notes {
+    width: 129px;
+    height: 48px;
+    right: 10px;
+    padding: 12px 24px;
+    border-radius: 24px;
+    background-color: #006450;
+}
+
+.notes .badge {
+    height: 16px;
+    width: 16px;
+    padding: 0 5px 0 6px;
+    border-radius: 50%;
+    top: -7px;
+    right: 5px;
+}
+
+.chat-float-button {
+    position: fixed;
+    top: 590px;
+    right: 15px;
+}
+
+
+/* CHAT RELATED CSS ENDS HERE */
+
+.modal-dialog-xlarge {
+    max-width: 1100px;
+}
+
+.disablePointer {
+    pointer-events: none;
+}
+
+
+/* NEW CSS ADDED BY ARUN */
+
+.d-contents {
+    display: contents !important;
+}
+
+.modal-body.px-60 {
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+}
+
+.table tbody+tbody {
+    border-top: 0px !important;
+}
+
+.table tbody+tbody tr td {
+    border-top: 0px !important;
+}
+
+.table tbody+tbody tr:nth-child(1) td {
+    border-top: 0px !important;
+    border-bottom: 1px solid #dee2e6!important;
+}
+
+.table tbody+tbody tr:nth-last-child(1) td {
+    border-top: 1px solid #dee2e6!important;
+}
+
+.lable-switch>label::before {
+    left: 0px;
+}
+
+a.mr-10 {
+    margin-left: 4px !important
+}
+
+.mr1-4 {
+    margin-left: 4px !important
+}
+
+.input-165 {
+    width: 200px !important
+}
+
+.editBtn {
+    /* position: absolute; */
+    /* color: #006450 !important;
+    margin-left: 10px; */
+    /* right: 24%; */
+}
+
+
+/* .editBtn:hover{color: #006450 !important;} */
+
+.text-danger {
+    font-size: 12px;
+}
+
+.d-contents {
+    display: contents !important;
+}
+
+
+/* table tbody div{
+
+    display:contents !important;
+}
+
+table tbody div{
+
+    display:contents !important;
+} */
+
+table tbody td div.d-flex {
+    /* justify-content: flex-end !important; */
+    display: flex !important
+}
+
+
+/* NEWLY ADDED CSS STARTS */
+
+.lang-arabic .lable-switch>label {
+    width: 40px;
+}
+
+.lang-arabic .lable-switch>input[type=checkbox]:checked+label::after {
+    left: -2px;
+    right: auto;
+}
+
+.lang-arabic .lable-switch>label::after {
+    left: auto;
+    right: -10px;
+}
+
+.lang-arabic .l-w-200.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.border-top-pattens-blue {
+    border-top: 1px solid #dee2e6;
+}
+
+.p-24 {
+    padding: 24px;
+}
+
+
+/* NEWLY ADDED CSS ENDS */
+
+.custom-upload-file{
+    opacity: 0;
+    transform: Y(-50%);
+    width:100%;
+    height:100%;
+    z-index: 99;
+}
+.mark-dark-green .text-white {
+    color:#fff !important;
+}
+
+.border-red
+{
+    border-color: red !important;
+}
+
+.vat-steps a img{padding:9px !important;}
+ .notes{
+    padding: 12px !important;
+    min-width:128px !important;
+    max-width: 160px !important;
+    
+}
+.arabic-btn {
+    float:left !important;
+    padding-left: 10px;
+  
+  }
+.download-btn{margin-bottom: 95px !important;}
+.download-btn a{margin-right: 5px;}
+.download-btn a>img{margin-right: 5px;}
+.download-btn a{background: rgba(0,100,80,.1);border:0px;color:#000;border-radius: 5px;padding: 7px 12px 12px;box-shadow: 0 2px 4px 0 rgb(35 35 35 / 10%);text-decoration: none !important;}
+.download-btn a:hover{background: rgba(0,100,80,.1);color:#000;}

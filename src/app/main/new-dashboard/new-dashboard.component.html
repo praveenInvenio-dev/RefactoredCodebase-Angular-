@@ -1,0 +1,1180 @@
+<div class="container-fluid" [dir]="direction">
+  <div class="row" *ngIf="tpType !== 'TA'">
+    <div class="col-md-8">
+      <div class="card cardz mt-3" *ngIf="returnFlag">
+        <!-- <div class="card-header titleCss">{{lang.title5}}</div> -->
+        <div class="row">
+          <div class="col-md-12">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;">{{ lang.title3 }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <div class="row" style="text-align: start;">
+          <div class="col-md-4" style="padding: 30px;" (click)="returnNavigate(1)">
+
+            <div class="row" style="display: flex;
+                    justify-content: center;
+                    align-items: center;">
+              <div class="col-md-2">
+                <img src="assets/image/group-8.svg" style="width: 29px; ">
+                <!-- <img src="assets/image/path-11-copy-5.svg" style="width: 29px;position: relative;
+                            bottom: 15px;"> -->
+              </div>
+              <div class="col-md-8">
+                <div class="returnTxt1">
+                  <number-tracker [end]="counterNumber2"></number-tracker>
+                </div>
+                <span class="returnTxt2">{{ lang.returns.t1 }}</span>
+              </div>
+              <div class="col-md-2">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-4" style="padding: 30px;border-right: 1px solid #f5f5f5;border-left: 1px solid #f5f5f5;">
+            <div class="row" style="display: flex;
+                        justify-content: center;
+                        align-items: center;" (click)="returnNavigate(2)">
+              <div class="col-md-2">
+                <img src="assets/image/invoice.svg" style="width: 29px; ">
+
+              </div>
+              <div class="col-md-8">
+                <div class="returnTxt1">
+                  <number-tracker [end]="counterNumber1"></number-tracker>
+                </div>
+                <span class="returnTxt2">{{ lang.returns.t2 }}</span>
+              </div>
+              <div class="col-md-2">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" style="padding: 30px;">
+            <div class="row" style="display: flex;
+                        justify-content: center;
+                        align-items: center;" (click)="returnNavigate(3)">
+              <div class="col-md-2">
+                <img src="assets/image/clock.svg" style="width: 29px; ">
+
+              </div>
+              <div class="col-md-8">
+                <span>
+                  <div class="returnTxt1">
+                    <number-tracker [end]="counterNumber"></number-tracker>
+                  </div>
+                  <span class="returnTxt2">{{ lang.returns.t3 }}</span>
+                </span>
+              </div>
+              <div class="col-md-2">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- CHARTS - START -->
+      <div class="card cardz mt-4" *ngIf="billsFlag">
+        <!-- <div class="card-header titleCss">{{lang.title6}}</div> -->
+        <div class="row">
+          <div class="col-md-12">
+            <div [ngClass]="
+                        direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'
+                      ">
+              <span style="margin-left: 10px;">{{ lang.title2 }}</span>
+            </div>
+          </div>
+        </div>
+        <p class="Rectangle-12"></p>
+
+        <div class="row mt-3">
+          <ng-container *ngIf="!billsChart">
+
+            <div class="col-md-6 sidelines">
+              <div class="card-body">
+
+                <div id="cdp1" class="row" style="display: flex; justify-content: space-between;">
+                  <div class="col-md-6" style="text-align: start;">
+                    <span class="chartBox-heading" style="top: -25px;"> {{lang.t2}}</span>
+                  </div>
+                  <!-- <div class="col-md-6">
+                    <span class="chartBox-heading" style="float: right;">
+                      <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Choose a date</mat-label> 
+
+                      <input matInput [matDatepicker]="picker1" class="chart-datepicker" />
+                      <img src="assets/images/calendar.svg" style="position: relative; bottom: 27px; right: 87px;" />
+                      <mat-datepicker-toggle matSuffix [for]="picker1"
+                        [ngClass]="direction === 'rtl' ? 'arbCalCss' : 'engCalCss'">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                      </mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                       </mat-form-field> --
+                    </span>
+                  </div> -->
+                </div>
+                <div class="chart-wrapper mt-5">
+                  <div class="chart-inner-text">
+                    <span class="chart-inner-text1">Total</span><Br />
+                    <span class="chart-inner-text2">{{totalAmountZakat | number}}</span>
+                  </div>
+                  <!-- <canvas
+                            baseChart
+                            [data]="doughnutChartData"
+                            [labels]="doughnutChartLabels"
+                            [colors]="lineChartColors"
+                            [chartType]="doughnutChartType"
+                            [options]="options"
+                          >
+                          </canvas> -->
+                  <canvas id="doughnut" width="520" height="220" (click)="chartClicked($event)"></canvas>
+                </div>
+                <div class="row" style="margin-top: 30px; justify-content: space-evenly;">
+                  <div class="col-md-3 legendText" (click)="billsNavigate(1)" (mouseover)="showTooltip()"
+                    data-toggle="tooltip" title={{paidZakat}}{{space}}{{lang.bills.t1}}>
+                    <img src="assets/images/check.svg"
+                      [ngClass]="direction === 'rtl' ? 'labelImgArbCss' : 'labelImgCss'" /><span
+                      class="legendText1">{{paidZakat| number}}</span>
+                    <span [ngClass]="direction === 'rtl' ? 'legendText2Arb' : 'legendText2'">{{ lang.bills.t1 }}</span>
+                  </div>
+                  <div class="col-md-3 legendText" (click)="billsNavigate(2)" (mouseover)="showTooltip()"
+                    data-toggle="tooltip" title={{partialpaidZakat}}{{space}}{{lang.bills.t3}}>
+                    <img src="assets/images/group.svg"
+                      [ngClass]="direction === 'rtl' ? 'labelImgArbCss' : 'labelImgCss'" />
+                    <span class="legendText1">{{partialpaidZakat| number}}</span>
+                    <span [ngClass]="direction === 'rtl' ? 'legendText2Arb' : 'legendText2'">{{ lang.bills.t3 }}</span>
+                  </div>
+                  <div class="col-md-3 legendText" (click)="billsNavigate(3)" (mouseover)="showTooltip()"
+                    data-toggle="tooltip" title={{unPaidZakat}}{{space}}{{lang.bills.t2}}>
+                    <img src="assets/images/stroke-4012.svg"
+                      [ngClass]="direction === 'rtl' ? 'labelImgArbCss' : 'labelImgCss'" />
+                    <span class="legendText1">{{unPaidZakat| number}}</span>
+                    <span [ngClass]="direction === 'rtl' ? 'legendText2Arb' : 'legendText2'">{{ lang.bills.t2 }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+
+          <div class="col-md-6" *ngIf="billsChart" style="height: 350px;">
+            <div class="card-body text-center" style="margin: 0;
+            position: relative;
+            top: 25%;">
+              <div>
+                <img src="assets/images/bill@2x.png" style="width: 40px;" />
+              </div>
+              <div class="noBills">
+                No bills
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card-body">
+              <div class="row" style="height:270px">
+                <div class="col-md-12" style="     height: 180px;
+                background: #397963;
+                border-radius: 20px;
+                position: relative;
+                bottom: 50px;">
+                  <div class="imgTxt" *ngIf="direction !== 'rtl'">
+
+                    GAZT New app.<br />
+                    We're always open for you.
+                  </div>
+                  <div class="imgTxt" *ngIf="direction === 'rtl'">
+                    التطبيق الجديد GAZT nWe're
+                    <br>
+                    مفتوحة دائما بالنسبة لك.
+                  </div>
+                </div>
+                <div style="width: 100%;
+               text-align: center;">
+                  <img src="assets\images\verde-mockup.png" alt="Logo" style="z-index: 1;z-index: 1;
+                position: relative;
+                bottom: 125px;" />
+                </div>
+                <div class="imgTxt2">
+                  <p><img src="assets\images\positive@2x.png" width="140px" height="53px" alt="Logo"
+                      style="margin-right: 8px;position: relative; bottom: 170px; margin-bottom: 10px;"
+                      [style.float]="direction !== 'rtl'? '':'left'" /></p>
+                </div>
+                <div class="imgTxt3">
+                  <img src="assets\images\app-store.png" width="100px" height="30px" alt="Logo"
+                    [style.float]="direction !== 'rtl'? 'right':''" style="margin-left: 8px;" />
+                  <img src="assets\images\google-play.png" width="100px" height="30px" alt="Logo"
+                    [style.float]="direction !== 'rtl'? 'right':''" />
+                </div>
+
+              </div>
+            </div>
+            <!-- <div class="card-body"> -->
+            <!-- <div id="crp1" class="row" style="display: flex; justify-content: space-between;">
+                <span class="chartBox-heading" style="top: -25px;"> VAT</span>
+                <span class="chartBox-heading" style="float: right;width:60%; bottom: 25px;">
+                  <input matInput placeholder="" [daterange]="daterange" class="chart-rangepicker" />
+                  <img src="assets/images/calendar.svg" style="position: relative;bottom: 32px;left: 9px;" />
+                  <daterange-toggle matSuffix [for]="daterange"></daterange-toggle>
+                  <daterange #daterange></daterange>
+                </span></div>
+              <div class="chart-wrapper mt-5">
+                <div class="chart-inner-text">
+                  <span class="chart-inner-text1">Total</span><Br />
+                  <span class="chart-inner-text2">{{totalAmountVAT| number}}</span>
+                </div>
+                <canvas width="520" height="220" baseChart [data]="doughnutChartData1"
+                  [labels]="doughnutChartLabels" [colors]="lineChartColors" [chartType]="doughnutChartType"
+                  [options]="options">
+                </canvas> -->
+            <!-- <canvas id="doughnut1" width="520" height="220"></canvas>
+              </div>
+              <div class="row" style="margin-top: 30px; justify-content: space-evenly;">
+                <div class="col-md-3 legendText">
+                  <img src="assets/images/check.svg" style="position: relative; left: -8px;" /><span
+                    class="legendText1">{{paidVAT| number}}</span>
+                  <span class="legendText2">Paid</span>
+                </div>
+                <div class="col-md-3 legendText">
+                  <img src="assets/images/group.svg" style="position: relative; left: -8px;" />
+                  <span class="legendText1">{{partialpaidVAT| number}}</span>
+                  <span class="legendText2">Partially</span>
+                </div>
+                <div class="col-md-3 legendText">
+                  <img src="assets/images/stroke-4012.svg" style="position: relative; left: -8px;" />
+                  <span class="legendText1">{{unPaidVAT| number}}</span>
+                  <span class="legendText2">Unpaid</span>
+                </div>
+              </div>
+              <img src="assets/images/circle-arrow-right.svg" style="position: absolute;top: 0;
+              bottom: 0;
+              right: 47px;
+              margin: auto;" /> -->
+            <!-- </div> -->
+
+          </div>
+
+        </div>
+      </div>
+      <!-- CHARTS - END -->
+      <!-- BANNER -START -->
+      <!-- <div class="row mt-3 ml-0 mr-0">
+        <div class="col-md-7" style="padding: 0;">
+          <div class="card cardz banner">
+            <div class="card-body">
+              <div style="cursor: pointer; padding: 10px; margin: 5px 5px 5px 5px;" [style.border-right]="'none'"
+                [style.border-left]="'none'">
+                <p class="banner-text">
+                  GAZT New app.<br />
+                  We're always open for you.
+                </p>
+                <p><img src="assets\images\verde-mockup.png" alt="Logo"
+                    style="margin-right: 8px;position: relative;left: 129px;z-index: 1;bottom: 94px;float: right;" />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5" style="padding: 0;">
+          <div class="card cardz" style="height: 227px;">
+            <div style="
+                    cursor: pointer;
+                    padding: 10px;
+                    margin: 5px;
+                    border-right: none;
+                    border-left: none;
+                    position: relative; top: 82px;
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+                  ">
+              <p><img src="assets\images\positive@2x.png" width="140px" height="53px" alt="Logo"
+                  style="margin-right: 8px;" /></p>
+            </div>
+            <div class="card-body" style="
+                        cursor: pointer;
+                        padding: 10px;
+                        margin: 5px;
+                        border-right: none;
+                        border-left: none;
+                        position: relative; /* top: 135px; */
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+                      " [style.border-right]="'none'" [style.border-left]="'none'">
+              <p>
+                <img src="assets\images\app-store.png" width="100px" height="30px" alt="Logo"
+                  style="margin-right: 8px;" />
+              </p>
+              <p>
+                <img src="assets\images\google-play.png" width="100px" height="30px" alt="Logo" />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="card cardz mt-3">
+        <div class="row">
+          <div class="col-md-12">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;">{{lang.c2.t1}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <div class="row" style="margin-left: 10px;
+        margin-right: 10px; margin-bottom: 10px;text-align: start;">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-8" style="margin-top: 20px;">
+                <div class="taxBalcss1 mb-2 mt-2">
+                  {{lang.c2.t2}}
+                </div>
+
+                <div fxLayout="row mt-2 mb-1"
+                  style="width: 100%;overflow: hidden;border-radius: 100px;height: 10px;background-color: #ebebeb !important">
+                  <div fxFlex={{flx}} style="height: 50px; background-color: #006450"></div>
+                  <div fxFlex={{flx2}} style="height: 50px; background-color: #aa0c19"></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <span class="taxBalIn2"> {{lang.c2.t3}} &nbsp;</span>
+                    <span class="taxBalIn4"> {{lang.c2.t4}}</span>
+                  </div>
+                  <div class="col-md-6" style="text-align: end;margin-bottom: 15px;">
+                    <span class="taxBalIn2"> {{lang.c2.t6}} &nbsp;</span>
+                    <span class="taxBalIn3"> {{lang.c2.t5}}</span>
+
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="col-md-4" style="margin-top: 15px;text-align: center;">
+                <div class="taxBalcss3 mt-3">
+                  {{lang.c2.t7}}
+                </div>
+                <div class="taxBalcss2">
+                  {{lang.c2.t8}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="card cardz mt-3" *ngIf="installmentFlag">
+        <div class="row">
+          <div class="col-md-12">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;">{{lang.c1.t1}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <div class="row" style="margin-left: 10px;
+        margin-right: 10px;margin-bottom: 10px;text-align: start;">
+          <div class="col-md-12">
+            <div class="taxBalcss1 mb-2 mt-2">
+              <span class="taxIn3"> {{lang.c1.t2}} &nbsp;</span> <span class="taxIn2">{{lang.c1.t3}}</span> <span
+                class="taxIn1" [style.float]="direction === 'rtl'? 'left':'right'">{{lang.c1.t4}}</span>
+            </div>
+
+            <div fxLayout="row mt-2 mb-3"
+              style="width: 100%;overflow: hidden;border-radius: 100px;height: 10px;background-color: #ebebeb !important">
+              <div fxFlex={{flx}} [ngClass]="direction === 'rtl' ? 'taxColorAr1' : 'taxColor1'"></div>
+              <div fxFlex={{flx2}} [ngClass]="direction === 'rtl' ? 'taxColorAr2' : 'taxColor2'"></div>
+              <!-- <div fxFlex={{flx3}} class="taxColor3"></div> -->
+            </div>
+
+            <div class="taxIn3">
+              {{lang.c1.t5}}
+            </div>
+            <div>
+              <span class="taxIn1">{{lang.c1.t6}}</span> <span class="taxIn3"
+                [style.float]="direction === 'rtl'? 'left':'right'">{{lang.c1.t7}}</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="card cardz mt-3" *ngIf="quickMenu?.length>0">
+        <div class="row">
+          <div class="col-md-10">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;"> {{ lang.title }}</span>
+
+            </div>
+          </div>
+          <div class="col-md-2" style="text-align: end;">
+            <div class="navTitleFav">
+              <span>
+
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <img src="assets/image/dots (2).svg" style="width: 24px;position: relative;
+                  bottom: 5px;" />
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+
+                    <span class="txtQuick" [routerLink]="newquick" (click)="closeQuickMenu()">{{ lang.t1 }}</span>
+                  </button>
+
+                </mat-menu>
+                <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <ng-container *ngFor="let item of quickMenu; let i=index">
+
+          <div class="card-body" [style.border-bottom]="i === quickMenu?.length-1?  'none': '1px solid #dfdfdf'"
+            [style.text-align]="direction === 'rtl'? 'right': 'left'">
+
+            <div class="row" style="cursor: pointer;" (click)="closeQuickMenu()" [routerLink]="item.Applink"
+              *ngIf="item.displayField === '0'">
+
+              <div class="col-md-2">
+                <img src={{item.Icon}} style="width: 24px;" alt="Logo">
+
+              </div>
+              <div class="col-md-8" style="text-align: start;">
+                <span class="quickActionTxt">{{item.ActDesc}}</span>
+                <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+              </div>
+
+              <div class="col-md-2" style="text-align: end;">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+
+
+            </div>
+
+            <div class="row" style="cursor: pointer;" (click)="closeQuickMenu()" [routerLink]="newquick2"
+              [queryParams]="{return:1}" *ngIf="item.displayField === '2'">
+
+              <div class="col-md-2">
+                <img src={{item.Icon}} style="width: 24px;" alt="Logo">
+
+              </div>
+              <div class="col-md-8" style="text-align: start;">
+                <span class="quickActionTxt">{{item.ActDesc}}</span>
+                <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+              </div>
+              <div class="col-md-2" style="text-align: end;">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+
+            </div>
+
+            <div class="row" style="cursor: pointer;" (click)="closeQuickMenu()" [routerLink]="newquick2"
+              [queryParams]="{return:2}" *ngIf="item.displayField === '1'">
+
+              <div class="col-md-2">
+                <img src={{item.Icon}} style="width: 24px;" alt="Logo">
+
+              </div>
+              <div class="col-md-8" style="text-align: start;">
+                <span class="quickActionTxt">{{item.ActDesc}}</span>
+                <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+              </div>
+              <div class="col-md-2" style="text-align: end;">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+
+            </div>
+
+
+            <!-- <span class="taxPayCss" *ngIf="direction === 'rtl'" style="margin-right:10px">{{item.title1}}</span> -->
+          </div>
+
+        </ng-container>
+
+      </div>
+      <!-- CALENDER SECTION - START -->
+      <div class="card cardz mt-3" *ngIf="commitmentFlag">
+        <!-- <div class="card-header titleCss">{{lang.title7}}</div> -->
+        <div class="row">
+          <div class="col-md-12">
+            <!-- <div [ngClass]="direction === 'rtl' ? 'sideHeadingArb' : 'sideHeading'">
+                            <span style="margin-left: 10px;" class="committmentsHeading"> {{lang.title7}}</span>
+
+                          </div> -->
+            <div [ngClass]="
+                        direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'
+                      ">
+              <span style="margin-left: 10px;">{{ lang.title7 }}</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <p class="Rectangle-12" style="margin-bottom: 0;"></p>
+
+            <div appearance="outline" style="display: none;">    
+              <input matInput [matDatepicker]="picker" >
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+              </mat-datepicker>
+            </div>
+            <mat-calendar [dateClass]="dateClass()" *ngIf="cmmttmnts" (selectedChange)="addEvent($event)"
+              [style.height]="getHeight()"></mat-calendar>
+            <div class="Rectangle-12"></div>
+            <!-- <pre> commitmentsArray :: {{commitmentsArray | json}}</pre> -->
+            <ng-container *ngIf="showCommittments">
+              <div class="card-body" style="border-bottom: 1px solid #dfdfdf;padding-bottom: 0;"
+                *ngFor="let item of selectedDate " [routerLink]="['/mains/commitments']"
+                [style.text-align]="direction === 'rtl' ? 'right' : 'left'">
+                <div class="row" *ngIf="commitmentsArray?.length>0">
+                  <div class="col-md-2">
+                    <p class="Mask-Copy-5" style="text-align: center;"
+                      [style.background-color]="item?.Status == 'O' ? '#aa0c19' : item?.Status == 'I' ? '#d99a29' : '#006450'">
+                      <span class="text1">{{ getDate(formatDate(item?.Faedn))}}</span>
+                      <span class="text2">{{ getMonth(formatDate(item?.Faedn))}}</span>
+                    </p>
+                  </div>
+                  <div class="col-md-8" style="display: flex;">
+                    <span class="Partially-Bill-Copy-5" style="display: block;">{{ item?.Status == 'O' ? lang.unpaidBill
+                      :
+                      item?.Status == 'I' ? lang.partialPaidBill : lang.paidBill}} <span style="display: block;"
+                        class="amt">{{item?.Betrw | number}} {{lang.sar}} </span>
+                    </span>
+                  </div>
+                  <div class="col-md-2" style="text-align: end;">
+                    <img src="assets/image/arrow-right.svg" *ngIf="direction == 'ltr'" style="width: 15px;" />
+                    <img src="assets/image/arrow-left.svg" *ngIf="direction == 'rtl'" style="width: 15px;" />
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+
+        <!-- <div class="card-body" style="border-bottom: 1px solid #dfdfdf;padding-bottom: 0;" [routerLink]="['/mains/commitments']"
+          [style.text-align]="direction === 'rtl' ? 'right' : 'left'" *ngIf="commitmentsArray?.length>0">
+          <div class="row">
+            <div class="col-md-2">
+              <p class="Mask-Copy-7 " style="text-align: center;">
+                <span class="text1">{{commitmentPartialBillDt | date: 'dd'  }}</span> 
+                <span class="text2">{{commitmentPartialBillDt | date: 'LLL'  }}</span> 
+              </p>
+            </div>
+            <div class="col-md-8" style="display: flex;">
+              <span class="Partially-Bill-Copy-5" style="display: block;">Partially Bill <span style="display: block;"
+                  class="amt">{{commitmentPartialBillAmount | number}} {{commitmentPartialCurrency}}</span>
+              </span>
+            </div>
+            <div class="col-md-2" style="text-align: end;">
+              <img [src]="img" style="width: 15px;" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body" style="border-bottom: 1px solid #dfdfdf;padding-bottom: 0;" [routerLink]="['/mains/commitments']"
+          [style.text-align]="direction === 'rtl' ? 'right' : 'left'" *ngIf="commitmentsArray?.length>0">
+          <div class="row">
+            <div class="col-md-2">
+              <p class="Mask-Copy-7 " style="text-align: center; background-color: #aa0c19;">
+                <span class="text1">{{commitmentPartialBillDt | date: 'dd'  }}</span> 
+                <span class="text2">{{commitmentPartialBillDt | date: 'LLL'  }}</span> 
+              </p>
+            </div>
+            <div class="col-md-8" style="display: flex;">
+              <span class="Partially-Bill-Copy-5" style="display: block;">Partially Bill <span style="display: block;"
+                  class="amt">{{commitmentPartialBillAmount | number}} {{commitmentPartialCurrency}}</span>
+              </span>
+            </div>
+            <div class="col-md-2" style="text-align: end;">
+              <img [src]="img" style="width: 15px;" />
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <!-- CALENDER SECTION - END -->
+    </div>
+
+
+  </div>
+
+
+
+  <!-- <div class="row">
+    <div class="col-md-6">
+   <mat-form-field appearance="outline">
+    <input matInput
+        placeholder="Choose a date"
+        [satDatepicker]="picker"
+        [value]="date">
+    <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+    <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+  </mat-form-field>
+    </div>
+  </div> -->
+
+
+  <!--     -->
+
+  <div class="row" *ngIf="tpType === 'TAA'">
+    <div class="col-md-8">
+      <div class="card cardz mt-3">
+        <div class="row">
+          <div class="col-md-10">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;">{{ lang.Auditor1.title }}</span>
+            </div>
+          </div>
+          <div class="col-md-2" style="text-align: end;">
+            <div class="navTitleFav">
+              <span>
+
+                <button mat-icon-button aria-label="Example icon-button with a menu">
+                  <img src="assets/image/arrows-gray-circle-arrow-right.svg" style="width: 24px;position: relative;
+                  bottom: 5px;" />
+                </button>
+
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12" style="background: white;"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">{{ lang.Auditor1.t1 }}</th>
+                  <th scope="col">{{ lang.Auditor1.t2 }}</th>
+                  <th scope="col">{{ lang.Auditor1.t3 }}</th>
+                  <th scope="col">{{ lang.Auditor1.t4 }}</th>
+                  <th scope="col">{{ lang.Auditor1.t5 }}</th>
+                  <th scope="col">{{ lang.Auditor1.t6 }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>123456789</th>
+                  <td>VAT</td>
+                  <td>12345678</td>
+                  <td>@Abu Farwa Industries Co.</td>
+                  <td>+966 532 587 099</td>
+                  <td>noura.zaed@gmail.com</td>
+                </tr>
+                <tr>
+                  <th>123456789</th>
+                  <td>VAT</td>
+                  <td>12345678</td>
+                  <td>@Abu Farwa Industries Co.</td>
+                  <td>+966 532 587 099</td>
+                  <td>noura.zaed@gmail.com</td>
+                </tr>
+                <tr>
+                  <th>123456789</th>
+                  <td>VAT</td>
+                  <td>12345678</td>
+                  <td>@Abu Farwa Industries Co.</td>
+                  <td>+966 532 587 099</td>
+                  <td>noura.zaed@gmail.com</td>
+                </tr>
+                <tr>
+                  <th>123456789</th>
+                  <td>VAT</td>
+                  <td>12345678</td>
+                  <td>@Abu Farwa Industries Co.</td>
+                  <td>+966 532 587 099</td>
+                  <td>noura.zaed@gmail.com</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card cardz mt-3" *ngIf="quickMenu?.length>0">
+        <div class="row">
+          <div class="col-md-10">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;"> {{ lang.title }}</span>
+
+            </div>
+          </div>
+          <div class="col-md-2" style="text-align: end;">
+            <div class="navTitleFav">
+              <span>
+
+                <button mat-icon-button aria-label="Example icon-button with a menu">
+                  <img src="assets/image/dots (2).svg" style="width: 24px;position: relative;
+                  bottom: 5px;" />
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+
+                    <span class="txtQuick" [routerLink]="newquick" (click)="closeQuickMenu()">{{ lang.t1 }}</span>
+                  </button>
+
+                </mat-menu>
+                <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <ng-container *ngFor="let item of quickMenu; let i=index">
+
+          <div class="card-body" [style.border-bottom]="i === quickMenu?.length-1?  'none': '1px solid #dfdfdf'"
+            [style.text-align]="direction === 'rtl'? 'right': 'left'">
+
+            <div class="row" style="cursor: pointer;" (click)="closeQuickMenu()" [routerLink]="item.Applink"
+              *ngIf="item.displayField === '0'">
+
+              <div class="col-md-2">
+                <img src={{item.Icon}} style="width: 24px;" alt="Logo">
+
+              </div>
+              <div class="col-md-8" style="text-align: start;">
+                <span class="quickActionTxt">{{item.ActDesc}}</span>
+                <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+              </div>
+
+              <div class="col-md-2" style="text-align: end;">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+
+
+            </div>
+
+            <div class="row" style="cursor: pointer;" (click)="closeQuickMenu()" [routerLink]="newquick2"
+              [queryParams]="{return:1}" *ngIf="item.displayField === '2'">
+
+              <div class="col-md-2">
+                <img src={{item.Icon}} style="width: 24px;" alt="Logo">
+
+              </div>
+              <div class="col-md-8" style="text-align: start;">
+                <span class="quickActionTxt">{{item.ActDesc}}</span>
+                <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+              </div>
+              <div class="col-md-2" style="text-align: end;">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+
+            </div>
+
+            <div class="row" style="cursor: pointer;" (click)="closeQuickMenu()" [routerLink]="newquick2"
+              [queryParams]="{return:2}" *ngIf="item.displayField === '1'">
+
+              <div class="col-md-2">
+                <img src={{item.Icon}} style="width: 24px;" alt="Logo">
+
+              </div>
+              <div class="col-md-8" style="text-align: start;">
+                <span class="quickActionTxt">{{item.ActDesc}}</span>
+                <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+              </div>
+              <div class="col-md-2" style="text-align: end;">
+                <img [src]="img" style="width: 15px; ">
+              </div>
+
+            </div>
+
+
+            <!-- <span class="taxPayCss" *ngIf="direction === 'rtl'" style="margin-right:10px">{{item.title1}}</span> -->
+          </div>
+
+        </ng-container>
+
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card cardz mt-3">
+        <div class="row">
+          <div class="col-md-10">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;"> {{ lang.Auditor3.title }}</span>
+
+            </div>
+          </div>
+          <div class="col-md-2" style="text-align: end;">
+            <div class="navTitleFav">
+              <span>
+
+                <button mat-icon-button aria-label="Example icon-button with a menu">
+                  <img src="assets/image/arrows-gray-circle-arrow-right.svg" style="width: 24px;position: relative;
+                  bottom: 5px;" />
+                </button>
+
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <div class="card-body" style="cursor: pointer; border-bottom: 1px solid #dfdfdf;"
+          [style.text-align]="direction === 'rtl'? 'right': 'left'">
+
+          <div class="row">
+
+
+            <div class="col-md-10" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor3.t1 }}</div>
+              <div class="audTxt2">{{ lang.Auditor3.t2 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" style="text-align: end; margin-top: 10px;">
+              <div class="pendingBack" [style.float]="direction === 'rtl'? 'left': 'right'">
+                <span class="pendingtxt">
+                  {{ lang.Auditor3.t3 }}
+                </span>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="card-body" style="cursor: pointer; border-bottom: 1px solid #dfdfdf;"
+          [style.text-align]="direction === 'rtl'? 'right': 'left'">
+          <div class="row" style="cursor: pointer;">
+
+            <div class="col-md-10" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor3.t4 }}</div>
+              <div class="audTxt2">{{ lang.Auditor3.t5 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" style="text-align: end; margin-top: 10px;">
+              <div class="approvedBack" [style.float]="direction === 'rtl'? 'left': 'right'">
+                <span class="approvedtxt">
+                  {{ lang.Auditor3.t6 }}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="card-body" style="cursor: pointer;" [style.text-align]="direction === 'rtl'? 'right': 'left'">
+          <div class="row" style="cursor: pointer;">
+            <div class="col-md-10" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor3.t7 }}</div>
+              <div class="audTxt2">{{ lang.Auditor3.t8 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" style="text-align: end; margin-top: 10px;">
+              <div class="rejectedBack" [style.float]="direction === 'rtl'? 'left': 'right'">
+                <span class="rejectedtxt">
+                  {{ lang.Auditor3.t9 }}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- <span class="taxPayCss" *ngIf="direction === 'rtl'" style="margin-right:10px">{{item.title1}}</span> -->
+      </div>
+
+
+    </div>
+
+    <div class="col-md-8">
+      <div class="card cardz mt-3">
+        <div class="row">
+          <div class="col-md-10">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;">{{ lang.Auditor2.title }}</span>
+            </div>
+          </div>
+          <div class="col-md-2" style="text-align: end;">
+            <div class="navTitleFav">
+              <span>
+
+                <button mat-icon-button aria-label="Example icon-button with a menu">
+                  <img src="assets/image/arrows-gray-circle-arrow-right.svg" style="width: 24px;position: relative;
+                  bottom: 5px;" />
+                </button>
+
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12" style="background: white;"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 20%;">{{ lang.Auditor2.t1 }}</th>
+                  <th scope="col" style="width: 20%;">{{ lang.Auditor2.t2 }}</th>
+                  <th scope="col" style="width: 20%;">{{ lang.Auditor2.t3 }}</th>
+                  <th scope="col">{{ lang.Auditor2.t4 }}</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>123456789</th>
+                  <td>VAT</td>
+                  <td>12345678</td>
+                  <td><span>@Abu Farwa Industries Co.</span> <span  [style.float]="direction !== 'rtl'? '':'left'" style="margin-right: 10px;
+                    margin-left: 10px;"><img [matMenuTriggerFor]="menu3" src="assets/image/dots (2).svg"
+                        style="width: 24px; ">
+                      <mat-menu #menu3="matMenu">
+                        <button mat-menu-item>
+                          <span>Update</span>
+                        </button>
+                        <button mat-menu-item>
+                          <span style="color: #aa0c19;">Delete</span>
+                        </button>
+                      </mat-menu>
+                    </span></td>
+
+                </tr>
+                <tr>
+                  <th>123456789</th>
+                  <td>VAT</td>
+                  <td>12345678</td>
+                  <td><span>@Abu Farwa Industries Co.</span> <span  [style.float]="direction !== 'rtl'? '':'left'" style="margin-right: 10px;margin-left: 10px;"><img src="assets/image/dots (2).svg"  style="width: 24px; "></span></td>
+
+                </tr>
+                <tr>
+                  <th>123456789</th>
+                  <td>VAT</td>
+                  <td>12345678</td>
+                  <td><span>@Abu Farwa Industries Co.</span> <span  [style.float]="direction !== 'rtl'? '':'left'" style="margin-right: 10px;
+                   margin-left: 10px; "><img src="assets/image/dots (2).svg" style="width: 24px; "></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card cardz mt-3">
+        <div class="row">
+          <div class="col-md-10">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;"> {{ lang.Auditor4.title }}</span>
+
+            </div>
+          </div>
+          <div class="col-md-2" style="text-align: end;">
+            <div class="navTitleFav">
+              <span>
+
+                <button mat-icon-button aria-label="Example icon-button with a menu">
+                  <img src="assets/image/arrows-gray-circle-arrow-right.svg" style="width: 24px;position: relative;
+                  bottom: 5px;" />
+                </button>
+
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <div class="card-body" style="cursor: pointer; border-bottom: 1px solid #dfdfdf;"
+          [style.text-align]="direction === 'rtl'? 'right': 'left'">
+
+          <div class="row">
+
+            <div class="col-md-2" style="text-align: center;
+            margin-top: 10px;">
+              <img src="assets/image/tax-company.svg" style="width: 34px;" alt="Logo">
+
+            </div>
+            <div class="col-md-8" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor4.t1 }}</div>
+              <div class="audTxt2">{{ lang.Auditor4.t2 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" [matMenuTriggerFor]="menu2" style="text-align: end; margin-top: 10px;">
+              <img src="assets/image/dots (2).svg" style="width: 24px; ">
+            </div>
+            <mat-menu #menu2="matMenu">
+              <button mat-menu-item>
+                <span>Update</span>
+              </button>
+              <button mat-menu-item>
+                <span style="color: #aa0c19;">Delete</span>
+              </button>
+            </mat-menu>
+
+
+          </div>
+        </div>
+        <div class="card-body" style="cursor: pointer; border-bottom: 1px solid #dfdfdf;"
+          [style.text-align]="direction === 'rtl'? 'right': 'left'">
+          <div class="row" style="cursor: pointer;">
+
+            <div class="col-md-2" style="text-align: center;
+            margin-top: 10px;">
+              <img src="assets/image/icons-32-px-tax-establishments (1).svg" style="width: 34px;" alt="Logo">
+
+            </div>
+            <div class="col-md-8" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor4.t3 }}</div>
+              <div class="audTxt2">{{ lang.Auditor4.t4 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" style="text-align: end; margin-top: 10px;">
+              <img src="assets/image/dots (2).svg" style="width: 24px; ">
+            </div>
+
+
+          </div>
+        </div>
+        <div class="card-body" style="cursor: pointer;" [style.text-align]="direction === 'rtl'? 'right': 'left'">
+          <div class="row" style="cursor: pointer;">
+
+            <div class="col-md-2" style="text-align: center;
+            margin-top: 10px;">
+              <img src="assets/image/icons-32-px-tax-establishments (1).svg" style="width: 34px;" alt="Logo">
+
+            </div>
+            <div class="col-md-8" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor4.t5 }}</div>
+              <div class="audTxt2">{{ lang.Auditor4.t6 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" style="text-align: end; margin-top: 10px;">
+              <img src="assets/image/dots (2).svg" style="width: 24px; ">
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- <span class="taxPayCss" *ngIf="direction === 'rtl'" style="margin-right:10px">{{item.title1}}</span> -->
+      </div>
+
+
+    </div>
+
+    <div class="col-md-6">
+      <div class="card cardz mt-3">
+        <div class="row">
+          <div class="col-md-10">
+            <div [ngClass]="direction === 'rtl' ? 'navBarTitleNew' : 'navBarTitleNew'">
+              <span style="margin-left: 10px;"> {{ lang.Auditor5.title }}</span>
+
+            </div>
+          </div>
+          <div class="col-md-2" style="text-align: end;">
+            <div class="navTitleFav">
+              <span>
+
+                <button mat-icon-button aria-label="Example icon-button with a menu">
+                  <img src="assets/image/arrows-gray-circle-arrow-right.svg" style="width: 24px;position: relative;
+                  bottom: 5px;" />
+                </button>
+
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12"></div>
+        <div class="card-body" style="cursor: pointer; border-bottom: 1px solid #dfdfdf;"
+          [style.text-align]="direction === 'rtl'? 'right': 'left'">
+
+          <div class="row">
+
+            <!-- <div class="col-md-2" style="text-align: center;
+            margin-top: 10px;">
+              <img src="assets/image/tax-company.svg" style="width: 34px;" alt="Logo">
+
+            </div> -->
+            <div class="col-md-10" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor5.t1 }}</div>
+              <div class="audTxt2">{{ lang.Auditor5.t2 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" [matMenuTriggerFor]="menu1" style="text-align: end; margin-top: 10px;">
+              <img src="assets/image/dots (2).svg" style="width: 24px; ">
+            </div>
+            <mat-menu #menu1="matMenu">
+              <button mat-menu-item>
+                <span>Update</span>
+              </button>
+              <button mat-menu-item>
+                <span style="color: #aa0c19;">Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="card-body" style="cursor: pointer; border-bottom: 1px solid #dfdfdf;"
+          [style.text-align]="direction === 'rtl'? 'right': 'left'">
+          <div class="row" style="cursor: pointer;">
+
+            <!-- <div class="col-md-2" style="text-align: center;
+            margin-top: 10px;">
+              <img src="assets/image/icons-32-px-tax-establishments (1).svg" style="width: 34px;" alt="Logo">
+
+            </div> -->
+            <div class="col-md-10" style="text-align: start;">
+              <div class="audTxt1">{{ lang.Auditor5.t3 }}</div>
+              <div class="audTxt2">{{ lang.Auditor5.t4 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" style="text-align: end; margin-top: 10px;">
+              <img src="assets/image/dots (2).svg" style="width: 24px; ">
+            </div>
+
+
+          </div>
+        </div>
+        <div class="card-body" style="cursor: pointer;" [style.text-align]="direction === 'rtl'? 'right': 'left'">
+          <div class="row" style="cursor: pointer;">
+
+            <!-- <div class="col-md-2" style="text-align: center;
+            margin-top: 10px;">
+              <img src="assets/image/icons-32-px-tax-establishments (1).svg" style="width: 34px;" alt="Logo">
+
+            </div> -->
+            <div class="col-md-10" style="text-align: start;">
+            
+              <div class="audTxt1">{{ lang.Auditor5.t5 }}</div>
+              <div class="audTxt2">{{ lang.Auditor5.t6 }}</div>
+              <!-- <span class="quickActionTxt" *ngIf="direction === 'rtl'">{{item.t2}}</span> -->
+            </div>
+
+            <div class="col-md-2" style="text-align: end; margin-top: 10px;">
+              <img src="assets/image/dots (2).svg" style="width: 24px; ">
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- <span class="taxPayCss" *ngIf="direction === 'rtl'" style="margin-right:10px">{{item.title1}}</span> -->
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+<notifier-container></notifier-container>

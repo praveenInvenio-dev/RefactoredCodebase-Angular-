@@ -1,0 +1,102 @@
+<app-header [direction]="direction" [title]="lang.title" [url]="url"></app-header>
+
+<div dir={{direction}}>
+
+    <div class="container" style="margin-top: 100px;">
+        <div class="row outerDiv" style="margin-top: 20%;">
+            <div class="col-md-3 mt-4 mb-4" *ngFor="let item of tiles; let i = index;">
+                <mat-card class="cardHover" style="height: 145px; 
+                width: 146px;cursor: pointer;" (click)="selectedTab(i)" (mouseover)="mouseover(i)" [routerLink]="item.path"
+                (mouseout)="mouseout()"
+                   >
+                    <div class="text-center">
+                        <div class="">
+                            <img  *ngIf="idd !== i" [src]="item.tileImg" alt="Logo" style="width: 50px;">
+                            <img  *ngIf="idd === i" [src]="item.tileImg1" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard" [style.color]="idd === i ? 'white':'#13614c'">{{item.tileName}}</p>
+                    </div>
+                </mat-card>
+            </div>
+            <!--<div class="col-md-3">
+                <mat-card  class="cardHover" [routerLink]="['consortium']">
+                    <div class="text-center">
+                         <div>
+                            <img src="assets/images/consortium.png" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard"><br>{{lang.subtitle.t2}}</p>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-3">
+                <mat-card  class="cardHover" [routerLink]="['/individual']">
+                    <div class="text-center">
+                         <div>
+                            <img src="assets/images/govt.png" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard">{{lang.subtitle.t3}}</p>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-3">
+                <mat-card  class="cardHover">
+                    <div class="text-center">
+                         <div>
+                            <img src="assets/images/inheritors.png" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard"><br>{{lang.subtitle.t4}}</p>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <br>
+        <div class="row outerDiv">
+          <div class="col-md-3">
+              <mat-card class="cardHover">
+                  <div class="text-center">
+                       <div>
+                          <img src="assets/images/realEstate.png" alt="Logo" style="width: 50px;">
+                      </div>
+                      <p class="insideCard">{{lang.subtitle.t5}}</p>
+                  </div>
+              </mat-card>
+          </div>
+          <div class="col-md-3">
+              <mat-card  class="cardHover" [routerLink]="['establishment']">
+                  <div class="text-center">
+                       <div>
+                          <img src="assets/images/investment.png" alt="Logo" style="width: 50px;">
+                      </div>
+                      <p class="insideCard"><br>{{lang.subtitle.t6}}</p>
+                  </div>
+              </mat-card>
+          </div>
+          <div class="col-md-3">
+              <mat-card  class="cardHover" [routerLink]="['/individual']">
+                  <div class="text-center">
+                       <div>
+                          <img src="assets/images/freelance.png" alt="Logo" style="width: 50px;">
+                      </div>
+                      <p class="insideCard">{{lang.subtitle.t7}}</p>
+                  </div>
+              </mat-card>
+          </div>
+          <div class="col-md-3">
+              <mat-card  class="cardHover">
+                  <div class="text-center">
+                       <div>
+                          <img src="assets/images/other.png" alt="Logo" style="width: 50px">
+                      </div>
+                      <p class="insideCard"><br>{{lang.subtitle.t8}}</p>
+                  </div>
+              </mat-card>
+          </div> -->
+        </div>
+
+        <!-- <div class="mt-3 mb-5" style="text-align: start; margin-left: 7%">
+            <button mat-button type="submit" class="btnCss mt-5" (click)="navigate()">
+                Continue
+            </button>
+        </div> -->
+    </div>
+</div>

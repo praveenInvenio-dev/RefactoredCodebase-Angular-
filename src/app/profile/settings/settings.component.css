@@ -1,0 +1,84 @@
+.exciseSecondTitle {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.exciseSecondTitle1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.txtlabel {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.cardActive {
+  height: 104px;
+  width: 207px;
+  background-image: url("../../../assets/image/selected.svg");
+  background-position: center;
+  cursor: pointer;
+}
+
+.cardInActive {
+  height: 104px;
+  width: 207px;
+  background-image: url("../../../assets/image/selected-copy-2.svg");
+  background-position: center;
+  cursor: pointer;
+}
+.acctxt1 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 15px;
+}
+
+.acctxt1Arb {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+}
+
+.exciseCardTxt1 {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.exciseCardTxt1In {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #151515;
+  text-align: start;
+}

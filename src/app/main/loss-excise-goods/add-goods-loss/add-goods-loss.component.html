@@ -1,0 +1,1407 @@
+<div [dir]="lang === 'AR' ? 'rtl' : 'ltr'" class="container view mt-4">
+  <div *ngIf="formStep < 3">
+    <div class="nav">
+      <div
+        class="path"
+        *ngFor="let path of stringConstants.add.nav.paths; let i = index"
+      >
+        <p
+          (click)="
+            i === 0
+              ? backTo('')
+              : i === 1
+              ? backTo('002')
+              : i === 2
+              ? backTo('28')
+              : i === 3 && router.navigate(['/mains/lossexcisegoods'])
+          "
+        >
+          {{ path }}
+        </p>
+        <span>></span>
+      </div>
+    </div>
+
+    <div class="stepHeader row header-control mt-4">
+      <span class="stepBack col-md-6" (click)="prevStep()">
+        <img
+          [src]="
+            lang === 'EN'
+              ? 'assets/image/arrow-left-green.svg'
+              : 'assets/image/arrow-right-green.svg'
+          "
+          style="width: 24px"
+        />
+        {{ stringConstants.report.nav.back }}</span
+      >
+      <span class="steps">
+        <img [src]="stringConstants.add.steps[formStep]" />
+        <img
+          src="assets/image/check.svg"
+          alt=""
+          *ngIf="formStep === 2"
+          style="height: 24px; margin-left: 8px"
+        />
+      </span>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div
+          class="pageTitle"
+          [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }"
+        >
+          {{ stringConstants.add.title.main[formStep] }}
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div
+          class="page-subtitle"
+          [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }"
+        >
+          {{ stringConstants.add.title.sub[formStep] }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New mt-3"></div>
+  </div>
+
+  <form class="form" *ngIf="formStep === 0" [formGroup]="addGoodsLoss">
+    <div class="form-card">
+      <div class="form-card-upper">
+        <div class="form-card-title">
+          <div
+            [ngClass]="lang === 'AR' ? 'form-card-img-rtl' : 'form-card-img'"
+          >
+            <img src="assets/images/excise-goods/warehouse.svg" />
+          </div>
+          <span>{{ stringConstants.add.form.warehouse }}</span>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="form-card-lower">
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.form.fin }}</p>
+          <span>{{ formData ? formData.fin : '' }}</span>
+        </div>
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.form.name }}</p>
+          <span>{{ formData ? formData.name : '' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-toggle">
+      <p [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }">
+        {{ stringConstants.add.form.irrLoss.label }}
+      </p>
+      <div [ngClass]="lang === 'AR' ? 'form-options-rtl' : 'form-options'">
+        <div
+          [ngClass]="
+            addGoodsLoss.controls['loss'].value.irreversibleLoss === 'yes'
+              ? 'form-option selector-card-active selector-card border pb-3 px-3'
+              : 'form-option selector-card border pb-3 px-3'
+          "
+          (click)="irreversibleLoss('yes')"
+        >
+          <div class="value">{{ stringConstants.add.form.irrLoss.yes }}</div>
+        </div>
+        <div
+          [ngClass]="
+            addGoodsLoss.controls['loss'].value.irreversibleLoss === 'no'
+              ? 'form-option selector-card-active selector-card border pb-3 px-3'
+              : 'form-option selector-card border pb-3 px-3'
+          "
+          (click)="irreversibleLoss('no')"
+        >
+          <div class="value">{{ stringConstants.add.form.irrLoss.no }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="addGoodsLoss.controls['loss'].value.irreversibleLoss"
+      class="form-toggle"
+    >
+      <p [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }">
+        {{ stringConstants.add.form.lossType.label }}
+      </p>
+      <div [ngClass]="lang === 'AR' ? 'form-options-rtl' : 'form-options'">
+        <div
+          [ngClass]="
+            addGoodsLoss.controls['loss'].value.lossType === 'warehouse'
+              ? 'form-option selector-card-active selector-card border pb-3 px-3'
+              : 'form-option selector-card border pb-3 px-3'
+          "
+          (click)="lossType('warehouse')"
+        >
+          <div class="value">
+            {{ stringConstants.add.form.lossType.warehouse }}
+          </div>
+        </div>
+        <div
+          *ngIf="addGoodsLoss.controls['loss'].value.irreversibleLoss === 'yes'"
+          [ngClass]="
+            addGoodsLoss.controls['loss'].value.lossType === 'movement'
+              ? 'form-option selector-card-active selector-card border pb-3 px-3'
+              : 'form-option selector-card border pb-3 px-3'
+          "
+          (click)="lossType('movement')"
+        >
+          <div class="value">
+            {{ stringConstants.add.form.lossType.movement }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goods under suspension in tax warehouse form -->
+
+    <div
+      class="mt-32px"
+      *ngIf="
+        addGoodsLoss.controls['loss'].value.irreversibleLoss &&
+        addGoodsLoss.controls['loss'].value.lossType === 'warehouse'
+      "
+    >
+      <mat-accordion multi formArrayName="warehouseSuspension">
+        <mat-expansion-panel
+          class="accordin"
+          #panel
+          *ngFor="let form of warehouseSuspension.controls; index as i"
+          [expanded]="true"
+          hideToggle
+        >
+          <mat-expansion-panel-header class="accordin-header">
+            <mat-panel-title>
+              <div class="accordin-title">
+                {{ stringConstants.add.form.whSus.title }}
+              </div>
+            </mat-panel-title>
+            <mat-panel-description
+              [ngClass]="
+                lang === 'AR' ? 'accordin-actions-rtl' : 'accordin-actions'
+              "
+            >
+              <img
+                *ngIf="warehouseSuspension.controls.length > 1"
+                src="assets/image/delete.svg"
+                (click)="deleteWarehouseSuspension(i)"
+              />
+              <img
+                src="assets/image/circle-arrow-up.svg"
+                [ngStyle]="{ transform: panel.expanded ? '' : 'scaleY(-1)' }"
+              />
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="accordin-form" [formGroupName]="i">
+            <div class="accordin-form-row">
+              <span class="form-row-label">
+                {{
+                  addGoodsLoss.controls['loss'].value.irreversibleLoss === 'yes'
+                    ? stringConstants.add.form.whSus.lossDate
+                    : stringConstants.add.form.whSus.plannedDate
+                }}
+              </span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && form.get('plannedDate').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <input
+                    readonly
+                    (click)="datePicker.open()"
+                    matInput
+                    [matDatepicker]="datePicker"
+                    name="pd"
+                    formControlName="plannedDate"
+                    [min]="
+                      addGoodsLoss.controls['loss'].value.irreversibleLoss ===
+                      'no'
+                        ? date
+                        : null
+                    "
+                    [max]="
+                      addGoodsLoss.controls['loss'].value.irreversibleLoss ===
+                      'yes'
+                        ? date
+                        : null
+                    "
+                    #ref
+                    (dateChange)="dupeValidation(i)"
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="datePicker">
+                    <mat-icon matDatepickerToggleIcon
+                      ><img src="assets/image/calendar.svg"
+                    /></mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker
+                    #datePicker
+                    [calendarHeaderComponent]="headerComponent"
+                  >
+                  </mat-datepicker>
+                </div>
+              </span>
+              <span
+                *ngIf="validError && form.get('plannedDate').invalid"
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.whNo
+              }}</span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && form.get('warehouseNo').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <mat-select
+                    class="form-select"
+                    formControlName="warehouseNo"
+                    (selectionChange)="setProductList(i); dupeValidation(i)"
+                  >
+                    <mat-option
+                      *ngFor="let warehouse of formData.warehouse"
+                      [value]="warehouse.Whno"
+                      >{{ warehouse.Whno }}</mat-option
+                    >
+                  </mat-select>
+                </div>
+              </span>
+              <span
+                *ngIf="validError && form.get('warehouseNo').invalid"
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.prodType
+              }}</span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && form.get('productType').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <mat-select
+                    class="form-select"
+                    formControlName="productType"
+                    (selectionChange)="setUnitList(i); dupeValidation(i)"
+                  >
+                    <mat-option
+                      *ngFor="
+                        let product of warehouseSuspension.controls[i].value
+                          .productList
+                      "
+                      [value]="product.GoodsNo"
+                      >{{ product.GoodsTxt }}</mat-option
+                    >
+                  </mat-select>
+                </div>
+              </span>
+              <span
+                *ngIf="validError && form.get('productType').invalid"
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.prodDesc
+              }}</span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && form.get('productDescription').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <input formControlName="productDescription" type="text" />
+                </div>
+              </span>
+              <span
+                *ngIf="validError && form.get('productDescription').invalid"
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.unitM
+              }}</span>
+              <span class="form-row-input"
+                ><div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && form.get('unitMeasure').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <mat-select class="form-select" formControlName="unitMeasure">
+                    <mat-option
+                      *ngFor="
+                        let unit of warehouseSuspension.controls[i].value
+                          .unitList
+                      "
+                      [value]="unit.Msehi"
+                      >{{ unit.Msehl }}</mat-option
+                    >
+                  </mat-select>
+                </div></span
+              >
+              <span
+                *ngIf="validError && form.get('unitMeasure').invalid"
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.units
+              }}</span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && form.get('units').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <input
+                    appNumberInput
+                    maxlength="14"
+                    formControlName="units"
+                    type="text"
+                    (input)="calculateTotal(i)"
+                  />
+                </div>
+              </span>
+              <span
+                *ngIf="
+                  validError &&
+                  form.get('units').invalid &&
+                  form.get('units').value.length > 0
+                "
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{
+                  stringConstants.add.form.errors.max +
+                    ' ' +
+                    '99,999,999,999,999'
+                }}</span
+              >
+              <span
+                *ngIf="
+                  validError &&
+                  form.get('units').invalid &&
+                  form.get('units').value.length < 1
+                "
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.rsp
+              }}</span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && form.get('rsp').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <input
+                    appNumberInput
+                    decimals="2"
+                    maxlength="14"
+                    formControlName="rsp"
+                    type="text"
+                    (input)="calculateTotal(i)"
+                  />
+                </div>
+              </span>
+              <span
+                *ngIf="
+                  validError &&
+                  form.get('rsp').invalid &&
+                  form.get('rsp').value.length > 0
+                "
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{
+                  stringConstants.add.form.errors.max +
+                    ' ' +
+                    '99,999,999,999.99'
+                }}</span
+              >
+              <span
+                *ngIf="
+                  validError &&
+                  form.get('rsp').invalid &&
+                  form.get('rsp').value.length < 1
+                "
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div
+              class="accordin-form-row accordin-form-total"
+              style="border-bottom: 1px solid #fff"
+            >
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.totalRsp
+              }}</span>
+              <span class="form-row-input"
+                >{{
+                  decimalPipe.transform(
+                    form.value.totalRsp ? form.value.totalRsp : '0.00',
+                    '1.2-2'
+                  )
+                }}
+                {{ stringConstants.add.form.currency }}</span
+              >
+            </div>
+            <div class="accordin-form-row accordin-form-total">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.totalEt
+              }}</span>
+              <span class="form-row-input"
+                >{{
+                  decimalPipe.transform(
+                    form.value.totalEt ? form.value.totalEt : '0.00',
+                    '1.2-2'
+                  )
+                }}
+                {{ stringConstants.add.form.currency }}</span
+              >
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div
+        [ngClass]="
+          lang === 'AR' ? 'form-list-add-rtl mt-24px' : 'form-list-add mt-24px'
+        "
+        (click)="addWareHouseSuspension()"
+      >
+        <img src="assets/image/add.svg" />
+        <span>{{ stringConstants.add.form.whSus.add }}</span>
+      </div>
+    </div>
+
+    <!-- Goods Movement under suspension -->
+
+    <div
+      class="input-form mt-32px"
+      *ngIf="
+        addGoodsLoss.controls['loss'].value.irreversibleLoss &&
+        addGoodsLoss.controls['loss'].value.lossType === 'movement'
+      "
+      formGroupName="movementSuspension"
+    >
+      <div [ngClass]="lang === 'AR' ? 'form-field-rtl' : 'form-field'">
+        <div
+          class="form-label"
+          [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }"
+        >
+          {{ stringConstants.add.form.movSus.date }}
+        </div>
+        <div
+          class="form-input"
+          [ngStyle]="{
+            'border-color':
+              validError &&
+              addGoodsLoss.controls['movementSuspension'].get('lossDate')
+                .invalid
+                ? 'var(--error)'
+                : ''
+          }"
+        >
+          <input
+            readonly
+            (click)="lossPicker.open()"
+            matInput
+            [matDatepicker]="lossPicker"
+            name="sd"
+            formControlName="lossDate"
+            [min]="
+              addGoodsLoss.controls['loss'].value.irreversibleLoss === 'no'
+                ? date
+                : null
+            "
+            [max]="
+              addGoodsLoss.controls['loss'].value.irreversibleLoss === 'yes'
+                ? date
+                : null
+            "
+          />
+          <mat-datepicker-toggle matSuffix [for]="lossPicker">
+            <mat-icon matDatepickerToggleIcon
+              ><img src="assets/image/calendar.svg"
+            /></mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker
+            #lossPicker
+            [calendarHeaderComponent]="headerComponent"
+          >
+          </mat-datepicker>
+        </div>
+        <div
+          *ngIf="
+            validError &&
+            addGoodsLoss.controls['movementSuspension'].get('lossDate').invalid
+          "
+          class="form-error"
+        >
+          {{ stringConstants.add.form.errors.invalid }}
+        </div>
+      </div>
+      <div [ngClass]="lang === 'AR' ? 'form-field-rtl' : 'form-field'">
+        <div
+          class="form-label"
+          [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }"
+        >
+          {{ stringConstants.add.form.movSus.doc }}
+        </div>
+        <div
+          class="form-input"
+          [ngStyle]="{
+            'border-color':
+              validError &&
+              addGoodsLoss.controls['movementSuspension'].get('movementDoc')
+                .invalid
+                ? 'var(--error)'
+                : ''
+          }"
+        >
+          <mat-select
+            class="form-select"
+            formControlName="movementDoc"
+            (selectionChange)="getMovSusData()"
+          >
+            <mat-option
+              *ngFor="let doc of formData.movementDoc"
+              [value]="doc.Fbnum"
+              >{{ doc.Fbnum }}</mat-option
+            >
+          </mat-select>
+        </div>
+        <div
+          *ngIf="
+            validError &&
+            addGoodsLoss.controls['movementSuspension'].get('lossDate').invalid
+          "
+          class="form-error"
+        >
+          {{ stringConstants.add.form.errors.invalid }}
+        </div>
+      </div>
+      <div [ngClass]="lang === 'AR' ? 'form-field-rtl' : 'form-field'">
+        <div
+          class="form-label"
+          [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }"
+        >
+          {{ stringConstants.add.form.movSus.period }}
+        </div>
+        <div class="form-input">
+          <mat-select class="form-select" formControlName="movementPeriod">
+            <mat-option
+              *ngFor="let period of formData.movementPeriod"
+              [value]="period.PeriodKey"
+              >{{ period.Txt50 }}</mat-option
+            >
+          </mat-select>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-32px"
+      *ngIf="
+        addGoodsLoss.controls['movementSuspension'].value.movementDoc &&
+        movSusGoods.controls.length > 0
+      "
+      formGroupName="movementSuspension"
+    >
+      <mat-accordion multi formArrayName="movSusGoods">
+        <mat-expansion-panel
+          class="accordin"
+          #movpanel
+          *ngFor="let item of movSusGoods.controls; index as i"
+          [expanded]="true"
+          hideToggle
+        >
+          <mat-expansion-panel-header class="accordin-header">
+            <mat-panel-title>
+              <div class="accordin-title">
+                {{ stringConstants.add.form.movSus.title }}
+              </div>
+            </mat-panel-title>
+            <mat-panel-description
+              [ngClass]="
+                lang === 'AR' ? 'accordin-actions-rtl' : 'accordin-actions'
+              "
+            >
+              <img
+                src="assets/image/circle-arrow-up.svg"
+                [ngStyle]="{ transform: movpanel.expanded ? '' : 'scaleY(-1)' }"
+              />
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="accordin-form" [formGroupName]="i">
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.prodType
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input
+                    type="text"
+                    disabled
+                    [value]="
+                      formData.productList[getGoodsIndex(item.value)].GoodsTxt
+                    "
+                  />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.movSus.tariffCode
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" disabled [value]="item.value.TariffCode" />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.movSus.tariffDesc
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" disabled [value]="item.value.ProDesc" />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.movSus.brand
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" disabled [value]="item.value.Brand" />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.unitM
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input
+                    type="text"
+                    disabled
+                    [value]="formData.unitSet[getUnitIndex(item.value)].Msehl"
+                  />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.units
+              }}</span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && item.get('PUnit').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <input
+                    appNumberInput
+                    maxlength="14"
+                    formControlName="PUnit"
+                    type="text"
+                    (input)="calculateTotal(i)"
+                  />
+                </div>
+              </span>
+              <span
+                *ngIf="
+                  validError &&
+                  item.get('PUnit').invalid &&
+                  item.get('PUnit').value.length > maxUnits
+                "
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{
+                  stringConstants.add.form.errors.max + ' ' + maxUnits
+                }}</span
+              >
+              <span
+                *ngIf="
+                  validError &&
+                  item.get('PUnit').invalid &&
+                  item.get('PUnit').value.length < 1
+                "
+                [ngClass]="
+                  lang === 'AR' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.form.errors.invalid }}</span
+              >
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.rsp
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" disabled [value]="item.value.RspUnit" />
+                </div>
+              </span>
+            </div>
+            <div
+              class="accordin-form-row accordin-form-total"
+              style="border-bottom: 1px solid #fff"
+            >
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.totalRsp
+              }}</span>
+              <span class="form-row-input"
+                >{{
+                  decimalPipe.transform(
+                    item.value.TotalRsp ? item.value.TotalRsp : '0.00',
+                    '1.2-2'
+                  )
+                }}
+                {{ stringConstants.add.form.currency }}</span
+              >
+            </div>
+            <div class="accordin-form-row accordin-form-total">
+              <span class="form-row-label">{{
+                stringConstants.add.form.whSus.totalEt
+              }}</span>
+              <span class="form-row-input"
+                >{{
+                  decimalPipe.transform(
+                    item.value.ExciseTax ? item.value.ExciseTax : '0.00',
+                    '1.2-2'
+                  )
+                }}
+                {{ stringConstants.add.form.currency }}</span
+              >
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div
+      class="mt-32px"
+      *ngIf="
+        addGoodsLoss.controls['loss'].value.lossType === 'movement'
+          ? addGoodsLoss.controls['loss'].valid &&
+            movSusGoods.controls.length > 0
+          : addGoodsLoss.controls['loss'].valid
+      "
+    >
+      <mat-accordion>
+        <mat-expansion-panel
+          class="accordin"
+          #movpanel
+          [expanded]="true"
+          hideToggle
+        >
+          <mat-expansion-panel-header class="accordin-header">
+            <mat-panel-title>
+              <div class="accordin-title">
+                {{ stringConstants.add.form.total.title }}
+              </div>
+            </mat-panel-title>
+            <mat-panel-description
+              [ngClass]="
+                lang === 'AR' ? 'accordin-actions-rtl' : 'accordin-actions'
+              "
+            >
+              <img
+                src="assets/image/circle-arrow-up.svg"
+                [ngStyle]="{ transform: movpanel.expanded ? '' : 'scaleY(-1)' }"
+              />
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="accordin-form">
+            <div
+              class="accordin-form-row accordin-form-total"
+              style="border-bottom: 1px solid #fff"
+            >
+              <span class="form-row-label">{{
+                stringConstants.add.form.total.units
+              }}</span>
+              <span class="form-row-input">{{
+                decimalPipe.transform(
+                  formTotal.units ? formTotal.units : '0.00',
+                  '1.2-2'
+                )
+              }}</span>
+            </div>
+            <div
+              class="accordin-form-row accordin-form-total"
+              style="border-bottom: 1px solid #fff"
+            >
+              <span class="form-row-label">{{
+                stringConstants.add.form.total.rsp
+              }}</span>
+              <span class="form-row-input"
+                >{{
+                  decimalPipe.transform(
+                    formTotal.rsp ? formTotal.rsp : '0.00',
+                    '1.2-2'
+                  )
+                }}
+                {{ stringConstants.add.form.currency }}</span
+              >
+            </div>
+            <div class="accordin-form-row accordin-form-total">
+              <span class="form-row-label">{{
+                stringConstants.add.form.total.et
+              }}</span>
+              <span class="form-row-input"
+                >{{
+                  decimalPipe.transform(
+                    formTotal.et ? formTotal.et : '0.00',
+                    '1.2-2'
+                  )
+                }}
+                {{ stringConstants.add.form.currency }}</span
+              >
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="form-btn">
+      <button
+        class="form-continue-btn"
+        style="margin: 56px 0"
+        [disabled]="addGoodsLoss.controls['loss'].invalid"
+        (click)="nextStep()"
+      >
+        {{ stringConstants.add.btn.continue }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Step 2 -->
+
+  <form *ngIf="formStep === 1" class="mt-32px" [formGroup]="addGoodsLoss">
+    <div class="form-description">
+      <div
+        class="form-label"
+        [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }"
+      >
+        {{ stringConstants.add.form.decla.reason }}
+      </div>
+      <div
+        class="form-input form-input-ta"
+        [ngStyle]="{
+          'border-color':
+            validError && addGoodsLoss.controls['reason'].invalid
+              ? 'var(--error)'
+              : ''
+        }"
+      >
+        <textarea
+          class="decleration-ta"
+          id="reason"
+          (input)="onInputChange()"
+          style="resize: none"
+          formControlName="reason"
+          maxlength="1000"
+        ></textarea>
+        <div class="form-ta-count">
+          {{
+            addGoodsLoss.controls['reason'].value
+              ? addGoodsLoss.controls['reason'].value.length + '/1000'
+              : '0/1000'
+          }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-attachments">
+      <p [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }">
+        {{ stringConstants.add.form.decla.files.label }}
+      </p>
+      <div class="form-upload" formArrayName="evidenceFiles">
+        <div
+          [ngClass]="
+            lang === 'AR' ? 'form-upload-card-rtl' : 'form-upload-card'
+          "
+          *ngFor="let file of evidenceFiles.controls; index as i"
+          [formGroupName]="i"
+        >
+          <img
+            src="assets/image/delete.svg"
+            [ngClass]="
+              lang === 'AR' ? 'form-upload-delete-rtl' : 'form-upload-delete'
+            "
+            (click)="deleteFile(i)"
+          />
+          <img
+            [src]="
+              file.value.type === 'pdf'
+                ? 'assets/image/pdf.svg'
+                : 'assets/image/generic-documents.png'
+            "
+          />
+          <div class="form-upload-name">
+            {{ file.value.name }}
+          </div>
+          <!-- <span>{{ file.value.size }} MB</span> -->
+        </div>
+
+        <div
+          [ngClass]="
+            lang === 'AR' ? 'form-upload-card-rtl' : 'form-upload-card'
+          "
+          [ngStyle]="{
+            'border-color':
+              validError && evidenceFiles.controls.length < 1
+                ? 'var(--error)'
+                : ''
+          }"
+          (click)="fileInput.click()"
+          appDragDrop
+          (onFileDropped)="
+            evidenceFiles.controls.length < 6 && uploadFile($event)
+          "
+          [ngStyle]="{
+            opacity: evidenceFiles.controls.length >= 5 ? '0.6' : ''
+          }"
+        >
+          <input
+            hidden
+            type="file"
+            #fileInput
+            (change)="
+              evidenceFiles.controls.length < 6 &&
+                uploadFile($event.target.files)
+            "
+            id="fileUp"
+            [disabled]="evidenceFiles.controls.length >= 5"
+          />
+          <img src="assets/image/attach.svg" />
+          <div class="form-upload-info">
+            {{ stringConstants.add.form.decla.files.add }}
+          </div>
+          <span>{{ stringConstants.add.form.decla.files.max }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-agree check mt-32px">
+      <mat-checkbox
+        class="checkboxAckCss"
+        formControlName="decleration"
+      ></mat-checkbox>
+      <div
+        class="form-agree-text"
+        [ngStyle]="{ 'text-align': lang === 'AR' ? 'initial' : '' }"
+      >
+        {{ stringConstants.add.form.decla.text }}
+      </div>
+    </div>
+
+    <div class="form-btn">
+      <button
+        type="submit"
+        class="form-continue-btn"
+        style="margin: 56px 0"
+        [disabled]="addGoodsLoss.controls['decleration'].invalid"
+        (click)="nextStep()"
+      >
+        {{ stringConstants.add.btn.continue }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Step 3 -->
+
+  <div
+    *ngIf="formStep === 2"
+    class="summary mt-32px"
+    [formGroup]="addGoodsLoss"
+  >
+    <div class="form-card">
+      <div class="form-card-upper">
+        <div class="form-card-title">
+          <div
+            [ngClass]="lang === 'AR' ? 'form-card-img-rtl' : 'form-card-img'"
+          >
+            <img src="assets/images/excise-goods/warehouse.svg" />
+          </div>
+          <span>{{ stringConstants.add.form.warehouse }}</span>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="form-card-lower">
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.form.fin }}</p>
+          <span>{{ formData.fin }}</span>
+        </div>
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.form.name }}</p>
+          <span>{{ formData.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card mt-24px">
+      <div class="form-card-upper">
+        <div class="form-card-title">
+          <div
+            [ngClass]="lang === 'AR' ? 'form-card-img-rtl' : 'form-card-img'"
+          >
+            <img src="assets/images/excise-goods/warehouse.svg" />
+          </div>
+          <span>{{ stringConstants.add.summary.loss }}</span>
+        </div>
+        <div class="form-card-edit" (click)="goToStep(0)">
+          {{ stringConstants.add.summary.edit }}
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="form-card-lower">
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.form.irrLoss.label }}</p>
+          <span>{{
+            addGoodsLoss.controls['loss'].value.irreversibleLoss
+              ? addGoodsLoss.controls['loss'].value.irreversibleLoss === 'yes'
+                ? stringConstants.add.form.irrLoss.yes
+                : stringConstants.add.form.irrLoss.no
+              : ''
+          }}</span>
+        </div>
+        <div class="form-card-detail" style="justify-content: space-between">
+          <p>{{ stringConstants.add.form.lossType.label }}</p>
+          <span>{{
+            addGoodsLoss.controls['loss'].value.lossType
+              ? addGoodsLoss.controls['loss'].value.lossType === 'warehouse'
+                ? stringConstants.add.form.lossType.warehouse
+                : stringConstants.add.form.lossType.movement
+              : ''
+          }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div
+      *ngIf="addGoodsLoss.controls['loss'].value.lossType === 'warehouse'"
+      formArrayName="warehouseSuspension"
+    >
+      <div
+        class="form-card mt-24px"
+        *ngFor="let form of warehouseSuspension.controls; index as i"
+        [formGroupName]="i"
+      >
+        <div class="form-card-upper">
+          <div class="form-card-title">
+            <div
+              [ngClass]="lang === 'AR' ? 'form-card-img-rtl' : 'form-card-img'"
+            >
+              <img src="assets/images/excise-goods/summary-goods.svg" />
+            </div>
+            <span>{{ stringConstants.add.form.whSus.title }}</span>
+          </div>
+          <div class="form-card-edit" (click)="goToStep(0)">
+            {{ stringConstants.add.summary.edit }}
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div
+          class="accordin-form-row accordin-form-total"
+          style="border-bottom: 1px solid #fff"
+        >
+          <span class="form-row-label">{{
+            stringConstants.add.form.whSus.totalRsp
+          }}</span>
+          <span class="form-row-input"
+            >{{ form.value.totalRsp ? form.value.totalRsp : '0.00' }} {{ stringConstants.add.form.currency }}</span
+          >
+        </div>
+        <div class="accordin-form-row accordin-form-total">
+          <span class="form-row-label">{{
+            stringConstants.add.form.whSus.totalEt
+          }}</span>
+          <span class="form-row-input"
+            >{{ form.value.totalEt ? form.value.totalEt : '0.00' }} {{ stringConstants.add.form.currency }}</span
+          >
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div
+      *ngIf="addGoodsLoss.controls['loss'].value.lossType === 'movement'"
+      formGroupName="movementSuspension"
+    >
+      <div formArrayName="movSusGoods">
+        <div
+          class="form-card mt-24px"
+          *ngFor="let form of movSusGoods.controls; index as i"
+          [formGroupName]="i"
+        >
+          <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  lang === 'AR' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/images/excise-goods/summary-goods.svg" />
+              </div>
+              <span>{{ stringConstants.add.form.movSus.title }}</span>
+            </div>
+            <div class="form-card-edit" (click)="goToStep(0)">
+              {{ stringConstants.add.summary.edit }}
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div
+            class="accordin-form-row accordin-form-total"
+            style="border-bottom: 1px solid #fff"
+          >
+            <span class="form-row-label">{{
+              stringConstants.add.form.whSus.totalRsp
+            }}</span>
+            <span class="form-row-input"
+              >{{
+                form.value.TotalRsp ? form.value.TotalRsp : '0.00'
+              }}
+              {{ stringConstants.add.form.currency }}</span
+            >
+          </div>
+          <div class="accordin-form-row accordin-form-total">
+            <span class="form-row-label">{{
+              stringConstants.add.form.whSus.totalEt
+            }}</span>
+            <span class="form-row-input"
+              >{{
+                form.value.ExciseTax ? form.value.ExciseTax : '0.00'
+              }}
+              {{ stringConstants.add.form.currency }}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="form-card mt-24px">
+      <div class="form-card-upper">
+        <div class="form-card-title">
+          <div
+            [ngClass]="lang === 'AR' ? 'form-card-img-rtl' : 'form-card-img'"
+          >
+            <img src="assets/images/excise-goods/summary-goods.svg" />
+          </div>
+          <span>{{
+            addGoodsLoss.controls['loss'].value.lossType === 'warehouse'
+              ? stringConstants.add.form.whSus.title
+              : stringConstants.add.form.movSus.title
+          }}</span>
+        </div>
+        <div class="form-card-edit" (click)="goToStep(0)">
+          {{ stringConstants.add.summary.edit }}
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div
+        class="accordin-form-row accordin-form-total"
+        style="border-bottom: 1px solid #fff"
+      >
+        <span class="form-row-label">{{
+          stringConstants.add.form.total.units
+        }}</span>
+        <span class="form-row-input">{{
+          decimalPipe.transform(
+            formTotal.units ? formTotal.units : '0.00',
+            '1.2-2'
+          )
+        }}</span>
+      </div>
+      <div
+        class="accordin-form-row accordin-form-total"
+        style="border-bottom: 1px solid #fff"
+      >
+        <span class="form-row-label">{{
+          stringConstants.add.form.total.rsp
+        }}</span>
+        <span class="form-row-input"
+          >{{
+            decimalPipe.transform(
+              formTotal.rsp ? formTotal.rsp : '0.00',
+              '1.2-2'
+            )
+          }}
+          {{ stringConstants.add.form.currency }}</span
+        >
+      </div>
+      <div class="accordin-form-row accordin-form-total">
+        <span class="form-row-label">{{
+          stringConstants.add.form.total.et
+        }}</span>
+        <span class="form-row-input"
+          >{{
+            decimalPipe.transform(formTotal.et ? formTotal.et : '0.00', '1.2-2')
+          }}
+          {{ stringConstants.add.form.currency }}</span
+        >
+      </div>
+    </div>
+
+    <div class="form-card mt-24px">
+      <div class="form-card-upper">
+        <div class="form-card-title">
+          <div
+            [ngClass]="lang === 'AR' ? 'form-card-img-rtl' : 'form-card-img'"
+          >
+            <img src="assets/images/excise-goods/summary-declaration.svg" />
+          </div>
+          <span>{{ stringConstants.add.summary.decla.title }}</span>
+        </div>
+        <div class="form-card-edit" (click)="goToStep(1)">
+          {{ stringConstants.add.summary.edit }}
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="form-card-lower">
+        <div class="form-card-detail">
+          <p>{{ stringConstants.add.summary.decla.reason }}</p>
+          <span>{{
+            addGoodsLoss.controls['reason'].value
+              ? addGoodsLoss.controls['reason'].value
+              : ''
+          }}</span>
+        </div>
+        <div class="form-card-detail" formArrayName="evidenceFiles">
+          <p>{{ stringConstants.add.summary.decla.attachments }}</p>
+          <span
+            class="form-filenames"
+            *ngFor="let file of evidenceFiles.controls; index as i"
+            [formGroupName]="i"
+            >{{ file.value.name
+            }}<img
+              [src]="
+                file.value.type === 'pdf'
+                  ? 'assets/image/pdf.svg'
+                  : 'assets/image/generic-documents.png'
+              "
+          /></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-btn">
+      <button
+        class="form-continue-btn"
+        style="margin: 56px 0"
+        (click)="formSubmit()"
+      >
+        {{ stringConstants.add.btn.confirm }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Success Screen -->
+
+  <div *ngIf="formStep === 3" class="form-success">
+    <img src="assets/image/success.svg" />
+    <span class="form-success-title">{{
+      stringConstants.add.success.title
+    }}</span>
+    <span class="form-success-subtitle">{{
+      stringConstants.add.success.sub
+    }}</span>
+    <div class="mt-32px">
+      <div class="form-success-info">
+        <p>{{ stringConstants.add.success.name }}</p>
+        <span>{{ formData.name }}</span>
+      </div>
+      <div class="form-success-info">
+        <p>{{ stringConstants.add.success.appNo }}</p>
+        <span>{{ formData.fbnum }}</span>
+      </div>
+      <div class="form-success-info">
+        <p>{{ stringConstants.add.success.date }}</p>
+        <span>{{ formData.appDate }}</span>
+      </div>
+    </div>
+    <span class="form-success-message">{{
+      stringConstants.add.success.message
+    }}</span>
+    <button class="form-success-dl" (click)="downloadAck()">
+      {{ stringConstants.add.success.download }}
+    </button>
+    <span class="form-success-dl2" (click)="downloadForm()">{{
+      stringConstants.add.success.download2
+    }}</span>
+  </div>
+
+  <!-- <button *ngIf="formStep < 3" class="form-continue-btn" style="margin: 56px 0;" (click)=" formStep < 2 ? nextStep() :  formSubmit()" [disabled]="addGoodsLoss.controls['loss'].invalid">{{formStep === 2 ? 'Confirm' : 'Continue'}}</button> -->
+</div>
+
+<notifier-container></notifier-container>

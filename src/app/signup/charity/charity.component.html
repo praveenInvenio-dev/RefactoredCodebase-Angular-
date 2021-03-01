@@ -1,0 +1,1661 @@
+<app-header [direction]="direction" [title]="lang.title" [url]="url"></app-header>
+
+<div class="container mt-5" style="margin-top: 150px!important;" dir="{{ direction }}">
+    <!-- PROGRESS BAR - START -->
+    <div class="row text-center" *ngIf="!showVerification" style="height: 110px;">
+        <div class="col-md-4">
+            <div [ngClass]="optionActive === 1 ? 'viewCssActive' : 'viewCss'" (click)="backClick(1)">
+                <div class="card cardz" [ngClass]="optionActive === 1 ? 'cardCss' : 'cardCssActive'">
+                    <div class="card-body">
+                        <i class="fa fa-check-circle" [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="showOne" aria-hidden="true"></i>
+                        <p class="ellipse-inner" [style.left]="direction === 'rtl' ? '0px' : ''" *ngIf="!showOne"></p>
+                    </div>
+
+                </div>
+
+            </div>
+            <p [ngClass]="optionActive === 1 ? 'txtCss' : 'txtCssActive'"> {{lang.header.h1}}
+            </p>
+
+        </div>
+        <div class="col-md-4">
+            <div [ngClass]="optionActive === 2 ? 'viewCssActive' : 'viewCss'" (click)="backClick(2)">
+                <div class="card cardz" [ngClass]="optionActive === 2 ? 'cardCss' : 'cardCssActive'">
+
+                    <div class="card-body">
+                        <i class="fa fa-check-circle" [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="showTwo" aria-hidden="true"></i>
+                        <p class="ellipse-inner" *ngIf="!showTwo" [style.left]="direction === 'rtl' ? '0px' : ''" [style.background]="defaultValue === 1 ? 'white' : ''" [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'">
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+            <p [ngClass]="optionActive === 2 ? 'txtCss' : 'txtCssActive'" [style.color]="defaultValue === 1 ? '#c0c0c0' : ''" [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+                {{lang.header.h2}}
+            </p>
+            <!-- <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss2Active">
+            <hr *ngIf="optionActive !== 2 && optionActive !== 1" class="hrCss3Active"> -->
+            <hr class="hrCss2">
+            <hr class="hrCss3">
+        </div>
+        <div class="col-md-4">
+            <div [ngClass]="optionActive === 3 ? 'viewCssActive' : 'viewCss'" (click)="backClick(3)">
+                <div class="card cardz" [ngClass]="optionActive === 3 ? 'cardCss' : 'cardCssActive'">
+
+                    <div class="card-body">
+                        <!-- <i class="fa fa-arrow-left" style="font-size: 25px;" aria-hidden="true"></i> -->
+                        <i class="fa fa-check-circle" [ngClass]="direction === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'" *ngIf="show" aria-hidden="true"></i>
+
+                        <p class="ellipse-inner" *ngIf="!show" [style.left]="direction === 'rtl' ? '0px' : ''" [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'" [style.background]="defaultValue === 3 ||defaultValue === 1 ? 'white' : ''">
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+            <p [ngClass]="optionActive === 3 ? 'txtCss' : 'txtCssActive'" [style.color]="defaultValue === 3 || defaultValue === 1 ? '#c0c0c0' : ''" [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+                {{lang.header.h3}}</p>
+        </div>
+    </div>
+    <!-- PROGRESS BAR - END -->
+
+    <!-- VERIFICATION CARD SCREEN - START -->
+    <!-- <app-otp-verification *ngIf="showVerification" (validateOTP)="validateOTP($event)" (resend)="resendOTP()" [mobile]="charityForm.get('contactForm.mobile').value" [resend]="resend">
+    </app-otp-verification> -->
+    <app-otp-verification *ngIf="showVerification && !show" [mobile]="charityForm.get('contactForm.mobile').value" [resend]="resend" (validateOTP)="validateOTP($event)" (resend)="resendOTP()"></app-otp-verification>
+
+    <!-- VERIFICATION CARD SCREEN - END -->
+
+    <!-- CHARITY SCREEN 1 - START -->
+    <div class="row rowCss mt-2" *ngIf="optionActive === 1 && !showVerification">
+        <div class="col-md-12">
+            <form [formGroup]="charityForm" (ngSubmit)="onSubmit()">
+                <mat-card class="mt-3">
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="sideHeading">
+                                    {{ lang.c1.title }}<span><i class="fa fa-check-circle" aria-hidden="true" *ngIf="f.companyId.valid && (f.orgName.valid || f.orgName.status === 'DISABLED') && f.accounting.valid"
+                    [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                                    <p class="Rectangle-12"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4" *ngIf="showTin">
+                                <div class="registerLabelCss">{{ lang.c1.in1 }}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="tin" maxlength="10" (change)="tinValidation(f.tin.value, false)" [ngClass]="{
+                      'is-invalid': submitted && f.tin.errors
+                    }" (keypress)='restrictAlphabets($event)' />
+                                </mat-form-field>
+                                <div *ngIf="tinErr" class="invalid-feedback">
+                                    <p>{{ tinMsg }}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss required">{{ lang.c1.in2 }}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="companyId" maxlength="10" (change)="getUserByCompID(f.companyId.value)" (keypress)='restrictAlphabets($event)' />
+                                </mat-form-field>
+                                <div *ngIf="(charityForm.get('companyId').touched || submitted) && f.companyId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.companyId.errors.required">{{ lang.errMsgs.cidReq}}</div>
+                                    <div *ngIf="f.companyId.errors.minlength">{{ lang.errMsgs.shdB10dgts}}</div>
+                                    <div *ngIf="f.companyId.errors.pattern">{{ lang.errMsgs.shdStrt7}}</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss required">{{ lang.c1.in3 }}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="orgName" maxlength="200" />
+                                </mat-form-field>
+                                <div *ngIf="(charityForm.get('orgName').touched || submitted) && f.orgName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.orgName.errors.required">{{lang.errMsgs.orgNameReqErr}}</div>
+                                    <div *ngIf="f.orgName.errors.pattern">{{lang.errMsgs.orgNameErr}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{ lang.c1.in4 }}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="repBranch" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-12">
+                                <p class="registerLabel2Css required">{{lang.c2.in1}}</p>
+                                <div class="row mr-3" style="margin-left: 5rem !important;">
+                                    <mat-radio-group aria-label="Select an option" name="r2" formControlName="accounting">
+                                        <mat-radio-button value="315A" class="mr-4 ml-4 radioCss" [style.background]="
+                            charityForm.get('accounting').value === '315A'
+                              ? '#d2a02a'
+                              : 'none'
+                          " [style.color]="
+                            charityForm.get('accounting').value === '315A'
+                              ? '#ffffff'
+                              : 'black'
+                          ">{{lang.c2.in2}}
+                                        </mat-radio-button>
+                                        <mat-radio-button value="315B" class="mr-4 ml-4 radioCss" [style.background]="
+                            charityForm.get('accounting').value === '315B'
+                              ? '#d2a02a'
+                              : 'none'
+                          " [style.color]="
+                            charityForm.get('accounting').value === '315B'
+                              ? '#ffffff'
+                              : 'black'
+                          ">{{lang.c2.in3}}
+                                        </mat-radio-button>
+                                        <mat-radio-button value="315C" class="mr-4 ml-4 radioCss" [style.background]="
+                            charityForm.get('accounting').value === '315C'
+                              ? '#d2a02a'
+                              : 'none'
+                          " [style.color]="
+                            charityForm.get('accounting').value === '315C'
+                              ? '#ffffff'
+                              : 'black'
+                          ">{{lang.c2.in4}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div *ngIf="(charityForm.get('accounting').touched || submitted) && f.accounting.errors" class="invalid-feedback mt-2">
+                                        <div *ngIf="f.accounting.errors.required">{{lang.errMsgs.slct1}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <!-- CONTACT SECTION - START  -->
+                <mat-card class="mt-3">
+                    <mat-card-content formGroupName="contactForm">
+                        <div class="sideHeading">
+                            {{ lang.c3.title }}<span><i class="fa fa-check-circle" aria-hidden="true" *ngIf="charityForm.get('contactForm').valid"
+                [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+                        <div class="row">
+
+                            <div class="time-picker-component col-md-4">
+                                <div class="registerLabelCss required">{{ lang.c3.in1 }}</div>
+                                <div id="custom" dir="ltr">
+                                    <mat-select id="code" class="custom" style="width: 30%; height: 60px;" formControlName="cc">
+                                        <mat-select-trigger>
+                                            +{{charityForm.get('contactForm.cc').value}}
+                                        </mat-select-trigger>
+                                        <mat-option [value]="item.Telefto" *ngFor="let item of codes" (click)="onChangeCC(item, charityForm.get('contactForm.mobile'))">
+                                            <!-- <span>+{{ item.Telefto }}</span> <span style="float: right;"> {{ item.Land1 }}</span></mat-option> -->
+                                            <div class="d-flex justify-content-between">
+                                                <div class="" style="font-size: 14px;">
+                                                    +{{ item.Telefto }}
+                                                </div>
+                                                <div class="text-truncate pl-4" [title]="item.Landx50" style="font-size: 14px;">
+                                                    {{ item.Landx50 }}
+                                                </div>
+                                            </div>
+                                        </mat-option>
+                                    </mat-select>
+                                    <input matInput type="text" formControlName="mobile" class="custom" placeholder="" style="width: 70%; padding-left: 12px; height: 60px;" maxLength="{{maxLength}}" (keypress)='restrictAlphabets($event)' [ngClass]="direction=='rtl'? 'mobileInputArb' : 'mobileInputEng'"
+                                    />
+                                </div>
+                                <div *ngIf="(charityForm.get('contactForm.mobile').touched || submitted) && charityForm.get('contactForm.mobile').errors" class="invalid-feedback mt-4" style="margin-top: 11px !important;">
+                                    <div *ngIf="charityForm.get('contactForm.mobile').errors.required">
+                                        {{lang.errMsgs.entrVldMobNo}}
+                                    </div>
+                                    <div *ngIf="charityForm.get('contactForm.mobile').errors.pattern"> {{lang.errMsgs.mobNoErr1}}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss required">{{ lang.c3.in2 }}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="email" />
+                                </mat-form-field>
+                                <div *ngIf="(charityForm.get('contactForm.email').touched || submitted) && charityForm.get('contactForm.email').errors" class="invalid-feedback">
+                                    <div *ngIf="charityForm.get('contactForm.email').errors.required">
+                                        {{lang.errMsgs.entrEmailAddrs}}
+                                    </div>
+                                    <div *ngIf="charityForm.get('contactForm.email').errors.pattern">{{lang.errMsgs.entrCrctEmail}}</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss required">{{ lang.c3.in3 }}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="cnfrmEmail" />
+                                </mat-form-field>
+                                <div *ngIf="(charityForm.get('contactForm.cnfrmEmail').touched || submitted) && charityForm.get('contactForm.cnfrmEmail').errors" class="invalid-feedback">
+                                    <div *ngIf="charityForm.get('contactForm.cnfrmEmail').errors.required">
+                                        {{lang.errMsgs.entrEmailAddrs}}
+                                    </div>
+                                    <div *ngIf="!matchErr && charityForm.get('contactForm.cnfrmEmail').value != ''">{{lang.errMsgs.emailMatch}}</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <!-- CONTACT SECTION - END -->
+
+                <div class="mt-3">
+                    <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'">
+            {{ lang.c1.btn }}
+          </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- CHARITY REGISTER SCREEN 1 - END -->
+
+    <!-- COMPLETE INFORMATION SCREEN 2 - START -->
+    <div class="row rowCss mt-2" *ngIf="optionActive === 2">
+        <div class="col-md-12">
+
+
+            <!-- FACILITY BRANCHES - START -->
+            <mat-card class="mt-3">
+                <mat-card-content>
+                    <div class="sideHeading">
+                        {{ lang.c9.title }}<span><i class="fa fa-check-circle" aria-hidden="true" *ngIf="dataSource.data.length > 0"
+                            [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                        <p class="Rectangle-12"></p>
+                    </div>
+
+
+                    <label style="width: 100%;">
+              <input matInput type="text" style="margin-top: 20px; text-align: start;" (keyup)="doFilter($event.target.value)" [style.float]="direction === 'rtl'? 'right': 'left'"/>
+              <span class="material-icons pl-2" style="color: #c0c0c0; position: relative; top: 10px; font-size: 30px; right:10px;" [style.float]="direction === 'rtl'? 'left': 'right'">
+                search
+              </span>
+            </label>
+                    <p class="Rectangle-12"></p>
+                    <table mat-table [dataSource]="dataSource" matSort>
+                        <ng-container matColumnDef="branchName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <span [style.float]="direction === 'rtl'? 'left': 'right'">{{lang.c9.in1}}</span>
+                            </th>
+                            <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell *matCellDef="let element">{{element.name}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="crLicense">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{lang.c9.in2}}
+                            </th>
+                            <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell *matCellDef="let element">
+                                {{ element.crLicense }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="city">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                {{lang.c9.in3}}
+                            </th>
+                            <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell *matCellDef="let element">{{ element.city }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="type">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{lang.c9.in4}}</th>
+                            <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell *matCellDef="let element">{{ element.type }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="update">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell *matCellDef="let element; let j = index;">
+                                <button mat-icon-button (click)="editBranch(j)">
+                    <mat-icon class="mat-18" [style.color]="'#d2a02a'" >edit</mat-icon>
+                  </button>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="delete">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell *matCellDef="let element;  let j = index;">
+                                <button mat-icon-button color="warn" (click)="deleteOutletPopup(j)">
+                    <mat-icon class="mat-18">delete</mat-icon>
+                  </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button mat-button [ngClass]="direction === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button" style="width: auto;" (click)="openModal()">{{lang.c9.btn}}
+                </button>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <!-- FACILITY BRANCHES - END -->
+
+            <!-- FACILITY FINANCIAL INFORMATION - START -->
+            <form [formGroup]="facilityInfoForm" (ngSubmit)="onSubmit1()" *ngIf="dataSource.data.length > 0">
+                <mat-card class="mt-3">
+                    <mat-card-content>
+                        <div class="sideHeading">
+                            {{ lang.c10.title }}<span><i class="fa fa-check-circle" aria-hidden="true" *ngIf="f1.taxableDate.value != null"
+                                [ngClass]="direction === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+                            <p class="Rectangle-12"></p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="registerLabelCss required">{{lang.c10.in1}}</div>
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="accounting">
+                                        <mat-option value="A" (click)="getAccountMethod('A')">{{lang.accounting}}</mat-option>
+                                        <mat-option value="E" (click)="getAccountMethod('E')">{{lang.estimated}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c10.in2}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input #a matInput placeholder="" formControlName="tin" maxlength="15" (keypress)='restrictAlphabets($event)' />
+                                    <!-- (change)="tinValidation(a.value, false)" /> -->
+                                </mat-form-field>
+                                <!-- <div *ngIf="tinErr" class="invalid-feedback">
+                                    <p>{{ tinMsg }}</p>
+                                </div> -->
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c10.in9}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" maxlength="10" formControlName="tan" (keypress)='restrictAlphabets($event)' />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="registerLabelCss ">{{ lang.c10.in10 }}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput [matDatepicker]="picker6" formControlName="capRegDt" [max]="enddate" (dateChange)="getdateErr(f1.capRegDt.value)">
+                                    <!-- [readonly]="inputReadonly"  -->
+                                    <!-- [ngClass]="{ 'is-invalid': submitted3 && f3.Decdate.errors }"> -->
+                                    <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker6 [calendarHeaderComponent]="headerComponent">
+                                    </mat-datepicker>
+                                </mat-form-field>
+                                <div *ngIf="(f1.capRegDt.touched || submitted1) && f1.capRegDt.errors" class="invalid-feedback">
+                                    <div *ngIf="(f1.capRegDt.touched || submitted1) && f1.capRegDt.errors.required">
+                                        <!-- {{lang.errMsgs.entrDtBrth}} -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss">{{lang.c10.in11}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="capAmt" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="registerLabel2Css required">{{lang.c10.in3}}</p>
+                                <div class="row mr-3" style="margin-left: 5rem !important;">
+                                    <mat-radio-group aria-label="Select an option" name="r2" formControlName="calendarType">
+                                        <mat-radio-button value="H" class="mr-3 ml-3 radioCss" [style.background]="
+                        facilityInfoForm.get('calendarType').value === 'H'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        facilityInfoForm.get('calendarType').value === 'H'
+                          ? '#ffffff'
+                          : 'black'
+                      " (click)="changeCalenderType('H')">{{lang.c10.in4}}
+                                        </mat-radio-button>
+                                        <mat-radio-button value="G" class="mr-3 ml-3 radioCss" [style.background]="
+                        facilityInfoForm.get('calendarType').value === 'G'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        facilityInfoForm.get('calendarType').value === 'G'
+                          ? '#ffffff'
+                          : 'black'
+                      " (click)="changeCalenderType('G')">{{lang.c10.in5}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <div class="invalid-feedback mt-3" *ngIf="submitted1 && f1.calendarType.errors" style="margin-top: 11px !important;">
+                                        <div *ngIf="f1.calendarType.errors.required">
+                                            {{lang.errMsgs.slct1}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <br>
+                        <div class="row">
+
+                            <div class="col-md-2">
+                                <div class="registerLabelCss required">{{lang.c10.in6}}</div>
+                                <div class="input-group mb-3" style="top: 21px;" id="month">
+                                    <!-- <input type="text" class="form-control" placeholder="5" aria-label="Recipient's username" formControlName="endMonth" aria-describedby="basic-addon2" style="height: 50px;" [ngClass]="direction === 'rtl' ? 'inputDayField' : ''"> -->
+                                    <mat-select id="day" formControlName="endMonth" style="height: 50px; width: 43% !important;">
+                                        <mat-option [value]="item.key" *ngFor="let item of months" class="form-control" (click)="monthSelected(item.key)" style="border: none;">
+                                            {{ item.value }}</mat-option>
+                                    </mat-select>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2" style="height: 50px;" [ngClass]="direction === 'rtl' ? 'dayField' : ''">{{lang.month}}</span>
+                                    </div>
+                                    <div class="invalid-feedback mt-3" *ngIf="submitted1 && f1.endMonth.errors" style="margin-top: 11px !important;">
+                                        <div *ngIf="f1.endMonth.errors.required">
+                                            {{lang.errMsgs.slct1}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="registerLabelCss"></div>
+                                <div class="input-group mb-3" style="top: 49px;" id="month">
+                                    <!-- <input type="text" class="form-control" placeholder="5" aria-label="Recipient's username" formControlName="endDay" aria-describedby="basic-addon2" style="height: 50px;" [ngClass]="direction === 'rtl' ? 'inputDayField' : ''"> -->
+                                    <mat-select id="day" formControlName="endDay" style="height: 50px; width: 58% !important;">
+                                        <mat-option [value]="item.key" *ngFor="let item of days" class="form-control" (click)="daySelected(item.key)" style="border: none;">
+                                            {{ item.value }}</mat-option>
+                                    </mat-select>
+
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2" style="height: 50px;width: 55px;" [ngClass]="direction === 'rtl' ? 'dayField' : ''">{{lang.day}}</span>
+                                    </div>
+                                    <div class="invalid-feedback mt-3" *ngIf="submitted1 && f1.endDay.errors" style="margin-top: 11px !important;">
+                                        <div *ngIf="f1.endDay.errors.required">
+                                            {{lang.errMsgs.slct1}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="registerLabelCss required">{{lang.c10.in7}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="commencementDate" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="registerLabelCss required">{{lang.c10.in8}}</div>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="" formControlName="taxableDate" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <!-- FACILITY FINANCIAL INFORMATION - END -->
+
+                <div class="mt-3">
+                    <button mat-raised-button [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'">
+          {{ lang.c3.btn }}
+        </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- COMPLETE INFORMATION SCREEN 2 - START -->
+
+    <!-- PASSWORD SCREEN - START -->
+    <app-Create-Password (completed)="submit($event)" [type2]="type" *ngIf="optionActive === 3 && !show"></app-Create-Password>
+    <!-- PASSWORD SCREEN - END -->
+    <!-- REGISTRATION SUCCESSFUL SCREEN - START -->
+    <!-- <mat-card class="mt-3" style="margin-left: 10%;
+margin-right: 10%;" *ngIf="show">
+        <mat-card-content>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div class="mt-5" style="height:159px">
+                        <img src="assets/image/success.svg" width="112px">
+                    </div>
+                    <div class="exciseAccCss1">
+                        {{lang.c5.t1}}
+                    </div>
+                    <div class="exciseAccCss2 mt-2">
+                        {{lang.c5.t2}}
+                    </div>
+
+                    <div class="exciseAccCssBox mt-4">
+                        <div class="exciseAccCssBox1">
+                            <span [style.margin-right]="direction === 'rtl' ? '20px' : ''">{{lang.c5.t3}}</span>
+                            <span [ngClass]="direction === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'"> {{compName}} </span>
+                        </div>
+                    </div>
+                    <div class="exciseAccCssBox mt-3">
+                        <div class="exciseAccCssBox1">
+                            <span [style.margin-right]="direction === 'rtl' ? '20px' : ''">{{lang.c5.t4}}</span>
+                            <span [ngClass]="direction === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'"> {{applicationNo}} </span>
+                        </div>
+                    </div>
+                    <div class="exciseAccCssBox mt-3">
+                        <div class="exciseAccCssBox1">
+                            <span [style.margin-right]="direction === 'rtl' ? '20px' : ''">{{lang.c5.t5}}</span>
+                            <span [ngClass]="direction === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'">{{ackdate | date}}</span>
+                        </div>
+                    </div>
+                    <button mat-button type="submit" class="btnCss2 mt-4" [routerLink]="['/login']">{{lang.c5.btn}}</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card> -->
+    <app-acknowledgment *ngIf="show" [no]="applicationNo" [name]="compName" [type]="type1"></app-acknowledgment>
+    <!-- REGISTRATION SUCCESSFUL SCREEN - END -->
+</div>
+<!-- model start -->
+<!-- Add Modal HTML -->
+<div id="addModal" class="modal charityBranchDetailsModal" dir="{{ direction }}" data-keyboard="false" data-backdrop="static" style="overflow-y: auto">
+    <div class="modal-dialog" style="margin:0 auto;top:20%;margin-bottom:30px; max-width:828px;height: auto;">
+        <div class="modal-content">
+
+            <div class="modal-header" style="background:#13614c;color: #fff;text-align: center;">
+                <p class="modal-title" style="background:#13614c;color: #fff;text-align: center;margin:0 auto">
+                    {{lang.c11.title}}</p>
+            </div>
+            <form>
+                <mat-vertical-stepper fxLayout="column" [linear]="true" #stepper>
+
+                    <ng-template matStepperIcon="create">
+                        <mat-icon>brightness_1</mat-icon>
+                      </ng-template>
+                      <ng-template matStepperIcon="edit">
+                        <mat-icon>brightness_1</mat-icon>
+                      </ng-template>
+                      <ng-template matStepperIcon="done">
+                        <mat-icon>check_circle</mat-icon>
+                      </ng-template>
+                      <ng-template matStepperIcon="number" let-index="index" let-active="active">
+                        <mat-icon *ngIf="!stepper.selected.interacted">panorama_fish_eye</mat-icon>
+                        <mat-icon *ngIf="stepper.selected.interacted">brightness_1</mat-icon>
+                      </ng-template>
+
+                    <!-- BRANCH DETAILS FORM - START -->
+                    <mat-step [completed]="stepControl1()">
+                        <form [formGroup]="branchDetailsForm">
+                            <ng-template matStepLabel>{{lang.brnchDtls}}</ng-template>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="registerLabelCss required">{{ lang.c11.in1 }}</div>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput placeholder="" formControlName="branchName" />
+                                    </mat-form-field>
+                                    <div *ngIf="(bFormSubmitted || b.branchName.touched) && b.branchName.errors" class="invalid-feedback">
+                                        <div *ngIf="(bFormSubmitted || b.branchName.touched) && b.branchName.errors.required">
+                                            {{lang.errMsgs.entrOtltNm}}
+                                        </div>
+                                        <div *ngIf="b.branchName.touched && b.branchName.errors.pattern">
+                                            {{lang.errMsgs.entrAlphaNm}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container formArrayName="copy" *ngIf="(requestObj?.Nreg_OutletSet['results'].length == 0 || showContactDetails)">
+                                    <ng-container *ngFor="let attach of branchDetailsForm.get('copy')['controls']; let j = index;">
+                                        <div class="col-md-4" [formGroupName]="j">
+                                            <ng-container>
+
+                                                <div class="registerLabelCss required">{{ lang.c11.in2 }}</div>
+                                                <div class="form-group attBoxCss" (click)="openAttachModal('RG23', branchDetailsForm.controls.copy)">
+                                                    <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                                        <span class="material-icons attIconCss" style="line-height: 1.5;" [style.opacity]="myFiles['RG23'][0].Flag ? '1' : '0.25'">
+                                          attach_file
+                                        </span>
+                                        <!-- <input hidden type="file" #fileInput
+                                      (change)="uploadFile($event.target.files, j, 'RG23');getFileDetails($event, j, 'RG23', branchDetailsForm.controls.copy)"> -->
+                                      </label>
+                                                </div>
+                                                <div *ngIf="bFormSubmitted && !checkAttValidity('RG23')" class="invalid-feedback">
+                                                    {{lang.errMsgs.addAttchmnt}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <!-- BRANCH DETAILS FORM - END -->
+
+                    <!-- ACTIVITY DETAILS FORM - START -->
+                    <!-- <mat-step [stepControl]="((ls && activityDetailsForm && checkAttValidity('RG02')) || (cr && commercialRegForm && checkAttValidity('RG01'))) && checkMASelected()" [completed]="false"> -->
+                    <mat-step  [completed]="stepControl2()">
+
+                        <ng-template matStepLabel>{{lang.actvtDtls}}</ng-template>
+
+                        <!-- ACTIVITY TYPE - START -->
+                        <div class="row mt-3 mb-5">
+                            <div class="col-md-12">
+                                <p class="registerLabel2Css required">{{lang.c11.subtitle}}</p>
+                                <div class="row">
+                                    <div class="col-md-4" [style.padding]="direction == 'rtl'? '0 32px 0 0': '0 0 0 32px'">
+                                        <div class="radioCss radio" [style.background]="cr ? '#13614c': 'none'" [style.color]="cr ? '#ffffff': '#13614c'">
+                                            <label class="cbContainer" [style.padding-right]="direction == 'rtl'? '60px': ''">
+                                  <input type="checkbox" name="cr" [ngModel]="cr"
+                                  (ngModelChange)="cr = $event; changeActivity('cr' , cr)">{{lang.c11.in7}}
+                                  <span class="checkmark" ></span>
+                                </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="radioCss radio" [style.background]="ls ? '#13614c': 'none'" [style.color]="ls ? '#ffffff': '#13614c'">
+                                            <label class="cbContainer" [style.padding-right]="direction == 'rtl'? '60px': ''">
+                                  <input type="checkbox" name="ls" [ngModel]="ls"
+                                  (ngModelChange)="ls = $event; changeActivity('ls', ls)" >{{lang.c11.in8}}
+                                  <span class="checkmark" ></span>
+                                </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!ls && !cr && showErr" class=" mt-2 invalid-feedback">
+                                {{lang.errMsgs.plSlct1}}
+                            </div>
+                        </div>
+                        <!-- ACTIVITY TYPE - END -->
+
+                        <!-- NOTE - START -->
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-12">
+                                <div class="registerBox" style="display: flex;">
+
+                                    <span class="material-icons" style="color: #c0c0c0;">
+                              error_outline
+                            </span>
+                                    <p class="registerLabelnCss"> {{lang.c11.in6}}
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-12">
+                                <div class="registerBox" style="display: flex;">
+
+                                    <span class="material-icons" style="color: #c0c0c0;">
+                              error_outline
+                            </span>
+                                    <p class="registerLabelnCss"> {{lang.c11.in9}}
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- NOTE - END -->
+
+                        <!-- COMMERCIAL DETAILS - START -->
+                        <form [formGroup]="commercialRegForm" *ngIf="cr">
+
+                            <div class="row">
+                                <div class="col-md-12 mt-3">
+                                    <mat-accordion #crAccordion multi>
+                                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title class="sideHeadingExpansionBar" style="color: #13614c; font-family: SSTArabic-Medium;">
+                                                    {{lang.c12.title1}}
+                                                </mat-panel-title>
+
+                                            </mat-expansion-panel-header>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p class="registerLabel2Css" [ngClass]="direction === 'rtl' ? 'ackArbCss' : ''">
+                                                        <input type="checkbox" id="CR" class="checkCss mainActivity" formControlName="ma" (click)="checkMA(0, 'cr')">
+                                                        <span [style.padding]="direction=='rtl'? '0 10px 0 0': ''">{{lang.c12.subtitle}}</span>
+                                                    </p>
+                                                </div>
+                                                <div *ngIf="acFormSubmitted && !checkMASelected()" class="invalid-feedback">
+                                                    {{lang.errMsgs.plSlctMA}}
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{lang.c12.in1}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select id="country" formControlName="issueCountry">
+                                                            <mat-option [value]="item.Land1" *ngFor="let item of countryList">
+                                                                {{ item.Landx50 }}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <!-- <div *ngIf="act.commercialReg.controls[0].get('issueCountry').touched && act.commercialReg.controls[0].get('issueCountry').errors" class="invalid-feedback">
+                                        <div  *ngIf="act.commercialReg.controls[0].get('issueCountry').errors.required" >
+                                          Please select Country
+                                        </div>
+                                      </div> -->
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{lang.c12.in2}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <mat-select id="IssueBy" formControlName="issueBy" disabled>
+                                                            <mat-option [value]="item.key" *ngFor="let item of issueByList">
+                                                                {{ item.text }}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{lang.c12.in3}}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <!-- <mat-select-trigger>
+                                          {{commercialRegForm.getRawValue().issueCity}}
+                                        </mat-select-trigger> -->
+                                                        <input matInput formControlName="issueCity" disabled *ngIf="prefillCRCityFlag">
+                                                        <mat-select id="country" formControlName="issueCity" *ngIf="!prefillCRCityFlag">
+                                                            <mat-option>{{commercialRegForm.getRawValue().issueCity}}</mat-option>
+                                                            <mat-option [value]="item.CityCode" *ngFor="let item of cityList | cityfilter: comReg.issueCountry.value">
+                                                                {{ item.CityName }}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(acFormSubmitted || comReg.issueCity.touched) && comReg.issueCity.errors" class="invalid-feedback">
+                                                        <div *ngIf="(acFormSubmitted || comReg.issueCity.touched) && comReg.issueCity.errors.required">
+                                                            {{lang.errMsgs.plSlctCity}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{lang.c12.in11}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <input matInput #a placeholder="" maxlength="10" formControlName="crNumber" (blur)="validateCR(a.value)">
+                                                    </mat-form-field>
+                                                    <div *ngIf="(acFormSubmitted || comReg.crNumber.touched) && comReg.crNumber.errors" class="invalid-feedback">
+                                                        <div *ngIf="(acFormSubmitted || comReg.crNumber.touched) && comReg.crNumber.errors.pattern">
+                                                            {{lang.errMsgs.invldCR}}
+                                                        </div>
+                                                        <div *ngIf="(acFormSubmitted || comReg.crNumber.touched) && comReg.crNumber.errors.required" class="invalid-feedback">
+                                                            {{lang.errMsgs.entrCR}}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{ lang.c12.in5 }}</div>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput [matDatepicker]="picker1" formControlName="validFrom" [max]="enddate" (dateChange)="getdateErr(comReg.validFrom.value)">
+                                                        <!-- [readonly]="inputReadonly"  -->
+                                                        <!-- [ngClass]="{ 'is-invalid': submitted3 && f3.Decdate.errors }"> -->
+                                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+                                                        </mat-datepicker>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(acFormSubmitted || comReg.validFrom.touched) && comReg.validFrom.errors" class="invalid-feedback">
+                                                        <div *ngIf="(acFormSubmitted || comReg.validFrom.touched) && comReg.validFrom.errors.required">
+                                                            {{lang.errMsgs.plEntrDt}}
+                                                        </div>
+                                                        <!-- <div *ngIf="comReg.validFrom.touched && comReg.validFrom.errors.required" class="invalid-feedback">
+                                                          Enter CR Number
+                                                      </div> -->
+                                                    </div>
+                                                </div>
+
+                                                <ng-container formArrayName="copyOfCR">
+                                                    <ng-container *ngFor="let attach of commercialRegForm.get('copyOfCR')['controls']; let j = index;">
+                                                        <div class="col-md-4" [formGroupName]="j">
+                                                            <ng-container>
+
+                                                                <div class="registerLabelCss required">{{ lang.c12.in12 }}</div>
+                                                                <div class="form-group attBoxCss" (click)="openAttachModal('RG01', commercialRegForm.controls.copyOfCR, commercialRegForm.controls.crNumber.value)" >
+                                                                    <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                                                    <span class="material-icons attIconCss" style="line-height: 1.5;" [style.opacity]="myFiles['RG01'][0].Flag ? '1' : '0.25'" >
+                                                      attach_file
+                                                    </span>
+                                                    <!-- <input hidden type="file" #fileInput
+                                                  (change)="uploadFile($event.target.files, j, 'RG01');getFileDetails($event, j, 'RG01', commercialRegForm.controls.copyOfCR, commercialRegForm.controls.crNumber.value)"> -->
+                                                  </label>
+                                                                </div>
+                                                                <div *ngIf="acFormSubmitted && !checkAttValidity('RG01')" class="invalid-feedback">
+                                                                    {{lang.errMsgs.addAttchmnt}}
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </ng-container>
+                                                </ng-container>
+                                                <ng-container formArrayName="transferCopy">
+                                                    <ng-container *ngFor="let attach of commercialRegForm.get('transferCopy')['controls']; let j = index;">
+                                                        <div class="col-md-4" [formGroupName]="j">
+                                                            <ng-container>
+
+                                                                <div class="registerLabelCss">{{ lang.c12.in10 }}</div>
+                                                                <div class="form-group attBoxCss" (click)="openAttachModal('RG12', commercialRegForm.controls.transferCopy, commercialRegForm.controls.crNumber.value)" >
+                                                                    <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                                                    <span class="material-icons attIconCss" style="line-height: 1.5;" [style.opacity]="myFiles['RG12'][0].Flag ? '1' : '0.25'" >
+                                                      attach_file
+                                                    </span>
+                                                    <!-- <input hidden type="file" #fileInput
+                                                  (change)="uploadFile($event.target.files, j, 'RG12');getFileDetails($event, j, 'RG12', commercialRegForm.controls.transferCopy, commercialRegForm.controls.crNumber.value)"> -->
+                                                  </label>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </ng-container>
+                                                </ng-container>
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{lang.c12.in7}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <mat-select id="country" formControlName="mainGrpActivity">
+                                                            <mat-option [value]="item.IndSector" *ngFor="let item of mainGrpActvty">
+                                                                {{ item.Text }}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(acFormSubmitted || comReg.mainGrpActivity.touched) && comReg.mainGrpActivity.errors" class="invalid-feedback">
+                                                        <div *ngIf="(acFormSubmitted || comReg.mainGrpActivity.touched) && comReg.mainGrpActivity.errors.required">
+                                                            {{lang.errMsgs.plslctMnGrp}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{lang.c12.in8}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <mat-select id="country" formControlName="subGrpActivity">
+                                                            <mat-option [value]="item.IndSector" *ngFor="let item of subGrpActvty | cityfilter: comReg.mainGrpActivity.value : 'MGA'">
+                                                                {{ item.Text }}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(acFormSubmitted || comReg.subGrpActivity.touched) && comReg.subGrpActivity.errors" class="invalid-feedback">
+                                                        <div *ngIf="(acFormSubmitted || comReg.subGrpActivity.touched) && comReg.subGrpActivity.errors.required">
+                                                            {{lang.errMsgs.plslctSbGrp}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="registerLabelCss required">{{lang.c12.in9}}</div>
+                                                    <mat-form-field appearance="outline">
+
+                                                        <mat-select id="country" formControlName="mainActivity">
+                                                            <mat-option [value]="item.IndSector" (click)="autoFillActivities(item, comReg)" *ngFor="let item of mainActvty | cityfilter: comReg.subGrpActivity.value : 'SGA'">
+                                                                {{ item.Text }}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <div *ngIf="(acFormSubmitted || comReg.mainActivity.touched) && comReg.mainActivity.errors" class="invalid-feedback">
+                                                        <div *ngIf="(acFormSubmitted || comReg.mainActivity.touched) && comReg.mainActivity.errors.required">
+                                                            {{lang.errMsgs.plslctActvty}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- COMMERCIAL DETAILS - END -->
+
+                        <!-- LICENSE DETAILS - START -->
+                        <form [formGroup]="activityDetailsForm">
+                            <mat-accordion #licenseAccordion multi>
+                            <ng-container formArrayName="license" *ngIf="ls">
+                                <ng-container *ngFor="let item of activityDetailsForm.get('license')['controls']; let j = index;">
+                                    <div class="row mt-3" [formGroupName]='j'>
+                                        <div class="col-md-12 mt-3">
+                                           
+                                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                                    <mat-expansion-panel-header>
+                                                        <mat-panel-title class="sideHeadingExpansionBar" style="color: #13614c; font-family: SSTArabic-Medium;">
+                                                            {{lang.c12.title}} ({{j + 1}})
+                                                        </mat-panel-title>
+                                                    </mat-expansion-panel-header>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <!-- <p class="registerLabel2Css"> {{lang.c12.subtitle}}</p> -->
+                                                            <p class="registerLabel2Css" [ngClass]="direction === 'rtl' ? 'ackArbCss' : ''">
+                                                                <input type="checkbox" id="LS{{j}}" class="checkCss mainActivity" formControlName="ma" (click)="checkMA(j, 'ls')">
+                                                                <span [style.padding]="direction=='rtl'? '0 10px 0 0': ''">{{lang.c12.subtitle}}</span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <img src="assets/image/delete.svg" style="width: 24px;cursor: pointer;" [style.float]="direction=='rtl'? 'left' : 'right'" (click)="deleteAttachment(j)">
+                                                        </div>
+                                                    </div>
+                                                    <div *ngIf="acFormSubmitted && !checkMASelected()" class="invalid-feedback">
+                                                        {{lang.errMsgs.plSlctMA}}
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{lang.c12.in1}}</div>
+                                                            <mat-form-field appearance="outline">
+
+                                                                <mat-select id="country" formControlName="issueCountry">
+                                                                    <mat-option [value]="item.Land1" *ngFor="let item of countryList">
+                                                                        {{ item.Landx50 }}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('issueCountry').touched || acFormSubmitted) && act.license['controls'][j].get('issueCountry').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('issueCountry').errors.required">
+                                                                    {{lang.errMsgs.plSlctCntry}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{lang.c12.in2}}</div>
+                                                            <mat-form-field appearance="outline" id="IssueBy">
+
+                                                                <mat-select id="IssueBy" formControlName="issueBy">
+                                                                    <mat-option [value]="item.key" *ngFor="let item of issueByList">
+                                                                        {{ item.text }}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('issueBy').touched || acFormSubmitted) && act.license['controls'][j].get('issueBy').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('issueBy').errors.required">
+                                                                    {{lang.errMsgs.plSlctIssuBy}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{lang.c12.in3}}</div>
+                                                            <mat-form-field appearance="outline">
+
+                                                                <mat-select id="country" formControlName="issueCity">
+                                                                    <mat-option [value]="item.CityCode" *ngFor="let item of cityList | cityfilter: act.license.value[j].issueCountry">
+                                                                        {{ item.CityName }}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('issueCity').touched || acFormSubmitted) && act.license['controls'][j].get('issueCity').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('issueCity').errors.required">
+                                                                    {{lang.errMsgs.plSlctCity}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{lang.c12.in4}}</div>
+                                                            <mat-form-field appearance="outline">
+
+                                                                <input matInput placeholder="" maxlength="30" formControlName="licenseNumber">
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('licenseNumber').touched || acFormSubmitted) && act.license['controls'][j].get('licenseNumber').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('licenseNumber').errors.required">
+                                                                    {{lang.errMsgs.entrLSNo}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{ lang.c12.in5 }}</div>
+                                                            <mat-form-field appearance="outline">
+                                                                <input matInput [matDatepicker]="picker2" formControlName="validFrom" [max]="enddate" (dateChange)="getdateErr(act.license['controls'][j].get('validFrom').value)">
+                                                                <!-- [readonly]="inputReadonly"  -->
+                                                                <!-- [ngClass]="{ 'is-invalid': submitted3 && f3.Decdate.errors }"> -->
+                                                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker2 [calendarHeaderComponent]="headerComponent">
+                                                                </mat-datepicker>
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('validFrom').touched || acFormSubmitted) && act.license['controls'][j].get('validFrom').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('validFrom').errors.required">
+                                                                    {{lang.errMsgs.plEntrDt}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="col-md-4">
+                                  <div class="registerLabelCss required">{{ lang.c12.in6 }}</div>
+                                  <div class="form-group attBoxCss">
+                                    <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                                      <span class="material-icons attIconCss" style="line-height: 1.5;">
+                                        attach_file
+                                      </span>
+                                                                <input type="file" style="display: none;" placeholder="Explore" />
+                                                                </label>
+                                                        </div>
+                                                    </div> -->
+
+                                                        <!-- TO BE DONE STILL PENDING -->
+                                                        <!-- act.license.controls[0].get('copyOfLicense')['controls'] -->
+                                                        <!-- act.license.value[j].copyOfLicense -->
+                                                        <!-- PREVIOUS VERSION - START -->
+                                                        <!-- <ng-container formArrayName="copyOfLicense">
+                                                            <ng-container *ngFor="let attach of act.license['controls'][j].get('copyOfLicense')['controls'] ; let k = index;">
+                                                                <div class="col-md-4" [formGroupName]="k">
+                                                                    <ng-container>
+
+                                                                        <div class="registerLabelCss required">{{ lang.c12.in6 }}</div>
+                                                                        <div class="form-group attBoxCss" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event, k, 'RG02');getFileDetails($event, k, 'RG02', act.license['controls'][j].get('copyOfLicense'), act.license['controls'][j].get('licenseNumber').value)">
+                                                                            <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                                                <span class="material-icons attIconCss" style="line-height: 1.5;" *ngIf="attach.value.flag || myFiles['RG02'].length > 0" >
+                                                  attach_file
+                                                </span>
+                                                <input hidden type="file" #fileInput
+                                              (change)="uploadFile($event.target.files, k, 'RG02');getFileDetails($event, k, 'RG02', act.license['controls'][j].get('copyOfLicense'), act.license['controls'][j].get('licenseNumber').value)">
+                                              </label>
+                                                                        </div>
+                                                                        <div *ngIf="acFormSubmitted && !checkAttValidity('RG02')" class="invalid-feedback">
+                                                                            {{lang.errMsgs.addAttchmnt}}
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </div>
+                                                            </ng-container>
+                                                        </ng-container> -->
+                                                        <!-- PREVIOUS VERSION - END -->
+                                                        <!-- TO BE DONE STILL PENDING -->
+
+                                                        <!-- NEW VERSION - START -->
+                                                        <ng-container formArrayName="copyOfLicense">
+                                                            <ng-container *ngFor="let attach of act.license['controls'][j].get('copyOfLicense')['controls'] ; let k = index;">
+                                                                <div class="col-md-4" [formGroupName]="k">
+                                                                    <ng-container>
+                                                                        <div class="registerLabelCss required">{{ lang.c12.in6 }}</div>
+                                                                        <div class="form-group attBoxCss" (click)="openAttachModal('RG02', act.license['controls'][j].get('copyOfLicense'), act.license['controls'][j].get('licenseNumber').value, j)">
+                                                                            <label class="btn btn-default btn-sm center-block btn-file" style="float: right;"> 
+                                                                            <span class="material-icons attIconCss" style="line-height: 1.5;" [style.opacity]="myFiles1[j][0].Flag ? '1' : '0.25'" >
+                                                                                attach_file
+                                                                            </span>
+                                                                            <!-- <input hidden type="file" #fileInput
+                                                                            (change)="uploadFile($event.target.files, k, 'RG02');getFileDetails($event, k, 'RG02', act.license['controls'][j].get('copyOfLicense'), act.license['controls'][j].get('licenseNumber').value)"> -->
+                                                                            </label>
+                                                                        </div>
+                                                                        <div *ngIf="acFormSubmitted && !checkAttValidity('RG02', j) && !myFiles1[j][0].Flag" class="invalid-feedback">
+                                                                            {{lang.errMsgs.addAttchmnt}}
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </div>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <!-- NEW VERSION - END -->
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{lang.c12.in7}}</div>
+                                                            <mat-form-field appearance="outline">
+
+                                                                <mat-select id="country" formControlName="mainGrpActivity">
+                                                                    <mat-option [value]="item.IndSector" *ngFor="let item of mainGrpActvty">
+                                                                        {{ item.Text }}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('mainGrpActivity').touched || acFormSubmitted) && act.license['controls'][j].get('mainGrpActivity').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('mainGrpActivity').errors.required">
+                                                                    {{lang.errMsgs.plslctMnGrp}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{lang.c12.in8}}</div>
+                                                            <mat-form-field appearance="outline">
+
+                                                                <mat-select id="country" formControlName="subGrpActivity">
+                                                                    <mat-option [value]="item.IndSector" *ngFor="let item of subGrpActvty | cityfilter: act.license.value[j].mainGrpActivity : 'MGA'">
+                                                                        {{ item.Text }}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('subGrpActivity').touched || acFormSubmitted) && act.license['controls'][j].get('subGrpActivity').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('subGrpActivity').errors.required">
+                                                                    {{lang.errMsgs.plslctSbGrp}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="registerLabelCss required">{{lang.c12.in9}}</div>
+                                                            <mat-form-field appearance="outline">
+
+                                                                <mat-select id="country" formControlName="mainActivity">
+                                                                    <mat-option [value]="item.IndSector" (click)="autoFillActivities(item, act.license['controls'][j]['controls'])" *ngFor="let item of mainActvty | cityfilter: act.license.value[j].subGrpActivity : 'SGA'">
+                                                                        <!-- (change)="mapActivity(item, j, act.license)"> -->
+                                                                        {{ item.Text }}</mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <div *ngIf="(act.license['controls'][j].get('mainActivity').touched || acFormSubmitted) && act.license['controls'][j].get('mainActivity').errors" class="invalid-feedback">
+                                                                <div *ngIf="act.license['controls'][j].get('mainActivity').errors.required">
+                                                                    {{lang.errMsgs.plslctActvty}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </mat-expansion-panel>
+                                           
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </mat-accordion>
+                            <div class="row" *ngIf="ls">
+                                <div class="col-md-12 mt-5">
+                                    <button mat-button [ngClass]="direction === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button" (click)="addLicense()" [style.opacity]="act.license['controls'].length >= 4 ? 0.25 : 1" [disabled]="act.license['controls'].length > 4">
+                            {{lang.c12.btn}}
+                          </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- LICENSE DETAILS - END -->
+                    </mat-step>
+
+                    <!-- ACTIVITY DETAILS FORM - END -->
+
+                    <!-- ADDRESS DETAILS FORM - START -->
+                    <mat-step [completed]="addressDetailsForm.valid">
+                        <form [formGroup]="addressDetailsForm">
+                            <ng-template matStepLabel>{{lang.addrDtls}}</ng-template>
+                            <div class="row rowCss">
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in1}}</div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select id="country" formControlName="country">
+                                            <mat-option [value]="item.Land1" *ngFor="let item of countryList">
+                                                {{ item.Landx50 }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.country.touched || addrFormSubmitted) && addr.country.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.country.touched || addrFormSubmitted) && addr.country.errors.required">
+                                            {{lang.errMsgs.plSlctCntry}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in2}}</div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select id="country" formControlName="province">
+                                            <mat-option [value]="item.Bland" *ngFor="let item of stateList  | cityfilter: addr.country.value : 'state'">
+                                                {{ item.Bezei }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.province.touched || addrFormSubmitted) && addr.province.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.province.touched || addrFormSubmitted) && addr.province.errors.required">
+                                            {{lang.errMsgs.slctPrvnc}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in3}}</div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select id="country" formControlName="city">
+                                            <mat-option [value]="item.CityCode" *ngFor="let item of cityList | cityfilter: addr.province.value : 'province' : addr.country.value">
+                                                {{ item.CityName }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.city.touched || addrFormSubmitted) && addr.city.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.city.touched || addrFormSubmitted) && addr.city.errors.required">
+                                            {{lang.errMsgs.plSlctCity}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in4}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" maxlength="10" formControlName="district">
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.district.touched || addrFormSubmitted) && addr.district.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.district.touched || addrFormSubmitted) && addr.district.errors.required">
+                                            {{lang.errMsgs.entrQurtr}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in5}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" maxlength="22" formControlName="streetName">
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.streetName.touched || addrFormSubmitted) && addr.streetName.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.streetName.touched || addrFormSubmitted) && addr.streetName.errors.required">
+                                            {{lang.errMsgs.entrStrt}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in6}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" maxlength="9" formControlName="blgNo">
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.blgNo.touched || addrFormSubmitted) && addr.blgNo.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.blgNo.touched || addrFormSubmitted) && addr.blgNo.errors.required">
+                                            {{lang.errMsgs.entrBldNo}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in8}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" maxlength="6" formControlName="zipCode">
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.zipCode.touched || addrFormSubmitted) && addr.zipCode.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.zipCode.touched ||addrFormSubmitted) && addr.zipCode.errors.required">
+                                            {{lang.errMsgs.entrPostlCode}}
+                                        </div>
+                                        <div *ngIf="(addr.zipCode.touched || addrFormSubmitted) && addr.zipCode.errors.minlength">
+                                            {{lang.errMsgs.min5chrs}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in9}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" maxlength="10" formControlName="additionalNo">
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.additionalNo.touched || addrFormSubmitted) && addr.additionalNo.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.additionalNo.touched || addrFormSubmitted) && addr.additionalNo.errors.required">
+                                            {{lang.errMsgs.plentrAddNo}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c13.in7}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" maxlength="9" formControlName="unitNo">
+                                    </mat-form-field>
+                                    <div *ngIf="(addr.unitNo.touched || addrFormSubmitted) && addr.unitNo.errors" class="invalid-feedback">
+                                        <div *ngIf="(addr.unitNo.touched || addrFormSubmitted) && addr.unitNo.errors.required">
+                                            {{lang.errMsgs.entrFlr}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <!-- ADDRESS DETAILS FORM - END -->
+
+                    <!-- CONTACT DETAILS FORM - START -->
+                    <mat-step [completed]="contactDetailsForm.valid && checkAttValidity('RG11')" *ngIf="requestObj?.Nreg_OutletSet['results'].length == 0 || showContactDetails">
+                        <form [formGroup]="contactDetailsForm">
+                            <ng-template matStepLabel>{{lang.cntctDtls}}</ng-template>
+                            <div class="row rowCss">
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss">{{lang.c14.in1}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input #a matInput placeholder="" formControlName="tin" maxlength="10" (change)="tinValidation(c.tin.value, true); checkValidTin()">
+                                    </mat-form-field>
+                                    <div *ngIf="tinErr" class="invalid-feedback">
+                                        <p>{{ tinMsg }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c14.in2}}</div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select formControlName="idType">
+                                            <mat-option value="ZS0001" (click)="onChange('ZS0001')">{{idTypes[0].name}}</mat-option>
+                                            <mat-option value="ZS0002" (click)="onChange('ZS0002')">{{idTypes[1].name}}</mat-option>
+                                            <mat-option value="ZS0003" (click)="onChange('ZS0003')">{{idTypes[2].name}}</mat-option>
+                                            <mat-option value="FS0002" (click)="onChange('FS0002')">{{idTypes[3].name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.idType.touched || cFormSubmitted) && c.idType.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.idType.touched || cFormSubmitted) && c.idType.errors.required">
+                                            {{lang.errMsgs.slct1}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" *ngIf="c.idType.value == 'FS0002'">
+                                    <div class="registerLabelCss required">{{lang.c14.in12}}</div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select id="country" formControlName="issueCountry">
+                                            <mat-option [value]="item.Land1" *ngFor="let item of countryList">
+                                                {{ item.Landx50 }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.issueCountry.touched || cFormSubmitted) && c.issueCountry.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.issueCountry.touched || cFormSubmitted) && c.issueCountry.errors.required">
+                                            {{lang.errMsgs.plSlctIssuCntry}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c14.in3}}</div>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput #a placeholder="" formControlName="idNumber" maxlength="15" (blur)="IDtypeValidation(c.idType.value, a.value, c.dtofBirth.value)">
+                                    </mat-form-field>
+                                    <div *ngIf="(c.idNumber.touched || cFormSubmitted) && c.idNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.idNumber.touched || cFormSubmitted) && c.idNumber.errors.required && c.idType.value !== 'FS0002'">
+                                            {{lang.errMsgs.entrID}}
+                                        </div>
+                                        <div *ngIf="(c.idNumber.touched || cFormSubmitted) && c.idNumber.errors.required && c.idType.value == 'FS0002'">
+                                            {{lang.errMsgs.entrPassprt}}
+                                        </div>
+                                    </div>
+                                    <div *ngIf="idErr && c.idType.value !== '' && c.idType.value !== 'FS0002'" class="mt-1 invalid-feedback">
+                                        <p>{{idMsg}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{ lang.c14.in4 }}</div>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput [matDatepicker]="picker4" formControlName="dtofBirth" [max]="enddate" (dateChange)="getdateErr(c.dtofBirth.value);getUserValidation(c.idType.value, c.idNumber.value, c.dtofBirth.value);">
+                                        <!-- [readonly]="inputReadonly"  -->
+                                        <!-- [ngClass]="{ 'is-invalid': submitted3 && f3.Decdate.errors }"> -->
+                                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker4 [calendarHeaderComponent]="headerComponent">
+                                        </mat-datepicker>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.dtofBirth.touched || cFormSubmitted) && c.dtofBirth.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.dtofBirth.touched || cFormSubmitted) && c.dtofBirth.errors.required">
+                                            {{lang.errMsgs.entrDtBrth}}
+                                        </div>
+                                    </div>
+                                    <div *ngIf="dobErr1" class="invalid-feedback">
+                                        <p>
+                                            <!-- {{dateMsg}} -->
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c14.in5}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" formControlName="fname" (keypress)='allowAlphabets($event)'>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.fname.touched || cFormSubmitted) && c.fname.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.fname.touched || cFormSubmitted) && c.fname.errors.required">
+                                            {{lang.errMsgs.entrFrstNm}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c14.in6}}</div>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput placeholder="" formControlName="lname" (keypress)='allowAlphabets($event)'>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.lname.touched || cFormSubmitted) && c.lname.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.lname.touched || cFormSubmitted) && c.lname.errors.required">
+                                            {{lang.errMsgs.entrLstNm}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{ lang.c14.in7 }}</div>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput [matDatepicker]="picker5" formControlName="strtDt" [max]="enddate" (dateChange)="getdateErr(c.strtDt.value)">
+                                        <!-- [readonly]="inputReadonly"  -->
+                                        <!-- [ngClass]="{ 'is-invalid': submitted3 && f3.Decdate.errors }"> -->
+                                        <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker5 [calendarHeaderComponent]="headerComponent">
+                                        </mat-datepicker>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.strtDt.touched || cFormSubmitted) && c.strtDt.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.strtDt.touched || cFormSubmitted) && c.strtDt.errors.required">
+                                            {{lang.errMsgs.plEntrDt}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c14.in8}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" maxlength="15" formControlName="mobNo" (keypress)='restrictAlphabets($event)'>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.mobNo.touched || cFormSubmitted) && c.mobNo.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.mobNo.touched || cFormSubmitted) && c.mobNo.errors.required">
+                                            {{lang.errMsgs.entrVldMobNo}}
+                                        </div>
+                                        <div *ngIf="c.mobNo.touched && c.mobNo.errors.pattern">
+                                            {{lang.errMsgs.mobErr}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c14.in9}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" formControlName="email" dir='ltr'>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.email.touched || cFormSubmitted) && c.email.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.email.touched || cFormSubmitted) && c.email.errors.required">
+                                            {{lang.errMsgs.entrEmail}}
+                                        </div>
+                                        <div *ngIf="c.email.touched && c.email.errors.pattern">
+                                            {{lang.errMsgs.entrCrctEmail}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="registerLabelCss required">{{lang.c14.in10}}</div>
+                                    <mat-form-field appearance="outline">
+
+                                        <input matInput placeholder="" formControlName="cnfrmEmail" dir='ltr'>
+                                    </mat-form-field>
+                                    <div *ngIf="(c.cnfrmEmail.touched || cFormSubmitted) && c.cnfrmEmail.errors" class="invalid-feedback">
+                                        <div *ngIf="(c.cnfrmEmail.touched || cFormSubmitted) && c.cnfrmEmail.errors.required" class="invalid-feedback">
+                                            {{lang.errMsgs.entrCrctEmail}}
+                                        </div>
+                                        <div *ngIf="!matchErr && c.cnfrmEmail.value != ''" class="invalid-feedback">{{lang.errMsgs.emailMatch}}</div>
+                                    </div>
+                                </div>
+
+                                <ng-container formArrayName="copyGMID">
+                                    <ng-container *ngFor="let attach of contactDetailsForm.get('copyGMID')['controls'] ; let k = index;">
+                                        <div class="col-md-4" [formGroupName]="k">
+                                            <ng-container>
+
+                                                <div class="registerLabelCss required">{{ lang.c14.in11 }}</div>
+                                                <div class="form-group attBoxCss" (click)="openAttachModal('RG11', contactDetailsForm.controls.copyGMID)" >
+                                                    <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                                        <span class="material-icons attIconCss" style="line-height: 1.5;" [style.opacity]="myFiles['RG11'][0].Flag ? '1' : '0.25'">
+                                          attach_file
+                                        </span>
+                                        <!-- <input hidden type="file" #fileInput
+                                      (change)="uploadFile($event.target.files, k, 'RG11');getFileDetails($event, k, 'RG11', contactDetailsForm.get('copyGMID'))"> -->
+                                      </label>
+                                                </div>
+                                                <div *ngIf="cFormSubmitted && !checkAttValidity('RG11')" class="invalid-feedback">
+                                                    {{lang.errMsgs.addAttchmnt}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <!-- CONTACT DETAILS FORM - END -->
+                </mat-vertical-stepper>
+                <div class="modal-footer" style="justify-content: flex-start !important;">
+
+                    <div class="mt-3 mb-2">
+                        <button mat-raised-button (click)="complete()" style="width:106px; height: 35px; border-radius: 9px;" [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'">
+              {{ lang.c13.btn1 }}
+            </button>
+                    </div>
+                    <div class="mt-3 mb-2">
+                        <input type="button" class="btn btn-default" (click)="close()" value="{{ lang.c13.btn2 }}">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ADDRESS MODAL- START -->
+<!-- TBD -->
+<div class="modal" id="address" data-keyboard="false" data-backdrop="static" style="padding: 112px 30px 0 0">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modalTitl justify-content-center" style="border-radius: 15px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;">
+                <span class="modalText"> National address</span>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="modalTxt2">
+                            You have many national addresses, Please select one of them
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6" *ngFor="let item of addrList;let i=index">
+                        <mat-card class="boxCss mt-3" style=" background-position: center;" [style.background-image]="item.flag? backgroundImg1:backgroundImg">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <ul class="modalTxt3" [style.color]="item.flag? 'white':'black'">
+                                        <li>CityName: <span class="modalTxtBold">{{item.CityName}}</span>
+                                        </li>
+                                        <li>Quarter: <span class="modalTxtBold">{{item.DistrictName}}</span></li>
+                                        <li>Zip Code: <span class="modalTxtBold">{{item.Zipcode}}</span></li>
+                                        <li>Street Name: <span class="modalTxtBold">{{item.StreetName}}</span></li>
+                                        <li>Building Number: <span class="modalTxtBold">{{item.BuildingNo}}</span></li>
+                                        <li>Additional Number: <span class="modalTxtBold">{{item.AdditionalNo}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col md-3">
+                                    <label class="containers">
+                                        <input type="checkbox" name="flag{{i}}"
+                                        [ngModel]="item.flag" maxlength="15"
+                                        (ngModelChange)="item.flag = $event; addrSelection(i)">
+                                        <span class="checkmark1"></span>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <!-- <div class="invalid-feedback" *ngIf="dataErr">
+                        {{dataMsg}}
+                    </div> -->
+                </div>
+                <div class="row mt-5 mb-3">
+                    <div class="col-md-12">
+                        <button mat-button style="width:106px; height: 35px; border-radius: 9px;" [ngClass]="direction === 'rtl' ? 'btnArbCss' : 'btnCss'" (click)="pushData()">SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ADDRESS MODAL - END -->
+
+<!-- DELETE OUTLET - START -->
+
+<div class="modal" id="deleteOutlet" data-keyboard="false" data-backdrop="static" [dir]="direction" style="margin-top: 17%;">
+    <div class="modal-dialog  modal-md">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div class="ackScreenTitle2" *ngIf="lng == 'E'">
+                            <span *ngIf="outnm == '000'" style="font-size: 16px;"> Main Outlet cannot be deleted </span>
+                            <span *ngIf="outnm != '000'" style="font-size: 13px;">Are you sure Outlet '{{ outnm }}' should be deleted? All entered details will be lost. </span>
+                        </div>
+                        <div class="ackScreenTitle2" style="font-size: 13px;" *ngIf="lng == 'A'">
+                            <span *ngIf="outnm == '000'" style="font-size: 16px;"> لا يمكنك حذف الفرع الرئيسي </span>
+                            <span *ngIf="outnm != '000'" style="font-size: 13px;">الفرع '{{outnm}}' هل انت متأكد من حذف بيانات الفرع؟ جميع التفاصيل المدخلة لهذا الفرع سيتم حذفها </span>
+                        </div>
+                        <div class="mt-3 mb-2">
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 12px;" data-dismiss="modal" class="btnTCss mr-2" (click)="deleteRow(outletIndex);" *ngIf="outnm != '000'">{{lang.yes}}</button>
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 12px;" data-dismiss="modal" class="btnTCss m2-2" *ngIf="outnm != '000'">{{lang.no}}</button>
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 12px;" data-dismiss="modal" class="btnTCss m2-2" *ngIf="outnm == '000'" [style.float]="direction == 'rtl' ? 'left' : 'right'">{{lang.ok}}</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- DELETE OUTLET - END -->
+
+<!-- ATTACH MODAL - START -->
+
+<div class="modal" id="attch" data-keyboard="false" data-backdrop="static" [dir]="direction" style="padding-left: 32px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header pb-0" style="border-bottom: none;">
+                <!-- <h5 class="modal-title"> {{modalTitle}} </h5> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [style.margin-left]="direction == 'rtl' ? 0 : ''">
+                      <span aria-hidden="true"><img src="assets/image/close.svg" class="" data-dismiss="modal" style="width: 20px; height: 20px;"></span>
+                    </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body pt-0 pl-4 pr-4" style="min-height: 600px;max-height: 600px;" [style.overflow-y]="tempFiles.length > 2 ? 'scroll' : ''">
+                <div class="row" style="text-align: start;">
+                    <div class="col-md-12">
+                        <div class="tnc">
+                            {{modalTitle}} 
+                        </div>
+                    </div>
+                </div>
+                <div class="Rectangle-12New mt-3"></div>
+                <div class="row mt-4" style="text-align: start; ">
+                    <div class="col-md-12">
+                        <textarea id="text" disabled style="width: 100%; height: 155px; overflow-y: hidden;">
+{{lang.txt1}} 
+{{lang.txt2}}
+{{lang.txt3}}
+{{lang.txt4}}
+{{lang.txt5}}
+
+                        </textarea>
+                    </div>
+                </div>
+                    <!-- <pre> tempFiles :: {{tempFiles | json}} <br>
+                myFiles1[attachIndex] :: {{ myFiles1[attchIndex] | json }}</pre> -->
+
+                <div class="row mt-3">
+                    <ng-container>
+                        <ng-container *ngFor="let attach of tempFiles; let j = index;">
+                            <div class="col-md-6 mt-3">
+                                <div *ngIf="attach.Flag">
+                                    <mat-card style="height: 216px;border: 1px solid #ebebeb;" *ngIf="attach.Flag">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img src="assets/image/delete.svg" style="width: 24px;" [style.float]="direction=='ltr' ? 'right' : 'left'" (click)="deleteAttachmentFromSer(attach.Dotyp, attach.did, attchIndex)">
+                                            </div>
+                                        </div>
+                                        <div class="uploadfilecontainer">
+                                            <div class="row text-center mt-3">
+                                                <div class="col-md-12 text-overflow-wrap">
+                                                    <a (click)="downloadAttachment(attach)" href="javascript:void(0);" style="text-decoration:none; color: black;">
+                                                        <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                                        <p class="fileName"> {{ attach.Filename }} </p>
+                                                        <div class="fileSize" *ngIf="attach.ZfileSize">{{ attach.ZfileSize }} MB</div>
+                                                        <!-- <div class="fileSize">{{ attach.lastModifiedDate | date: 'full' }}</div> -->
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                               
+                                <mat-card style="height: 216px;border: 1px solid #ebebeb;" *ngIf="!attach.Flag && j <= 4">
+                                    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile1($event);getFileDetails1($event, attach.Dotyp, fc)">
+
+                                        <input hidden type="file" #fileInput (change)="uploadFile1($event.target.files);getFileDetails1($event, attach.Dotyp, fc)">
+                                        <div class="row text-center mt-5">
+                                            <div class="col-md-12 ">
+                                                <img src="assets/image/attach.svg" style="width: 24px;">
+                                                <div class="fileUploadTxt">{{lang.attchTxt1}}
+                                                </div>
+                                                <div class="fileUploadTxt1">{{lang.attchTxt2}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: none">
+                <div class="row">
+                    <button mat-button data-dismiss="modal" class="btnCss">
+                        {{lang.c1.btn}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ATTACH MODAL - END -->
+<notifier-container [dir]="direction"></notifier-container>

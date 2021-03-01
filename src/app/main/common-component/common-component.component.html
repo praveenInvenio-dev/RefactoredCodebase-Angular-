@@ -1,0 +1,363 @@
+<div class="alignStart mb-5 pb-5" [dir]="dir">
+  <button class="btnPrimary" mat-raised-button>primary Button</button>
+
+  <button class="btnSecondary">secondary Button</button>
+  <div class="Rectangle-12New"></div>
+  <div class="pageTitle">Page title</div>
+
+  <div class="Rectangle-12New"></div>
+  <div class="sectionTitle">section</div>
+  <div class="Rectangle-12New"></div>
+  <div class="value">value</div>
+  <div class="Rectangle-12New"></div>
+  <div class="value textLight">light value</div>
+  <div class="Rectangle-12New"></div>
+  <div class="paragraph">paragraph</div>
+  <div class="Rectangle-12New"></div>
+  <div class="caption">caption</div>
+  <div class="Rectangle-12New"></div>
+
+  <!-- 
+    <div><span class="bcTitle unicodeDir">breadcrumb1 &gt; breadcrumb 2 &gt;</span> <span
+            class="bcTitleActive">breadcrumb3</span>
+    </div> -->
+  <div class="Rectangle-12New"></div>
+
+  <!-- <div class="border my-2"> border </div>
+    <div class="Rectangle-12New"></div> -->
+
+  <!-- steps component -->
+
+  <div class="col-md-8">
+    <div class="row mt-3" style="width: 100%">
+      <div class="col-md-12">
+        <div class="stepHeader row">
+          <span class="stepBack col-md-6">
+            <img src="assets/image/arrow-left-green.svg" style="width: 24px" />
+
+            <img src="assets/image/arrow-right-green.svg" style="width: 24px" />
+            Back</span
+          >
+          <span class="stepNumber col-md-6">
+            <img src="assets/image/2-nd-vat.svg" style="width: 106px" />
+          </span>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <div class="pageTitle">Page Title</div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <div class="value valueLight fwb">subtitle</div>
+          </div>
+        </div>
+        <div class="Rectangle-12New mt-3"></div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <div class="pageTitle">Page Title</div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <div class="value valueLight">subtitle</div>
+        </div>
+      </div>
+      <div class="Rectangle-12New my-3"></div>
+
+      <!-- date Picker -->
+      <div class="commomDatePicker">
+        <input
+          readonly
+          (click)="datePicker.open()"
+          matInput
+          [matDatepicker]="datePicker"
+          name="sd"
+          [max]="today"
+          placeholder="Choose a date"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="datePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #datePicker [calendarHeaderComponent]="headerComponent">
+        </mat-datepicker>
+      </div>
+      <div class="Rectangle-12New my-3"></div>
+
+      <!-- datepickerRange   #ref  BillComponent -->
+
+      <div class="dateRangePicker">
+        <input
+          readonly
+          (click)="picker.open()"
+          [(ngModel)]="fromDate"
+          matInput
+          [matDatepicker]="picker"
+          name="fromdate"
+          style="border: none"
+          placeholder="From"
+          (dateChange)="changesToDate()"
+          [max]="toDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+        </mat-datepicker>
+        <span style="display: flex">
+          <img
+            [src]="
+              dir == 'ltr'
+                ? 'assets/image/arrow-right-green.svg'
+                : 'assets/image/arrow-left-green.svg'
+            "
+        /></span>
+        <input
+          readonly
+          (click)="picker1.open()"
+          [(ngModel)]="toDate"
+          matInput
+          [matDatepicker]="picker1"
+          name="todate"
+          style="border: none"
+          placeholder="To"
+          (dateChange)="changesFromDate()"
+          [min]="fromDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+        </mat-datepicker>
+      </div>
+
+      <div class="Rectangle-12New my-3"></div>
+
+      <!-- uploaded card -->
+
+      <div class="card-uploaded border">
+        <div class="card-delete"><img src="assets/image/delete.svg" /></div>
+        <div class="card-file-content">
+          <img src="assets/image/pdf.svg" />
+          <div class="value textDark mt-1 card-main-text fwb">File.pdf</div>
+          <div class="caption textGray mt-1">20MB</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- upload Card -->
+
+    <div class="card-upload border">
+      <div class="card-upload-content">
+        <img src="assets/image/attach.svg" />
+        <div class="value textPrimary mt-1 card-main-text fwb">
+          Drag and drop file to upload documentation
+        </div>
+        <div class="caption textGray mt-1">20MB Max</div>
+      </div>
+    </div>
+
+    <button class="toggle" (click)="toggle()">
+      {{ dir === "rtl" ? "english" : "عربى" }}
+    </button>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- dropodown accordian -->
+
+    <div class="row border py-3" style="width: 70%">
+      <div class="col-md-6 sectionTitle">Section Title</div>
+      <div class="col-md-6 justifyContentEnd row">
+        <img src="assets/image/delete.svg" class="mx-1" />
+        <img src="assets/image/circle-arrow-down.svg" class="mx-1" />
+        <!-- <img src="assets/image/circle-arrow-up.svg" class="mx-10"/> -->
+      </div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- unselected Card -->
+
+    <div class="selector-card border pb-3 px-3">
+      <div class="value fwb">Title</div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- selected Card -->
+
+    <div class="selector-card-active selector-card border pb-3 px-3">
+      <div class="value fwb">Title</div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- checkbox -->
+    <div class="check">
+      <mat-checkbox class="checkboxAckCss">
+        I know how to copy paste.
+      </mat-checkbox>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- return Card  active-->
+
+    <div class="return-card border py-3">
+      <div class="verticallyCenter px-3">
+        <div class="sectionTitle fwb">Zakat & CIT</div>
+        <div class="caption">Ammend by GAZT</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="row verticallyCenter px-3">
+        <div class="col-md-6">
+          <div class="caption">Assessment year</div>
+          <div class="value fwb">2019</div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="caption">Gazt Assessment ammount</div>
+          <div class="value fwb">1,00,000 SAR</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- return card inactive -->
+
+    <div class="return-card return-card-inactive border py-3">
+      <div class="verticallyCenter px-3">
+        <div class="sectionTitle fwb">Zakat & CIT</div>
+        <div class="caption">Ammend by GAZT</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="row verticallyCenter px-3">
+        <div class="col-md-6">
+          <div class="caption">Assessment year</div>
+          <div class="value fwb">2019</div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="caption">Gazt Assessment ammount</div>
+          <div class="value fwb">1,00,000 SAR</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- add card small  -->
+
+    <div class="add-card col-md-6">
+      <img class="px-2" src="assets/image/add.svg" />
+      <div class="value fwb textPrimary mx-1">Add investment Detail</div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- add card large  -->
+
+    <div class="add-card-large col-md-6">
+      <img class="px-2" src="assets/image/add.svg" />
+      <div class="value fwb textPrimary mx-1 mt-2">Add investment Detail</div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <div class="filing-card textDark border">
+      <div class="row filing-card-upper px-3">
+        <div class="col-md-6">
+          <div class="value fwb">VAT Filling Period</div>
+          <div class="caption textGray">00089887879</div>
+        </div>
+        <div class="col-md-6" style="justify-content: flex-end; display: flex">
+          <div class="tag32 tag-partial">In Process</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="row filing-card-down px-3">
+        <div class="col-md-6">
+          <div class="caption textGray">VAT Filling Period</div>
+          <div class="value fwb">00089887879</div>
+        </div>
+        <div class="col-md-6">
+          <div class="caption textGray">VAT Filling Period</div>
+          <div class="value fwb">00089887879</div>
+        </div>
+        <div class="col-md-6">
+          <div class="caption textGray">VAT Filling Period</div>
+          <div class="value fwb">00089887879</div>
+        </div>
+        <div class="col-md-6">
+          <div class="caption textGray">VAT Filling Period</div>
+          <div class="value fwb">00089887879</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Rectangle-12New my-3"></div>
+
+    <!-- TAGS  -->
+
+    <div class="tag32 tag-success">In Process</div>
+
+    <div class="tag32 tag-danger">In Process</div>
+
+    <div class="tag32 tag-partial">In Process</div>
+
+    <div class="tag32 tag-unsubmit">In Process</div>
+
+    <div class="Rectangle-12New my-3"></div>
+  </div>
+
+  <!-- <div class="mt-2 matLabel">Label</div>
+        <mat-form-field class="mt-2" appearance="outline">
+
+
+            <mat-select>
+
+                <mat-option value="1"> option1</mat-option>
+                <mat-option value="2"> option2</mat-option>
+
+            </mat-select>
+        </mat-form-field> -->
+
+  <!-- mat input -->
+  <!-- <mat-form-field class="mt-2" appearance="outline">
+            <input matInput placeholder="placeholder" />
+        </mat-form-field> -->
+
+  <!-- <div class="dateRangePicker">
+            <span class="dateRangeLabel">From</span>
+    
+            <input readonly (click)="picker.open()" matInput [matDatepicker]="picker" name="fromdate" style="border: none;"
+                placeholder="">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+            </mat-datepicker>
+            <span class="dateRangeLabel"> <img
+                    [src]="dir=='ltr'?'assets/image/arrow-right-green.svg':'assets/image/arrow-left-green.svg'" />
+                To</span>
+            <input readonly (click)="picker1.open()" matInput [matDatepicker]="picker1" name="todate" style="border: none;"
+                placeholder="">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+            </mat-datepicker>
+    
+        </div>
+    
+    
+    
+        <div class="Rectangle-12New my-3"></div>
+     -->
+</div>

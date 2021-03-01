@@ -1,0 +1,71 @@
+.iptax-card-container {
+  height: 172px;
+  margin-top: 24px;
+  max-width: none;
+  cursor: pointer;
+}
+.cardWith437 {
+  min-width: 437px;
+}
+
+.iptax-card-container:nth-child(2n) {
+  margin-inline-start: 25px;
+}
+.greenBold {
+  font-family: SSTArabic-Bold;
+  color: #006450;
+}
+.iptax-card-section {
+  margin: 0 24px;
+}
+
+.iptax-card-container > .iptax-card-section:first-child {
+  height: 41px;
+  margin-top: 30px;
+  margin-bottom: 18px;
+}
+
+.iptax-card-container > .iptax-card-section:last-child {
+  height: 41px;
+  margin-top: 19px;
+  margin-bottom: 25px;
+}
+
+.card-title {
+  max-width: 220px;
+  margin-bottom: 0;
+  font-size: 20px;
+  line-height: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Override */
+
+.tag32 {
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 6px 10px;
+  max-height: 32px;
+  width: max-content;
+  min-width: 100px;
+}
+
+/* .tag32 {
+  height: 32px;
+  width: 100px;
+  font-size: 12px;
+  border-radius: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */

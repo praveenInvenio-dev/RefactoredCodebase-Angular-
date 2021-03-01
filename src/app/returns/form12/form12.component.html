@@ -1,0 +1,2095 @@
+<!-- <p>form12 works!</p> -->
+<div class="d-flex align-items-center width100P mb-32" dir={{direction}}>
+    <!-- <div class="searchBox" *ngIf="!Form12DetailsScreen">
+            <input type="text" [placeholder]=lang.c1.pl1 [(ngModel)]="searchText">
+            <button>
+                <img src="assets/images/icon-search.svg" alt="">
+            </button>
+        </div>
+        <a *ngIf="!Form12DetailsScreen" data-toggle="modal" data-target="#filterModal">
+            <img class="ml-15" src="assets/images/icon-filter.svg" alt="">
+        </a> -->
+</div>
+
+<div dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <!-- *ngIf="!enableonAmmendscreen"  -->
+    <!-- Step 1 -->
+    <div *ngIf="confirm != true && !confirmObjection">
+        <div class="container">
+            <div class="mb-24  d-flex" dir={{direction}}>
+                <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang.c1.path1}} > </a>
+                {{lang.c1.path2}}
+            </div>
+            <div class="mb-32 d-flex justify-content-between align-items-center">
+
+                <a [routerLink]="['/mains/returns/search']"
+                    class="text-Watercourse d-flex font-weight-bold align-items-center">
+                    <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse"> {{lang.back}}
+                </a>
+
+            </div>
+            <div class="d-flex align-items-center justify-content-between mb-24">
+                <h2>{{lang.c1.title}}</h2>
+                <!-- <span class="status status-h40 status-unsubmitted font-16">Unsubmitted</span> -->
+            </div>
+            <div class="row custom-row">
+                <div class="col-sm-6">
+                    <div class="card-inner mb-24">
+                        <div class="font-16 text-Gray">{{lang.c1.t1}}</div>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{form12List?.Persl || '-'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card-inner mb-24">
+                        <div class="font-16 text-Gray">{{lang.c1.t2}}</div>
+                        <div class="text-Eerie-Black font-16 font-weight-500" *ngIf = "form12List.Persl < 1900">
+                            {{ periodStartDate?.hy}}/{{periodStartDate?.hm}}/{{periodStartDate?.hd || '-' }} - {{
+                            periodEndDate?.hy}}/{{periodEndDate?.hm}}/{{periodEndDate?.hd|| '-'}}
+                        </div>
+                        <div class="text-Eerie-Black font-16 font-weight-500" *ngIf = "form12List.Persl > 1900">
+                            {{ periodStartDate || '-'}}  - {{ periodEndDate || '-'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card-inner mb-24">
+                        <div class="font-16  text-Gray">{{lang.c1.t3}}</div>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{form12List?.Fbnum || '-'}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card mb-24 card-shadow-none">
+                <div class="pxy-2412">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-calculator.svg"
+                                class="" alt=""></span> {{lang.c2.title}}
+                        <a href="#" data-toggle="modal" data-target="#calculationsummary">
+                            <img src="assets/images/icon-info.svg" class="ml-15" alt="">
+                        </a>
+                    </h3>
+
+                </div>
+
+                <div class="border-bottom-whisper"> </div>
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray  mb-0">{{lang.c2.t1}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{form12List?.Estsl || '-' | mask: 'separator':','}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.c2.t2}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{form12List?.Cpamt || '-' | mask: 'separator':','}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"> </div>
+                <div class="row  p-24">
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.c2.t3}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{form12List?.Zbamt || '-' | mask: 'separator':','}}
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.c2.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{form12List?.Zkamt || '-' | mask: 'separator':','}}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="table mb-50">
+                <div class="p-24 d-flex align-items-center justify-content-between">
+                    <h3 class="d-flex align-items-center mb-0">
+                        {{lang.c3.heading}}
+                    </h3>
+                </div>
+
+                <table width="100%" class="table-bordered" *ngIf="Form12DetailsScreen">
+                    <thead>
+                        <th class="font-16 text-Eerie-Black font-weight-bold ar-text-right" width="25%">
+                            {{lang.c3.title1}}
+                        </th>
+                        <th width="170" class="font-16 text-Eerie-Black font-weight-bold  text-right">
+                            {{lang.c3.title2}}
+                        </th>
+                        <th width="170" class="font-16 text-Eerie-Black font-weight-bold text-right">
+                            {{lang.c3.title3}}
+                            <a href="#" data-toggle="modal" data-target="#saleDetails">
+                                <img src="assets/images/icon-info.svg" class="ml-15" alt="">
+                            </a>
+                        </th>
+                    </thead>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            <!-- <div class="d-flex align-items-center"> -->
+                            {{lang.c3.t1}}
+                            <!-- </div> -->
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.TvtslI | mask: 'separator':','}}
+                            </div>
+                            <!-- <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{lang.c3.t10}}
+                            </div> -->
+                            <!-- <input type="text" [(ngModel)]="form12List.TvtslI" class="input165  text-right" readonly> -->
+                        </td>
+
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.TvtslE | mask: 'separator':','}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.TvtslE" class="input165 text-right" readonly> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t2}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf =  "form12List.TvtslI < 187500 ">{{form12List.LabnoI | mask: 'separator':','}}
+                            </div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf =  "form12List.TvtslI > 187500">{{lang.c3.t10}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.LabnoI" class="input165  text-right" readonly> -->
+                        </td>
+
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.LabnoE | mask: 'separator':','}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.LabnoE" class="input165 text-right" readonly> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t3}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500 ">{{form12List.ImpvalI | mask:
+                                'separator':','}}</div>
+                                <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500 ">{{lang.c3.t10}}</div>
+                            <!-- <input type="text" [(ngModel)]="form12List.ImpvalI" class="input165  text-right" readonly> -->
+                        </td>
+
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.ImpvalE | mask:
+                                'separator':','}}</div>
+                            <!-- <input type="text" [(ngModel)]="form12List.ImpvalE" class="input165 text-right" readonly> -->
+                        </td>
+                    </tr>
+                    <tr class="rowshadow-hoverNone">
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t4}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.PtoslI | mask: 'separator':','}}
+                            </div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c3.t10}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.PtoslI" class="input165  text-right" readonly> -->
+                        </td>
+
+                        <td rowspan="3" class=" text-right text-vertical-middle ">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.Sumcnt | mask:
+                                'separator':','}}</div>
+                            <!-- <input type="text" [(ngModel)]="form12List.ImpvalE" class="input165 text-right" readonly> -->
+                        </td>
+                    </tr>
+
+                    <tr class="rowshadow-hoverNone">
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t5}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.EtimadI | mask:
+                                'separator':','}}</div>
+                                <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c3.t10}}</div>
+                            <!-- <input type="text" [(ngModel)]="form12List.EtimadI" class="input165  text-right" readonly> -->
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t6}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.ExamtI | mask: 'separator':','}}
+                            </div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c3.t10}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.ExamtI" class="input165  text-right" readonly> -->
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t7}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.PramtI | mask: 'separator':','}}
+                            </div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c3.t10}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.PramtI" class="input165  text-right" readonly> -->
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.PramtE | mask: 'separator':','}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.PramtE" class="input165  text-right" readonly> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t8}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.Cpamt | mask: 'separator':','}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.Cpamt" class="input165  text-right" readonly> -->
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12List.Cpamt | mask: 'separator':','}}
+                            </div>
+                            <!-- <input type="text" [(ngModel)]="form12List.Cpamt" class="input165  text-right" readonly> -->
+                        </td>
+                    </tr>
+                    <tr class="bg-Watercourse-opa1">
+                        <td colspan="3">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="text-Eerie-Black font-20 font-weight-bold"> {{lang.c3.t9}}</div>
+                                <div class="text-Eerie-Black font-20 font-weight-bold ar-w-368">{{form12List.Estsl |
+                                    mask: 'separator':','}}</div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+                <div *ngIf="enableonAmmendscreen">
+                    <form [formGroup]="Form12Form">
+                        <table width="100%" class="table-bordered">
+                            <thead>
+                                <th class="font-16 text-Eerie-Black font-weight-bold whitespace-now-wrap" width="25%">
+                                    {{lang.c4.title1}}
+                                </th>
+                                <th width="170" class="font-16 text-Eerie-Black font-weight-bold  text-right w-230"
+                                [ngClass]="{'arabic-width':language == 'ar'}">
+                                    {{lang.c4.title2}}
+                                </th>
+                                <th width="170" class="font-16 text-Eerie-Black font-weight-bold text-right">
+                                    {{lang.c4.title3}}
+                                </th>
+                                <th width="170" class="font-16 text-Eerie-Black font-weight-bold text-right">
+                                    {{lang.c4.title4}}
+                                </th>
+                                <th class="w-5">
+                                </th>
+                            </thead>
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t1}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500">{{form12List.TvtslI | mask:
+                                        'separator':','}}</div>
+                                        <!-- <div class="text-Gray font-16 font-weight-500" *ngIf ="form12List.TvtslI < 187500">{{lang.c4.t10}}</div> -->
+                                </td>
+                                <td class=" text-right">
+
+                                    <input type="text" formControlName="TotalVATSales1" pattern="^\d{0,12}(\.\d{0,2})?$"
+                                        mask="separator" thousandSeparator="," (blur)="validateForm();"
+                                        class="input165 text-right" (keyup)="GlobalNumberAllow($event)"
+                                        [ngClass]="{'border-red':Form12Form.get('TotalVATSales1').hasError('pattern')}">
+                                </td>
+                                <div class="text-danger" *ngIf="Form12Form.get('TotalVATSales1').hasError('pattern')">
+                                    {{lang.Errormessages.er1}}
+                                </div>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.TvtslResn" [disabled]="form12List.TvtslI < 187500 ?true:false"  -->
+                                    <input type="text" class="input165 text-right" formControlName="TotalVATSalesChange"
+                                        [required]="(Form12Form.get('TotalVATSalesChange').value.length<=0 && (+Form12Form.get('TotalVATSales1').value)<(+form12List.TvtslI))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('TotalVATSalesChange').value.length<=0 && (+Form12Form.get('TotalVATSales1').value)<(+form12List.TvtslI)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <div>
+                                        <a data-toggle="modal" data-target="#attachfileZ12V"
+                                            [ngClass]="{'disablePointer': form12List.TvtslI < 187500 ?true:false}"
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('TotalVATSales1').value)>=(+form12List.TvtslI)&&setZ12V.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12V.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="(+Form12Form.get('TotalVATSales1').value)<(+form12List.TvtslI)&&setZ12V.length==0"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t2}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.LabnoI | mask:
+                                        'separator':','}}</div>
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c4.t10}}</div>
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.LabnoI | number : '1.2-2'" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" formControlName="AverageNumberofLabour1" mask="separator"
+                                        thousandSeparator="," pattern="^\d{0,9}(\.\d{0,2})?$"
+                                        class="input165 text-right" (keyup)="GlobalNumberAllow($event)"
+                                        (blur)="validateForm();"
+                                        [ngClass]="{'border-red':Form12Form.get('AverageNumberofLabour1').hasError('pattern')}">
+
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('AverageNumberofLabour1').hasError('pattern')">
+                                        {{lang.Errormessages.er3}}
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    <!-- [(ngModel)]="form12List.LabnoResn" [disabled]="form12List.TvtslI > 187500 ?true:false" -->
+                                    <input type="text" class="input165 text-right"
+                                        formControlName="AverageNumberofLabourChange"
+                                        [required]="(Form12Form.get('AverageNumberofLabourChange').value.length<=0 && (+Form12Form.get('AverageNumberofLabour1').value)<(+form12List.LabnoI))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('AverageNumberofLabourChange').value.length<=0 && (+Form12Form.get('AverageNumberofLabour1').value)<(+form12List.LabnoI)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <div>
+                                        <a data-toggle="modal" data-target="#attachfileZ12L"
+                                            [ngClass]="{'disablePointer': form12List.TvtslI > 187500 ?true:false}"
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('AverageNumberofLabour1').value)>=(+form12List.LabnoI)&&setZ12L.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12L.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="((+Form12Form.get('AverageNumberofLabour1').value)<(+form12List.LabnoI)&&setZ12L.length==0)"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t3}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.ImpvalI | mask:
+                                        'separator':','}}</div>
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c4.t10}}</div>
+
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.ImpvalI" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" mask="separator" pattern="^\d{0,12}(\.\d{0,2})?$"
+                                        formControlName="ImportsValue1" thousandSeparator=","
+                                        class="input165 text-right" (keyup)="GlobalNumberAllow($event)"
+                                        (blur)="validateForm();"
+                                        [ngClass]="{'border-red':Form12Form.get('ImportsValue1').hasError('pattern')}">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('ImportsValue1').hasError('pattern')">
+                                        {{lang.Errormessages.er1}}
+                                    </div>
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.ImpvalResn" [disabled]="form12List.TvtslI > 187500 ?true:false" -->
+                                    <input type="text" class="input165 text-right" formControlName="ImportsValueChange"
+                                        [required]="(Form12Form.get('ImportsValueChange').value.length<=0 && (+Form12Form.get('ImportsValue1').value)<(+form12List.ImpvalI))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('ImportsValueChange').value.length<=0 && (+Form12Form.get('ImportsValue1').value)<(+form12List.ImpvalI)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+
+                                </td>
+                                <td class="align-middle">
+                                    <div class="file-attachment-with-bg">
+                                        <a data-toggle="modal" data-target="#attachfileZ12I"
+                                            [ngClass]="{'disablePointer': form12List.TvtslI > 187500 ?true:false}"
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('ImportsValue1').value)>=(+form12List.ImpvalI)&&setZ12I.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12I.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="(+Form12Form.get('ImportsValue1').value)<(+form12List.ImpvalI)&&setZ12I.length==0"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t4}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.PtoslI | mask:
+                                        'separator':','}}</div>
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500 ">{{lang.c4.t10}}</div>
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.PtoslI" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" formControlName="SalesfromPointofSales1"
+                                        pattern="^\d{0,12}(\.\d{0,2})?$" mask="separator" thousandSeparator=","
+                                        class="input165 text-right" (keyup)="GlobalNumberAllow($event)"
+                                        (blur)="validateForm();"
+                                        [ngClass]="{'border-red':Form12Form.get('SalesfromPointofSales1').hasError('pattern')}">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('SalesfromPointofSales1').hasError('pattern')">
+                                        {{lang.Errormessages.er1}}
+                                    </div>
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.PtoslResn" [disabled]="form12List.TvtslI > 187500 ?true:false" -->
+                                    <input type="text" class="input165 text-right"
+                                        formControlName="SalesfromPointofSalesChange"
+                                        [required]="(Form12Form.get('SalesfromPointofSalesChange').value.length<=0 && (+Form12Form.get('SalesfromPointofSales1').value)<(+form12List.PtoslI))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('SalesfromPointofSalesChange').value.length<=0 && (+Form12Form.get('SalesfromPointofSales1').value)<(+form12List.PtoslI)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+
+                                </td>
+                                <td class="align-middle">
+                                    <div class="file-attachment-with-bg">
+                                        <a data-toggle="modal" data-target="#attachfileZ12S"
+                                            [ngClass]="{'disablePointer': form12List.TvtslI > 187500 ?true:false}"
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('SalesfromPointofSales1').value)>=(+form12List.PtoslI)&&setZ12S.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12S.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="(+Form12Form.get('SalesfromPointofSales1').value)<(+form12List.PtoslI)&&setZ12S.length==0"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t5}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.EtimadI | mask:
+                                        'separator':','}}</div>
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500 ">{{lang.c4.t10}}</div>
+
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.EtimadI" [disabled]="form12List.TvtslI > 187500 ?true:false"  -->
+                                    <input type="text" formControlName="ContactsfromETIMADSystem1"
+                                        pattern="^\d{0,12}(\.\d{0,2})?$" mask="separator" thousandSeparator=","
+                                        class="input165  text-right" (keyup)="GlobalNumberAllow($event)"
+                                        (blur)="validateForm();"
+                                        [ngClass]="{'border-red':Form12Form.get('ContactsfromETIMADSystem1').hasError('pattern')}">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('ContactsfromETIMADSystem1').hasError('pattern')">
+                                        {{lang.Errormessages.er1}}
+                                    </div>
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.EtimadResn" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" class="input165 text-right"
+                                        formControlName="ContactsfromETIMADSystemChange"
+                                        [required]="(Form12Form.get('ContactsfromETIMADSystemChange').value.length<=0 && (+Form12Form.get('ContactsfromETIMADSystem1').value)<(+form12List.EtimadI))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('ContactsfromETIMADSystemChange').value.length<=0 && (+Form12Form.get('ContactsfromETIMADSystem1').value)<(+form12List.EtimadI)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="file-attachment-with-bg">
+                                        <a data-toggle="modal" data-target="#attachfileZ12D"
+                                            [ngClass]="{'disablePointer': form12List.TvtslI > 187500 ?true:false}"
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('ContactsfromETIMADSystem1').value)>=(+form12List.EtimadI)&&setZ12D.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12D.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="(+Form12Form.get('ContactsfromETIMADSystem1').value)<(+form12List.EtimadI)&&setZ12D.length==0"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t6}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.ExamtI | mask:
+                                        'separator':','}}</div>
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c4.t10}}</div>
+
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.ExamtI" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" formControlName="ExportsValue1" pattern="^\d{0,12}(\.\d{0,2})?$"
+                                        mask="separator" thousandSeparator="," class="input165  text-right"
+                                        (keyup)="GlobalNumberAllow($event)" (blur)="validateForm();"
+                                        [ngClass]="{'border-red':Form12Form.get('ExportsValue1').hasError('pattern')}">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('ExportsValue1').hasError('pattern')">
+                                        {{lang.Errormessages.er1}}
+                                    </div>
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.ExamtResn" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" class="input165 text-right" formControlName="ExportsValueChange"
+                                        [required]="(Form12Form.get('ExportsValueChange').value.length<=0 && (+Form12Form.get('ExportsValue1').value)<(+form12List.ExamtI))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('ExportsValueChange').value.length<=0 && (+Form12Form.get('ExportsValue1').value)<(+form12List.ExamtI)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="file-attachment-with-bg">
+                                        <a data-toggle="modal" data-target="#attachfileZ12E"
+                                            [ngClass]="{'disablePointer': form12List.TvtslI > 187500 ?true:false}"
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('ExportsValue1').value)>=(+form12List.ExamtI)&&setZ12E.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12E.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="(+Form12Form.get('ExportsValue1').value)<(+form12List.ExamtI)&&setZ12E.length==0"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t7}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI < 187500">{{form12List.PramtI | mask:
+                                        'separator':','}}</div>
+                                    <div class="text-Gray font-16 font-weight-500" *ngIf = "form12List.TvtslI > 187500">{{lang.c4.t10}}</div>
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.PramtE" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" formControlName="PurchaseValue1" pattern="^\d{0,12}(\.\d{0,2})?$"
+                                        mask="separator" thousandSeparator="," class="input165  text-right"
+                                        (keyup)="GlobalNumberAllow($event)" (blur)="validateForm();"
+                                        [ngClass]="{'border-red':Form12Form.get('PurchaseValue1').hasError('pattern')}">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('PurchaseValue1').hasError('pattern')">
+                                        {{lang.Errormessages.er1}}
+                                    </div>
+                                </td>
+
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.PramtResn" [disabled]="form12List.TvtslI > 187500 ?true:false"-->
+                                    <input type="text" class="input165 text-right" formControlName="PurchaseValueChange"
+                                        [required]="(Form12Form.get('PurchaseValueChange').value.length<=0 && (+Form12Form.get('PurchaseValue1').value)<(+form12List.PramtI))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('PurchaseValueChange').value.length<=0 && (+Form12Form.get('PurchaseValue1').value)<(+form12List.PramtI)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="file-attachment-with-bg">
+                                        <a data-toggle="modal" data-target="#attachfileZ12P"
+                                            [ngClass]="{'disablePointer': form12List.TvtslI > 187500 ?true:false}"
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('PurchaseValue1').value)>=(+form12List.PramtI)&&setZ12P.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12P.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="(+Form12Form.get('PurchaseValue1').value)<(+form12List.PramtI)&&setZ12P.length==0"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ar-text-right col-middle-text">
+                                    {{lang.c4.t8}}
+                                </td>
+                                <td class=" text-right">
+                                    <div class="text-Gray font-16 font-weight-500">{{form12List.Cpamt | mask:
+                                        'separator':',' }}</div>
+                                    <!-- <input type="text" [(ngModel)]="form12List.Cpamt" readonly  class="input165  text-right"> -->
+                                </td>
+                                <td class=" text-right">
+                                    <!-- [(ngModel)]="form12List.Cpamt" -->
+                                    <input type="text" formControlName="CapitalAmount1" mask="separator"
+                                        pattern="^\d{0,12}(\.\d{0,2})?$" thousandSeparator=","
+                                        class="input165  text-right" (keyup)="GlobalNumberAllow($event)"
+                                        (blur)="validateForm();"
+                                        [ngClass]="{'border-red':Form12Form.get('CapitalAmount1').hasError('pattern')}">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('CapitalAmount1').hasError('pattern')">
+                                        {{lang.Errormessages.er1}}
+                                    </div>
+                                </td>
+                                <td class=" text-right">
+                                    <!--  [(ngModel)]="form12List.CpamtResn" -->
+                                    <input type="text" class="input165 text-right" formControlName="CapitalAmountChange"
+                                        [required]="(Form12Form.get('CapitalAmountChange').value.length<=0 && (+Form12Form.get('CapitalAmount1').value)<(+form12List.Cpamt))?true:false"
+                                        (keypress)="SpaceValidator($event)"
+                                        maxlength="100">
+                                    <div class="text-danger"
+                                        *ngIf="Form12Form.get('CapitalAmountChange').value.length<=0 && (+Form12Form.get('CapitalAmount1').value)<(+form12List.Cpamt)">
+                                        {{lang.Errormessages.er2}}
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <!-- [ngClass]="{'disablePointer': form12List.TvtslI > 187500 ?true:false}" -->
+                                    <div class="file-attachment-with-bg">
+                                        <a data-toggle="modal" data-target="#attachfileZ12C"
+                                            
+                                            class="font-weight-bold font-16 text-Watercourse ">
+                                            <img *ngIf="(+Form12Form.get('CapitalAmount1').value)>=(+form12List.Cpamt)&&setZ12C.length==0"
+                                                src="assets/images/icon-attachment.svg" class="mb-10 withheight24">
+                                            <img *ngIf="setZ12C.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                                class="mb-10 withheight24">
+                                            <img *ngIf="(+Form12Form.get('CapitalAmount1').value)<(+form12List.Cpamt)&&setZ12C.length==0"
+                                                src="assets/images/icon-attachment-red.svg" class="mb-10 withheight24">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <div>
+                                        <label class="custom-checkBox d-flex align-items-center h-32">
+                                            <span class="ml-10">{{lang.c3.t11}}</span>
+                                            <input type="checkbox" [checked]="isChecked!=false"  (change)="onChecked($event)">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                
+                            </tr> 
+                        </table> 
+                    </form>
+                    
+                </div>
+                <table width="100%" class="table-bordered" *ngIf="enableonsubmit">
+                    <thead>
+                        <th class="font-16 text-Eerie-Black font-weight-bold w-250" width="25%">
+                            {{lang.c3.title1}}
+                        </th>
+                        <th width="170" class="font-16 text-Eerie-Black font-weight-bold  text-right w-230"
+                        [ngClass]="{'arabic-width':language == 'ar'}">
+                            {{lang.c3.title2}}
+                        </th>
+                        <th width="170" class="font-16 text-Eerie-Black font-weight-bold text-right max-width-190">
+                            <div class="d-flex justify-content-end whitespace-now-wrap">
+                                {{lang.c3.title3}}
+                                <a href="#" data-toggle="modal" data-target="#saleDetails">
+                                    <img src="assets/images/icon-info.svg" class="ml-15" alt="">
+                                </a>
+                            </div>
+                        </th>
+                        <th width="170" class="font-16 text-Eerie-Black font-weight-bold text-right">
+                            {{lang.c3.title4}}
+                        </th>
+                        <th class="w-5"></th>
+                        
+                    </thead>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t1}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" >{{form12SubmitResponse.TvtslI | mask:
+                                'separator':','}}</div>
+                                <!-- <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI < 187500">{{lang.c4.t10}}</div> -->
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.TvtslE | mask:
+                                'separator':','}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.TvtslResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12V"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI < 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse">
+                                    <img *ngIf="setZ12V.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12V.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t2}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI < 187500">{{form12SubmitResponse.LabnoI | mask:
+                                'separator':','}}
+                            </div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI > 187500">{{lang.c4.t10}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.LabnoE | mask:
+                                'separator':','}}</div>
+
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.LabnoResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12L"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI > 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse ">
+                                    <img *ngIf="setZ12L.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12L.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t3}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI < 187500">{{form12SubmitResponse.ImpvalI | mask:
+                                'separator':','}}</div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI > 187500">{{lang.c4.t10}}</div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.ImpvalE | mask:
+                                'separator':','}}</div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.ImpvalResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12I"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI > 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse ">
+                                    <img *ngIf="setZ12I.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12I.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t4}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI < 187500">{{form12SubmitResponse.PtoslI | mask:
+                                'separator':','}}</div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI > 187500">{{lang.c4.t10}}</div>
+                        </td>
+                        <td rowspan="3" class=" text-right text-vertical-middle ">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.Sumcnt | mask:
+                                'separator':','}}</div>
+
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.PtoslResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12S"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI > 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse ">
+                                    <img *ngIf="setZ12S.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12S.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t5}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI < 187500">{{form12SubmitResponse.EtimadI | mask:
+                                'separator':','}}</div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI > 187500">{{lang.c4.t10}}</div>
+                                
+
+                        </td>
+                        <!-- <td class=" text-right ">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.Sumcnt | mask: 'separator':','}}</div>
+
+                        </td> -->
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.EtimadResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12D"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI > 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse ">
+                                    <img *ngIf="setZ12D.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12D.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t6}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI < 187500">{{form12SubmitResponse.ExamtI | mask:
+                                'separator':','}}</div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI > 187500">{{lang.c4.t10}}</div>
+
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.ExamtResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12E"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI > 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse ">
+                                    <img *ngIf="setZ12E.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12E.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+
+                        <!-- <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.Sumcnt | mask: 'separator':','}}</div>
+
+                        </td> -->
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t7}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI < 187500">{{form12SubmitResponse.PramtI | mask:
+                                'separator':','}}</div>
+                            <div class="text-Gray font-16 font-weight-500" *ngIf = "form12SubmitResponse.TvtslI > 187500">{{lang.c4.t10}}</div>
+
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.PramtE | mask:
+                                'separator':','}}</div>
+
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.PramtResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12P"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI > 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse ">
+                                    <img *ngIf="setZ12P.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12P.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+
+                        
+                    </tr>
+                    <tr>
+                        <td class="ar-text-right col-middle-text">
+                            {{lang.c3.t8}}
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.Cpamt | mask:
+                                'separator':','}}</div>
+
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500">{{form12SubmitResponse.Cpamt | mask:
+                                'separator':','}}</div>
+
+                        </td>
+                        <td class=" text-right">
+                            <div class="text-Gray font-16 font-weight-500 word-wrap">{{form12SubmitResponse.CpamtResn}}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="file-attachment-with-bg">
+                                <a data-toggle="modal" data-target="#attachfileZ12C"
+                                    [ngClass]="{'disablePointer': form12SubmitResponse.TvtslI > 187500 ?true:false}"
+                                    class="font-weight-bold font-16 text-Watercourse ">
+                                    <img *ngIf="setZ12C.length==0" src="assets/images/icon-attachment.svg"
+                                        class="mb-10 withheight24">
+                                    <img *ngIf="setZ12C.length>0" src="assets/images/icon-attachment-dark-green.svg"
+                                        class="mb-10 withheight24">
+                                </a>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    <tr class="bg-Watercourse-opa1">
+
+                        <td class=" text-right" colspan="5">
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="text-Eerie-Black font-20 font-weight-bold ">
+                                    {{lang.c3.t9}}
+                                </div>
+                                <div class="text-Eerie-Black font-20 font-weight-bold ar-w-368">
+                                    {{form12SubmitResponse.Estsl | mask: 'separator':','}}</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="mb-24 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+
+
+                    <button *ngIf="step==1 || step==2" class="btn btn-link mr-15">{{lang.c3.btn1}}</button>
+                    <button *ngIf="btnRelease==true" class="btn btn-primary"
+                        (click)="releaseForm12(form12List);">{{lang.c3.btn2}}</button>
+                    <button *ngIf="btnAmend==true" class="btn btn-primary"
+                        (click)="ammendForm12(form12List);">{{lang.c3.btn3}}</button>
+                    <button *ngIf="step==3" class="btn btn-primary" (click)="submitForm12();"
+                        [disabled]="!Form12Form.valid ||((+Form12Form.get('TotalVATSales1').value)<(+form12List.TvtslI)&&setZ12V.length==0) || 
+                        ((+Form12Form.get('AverageNumberofLabour1').value)<(+form12List.LabnoI)&&setZ12L.length==0) ||
+                        ((+Form12Form.get('ImportsValue1').value)<(+form12List.ImpvalI)&&setZ12I.length==0) ||
+                        ((+Form12Form.get('SalesfromPointofSales1').value)<(+form12List.PtoslI)&&setZ12S.length==0) ||
+                        ((+Form12Form.get('ContactsfromETIMADSystem1').value)<(+form12List.EtimadI)&&setZ12D.length==0) ||
+                        ((+Form12Form.get('ExportsValue1').value)<(+form12List.ExamtI)&&setZ12E.length==0) ||
+                        ((+Form12Form.get('PurchaseValue1').value)<(+form12List.PramtI)&&setZ12P.length==0) ||
+                        ((+Form12Form.get('CapitalAmount1').value)<(+form12List.Cpamt)&&setZ12C.length==0)
+                        ">{{lang.c4.btn1}}</button>
+                    <button *ngIf="step==4" class="btn btn-primary"
+                        (click)="confirmForm12(form12SubmitResponse);">{{lang.c3.btn4}}</button>
+                    <button *ngIf="step==4 || step==3" class="btn btn-primary"
+                        (click)="cancel();">{{lang.c6.btn2}}</button>
+                </div>
+                <div>
+                    <button *ngIf="invoice" class="btn btn-link d-inline-block"
+                        (click)="onDownloadInvoice()">{{lang.c5.btn2}}
+                        <iframe [src] ="url" width='0' height='0' scrolling='no' frameborder = "0">
+                        </iframe>
+                    </button>
+                       
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal modal-filter fade" id="calculationsummary" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-flex align-items-center justify-content-center height100VH my-0 mx-auto"
+                role="document">
+                <div class="modal-content">
+                    <div class="text-right modal-filter-head">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="material-icons font-28">
+                                clear
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="mb-24">{{lang.c7.heading}}</h2>
+                        <div class="card-inner p-15 mb-56">
+                            <p>
+                                <b>{{lang.c7.subheading}}</b> 
+                                {{lang.c7.p}}<br>
+                                - {{lang.c7.p1}}<br>
+                                - {{lang.c7.p2}}<br>
+                                • {{lang.c7.p3}}<br>
+                                • {{lang.c7.p4}}<br>
+                                • {{lang.c7.p5}}<br>
+                                • {{lang.c7.p6}}<br>
+                                <b>{{lang.c7.p7}}</b> - {{lang.c7.p8}}<br>
+                                <b>{{lang.c7.p9}} </b> - {{lang.c7.p10}}<br>
+                                <b>{{lang.c7.p11}}</b> - {{lang.c7.p12}}
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal modal-filter fade" id="saleDetails" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-flex align-items-center justify-content-center height100VH my-0 mx-auto"
+                role="document">
+                <div class="modal-content">
+                    <div class="text-right modal-filter-head">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="material-icons font-28">
+                                clear
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="mb-24">{{lang.c3.heading}}</h2>
+                        <div class="card-inner p-15 mb-56">
+
+                            <p>
+                                <b>{{lang.c7.p13}}</b> - {{lang.c7.p14}}<br>
+                                <b>{{lang.c7.p15}}</b> -{{lang.c7.p16}}<br>
+                                <b>{{lang.c7.p17}}</b> - {{lang.c7.p18}}<br>
+                                <b>{{lang.c7.p19}}</b> - {{lang.c7.p20}}<br>
+                                <b>{{lang.c7.p21}}</b> - {{lang.c7.p22}}<br>
+                                <b>{{lang.c7.p7}}</b> - {{lang.c7.p8}}<br>
+                                <b>{{lang.c7.subheading}}</b>
+                                {{lang.c7.p}}<br>
+                                - {{lang.c7.p1}} <br>
+                                - {{lang.c7.p2}}<br>
+                                • {{lang.c7.p3}} <br>
+                                • {{lang.c7.p4}}<br>
+                                • {{lang.c7.p5}} <br>
+                                • {{lang.c7.p6}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal modal-filter fade" id="ConfirmModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog d-flex max-width-600 align-items-center height100VH my-0 mx-auto justify-content-center"
+                role="document">
+                <div class="modal-content">
+                    <div class="text-right modal-filter-head">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="material-icons font-28">
+                                clear
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center mb-24">{{lang.c6.p}}</p>
+
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary" data-dismiss="modal"
+                                (click)="ConfirmRelease()">{{lang.c6.btn1}}</button>
+
+                            <button class="btn btn-primary" data-dismiss="modal"
+                                aria-label="Close">{{lang.c6.btn2}}</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!---- Aknowledgement Starts Here ---->
+    <div class="container"  *ngIf = "confirm == true" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <!-- <div class="text-right mt-5">
+            <a class="btn btn-link mb-24 d-inline-block img-reverse" [routerLink]="['/mains/returns/search']"> {{lang.c4.btn2}}</a>
+        </div> -->
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a [routerLink]="['/mains/returns/search']"
+                class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang.c4.btn2}}
+            </a>
+        </div>
+        <div class="text-center">
+            <div class="text-center mb-40">
+                <img src="assets/images/icon-success.svg" alt="">
+            </div>
+
+            <div class="pb-24">
+
+                <div class="text-Gray font-24 mb-24">
+                    <h2 class="mb-24 text-Eerie-Black">{{lang.c5.heading}}</h2>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c5.i1}}:
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Sopbel || '-'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c5.i2}}:
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Sadadid || '-'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c5.i3}}:
+                    </span>
+
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Stotamt || '-' | number:'1.2-2'}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="font-16 text-Gray text-left width440 mx-auto" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+            <p>{{lang.c5.p}}</p>
+            <p>{{lang.c5.p1}}</p>
+            <p>{{lang.c5.p2}}</p>
+        </div>
+        <div class="mb-24 pt-32 text-center  d-flex flex-column justify-content-center align-items-center" >
+            
+            <div *ngIf = "invoiseSet.length == [] ">
+                <button class="btn btn-link mb-24 d-inline-block" (click)="onRefresh()">{{lang.c5.btn1}}</button>
+            </div>
+
+            <div *ngIf='invoiseSet?.Sopbel != "" '>
+                <button class="btn btn-primary d-inline-block" (click)="onDownloadInvoice()">{{lang.c5.btn2}}
+                    <iframe [src] ="url" width='0' height='0' scrolling='no' frameborder = "0">
+                    </iframe>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--- Acknowledgement ends here ----->
+    <!----- Acknowledgement for Decreased Liability-->
+    <div class="container" *ngIf = "confirmObjection == true" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a [routerLink]="['/mains/returns/search']"
+                class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang.c4.btn2}}
+            </a>
+        </div>
+        <div class="text-center">
+            <div class="text-center mb-40">
+                <img src="assets/images/icon-success.svg" alt="">
+            </div>
+
+            <div class="pb-24">
+
+                <div class="text-Gray font-24 mb-24">
+                    <h2 class="mb-24 text-Eerie-Black">{{lang.c8.title}}</h2>
+                </div>
+                <!-- <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.subtitle1}}
+                    </span>
+                </div> -->
+                <div class="text-left font-20 mt-30 mb-24 item-cardetails item-cardetails-head">
+                    <h3 class="mb-24 text-Eerie-Black ar-text-right">{{lang.c8.subtitle1}}</h3>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i1}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Undisamt || '-' | number:'1.2-2'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i2}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Disamt || '-' | number:'1.2-2'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i3}}
+                    </span>
+
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Totamt || '-' | number:'1.2-2'}}
+                    </span>
+                </div>
+
+                <!-- <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.subtitle2}}
+                    </span>
+                </div> -->
+                <div class="text-left font-20 mb-24 mt-30 item-cardetails item-cardetails-head">
+                    <h3 class="mb-24 text-Eerie-Black ar-text-right">{{lang.c8.subtitle2}}</h3>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i4}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Sopbel || '-'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i5}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Sadadid || '-'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i6}}
+                    </span>
+
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Sundisamt || '-' | number:'1.2-2' }}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i7}}
+                    </span>
+
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Sdisamt || '-' | number:'1.2-2'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.c8.i3}}
+                    </span>
+
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{invoiseSet?.Stotamt || '-' | number:'1.2-2' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="font-16 text-Gray text-center max-width650 mx-auto">
+            {{lang.c5.p}}
+        </div> -->
+        <div class="mb-24 pt-32 text-center  d-flex flex-column justify-content-center align-items-center">
+            <div *ngIf = "invoiseSet.length == [] ">
+                <button class="btn btn-link mb-24 d-inline-block" (click)="onRefresh()">{{lang.c5.btn1}}</button>
+            </div>
+
+            <div *ngIf='invoiseSet?.Sopbel != "" '>
+                <button class="btn btn-primary d-inline-block" (click)="onDownloadInvoice()">{{lang.c5.btn2}}
+                    <iframe [src] ="url" width='0' height='0' scrolling='no' frameborder = "0">
+                    </iframe>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ATTACHMENT POPUP STARTS HERE --->
+
+<div class="modal   fade " id="attachfileZ12V" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12V.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12V">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12V.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12V')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30">{{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal   fade " id="attachfileZ12L" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12L.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12L">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12L.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12L')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30">{{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal   fade " id="attachfileZ12I" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12I.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12I">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12I.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12I')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30"> {{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal   fade " id="attachfileZ12S" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12S.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12S">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12S.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12S')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30"> {{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal   fade " id="attachfileZ12D" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12D.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12D">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12D.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12D')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30"> {{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal   fade " id="attachfileZ12E" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12E.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12E">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12E.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12E')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30"> {{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal   fade " id="attachfileZ12P" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12P.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12P">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12P.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12P')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30"> {{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!----Info Modal for amendment submission ---->
+<div class="modal modal-filter fade" id="infoModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="modal-dialog d-flex align-items-center justify-content-center height100VH my-0 mx-auto"
+            role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+                </div>
+                <div class="modal-body">
+                    <div class="font-16 text-Gray">
+                        {{errorMessage}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!---- Modal Ends ----->
+
+<div class="modal   fade " id="attachfileZ12C" tabindex="-1" role="dialog" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-large" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">clear</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-24">
+                    <h2 class="mb-12">{{lang.c9.heading}}</h2>
+                    <!-- <div class="text-Gray font-16">Please provide a copy of following documents </div> -->
+                </div>
+                <div class="border-bottom-whisper mb-60"></div>
+                <div class="row d-flex mb-60">
+                    <div *ngIf="setZ12C.length==0" class="col-sm-6">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <P class="m-0 font-weight-500 font-16 text-center">
+                                    {{lang.c9.p1}}
+                                </P>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngFor="let obj of setZ12C">
+                        <div class="cardh180 card mb-40 p-24 border-gray-1">
+                            <div class="d-flex justify-content-end"><img *ngIf="AttachDelAllow"
+                                    src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'"
+                                        src="assets/images/icon-pdf.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'"
+                                        src="assets/images/icon-excel.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'"
+                                        src="assets/images/icon-doc.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'"
+                                        src="assets/images/icon-jpg.svg" class="mb-10">
+                                    <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'"
+                                        src="assets/images/icon-png.svg" class="mb-10"> <br>
+                                    {{obj.Filename}}
+                                    <br>
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AttachDelAllow">
+                        <div
+                            class="cardh180 card p-24 position-relative d-flex justify-content-center align-items-center boder-dashed-1">
+                            <input type="file" *ngIf="setZ12C.length<5"
+                                class="custom-upload-file position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"
+                                #inputFile (change)="FileUpload($event, 'Z12C')">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <img src="assets/images/icon-attachment-2.svg" class="mb-10 withheight24"> <br>
+                                <p class="text-Watercourse font-weight-bold plr-30"> {{lang.c9.p2}}</p>
+                                <p class="font-12 font-weight-normal text-Gray">{{lang.c9.p3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-56" *ngIf="AttachDelAllow">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang.c9.p4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-56 d-inline-block mt-4"></div>
+                <!-- <div class="form-group text-right">
+                    <button class="btn btn-primary">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ATTACHMENT POPUP ENDS HERE --->
+<!--- Attachment Error model ---->
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="AttachmentModal">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="card-inner mb-16">
+                    <div class="font-12 text-Gray">
+                        {{errorMessage}}
+                    </div>
+                </div>
+                <div class="form-group text-right" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang.c6.btn1}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---- Attachments Error modal ends-->
+<!-----Liability decrease modal -->
+<div class="modal modal-filter fade" id="objectionModal" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+<div class="modal-dialog d-flex max-width-600 align-items-center height100VH my-0 mx-auto justify-content-center"
+    role="document">
+    <div class="modal-content">
+        <div class="text-right modal-filter-head">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            [ngClass]="{'arabic-btn':language == 'ar'}">
+                <span class="material-icons font-28">
+                    clear
+                </span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="text-center mb-24">{{errorMessage}}</p>
+
+            <div class="form-group text-right" [ngClass]="{'arabic-btn':language == 'ar'}">
+                <button class="btn btn-primary" 
+                    (click)="ConfirmSubmit(form12SubmitResponse)" data-dismiss="modal">{{lang.c6.btn1}}</button>
+
+                <button class="btn btn-primary" data-dismiss="modal"
+                    aria-label="Close">{{lang.c6.btn2}}</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+<!---Liability decrease modal ends --->
+<div dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <notifier-container></notifier-container>
+</div>

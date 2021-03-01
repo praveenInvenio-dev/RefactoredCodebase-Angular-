@@ -1,0 +1,386 @@
+.pageTitle {
+  font-family: SSTArabic-Bold;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.mie-2 {
+  margin-inline-end: 0.5rem !important;
+}
+
+.sstroman {
+  font-family: SSTArabic-Roman;
+}
+
+.sstbold {
+  font-family: SSTArabic-Bold;
+}
+
+.sstmedium {
+  font-family: SSTArabic-Medium;
+}
+
+.sstlight {
+  font-family: SSTArabic-Light;
+}
+
+.tabs {
+  border-bottom: 1px solid var(--light);
+}
+
+.selectedTab {
+  border-bottom: 4px solid var(--secondary);
+  font-weight: bold;
+  color: #151515;
+}
+
+.commitmentTile {
+  height: 64px;
+  align-items: center;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+  min-width: 420px;
+}
+
+.commitmentContent {
+  margin-inline-start: 15px;
+  color: var(--dark);
+}
+.commitmentArrow {
+  margin-inline-start: auto;
+  margin-inline-end: 15px;
+}
+
+.rotateImage {
+  transform: rotate(180deg);
+}
+
+.commitmentDay {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  border-radius: 14px;
+  border: 1px solid var(--light);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.commitmentDate {
+  font-size: 16px;
+  font-family: SSTArabic-Medium;
+}
+
+.commitmentDateRtl {
+  font-size: 10px;
+  font-family: SSTArabic-Medium;
+}
+
+.commitmentMonth {
+  font-size: 12px;
+  font-family: SSTArabic-Roman;
+}
+
+.commitmentContentTitle {
+  font-size: 16px;
+  font-family: SSTArabic-Medium;
+}
+
+.commitmentContentAmount {
+  font-family: 16px;
+}
+
+.commitmentPrimary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.commitmentSecondary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.commitmentError {
+  background-color: var(--error);
+  border-color: var(--error);
+}
+
+.commitmentBlack {
+  background-color: #5d6770;
+  border-color: #5d6770;
+}
+
+.events {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.event {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  margin: 0 1px;
+}
+
+.e-cell {
+  position: relative;
+}
+
+.e-cell span {
+  color: var(--gray) !important;
+}
+
+.e-range-hover {
+  background-color: #e6f0ee !important;
+}
+
+.e-range-hover span {
+  background: #e6f0ee !important;
+}
+
+.e-selected span {
+  color: var(--primary) !important;
+  background-color: #e6f0ee !important;
+}
+
+.e-today span {
+  border-color: transparent !important;
+  color: var(--gray) !important;
+}
+
+.e-other-month .events {
+  display: none;
+}
+
+.e-other-month.e-range-hover {
+  background-color: transparent !important;
+}
+
+.primaryEvent {
+  background-color: var(--primary);
+}
+
+.secondaryEvent {
+  background-color: var(--secondary);
+}
+
+.errorEvent {
+  background-color: var(--error);
+}
+
+@media (max-width: 500px) {
+  .commitmentTile {
+    min-width: 100%;
+  }
+}
+
+::ng-deep .calendarRTL .mat-calendar-body-begin-range {
+  border-radius: 0 50% 50% 0;
+}
+
+::ng-deep .calendarRTL .mat-calendar-body-end-range {
+  border-radius: 50% 0 0 50%;
+}
+
+::ng-deep .mat-calendar-cell-semi-selected {
+  background-color: rgba(0, 100, 80, 0.1);
+}
+
+::ng-deep .mat-calendar-body-begin-range {
+  background-color: rgba(0, 100, 80, 0.1);
+  border-radius: 50% 0 0 50%;
+}
+
+::ng-deep .mat-calendar-body-end-range {
+  background-color: rgba(0, 100, 80, 0.1);
+  border-radius: 0 50% 50% 0;
+}
+
+::ng-deep .zs-calendarEvent div {
+  background-color: var(--secondary);
+}
+
+::ng-deep .zs-calendarEvent:hover {
+  background-color: var(--secondary);
+  border-radius: 50%;
+}
+
+.dots-container {
+  position: absolute;
+  bottom: -25px;
+  display: flex;
+  padding: unset !important;
+  list-style-type: none;
+}
+.dot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  margin: 0 1px !important;
+}
+
+.dot-primary {
+  background: var(--primary);
+}
+
+.dot-secondary {
+  background: var(--secondary);
+}
+
+.dot-error {
+  background: var(--error);
+}
+
+.dot-black {
+  background: #5d6770;
+}
+
+::ng-deep .p-datepicker td > span,
+.p-monthpicker-month {
+  overflow: visible !important;
+}
+
+::ng-deep .p-datepicker {
+  border-radius: 14px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header {
+  border-bottom: none !important;
+}
+
+::ng-deep .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
+  border-right: none !important;
+}
+
+::ng-deep .p-datepicker table th {
+  text-align: center;
+}
+
+::ng-deep .p-datepicker table td > span.p-highlight {
+  background: none !important;
+}
+
+.zs-daterange {
+  width: 100% !important;
+}
+
+.zs-daterange-rtl {
+  width: 100% !important;
+}
+
+::ng-deep .p-calendar {
+  width: 100% !important;
+}
+
+::ng-deep .p-datepicker-multiple-month .p-datepicker-group-container {
+  width: 100% !important;
+  justify-content: space-between;
+}
+
+::ng-deep .td-p-highlight {
+  background: rgba(0, 100, 80, 0.1);
+}
+
+::ng-deep .zs-daterange .td-p-startDate,
+::ng-deep .zs-daterange-rtl .td-p-endDate {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+::ng-deep .zs-daterange .td-p-endDate,
+::ng-deep .zs-daterange-rtl .td-p-startDate {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+::ng-deep .p-datepicker table td.p-datepicker-today > span {
+  background: none !important;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-title {
+  margin-inline-start: 1rem;
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+::ng-deep .p-datepicker-group:nth-child(1) .p-datepicker-header {
+  justify-content: flex-start;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev,
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-next {
+  border: 1px solid var(--gray) !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+::ng-deep .p-datepicker table td > span:focus {
+  box-shadow: none !important;
+}
+
+::ng-deep .zs-daterange-rtl .pi-chevron-right:before {
+  content: "\e900";
+}
+
+::ng-deep .zs-daterange-rtl .pi-chevron-left:before {
+  content: "\e901";
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev:focus,
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-next:focus {
+  box-shadow: none !important;
+}
+
+::ng-deep .p-datepicker table {
+  border-collapse: separate !important;
+  border-spacing: 0 5px;
+}
+
+::ng-deep .p-datepicker-other-month.td-p-highlight {
+  background: transparent !important;
+}
+
+::ng-deep .p-datepicker-other-month .dots-container {
+  display: none !important;
+}
+
+::ng-deep
+  .p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-month {
+  margin-right: unset;
+}
+
+::ng-deep .p-datepicker-year {
+  margin-inline-start: 0.5rem;
+}
+
+::ng-deep .p-datepicker table th > span {
+  color: var(--dark);
+  font-family: SSTArabic-Roman !important;
+}
+
+::ng-deep .p-datepicker-other-month .p-startDate,
+::ng-deep .p-datepicker-other-month .p-endDate {
+  color: var(--gray) !important;
+  font-family: SSTArabic-Roman !important;
+}
+
+.p-normalDate {
+  color: var(--gray);
+  font-family: SSTArabic-Roman;
+}
+
+.p-startDate,
+.p-endDate {
+  color: var(--primary);
+  font-family: SSTArabic-Bold;
+}

@@ -1,0 +1,427 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="resDetailsForm" autocomplete="off" #resDetailsFormDirective="ngForm">
+      <mat-card class="mt-3">
+        <mat-card-content>
+          <div class="sideHeading">
+            {{ tpType == '1' ? label.heading1 : label.heading}}
+            <mat-icon *ngIf="resDetailsForm.valid"[ngClass]="
+              direction === 'rtl'
+                ? 'checkCircleARB'
+                : 'checkCircleENG'
+            ">check_circle
+            </mat-icon>
+            <p class="Rectangle-12"></p>
+          </div>
+          <div class="row">
+            <div class="col-md-4" *ngIf="showTin">
+              <div class="registerLabelCss">{{label.tin}}</div>
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="" maxlength="10" formControlName="tin" />
+              </mat-form-field>
+              <!-- <div *ngIf="tinErr" class="invalid-feedback">
+                            <p>{{ tinMsg }}</p>
+                        </div> -->
+            </div>
+            <div class="col-md-4" *ngIf="showRepBranch">
+              <div class="registerLabelCss required">{{label.repBranch}}</div>
+              <mat-form-field appearance="outline">
+                <mat-select formControlName="Augrp">
+                  <mat-option [value]="item.Augrp" *ngFor="let item of branches">{{item.Bez50}}</mat-option>
+                </mat-select>
+                <mat-error class="custom-mat-error" style="font-size: 100%;"
+                *ngIf="resDetailsForm.get('Augrp').touched && resDetailsForm.get('Augrp').hasError('required')">
+                {{label.err3}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-md-12">
+              <p class="registerLabel2Css side-label required" *ngIf="tpType!='3'">{{label.resStats}}</p>
+              <p class="registerLabel2Css side-label" *ngIf="tpType=='3'">{{label.residencyType}} <span class="default-selected-label" *ngIf="tpType=='3'" style="margin-left: 2rem !important;">{{label.resident}}</span></p>
+              
+              <div class="row mr-3" style="margin-left: 2rem !important;"  *ngIf="tpType!='3'">
+                <mat-radio-group aria-label="Select an option" name="r2" formControlName="resStatus">
+                  <!-- [ngClass]="{ 'is-invalid': submitted && f1.type.errors }"  -->
+                  <mat-radio-button value="1" class="mr-2 radioCss mr-4 ml-4" [style.background]="
+                                resDetailsForm.get('resStatus').value === '1'
+                        ? '#d2a02a'
+                        : 'none'
+                    " [style.color]="
+                    resDetailsForm.get('resStatus').value === '1'
+                        ? '#ffffff'
+                        : 'black'
+                    ">{{label.resident}}
+                  </mat-radio-button>
+                  <mat-radio-button value="2" class="mr-2 radioCss mr-4 ml-4" [style.background]="
+                                resDetailsForm.get('resStatus').value === '2'
+                        ? '#d2a02a'
+                        : 'none'
+                    " [style.color]="
+                    resDetailsForm.get('resStatus').value  === '2'
+                        ? '#ffffff'
+                        : 'black'
+                    ">{{label.nonResident}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-error class="custom-mat-error pt-2"
+                *ngIf="resDetailsForm.get('resStatus').touched && resDetailsForm.get('resStatus').hasError('required')">
+                {{label.err1}}
+                </mat-error>
+            </div>
+          </div>
+          <br />
+          <div class="row" *ngIf="resDetailsForm.get('resStatus').value  == '1' && registrationObj?.Atype!=='1'">
+            <div class="col-md-12">
+              <p class="registerLabel2Css side-label required">{{label.resStats1}}</p>
+              <div class="row mr-3" style="margin-left: 2rem !important;">
+                <mat-radio-group aria-label="Select an option" formControlName="Orgresidence">
+                  <!-- [ngClass]="{ 'is-invalid': submitted && f1.type.errors }"  -->
+                  <mat-radio-button value="1" class="mr-2 radioCss mr-4 ml-4" [style.background]="
+                                resDetailsForm.get('Orgresidence').value === '1'
+                        ? '#d2a02a'
+                        : 'none'
+                    " [style.color]="
+                    resDetailsForm.get('Orgresidence').value === '1'
+                        ? '#ffffff'
+                        : 'black'
+                    ">{{label.option1}}
+                  </mat-radio-button>
+                  <mat-radio-button value="2" class="mr-2 radioCss mr-4 ml-4" [style.background]="
+                                resDetailsForm.get('Orgresidence').value === '2'
+                        ? '#d2a02a'
+                        : 'none'
+                    " [style.color]="
+                    resDetailsForm.get('Orgresidence').value === '2'
+                        ? '#ffffff'
+                        : 'black'
+                    ">{{label.option2}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-error class="custom-mat-error pt-2"
+                *ngIf="resDetailsForm.get('Orgresidence').touched && resDetailsForm.get('Orgresidence').hasError('required')">
+                {{label.err1}}
+                </mat-error>
+            </div>
+          </div>
+
+          <!-- <div class="row" *ngIf="resDetailsForm.get('Orgresidence').value  == '2'">
+                    <div class="col-md-4">
+                        <div class="registerLabelCss required">Attachment</div>
+                        <div class="form-group attBoxCss">
+                          <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                            <span class="material-icons attIconCss" style="line-height: 1.5;">
+                              attach_file
+                            </span>
+                                                      <input type="file" style="display: none;" placeholder="Explore" />
+                                                      </label>
+                                              </div>
+                                          </div>
+                </div> -->
+
+          <div class="col-4" *ngIf="resDetailsForm.get('Orgresidence').value  == '2'">
+            <div class="registerLabelCss required">{{label.attachment}}</div>
+            <!-- fileInput1.click(); -->
+            <mat-form-field class="pointer-hand"
+              (click)="onClickFileControl('RG17','RD','',resDetailsForm.get('resAttchmnt'),'Attachment','CM1');"
+              (blur)="resDetailsForm.get('resAttchmnt').markAsTouched();" appearance="outline"
+              class="attachment-field pointer-hand">
+              <input matInput style="display: none;" formControlName="resAttchmnt" />
+              <input type="file" #fileInput1 style="display: none;" />
+              <span class="w-75 d-inline-block text-truncate pointer-hand" >
+                {{resDetailsForm.get('resAttchmnt').value}}
+              </span>
+              <span class="material-icons float-right pointer-hand">
+                attach_file
+              </span>
+              <mat-error *ngIf="resDetailsForm.get('attchmnt').hasError('required')">
+                <!-- {{lang.c6.in2}} {{lang.err.in1}} -->
+                <!-- {{lang?.err?.copyofmemorequired}} --> {{label.err2}}
+                <!-- {{branchDetailsForm.get('branchDetails').get('branchNo').value }} -->
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row" *ngIf="resDetailsForm.get('Orgresidence').value  == 1 || resDetailsForm.get('Orgresidence').value  == 2">
+            <div class="col-md-12">
+              <p class="registerLabel2Css side-label required">{{label.legalEntity}}</p>
+              <div class="row mr-3" style="margin-left: 2rem !important;">
+                <mat-radio-group aria-label="Select an option" formControlName="Orgforresident" (change)="typeOfLegalEntityChange($event, 'R')">
+                  <mat-radio-button value="1" class="mr-2 radioCss mr-4 ml-4" companyForm
+                    [style.background]="resDetailsForm.get('Orgforresident').value  === '1' ? '#d2a02a' : 'none'" 
+                    [style.color]="resDetailsForm.get('Orgforresident').value === '1' ? '#ffffff' : 'black'">{{label.capital}}
+                  </mat-radio-button>
+
+                  <mat-radio-button value="2" class="mr-2 radioCss mr-4 ml-4" [disabled]="tpType != '1'"
+                    [style.background]="resDetailsForm.get('Orgforresident').value === '2' ? '#d2a02a' : 'none'"
+                    [style.color]="resDetailsForm.get('Orgforresident').value === '2' ? '#ffffff' : 'black'">{{label.personal}}
+                  </mat-radio-button>
+
+                  <mat-radio-button value="3" class="mr-2 radioCss mr-4 ml-4" [disabled]="tpType != '1'"
+                    [style.background]="resDetailsForm.get('Orgforresident').value === '3' ? '#d2a02a' : 'none'"
+                    [style.color]="resDetailsForm.get('Orgforresident').value === '3' ? '#ffffff' : 'black'">{{label.prof}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-error class="custom-mat-error pt-2"
+                              *ngIf="resDetailsForm.get('Orgforresident').touched && resDetailsForm.get('Orgforresident').hasError('required')">
+                              {{label.err1}}
+              </mat-error>
+            </div>
+          </div>
+          <div class="row" *ngIf="resDetailsForm.get('resStatus').value  == '2'">
+            <div class="col-md-12">
+              <p class="registerLabel2Css side-label required">{{label.legalEntity}}</p>
+              <div class="row mr-3" style="margin-left: 2rem !important;">
+                <mat-radio-group aria-label="Select an option" formControlName="Orgnonresident" (change)="typeOfLegalEntityChange($event, 'NR')">
+                  <!-- [ngClass]="{ 'is-invalid': submitted && f1.type.errors }"  -->
+                  <mat-radio-button value="1" class="mr-2 radioCss mr-4 ml-4" 
+                    [style.background]="resDetailsForm.get('Orgnonresident').value === '1' ? '#d2a02a' : 'none'"
+                    [style.color]="resDetailsForm.get('Orgnonresident').value === '1' ? '#ffffff' : 'black'"> 
+                    {{ registrationObj?.Atype!=='1' ? label.permComp : label.permEstb}}
+                  </mat-radio-button>
+
+                  <mat-radio-button value="2" class="mr-2 radioCss mr-4 ml-4" 
+                    [style.background]="resDetailsForm.get('Orgnonresident').value === '2' ? '#d2a02a' : 'none'"
+                    [style.color]="resDetailsForm.get('Orgnonresident').value === '2' ? '#ffffff' : 'black'">
+                    {{registrationObj?.Atype!=='1' ? label.nonPermComp : label.nonpermEstb}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <mat-error class="custom-mat-error pt-2"
+                *ngIf="resDetailsForm.get('Orgnonresident').touched && resDetailsForm.get('Orgnonresident').hasError('required')">
+                {{label.err1}}
+                </mat-error>
+            </div>
+          </div>
+          <!-- <pre>
+            resDetailsForm :: {{resDetailsForm.value | json}}
+          </pre> -->
+          <div class="row" *ngIf="resDetailsForm.get('Orgforresident').value  !== '' || resDetailsForm.get('Orgnonresident').value  !== ''">
+            <div class="col-md-8">
+              <div class="registerLabelCss"></div>
+              <mat-form-field appearance="outline">
+                <mat-select formControlName="compType" name="" style= "width:100%;">
+                  <mat-option [value]="item.id" *ngFor="let item of legalEntityOptions"  style= "width:100%;" matTooltip="{{ direction == 'ltr' ? item.nameEng : item.nameArb }}">{{ direction == 'ltr' ? item.nameEng : item.nameArb}}</mat-option>
+                  <!-- <mat-option value="ZS0002">A branch of Non-Resident Company</mat-option>
+                  <mat-option value="ZS0003">Option 3</mat-option> -->
+                </mat-select>
+                <mat-error class="custom-mat-error" style="font-size: 100%;"
+                *ngIf="resDetailsForm.get('compType').touched && resDetailsForm.get('compType').hasError('required')">
+                {{label.err1}}
+              </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <div [hidden]="!showAttachments" class="container-attachments-list">
+        <ng-container *ngTemplateOutlet="attachmentsTemplate"></ng-container>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #attachmentsTemplate>
+  <div class="row m-0">
+    <div class="col-12 p-0">
+      <div class="row m-0 mt-4 pl-4 pr-4">
+        <div class="col-12 position-relative text-right">
+          <img class="position-absolute pointer-hand" (click)="closeAttachments('attachmentsModal');"
+            src="assets/image/close.svg">
+        </div>
+      </div>
+      <div class="row mt-5 pl-2 pr-2">
+        <div class="col-12 text-left">
+          <h3>{{ direction != 'rtl' ? 'Attachments' : 'المرفقات'}}</h3>
+          <h6 class="small text-muted font-weight-normal">{{selectedAttachmentObj?.displayLabel}}</h6>
+        </div>
+        <div class="col-12">
+          <hr />
+        </div>
+      </div>
+      <div class="row mt-4 pl-4 pr-4">
+        <ng-container *ngFor="let file of resDetailsForm.value.attchmnt">
+          <ng-container *ngIf="file.uniqueDocTypeRef==selectedAttachmentObj.uniqueDocTypeRef">
+            <div class="col-6 mb-4">
+              <mat-card class="height-180 border">
+                <mat-card-content class="h-100 position-relative">
+                  <div class="position-absolute text-right w-100">
+                    <img class="pointer-hand width-18" src="assets/image/delete.svg"
+                        (click)="deleteAttachment(file.Dotyp,file.Doguid);">
+                  </div>
+                  <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                    <div>
+                      <img *ngIf="file.FileExtn.toUpperCase()=='DOC'" src="assets/images/icon-doc.svg" class="mb-10">
+                      <img *ngIf="file.FileExtn.toUpperCase()=='DOCX'" src="assets/images/icon-doc.svg" class="mb-10">
+                      <img *ngIf="file.FileExtn.toUpperCase()=='XLS'" src="assets/images/icon-excel.svg" class="mb-10">
+                      <img *ngIf="file.FileExtn.toUpperCase()=='XLSX'" src="assets/images/icon-excel.svg" class="mb-10">
+                      <img *ngIf="file.FileExtn.toUpperCase()=='PDF'" src="assets/images/icon-pdf.svg" class="mb-10">
+                      <img *ngIf="file.FileExtn.toUpperCase()=='JPG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                      <img *ngIf="file.FileExtn.toUpperCase()=='JPEG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                      <img *ngIf="file.FileExtn.toUpperCase()=='PNG'" src="assets/images/icon-png.svg" class="mb-10">
+                    </div>
+                    <div class="font-weight-bold text-wrap">
+                      {{file?.Filename || 'File Name'}}
+                    </div>
+                    <div class="text-muted small">
+                      {{file?.ZfileSize || 'File Size'}} MB
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </ng-container>
+        </ng-container>
+        <div class="col-6 mb-4" *ngIf="selectedAttachmentObj.atttchedFilesCount<5">
+          <mat-card class="height-180 pointer-hand border" appDragDrop
+            (onFileDropped)="onFileDrop($event);attachFileControl.value='';" (click)="attachFileControl.click();">
+            <mat-card-content class="h-100">
+              <div class="h-100 d-flex flex-column text-center justify-content-center align-items-center">
+                <div>
+                  <span class="material-icons text-muted">
+                    attach_file
+                  </span>
+                </div>
+                <div class="w-100"></div>
+                <div class="text-primary font-weight-bold text-wrap">
+                  {{lang.attachments.label1}}
+                </div>
+                <div class="text-muted small">
+                  {{lang.attachments.label2}}
+                </div>
+                <input type="file" #attachFileControl style="display: none;"
+                  (change)="onFileSelect($event);attachFileControl.value='';" />
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div class="row m-0 mt-4 mb-4">
+        <div class="col-12 text-right">
+          <button class="rounded btnCss rounded" style="min-width: 200px;" mat-button
+            (click)="closeAttachments('attachmentsModal');"> {{lang?.continue}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div class="modal" id="attachmentsModal" data-keyboard="false" data-backdrop="static" [dir]="direction">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row m-0">
+          <div class="col-12 p-0">
+            <div class="row m-0 mt-4 pl-4 pr-4">
+              <div class="col-12 position-relative text-right">
+                <img class="position-absolute pointer-hand" (click)="closeAttachments('attachmentsModal');"
+                  src="assets/image/close.svg">
+              </div>
+            </div>
+            <div class="row mt-5 pl-2 pr-2">
+              <div class="col-12 text-left">
+                <h3>{{ direction == 'ltr' ? 'Attachments' : 'المرفقات'}}</h3>
+                <h6 class="small text-muted font-weight-normal"></h6>
+              </div>
+              <div class="col-12">
+                <hr />
+              </div>
+            </div>
+            <div class="row pl-2 pr-2">
+              <div class="col-12 text-left">
+                  <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt1}}</h6>
+                  <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt2}}</h6>
+                  <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt3}}</h6>
+                  <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt4}}</h6>
+                  <h6 class="small text-muted font-weight-normal mb-0 line-height-2 ">{{lang?.attachments?.txt5}}</h6>
+              </div>
+              <div class="col-12">
+                <hr />
+              </div>
+            </div>
+            <div class="row mt-4 pl-4 pr-4">
+              <ng-container *ngFor="let file of resDetailsForm.value.attchmnt">
+                <ng-container *ngIf="file.uniqueDocTypeRef==selectedAttachmentObj.uniqueDocTypeRef">
+                  <div class="col-6 mb-4">
+                    <mat-card class="height-180 border">
+                      <mat-card-content class="h-100 position-relative">
+                        <div class="position-absolute text-right w-100">
+                          <img class="pointer-hand width-18" src="assets/image/delete.svg"
+                        (click)="deleteAttachment(file.Dotyp,file.Doguid);">
+                        </div>
+                        <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                          <div>
+                            <img *ngIf="file.FileExtn.toUpperCase()=='DOC'" src="assets/images/icon-doc.svg"
+                              class="mb-10">
+                            <img *ngIf="file.FileExtn.toUpperCase()=='DOCX'" src="assets/images/icon-doc.svg"
+                              class="mb-10">
+                            <img *ngIf="file.FileExtn.toUpperCase()=='XLS'" src="assets/images/icon-excel.svg"
+                              class="mb-10">
+                            <img *ngIf="file.FileExtn.toUpperCase()=='XLSX'" src="assets/images/icon-excel.svg"
+                              class="mb-10">
+                            <img *ngIf="file.FileExtn.toUpperCase()=='PDF'" src="assets/images/icon-pdf.svg"
+                              class="mb-10">
+                            <img *ngIf="file.FileExtn.toUpperCase()=='JPG'" src="assets/images/icon-jpg.svg"
+                              class="mb-10">
+                            <img *ngIf="file.FileExtn.toUpperCase()=='JPEG'" src="assets/images/icon-jpg.svg"
+                              class="mb-10">
+                            <img *ngIf="file.FileExtn.toUpperCase()=='PNG'" src="assets/images/icon-png.svg"
+                              class="mb-10">
+                          </div>
+                          <div class="font-weight-bold text-wrap">
+                            {{file?.Filename || 'File Name'}}
+                          </div>
+                          <div class="text-muted small">
+                            {{file?.ZfileSize || 'File Size'}} MB
+                          </div>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                </ng-container>
+              </ng-container>
+              <div class="col-6 mb-4" *ngIf="selectedAttachmentObj.atttchedFilesCount<5">
+                <mat-card class="height-180 pointer-hand border" appDragDrop
+                  (onFileDropped)="onFileDrop($event);attachFileControl.value='';" (click)="attachFileControl.click();">
+                  <mat-card-content class="h-100">
+                    <div class="h-100 d-flex flex-column text-center justify-content-center align-items-center">
+                      <div>
+                        <span class="material-icons text-muted">
+                          attach_file
+                        </span>
+                      </div>
+                      <div class="w-100"></div>
+                      <div class="text-primary font-weight-bold text-wrap">
+                        {{lang.attachments.label1}}
+                      </div>
+                      <div class="text-muted small">
+                        {{lang.attachments.label2}}
+                      </div>
+                      <input type="file" #attachFileControl style="display: none;"
+                        (change)="onFileSelect($event);attachFileControl.value='';" />
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+            <div class="row m-0 mt-4 mb-4">
+              <div class="col-12 text-right">
+                <button class="rounded btnCss rounded" style="min-width: 200px;" mat-button
+                  (click)="closeAttachments('attachmentsModal');"> {{lang?.continue}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <notifier-container [dir]="direction"></notifier-container> -->

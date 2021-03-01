@@ -1,0 +1,604 @@
+<div
+  class="container alignStart my-3 px-0 refundsContainer"
+  [dir]="lang['dir']"
+  *ngIf="!showNewRefund"
+>
+  <div class="pageTitle textDark">{{ lang["refunds"] }}</div>
+  <div class="row mx-0 mt-3">
+    <div class="col-9 px-0 tabs">
+      <span
+        class="mie-2 value pointer pb-3"
+        [ngClass]="
+          displayedRefunds === 'all'
+            ? 'sstbold selectedTab'
+            : 'sstroman textDark'
+        "
+        (click)="selectRefund('all')"
+        >{{ lang["allRefunds"] }}</span
+      >
+      <span
+        class="mx-2 value pointer pb-3"
+        [ngClass]="
+          displayedRefunds === 'sukuk'
+            ? 'sstbold selectedTab'
+            : 'sstroman textDark'
+        "
+        (click)="selectRefund('sukuk')"
+        >{{ lang["sukuk"] }}</span
+      >
+      <span
+        class="mx-2 value pointer pb-3"
+        [ngClass]="
+          displayedRefunds === 'vat'
+            ? 'sstbold selectedTab'
+            : 'sstroman textDark'
+        "
+        (click)="selectRefund('vat')"
+        >{{ lang["vat"] }}</span
+      >
+      <span
+        class="mx-2 value pointer pb-3"
+        [ngClass]="
+          displayedRefunds === 'excise'
+            ? 'sstbold selectedTab'
+            : 'sstroman textDark'
+        "
+        (click)="selectRefund('excise')"
+        >{{ lang["excise"] }}</span
+      >
+    </div>
+    <div class="col-3 px-0 alignEnd tabs">
+      <span
+        class="iconPaddingBottom mie-2 pointer"
+        [ngClass]="listView ? '' : 'selectedTab'"
+        (click)="toggleListView('grid')"
+      >
+        <img
+          [src]="
+            listView
+              ? 'assets/image/cards-gray.svg'
+              : 'assets/image/cards-green.svg'
+          "
+        />
+      </span>
+      <span
+        class="iconPaddingBottom pointer"
+        [ngClass]="!listView ? '' : 'selectedTab'"
+        (click)="toggleListView('list')"
+      >
+        <img
+          [src]="
+            listView ? 'assets/image/table.svg' : 'assets/image/table-gray.svg'
+          "
+        />
+      </span>
+    </div>
+  </div>
+  <div class="row mt-3 mx-0 justify-content-between">
+    <div style="width: 851px">
+      <div class="filter-search">
+        <input
+          type="text"
+          [placeholder]="lang.search"
+          [(ngModel)]="searchFilter"
+        />
+        <img src="assets/images/inbox/search.svg" alt="" />
+      </div>
+    </div>
+    <div class="row justify-content-end mx-0">
+      <img src="assets/images/filter.svg" alt="filter" class="ff-filter-icon" (click)="FilterClick()"/>
+    </div>
+  </div>
+
+  <!-- Grid View -->
+  <div *ngIf="!listView" class="row justify-content-between mt-3 mx-0">
+    <div class="add-card-large col-md-6 mt-3 px-0" (click)="newRefund()">
+      <img class="px-2" src="assets/image/add.svg" />
+      <div class="value fwb textPrimary mx-1 mt-2">
+        {{
+          displayedRefunds === "all"
+            ? lang.newRefund
+            : displayedRefunds === "sukuk"
+            ? lang.newSukuk
+            : displayedRefunds === "vat"
+            ? lang.vatRefund
+            : ""
+        }}
+      </div>
+    </div>
+    <ng-container
+      *ngIf="displayedRefunds === 'all' || displayedRefunds === 'sukuk'"
+    >
+      <div
+        class="filing-card textDark border col-md-6 mt-3 px-0 pointer"
+        *ngFor="let refund of sukukRefunds | filter: searchFilter"
+        [routerLink]="['/mains/sukukbonds/' + refund?.Persl]"
+      >
+        <div class="row filing-card-upper px-3">
+          <div class="col-md-6">
+            <div class="value fwb">{{ lang.sukuk }}</div>
+            <div class="caption textGray">{{ refund?.Fbnum }}</div>
+          </div>
+          <div
+            class="col-md-6"
+            style="justify-content: flex-end; display: flex"
+          >
+            <div
+              class="tag32"
+              [ngClass]="getSukukRefundStatus(refund?.Fbsta)"
+              [matTooltip]="refund?.Status"
+            >
+              {{ refund?.Status }}
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row filing-card-down px-3">
+          <div class="col-md-6"></div>
+          <div class="col-md-6 sstbold">{{ refund?.Persl }}</div>
+          <div class="col-md-6">
+            <div class="caption textGray">
+              {{ lang.sukukCard.reassessment }}
+            </div>
+            <div class="value fwb">&nbsp;</div>
+          </div>
+          <div class="col-md-6">
+            <div class="caption textGray">{{ lang.sukukCard.totalOffset }}</div>
+            <div class="value fwb">
+              {{ refund?.TotalOffsetAmt }} {{ refund?.Waers }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="caption textGray">{{ lang.sukukCard.netBalance }}</div>
+            <div class="value fwb">&nbsp;</div>
+          </div>
+          <div class="col-md-6">
+            <div class="caption textGray">{{ lang.sukukCard.requestDate }}</div>
+            <div class="value fwb">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  
+    <!-- vat refunc -->
+    <ng-container
+      *ngIf="displayedRefunds === 'all' || displayedRefunds === 'vat'"
+    >
+      <div
+        class="filing-card textDark border col-md-6 mt-3 px-0 pointer"
+        *ngFor="let refund of vatRefunds | filter: searchFilter" (click)="openSelectedCard(refund.RefundFbnum)"
+      >
+        <div class="row filing-card-upper px-3">
+          <div class="col-md-6">
+            <div class="value fwb">{{ lang.vatRefund }}</div>
+            <div class="caption textGray">{{ refund?.RefundFbnum }}</div>
+          </div>
+          <div
+            class="col-md-6"
+            style="justify-content: flex-end; display: flex"
+          >
+            <div
+              class="tag32"
+              [ngClass]="statusColorVat(refund?.RefundFbnum)"
+              [matTooltip]="refund?.Status"
+            >
+              {{ refund?.Status }}
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row filing-card-down px-3">
+          <div class="col-md-6"></div>
+          <div class="col-md-6 sstbold"></div>
+          <div class="col-md-6">
+            <div class="caption textGray">{{lang.vatCard.RequestedAmount}}</div>
+            <div class="value fwb">
+              <span>
+                <span [ngClass]="lang['dir'] === 'rtl' ? 'acc-number-align' : ''" >
+                  {{ getAmountString(refund.RequestedAmt)}}
+                  </span>
+                  {{ lang.SAR }}
+                </span>
+              <!-- {{getAmountString(refund.RequestedAmt)}} -->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="caption textGray">{{lang.vatCard.ReAssessedAmount}}</div>
+            <div class="value fwb">
+              <span>
+                <span [ngClass]="lang.dir === 'rtl' ? 'acc-number-align' : ''" >
+                  {{ getAmountString(refund.ReassessAmt)}}
+                  </span>
+                  {{ lang.SAR }}
+                </span>
+              <!-- {{getAmountString(refund.ReassessAmt)}} -->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="caption textGray">{{lang.vatCard.CreditBalance}}</div>
+            <div class="value fwb">
+              <span>
+                <span [ngClass]="lang.dir === 'rtl' ? 'acc-number-align' : ''" >
+                  {{ getAmountString(refund.NetCreditBal)}}
+                  </span>
+                  {{ lang.SAR }}
+                </span>
+              <!-- {{getAmountString(refund.NetCreditBal)}} -->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="caption textGray">{{lang.vatCard.RequestDate}}</div>
+            <div class="value fwb">{{ refund?.RefundReqDt }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>  
+  </div>
+  <!-- List View -->
+  <div class="row mt-5 mt-3" *ngIf="listView">
+    <div class="col-md-12">
+      <div class="mb-2 border">
+        <div
+          class="row"
+          style="margin: 0; cursor: pointer"
+          (click)="newRefund()"
+        >
+          <img class="col-auto" src="assets/image/add.svg" />
+          <div class="value fwb textPrimary mt-3 mb-3 mx-1 col">
+            {{
+              displayedRefunds === "all"
+                ? lang.newRefund
+                : displayedRefunds === "sukuk"
+                ? lang.newSukuk
+                : displayedRefunds === "vat"
+                ? lang.vatRefund
+                : ""
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 listViewWhitelisting mt-3" *ngIf="displayedRefunds === 'all' || displayedRefunds === 'sukuk'">
+      <table style="width: 100%">
+        <tr class="tabHeader" *ngIf="sukukRefunds.length > 0">
+          <th
+            colspan="8"
+            [ngClass]="
+              lang.dir === 'rtl' ? 'tableFirstHeadingRtl' : 'tableFirstHeading'
+            "
+          >
+            {{ lang.refunds }}
+          </th>
+          <th colspan="8">{{ lang.fbNum }}</th>
+          <th colspan="8">{{ lang.sukukCard.totalOffset }}</th>
+
+          <th
+            colspan="1"
+            [ngClass]="
+              lang.dir === 'rtl' ? 'tableLastHeadingRtl' : 'tableLastHeading'
+            "
+          >
+            {{ lang.status }}
+          </th>
+        </tr>
+
+
+        <ng-container
+          *ngIf="displayedRefunds === 'all' || displayedRefunds === 'sukuk'"
+        >
+          <tr
+            class="tabheader2"
+            *ngFor="
+              let refund of sukukRefunds | filter: searchFilter;
+              index as sukukIndex
+            "
+            [routerLink]="['/mains/sukukbonds/' + refund?.Persl]"
+          >
+            <td
+              colspan="8"
+              [ngClass]="
+                sukukIndex === sukukRefunds.length - 1 && lang.dir === 'rtl'
+                  ? 'tableBottomLeftRtl'
+                  : sukukIndex === sukukRefunds.length - 1 && lang.dir === 'ltr'
+                  ? 'tableBottomLeft'
+                  : ''
+              "
+            >
+              {{ lang.sukuk }}
+            </td>
+            <td colspan="8">{{ refund?.Fbnum }}</td>
+            <td colspan="8">
+              {{ refund?.TotalOffsetAmt }} {{ refund?.Waers }}
+            </td>
+
+            <td
+              colspan="8"
+              [ngClass]="
+                sukukIndex === sukukRefunds.length - 1 && lang.dir === 'rtl'
+                  ? 'tableBottomRightRtl'
+                  : sukukIndex === sukukRefunds.length - 1 && lang.dir === 'ltr'
+                  ? 'tableBottomRight'
+                  : ''
+              "
+            >
+              <div
+                class="tag32"
+                [ngClass]="getSukukRefundStatus(refund?.Fbsta)"
+                [matTooltip]="refund?.Status"
+              >
+                {{ refund?.Status }}
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+
+      </table>
+    </div>
+
+
+    <div class="col-md-12 listViewWhitelisting mt-3" *ngIf="displayedRefunds === 'all' || displayedRefunds === 'vat'">
+      <table style="width: 100%">
+        <tr class="tabHeader" *ngIf="vatRefunds.length > 0">
+          <th
+            colspan="8"
+            [ngClass]="
+              lang.dir === 'rtl' ? 'tableFirstHeadingRtl' : 'tableFirstHeading'
+            "
+          >
+            {{ lang.vatCard.FbNumber }}
+          </th>
+          <th colspan="8">{{ lang.vatCard.RequestDate }}</th>
+          <th colspan="8">{{ lang.vatCard.RequestedAmount }}</th>
+          <th colspan="8">{{ lang.vatCard.ReAssessedAmount }}</th>
+          <th colspan="8">{{ lang.vatCard.CreditBalance }}</th>
+          <th
+            colspan="1"
+            [ngClass]="
+              lang.dir === 'rtl' ? 'tableLastHeadingRtl' : 'tableLastHeading'
+            "
+          >
+            {{ lang.vatCard.Status }}
+          </th>
+        </tr>      
+        <ng-container
+          *ngIf="displayedRefunds === 'all' || displayedRefunds === 'vat'"
+        >
+          <tr
+            class="tabheader2"
+            *ngFor="
+            let refund of vatRefunds | filter: searchFilter
+              index as vatIndex
+            "
+            (click)="openSelectedCard(refund.RefundFbnum)"
+          >
+            <td
+              colspan="8"
+              [ngClass]="
+              vatIndex === vatRefunds.length - 1 && lang.dir === 'rtl'
+                  ? 'tableBottomLeftRtl'
+                  : vatIndex === vatRefunds.length - 1 && lang.dir === 'ltr'
+                  ? 'tableBottomLeft'
+                  : ''
+              "
+            >
+              {{ refund?.RefundFbnum }}
+            </td>
+            <td colspan="8">{{ refund?.RefundReqDt }}</td>
+            <td colspan="8">
+              <span>
+              <span [ngClass]="lang.dir === 'rtl' ? 'acc-number-align' : ''" >
+                {{ getAmountString(refund.RequestedAmt)}}
+                </span>
+                {{ lang.SAR }}
+              </span>
+            </td>
+            <td colspan="8">
+              <span>
+              <span [ngClass]="lang.dir === 'rtl' ? 'acc-number-align' : ''" >
+                {{ getAmountString(refund.ReassessAmt)}}
+                </span>
+                {{ lang.SAR }}
+              </span>
+            </td>
+            <td colspan="8">
+              <span>
+              <span [ngClass]="lang.dir === 'rtl' ? 'acc-number-align' : ''" >
+                {{ getAmountString(refund.NetCreditBal)}}
+                </span>
+                {{ lang.SAR }}
+              </span>
+            </td>
+
+            <td
+              colspan="8"
+              [ngClass]="
+              vatIndex === vatRefunds.length - 1 && lang.dir === 'rtl'
+                  ? 'tableBottomRightRtl'
+                  : vatIndex === vatRefunds.length - 1 && lang.dir === 'ltr'
+                  ? 'tableBottomRight'
+                  : ''
+              "
+            >
+              <div
+                class="tag32"
+                [ngClass]="statusColorVat(refund?.RefundFbnum)"
+                [matTooltip]="refund?.Status"
+              >
+                {{ refund?.Status }}
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+
+
+      </table>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- New Refunds -->
+<div
+  class="container alignStart my-3 px-0 refundsContainer"
+  [dir]="lang['dir']"
+  *ngIf="showNewRefund"
+>
+  <div>
+    <div class="row mx-0">
+      <div class="col-md-12 px-0">
+        <span
+          class="exciseTitle1 unicodeDir pointer"
+          (click)="toggleNewRefund()"
+          >{{ lang.refunds }} &gt; </span
+        ><span class="exciseTitle1" style="color: #151515">{{
+          lang.newRefund
+        }}</span>
+      </div>
+    </div>
+    <div class="row mt-3 mx-0" style="width: 100%">
+      <span style="cursor: pointer" (click)="toggleNewRefund()">
+        <img
+          src="assets/image/arrow-left.svg"
+          style="width: 24px"
+          [ngClass]="lang.dir === 'rtl' ? 'rotateImage' : ''"
+        />
+        {{ lang.back }}</span
+      >
+    </div>
+    <div class="row mt-4 mx-0">
+      <div class="col-md-12 px-0">
+        <div class="exciseSecondTitle">
+          {{ lang.newRefund }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2 mx-0">
+      <div class="col-md-12 px-0">
+        <div class="exciseSecondTitle1">
+          {{ lang.selectOneTax }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New mt-3"></div>
+
+    <!-- header end -->
+
+    <!-- 4 cards Start -->
+
+    <div class="mt-3 mb-3">
+      <div class="row col-md-12 col-sm-12 col-xs-12 mt-2 mb-3">
+        <div class="col-md-4 col-sm-6 col-xs-12 col-xl-4 mb-3 px-0">
+          <mat-card class="cardInActive" routerLink="/mains/sukukbonds">
+            <div [ngClass]="lang.dir === 'ltr' ? 'acctxt1L' : 'acctxt1R'">
+              <div class="exciseCardTxt1In">
+                {{ lang.sukuk }}
+              </div>
+            </div>
+          </mat-card>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 col-xl-4 mb-3 px-0">
+          <mat-card class="cardInActive" (click)="newvatrefundhanler()">
+            <div [ngClass]="lang.dir === 'ltr' ? 'acctxt1L' : 'acctxt1R'">
+              <div class="exciseCardTxt1In">
+                {{ lang.vat }}
+              </div>
+            </div>
+          </mat-card>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12 col-xl-4 mb-3 px-0">
+          <mat-card class="cardInActive">
+            <div [ngClass]="lang.dir === 'ltr' ? 'acctxt1L' : 'acctxt1R'">
+              <div class="exciseCardTxt1In">
+                {{ lang.excise }}
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- filter popup -->
+<div
+  class="modal alignStart"
+  id="filterpopup"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+>
+  <div class="modal-dialog center">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeFilterPopup()"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+            {{lang.filter}}
+          </div>
+        <div class="lightCard py-3 pr-3 mb-3">
+          <div class="matLabel labelMarginBottom" style="font-family: 'SSTArabic-Roman'; ">{{lang.status}}</div>
+              <mat-select class="commonMatSelect" [(ngModel)]="filtermodel"  (selectionChange)="getselstatusx($event)" >
+                <!--   -->
+                  <mat-option *ngFor="let data of filterData" [value]="data" (click)="getselstatus(data.status)"
+                  class="matoptxt sstcls" >
+                  {{data.status}}
+                </mat-option>
+                <!-- <mat-option 
+                  class="matoptxt" [value]="status"  (click)="getselstatus(lang.fliters.COMPLETED)">
+                  {{lang.fliters.COMPLETED}}
+                </mat-option>
+                <mat-option 
+                  class="matoptxt" [value]="status"  (click)="getselstatus(lang.fliters.DRAFT)">
+                  {{lang.fliters.DRAFT}}
+                </mat-option>
+                <mat-option 
+                  class="matoptxt" [value]="status"  (click)="getselstatus(lang.fliters.CANCELED)">
+                  {{lang.fliters.CANCELED}}
+                </mat-option> -->
+                  
+                  
+                  
+                  
+              </mat-select>
+          </div>
+         </div>
+         <div class="row col-md-12">
+          <div class="col-md-6 mt-4 mb-2 alignEnd">
+            <button
+              class="col-md-8 btnPrimary btnprimary-width sstcls"
+              (click)="applyFilter()"
+              mat-raised-button
+            >
+              {{lang.apply}}
+            </button>
+          </div>
+          <div class="col-md-6 mt-4 mb-2 alignStart">
+            <button
+              class="col-md-8 btnPrimary btnprimary-width sstcls"
+              (click)="resetFilter()"
+              mat-raised-button
+            >
+              {{lang.reset}}
+            </button>
+          </div>
+         </div>
+          
+        </div>
+      </div>
+    </div>
+</div>
+
+<notifier-container></notifier-container>

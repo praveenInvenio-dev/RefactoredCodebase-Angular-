@@ -1,0 +1,1792 @@
+<div
+  class="container alignStart"
+  [dir]="lang.dir"
+  *ngIf="!bondsSubmitted && isResSuccess"
+>
+  <!-- <div class="row"> -->
+  <div class="col-md-10 container">
+    <span
+      class="exciseTitle1 unicodeDir bcTitle"
+      [routerLink]="['/mains/refundslanding']"
+      >{{ lang.bc1 }} &gt; </span
+    ><span
+      class="exciseTitle1 unicodeDir"
+      [ngClass]="
+        existingApplication && requestDetails?.Fbnumz !== ''
+          ? 'bcTitleActive'
+          : 'bcTitle'
+      "
+      (click)="bc2Click()"
+      >{{ lang.bc2 }}
+      {{
+        !existingApplication || requestDetails?.Fbnumz === "" ? "&gt;" : ""
+      }} </span
+    ><span
+      class="exciseTitle1 bcTitleActive"
+      *ngIf="!existingApplication || requestDetails?.Fbnumz === ''"
+      style="font-size: 16px"
+      >{{ lang.bc3 }}</span
+    >
+  </div>
+  <!-- </div> -->
+
+  <div class="col-md-10 container">
+    <div class="mt-3" style="width: 100%">
+      <div class="stepHeader">
+        <span class="stepBack" style="cursor: pointer" (click)="back()">
+          <img
+            *ngIf="lang['dir'] === 'ltr'"
+            src="assets/image/arrow-left-green.svg"
+            style="width: 24px"
+          />
+
+          <img
+            *ngIf="lang['dir'] === 'rtl'"
+            src="assets/image/arrow-right-green.svg"
+            style="width: 24px"
+          />
+          {{ lang.back }}</span
+        >
+        <span
+          class="steps stepNumber"
+          *ngIf="!existingApplication || requestDetails?.Fbnumz === ''"
+        >
+          <img
+            [ngClass]="lang['dir'] === 'rtl' ? 'rotateImage' : ''"
+            [src]="lang.menu[optionActive - 1].step"
+            style="width: 106px"
+          />
+          <img
+            src="assets/image/check.svg"
+            alt=""
+            *ngIf="optionActive === 4"
+            style="height: 24px"
+          />
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="pageTitle textDark sstbold">
+          {{ lang.menu[optionActive - 1].title }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="exciseSecondTitle1 value textGray sstroman">
+          {{ lang.menu[optionActive - 1].subtitle }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New mt-3"></div>
+
+    <br /><br />
+
+    <!-- form-1 -->
+
+    <div class="row" *ngIf="optionActive === 1">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit()">
+          <div class="sectionTitle textDark sstbold">
+            {{ lang.requestDetailsForm.periodSelection }}
+          </div>
+
+          <br />
+
+          <div class="row block-1">
+            <div class="matLabel">{{ lang.requestDetailsForm.period }}</div>
+
+            <mat-select
+              class="commonMatSelect block-12 block-11"
+              [formControl]="selectedYear"
+              (selectionChange)="getYearSelection(selectedYear.value)"
+            >
+              <!-- [formControl] ="selectedYear" (selectionChange) ="getYearSelection()" -->
+              <mat-option *ngFor="let year of years" [value]="year.Persl">
+                {{ year.Persl }}</mat-option
+              >
+            </mat-select>
+          </div>
+
+          <br /><br /><br /><br />
+
+          <div *ngIf="showMe">
+            <div [ngClass]="lang.dir === 'rtl' ? 'row block-rtl' : 'row block'">
+              <div class="row border" style="width: 100%">
+                <div class="col-md-6 sectionTitle block-2">
+                  {{ lang.requestDetailsForm.information }}
+                </div>
+                <div class="col-md-6 justifyContentEnd row">
+                  <!-- <img src="assets/image/delete.svg" class="mx-1" /> -->
+                  <img
+                    *ngIf="open"
+                    src="assets/image/circle-arrow-right.svg"
+                    class="mx-1"
+                    (click)="openClose()"
+                  />
+                  <img
+                    *ngIf="!open"
+                    src="assets/image/circle-arrow-down.svg"
+                    class="mx-10"
+                    (click)="openClose()"
+                  />
+                </div>
+
+                <span
+                  *ngIf="open"
+                  [ngClass]="lang.dir === 'rtl' ? 'row block-rtl' : 'row block'"
+                >
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span
+                    class="Placeholder-text-Copy col-md-6"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                    >{{ lang.requestDetailsForm.zakatBaseInvestment }}</span
+                  >
+
+                  <span
+                    class="col-md-6 block-17"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails
+                          ? (requestDetails.ZkatBaseBded | number: "0.2")
+                          : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div
+                    [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  ></div>
+
+                  <span
+                    class="Placeholder-text-Copy col-md-6"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                    >{{ lang.requestDetailsForm.zakatNetProfit }}</span
+                  >
+                  <span
+                    class="col-md-6 block-17"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails
+                          ? (requestDetails.ZkatNetProfit | number: "0.2")
+                          : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div
+                    [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  ></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.citNetProfit
+                  }}</span>
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails
+                          ? (requestDetails.CitNetProfit | number: "0.2")
+                          : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.totalProfit
+                  }}</span>
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails
+                          ? (requestDetails.TotProfit | number: "0.2")
+                          : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span
+                    class="Placeholder-text-Copy col-md-6"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                    >{{ lang.requestDetailsForm.zakatPaid }}</span
+                  >
+                  <span
+                    class="col-md-6 block-17"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails
+                          ? (requestDetails.ZkatBdiff | number: "0.2")
+                          : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div
+                    [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  ></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.citPaid
+                  }}</span>
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails
+                          ? (requestDetails.CitBdiff | number: "0.2")
+                          : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.noOfDays
+                  }}</span>
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{ requestDetails ? requestDetails.Days1 : "" }}
+                    </div>
+                  </span>
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.returnPeriod
+                  }}</span>
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{ requestDetails ? requestDetails.RetPeriod : "" }}
+                    </div>
+                  </span>
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.saudiProfit
+                  }}</span>
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{ requestDetails ? requestDetails.SaudiSharePrft : "" }}
+                    </div>
+                  </span>
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.nonSaudi
+                  }}</span>
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails ? requestDetails.NssaudiSharePrft : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span
+                    class="Placeholder-text-Copy col-md-6"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                    >{{ lang.requestDetailsForm.zakatPercent }}</span
+                  >
+                  <span
+                    class="col-md-6 block-17"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{ requestDetails ? requestDetails.ZakatPercen : "" }}
+                    </div>
+                  </span>
+
+                  <div
+                    [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  ></div>
+
+                  <span
+                    class="Placeholder-text-Copy col-md-6"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                    >{{ lang.requestDetailsForm.minimumZakat }}</span
+                  >
+                  <span
+                    class="col-md-6 block-17"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{
+                        requestDetails
+                          ? (requestDetails.MinZkatBase | number: "0.2")
+                          : ""
+                      }}
+                    </div>
+                  </span>
+
+                  <div
+                    [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                    *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  ></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.ninNumber
+                  }}</span>
+
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      <input
+                        appNumberInput
+                        decimals="2"
+                        class="numberInput row"
+                        [(ngModel)]="ninNumber"
+                        name="ninNumber"
+                        maxlength="11"
+                        [ngClass]="
+                          form1Validation && !ninNumber ? 'error-border' : ''
+                        "
+                      />
+                    </div>
+                  </span>
+
+                  <!-- <span class="col-md-6 block-15">
+                    <input
+                      appNumberInput
+                      decimals="2"
+                      class="numberInput row"
+                      [(ngModel)] = "ninNumber" name = "ninNumber"
+                    />
+                  </span> -->
+
+                  <!-- <span class="col-md-6">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      56543434345
+                    </div>
+                  </span> -->
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-10">{{
+                    lang.requestDetailsForm.totalInvestment
+                  }}</span>
+                  <span class="col-md-2 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{ getTotalInv() | number: "0.2" }}
+                    </div>
+                  </span>
+
+                  <br /><br /><br />
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-10">{{
+                    lang.requestDetailsForm.totalReturn
+                  }}</span>
+                  <span class="col-md-2 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      {{ getTotalReturn() | number: "0.2" }}
+                    </div>
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <div
+              *ngFor="let investment of investmentDetails; index as i"
+              [ngClass]="
+                lang.dir === 'rtl' ? 'row block-rtl mt-3' : 'row block mt-3'
+              "
+            >
+              <div class="row border" style="width: 100%">
+                <div class="col-md-6 sectionTitle block-2">
+                  {{ lang.requestDetailsForm.investmentDetails }}
+                </div>
+                <div class="col-md-6 justifyContentEnd row">
+                  <img
+                    *ngIf="i > 0"
+                    src="assets/image/delete.svg"
+                    class="mx-1"
+                    (click)="deleteInvestmentDetail(i)"
+                  />
+                  <img
+                    *ngIf="closedInvestment.indexOf(i) < 0"
+                    src="assets/image/circle-arrow-right.svg"
+                    class="mx-1"
+                    (click)="toggleInvestmentDropdown(i)"
+                  />
+                  <img
+                    *ngIf="closedInvestment.indexOf(i) > -1"
+                    src="assets/image/circle-arrow-down.svg"
+                    class="mx-10"
+                    (click)="toggleInvestmentDropdown(i)"
+                  />
+                </div>
+
+                <span
+                  *ngIf="closedInvestment.indexOf(i) < 0"
+                  [ngClass]="lang.dir === 'rtl' ? 'row block-rtl' : 'row block'"
+                >
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.sukukBondName
+                  }}</span>
+
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      <mat-select
+                        [name]="'BondNo' + i"
+                        [(ngModel)]="investment.BondNo"
+                        class="commonMatSelect block-16"
+                        name="investmentBondNumber"
+                        [ngClass]="
+                          form1Validation && investment.BondNo === ''
+                            ? 'error-border'
+                            : ''
+                        "
+                      >
+                        <mat-option
+                          *ngFor="let bond of sukukBondName"
+                          [value]="bond.SrNo"
+                          >{{ bond["Zdesc"] }}
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                  </span>
+
+                  <!-- <span class="col-md-6 block-15">
+    
+                    <mat-select [name]="'BondNo' + i" [(ngModel)] ="investment.BondNo" class="commonMatSelect block-16" placeholder="MAR, 2019 - 5" name="investmentBondNumber">
+    
+                      <mat-option *ngFor = "let bond of sukukBondName" [value]="bond.SrNo">{{bond['Zdesc']}}</mat-option> -->
+                  <!-- <mat-option value="2"> option2</mat-option> -->
+                  <!-- <mat-option *ngFor = "let year of years" [value]="year.Persl" > 
+                        {{year.Persl}}</mat-option>
+                      </mat-select> -->
+                  <!-- <mat-option *ngFor = "let name of names" [value]="name.Zdesc">{{sukukBondName['Zdesc']}}</mat-option> -->
+
+                  <!-- </mat-select>
+    
+                  </span> -->
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.valueOfInvestment
+                  }}</span>
+
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      <input
+                        [name]="'InvValue' + i"
+                        [(ngModel)]="investment.InvValue"
+                        class="numberInput justifyContentEnd row"
+                        name="investmentValue"
+                        [ngClass]="
+                          form1Validation && investment.InvValue <= 0
+                            ? 'error-border'
+                            : ''
+                        "
+                        (input)="generateZakatBaseAfterDeduction()"
+                        mask="separator.2"
+                        thousandSeparator=","
+                        maxlength="18"
+                        (blur)="validateNumbers()"
+                        separatorLimit="100000000000"
+                      />
+                    </div>
+                  </span>
+
+                  <!-- <span class="col-md-6 block-15">
+                    <input appNumberInput
+                      decimals="2" [name]="'InvValue' + i" [(ngModel)] = 'investment.InvValue'
+                      class="numberInput justifyContentEnd row" name="investmentValue"
+                      
+                    />
+                  </span> -->
+
+                  <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                  <span class="Placeholder-text-Copy col-md-6">{{
+                    lang.requestDetailsForm.returnOnInvestment
+                  }}</span>
+
+                  <span class="col-md-6 block-17">
+                    <div class="Placeholder-text-Copy justifyContentEnd row">
+                      <input
+                        [name]="'InvReturn' + i"
+                        [(ngModel)]="investment.InvReturn"
+                        class="numberInput justifyContentEnd row"
+                        name="investmentReturn"
+                        [ngClass]="
+                          form1Validation && investment.InvReturn <= 0
+                            ? 'error-border'
+                            : ''
+                        "
+                        (input)="generateZakatBaseAfterDeduction()"
+                        mask="separator.2"
+                        thousandSeparator=","
+                        maxlength="18"
+                        (blur)="validateNumbers()"
+                        separatorLimit="100000000000"
+                      />
+                    </div>
+                  </span>
+
+                  <!-- <span class="col-md-6 block-15">
+                    <input appNumberInput
+                      decimals="2"  [name] ="'InvReturn' + i" [(ngModel)] = 'investment.InvReturn'
+                      class="numberInput justifyContentEnd row" name="investmentReturn"
+                    />
+                  </span> -->
+                </span>
+              </div>
+            </div>
+
+            <br /><br />
+
+            <div class="add-card col-md-6" (click)="addInvestmentDetails()">
+              <img class="px-2" src="assets/image/add.svg" />
+              <div class="value fwb textPrimary mx-1">
+                {{ lang.requestDetailsForm.addInvestmentDetail }}
+              </div>
+            </div>
+
+            <div
+              class="border row justify-content-between mx-0 mt-3 p-3 textDark primary-background"
+              *ngIf="requestDetails?.SbForm11 !== 'X'"
+            >
+              <span class="sstbold calculationHeading">{{
+                lang.requestDetailsForm.zakatBaseAfterDeduction
+              }}</span>
+              <span class="sstmedium">{{
+                zakatBaseAfterDeduction | number: "0.2"
+              }}</span>
+            </div>
+
+            <div
+              class="border row justify-content-between mx-0 mt-3 p-3 textDark primary-background"
+              *ngIf="
+                requestDetails?.TaxpayerTp === 'M' ||
+                requestDetails?.TaxpayerTp === 'F'
+              "
+            >
+              <span class="sstbold calculationHeading">{{
+                lang.requestDetailsForm.refundableCIT
+              }}</span>
+              <span class="sstmedium">{{ refundableCIT | number: "0.2" }}</span>
+            </div>
+
+            <div
+              class="border row justify-content-between mx-0 mt-3 p-3 textDark primary-background"
+              *ngIf="
+                (requestDetails?.TaxpayerTp === 'M' ||
+                  requestDetails?.TaxpayerTp === 'S') &&
+                requestDetails?.SbForm11 !== 'X'
+              "
+            >
+              <span class="sstbold calculationHeading">{{
+                lang.requestDetailsForm.refundableZakat
+              }}</span>
+              <span class="sstmedium">{{
+                refundableZakat | number: "0.2"
+              }}</span>
+            </div>
+
+            <br /><br />
+
+            <button
+              class="btnPrimary btnprimary-width sstbold"
+              mat-raised-button
+            >
+              {{ lang.continue }}
+            </button>
+
+            <span
+              *ngIf="form1Validation"
+              class="Placeholder-text-Copy col-md-6"
+              [ngStyle]="{ color: '#aa0c19' }"
+              >{{ lang.requestDetailsForm.validationError }}</span
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- form 2 -->
+
+    <div class="row" *ngIf="optionActive === 2">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit2()">
+          <div class="row">
+            <!-- Add IBAN start -->
+            <div class="col-md-12 check mb-3">
+              <mat-checkbox
+                class="checkboxAckCss"
+                name="addIBAN"
+                [(ngModel)]="addIban"
+              ></mat-checkbox>
+              <label for="addIBAN">{{ lang.accountDetailsForm.addIBAN }}</label>
+            </div>
+            <!-- Add IBAN end -->
+            <div class="col-md-6 block-7">
+              <div class="matLabel labelMarginBottom">
+                {{ lang.accountDetailsForm.ibanAccountNumber }}
+              </div>
+              <input
+                class="commonInput block-12"
+                [formControl]="newIban"
+                name="newIban"
+                *ngIf="addIban"
+                maxlength="24"
+                (input)="spaceValidator($event)"
+                [ngClass]="
+                  newIban.touched &&
+                  (newIban.invalid || newIbanApiError || newIbanError !== '')
+                    ? 'error-border'
+                    : ''
+                "
+              />
+              <span class="zs-errorText" *ngIf="addIban && newIban.touched">{{
+                newIbanApiError
+                  ? lang["invalidIban"]
+                  : newIbanError !== ""
+                  ? newIbanError
+                  : newIban.invalid
+                  ? lang["ibanLengthError"]
+                  : ""
+              }}</span>
+              <mat-select
+                [formControl]="ibanNumber"
+                name="ibanNumber"
+                class="commonMatSelect block-12 mt-0"
+                *ngIf="!addIban"
+                [ngClass]="
+                  ibanNumber.touched && ibanNumber.invalid ? 'error-border' : ''
+                "
+              >
+                <mat-option
+                  *ngFor="let ibanDetail of ibanList"
+                  [value]="ibanDetail['Iban']"
+                  >{{ ibanDetail["Iban"] }}
+                </mat-option>
+              </mat-select>
+            </div>
+
+            <div class="col-md-6 block-7">
+              <div class="matLabel labelMarginBottom">
+                {{ lang.accountDetailsForm.ibanLinkedIdType }}
+              </div>
+              <mat-select
+                [formControl]="ibanLinkedType"
+                name="ibanLinkedType"
+                class="commonMatSelect block-12 mt-0"
+                (selectionChange)="onLinkedIdNumberChanged()"
+                [ngClass]="
+                  ibanLinkedType.touched && ibanLinkedType.invalid
+                    ? 'error-border'
+                    : ''
+                "
+              >
+                <mat-option
+                  [value]="account['Type']"
+                  *ngFor="let account of accountDetails"
+                  >{{ account["Text"] }}
+                </mat-option>
+              </mat-select>
+              <!-- <input
+                class="commonInput block-12"
+                [value]="ibanLinkedText"
+                readonly
+              /> -->
+            </div>
+
+            <!-- mat select -->
+
+            <div class="col-md-6 block-7">
+              <div class="matLabel labelMarginBottom">
+                {{ lang.accountDetailsForm.ibanLinkedIdNumber }}
+              </div>
+              <input
+                class="commonInput block-12"
+                [formControl]="ibanLinkedNumber"
+                [ngClass]="
+                  ibanLinkedNumber.touched && ibanLinkedNumber.invalid
+                    ? 'error-border'
+                    : ''
+                "
+                readonly
+              />
+              <!-- <mat-select
+                [(ngModel)]="ibanLinkedNumber"
+                name="ibanLinkedNumber"
+                class="commonMatSelect block-12"
+                (selectionChange)="onLinkedIdNumberChanged()"
+              >
+                <mat-option
+                  [value]="account['Idnumber']"
+                  *ngFor="let account of accountDetails"
+                  >{{ account["Idnumber"] }}</mat-option
+                >
+              </mat-select> -->
+            </div>
+
+            <!-- checkbox -->
+
+            <div
+              class="check vCenter row"
+              [ngStyle]="
+                lang.dir === 'rtl'
+                  ? { marginRight: '15px' }
+                  : { marginLeft: '15px' }
+              "
+            >
+              <mat-checkbox
+                [(ngModel)]="formTwoAccepted"
+                name="formTwoAccepted"
+                class="checkboxAckCss"
+                [disabled]="
+                  ibanLinkedNumber.invalid ||
+                  (addIban && (newIbanApiError || newIban.invalid)) ||
+                  (!addIban && ibanNumber.invalid)
+                "
+              >
+              </mat-checkbox>
+              <div
+                class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2 styles"
+              >
+                {{ lang.accountDetailsForm.note }}
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div>
+            <button
+              class="btnPrimary btnprimary-width sstbold"
+              mat-raised-button
+              [disabled]="
+                ibanLinkedNumber.invalid ||
+                (addIban && (newIbanApiError || newIban.invalid)) ||
+                (!addIban && ibanNumber.invalid) ||
+                !formTwoAccepted
+              "
+            >
+              {{ lang.continue }}
+            </button>
+          </div>
+
+          <!-- <div class="mt-5 mb-5">
+                                        <button mat-button type="submit" class="btnCss mt-5 customBTN">
+                                            {{ lang.continue }}
+                                        </button>
+                                    </div> -->
+        </form>
+      </div>
+    </div>
+
+    <!-- form 3 -->
+
+    <div class="row" *ngIf="optionActive === 3">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit3()">
+          <div class="label-style" for="">
+            {{ lang.attachmentsForm.attachAccountantCetification }}
+          </div>
+
+          <br />
+          <div class="row removeMargin">
+            <div
+              [ngClass]="
+                lang.dir === 'rtl'
+                  ? 'attachment-rtl card-uploaded border mb-3'
+                  : 'attachment card-uploaded border mb-3'
+              "
+              [ngStyle]="
+                lang.dir === 'rtl'
+                  ? { marginLeft: '22px' }
+                  : { marginRight: '22px' }
+              "
+              *ngFor="
+                let certificate of certificatesAttachments;
+                let certificateIndex = index
+              "
+            >
+              <div
+                class="card-delete"
+                (click)="
+                  deleteAttachment(
+                    'ZSBA',
+                    certificate['Doguid'],
+                    certificateIndex
+                  )
+                "
+              >
+                <img src="assets/image/delete.svg" />
+              </div>
+              <div class="card-file-content">
+                <img
+                  class="zs-sukukAttachment"
+                  [src]="
+                    isPdf(certificate['Filename'])
+                      ? 'assets/image/generic-documents.png'
+                      : 'assets/image/generic-documents.png'
+                  "
+                />
+                <div class="value textDark mt-1 card-main-text fwb">
+                  {{ certificate["Filename"] }}
+                </div>
+                <!-- <div class="caption textGray mt-1">
+                  {{ certificate["ZfileSize"] }}MB
+                </div> -->
+              </div>
+            </div>
+            <div
+              class="zs-pointer"
+              [ngClass]="
+                lang.dir === 'rtl'
+                  ? 'attachment-rtl card-upload border mb-3'
+                  : 'attachment card-upload border mb-3'
+              "
+              [ngStyle]="
+                lang.dir === 'rtl'
+                  ? { marginLeft: '22px' }
+                  : { marginRight: '22px' }
+              "
+              (click)="fileInput.click()"
+              appDragDrop
+              (onFileDropped)="uploadFiles($event, 'ZSBA')"
+            >
+              <div class="card-upload-content">
+                <input
+                  hidden
+                  type="file"
+                  #fileInput
+                  (change)="uploadFiles($event.target.files, 'ZSBA')"
+                  id="accountantCertification"
+                />
+                <img src="assets/image/attach-grey.svg" />
+                <div class="value textPrimary mt-1 card-main-text fwb">
+                  {{ lang.attachmentsForm.dragAndDropFile }}
+                </div>
+                <div class="caption textGray mt-1">10MB {{ lang.max }}</div>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div class="label-style" for="">
+            {{ lang.attachmentsForm.attachInvestmentStatement }}
+          </div>
+
+          <br />
+          <div class="row removeMargin">
+            <div
+              [ngClass]="
+                lang.dir === 'rtl'
+                  ? 'attachment-rtl card-uploaded border mb-3'
+                  : 'attachment card-uploaded border mb-3'
+              "
+              [ngStyle]="
+                lang.dir === 'rtl'
+                  ? { marginLeft: '22px' }
+                  : { marginRight: '22px' }
+              "
+              *ngFor="
+                let tadawul of tadawulAttachments;
+                let tadawulIndex = index
+              "
+            >
+              <div
+                class="card-delete"
+                (click)="
+                  deleteAttachment('ZSBB', tadawul['Doguid'], tadawulIndex)
+                "
+              >
+                <img src="assets/image/delete.svg" />
+              </div>
+              <div class="card-file-content">
+                <img
+                  class="zs-sukukAttachment"
+                  [src]="
+                    isPdf(tadawul['Filename'])
+                      ? 'assets/image/generic-documents.png'
+                      : 'assets/image/generic-documents.png'
+                  "
+                />
+                <div class="value textDark mt-1 card-main-text fwb">
+                  {{ tadawul["Filename"] }}
+                </div>
+                <!-- <div class="caption textGray mt-1">
+                  {{ tadawul["ZfileSize"] }}MB
+                </div> -->
+              </div>
+            </div>
+            <div
+              class="zs-pointer"
+              [ngClass]="
+                lang.dir === 'rtl'
+                  ? 'attachment-rtl card-upload border mb-3'
+                  : 'attachment card-upload border mb-3'
+              "
+              [ngStyle]="
+                lang.dir === 'rtl'
+                  ? { marginLeft: '22px' }
+                  : { marginRight: '22px' }
+              "
+              (click)="fileInput1.click()"
+              appDragDrop
+              (onFileDropped)="uploadFiles($event, 'ZSBB')"
+            >
+              <div class="card-upload-content">
+                <input
+                  hidden
+                  type="file"
+                  #fileInput1
+                  (change)="uploadFiles($event.target.files, 'ZSBB')"
+                  id="accountStatement"
+                />
+                <img src="assets/image/attach-grey.svg" />
+                <div class="value textPrimary mt-1 card-main-text fwb">
+                  {{ lang.attachmentsForm.dragAndDropFile }}
+                </div>
+                <div class="caption textGray mt-1">10MB {{ lang.max }}</div>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div class="label-style" for="">
+            {{ lang.attachmentsForm.otherSupportDoc }}
+          </div>
+
+          <br />
+          <div class="row removeMargin">
+            <div
+              [ngClass]="
+                lang.dir === 'rtl'
+                  ? 'attachment-rtl card-uploaded border mb-3'
+                  : 'attachment card-uploaded border mb-3'
+              "
+              [ngStyle]="
+                lang.dir === 'rtl'
+                  ? { marginLeft: '22px' }
+                  : { marginRight: '22px' }
+              "
+              *ngFor="
+                let attachment of otherAttachments;
+                let attachmentIndex = index
+              "
+            >
+              <div
+                class="card-delete"
+                (click)="
+                  deleteAttachment(
+                    'ZSBC',
+                    attachment['Doguid'],
+                    attachmentIndex
+                  )
+                "
+              >
+                <img src="assets/image/delete.svg" />
+              </div>
+              <div class="card-file-content">
+                <img
+                  class="zs-sukukAttachment"
+                  [src]="
+                    isPdf(attachment['Filename'])
+                      ? 'assets/image/generic-documents.png'
+                      : 'assets/image/generic-documents.png'
+                  "
+                />
+                <div class="value textDark mt-1 card-main-text fwb">
+                  {{ attachment["Filename"] }}
+                </div>
+                <!-- <div class="caption textGray mt-1">
+                  {{ attachment["ZfileSize"] }}MB
+                </div> -->
+              </div>
+            </div>
+            <div
+              class="zs-pointer"
+              [ngClass]="
+                lang.dir === 'rtl'
+                  ? 'attachment-rtl card-upload border mb-3'
+                  : 'attachment card-upload border mb-3'
+              "
+              [ngStyle]="
+                lang.dir === 'rtl'
+                  ? { marginLeft: '22px' }
+                  : { marginRight: '22px' }
+              "
+              (click)="fileInput2.click()"
+              appDragDrop
+              (onFileDropped)="uploadFiles($event, 'ZSBC')"
+            >
+              <div class="card-upload-content">
+                <input
+                  hidden
+                  type="file"
+                  #fileInput2
+                  (change)="uploadFiles($event.target.files, 'ZSBC')"
+                  id="otherDocuments"
+                />
+                <img src="assets/image/attach-grey.svg" />
+                <div class="value textPrimary mt-1 card-main-text fwb">
+                  {{ lang.attachmentsForm.dragAndDropFile }}
+                </div>
+                <div class="caption textGray mt-1">10MB {{ lang.max }}</div>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div>
+            <button
+              class="btnPrimary btnprimary-width sstbold"
+              mat-raised-button
+              [disabled]="
+                certificatesAttachments.length === 0 ||
+                tadawulAttachments.length === 0
+              "
+            >
+              {{ lang.continue }}
+            </button>
+          </div>
+
+          <!-- <div class="mt-5 mb-5">
+                                            <button mat-button type="submit" class="btnCss mt-5">
+                                                {{ lang.continue }}
+                                            </button>
+                                        </div> -->
+        </form>
+      </div>
+    </div>
+
+    <!-- form 4 -->
+
+    <div class="row" *ngIf="optionActive === 4">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit4()">
+          <div [ngClass]="lang.dir === 'rtl' ? 'row block-rtl' : 'row block'">
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                {{ lang.requestDetailsForm.information }}
+              </div>
+              <div class="col-md-6 justifyContentEnd row px-0">
+                <!-- <img src="assets/image/delete.svg" class="mx-1" /> -->
+                <img
+                  *ngIf="infoOpen"
+                  src="assets/image/circle-arrow-right.svg"
+                  class="mx-1"
+                  (click)="infoOpenClose()"
+                />
+                <img
+                  *ngIf="!infoOpen"
+                  src="assets/image/circle-arrow-down.svg"
+                  class="mx-1"
+                  (click)="infoOpenClose()"
+                />
+              </div>
+
+              <span
+                *ngIf="infoOpen"
+                [ngClass]="lang.dir === 'rtl' ? 'row block-rtl' : 'row block'"
+              >
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span
+                  class="Placeholder-text-Copy col-md-6"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >{{ lang.requestDetailsForm.zakatBaseInvestment }}</span
+                >
+
+                <span
+                  class="col-md-6 block-17"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                >
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{
+                      requestDetails
+                        ? (requestDetails.ZkatBaseBded | number: "0.2")
+                        : ""
+                    }}
+                  </div>
+                </span>
+
+                <div
+                  [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                ></div>
+
+                <span
+                  class="Placeholder-text-Copy col-md-6"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >{{ lang.requestDetailsForm.zakatNetProfit }}</span
+                >
+                <span
+                  class="col-md-6 block-17"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                >
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{
+                      requestDetails
+                        ? (requestDetails.ZkatNetProfit | number: "0.2")
+                        : ""
+                    }}
+                  </div>
+                </span>
+
+                <div
+                  [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                ></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.citNetProfit
+                }}</span>
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{
+                      requestDetails
+                        ? (requestDetails.CitNetProfit | number: "0.2")
+                        : ""
+                    }}
+                  </div>
+                </span>
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.totalProfit
+                }}</span>
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{
+                      requestDetails
+                        ? (requestDetails.TotProfit | number: "0.2")
+                        : ""
+                    }}
+                  </div>
+                </span>
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span
+                  class="Placeholder-text-Copy col-md-6"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >{{ lang.requestDetailsForm.zakatPaid }}</span
+                >
+                <span
+                  class="col-md-6 block-17"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                >
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{
+                      requestDetails
+                        ? (requestDetails.ZkatBdiff | number: "0.2")
+                        : ""
+                    }}
+                  </div>
+                </span>
+
+                <div
+                  [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                ></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.citPaid
+                }}</span>
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{
+                      requestDetails
+                        ? (requestDetails.CitBdiff | number: "0.2")
+                        : ""
+                    }}
+                  </div>
+                </span>
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.noOfDays
+                }}</span>
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ requestDetails ? requestDetails.Days1 : "" }}
+                  </div>
+                </span>
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.returnPeriod
+                }}</span>
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ requestDetails ? requestDetails.RetPeriod : "" }}
+                  </div>
+                </span>
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.saudiProfit
+                }}</span>
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ requestDetails ? requestDetails.SaudiSharePrft : "" }}
+                  </div>
+                </span>
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.nonSaudi
+                }}</span>
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ requestDetails ? requestDetails.NssaudiSharePrft : "" }}
+                  </div>
+                </span>
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span
+                  class="Placeholder-text-Copy col-md-6"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >{{ lang.requestDetailsForm.zakatPercent }}</span
+                >
+                <span
+                  class="col-md-6 block-17"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                >
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ requestDetails ? requestDetails.ZakatPercen : "" }}
+                  </div>
+                </span>
+
+                <div
+                  [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                ></div>
+
+                <span
+                  class="Placeholder-text-Copy col-md-6"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                  >{{ lang.requestDetailsForm.minimumZakat }}</span
+                >
+                <span
+                  class="col-md-6 block-17"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                >
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{
+                      requestDetails
+                        ? (requestDetails.MinZkatBase | number: "0.2")
+                        : ""
+                    }}
+                  </div>
+                </span>
+
+                <div
+                  [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"
+                  *ngIf="requestDetails?.SbForm11 !== 'X'"
+                ></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.requestDetailsForm.ninNumber
+                }}</span>
+
+                <span class="col-md-6 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ ninNumber }}
+                  </div>
+                </span>
+
+                <!-- <span class="col-md-6">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    56543434345
+                  </div>
+                </span> -->
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span class="Placeholder-text-Copy col-md-10">{{
+                  lang.requestDetailsForm.totalInvestment
+                }}</span>
+                <span class="col-md-2 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ getTotalInv() | number: "0.2" }}
+                  </div>
+                </span>
+
+                <br /><br /><br />
+
+                <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div>
+
+                <span class="Placeholder-text-Copy col-md-10">{{
+                  lang.requestDetailsForm.totalReturn
+                }}</span>
+                <span class="col-md-2 block-17">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ getTotalReturn() | number: "0.2" }}
+                  </div>
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div
+            *ngFor="
+              let investment of investmentDetails;
+              let investmentIndex = index
+            "
+            [ngClass]="
+              lang.dir === 'rtl' ? 'row block-rtl mt-3' : 'row block mt-3'
+            "
+          >
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                {{ lang.summaryForm.investmentDetails }}
+              </div>
+              <div class="col-md-6 justifyContentEnd row px-0">
+                <img
+                  *ngIf="closedInvestmentSummary.indexOf(investmentIndex) < 0"
+                  src="assets/image/circle-arrow-right.svg"
+                  class="mx-1"
+                  (click)="toggleInvestmentDropdownSummary(investmentIndex)"
+                />
+                <img
+                  *ngIf="closedInvestmentSummary.indexOf(investmentIndex) > -1"
+                  src="assets/image/circle-arrow-down.svg"
+                  class="mx-1"
+                  (click)="toggleInvestmentDropdownSummary(investmentIndex)"
+                />
+              </div>
+
+              <!-- <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div> -->
+              <div
+                class="row mx-0 justify-content-between"
+                *ngIf="closedInvestmentSummary.indexOf(investmentIndex) < 0"
+              >
+                <div class="Rectangle-12New row col-md-12 mx-0"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.summaryForm.sukukBondName
+                }}</span>
+                <span class="col-md-6">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ getBondSetData(investment["BondNo"]) }}
+                  </div>
+                </span>
+
+                <!-- <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div> -->
+                <div class="Rectangle-12New row col-md-12 mx-0"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.summaryForm.valueOfInvestment
+                }}</span>
+                <span class="col-md-6">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ investment["InvValue"] | number: "0.2" }}
+                  </div>
+                </span>
+
+                <!-- <div [ngClass]="lang.dir === 'rtl' ? 'hr-rtl' : 'hr'"></div> -->
+                <div class="Rectangle-12New row col-md-12 mx-0"></div>
+
+                <span class="Placeholder-text-Copy col-md-6">{{
+                  lang.summaryForm.returnOnInvestment
+                }}</span>
+                <span class="col-md-6">
+                  <div class="Placeholder-text-Copy justifyContentEnd row">
+                    {{ investment["InvReturn"] | number: "0.2" }}
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="border row justify-content-between mx-0 mt-3 p-3 textDark primary-background"
+            *ngIf="requestDetails?.SbForm11 !== 'X'"
+          >
+            <span class="sstbold calculationHeading">{{
+              lang.requestDetailsForm.zakatBaseAfterDeduction
+            }}</span>
+            <span class="sstmedium">{{
+              zakatBaseAfterDeduction | number: "0.2"
+            }}</span>
+          </div>
+
+          <div
+            class="border row justify-content-between mx-0 mt-3 p-3 textDark primary-background"
+            *ngIf="
+              requestDetails?.TaxpayerTp === 'M' ||
+              requestDetails?.TaxpayerTp === 'F'
+            "
+          >
+            <span class="sstbold calculationHeading">{{
+              lang.requestDetailsForm.refundableCIT
+            }}</span>
+            <span class="sstmedium">{{ refundableCIT | number: "0.2" }}</span>
+          </div>
+
+          <div
+            class="border row justify-content-between mx-0 mt-3 p-3 textDark primary-background"
+            *ngIf="
+              (requestDetails?.TaxpayerTp === 'M' ||
+                requestDetails?.TaxpayerTp === 'S') &&
+              requestDetails?.SbForm11 !== 'X'
+            "
+          >
+            <span class="sstbold calculationHeading">{{
+              lang.requestDetailsForm.refundableZakat
+            }}</span>
+            <span class="sstmedium">{{ refundableZakat | number: "0.2" }}</span>
+          </div>
+
+          <div
+            [ngClass]="
+              lang.dir === 'rtl' ? 'row block-rtl mt-3' : 'row block mt-3'
+            "
+          >
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/details.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang.summaryForm.accountDetails }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 justifyContentEnd row">
+                <div
+                  class="edit-button"
+                  (click)="goToStep(2)"
+                  *ngIf="!existingApplication || requestDetails?.Fbnumz === ''"
+                >
+                  {{ lang.edit }}
+                </div>
+              </div>
+
+              <div
+                [ngClass]="lang.dir === 'rtl' ? 'hr-rtl mx-0' : 'hr mx-0'"
+              ></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">
+                  {{ lang.summaryForm.ibanAccountNumber }}
+                </div>
+                <span class="Placeholder-text-Copy block-3 col-md-6">{{
+                  addIban ? newIban["value"] : ibanNumber["value"]
+                }}</span>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">
+                  {{ lang.summaryForm.ibanLinkedIdType }}
+                </div>
+                <span class="Placeholder-text-Copy block-3 col-md-6">{{
+                  ibanLinkedText
+                }}</span>
+              </div>
+
+              <div
+                [ngClass]="lang.dir === 'rtl' ? 'hr-rtl mx-0' : 'hr mx-0'"
+              ></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">
+                  {{ lang.summaryForm.ibanLinkedIdNumber }}
+                </div>
+                <span class="Placeholder-text-Copy block-3 col-md-6">{{
+                  ibanLinkedNumber.value
+                }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            [ngClass]="
+              lang.dir === 'rtl' ? 'row block-rtl mt-3' : 'row block mt-3'
+            "
+          >
+            <div class="row border" style="width: 100%">
+              <div class="col-md-6 sectionTitle block-2">
+                <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                  <div class="roundedIcon">
+                    <img src="assets/image/details.svg" />
+                  </div>
+                  <div class="sectionTitle fwb px-2">
+                    {{ lang.summaryForm.attachments }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 justifyContentEnd row">
+                <div
+                  class="edit-button"
+                  (click)="goToStep(3)"
+                  *ngIf="!existingApplication || requestDetails?.Fbnumz === ''"
+                >
+                  {{ lang.edit }}
+                </div>
+              </div>
+
+              <div
+                [ngClass]="lang.dir === 'rtl' ? 'hr-rtl mx-0' : 'hr mx-0'"
+              ></div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">
+                  {{ lang.summaryForm.attachAccountantCetification }}
+                </div>
+                <div class="summary-attachments">
+                  <span
+                    class="zs-attachmentContainer"
+                    *ngFor="let certificate of certificatesAttachments"
+                    ><span class="value textDark mt-1 zs-longText">{{
+                      certificate["Filename"]
+                    }}</span>
+                    <img
+                      class="zs-summaryAttachment"
+                      [src]="
+                        isPdf(certificate['Filename'])
+                          ? 'assets/image/generic-documents.png'
+                          : 'assets/image/generic-documents.png'
+                      "
+                  /></span>
+                </div>
+              </div>
+
+              <div class="col-md-6 block-5">
+                <div class="matLabel block-4">
+                  {{ lang.summaryForm.attachInvestmentStatement }}
+                </div>
+                <div class="summary-attachments">
+                  <span
+                    class="zs-attachmentContainer"
+                    *ngFor="let tadawul of tadawulAttachments"
+                  >
+                    <span class="value textDark mt-1 zs-longText">{{
+                      tadawul["Filename"]
+                    }}</span>
+                    <img
+                      class="zs-summaryAttachment"
+                      [src]="
+                        isPdf(tadawul['Filename'])
+                          ? 'assets/image/generic-documents.png'
+                          : 'assets/image/generic-documents.png'
+                      "
+                    />
+                  </span>
+                </div>
+              </div>
+
+              <div
+                [ngClass]="lang.dir === 'rtl' ? 'hr-rtl mx-0' : 'hr mx-0'"
+              ></div>
+
+              <div class="col-md-12 block-5">
+                <div class="matLabel block-4">
+                  {{ lang.summaryForm.otherSupportDoc }}
+                </div>
+                <div class="summary-attachments">
+                  <span
+                    *ngFor="let attachment of otherAttachments"
+                    class="value textDark mt-1 zs-longText zs-attachmentContainer"
+                    >{{ attachment["Filename"] }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br /><br />
+
+          <div>
+            <button
+              class="btnPrimary btnprimary-width sstbold"
+              mat-raised-button
+              *ngIf="!existingApplication || requestDetails?.Fbnumz === ''"
+            >
+              {{ lang.confirm }}
+            </button>
+            <a
+              class="btnPrimary btnprimary-width sstbold px-4 py-2 text-decoration-none"
+              *ngIf="requestDetails?.Fbnumz !== ''"
+              [href]="getUrl(requestDetails?.Fbnumz)"
+              >{{ lang.downloadForm }}</a
+            >
+          </div>
+
+          <!-- <div class="mt-5 mb-5">
+                                                <button mat-button type="submit" class="btnCss mt-5">
+                                                    {{ lang.continue }}
+                                                </button>
+                                            </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- form 5 success screen -->
+
+<div class="container alignStart" [dir]="lang.dir" *ngIf="bondsSubmitted">
+  <div class="mini-container mt-5">
+    <img src="assets/image/success.svg" class="Success block-9" />
+
+    <br /><br /><br />
+
+    <div class="pageTitle block-8">
+      {{ lang.successScreenForm.sukukBondsRefund }}
+    </div>
+
+    <div class="sub-heading">
+      {{ lang.successScreenForm.requestSuccessful }}
+    </div>
+
+    <br /><br />
+
+    <div class="row justify-content-center mx-0">
+      <div
+        class="col-md-9 border row vCenter mt-3 justify-content-between py-2 block-13"
+      >
+        <div class="value textGray">
+          {{ lang.successScreenForm.referenceNumber }}
+        </div>
+        <div class="value textDark fw500">{{ fbNumz }}</div>
+      </div>
+    </div>
+
+    <br /><br />
+
+    <button
+      class="btnPrimary btnprimary-width block-9 sstbold"
+      mat-raised-button
+      (click)="refundsRedirect()"
+    >
+      {{ lang.refund }}
+    </button>
+
+    <br /><br />
+
+    <div class="dashboard-heading" (click)="dashboardRedirect()">
+      {{ lang.successScreenForm.dashboard }}
+    </div>
+
+    <br /><br /><br />
+  </div>
+</div>
+
+<!-- card modal -->
+
+<!-- <div class="mt-3 mb-3">
+  <div class="row col-md-12 col-sm-12 col-xs-12 mt-2 mb-3">
+    <div class="col-md-3 col-sm-6 col-xs-12 col-xl-3 mb-3">
+      <mat-card
+        [ngClass]="isActive == 1 ? 'cardActive' : 'cardInActive'"
+        (click)="getModal('sukukBondsCard')"
+      >
+        <div [ngClass]="lang.dir === 'ltr' ? 'acctxt1L' : 'acctxt1R'">
+          <div
+            [ngClass]="isActive == 1 ? 'exciseCardTxt1' : 'exciseCardTxt1In'"
+          >
+            {{ lang.sukukBondsCard.title }}
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div> -->
+
+<!-- start sukuk bonds modal -->
+
+<div
+  class="modal alignStart"
+  id="sukukBondsCard"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+>
+  <div class="modal-dialog center">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('sukukBondsCard')"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+            {{ lang.sukukBondsCard.modalTitle }}
+          </div>
+          <div class="lightCard py-3 pr-3 mb-3 border">
+            <div class="modalInstructions f12 gray font-color">
+              {{ lang.sukukBondsCard.content }}
+            </div>
+          </div>
+
+          <div class="check row mx-0">
+            <mat-checkbox
+              class="checkboxAckCss"
+              [(ngModel)]="instructionsAccepted"
+            >
+            </mat-checkbox>
+            <div
+              class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+              style="font-size: 12px; font-weight: 600"
+            >
+              {{ lang.sukukBondsCard.agree }}
+            </div>
+          </div>
+
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary btnprimary-width sstbold"
+              (click)="closeModal('sukukBondsCard')"
+              mat-raised-button
+              [disabled]="!instructionsAccepted"
+            >
+              {{ lang.confirm }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end sukuk bonds modal  -->
+
+<notifier-container></notifier-container>

@@ -1,0 +1,27 @@
+<mat-dialog-content [dir]="data.direction">
+  <div class="container col-md-12">
+    <div class="row d-block acc-dialog-x-container">
+      <img
+        src="assets/images/close.svg"
+        alt="close"
+        [ngClass]="data.direction === 'ltr' ? 'float-right' : 'float-left'"
+        (click)="onCrossClick()"
+      />
+    </div>
+    <div class="col-md-12" style="padding: 0 75px">
+      <app-filter-dialog
+        *ngIf="data.page === 'filter'"
+        [data]="data"
+        [output]="dataOutput"
+        (close)="onClose()"
+      ></app-filter-dialog>
+      <app-download-dialog
+        *ngIf="data.page === 'download'"
+        [data]="data"
+        [output]="dataOutput"
+        (close)="onClose()"
+      ></app-download-dialog>
+    </div>
+  </div>
+</mat-dialog-content>
+<notifier-container></notifier-container>

@@ -1,0 +1,1525 @@
+<div class="container alignStart" [dir]="translation.direction">
+  <div class="col-md-12" *ngIf="!submitComplete">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb iptax-breadcrumb">
+        <li
+          class="breadcrumb-item"
+          *ngFor="let item of pageTranslation.breadcrumb; let i = index"
+          [ngClass]="item.active ? 'active' : ''"
+        >
+          <a (click)="bredCrumbClick(i)">{{ item.text }}</a>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="col-md-12" *ngIf="!submitComplete">
+    <div class="row mb-3">
+      <span class="stepBack col-md-10 iptax-stepBack" (click)="onBackClick()">
+        <img
+          [src]="
+            translation.direction === 'ltr'
+              ? 'assets/image/arrow-left-green.svg'
+              : 'assets/image/arrow-right-green.svg'
+          "
+          style="width: 24px"
+        />
+        <span style="width: 7px"></span>
+        <span class="iptax-back-text">
+          {{ translation.back }}
+        </span>
+      </span>
+      <div class="col-md-2 stepHeader p-0" *ngIf="isNewApplication">
+        <div
+          [ngClass]="
+            translation.direction === 'ltr' ? 'float-right' : 'float-left'
+          "
+        >
+          <img
+            [style.trasform]="
+              translation.direction === 'rtl' ? 'scaleY(-1)' : ''
+            "
+            [src]="getStepIndicatorImg()"
+          />
+          <img
+            src="assets/image/check.svg"
+            alt="check"
+            class="mx-2"
+            *ngIf="currentStep === 'step4'"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template [ngIf]="currentStep === 'step1'">
+    <div class="col-md-12">
+      <div class="pageTitle">
+        {{ pageTranslation.step1.heading }}
+      </div>
+      <div class="textGray">
+        {{ pageTranslation.step1.subHeading }}
+      </div>
+    </div>
+    <div class="mx-3 iptax-divider mt-3"></div>
+    <div class="col-md-12">
+      <div class="row">
+        <label class="iptax-exciseTitle1 col-12 m-3 p-0">{{
+          pageTranslation.step1.effectiveDateHeading
+        }}</label>
+        <div class="col-md-6">
+          <div
+            class="caption textGray mb-2"
+            [ngClass]="translation.direction === 'ltr' ? 'align-left' : 'align'"
+          >
+            {{ pageTranslation.step1.effectiveDateSubHeading }}
+          </div>
+          <div
+            class="dateRangePicker"
+            [ngClass]="dateError ? 'error-border' : ''"
+          >
+            <input
+              readonly
+              (click)="step1EffectiveDateFromPicker.open()"
+              matInput
+              [matDatepicker]="step1EffectiveDateFromPicker"
+              name="fromdate"
+              style="border: none"
+              [placeholder]="translation.from"
+              [formControl]="fields.step1.formFields.effectiveDate.from"
+              (dateChange)="onEffectiveDateChange('from'); validateDate()"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="step1EffectiveDateToPicker"
+              matDatepickerToggleIcon="none"
+            >
+            </mat-datepicker-toggle>
+
+            <mat-datepicker
+              #step1EffectiveDateFromPicker
+              [calendarHeaderComponent]="calendarComponent"
+            >
+            </mat-datepicker>
+            <span style="display: flex; align-items: center">
+              <img
+                src="assets/image/arrow-right.svg"
+                class="acc-date-arrow"
+                [style.transform]="
+                  translation.direction == 'rtl'
+                    ? 'rotate(180deg)'
+                    : 'rotate(0deg)'
+                "
+              />
+            </span>
+            <input
+              readonly
+              (click)="step1EffectiveDateToPicker.open()"
+              matInput
+              [matDatepicker]="step1EffectiveDateToPicker"
+              name="todate"
+              style="border: none"
+              [placeholder]="translation.to"
+              [formControl]="fields.step1.formFields.effectiveDate.to"
+              (dateChange)="onEffectiveDateChange('to'); validateDate()"
+              required
+            />
+            <mat-datepicker-toggle matSuffix [for]="step1EffectiveDateToPicker">
+              <mat-icon
+                matDatepickerToggleIcon
+                class="d-flex"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'float-right' : 'float-left'
+                "
+              >
+                <img src="assets/image/calendar.svg" alt="calendar" />
+              </mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker
+              #step1EffectiveDateToPicker
+              [calendarHeaderComponent]="calendarComponent"
+            >
+            </mat-datepicker>
+          </div>
+          <div class="position-relative" *ngIf="dateError">
+            <p
+              class="error-container"
+              [ngClass]="
+                translation.direction === 'ltr' ? 'align-left' : 'align'
+              "
+            >
+              {{ dateError }}
+            </p>
+          </div>
+        </div>
+
+        <label class="iptax-exciseTitle1 m-3">{{
+          pageTranslation.step1.currentDeductionHeading
+        }}</label>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.taxPurchaseName }}
+              </div>
+              <input
+                class="commonInput"
+                type="text"
+                [placeholder]="pageTranslation.step1.taxSuppliesPlaceholder"
+                [formControl]="
+                  fields.step1.formFields.currentDeduction.taxablePurchaseName
+                "
+                [attr.disabled]="disableCurrentInputFields.taxable ? '' : null"
+                [ngClass]="{
+                  'error-border':
+                    !fields.step1.formFields.currentDeduction
+                      .taxablePurchaseName.valid &&
+                    fields.step1.formFields.currentDeduction.taxablePurchaseName
+                      .touched
+                }"
+              />
+              <div
+                class="position-relative"
+                *ngIf="
+                  fields.step1.formFields.currentDeduction.taxablePurchaseName
+                    .invalid &&
+                  fields.step1.formFields.currentDeduction.taxablePurchaseName
+                    .touched
+                "
+              >
+                <p
+                  class="error-container"
+                  [ngClass]="
+                    translation.direction === 'ltr' ? 'align-left' : 'align'
+                  "
+                >
+                  {{ pageTranslation.step1.error.taxablePurchaseName }}
+                </p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.taxPurchasePercent }}
+              </div>
+              <div>
+                <input
+                  class="commonInput"
+                  type="number"
+                  [formControl]="
+                    fields.step1.formFields.currentDeduction
+                      .taxablePurchasePercent
+                  "
+                  min="0.00"
+                  max="100.00"
+                  appNumberInput
+                  decimals="2"
+                  (input)="
+                    onBlurKey(
+                      fields.step1.formFields.currentDeduction
+                        .taxablePurchasePercent,
+                      fields.step1.formFields.currentDeduction
+                        .exemptPurchasePercent
+                    )
+                  "
+                  [ngClass]="{ 'error-border': taxInput }"
+                />
+                <span class="textGray iptax-percent-suffix"> % </span>
+                <div class="position-relative">
+                  <p
+                    class="error-container"
+                    [ngClass]="
+                      translation.direction === 'ltr' ? 'align-left' : 'align'
+                    "
+                  >
+                    {{ taxInput }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-md-3 mt-3"
+              [ngClass]="
+                translation.direction === 'ltr' ? 'align-left' : 'align'
+              "
+            >
+              <span class="caption textGray mb-2">
+                {{ pageTranslation.step1.deductionSideNote }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.exemptPurchaseName }}
+              </div>
+              <input
+                class="commonInput"
+                type="text"
+                [formControl]="
+                  fields.step1.formFields.currentDeduction.exemptPurchaseName
+                "
+                [placeholder]="pageTranslation.step1.exemptSuppliesPlaceholder"
+                [attr.disabled]="disableCurrentInputFields.exempt ? '' : null"
+                [ngClass]="{
+                  'error-border':
+                    !fields.step1.formFields.currentDeduction.exemptPurchaseName
+                      .valid &&
+                    fields.step1.formFields.currentDeduction.exemptPurchaseName
+                      .touched
+                }"
+              />
+              <div
+                class="position-relative"
+                *ngIf="
+                  fields.step1.formFields.currentDeduction.exemptPurchaseName
+                    .invalid &&
+                  fields.step1.formFields.currentDeduction.exemptPurchaseName
+                    .touched
+                "
+              >
+                <p
+                  class="error-container"
+                  [ngClass]="
+                    translation.direction === 'ltr' ? 'align-left' : 'align'
+                  "
+                >
+                  {{ pageTranslation.step1.error.exemptPurchaseName }}
+                </p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.exemptPurchasePercent }}
+              </div>
+              <div>
+                <input
+                  type="number"
+                  [formControl]="
+                    fields.step1.formFields.currentDeduction
+                      .exemptPurchasePercent
+                  "
+                  disabled
+                  class="commonInput"
+                />
+                <span class="textGray iptax-percent-suffix"> % </span>
+              </div>
+            </div>
+            <div
+              class="col-md-3 mt-3"
+              [ngClass]="
+                translation.direction === 'ltr' ? 'align-left' : 'align'
+              "
+            >
+              <span class="caption textGray mb-2">
+                {{ pageTranslation.step1.deductionSideNote }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <label class="iptax-exciseTitle1 m-3">{{
+          pageTranslation.step1.proposedDeductionHeading
+        }}</label>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.taxPurchaseName }}
+              </div>
+              <input
+                class="commonInput"
+                type="text"
+                [formControl]="
+                  fields.step1.formFields.proposedDeduction.taxablePurchaseName
+                "
+                [placeholder]="pageTranslation.step1.taxSuppliesPlaceholder"
+                [ngClass]="{
+                  'error-border':
+                    !fields.step1.formFields.proposedDeduction
+                      .taxablePurchaseName.valid &&
+                    fields.step1.formFields.proposedDeduction
+                      .taxablePurchaseName.touched
+                }"
+              />
+              <div
+                class="position-relative"
+                *ngIf="
+                  fields.step1.formFields.proposedDeduction.taxablePurchaseName
+                    .invalid &&
+                  fields.step1.formFields.proposedDeduction.taxablePurchaseName
+                    .touched
+                "
+              >
+                <p
+                  class="error-container"
+                  [ngClass]="
+                    translation.direction === 'ltr' ? 'align-left' : 'align'
+                  "
+                >
+                  {{ pageTranslation.step1.error.taxablePurchaseName }}
+                </p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.taxPurchasePercent }}
+              </div>
+              <div>
+                <div>
+                  <input
+                    class="commonInput"
+                    type="number"
+                    [formControl]="
+                      fields.step1.formFields.proposedDeduction
+                        .taxablePurchasePercent
+                    "
+                    min="0.00"
+                    max="100.00"
+                    appNumberInput
+                    decimals="2"
+                    (input)="
+                      onBlur(
+                        fields.step1.formFields.proposedDeduction
+                          .taxablePurchasePercent,
+                        fields.step1.formFields.proposedDeduction
+                          .exemptPurchasePercent
+                      )
+                    "
+                    [ngClass]="{ 'error-border': taxablePurchasePercent }"
+                  />
+                  <span class="textGray iptax-percent-suffix"> % </span>
+                  <div class="position-relative">
+                    <p
+                      class="error-container"
+                      [ngClass]="
+                        translation.direction === 'ltr' ? 'align-left' : 'align'
+                      "
+                    >
+                      {{ taxablePurchasePercent }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-md-3 mt-3"
+              [ngClass]="
+                translation.direction === 'ltr' ? 'align-left' : 'align'
+              "
+            >
+              <span class="caption textGray mb-2">
+                {{ pageTranslation.step1.deductionSideNote }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-3">
+          <div class="row">
+            <div class="col-md-6">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.exemptPurchaseName }}
+              </div>
+              <input
+                class="commonInput"
+                type="text"
+                [formControl]="
+                  fields.step1.formFields.proposedDeduction.exemptPurchaseName
+                "
+                [placeholder]="pageTranslation.step1.exemptSuppliesPlaceholder"
+                [ngClass]="{
+                  'error-border':
+                    !fields.step1.formFields.proposedDeduction
+                      .exemptPurchaseName.valid &&
+                    fields.step1.formFields.proposedDeduction.exemptPurchaseName
+                      .touched
+                }"
+              />
+              <div
+                class="position-relative"
+                *ngIf="
+                  fields.step1.formFields.proposedDeduction.exemptPurchaseName
+                    .invalid &&
+                  fields.step1.formFields.proposedDeduction.exemptPurchaseName
+                    .touched
+                "
+              >
+                <p
+                  class="error-container"
+                  [ngClass]="
+                    translation.direction === 'ltr' ? 'align-left' : 'align'
+                  "
+                >
+                  {{ pageTranslation.step1.error.exemptPurchaseName }}
+                </p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.exemptPurchasePercent }}
+              </div>
+              <input
+                type="number"
+                [formControl]="
+                  fields.step1.formFields.proposedDeduction
+                    .exemptPurchasePercent
+                "
+                disabled
+                class="commonInput"
+              />
+              <span class="textGray iptax-percent-suffix"> % </span>
+            </div>
+            <div
+              class="col-md-3 mt-3"
+              [ngClass]="
+                translation.direction === 'ltr' ? 'align-left' : 'align'
+              "
+            >
+              <span class="caption textGray mb-2">
+                {{ pageTranslation.step1.deductionSideNote }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <label class="iptax-exciseTitle1 m-3">
+          {{ pageTranslation.step1.notesHeading }}
+        </label>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <div
+                class="caption textGray mb-2"
+                [ngClass]="
+                  translation.direction === 'ltr' ? 'align-left' : 'align'
+                "
+              >
+                {{ pageTranslation.step1.notes }}
+              </div>
+              <textarea
+                class="commonInput iptax-input-field"
+                style="min-height: 96px; position: relative"
+                [formControl]="fields.step1.formFields.notes"
+                (keyup)="onNotesKeyup($event)"
+                [maxlength]="getNotesMaxLength()"
+                [ngClass]="{
+                  'error-border':
+                    fields.step1.formFields.notes.invalid &&
+                    fields.step1.formFields.notes.touched
+                }"
+              ></textarea>
+              <span class="caption textGray mb-2 iptax-notes-remaining">
+                {{ notesLength }}
+              </span>
+              <div
+                class="position-relative"
+                *ngIf="
+                  fields.step1.formFields.notes.invalid &&
+                  fields.step1.formFields.notes.touched
+                "
+              >
+                <p
+                  class="error-container"
+                  [ngClass]="
+                    translation.direction === 'ltr' ? 'align-left' : 'align'
+                  "
+                >
+                  {{ pageTranslation.step1.error.notes }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="currentStep === 'step2'">
+    <div class="col-md-12">
+      <div class="pageTitle">
+        {{ pageTranslation.step2.heading }}
+      </div>
+      <div class="textGray">
+        {{ pageTranslation.step2.subHeading }}
+      </div>
+    </div>
+    <div class="mx-3 iptax-divider mt-3"></div>
+
+    <div class="col-md-12">
+      <div
+        class="row attach-row"
+        *ngFor="let inputObj of fields.step2.formFields.attachments; index as i"
+      >
+        <div class="col-md-5">
+          <div
+            class="caption textGray mb-2 mt-4"
+            [ngClass]="translation.direction === 'ltr' ? 'align-left' : 'align'"
+          >
+            {{ pageTranslation.step2.attachmentName }}
+          </div>
+          <input
+            type="text"
+            class="commonInput"
+            [placeholder]="pageTranslation.step2.attachmentName"
+            [formControl]="inputObj.name"
+            (keyup)="onAttachmentNameKeyup(inputObj.name)"
+            [ngClass]="{
+              'error-border': !inputObj.name.valid && inputObj.name.touched
+            }"
+          />
+          <div
+            class="position-relative"
+            *ngIf="inputObj.name.invalid && inputObj.name.touched"
+          >
+            <p
+              class="error-container"
+              [ngClass]="
+                translation.direction === 'ltr' ? 'align-left' : 'align'
+              "
+            >
+              {{ pageTranslation.step2.error.attachmentName }}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 mt-5">
+          <div
+            class="add-card"
+            [ngClass]="inputObj.files.length >= 5 ? 'card-disabled' : ''"
+            (click)="
+              validateAttachmentName(inputObj) &&
+                inputObj.files.length < 5 &&
+                openForm('Attachments', i)
+            "
+          >
+            <img src="assets/image/add.svg" class="px-2" />
+            <div class="value fwb textPrimary mx-1">
+              {{ pageTranslation.step2.addAttachment }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div
+            class="caption textGray mb-3 mt-4"
+            [ngClass]="translation.direction === 'ltr' ? 'align-left' : 'align'"
+          >
+            {{ pageTranslation.step2.attachmentNo }}
+          </div>
+          <p
+            class="iptax-refund-value mb-0 attach-num"
+            (click)="openForm('Attachments', i)"
+          >
+            {{ inputObj.files.length }}
+          </p>
+        </div>
+
+        <div class="col-md-1 mt-5 attach-delete">
+          <img
+            src="assets/image/delete.svg"
+            *ngIf="i > 0"
+            (click)="onDeleteAttachmentRow(inputObj, i)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row col-md-12 mt-4">
+      <div class="col-md-5">
+        <div
+          class="add-card"
+          [ngClass]="
+            fields.step2.formFields.attachments.length >= 10
+              ? 'card-disabled'
+              : ''
+          "
+          (click)="
+            fields.step2.formFields.attachments.length < 10 &&
+              fields.step2.addAttachments()
+          "
+        >
+          <img src="assets/image/add.svg" class="px-2" />
+          <div class="value fwb textPrimary mx-1">
+            {{ pageTranslation.step2.addAttachmentType }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <div class="caution">
+        <div class="matLabel">
+          <img
+            src="assets/images/icon-info.svg"
+            [ngClass]="
+              translation.direction == 'ltr' ? 'img-icon-rtl' : 'img-icon-ltr'
+            "
+          />{{ pageTranslation.step2.caution }}
+        </div>
+        <div class="matLabel m-l-4">
+          {{ pageTranslation.step2.caution1 }}
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="currentStep === 'step3'">
+    <!-- Decleration -->
+    <div class="col-md-12">
+      <div class="pageTitle">
+        {{ pageTranslation.step3.heading }}
+      </div>
+      <div class="textGray">
+        {{ pageTranslation.step3.subHeading }}
+      </div>
+    </div>
+    <div class="mx-3 iptax-divider mt-3"></div>
+    <div class="col-md-12 mt-4">
+      <form class="form" [formGroup]="declarationForm">
+        <div class="col-md-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="matLabel labelMarginBottom">
+                {{ pageTranslation.step3.idType }}
+              </div>
+              <mat-select
+                class="commonMatSelect"
+                formControlName="idType"
+                (selectionChange)="onIdSelect()"
+                [ngClass]="{
+                  'input-error':
+                    declarationForm.controls.idType.invalid &&
+                    declarationForm.controls.idType.touched
+                }"
+              >
+                <mat-option
+                  [value]="item.value"
+                  *ngFor="let item of pageTranslation.step3.idTypeDropdown"
+                >
+                  {{ item.text }}</mat-option
+                >
+              </mat-select>
+            </div>
+            <div class="col-md-6">
+              <div class="matLabel labelMarginBottom">
+                {{ pageTranslation.step3.idNumber }}
+              </div>
+              <input
+                class="commonInput"
+                formControlName="idNum"
+                [readOnly]="declarationForm.value.idType !== 'ZS0003'"
+                (input)="removeSpace2()"
+                (blur)="initiateGCCIDValidation()"
+                [ngClass]="
+                  declarationForm.get('idType').value === 'ZS0003' &&
+                  declarationForm.controls.idNum.invalid &&
+                  declarationForm.controls.idNum.touched
+                    ? 'input-error'
+                    : ''
+                "
+                maxlength="15"
+              />
+              <div
+                *ngIf="
+                  declarationForm.get('idType').value === 'ZS0003' &&
+                  declarationForm.get('idNum').touched &&
+                  declarationForm.get('idNum').invalid
+                "
+              >
+                <div class="position-relative">
+                  <p class="error-container">
+                    {{ pageTranslation.step3.idError }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-5 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="matLabel labelMarginBottom">
+                {{ pageTranslation.step3.contactPerson }}
+              </div>
+              <input
+                class="commonInput"
+                formControlName="name"
+                [readOnly]="!isIdValidated || idValidatedName !== ''"
+                [ngClass]="{
+                  'input-error':
+                    declarationForm.get('name').touched &&
+                    declarationForm.get('name').invalid &&
+                    idValidatedName === ''
+                }"
+                (input)="nameValidator($event)"
+                (blur)="onInputBlur()"
+              />
+              <div
+                *ngIf="
+                  declarationForm.get('name').touched &&
+                  declarationForm.get('name').invalid &&
+                  idValidatedName === ''
+                "
+              >
+                <div class="position-relative">
+                  <p class="error-container">
+                    {{ pageTranslation.step3.error.contactPerson.required }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-5 px-0">
+          <div class="check row mx-0">
+            <mat-checkbox
+              class="checkboxAckCss"
+              formControlName="checkTerm"
+              [ngClass]="{
+                'checkbox-error': !declarationForm.value.checkTerm
+              }"
+            >
+            </mat-checkbox>
+            <div
+              class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+              style="
+                font-size: 12px;
+                font-weight: 600;
+                width: 726px;
+                height: 16px;
+              "
+            >
+              {{ pageTranslation.step3.declaration }}
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="currentStep === 'step4'">
+    <div class="col-md-12">
+      <div class="pageTitle" *ngIf="!isViewOnly">
+        {{ pageTranslation.step4.heading }}
+      </div>
+      <div class="pageTitle" *ngIf="isViewOnly">
+        {{ translation.inputTaxDeductionmMethod }}
+      </div>
+
+      <div class="textGray">
+        {{ pageTranslation.step4.subHeading }}
+      </div>
+    </div>
+    <div class="mx-3 iptax-divider mt-3"></div>
+    <div class="col-md-12 mt-4">
+      <div class="card iptax-custom-card">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row iptax-custom-card-title">
+              <div class="col-md-11">
+                <span class="roundedIcon">
+                  <img
+                    src="assets/image/objections.svg"
+                    alt="objections"
+                    style="padding: 10px"
+                  />
+                </span>
+                <span style="margin: auto 16px">{{
+                  pageTranslation.step1.heading
+                }}</span>
+              </div>
+              <div
+                class="col-md-1 stepHeader iptax-card-action mt-2"
+                (click)="onEditClick(0)"
+                *ngIf="isNewApplication"
+              >
+                {{ translation.edit }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="iptax-divider mt-0"></div>
+        <!-- <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-12 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.effectiveDate }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{ fields.step1.getEffectiveDateForSummary(lang) }}
+              </p>
+            </div>
+          </div>
+        </div> -->
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-12 section-title">
+              {{ pageTranslation.step4.effectiveDate }}
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.effectiveFrom }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{ fields.step1.getEffectiveDateForSummary(lang).from }}
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                <span>{{ pageTranslation.step4.effectiveTo }}</span>
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>{{
+                  fields.step1.getEffectiveDateForSummary(lang).to
+                }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-12 section-title">
+              {{ pageTranslation.step4.current }}
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.proxyTaxable }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{
+                  fields.step1.formFields.currentDeduction.taxablePurchaseName
+                    .value
+                }}
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.proxyExempt }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{
+                  fields.step1.formFields.currentDeduction.exemptPurchaseName
+                    .value
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                <span>{{ pageTranslation.step4.taxable }}</span>
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>{{
+                  fields.step1.formFields.currentDeduction
+                    .taxablePurchasePercent.value
+                }}</span>
+                <span> % </span>
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                <span>{{ pageTranslation.step4.exempt }}</span>
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>{{
+                  fields.step1.formFields.currentDeduction.exemptPurchasePercent
+                    .value
+                }}</span>
+                <span> % </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-12 section-title">
+              {{ pageTranslation.step4.proposed }}
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.proxyTaxable }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>{{
+                  fields.step1.formFields.proposedDeduction.taxablePurchaseName
+                    .value
+                }}</span>
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.proxyExempt }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>{{
+                  fields.step1.formFields.proposedDeduction.exemptPurchaseName
+                    .value
+                }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                <span>{{ pageTranslation.step2.taxable }}</span>
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>
+                  {{
+                    fields.step1.formFields.proposedDeduction
+                      .taxablePurchasePercent.value
+                  }}</span
+                >
+                <span> % </span>
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.exempt }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>
+                  {{
+                    fields.step1.formFields.proposedDeduction
+                      .exemptPurchasePercent.value
+                  }}
+                </span>
+                <span> % </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-12 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.notes }}
+              </p>
+              <p
+                class="iptax-refund-value mb-0"
+                style="white-space: pre-wrap"
+                [innerHTML]="fields.step1.getNotesForSummary()"
+              ></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <div class="card iptax-custom-card">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row iptax-custom-card-title">
+              <div class="col-md-11">
+                <span class="iptax-summary-icon">
+                  <img
+                    src="assets/image/attach.svg"
+                    alt="attach"
+                    style="padding: 10px"
+                  />
+                </span>
+                <span style="margin: auto 16px">{{
+                  pageTranslation.step2.heading
+                }}</span>
+              </div>
+              <div
+                class="col-md-1 stepHeader iptax-card-action mt-2"
+                (click)="onEditClick(1)"
+                *ngIf="isNewApplication"
+              >
+                {{ translation.edit }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div
+            *ngFor="
+              let attachObj of fields.step2.getAttachmentsForSummary();
+              index as i
+            "
+            class="row"
+            style="text-align: start"
+          >
+            <div class="col-md-6 col-12">
+              <p *ngIf="i < 1" class="iptax-refund-label mb-0">
+                <span>{{ pageTranslation.step2.attachmentName }}</span>
+              </p>
+              <p class="iptax-refund-value mb-0">
+                <span>{{ attachObj.attachmentName }}</span>
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p *ngIf="i < 1" class="iptax-refund-label mb-0">
+                <span>{{ pageTranslation.step2.attachmentNo }}</span>
+              </p>
+              <p
+                class="iptax-refund-value mb-0 attach-num"
+                (click)="openForm('Attachments', i, true)"
+              >
+                <span>{{ attachObj.files.length }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <div class="card iptax-custom-card">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row iptax-custom-card-title">
+              <div class="col-md-11">
+                <span class="roundedIcon">
+                  <img
+                    src="assets/image/declaration.svg"
+                    alt="declaration"
+                    style="padding: 10px"
+                  />
+                </span>
+                <span style="margin: auto 16px">{{
+                  pageTranslation.step3.heading
+                }}</span>
+              </div>
+              <div
+                class="col-md-1 stepHeader iptax-card-action mt-2"
+                (click)="onEditClick(2)"
+                *ngIf="isNewApplication"
+              >
+                {{ translation.edit }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step3.idType }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{ getIdType() }}
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step3.idNumber }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{ declarationForm.value.idNum }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-0 iptax-divider"></div>
+        <div class="card-body">
+          <div class="row" style="text-align: start">
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step4.dateOfSubmission }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{ currentDate }}
+              </p>
+            </div>
+            <div class="col-md-6 col-12">
+              <p class="iptax-refund-label mb-0">
+                {{ pageTranslation.step3.contactPerson }}
+              </p>
+              <p class="iptax-refund-value mb-0">
+                {{ declarationForm.value.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="submitComplete">
+    <div class="form-success">
+      <img src="assets/image/success.svg" />
+      <span class="form-success-title">{{
+        pageTranslation.submissionPage.requestSentHeading
+      }}</span>
+      <span class="form-success-subtitle">{{
+        pageTranslation.submissionPage.requestSentSubHeading
+      }}</span>
+      <div class="mt-4">
+        <div class="form-success-info">
+          <p>{{ pageTranslation.submissionPage.name }}</p>
+          <span>{{ submitApplicationInfo.name }}</span>
+        </div>
+        <div class="form-success-info">
+          <p>{{ pageTranslation.submissionPage.requestNumber }}</p>
+          <span>{{ submitApplicationInfo.requestNumber }}</span>
+        </div>
+        <div class="form-success-info">
+          <p>{{ pageTranslation.submissionPage.date }}</p>
+          <span>{{ submitApplicationInfo.date }}</span>
+        </div>
+      </div>
+      <!-- <span class="form-success-message">{{
+        stringConstants.add.success.message
+      }}</span> -->
+      <button class="form-success-dl" (click)="downloadAck()">
+        {{ pageTranslation.submissionPage.download }}
+      </button>
+      <span class="form-success-dl2" (click)="onGotoDashboardClick()">{{
+        pageTranslation.submissionPage.gotoDashboard
+      }}</span>
+    </div>
+  </ng-template>
+
+  <div class="col-md-12 mt-4" *ngIf="isNewApplication && !submitComplete">
+    <div [ngClass]="translation.direction === 'ltr' ? 'align-left' : 'align'">
+      <button
+        *ngIf="currentStep"
+        type="button"
+        (click)="onContinueClick()"
+        [disabled]="!getButtonStatus()"
+        mat-raised-button
+        class="btnPrimary"
+      >
+        {{
+          currentStep !== 'step4'
+            ? translation.continueButton
+            : translation.confirmButton
+        }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Id validation Modal -->
+
+<div
+  class="modal"
+  id="aftSelect"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="translation.direction"
+  style="top: 15%"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row text-center mt-3">
+          <div class="col-md-12">
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="labelTxtCss" style="text-align: center">
+                  {{ pageTranslation.step3.idNumber }}
+                </div>
+
+                <input
+                  class="commonInput"
+                  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                  (input)="removeSpace()"
+                  [formControl]="id1"
+                  name="id1"
+                  maxlength="10"
+                  [ngClass]="{
+                    'input-error': idErr1 || id1.touched || apiIdMsg
+                  }"
+                />
+
+                <div
+                  *ngIf="idErr1 || id1.touched || apiIdMsg"
+                  class="invalid-feedback"
+                  style="margin-inline-start: 10px"
+                >
+                  <p
+                    style="
+                      position: relative;
+                      margin-top: 10px;
+                      font-size: 14px;
+                    "
+                  >
+                    {{ validId() }}{{ idMsg ? idMsg : apiIdMsg }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="labelTxtCss mt-3" style="text-align: center">
+                  {{ pageTranslation.step3.dateOfBirth }}
+                </div>
+                <div
+                  class="commomDatePicker"
+                  style="margin: 0 auto"
+                  [ngClass]="{
+                    'input-error': dobErr || (dob1.touched && dob1.invalid)
+                  }"
+                >
+                  <input
+                    readonly
+                    (click)="datePicker.open()"
+                    matInput
+                    [max]="minDate"
+                    [matDatepicker]="datePicker"
+                    name="dob1"
+                    [formControl]="dob1"
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="datePicker">
+                    <mat-icon matDatepickerToggleIcon>
+                      <span style="display: flex">
+                        <img src="assets/image/calendar.svg" alt="calendar"
+                      /></span>
+                    </mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker
+                    #datePicker
+                    [calendarHeaderComponent]="calendarComponent"
+                  >
+                  </mat-datepicker>
+                </div>
+                <div
+                  *ngIf="dobErr || (dob1.touched && dob1.invalid)"
+                  class="invalid-feedback"
+                  style="margin-inline-start: 10px"
+                >
+                  <p
+                    style="
+                      position: relative;
+                      margin-top: 10px;
+                      font-size: 14px;
+                    "
+                  >
+                    {{ dobErr ? dobMsg : pageTranslation.step3.dobMsg }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 mb-2">
+              <button
+                mat-button
+                (click)="validateID2()"
+                style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                "
+                class="btnTCss"
+              >
+                {{ pageTranslation.step3.validate }}
+              </button>
+              <button
+                mat-button
+                style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                "
+                data-dismiss="modal"
+                (click)="reset()"
+                class="btnTCss"
+              >
+                {{ pageTranslation.step3.close }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  Attachment Modal -->
+
+<div
+  class="modal"
+  id="Attachments"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="translation.direction"
+>
+  <div class="modal-dialog center">
+    <div
+      class="modal-content"
+      [ngClass]="
+        translation.direction === 'rtl' ? 'attach-modal-rtl' : 'attach-modal'
+      "
+    >
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('Attachments')"
+            />
+          </div>
+
+          <!-- <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+            {{ 'Attachments' }}
+          </div> -->
+          <div
+            class="pageTitle"
+            [ngClass]="{ 'ar-align': translation.direction === 'rtl' }"
+          >
+            {{ pageTranslation.step2.heading }}
+          </div>
+          <div
+            *ngIf="!attachReadOnly"
+            class="textGray"
+            [ngClass]="{ 'ar-align': translation.direction === 'rtl' }"
+          >
+            {{ pageTranslation.step2.subHeading }}
+          </div>
+          <div class="iptax-divider mt-3"></div>
+
+          <div class="attachments row justify-content-between mx-0 mt-3">
+            <div
+              class="card-uploaded border mb-3"
+              *ngFor="
+                let file of fields.step2.formFields.attachments[attachIndex]
+                  .files;
+                index as i
+              "
+              (click)="attachReadOnly && downloadAttachment(file)"
+            >
+              <div *ngIf="!attachReadOnly" class="card-delete">
+                <img
+                  src="assets/image/delete.svg"
+                  (click)="
+                    onDeleteAttachmentClick(
+                      fields.step2.formFields.attachments[attachIndex],
+                      i
+                    )
+                  "
+                />
+              </div>
+              <div class="card-file-content">
+                <img src="assets/image/generic-documents.png" />
+                <div class="value textDark mt-1 card-main-text fwb file-name">
+                  {{ file.getFileName() }}
+                </div>
+              </div>
+            </div>
+            <div
+              *ngIf="!attachReadOnly"
+              class="card-upload border mb-3"
+              (click)="fileInput.click()"
+              appDragDrop
+              (onFileDropped)="
+                fields.step2.formFields.attachments[attachIndex].files.length <
+                  5 &&
+                  uploadFiles(
+                    fields.step2.formFields.attachments[attachIndex],
+                    $event
+                  )
+              "
+            >
+              <div
+                class="card-upload-content"
+                [ngClass]="
+                  fields.step2.formFields.attachments[attachIndex].files
+                    .length >= 5
+                    ? 'card-disabled'
+                    : ''
+                "
+              >
+                <input
+                  hidden
+                  type="file"
+                  #fileInput
+                  (change)="
+                    uploadFiles(
+                      fields.step2.formFields.attachments[attachIndex],
+                      $event.target.files
+                    )
+                  "
+                  [disabled]="
+                    fields.step2.formFields.attachments[attachIndex].files
+                      .length >= 5
+                  "
+                />
+                <img src="assets/image/attach-grey.svg" />
+                <div class="value textPrimary mt-1 card-main-text fwb">
+                  {{ pageTranslation.step2.dragAndDrop }}
+                </div>
+                <div class="caption textGray mt-1">
+                  {{ pageTranslation.step2.fileMax }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              *ngIf="!attachReadOnly"
+              class="btnPrimary btnprimary-width"
+              mat-raised-button
+              (click)="closeModal('Attachments')"
+            >
+              {{ translation.continueButton }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

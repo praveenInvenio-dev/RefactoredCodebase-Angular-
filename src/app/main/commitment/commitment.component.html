@@ -1,0 +1,533 @@
+<div
+  class="container alignStart my-3 px-0"
+  style="max-width: 899px"
+  [dir]="lang['dir']"
+>
+  <div class="pageTitle textDark">{{ lang["commitments"] }}</div>
+  <div class="row mx-0 mt-3 tabs">
+    <span
+      class="mie-2 value pointer pb-3"
+      [ngClass]="
+        displayedCommitments === 'all'
+          ? 'sstbold selectedTab'
+          : 'sstroman textDark'
+      "
+      (click)="selectCommitment('all')"
+      >{{ lang["allCommitments"] }}</span
+    >
+    <span
+      class="mx-2 value pointer pb-3"
+      [ngClass]="
+        displayedCommitments === 'zakat'
+          ? 'sstbold selectedTab'
+          : 'sstroman textDark'
+      "
+      (click)="selectCommitment('zakat')"
+      >{{ lang["zakatCit"] }}</span
+    >
+    <span
+      class="mx-2 value pointer pb-3"
+      [ngClass]="
+        displayedCommitments === 'vat'
+          ? 'sstbold selectedTab'
+          : 'sstroman textDark'
+      "
+      (click)="selectCommitment('vat')"
+      >{{ lang["vat"] }}</span
+    >
+    <span
+      class="mx-2 value pointer pb-3"
+      [ngClass]="
+        displayedCommitments === 'excise'
+          ? 'sstbold selectedTab'
+          : 'sstroman textDark'
+      "
+      (click)="selectCommitment('excise')"
+      >{{ lang["excise"] }}</span
+    >
+    <span
+      class="mx-2 value pointer pb-3"
+      [ngClass]="
+        displayedCommitments === 'withholding'
+          ? 'sstbold selectedTab'
+          : 'sstroman textDark'
+      "
+      (click)="selectCommitment('withholding')"
+      >{{ lang["withholding"] }}</span
+    >
+  </div>
+  <!-- <div class="row mx-0">
+    <ejs-daterangepicker (renderDayCell)="onLoad($event)" [(ngModel)]="dateRange" (change)="dateRangeSelect($event)"></ejs-daterangepicker>
+    <mat-calendar></mat-calendar>
+    <mat-calendar></mat-calendar>
+    
+    <p-calendar [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [(ngModel)]="rangeDates" [numberOfMonths]="2"  selectionMode="range" [inline]="true">
+
+      <ng-template pTemplate="date" let-date>        
+        <span [ngStyle]="{textDecoration: (date.day < 21 && date.day > 10) ? 'line-through' : 'inherit'}">{{date.day}}</span>
+        <ul class="dots-container">
+          <li class="dot m-2"></li>
+          <li class="dot m-2"></li>
+          <li class="dot m-2"></li>
+        </ul>        
+    </ng-template>
+
+    </p-calendar>
+
+    <sat-calendar
+      class="col-md-6 px-0"      
+      [rangeMode]="true"            
+      [(ngModel)]="dateRange"
+      [beginDate]="beginDate"
+      [endDate]="endDate" 
+      name="satdatepicker"     
+      ngDefaultControl 
+      (dateRangesChange)="dateRangeSelect1($event,dp2)" 
+      #dp1
+      (beginDateSelectedChange)="selectedBeginChange($event,dp2);"
+    >
+    </sat-calendar>
+    
+    <sat-calendar
+      class="col-md-6 px-0"
+      [rangeMode]="true"     
+      [(ngModel)]="dateRange2"
+      [beginDate]="beginDate"
+      [endDate]="endDate"
+      name="satdatepicker"    
+      ngDefaultControl   
+      (dateRangesChange)="dateRangeSelect2($event,dp1)"
+      #dp2
+      (beginDateSelectedChange)="selectedBeginChange2($event,dp1)" 
+      rangeHoverEffect="false"
+    >
+    </sat-calendar>
+  </div> -->
+  <div class="row mx-0 mt-5">
+    <p-calendar
+      [numberOfMonths]="2"
+      [inline]="true"
+      [ngClass]="lang['dir'] === 'ltr' ? 'zs-daterange' : 'zs-daterange-rtl'"
+      selectionMode="range"
+      (onSelect)="primeSelected($event)"
+      [(ngModel)]="primeRange"
+    >
+      <ng-template pTemplate="date" let-date>
+        <span [ngClass]="startOrEndDate(date)">{{ date.day }}</span>
+        <ul class="dots-container">
+          <li class="dot dot-primary" *ngIf="isPaidBill(date)"></li>
+          <li class="dot dot-secondary" *ngIf="isPartialPaidBill(date)"></li>
+          <li class="dot dot-error" *ngIf="isUnpaidBill(date)"></li>
+          <li class="dot dot-black" *ngIf="isUnsubmittedReturn(date)"></li>
+        </ul>
+      </ng-template>
+    </p-calendar>
+  </div>
+  <div class="mt-3 sectionTitle sstbold textDark" *ngIf="dateRange">
+    {{ lang["periodSelected"] }}: {{ getDisplayDate() }}
+  </div>
+  <div class="row mx-0 mt-3 justify-content-between" *ngIf="dateRange">
+    <!-- <div class="row px-0 mx-0 commitmentTile border mb-3" *ngFor="let obligation of dateRangeFilteredObligations; index as i">
+      <div class="commitmentDay commitmentPrimary">
+        <div class="commitmentDate">{{getDate(obligation['Faedn'])}}</div>
+        <div class="commitmentMonth">{{getMonth(obligation['Faedn'])}}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">{{obligation["Text"]}}</div>
+        <div class="commitmentContentAmount">200.000,00 SAR</div>
+      </div>
+      <div class="commitmentArrow">
+        <img src="assets/image/arrow-right-green.svg" />
+      </div>
+    </div> -->
+    <div
+      class="row px-0 mx-0 commitmentTile border mb-3"
+      *ngFor="let bill of dateRangeFilteredBills; index as i"
+    >
+      <div
+        class="commitmentDay"
+        [ngClass]="
+          bill['Status'] === 'P'
+            ? 'commitmentPrimary'
+            : bill['Status'] === 'O'
+            ? 'commitmentError'
+            : bill['Status'] === 'I'
+            ? 'commitmentSecondary'
+            : ''
+        "
+      >
+        <div
+          [ngClass]="
+            lang.dir === 'rtl' ? 'commitmentDateRtl' : 'commitmentDate'
+          "
+        >
+          {{ getDate(bill["Faedn"]) }}
+        </div>
+        <div class="commitmentMonth">{{ getMonth(bill["Faedn"]) }}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">
+          {{
+            bill["Status"] === "P"
+              ? lang["paidBill"]
+              : bill["Status"] === "O"
+              ? lang["unpaidBill"]
+              : bill["Status"] === "I"
+              ? lang["partialPaidBill"]
+              : ""
+          }}
+        </div>
+        <div class="commitmentContentAmount">
+          {{ getNumber(bill["Betrw"]) }} {{ lang["sar"] }}
+        </div>
+      </div>
+      <div class="commitmentArrow">
+        <img
+          src="assets/image/arrow-right-green.svg"
+          [ngClass]="lang.dir === 'rtl' ? 'rotateImage' : ''"
+        />
+      </div>
+    </div>
+
+    <!-- Returns -->
+
+    <div
+      class="row px-0 mx-0 commitmentTile border mb-3"
+      *ngFor="let returnObj of dateRangeFilteredReturns; index as i"
+    >
+      <div
+        class="commitmentDay"
+        [ngClass]="
+          returnObj['returnStatus'] === 'Overdue'
+            ? 'commitmentError'
+            : returnObj['returnStatus'] === 'Unsubmitted'
+            ? 'commitmentBlack'
+            : 'commitmentBlack'
+        "
+      >
+        <div
+          [ngClass]="
+            lang.dir === 'rtl' ? 'commitmentDateRtl' : 'commitmentDate'
+          "
+        >
+          {{ getDate(returnObj["DueDt"]) }}
+        </div>
+        <div class="commitmentMonth">{{ getMonth(returnObj["DueDt"]) }}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">
+          {{ returnObj["IcrStatusAn"] }}
+        </div>
+        <div class="commitmentContentAmount">
+          {{
+            returnObj?.returnType === "zakat"
+              ? lang["zakatCit"]
+              : returnObj?.returnType === "vat"
+              ? lang["vat"]
+              : returnObj?.returnType === "excise"
+              ? lang["excise"]
+              : returnObj?.returnType === "withholding"
+              ? lang["withholding"]
+              : ""
+          }}
+        </div>
+      </div>
+      <div class="commitmentArrow">
+        <img
+          src="assets/image/arrow-right-green.svg"
+          [ngClass]="lang.dir === 'rtl' ? 'rotateImage' : ''"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="mt-3 sectionTitle sstbold textDark" *ngIf="!dateRange">
+    {{ lang["today"] }}
+  </div>
+  <div class="row mx-0 mt-3 justify-content-between" *ngIf="!dateRange">
+    <!-- <div
+      class="row px-0 mx-0 commitmentTile border mb-3"
+      *ngFor="let obligation of todaysObligations; index as i"
+    > -->
+    <!-- <div class="commitmentDay commitmentPrimary">
+        <div class="commitmentDate">{{getDate(obligation['Faedn'])}</div>
+        <div class="commitmentMonth">{{getMonth(obligation['Faedn'])}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">{{obligation["Text"]}}</div>
+        <div class="commitmentContentAmount">200.000,00 SAR</div>
+      </div>
+      <div class="commitmentArrow">
+        <img src="assets/image/arrow-right-green.svg" />
+      </div>
+    </div> -->
+    <div
+      class="row px-0 mx-0 commitmentTile border mb-3"
+      *ngFor="let bill of todaysBills; index as i"
+    >
+      <div
+        class="commitmentDay"
+        [ngClass]="
+          bill['Status'] === 'P'
+            ? 'commitmentPrimary'
+            : bill['Status'] === 'O'
+            ? 'commitmentError'
+            : bill['Status'] === 'I'
+            ? 'commitmentSecondary'
+            : ''
+        "
+      >
+        <div
+          [ngClass]="
+            lang.dir === 'rtl' ? 'commitmentDateRtl' : 'commitmentDate'
+          "
+        >
+          {{ getDate(bill["Faedn"]) }}
+        </div>
+        <div class="commitmentMonth">{{ getMonth(bill["Faedn"]) }}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">
+          {{
+            bill["Status"] === "P"
+              ? lang["paidBill"]
+              : bill["Status"] === "O"
+              ? lang["unpaidBill"]
+              : bill["Status"] === "I"
+              ? lang["partialPaidBill"]
+              : ""
+          }}
+        </div>
+        <div class="commitmentContentAmount">
+          {{ bill["Betrw"] }} {{ lang["sar"] }}
+        </div>
+      </div>
+      <div class="commitmentArrow">
+        <img
+          src="assets/image/arrow-right-green.svg"
+          [ngClass]="lang.dir === 'rtl' ? 'rotateImage' : ''"
+        />
+      </div>
+    </div>
+
+    <!-- Returns -->
+
+    <div
+      class="row px-0 mx-0 commitmentTile border mb-3"
+      *ngFor="let returnObj of todaysReturns; index as i"
+    >
+      <div
+        class="commitmentDay"
+        [ngClass]="
+          returnObj['returnStatus'] === 'Overdue'
+            ? 'commitmentError'
+            : returnObj['returnStatus'] === 'Unsubmitted'
+            ? 'commitmentBlack'
+            : 'commitmentBlack'
+        "
+      >
+        <div
+          [ngClass]="
+            lang.dir === 'rtl' ? 'commitmentDateRtl' : 'commitmentDate'
+          "
+        >
+          {{ getDate(returnObj["DueDt"]) }}
+        </div>
+        <div class="commitmentMonth">{{ getMonth(returnObj["DueDt"]) }}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">
+          {{ returnObj["IcrStatusAn"] }}
+        </div>
+        <div class="commitmentContentAmount">
+          {{
+            returnObj?.returnType === "zakat"
+              ? lang["zakatCit"]
+              : returnObj?.returnType === "vat"
+              ? lang["vat"]
+              : returnObj?.returnType === "excise"
+              ? lang["excise"]
+              : returnObj?.returnType === "withholding"
+              ? lang["withholding"]
+              : ""
+          }}
+        </div>
+      </div>
+      <div class="commitmentArrow">
+        <img
+          src="assets/image/arrow-right-green.svg"
+          [ngClass]="lang.dir === 'rtl' ? 'rotateImage' : ''"
+        />
+      </div>
+    </div>
+    <!-- <div class="row px-0 mx-0 commitmentTile border mb-3">
+      <div class="commitmentDay commitmentError">
+        <div class="commitmentDate">5</div>
+        <div class="commitmentMonth">May</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">{{lang["unpaidBill"]}}</div>
+        <div class="commitmentContentAmount">200.000,00 SAR</div>
+      </div>
+      <div class="commitmentArrow">
+        <img src="assets/image/arrow-right-green.svg" />
+      </div>
+    </div>
+    <div class="row px-0 mx-0 commitmentTile border mb-3">
+      <div class="commitmentDay commitmentSecondary">
+        <div class="commitmentDate">5</div>
+        <div class="commitmentMonth">May</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">{{lang["partialPaidBill"]}}</div>
+        <div class="commitmentContentAmount">200.000,00 SAR</div>
+      </div>
+      <div class="commitmentArrow">
+        <img src="assets/image/arrow-right-green.svg" />
+      </div>
+    </div>
+    <div class="row px-0 mx-0 commitmentTile border mb-3">
+      <div class="commitmentDay commitmentBlack">
+        <div class="commitmentDate">5</div>
+        <div class="commitmentMonth">May</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">{{lang["unsubmittedReturn"]}}</div>
+        <div class="commitmentContentAmount">200.000,00 SAR</div>
+      </div>
+      <div class="commitmentArrow">
+        <img src="assets/image/arrow-right-green.svg" />
+      </div>
+    </div>
+    <div class="row px-0 mx-0 commitmentTile border mb-3">
+      <div class="commitmentDay commitmentPrimary">
+        <div class="commitmentDate">5</div>
+        <div class="commitmentMonth">May</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">{{lang["paidBill"]}}</div>
+        <div class="commitmentContentAmount">200.000,00 SAR</div>
+      </div>
+      <div class="commitmentArrow">
+        <img src="assets/image/arrow-right-green.svg" />
+      </div>
+    </div> -->
+    <!-- </div> -->
+  </div>
+  <div class="mt-3 sectionTitle sstbold textDark" *ngIf="!dateRange">
+    {{ lang["nextCommitments"] }}
+  </div>
+  <div class="row mx-0 mt-3 justify-content-between" *ngIf="!dateRange">
+    <!-- <div class="row px-0 mx-0 commitmentTile border mb-3" *ngFor="let obligation of nextObligations; index as i">
+      <div class="commitmentDay commitmentPrimary">
+        <div class="commitmentDate">{{getDate(obligation['Faedn'])}}</div>
+        <div class="commitmentMonth">{{getMonth(obligation['Faedn'])}}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">{{obligation["Text"]}}</div>
+        <div class="commitmentContentAmount">200.000,00 SAR</div>
+      </div>
+      <div class="commitmentArrow">
+        <img src="assets/image/arrow-right-green.svg" />
+      </div>
+    </div> -->
+    <div
+      class="row px-0 mx-0 commitmentTile border mb-3"
+      *ngFor="let bill of nextBills; index as i"
+    >
+      <div
+        class="commitmentDay"
+        [ngClass]="
+          bill['Status'] === 'P'
+            ? 'commitmentPrimary'
+            : bill['Status'] === 'O'
+            ? 'commitmentError'
+            : bill['Status'] === 'I'
+            ? 'commitmentSecondary'
+            : ''
+        "
+      >
+        <div
+          [ngClass]="
+            lang.dir === 'rtl' ? 'commitmentDateRtl' : 'commitmentDate'
+          "
+        >
+          {{ getDate(bill["Faedn"]) }}
+        </div>
+        <div class="commitmentMonth">{{ getMonth(bill["Faedn"]) }}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">
+          {{
+            bill["Status"] === "P"
+              ? lang["paidBill"]
+              : bill["Status"] === "O"
+              ? lang["unpaidBill"]
+              : bill["Status"] === "I"
+              ? lang["partialPaidBill"]
+              : ""
+          }}
+        </div>
+        <div class="commitmentContentAmount">
+          {{ getNumber(bill["Betrw"]) }} {{ lang["sar"] }}
+        </div>
+      </div>
+      <div class="commitmentArrow">
+        <img
+          src="assets/image/arrow-right-green.svg"
+          [ngClass]="lang.dir === 'rtl' ? 'rotateImage' : ''"
+        />
+      </div>
+    </div>
+
+    <!-- Returns -->
+
+    <div
+      class="row px-0 mx-0 commitmentTile border mb-3"
+      *ngFor="let returnObj of nextReturns; index as i"
+    >
+      <div
+        class="commitmentDay"
+        [ngClass]="
+          returnObj['returnStatus'] === 'Overdue'
+            ? 'commitmentError'
+            : returnObj['returnStatus'] === 'Unsubmitted'
+            ? 'commitmentBlack'
+            : 'commitmentBlack'
+        "
+      >
+        <div
+          [ngClass]="
+            lang.dir === 'rtl' ? 'commitmentDateRtl' : 'commitmentDate'
+          "
+        >
+          {{ getDate(returnObj["DueDt"]) }}
+        </div>
+        <div class="commitmentMonth">{{ getMonth(returnObj["DueDt"]) }}</div>
+      </div>
+      <div class="commitmentContent">
+        <div class="commitmentContentTitle">
+          {{ returnObj["IcrStatusAn"] }}
+        </div>
+        <div class="commitmentContentAmount">
+          {{
+            returnObj?.returnType === "zakat"
+              ? lang["zakatCit"]
+              : returnObj?.returnType === "vat"
+              ? lang["vat"]
+              : returnObj?.returnType === "excise"
+              ? lang["excise"]
+              : returnObj?.returnType === "withholding"
+              ? lang["withholding"]
+              : ""
+          }}
+        </div>
+      </div>
+      <div class="commitmentArrow">
+        <img
+          src="assets/image/arrow-right-green.svg"
+          [ngClass]="lang.dir === 'rtl' ? 'rotateImage' : ''"
+        />
+      </div>
+    </div>
+  </div>
+</div>

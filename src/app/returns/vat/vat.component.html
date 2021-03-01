@@ -1,0 +1,2738 @@
+<!---VAT Return Forms Starts Here -->
+<!-- Step 1 -->
+<div *ngIf="VatDetailsScreen" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" *ngIf="step==1">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a [routerLink]="['/mains/returns/search']" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step2.path}}
+            </a>
+            <div class="d-flex justify-content-between mb-24 align-items-center pt-2">
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="!disableInputs">
+                        <li><a (click)="step=1" class="active">1</a></li>
+                        <li><a (click)="step=2">2</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid}" (click)="step=3;calculateVat();">3</a>
+                        </li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid}" (click)="step=4;getPenalityUserDetails();">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000}" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000}" (click)="step=13;calculateVat();">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 || errorNotes}" (click)="calculateVat();SaveVatReturnReview();">7</a></li>
+                    </ul>
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="disableInputs || voidReturn">
+                        <li><a (click)="step=1" class="active">1</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=2">2</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=3">3</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=4">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=13">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=5">7</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+            <a (click)="step=1" class="active">
+                <span></span>
+            </a>
+            <a (click)="step=2">
+                <span></span>
+            </a>
+            <a (click)="step=3">
+                <span></span>
+            </a>
+            <a (click)="step=4">
+                <span></span>
+            </a>
+            <a (click)="step=12">
+                <span></span>
+            </a>
+            <a (click)="step=13">
+                <span></span>
+            </a>
+            <a (click)="step=5">
+                <span></span>
+            </a>
+
+        </div> -->
+        </div>
+        <h2>{{lang?.vatDetails.step1.title}}</h2>
+        <div class="text-Gray font-16 mb-24">{{lang?.vatDetails.step1.subTitle}}</div>
+        <div class="border-bottom-whisper mb-32"> </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg"
+                            class="text-right" alt=""></span> {{lang?.vatDetails.step1.block1.title}}
+                </h3>
+
+            </div>
+
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Gpartz}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block1.i2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Fin}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Idnumber}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block1.i4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Tpnm}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-12">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="taxPayerDetails?.ADRSet?.results?.length>0">
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.BuildingNo">{{taxPayerDetails?.ADRSet?.results[0]?.BuildingNo}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.BuildingNo!='' && taxPayerDetails?.ADRSet?.results[0]?.Street!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Street">{{taxPayerDetails?.ADRSet?.results[0]?.Street}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Street!='' && taxPayerDetails?.ADRSet?.results[0]?.Quarter!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Quarter">{{taxPayerDetails?.ADRSet?.results[0]?.Quarter}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Quarter!='' && taxPayerDetails?.ADRSet?.results[0]?.RegionDesc!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.RegionDesc">{{taxPayerDetails?.ADRSet?.results[0]?.RegionDesc}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.RegionDesc!='' && taxPayerDetails?.ADRSet?.results[0]?.City!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.City">{{taxPayerDetails?.ADRSet?.results[0]?.City}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.City!='' && taxPayerDetails?.ADRSet?.results[0]?.PostalCd!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.PostalCd">{{taxPayerDetails?.ADRSet?.results[0]?.PostalCd}}</span>
+
+                    </div>
+                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="taxPayerDetails?.ADRSet?.results?.length==0">
+                        -
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-return.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step1.block2.title}}
+                </h3>
+            </div>
+
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block2.i1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Incotext}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block2.i2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Fbnum || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row   p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block2.i3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Perslt}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block2.i4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Vrtaxret || '-' }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mb-24 pt-32" *ngIf=" disableInputs == false ">
+            <a class="btn btn-link" [routerLink]="['/mains/newVat']" target="_blank"> {{lang?.vatDetails.step1.btn1}}</a>
+            <button class="btn btn-primary" (click)="step=2">{{lang?.vatDetails.step1.btn2}}</button>
+        </div>
+    </div>
+    <!--- Step 1 Ends Here -->
+    <!---Step 1.1 Starts Here -->
+    <div class="container" *ngIf="step==2">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a (click)="step=1" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step2.path}}
+            </a>
+            <div class="d-flex justify-content-between mb-24 align-items-center pt-2">
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="!disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a (click)="step=2" class="active">2</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid}" (click)="step=3;calculateVat();">3</a>
+                        </li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid}" (click)="step=4">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000}" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000}" (click)="step=13;calculateVat();">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 || errorNotes}" (click)="calculateVat();SaveVatReturnReview();">7</a></li>
+                    </ul>
+
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a (click)="step=2" [ngClass]="{'pointer-none':voidReturn}" class="active">2</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=3">3</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=4">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=13">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=5">7</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h2>{{lang?.vatDetails.step2.title}}</h2>
+        <div class="text-Gray font-16 mb-32">{{lang?.vatDetails.step2.subTitle}}</div>
+        <!-- <div *ngIf="goLiveflg=='X'"> -->
+        <div *ngIf="steppercentage==15">
+            <!-- <p>
+            Do you have sales or purchases subject to ({{steppercentage}}) % VAT as per the transitional provisions or sales, purchases, imports and adjustments subject to 5% VAT that you would like to declare in this period?</p> -->
+            <p>{{lang?.vatDetails.step2.block.p}}</p>
+            <div class="d-flex mb-32 text-Eerie-Black">
+                <label class="radio-thumb cursor-pointer card custom-option-small mr-24 text-Eerie-Black">
+                    <input type="radio" name="extratax" value="yes" class="position-absolute cursor-pointer"
+                        [(ngModel)]="extratax" [disabled]="disableInputs" (change)="ExtrataxCalculation()">
+                    <span class="checkmark m-0 font-16 mt-auto font-weight-500 d-flex align-items-end py-10 px-15 h-100"
+                        *ngIf="extratax=='yes'">{{lang?.vatDetails.step2.block.radio1}}</span>
+                    <span class="checkmark m-0 font-16 mt-auto font-weight-500 d-flex align-items-end py-10 px-15 h-100"
+                        *ngIf="extratax=='no'">{{lang?.vatDetails.step2.block.radio1}}</span>
+                </label>
+                <label class="radio-thumb cursor-pointer card custom-option-small mr-24 text-Eerie-Black">
+                    <input type="radio" name="extratax" value="no" class="position-absolute cursor-pointer"
+                        [(ngModel)]="extratax" [disabled]="disableInputs" (change)="ExtrataxCalculation()">
+                    <span class="checkmark m-0 font-16 mt-auto font-weight-500 d-flex align-items-end py-10 px-15 h-100"
+                        *ngIf="extratax=='no'">{{lang?.vatDetails.step2.block.radio2}}</span>
+                    <span class="checkmark m-0 font-16 mt-auto font-weight-500 d-flex align-items-end py-10 px-15 h-100"
+                        *ngIf="extratax=='yes'">{{lang?.vatDetails.step2.block.radio2}}</span>
+                </label>
+            </div>
+        </div>
+        <div class="table mb-50">
+            <!-- *ngIf="goLiveflg=='X'" -->
+            <!--<input type="radio" name="extratax" value="yes" [(ngModel)]="extratax">
+                <img src="assets/image/selected.svg" class="Selected" *ngIf="extratax=='yes'">
+                <img src="assets/image/unselected.svg" class="Unselected" *ngIf="extratax!='yes'"> Ypes
+                <input type="radio" name="extratax" value="no" [(ngModel)]="extratax">
+                <img src="assets/image/selected.svg" class="Selected" *ngIf="extratax=='no'">
+                <img src="assets/image/unselected.svg" class="Unselected" *ngIf="extratax!='no'"> No-->
+
+            <form [formGroup]="VATSalesForm">
+                <table width="100%">
+                    <thead>
+                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                            {{lang?.vatDetails.step2.block.tableHeading1}}
+                        </th>
+                        <th width="200" class="font-16 text-Eerie-Black font-weight-bold  text-right">
+                            {{lang?.vatDetails.step2.block.tableHeading2}}
+                        </th>
+                        <th width="200" class="font-16 text-Eerie-Black font-weight-bold text-right">
+                            {{lang?.vatDetails.step2.block.tableHeading3}}
+                        </th>
+                    </thead>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            <div class="d-flex align-items-center">
+                                <!-- *ngIf="goLiveflg=='X'" -->
+                                {{lang?.vatDetails.step2.block.tr1}} <span *ngIf="steppercentage==15">({{steppercentage}}
+                                    %)</span>
+                                <a href="#" class="ml-15" data-toggle="modal" data-target="#infoModal">
+                                    <img src="assets/images/icon-info.svg" alt="">
+                                </a>
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('StandardRatedSales1').hasError('pattern')}" class="input165  text-right" formControlName="StandardRatedSales1" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATSalesCalculation()" (keyup)="GlobalNumberAllow($event)" (blur)="validateForms();" mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('StandardRatedSales1').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('StandardRatedSales1Adjustment').hasError('pattern')}" class="input165 text-right" formControlName="StandardRatedSales1Adjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (blur)="validateForms();AdjustmentAmountPopUp(VATSalesForm,'StandardRatedSales1Adjustment','StandardRatedSales1');"
+                                    (input) ="VATSalesCalculation()" mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('StandardRatedSales1Adjustment').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+
+                        </td>
+                        <!--  -->
+                        <td class="text-right" style="display: none !important;" style="display: none !important;">
+                            <input type="text" placeholder="0.00" class="input165 text-right" formControlName="StandardRatedSales1VAT" (blur)="validateForms();">
+                        </td>
+                    </tr>
+                    <!-- *ngIf="steppercentage==15" -->
+                    <!-- goLiveflg=='X' -->
+                    <tr *ngIf="steppercentage==15 && extratax=='yes'">
+                        <td class="font-16 text-Eerie-Black">
+                            <div class="d-flex align-items-center">
+                                <!-- goLiveflg=='X' -->
+                                {{lang?.vatDetails.step2.block.tr11}} <span *ngIf="steppercentage==15 && extratax=='yes'">(5%)</span>
+                                <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('salesSubjecttovat')">
+                                    <img src="assets/images/icon-info.svg" alt="">
+                                </a>
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('salesSubjecttovat').hasError('pattern')}" class="input165  text-right" formControlName="salesSubjecttovat" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATSalesCalculation()" (blur)="validateForms();" mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('salesSubjecttovat').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" [ngClass]="{'border-red':VATSalesForm.get('salesSubjecttovatAdjustment').hasError('pattern')}" placeholder="0.00" class="input165 text-right" formControlName="salesSubjecttovatAdjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATSalesCalculation();" (blur)="validateForms();" mask="separator"
+                                    thousandSeparator=",">
+
+                            </div>
+
+                            <div class="text-danger" *ngIf="VATSalesForm.get('salesSubjecttovatAdjustment').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+
+                        </td>
+                        <!--  -->
+                        <td class=" text-right" style="display: none !important;" style="display: none !important;">
+                            <input type="text" placeholder="0.00" class="input165 text-right" formControlName="salesSubjecttovatVAT" (keyup)="GlobalNumberAllow($event)" (blur)="validateForms();" mask="separator" thousandSeparator=",">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step2.block.tr2}}
+                            <a href="#" class="ml-15" data-toggle="modal" (click)="CommonInfoModal('PrivateHealthCareEducation')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('PrivateHealthCareEducation').hasError('pattern')}" class="input165  text-right" formControlName="PrivateHealthCareEducation" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalSalesCalculation()" (blur)="validateForms();" mask="separator"
+                                    thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('PrivateHealthCareEducation').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('PrivateHealthCareEducationAdjustment').hasError('pattern')}" class="input165 text-right" formControlName="PrivateHealthCareEducationAdjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalAdjustmentCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATSalesForm,'PrivateHealthCareEducationAdjustment','PrivateHealthCareEducation');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('PrivateHealthCareEducationAdjustment').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step2.block.tr3}}
+                            <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ZeroRatedDomesticSales')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('ZeroRatedDomesticSales').hasError('pattern')}" class="input165  text-right" formControlName="ZeroRatedDomesticSales" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalSalesCalculation()" (blur)="validateForms();AdjustmentAmountPopUp(VATSalesForm,'ZeroRatedDomesticSales','ZeroRatedDomesticSales');" mask="separator"
+                                    thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('ZeroRatedDomesticSales').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('ZeroRatedDomesticSalesAdjustment').hasError('pattern')}" class="input165 text-right" formControlName="ZeroRatedDomesticSalesAdjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalAdjustmentCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATSalesForm,'ZeroRatedDomesticSalesAdjustment','ZeroRatedDomesticSales');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('ZeroRatedDomesticSalesAdjustment').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step2.block.tr4}}
+                            <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('Exports')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('Exports').hasError('pattern')}" class="input165  text-right" formControlName="Exports" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalSalesCalculation()" (blur)="validateForms();" mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('Exports').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('ExportsAdjustment').hasError('pattern')}" class="input165 text-right" formControlName="ExportsAdjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalAdjustmentCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATSalesForm,'ExportsAdjustment','Exports');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('ExportsAdjustment').hasError('pattern') && VATSalesForm.get('ExportsAdjustment').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step2.block.tr5}}
+                            <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ExemptSales')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('ExemptSales').hasError('pattern')}" class="input165  text-right" formControlName="ExemptSales" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalSalesCalculation()" (blur)="validateForms();AdjustmentAmountPopUp(VATSalesForm,'ExemptSales','ExemptSales');" mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('ExemptSales').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATSalesForm.get('ExemptSalesAdjustment').hasError('pattern')}" class="input165 text-right" formControlName="ExemptSalesAdjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="TotalAdjustmentCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATSalesForm,'ExemptSalesAdjustment','ExemptSales');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATSalesForm.get('ExemptSalesAdjustment').hasError('pattern') && VATSalesForm.get('ExemptSalesAdjustment').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step2.block.tr6}}
+                        </td>
+                        <td class="text-right">
+                            <!-- {{VATSalesForm.get('totalSales').value | number:'1.2-2'}} SAR -->
+
+                            <div class="d-flex align-items-center la-text-reverse">
+                                &nbsp;<span>{{VATSalesForm.get('totalSales').value | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                            </div>
+                            <!-- <input type="text" class="input165  text-right" formControlName="totalSales" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,16}(\.\d{0,2})?$" (blur)="validateForms();"  mask="separator" thousandSeparator=","> -->
+                        </td>
+                        <td class="text-right">
+                            <!-- {{VATSalesForm.get('totalSalesAdjustment').value | number:'1.2-2'}} SAR -->
+
+                            <div class="d-flex align-items-center la-text-reverse">
+                                &nbsp;<span>{{VATSalesForm.get('totalSalesAdjustment').value | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                            </div>
+                            <!-- <input type="text" class="input165  text-right" formControlName="totalSalesAdjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,16}(\.\d{0,2})?$" (blur)="validateForms();"  mask="separator" thousandSeparator=","> -->
+                        </td>
+                    </tr>
+                    <tr class="bg-Watercourse-opa1">
+                        <td class="font-16 text-Eerie-Black font-weight-500">
+                            {{lang?.vatDetails.step2.block.tr7}}
+                        </td>
+                        <td class=" text-right" colspan="2">
+                            <div class="text-Eerie-Black font-20 font-weight-bold">
+                                <!-- {{VATSalesForm.value.TotalVATonSales || 0 | number:'1.2-2'}} SAR -->
+
+                                <div class="d-flex align-items-center la-text-reverse la-text-reverse-end">
+                                    &nbsp;<span>{{VATSalesForm.value.TotalVATonSales || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="mb-24" *ngIf="disableInputs == false">
+            <button class="btn btn-link mr-3" *ngIf="taxPayerDetails.Statusz == 'E0013'" data-toggle="modal" data-target="#VoidModal">{{lang?.vatDetails.step2.btn3}}</button>
+            <button class="btn btn-primary mr-3" [disabled]="!VATSalesForm.valid || disableInputs" (click)="SaveAsDraft();">{{lang?.vatDetails.step2.btn1}}</button>
+            <button class="btn btn-primary" [disabled]="!VATSalesForm.valid" (click)="calculateVat();totalAmountPopup('totalSales');">{{lang?.vatDetails.step2.btn2}}</button>
+
+        </div>
+    </div>
+    <!-- Step 1.1 Ends here -->
+    <!-- Step 2 SAR MODAL STARTS  -->
+    <div class="modal modal-filter fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28" >
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h2 class="mb-24">{{lang?.vatDetails.infoModal.t1}}</h2>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t2}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{lang?.vatDetails.infoModal.p1}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{lang?.vatDetails.infoModal.p2}} {{steppercentage}} {{lang?.vatDetails.infoModal.p5}}
+                        </div>
+                    </div>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t3}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{lang?.vatDetails.infoModal.p3}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{lang?.vatDetails.infoModal.p4}}
+                        </div>
+                    </div>
+
+                    <div class="form-group text-right pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <a class="btn btn-link"  target="_blank" href="{{urlPortal}}">{{lang?.vatDetails.infoModal.a1}}</a>
+                        <button class="btn btn-primary"  data-dismiss="modal">{{lang?.vatDetails.infoModal.btn1}}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!---- Private Healthcare Modal ----->
+    <!-- Step 2 SAR MODAL STARTS  -->
+    <div class="modal modal-filter fade" id="infoModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h2 class="mb-24">{{infotitle}}</h2>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t2}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{infomessage1}}
+                        </div>
+                    </div>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t3}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{infomessage2}}
+                        </div>
+                    </div>
+
+                    <div class="form-group text-right pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <a class="btn btn-link" target="_blank" href="{{urlPortal}}">{{lang?.vatDetails.infoModal.a1}}</a>
+                        <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.infoModal.btn1}}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!------- Privatre HealthCare Modal ends ----->
+    <!-----common info modal for icons------>
+    <div class="modal modal-filter fade" id="infoModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h2 class="mb-24">{{infotitle}}</h2>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t2}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                           {{infomessage1}}
+                        </div>
+                        <div class="font-12 text-Gray"> 
+                            {{infomessage2}}
+                         </div>
+                    </div>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t3}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{infomessage3}}
+                         </div>
+                         <div class="font-12 text-Gray"> 
+                             {{infomessage4}}
+                          </div>
+                    </div>
+
+                    <div class="form-group text-right pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <a class="btn btn-link" target="_blank" href="{{urlPortal}}">{{lang?.vatDetails.infoModal.a1}}</a>
+                        <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.infoModal.btn1}}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!----common info modal ends Here-->
+    <!----- Info Modal 3 starts here-->
+    <div class="modal modal-filter fade" id="infoModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28" >
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h2 class="mb-24">{{infotitle}}</h2>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t2}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                           {{infomessage1}}
+                        </div>
+                        <div class="font-12 text-Gray"> 
+                            {{infomessage2}}
+                         </div>
+                    </div>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t3}}
+                        </div>
+                         <div class="font-12 text-Gray"> 
+                             {{infomessage3}}
+                          </div>
+                    </div>
+
+                    <div class="form-group text-right pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <a class="btn btn-link" target="_blank" href="{{urlPortal}}">{{lang?.vatDetails.infoModal.a1}}</a>
+                        <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.infoModal.btn1}}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!----- Info Modal Ends Here ----->
+    <!----- Info Modal4 Starts Here ----->
+    <div class="modal modal-filter fade" id="infoModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h2 class="mb-24">{{infotitle}}</h2>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t2}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                           {{infomessage1}}
+                        </div>
+                        <div class="font-12 text-Gray"> 
+                            {{infomessage2}}
+                         </div>
+                         <div class="font-12 text-Gray"> 
+                            {{infomessage3}}
+                         </div>
+                    </div>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t3}}
+                        </div>
+                         <div class="font-12 text-Gray"> 
+                             {{infomessage4}}
+                          </div>
+                    </div>
+
+                    <div class="form-group text-right pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <a class="btn btn-link" target="_blank" href="{{urlPortal}}">{{lang?.vatDetails.infoModal.a1}}</a>
+                        <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.infoModal.btn1}}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!----- Info Modal Ends Here ------>
+    <!----- Info Modal 5 Starts Here ----->
+    <div class="modal modal-filter fade" id="infoModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h2 class="mb-24">{{infotitle}}</h2>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t2}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                           {{infomessage1}}
+                        </div>
+                        <div class="font-12 text-Gray"> 
+                            {{infomessage2}}
+                         </div>
+                         <div class="font-12 text-Gray"> 
+                            {{infomessage3}}
+                         </div>
+                         <div class="font-12 text-Gray"> 
+                            {{infomessage4}}
+                         </div>
+                    </div>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> {{lang?.vatDetails.infoModal.t3}}
+                        </div>
+                        <div class="font-12 text-Gray">
+                            {{infomessage5}}
+                         </div>
+                         <div class="font-12 text-Gray"> 
+                             {{infomessage6}}
+                          </div>
+                          <div class="font-12 text-Gray"> 
+                             {{infomessage7}}
+                          </div>
+                          <div class="font-12 text-Gray"> 
+                             {{infomessage8}}
+                          </div>
+                    </div>
+
+                    <div class="form-group text-right pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <a class="btn btn-link" target="_blank" href="{{urlPortal}}">{{lang?.vatDetails.infoModal.a1}}</a>
+                        <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.infoModal.btn1}}</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!---- Info Modal ends Here ------->
+    <!-- Step 2 MODAL ENDS -->
+    <!--- Step 3 Starts Here -->
+    <div class="container" *ngIf="step==3">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a (click)="step=2" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step3.path}}
+            </a>
+            
+            <div class="d-flex justify-content-between mb-24 align-items-center pt-2">
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="!disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid}" (click)="step=3;calculateVat();">3</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid}" (click)="step=4">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000  }" (click)="step=13;calculateVat();">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || errorNotes || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="calculateVat();SaveVatReturnReview();">7</a></li>
+                    </ul>
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" [ngClass]="{'pointer-none':voidReturn}" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=3">3</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=4">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=13">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=5">7</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h2>{{lang?.vatDetails.step3.title}}</h2>
+        <div class="text-Gray font-16 mb-32">{{lang?.vatDetails.step3.subTitle}}</div>
+        <div class="table mb-50">
+            <form [formGroup]="VATPurchasesForm">
+                <table width="100%">
+                    <thead>
+                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                            {{lang?.vatDetails.step3.block.tableHeading1}}
+                        </th>
+                        <th width="200" class="font-16 text-Eerie-Black font-weight-bold  text-right">
+                            {{lang?.vatDetails.step3.block.tableHeading2}}
+                        </th>
+                        <th width="200" class="font-16 text-Eerie-Black font-weight-bold text-right">
+                            {{lang?.vatDetails.step3.block.tableHeading3}}
+                        </th>
+                    </thead>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            <div class="d-flex align-items-center">
+                                <!-- goLiveflg=='X' -->
+                                {{lang?.vatDetails.step3.block.tr1}} <span *ngIf="steppercentage==15">({{steppercentage}}
+                                    %)</span>
+                                    <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('StandardRatedDomesticPurchases1')">
+                                        <img src="assets/images/icon-info.svg" alt="">
+                                    </a>
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('StandardRatedDomesticPurchases1').hasError('pattern')}" class="input165  text-right" (keyup)="GlobalNumberAllow($event)" formControlName="StandardRatedDomesticPurchases1" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()" (blur)="validateForms();totalAmountPopup('StandardRatedDomesticPurchases1')" mask="separator"
+                                    thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('StandardRatedDomesticPurchases1').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('StandardRatedDomesticPurchases1Adjustment').hasError('pattern')}" class="input165 text-right" (keyup)="GlobalNumberAllow($event)" formControlName="StandardRatedDomesticPurchases1Adjustment" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'StandardRatedDomesticPurchases1Adjustment','StandardRatedDomesticPurchases1');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('StandardRatedDomesticPurchases1Adjustment').hasError('pattern') && VATPurchasesForm.get('StandardRatedDomesticPurchases1Adjustment').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- goLiveflg=='X' -->
+                    <tr *ngIf="steppercentage==15 && extratax=='yes'">
+                        <td class="font-16 text-Eerie-Black">
+                            <div class="d-flex align-items-center">
+                                <!-- goLiveflg=='X' -->
+                                {{lang?.vatDetails.step3.block.tr11}} <span *ngIf="steppercentage==15 && extratax=='yes'">(5%)</span>
+                                <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('PurchaseSubjectToVAT')">
+                                    <img src="assets/images/icon-info.svg" alt="">
+                                </a>
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('PurchaseSubjectToVAT').hasError('pattern')}" class="input165  text-right" (keyup)="GlobalNumberAllow($event)" formControlName="PurchaseSubjectToVAT" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()" (blur)="validateForms();" mask="separator"
+                                    thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('PurchaseSubjectToVAT').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('PurchaseSubjectToVATAdjustment').hasError('pattern')}" class="input165 text-right" (keyup)="GlobalNumberAllow($event)" formControlName="PurchaseSubjectToVATAdjustment" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'PurchaseSubjectToVATAdjustment','PurchaseSubjectToVAT');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('PurchaseSubjectToVATAdjustment').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right" style="display: none !important;" style="display: none !important;">
+                            <input type="text" placeholder="0.00" class="input165 text-right" formControlName="PurchaseSubjectToVATVAT" (blur)="validateForms();" mask="separator" thousandSeparator=",">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            <!-- goLiveflg=='X' -->
+                            {{lang?.vatDetails.step3.block.tr2}} <span *ngIf="steppercentage==15">({{steppercentage}}
+                                %)</span>
+                                <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ImportSubjectVatPaidCustoms')">
+                                    <img src="assets/images/icon-info.svg" alt="">
+                                </a>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatPaidCustoms').hasError('pattern')}" class="input165  text-right" (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatPaidCustoms" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()" (blur)="validateForms();" mask="separator"
+                                    thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatPaidCustoms').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatPaidCustomsAdjustments').hasError('pattern')}" class="input165 text-right" (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatPaidCustomsAdjustments" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'ImportSubjectVatPaidCustomsAdjustments','ImportSubjectVatPaidCustoms');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatPaidCustomsAdjustments').hasError('pattern') && VATPurchasesForm.get('ImportSubjectVatPaidCustomsAdjustments').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- goLiveflg=='X' -->
+                    <!-- *ngIf="steppercentage==15" -->
+                    <tr *ngIf="steppercentage==15 && extratax=='yes'">
+                        <td class="font-16 text-Eerie-Black">
+                            <!-- goLiveflg=='X' -->
+                            {{lang?.vatDetails.step3.block.tr21}} <span *ngIf="steppercentage==15 && extratax=='yes'">(5%)</span>
+                            <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ImportSubjectVatStepAmt')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatStepAmt').hasError('pattern')}" class="input165  text-right" (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatStepAmt" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()" (blur)="validateForms();" mask="separator"
+                                    thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatStepAmt').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatStepAdjustments').hasError('pattern')}" class="input165 text-right" (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatStepAdjustments" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();" (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'ImportSubjectVatStepAdjustments','ImportSubjectVatStepAmt');"
+                                    mask="separator" thousandSeparator=",">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatStepAdjustments').hasError('pattern') && VATPurchasesForm.get('ImportSubjectVatStepAdjustments').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            <!-- goLiveflg=='X' -->
+                            {{lang?.vatDetails.step3.block.tr3}} <span *ngIf="steppercentage==15">({{steppercentage}}
+                                %)</span>
+                                <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ImportSubjectVatPaidforReverseCharge')">
+                                    <img src="assets/images/icon-info.svg" alt="">
+                                </a>
+                        </td>
+                        <td class="text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatPaidforReverseCharge').hasError('pattern')}" placeholder="0.00" class="input165  text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatPaidforReverseCharge" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()"
+                                    (blur)="validateForms();">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatPaidforReverseCharge').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeAdjustments').hasError('pattern')}" class="input165 text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatPaidforReverseChargeAdjustments" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();"
+                                    (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'ImportSubjectVatPaidforReverseChargeAdjustments','ImportSubjectVatPaidforReverseCharge');">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeAdjustments').hasError('pattern') && VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeAdjustments').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- goLiveflg=='X' -->
+                    <tr *ngIf="steppercentage==15 && extratax=='yes'">
+                        <td class="font-16 text-Eerie-Black">
+                            <!-- goLiveflg=='X' -->
+                            {{lang?.vatDetails.step3.block.tr31}} <span *ngIf="steppercentage==15 && extratax=='yes'">(5%)</span>
+                            <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ImportSubjectVatPaidforReverseChargeStepAmt')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeStepAmt').hasError('pattern')}" class="input165  text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatPaidforReverseChargeStepAmt" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()"
+                                    (blur)="validateForms();">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeStepAmt').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class=" text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeStepAdjustments').hasError('pattern')}" class="input165 text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ImportSubjectVatPaidforReverseChargeStepAdjustments" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();"
+                                    (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'ImportSubjectVatPaidforReverseChargeStepAdjustments','ImportSubjectVatPaidforReverseChargeStepAmt');">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeStepAdjustments').hasError('pattern') && VATPurchasesForm.get('ImportSubjectVatPaidforReverseChargeStepAdjustments').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step3.block.tr4}}
+                            <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ZeroRatedPurchases')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ZeroRatedPurchases').hasError('pattern')}" class="input165  text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ZeroRatedPurchases" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()" (blur)="validateForms();">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ZeroRatedPurchases').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ZeroRatedPurchasesAdjustments').hasError('pattern')}" class="input165 text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ZeroRatedPurchasesAdjustments" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();"
+                                    (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'ZeroRatedPurchasesAdjustments','ZeroRatedPurchases');">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ZeroRatedPurchasesAdjustments').hasError('pattern') && VATPurchasesForm.get('ZeroRatedPurchasesAdjustments').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step3.block.tr5}}
+                            <a  class="ml-15" data-toggle="modal" (click)="CommonInfoModal('ExemptPurchases')">
+                                <img src="assets/images/icon-info.svg" alt="">
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ExemptPurchases').hasError('pattern')}" class="input165  text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ExemptPurchases" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation()" (blur)="validateForms();">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ExemptPurchases').hasError('pattern')">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="d-flex align-items-center">
+                                <input type="text" placeholder="0.00" [ngClass]="{'border-red':VATPurchasesForm.get('ExemptPurchasesAdjustment').hasError('pattern')}" class="input165 text-right" mask="separator" thousandSeparator="," (keyup)="GlobalNumberAllow($event)" formControlName="ExemptPurchasesAdjustment" pattern="^\d{0,12}(\.\d{0,2})?$" (input)="VATPurchasesCalculation();"
+                                    (blur)="validateForms();AdjustmentAmountPopUp(VATPurchasesForm,'ExemptPurchasesAdjustment','ExemptPurchases');">
+
+                            </div>
+                            <div class="text-danger" *ngIf="VATPurchasesForm.get('ExemptPurchasesAdjustment').hasError('pattern') && VATPurchasesForm.get('ExemptPurchasesAdjustment').touched">
+                                {{lang?.vatDetails.Errormessages.default}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-16 text-Eerie-Black">
+                            {{lang?.vatDetails.step3.block.tr6}}
+                            
+                        </td>
+                        <td class="text-right">
+                            <!-- {{VATPurchasesForm.get('totalPurchases').value | number:'1.2-2'}} SAR -->
+
+                            <div class="d-flex align-items-center la-text-reverse">
+                                &nbsp;<span>{{VATPurchasesForm.get('totalPurchases').value | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                            </div>
+                            <!-- <input type="text" class="input165  text-right"  mask="separator" thousandSeparator="," formControlName="totalPurchases" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,16}(\.\d{0,2})?$" (blur)="validateForms();"> -->
+                        </td>
+
+                        <td class="text-right">
+                            <!-- {{VATPurchasesForm.get('totalPurchasesAdjustment').value | number:'1.2-2'}} SAR -->
+
+                            <div class="d-flex align-items-center la-text-reverse">
+                                &nbsp;<span>{{VATPurchasesForm.get('totalPurchasesAdjustment').value | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                            </div>
+                            <!-- <input type="text" class="input165  text-right"  mask="separator" thousandSeparator="," formControlName="totalPurchasesAdjustment" (keyup)="GlobalNumberAllow($event)" pattern="^\d{0,16}(\.\d{0,2})?$" (blur)="validateForms();"> -->
+                        </td>
+                    </tr>
+                    <tr class="bg-Watercourse-opa1">
+                        <td class="font-16 text-Eerie-Black font-weight-500">
+                            {{lang?.vatDetails.step3.block.tr7}}
+                        </td>
+
+                        <td class=" text-right" colspan="2">
+                            <div class="text-Eerie-Black font-20 font-weight-bold">
+                                <!-- {{VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}} SAR -->
+
+                                <div class="d-flex align-items-center la-text-reverse la-text-reverse-end">
+                                    &nbsp;<span>{{VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="mb-24" *ngIf="disableInputs == false ">
+            <button class="btn btn-link mr-3" *ngIf="taxPayerDetails.Statusz== 'E0013'" data-toggle="modal" data-target="#VoidModal">{{lang?.vatDetails.step2.btn3}}</button>
+            <button class="btn btn-primary mr-3" [disabled]="!VATPurchasesForm.valid || disableInputs" (click)="SaveAsDraft();">{{lang?.vatDetails.step3.btn1}}</button>
+            <!-- calculateVat(); -->
+            <button class="btn btn-primary" [disabled]="!VATPurchasesForm.valid" (click)="getPenalityUserDetails();totalAmountPopup('totalPurchases')">{{lang?.vatDetails.step3.btn2}}</button>
+        </div>
+    </div>
+    <!--Step 3 Ends Here-->
+    <!-- Step 4 MODAL STARTS -->
+    <div class="modal modal-filter fade" id="amountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{direction}}>
+        <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <h2 class="mb-24" *ngIf="!amountModal">{{lang?.vatDetails.AdjustmentAmountModal.title}}</h2>
+                    <div class="card-inner mb-16">
+                        <div class="d-flex align-items-center mb-24 text-Nero font-12">
+                            <img src="assets/images/icon-info.svg" class="mr-15" alt=""> 
+                            <span *ngIf="!amountModal">{{lang?.vatDetails.AdjustmentAmountModal.subtitle}}</span> 
+                            <span *ngIf="amountModal || totalModal">{{lang?.vatDetails.infoModal.t2}}</span>                           
+                        </div>
+                        <div class="font-12 text-Gray">
+                            <!-- The adjustment amount entered is more than 10% larger than the amount of domestic standard-rated sales. Please verify the amount entered in the return or continue if the amount entered is correct. -->
+                            {{message}}
+                        </div>
+                    </div>
+
+
+                    <div class="form-group text-right pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.infoModal.btn1}}</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Step 4 MODAL ENDS -->
+    <!--- Step 5 Starts Here -->
+    <div class="container" *ngIf="step==4">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a (click)="step=3" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step4.path}}
+            </a>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=1" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=2" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=3" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=4" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=12">
+                    <span></span>
+                </a>
+                <a (click)="step=13">
+                    <span></span>
+                </a>
+                <a (click)="step=5">
+                    <span></span>
+                </a>
+            </div> -->
+            <div class="d-flex justify-content-between mb-24 align-items-center pt-2">
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="!disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid}" (click)="step=3;calculateVat();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid}" (click)="step=4;getPenalityUserDetails();">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=13;calculateVat();">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000  || errorNotes}" (click)="calculateVat();SaveVatReturnReview();">7</a></li>
+                    </ul>
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a [ngClass]="{'pointer-none':voidReturn}" (click)="step=2" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a [ngClass]="{'pointer-none':voidReturn}" class="active" (click)="step=3"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" class="active" (click)="step=4">4</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=13">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=5">7</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h2>{{lang?.vatDetails.step4.title}}</h2>
+        <div class="text-Gray font-16 mb-24">{{lang?.vatDetails.step4.subTitle}}</div>
+        <div class="border-bottom-whisper  mb-32"></div>
+        <div class="row custom-row">
+            <div class="col-sm-6">
+                <div class="card-inner mb-24">
+                    <div class="font-16 text-Gray">{{lang?.vatDetails.step4.block.i1}}</div>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{NetdueVat || 0.00 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{NetdueVat || 0.00 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card-inner mb-24">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="font-16 text-Gray">{{lang?.vatDetails.step4.block.i2}}</div>
+                        <div class="dropdown mini-dropdown">
+                            <a class="dropdown-toggle  " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="material-icons">
+                                    more_horiz
+                                </span>
+                            </a>
+                            <div class="custom-right-align dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="text-dark" data-toggle="modal" data-target="#sampleModal">
+                                    {{lang?.vatDetails.step4.block.l1}}
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{vatDetailsObj?.CreditVat || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{vatDetailsObj?.CreditVat || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-32">
+                <div class="font-12  text-Gray mb-5">{{lang?.vatDetails.step4.block.i3}}</div>
+                <div class="input-container d-flex" [ngClass]="{'border-red':CorrectionPenality<-5000 || CorrectionPenality>5000 || correction?.errors?.pattern}">
+                    <!-- <div>{{CorrectionPenality || 0 | currency:'SAR'  | slice:3}} SAR</div> -->
+                    <!-- (keypress)="NumberAllow($event)" (input)="CorrectionPenalityChange()" mask="separator" thousandSeparator="," [disabled] = "disableInputs" -->
+                    <input id="corrError" type="text" [(ngModel)]="CorrectionPenality" pattern="^[-]?\d{0,4}(\.\d{0,2})?$" #correction="ngModel" (change)="CorrectionPenalityChange()" (keydown)="NumberAllow($event)" [disabled]="disableInputs" (blur)="validateForms()">
+                    <img src="assets/images/icon-info.svg" class="ml-auto" data-toggle="modal" data-target="#correctionsModal">
+                </div>
+                <div class="text-danger" *ngIf="CorrectionPenality<-5000 || CorrectionPenality>5000 || correction?.errors?.pattern">
+                    {{lang?.vatDetails.Errormessages.correctionError}}
+                </div>
+
+            </div>
+
+        </div>
+        <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-14 mb-56">
+            <div class="text-Eerie-Black font-16 font-weight-500">
+                {{lang?.vatDetails.step4.block.i4}}
+            </div>
+            <div class="font-20 font-weight-bold text-Eerie-Black">
+                <!-- {{((VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases )+(CorrectionPenality) + CreditVat)+(lateFinePenality)}} -->
+                <!-- {{netVat || 0.00 | number:'1.2-2'}} SAR -->
+
+                <div class="d-flex align-items-center la-text-reverse">
+                    &nbsp;<span>{{netVat || 0.00 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-24" *ngIf="disableInputs == false ">
+            <button class="btn btn-link mr-3" *ngIf="taxPayerDetails?.Statusz == 'E0013'" data-toggle="modal" data-target="#VoidModal">{{lang?.vatDetails.step2.btn3}}</button>
+            <button class="btn btn-primary mr-3" [disabled]="disableInputs || CorrectionPenality<-5000 || CorrectionPenality>5000" (click)="SaveAsDraft();">{{lang?.vatDetails.step4.btn1}}</button>
+            <button class="btn btn-primary" (click)="calculateVat();step=12;" [disabled]="disableInputs || CorrectionPenality<-5000 || CorrectionPenality>5000">{{lang?.vatDetails.step4.btn2}}</button>
+        </div>
+
+    </div>
+    <!--- Step 5 Ends Here-->
+
+
+    <!-- Hema starts attachemnts and notes starts -->
+    <div class="container" *ngIf="step==12">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a (click)="step=4" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step4.path}}
+            </a>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=1" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=2" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=3" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=4" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=12" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=13">
+                    <span></span>
+                </a>
+                <a (click)="step=5">
+                    <span></span>
+                </a>
+            </div> -->
+
+            <div class="d-flex justify-content-between mb-24 align-items-center pt-2">
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="!disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid}" (click)="step=3;calculateVat();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid}" (click)="step=4;getPenalityUserDetails();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=13;calculateVat();">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 || errorNotes}" (click)="calculateVat();SaveVatReturnReview();">7</a></li>
+                    </ul>
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" [ngClass]="{'pointer-none':voidReturn}" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=3"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=4"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=12">5</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=13">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=5">7</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h2>{{lang?.vatDetails.step12.t1}}</h2>
+        <div class="border-bottom-whisper  mb-32"></div>
+        <!-- <p class="mb-16 font-16">{{lang?.vatDetails.step12.st1}} </p> -->
+        <div class="row custom-row">
+            <div class="col-sm-6" *ngFor="let obj of vatDetailsObj.ATTACHSet.results">
+                <div class="cardh180 card mb-40 p-24 border-gray">
+                    <div class="d-flex justify-content-end" *ngIf="!disableInputs"><img src="assets/images/icon-delete.svg" (click)="DeleteAttachement(obj)"></div>
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <p class="m-0 font-weight-500 font-16 text-center">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'" src="assets/images/icon-pdf.svg" class="mb-10"> 
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'" src="assets/images/icon-excel.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'" src="assets/images/icon-excel.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'" src="assets/images/icon-doc.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'" src="assets/images/icon-doc.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'" src="assets/images/icon-png.svg" class="mb-10">  
+                            <br />
+                            {{obj.Filename}}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" *ngIf="disableInputs == false ">
+
+                <!-- <div class="cardh219 card  p-24 d-flex justify-content-center align-items-center h-100"
+                        style="width: 437px;border: 1px dashed #bbbbbb;">        
+                        <div class="m-0 font-weight-500 font-16 text-center" >
+                            <img src="assets/images/icon-plus.svg" class="mb-10 withheight24"> <br />
+                             (click)="UploadFile($event)" -->
+                <!-- <input type="file" class="opacity-0" accept="application/DOC,application/DOCX,application/XLS,application/XLSX,application/PDF,image/JPG" #inputFile (change)="FileUpload($event)" > 
+                            <input type="file" class="opacity-20" accept="application/DOC,application/DOCX,application/XLS,application/XLSX,application/PDF,image/JPG" #inputFile (click)="FileUpload($event)">
+                            <p class="text-Watercourse mb-24 font-weight-bold"> {{lang?.vatDetails.step12.btn1}}</p>
+                            <p class="font-12 font-weight-normal text-Gray">10MB {{lang?.vatDetails.step12.l1}}</p>
+                        </div>
+                    </div>  -->
+
+                <div class="cardh180 card mb-40 p-24 width100P d-flex justify-content-center align-items-center border-gray-dashed">
+                    <!-- (click)="UploadFile($event)" -->
+                    <!-- <input type="file" class="opacity-0" accept="application/DOC,application/DOCX,application/XLS,application/XLSX,application/PDF,image/JPG" #inputFile (change)="FileUpload($event)" >  -->
+                    <input type="file" multiple class="custom-upload-file opacity-0 cardh219 d-flex align-items-center justify-content-center w-100"  #inputFile (change)="FileUpload($event)">
+                    <div class="m-0 font-weight-500 font-16 text-center  upload-text-items  position-absolute text-center">
+                        <img src="assets/images/icon-plus.svg" class="mb-10 withheight24"> <br />
+                        <p class="text-Watercourse mb-24 font-weight-bold"> {{lang?.vatDetails.step12.btn1}}</p>
+                        <!-- <p class="font-12 font-weight-normal text-Gray">10MB {{lang?.vatDetails.step12.l1}}</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!disableInputs">
+            <div class="col-sm-12">
+                <div class="card p-24 mb-56">
+                    <div class="d-flex">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                            {{lang?.vatDetails.step12.span}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-24" *ngIf="disableInputs == false">
+            <button class="btn btn-link mr-3" [disabled]="disableInputs" (click)="step=13">{{lang?.vatDetails.step12.btn2}}</button>
+            <button class="btn btn-primary" (click)="calculateVat();step=13;">{{lang?.vatDetails.step12.btn3}}</button>
+        </div>
+
+    </div>
+
+    <!---- Notes Set Step ----->
+    <div class="container" *ngIf="step==13">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a (click)="step=12" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step4.path}}
+            </a>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=1" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=2" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=3" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=4" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=12" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=13" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=5">
+                    <span></span>
+                </a>
+            </div> -->
+            <div class="d-flex justify-content-between mb-24 align-items-center pt-2">
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="!disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid}" (click)="step=3;calculateVat();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid}" (click)="step=4;getPenalityUserDetails();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=12"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=13;calculateVat();">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 || errorNotes}" (click)="calculateVat();SaveVatReturnReview();">7</a></li>
+                    </ul>
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="disableInputs">
+                        <li>
+                            <a (click)="step=1" [ngClass]="{'pointer-none':voidReturn}" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2"  [ngClass]="{'pointer-none':voidReturn}" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=3"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=4"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=12"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=13">6</a></li>
+                        <li><a [ngClass]="{'pointer-none':voidReturn}" (click)="step=5">7</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h2>{{lang?.vatDetails.step13.t1}}</h2>
+        <div class="border-bottom-whisper  mb-32"></div>
+        <div class="mb-56">
+            <textarea rows="999" cols="132" class="form-control h-216" [(ngModel)]="notesAttached" (keyup)="SaveNotes()" (change)="SubmitNotes()" [disabled]="disableInputs">
+            </textarea>
+        </div>
+        <div *ngIf="errorNotes">
+
+        </div>
+
+        <div class="mb-24" *ngIf="disableInputs == false">
+            <button class="btn btn-link mr-3" *ngIf="taxPayerDetails?.Statusz == 'E0013'" data-toggle="modal" data-target="#VoidModal">{{lang?.vatDetails.step2.btn3}}</button>
+            <button class="btn btn-primary mr-3" [disabled]="errorNotes || disableInputs " (click)="SubmitNotes();">{{lang?.vatDetails.step13.btn1}}</button>
+            <button class="btn btn-primary" [disabled]="errorNotes" (click)="calculateVat();SaveVatReturnReview();">{{lang?.vatDetails.step13.btn2}}</button>
+        </div>
+
+    </div>
+    <!-- Hema starts attachements and notes ends -->
+
+
+
+    <!----Corrections From Previous Period Modal-->
+    <div class="modal modal-filter fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="modal-dialog modal-dialog-large" role="document" style="max-width: 800px;">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                        <span class="material-icons font-28">
+                            clear
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="mb-24">{{lang?.vatDetails.modalCorrections.title}}</h2>
+
+                    <div class="card-inner mb-16 table-default">
+                        <table class="w-100">
+                            <thead>
+                                <th width="8%">
+                                    <div class="font-16 text-Eerie-Black font-weight-bold">
+                                        {{lang?.vatDetails.modalCorrections.th1}}
+                                    </div>
+
+                                </th>
+                                <th width="42%">
+                                    <div class="font-16 text-Eerie-Black font-weight-bold">
+                                        {{lang?.vatDetails.modalCorrections.th2}}
+
+                                    </div>
+
+                                </th>
+                                <th width="30%">
+                                    <div class="font-16 text-Eerie-Black font-weight-bold">
+                                        {{lang?.vatDetails.modalCorrections.th3}}
+
+                                    </div>
+
+                                </th>
+                                <th width="20%" text-align="right" class="text-right">
+                                    <div class="font-16 text-Eerie-Black font-weight-bold">
+                                        {{lang?.vatDetails.modalCorrections.th4}}
+
+                                    </div>
+
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let previousCredits of PreviousCredits">
+                                    <td>{{ previousCredits.LineNo}}</td>
+                                    <td>{{ previousCredits.Fbnum }}</td>
+                                    <td class="font-16 text-Eerie-Black">{{ previousCredits.DocNo }}</td>
+                                    <td class="font-16 text-Eerie-Black text-right">
+                                        {{ previousCredits.CreditAmt || 0 | number:'1.2-2'}}</td>
+                                </tr>
+                                <tr *ngIf="PreviousCredits.length != 0">
+                                    <td></td>
+                                    <td></td>
+                                    <th width="20%" text-align="right" class="text-right">
+                                        <div class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang?.vatDetails.modalCorrections.th5}}
+    
+                                        </div>
+                                    </th>
+                                    <td class="font-16 text-Eerie-Black text-right">{{taxPayerDetails.CreditVatRef || 0 | number:'1.2-2'}}</td>
+                                </tr>
+                                <tr *ngIf="PreviousCredits.length==0">
+                                    <td colspan="4" class="text-center">
+                                        <div class="alert alert-info">
+                                            {{lang?.vatDetails.modalCorrections.p1}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!----Correction Periods Modal Ends-->
+    <!-- Step 6 Starts Here-->
+    <div class="container" *ngIf="step==5">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a (click)="step=13" class="text-Watercourse d-flex font-weight-bold align-items-center">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step5.path}}
+            </a>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=1" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=2" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=3" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=4" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=12" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=13" class="active">
+                    <span></span>
+                </a>
+                <a (click)="step=5" class="active">
+                    <span></span>
+                </a>
+                <a href="#" class="ml-10">
+                    <img src="assets/images/icon-gcheck.svg" alt="">
+                </a>
+            </div> -->
+            <div class="d-flex justify-content-between mb-24 align-items-center pt-2">
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="!disableInputs">
+                        <li>
+                            <a (click)="step=1" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid}" (click)="step=3;calculateVat();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid}" (click)="step=4;getPenalityUserDetails();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=12"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 }" (click)="step=13;calculateVat();"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':!VATSalesForm.valid || !VATPurchasesForm.valid || CorrectionPenality < -5000 || CorrectionPenality > 5000 || errorNotes}" (click)="calculateVat();SaveVatReturnReview();">7</a></li>
+                    </ul>
+
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative" *ngIf="disableInputs">
+                        <li>
+                            <a (click)="step=1" [ngClass]="{'pointer-none':voidReturn}" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a (click)="step=2" [ngClass]="{'pointer-none':voidReturn}" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=3"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=4"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=12"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li>
+                            <a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=13"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                        </li>
+                        <li><a class="active" [ngClass]="{'pointer-none':voidReturn}" (click)="step=5">7</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h2>{{lang?.vatDetails.step5.title}}</h2>
+        <div class="text-Gray font-16 mb-24">{{lang?.vatDetails.step5.subTitle}}</div>
+        <div class="border-bottom-whisper mb-32"> </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step1.block1.title}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Gpartz}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block1.i2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Fin}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Idnumber}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block1.i4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Tpnm}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-12">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="taxPayerDetails?.ADRSet?.results?.length>0">
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.BuildingNo">{{taxPayerDetails?.ADRSet?.results[0]?.BuildingNo}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.BuildingNo!='' && taxPayerDetails?.ADRSet?.results[0]?.Street!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Street">{{taxPayerDetails?.ADRSet?.results[0]?.Street}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Street!='' && taxPayerDetails?.ADRSet?.results[0]?.Quarter!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Quarter">{{taxPayerDetails?.ADRSet?.results[0]?.Quarter}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Quarter!='' && taxPayerDetails?.ADRSet?.results[0]?.RegionDesc!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.RegionDesc">{{taxPayerDetails?.ADRSet?.results[0]?.RegionDesc}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.RegionDesc!='' && taxPayerDetails?.ADRSet?.results[0]?.City!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.City">{{taxPayerDetails?.ADRSet?.results[0]?.City}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.City!='' && taxPayerDetails?.ADRSet?.results[0]?.PostalCd!=''">,</span>
+                        <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.PostalCd">{{taxPayerDetails?.ADRSet?.results[0]?.PostalCd}}</span>
+
+                    </div>
+                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="taxPayerDetails?.ADRSet?.results?.length==0">
+                        -
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-return.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step1.block2.title}}
+                </h3>
+            </div>
+
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block2.i1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Incotext}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block2.i2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{taxPayerDetails?.Fin}} {{taxPayerDetails?.Vrtaxret}} -->
+                        {{taxPayerDetails?.Fbnum || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row   p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block2.i3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Perslt}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block2.i4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Vrtaxret}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step2.title}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step2.block.tableHeading2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{VATSalesForm.value.totalSales || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{VATSalesForm.value.totalSales || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step2.block.tableHeading3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{VATSalesForm.value.totalSalesAdjustment || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{VATSalesForm.value.totalSalesAdjustment || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step2.title}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{VATSalesForm.value.TotalVATonSales || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{VATSalesForm.value.TotalVATonSales || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step3.title}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step3.block.tableHeading2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{VATPurchasesForm.value.totalPurchases || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{VATPurchasesForm.value.totalPurchases || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step3.block.tableHeading3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{VATPurchasesForm.value.totalPurchasesAdjustment || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{VATPurchasesForm.value.totalPurchasesAdjustment || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row   p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step3.title}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step12.t1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="mr-24">
+                    <div *ngFor="let obj of vatDetailsObj.ATTACHSet.results">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <p class="m-0 font-weight-500 font-16 text-center">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'" src="assets/images/icon-pdf.svg" class="mb-10"> 
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'" src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'" src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'" src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'" src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'" src="assets/images/icon-png.svg" class="mb-10">  
+                                <br />
+                                {{obj.Filename}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step13.t1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="mr-24">
+                    {{notesAttached}}
+                </div>
+            </div>
+
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <h3 class="d-flex align-items-center">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-bill.svg" class=""
+                            alt=""></span> {{lang?.vatDetails.step4.title}}
+                </h3>
+            </div>
+
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step4.block.i1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center ">
+                            &nbsp;<span>{{VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step4.block.i2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{vatDetailsObj?.CreditVat || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center">
+                            &nbsp;<span>{{vatDetailsObj?.CreditVat || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"></div>
+            <div class="row   p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step4.block.i3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{CorrectionPenality || 0 | number:'1.2-2'}} SAR -->
+
+                        <div class="d-flex align-items-center">
+                            &nbsp;<span>{{CorrectionPenality || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-y-14">
+                <div class="text-Eerie-Black font-16">
+                    {{lang?.vatDetails.step4.block.i4}}
+                </div>
+                <div class="font-20 font-weight-bold text-Eerie-Black">
+                    <!-- {{((VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases )+(CorrectionPenality) + CreditVat)+(lateFinePenality)}} -->
+                    <!-- {{netVat || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center la-text-reverse">
+                        &nbsp;<span>{{netVat || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-24 pt-32" *ngIf="netVat>=0 && disableInputs == false">
+
+            <button class="btn btn-primary" (click)="SaveVatReturn();"> {{lang?.vatDetails.step5.btn3}}</button>
+
+            <!-- <button class="btn btn-primary" (click)="step=6;SaveVatReturn();">Continue</button> -->
+        </div>
+
+        <div class="mb-24 pt-32" *ngIf="netVat<0 && disableInputs == false">
+
+            <button class="btn btn-link" (click)="isrefund=true;step=7;">{{lang?.vatDetails.step5.btn1}}</button>
+
+            <button class="btn btn-primary" (click)="isrefund=false;SaveVatReturn();">{{lang?.vatDetails.step5.btn2}}</button>
+        </div>
+        <div class="mb-24 text-center pt-32" *ngIf=" disableInputs == true">
+            <button class="btn btn-link" (click)="step=6">{{lang?.vatDetails.step6.heading}}</button>
+        </div>
+
+    </div>
+    <!----- Step 6 Ends Here --->
+    <!---- Aknowledgement Starts Here ---->
+    <div class="container" *ngIf="step==6">
+        <div class="text-right">
+            <button class="btn btn-link mb-24 d-inline-block" [routerLink]="['/mains/returns/search']">{{lang?.vatDetails.step6.btn4}}</button>
+        </div>
+        <div class="text-center">
+            <div class="text-center mb-40">
+                <img src="assets/images/icon-success.svg" alt="">
+            </div>
+            <h2 class="mb-12" *ngIf="!isrefund">{{lang?.vatDetails.step6.title}}</h2>
+            <div class="text-Gray font-16 mb-24" *ngIf="!isrefund">{{lang?.vatDetails.step6.subtitle}}</div>
+            <h2 class="mb-12" *ngIf="isrefund">{{lang?.vatDetails.step6.title1}}</h2>
+            <div class="text-Gray font-16 mb-24" *ngIf="isrefund">
+                {{lang?.vatDetails.step6.subtitle1}}
+            </div>
+            <div class="pb-24">
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang?.vatDetails.step6.i1}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Fbnumz || '-'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang?.vatDetails.step6.i2}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{taxPayerDetails?.Perslt || '-'}}
+                    </span>
+                </div>
+                <div *ngIf='taxPayerDetails?.Sopbel != ""'>
+                    <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                        <span class="font-16 text-Gray  mb-0">
+                            {{lang?.vatDetails.step6.i3}}
+                        </span>
+                        <!-- <span class="text-Eerie-Black font-16 font-weight-500"
+                        *ngIf="((VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases )+(CorrectionPenality) + CreditVat)+(lateFinePenality)<0">
+                        -
+                    </span> -->
+                        <!-- *ngIf="((VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases )+(CorrectionPenality) + CreditVat)+(lateFinePenality)>0" -->
+                        <span class="text-Eerie-Black font-16 font-weight-500">
+                            {{taxPayerDetails?.Sopbel || '-'}}
+                        </span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                        <span class="font-16 text-Gray  mb-0">
+                            {{lang?.vatDetails.step6.i4}}
+                        </span>
+                        <span class="text-Eerie-Black font-16 font-weight-500">
+                            <!-- {{taxPayerDetails?.Betrh || 0  | number:'1.2-2'}} SAR -->
+
+                            <div class="d-flex align-items-center la-text-reverse">
+                                &nbsp;<span>{{taxPayerDetails?.Betrh || 0  | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="font-16 text-Gray text-center max-width650 mx-auto" *ngIf="!isrefund">
+        {{lang?.vatDetails.step6.msg}}
+    </div> -->
+
+    <div class="mb-24 pt-32 text-center  d-flex flex-column justify-content-center align-items-center">
+        <div *ngIf='taxPayerDetails?.Sopbel == ""'>
+            <button class="btn btn-link mb-24 d-inline-block" (click)="onRefresh()">{{lang?.vatDetails.step6.btn3}}</button>
+        </div>
+        <button class="btn btn-primary mb-24 d-inline-block" (click)="onDownloadAcknowledgement()">{{lang?.vatDetails.step6.btn1}}</button>
+        <div *ngIf='taxPayerDetails?.Sopbel != "" '>
+            <button class="btn btn-link d-inline-block" (click)="onDownloadForm()">
+                    {{lang?.vatDetails.step6.btn2}}</button>
+        </div>
+
+    </div>
+</div>
+<!-----Submitted return Display Screen -------->
+<div class="container" *ngIf="step==8">
+    <div class="mb-24">
+        <a [routerLink]="['/mains/returns/search']" class="text-Gray"> {{lang?.vatDetails.step1.path.t1}} > </a> {{lang?.vatDetails.step1.path.t2}}
+    </div>
+    <div class="mb-32 d-flex justify-content-between align-items-center">
+
+        <a [routerLink]="['/mains/returns/search']" class="text-Watercourse d-flex font-weight-bold align-items-center">
+            <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step5.path}}
+        </a>
+    </div >
+    <div class="mb-32 d-flex justify-content-between align-items-center">
+        <h2>{{lang?.vatDetails.step1.title}}</h2>
+        <span class="status" [ngClass]="{'status-submitted':(RetrunObjStatus=='E0045' || RetrunObjStatus=='E0055' || RetrunObjStatus=='E0006')}">
+            {{ReturnObjStatusTxt}}
+        </span>
+    </div>
+    <!-- <div class="border-bottom-whisper mb-32"> </div> -->
+    <div class="card mb-24 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step1.block1.title}}
+            </h3>
+        </div>
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i1}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    {{taxPayerDetails?.Gpartz}}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block1.i2}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    {{taxPayerDetails?.Fin}}
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper"> </div>
+        <div class="row  p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i3}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    {{taxPayerDetails?.Idnumber}}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block1.i4}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    {{taxPayerDetails?.Tpnm}}
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper"> </div>
+        <div class="row  p-24">
+            <div class="col-sm-12">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block1.i5}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="taxPayerDetails?.ADRSet?.results?.length>0">
+                    <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.BuildingNo">{{taxPayerDetails?.ADRSet?.results[0]?.BuildingNo}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.BuildingNo!='' && taxPayerDetails?.ADRSet?.results[0]?.Street!=''">,</span>
+                    <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Street">{{taxPayerDetails?.ADRSet?.results[0]?.Street}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Street!='' && taxPayerDetails?.ADRSet?.results[0]?.Quarter!=''">,</span>
+                    <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Quarter">{{taxPayerDetails?.ADRSet?.results[0]?.Quarter}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.Quarter!='' && taxPayerDetails?.ADRSet?.results[0]?.RegionDesc!=''">,</span>
+                    <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.RegionDesc">{{taxPayerDetails?.ADRSet?.results[0]?.RegionDesc}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.RegionDesc!='' && taxPayerDetails?.ADRSet?.results[0]?.City!=''">,</span>
+                    <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.City">{{taxPayerDetails?.ADRSet?.results[0]?.City}}</span><span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.City!='' && taxPayerDetails?.ADRSet?.results[0]?.PostalCd!=''">,</span>
+                    <span *ngIf="taxPayerDetails?.ADRSet?.results[0]?.PostalCd">{{taxPayerDetails?.ADRSet?.results[0]?.PostalCd}}</span>
+
+                </div>
+                <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="taxPayerDetails?.ADRSet?.results?.length==0">
+                    -
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card mb-24 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-return.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step1.block2.title}}
+            </h3>
+        </div>
+
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block2.i1}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    {{taxPayerDetails?.Incotext}}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block2.i2}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{taxPayerDetails?.Fin}} {{taxPayerDetails?.Vrtaxret}} -->
+                    {{taxPayerDetails?.Fbnum || '-'}}
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper"></div>
+        <div class="row   p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step1.block2.i3}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    {{taxPayerDetails?.Perslt}}
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step1.block2.i4}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    {{taxPayerDetails?.Vrtaxret}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card mb-24 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step2.title}}
+            </h3>
+        </div>
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step2.block.tableHeading2}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{VATSalesForm.value.totalSales || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center ">
+                        &nbsp;<span>{{VATSalesForm.value.totalSales || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step2.block.tableHeading3}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{VATSalesForm.value.totalSalesAdjustment || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center ">
+                        &nbsp;<span>{{VATSalesForm.value.totalSalesAdjustment || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper"></div>
+        <div class="row p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step2.title}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{VATSalesForm.value.TotalVATonSales || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center ">
+                        &nbsp;<span>{{VATSalesForm.value.TotalVATonSales || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-24 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step3.title}}
+            </h3>
+        </div>
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step3.block.tableHeading2}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{VATPurchasesForm.value.totalPurchases || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center ">
+                        &nbsp;<span>{{VATPurchasesForm.value.totalPurchases || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step3.block.tableHeading3}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{VATPurchasesForm.value.totalPurchasesAdjustment || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center ">
+                        &nbsp;<span>{{VATPurchasesForm.value.totalPurchasesAdjustment || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper"></div>
+        <div class="row   p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step3.title}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center ">
+                        &nbsp;<span>{{VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card mb-24 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step12.t1}}
+            </h3>
+        </div>
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="mr-24">
+                <div *ngFor="let obj of vatDetailsObj?.ATTACHSet?.results">
+                    <div class="d-flex align-items-center h-100">
+                        <p class="m-0 font-weight-500 font-16 text-center">
+                            <span class="mr-3">{{obj.Filename}}</span>
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'" src="assets/images/icon-pdf.svg" class="mb-10"> 
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'" src="assets/images/icon-excel.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'" src="assets/images/icon-excel.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'" src="assets/images/icon-doc.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'" src="assets/images/icon-doc.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'" src="assets/images/icon-png.svg" class="mb-10"> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card mb-24 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step13.t1}}
+            </h3>
+        </div>
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="mr-24">
+                {{notesAttached}}
+            </div>
+        </div>
+
+    </div>
+    <div class="card mb-24 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-bill.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step4.title}}
+            </h3>
+        </div>
+
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step4.block.i1}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center ">
+                        &nbsp;<span>{{VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step4.block.i2}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{vatDetailsObj?.CreditVat || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center">
+                        &nbsp;<span>{{vatDetailsObj?.CreditVat || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper"></div>
+        <div class="row   p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step4.block.i3}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{CorrectionPenality || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center">
+                        &nbsp;<span>{{CorrectionPenality || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-y-14">
+            <div class="text-Eerie-Black font-16">
+                {{lang?.vatDetails.step4.block.i4}}
+            </div>
+            <div class="font-20 font-weight-bold text-Eerie-Black">
+                <!-- {{((VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases )+(CorrectionPenality) + CreditVat)+(lateFinePenality)}} -->
+                <!-- {{netVat || 0 | number:'1.2-2'}} SAR -->
+
+                <div class="d-flex align-items-center la-text-reverse">
+                    &nbsp;<span>{{netVat || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-24 pt-32" *ngIf="disableInputs == true">
+        <button class="btn btn-link mr-5" (click)="Amendment()">{{lang?.vatDetails.step5.btn4}}</button>
+        <button class="btn btn-primary" (click)="step=6">{{lang?.vatDetails.step6.heading}}</button>
+    </div>
+
+</div>
+<!----- Display Screen Ends Here ------->
+</div>
+<!----- Aknowledgement Ends Here ----->
+
+
+
+
+
+
+
+
+
+
+<!------Refund Screen Starts Here ------>
+<div class="container" *ngIf="step==7" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="mb-24">
+        <a (click)="step=5;" class="text-Watercourse d-flex font-weight-bold align-items-center">
+            <img src="assets/images/arrow-left-green.svg" class="mr-10 img-reverse" alt=""> {{lang?.vatDetails.step7.path}}
+        </a>
+    </div>
+    <h2>{{lang?.vatDetails.step7.title}}</h2>
+    <div class="text-Gray font-16 mb-24">{{lang?.vatDetails.step7.subTitle}}</div>
+    <div class="border-bottom-whisper mb-32"> </div>
+    <div class="card mb-32 card-shadow-none">
+        <div class="pxy-2412">
+            <h3 class="d-flex align-items-center">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-bill.svg" class=""
+                        alt=""></span> {{lang?.vatDetails.step7.block1.title}}
+            </h3>
+        </div>
+
+        <div class="border-bottom-whisper"> </div>
+        <div class="row p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step7.block1.i1}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{NetdueVat || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center la-text-reverse justify-content-start">
+                        <span>{{NetdueVat || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray mb-0">{{lang?.vatDetails.step7.block1.i2}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{vatDetailsObj?.CreditVat || 0 | number:'1.2-2' }} SAR -->
+
+                    <div class="d-flex align-items-center la-text-reverse  justify-content-start">
+                        <span>{{vatDetailsObj?.CreditVat || 0 | number:'1.2-2' }}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-bottom-whisper"></div>
+        <div class="row   p-24">
+            <div class="col-sm-6">
+                <p class="font-16 text-Gray  mb-0">{{lang?.vatDetails.step7.block1.i3}}</p>
+                <div class="text-Eerie-Black font-16 font-weight-500">
+                    <!-- {{CorrectionPenality || 0 | number:'1.2-2'}} SAR -->
+
+                    <div class="d-flex align-items-center la-text-reverse  justify-content-start">
+                        <span>{{CorrectionPenality || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-y-14">
+            <div class="text-Eerie-Black font-16">
+                {{lang?.vatDetails.step7.block1.i4}}
+            </div>
+            <div class="font-20 font-weight-bold text-Eerie-Black">
+                <!-- {{((VATSalesForm.value.TotalVATonSales-VATPurchasesForm.value.totalVATOnPurchases )+(CorrectionPenality) + CreditVat)+(lateFinePenality)}} -->
+                <!-- {{netVat || 0 | number:'1.2-2'}} SAR -->
+
+                <div class="d-flex align-items-center la-text-reverse  justify-content-start">
+                    <span>{{netVat || 0 | number:'1.2-2'}}</span>&nbsp;<span>{{lang?.vatDetails.step1.path.currency}}</span>&nbsp;
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <p class="font-20 font-weight-bold">{{lang?.vatDetails.step7.block2.title}}</p>
+    <div class="row mb-56">
+        <div class="col-sm-3">
+            <div class="cardh139 card mark-light-gray p-24 cursor-pointer" data-toggle="modal" data-target="#iBanModal">
+                <div class="d-flex justify-content-end" *ngIf="disableInputs == false">
+                    <img src="assets/images/icon-plus.svg">
+                </div>
+                <div class="font-weight-500 font-16">
+                    <p class="m-0">
+                        {{lang?.vatDetails.step7.block2.btn1}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" *ngFor="let bank of bankSet">
+
+            <label class="radio-thumb cursor-pointer width100P cardh139 mb-0 text-Eerie-Black" (click)="onIBANSelect(bank)">
+                   
+                        <input type="radio" name="radio" class="position-absolute cursor-pointer">
+                        <span class="checkmark card cardh139 width100P cardh139 p-24">
+                                <div class="d-flex justify-content-end">
+                                        <span>
+                                            <img [src]="bank.Logo" class="ellipse40" alt="">
+                                                </span>
+                                    </div>
+                             <div class="font-16 text-black font-weight-500"> {{bank.Iban.substring(0,3)}}****************{{bank.Iban.substring(20,23)}}</div>
+                            <div class="text-Gray font-14">{{bank.bankName}}</div>       
+                        
+                        </span>
+                    </label>
+
+            <!-- 
+            <div class="cardh139 card mark-light-gray p-24">
+                <div class="d-flex justify-content-end">
+                    <span class="ellipse40 bg-dark-blue">
+                                <img src="" class="" alt="">
+                            </span>
+                </div>
+                <div class="font-weight-500 font-16" >
+                    <p class="m-0"></p>
+                    <span class="text-Gray font-14">{{bank.Iban.substring(0,3)}}****************{{bank.Iban.substring(20,23)}}</span>
+                </div>
+            </div> -->
+        </div>
+
+
+    </div>
+    <div class="mb-24">
+        <!-- SaveVatReturn(); -->
+        <button class="btn btn-primary" [disabled]="!IbanSelected" (click)="SaveVatReturn();">{{lang?.vatDetails.step7.btn}}</button>
+    </div>
+</div>
+<!--- NewBank account modal-->
+<div class="modal modal-filter fade lang-arabic" id="iBanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2 class="mb-24">{{lang?.vatDetails?.modal?.title}}</h2>
+                <div class="form-group">
+                    <label>{{lang?.vatDetails?.modal?.i1}}</label>
+                    <input type="text" class="form-control" [value]="taxPayerDetails.Tpnm">
+                </div>
+                <div class="form-group">
+                    <label>{{lang?.vatDetails?.modal?.i2}}</label>
+                    <input type="text" class="form-control" [(ngModel)]="IBANNumber" minlength="24" maxlength="24">
+                </div>
+                <div class="form-group text-right"  [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <button class="btn btn-primary  ar-ml-0" data-dismiss="modal" (click)="NewBankAccountSave()">{{lang?.vatDetails?.modal?.btn}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!------- Refund Code Ends Here ------->
+<!---VAT Return Forms End Here-->
+
+
+
+<!-- ReviewModal -->
+<div class="modal modal-filter fade lang-arabic" id="ReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button> -->
+            </div>
+            <div class="modal-body">
+                <p>{{lang?.vatDetails?.ReviewModal?.p1}}</p>
+                <div class="form-group text-right" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <button class="btn btn-primary ar-ml-0" data-dismiss="modal" (click)="ShowSummary()">{{lang?.vatDetails?.ReviewModal.btn}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Review modal ends -->
+
+
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" id="correctionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <h2 class="mb-24"> {{lang?.vatDetails.CorrectionsModal.t1}}</h2>
+                <div class="card-inner mb-16">
+                    <div class="font-12 text-Gray">
+                        {{lang?.vatDetails.CorrectionsModal.p1}}
+                    </div>
+                </div>
+
+
+                <div class="form-group text-right ar-text-left pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.CorrectionsModal.btn1}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Success modal starts -->
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" id="SuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="card-inner mb-16">
+                    <div class="font-12 text-Gray">
+                        {{lang?.vatDetails.SuccessModal.p1}} {{taxPayerDetails.Fbnum}}
+                    </div>
+                </div>
+
+
+                <div class="form-group text-right ar-text-left pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.SuccessModal.btn1}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Success modal ends -->
+<!--- Void Modal Popup----->
+<div class="modal modal-filter fade" dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" id="VoidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="card-inner mb-16">
+                    <div class="font-12 text-Gray">
+                     {{lang?.vatDetails.VoidModal.p1}}
+                    </div>
+                </div>
+                <div class="form-group text-right ar-text-left pt-32" [ngClass]="{'arabic-btn':language == 'ar'}">
+                    <button class="btn btn-primary mr-3" (click)="CancelReturn()">{{lang?.vatDetails.VoidModal.btn1}}</button>
+                    <button class="btn btn-primary" data-dismiss="modal">{{lang?.vatDetails.VoidModal.btn2}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!---- Void Modal popup ends ---->
+<!--- Void Success Modal-->
+<div class="modal modal-filter fade" id="voidSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center justify-content-center height100VH my-0 mx-auto"
+            role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+                </div>
+                <div class="modal-body">
+                    <div class="font-16 text-Gray">
+                        {{lang?.vatDetails.VoidModal.p2}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!--- Void Suceess Modal ends-->
+<div dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <notifier-container></notifier-container>
+</div>

@@ -1,0 +1,44 @@
+<div class="row" dir="{{ direction }}">
+    <div class="col-12 p-5">
+        <mat-card class="">
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="vText">
+                            <span class="font-weight-bold"> {{lang.title}} </span>
+                            <span class="font-weight-bold" *ngIf="params.MobileNo">xxxxxx{{params.MobileNo.substr(-4)}}</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5 mb-4" style="direction: initial;">
+                    <div class="col-12 vBox">
+                        <input autocomplete="off"  type="password" #e1 class="Verif-box ash" maxlength="1" [disabled]="enableResendButton"
+                            (keyup)="keyUpEvent($event, 1)" id="one" />
+                        <input autocomplete="off" type="password" #e2 class="Verif-box ash" maxlength="1" [disabled]="enableResendButton"
+                            (keyup)="keyUpEvent($event, 2)" />
+                        <input autocomplete="off" type="password" #e3 class="Verif-box ash" maxlength="1" [disabled]="enableResendButton"
+                            (keyup)="keyUpEvent($event, 3)" />
+                        <input autocomplete="off" type="password" #e4 class="Verif-box ash mr-0" maxlength="1" [disabled]="enableResendButton"
+                            (keyup)="keyUpEvent($event, 4)" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="sideHeading timer">
+                            {{ timeLeft | minuteSeconds }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <button class="h6 resend" [disabled]="!enableResendButton"
+                            [style.color]="!enableResendButton? '#c0c0c0':''" (click)="resendOTP()">{{lang.verifyTitle}}
+                        </button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

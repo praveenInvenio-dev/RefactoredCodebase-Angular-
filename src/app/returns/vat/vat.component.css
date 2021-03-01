@@ -1,0 +1,166 @@
+.Selected {
+    width: 206px;
+    height: 104px;
+    object-fit: contain;
+}
+
+.Unselected {
+    width: 206px;
+    height: 104px;
+    object-fit: contain;
+}
+
+.mini-dropdown .dropdown-menu {
+    padding: 15px;
+    right: 0 !important;
+    left: auto !important;
+    width: 200px;
+}
+
+.mini-dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+.mini-dropdown .custom-right-align.dropdown-menu {
+    right: -3px !important;
+    top: -5px !important;
+    padding: 10px !important;
+    width: 174px !important;
+    text-align: center;
+}
+
+.opacity-0 {
+    opacity: 0 !important;
+}
+
+.h-216 {
+    height: 216px !important;
+}
+
+
+/* Radio thumb css starts here */
+
+.px-15 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.radio-thumb.custom-option-small {
+    /* background: url(/../../../assets/image/unselected.svg) no-repeat; */
+    user-select: none;
+    padding: 0px !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.radio-thumb input {
+    opacity: 0;
+}
+
+.radio-thumb input:checked~.checkmark {
+    /* background: url(/../../../assets/image/selected.svg) no-repeat; */
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 18px;
+    color: #fff !important;
+}
+
+.radio-thumb input:checked~.checkmark .text-Gray,
+.radio-thumb input:checked~.checkmark .text-black {
+    color: #fff !important;
+}
+
+.custom-option-small {
+    border: none;
+    width: 208px !important;
+    height: 104px !important;
+    padding: 10px 15px !important;
+}
+
+.pointer-none {
+    pointer-events: none !important;
+}
+
+
+/* file  upload css */
+
+.upload-text-items {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.custom-upload-file {
+    z-index: 999999 !important;
+    cursor: pointer;
+}
+
+.cardh219 {
+    height: 216px !important;
+}
+
+
+/*Error messages boreder-red*/
+
+input.ng-invalid,
+textarea.ng-invalid{
+    border: 1px solid red !important;
+}
+/* for Right Arrow*/
+
+.rightArrow {
+    height: 24px !important;
+    width: 24px !important;
+}
+
+.border-gray {
+    border: 1px solid #808080;
+}
+
+.border-gray-dashed {
+    border: 1px dashed #ccc;
+}
+
+.p-24.card {
+    padding: 24px !important;
+}
+
+.width100P {
+    width: 100% !important;
+}
+.arabic-btn {
+    float:left !important;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+.info-icon{
+    top:50%;
+    right:0;
+}
+
+input#corrError {
+    border: none !important;
+}
+.border-red
+{
+    border-color: red !important;
+}
+table>tr>td.text-right div.d-flex.align-items-center{
+    justify-content: flex-end !important;
+}
+form table tr td{
+    max-width:230px !important ;
+
+}
+
+form table tr td div.text-danger{
+    font-size: 12px !important;
+}

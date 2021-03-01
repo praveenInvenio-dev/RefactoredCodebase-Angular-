@@ -1,0 +1,93 @@
+.titleCssS {
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.96;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    margin-left: 10px;
+    font-size: 20px;
+  }
+
+  .insideCard {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    color: #13614c;
+    font-family: SSTArabic-Bold;
+  }
+
+  /* .insideCard:hover {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.44;
+      letter-spacing: normal;
+      color: white;
+    } */
+
+
+  .outerDiv {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+  }
+
+
+  .cardHover:hover {
+      background-color: #d2a02a;
+      color: white;
+    }
+
+    /* .cardHover {
+      width: 146.4px !important;
+      height: 145.6px !important;
+      object-fit: contain !important;
+      background-color: #d2a02a;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16) !important;
+      color: white !important;
+    } */
+
+    /* .Tile {
+      width: 192px;
+      height: 191px;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+      background-color: var(--dull-orange);
+    } */
+
+    .Tile {
+      width: 146.4px !important;
+      height: 145.6px !important;
+      object-fit: contain !important;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16) !important;
+      background-color: #ffffff !important;
+    }
+
+    .Company {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+
+    .btnCss {
+      width: 106px;
+      height: 35px;
+      border-radius: 9px;
+      font-family: SSTArabic-Bold;
+      font-size: 16px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+      background-color: #d2a02a;
+    }

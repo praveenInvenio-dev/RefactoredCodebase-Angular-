@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="16" viewBox="0 0 84 16">
+    <g fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero">
+            <g transform="translate(-1084 -244) translate(1084 244)">
+                <circle cx="42" cy="8" r="6" fill="#EBEBEB"/>
+                <circle cx="24" cy="8" r="6" fill="#EBEBEB"/>
+                <rect width="12" height="12" y="2" fill="#006450" rx="6"/>
+                <circle cx="60" cy="8" r="6" fill="#EBEBEB"/>
+                <circle cx="78" cy="8" r="6" fill="#EBEBEB"/>
+            </g>
+        </g>
+    </g>
+</svg>

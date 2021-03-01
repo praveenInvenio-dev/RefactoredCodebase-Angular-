@@ -1,0 +1,2356 @@
+<div
+  class="container alignStart px-0"
+  [dir]="direction"
+  *ngIf="!displayAcknowledgement"
+>
+  <div>
+    <div class="row mx-0">
+      <div class="col-md-12 px-0">
+        <span
+          class="exciseTitle1 unicodeDir"
+          style="cursor: pointer"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          (click)="backTo('')"
+          >{{ lang["bc1"] }}
+          &gt;
+        </span>
+        <span
+          class="exciseTitle1"
+          style="cursor: pointer"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          (click)="backTo('001')"
+          >{{ lang["bc2"] }} &gt;</span
+        >
+        <span
+          class="exciseTitle1"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          style="color: #151515"
+        >
+          {{ lang[WhitelistPath ? "bc3" : "bc4"] }}</span
+        >
+      </div>
+    </div>
+    <div class="row mt-3 mx-0" style="width: 100%">
+      <div class="col-md-12 px-0">
+        <div class="row mx-0">
+          <div class="viewMore col-md-6 px-0">
+            <div style="cursor: pointer" (click)="back()">
+              <span class="addServiceSpan2">
+                <img
+                  [src]="
+                    direction === 'ltr'
+                      ? 'assets/image/arrow-left-green.svg'
+                      : 'assets/image/arrow-right-green.svg'
+                  "
+                />
+              </span>
+              <span class="addServiceSspan2"> {{ lang["back"] }} </span>
+            </div>
+          </div>
+          <span
+            class="stepNumber col-md-6 px-0"
+            *ngIf="formBundle === null || isExistingApplicationEditable"
+          >
+            <img
+              [ngClass]="direction === 'rtl' ? 'rotateImage' : ''"
+              class="stepperImage"
+              [src]="
+                lang[
+                  WhitelistPath
+                    ? 'process_addWhitelist'
+                    : 'process_cancelWhitelist'
+                ][processActive - 1]['step']
+              "
+            />
+            <img
+              src="assets/image/check.svg"
+              alt="check"
+              class="mx-2"
+              *ngIf="processActive === 5"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4 mx-0">
+      <div class="col-md-10 px-0">
+        <div class="exciseSecondTitle">
+          {{
+            formBundle !== null && !isExistingApplicationEditable
+              ? formBundle["FbtText"]
+              : lang[
+                  WhitelistPath
+                    ? "process_addWhitelist"
+                    : "process_cancelWhitelist"
+                ][processActive - 1]["title"]
+          }}
+        </div>
+      </div>
+      <div class="col-md-2 mx-0 row px-0 justify-content-end">
+        <div
+          class="tag32"
+          *ngIf="formBundle !== null && processActive === 5"
+          [matTooltip]="formBundle['FbustTxt']"
+          [ngClass]="statusClass"
+        >
+          {{ formBundle.FbustTxt }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2 mx-0">
+      <div class="col-md-12 px-0">
+        <div class="exciseSecondTitle1">
+          {{
+            lang[
+              WhitelistPath ? "process_addWhitelist" : "process_cancelWhitelist"
+            ][processActive - 1]["subtitle"]
+          }}
+        </div>
+      </div>
+    </div>
+
+    <div class="Rectangle-12New mt-3"></div>
+
+    <!-- header end -->
+
+    <div class="my-3">
+      <!-- Step 1 -->
+      <div
+        class="col-md-12 mt-4 px-0"
+        [ngClass]="direction === 'ltr' ? 'padding-lft' : 'padding-rtl'"
+        *ngIf="processActive === 1"
+      >
+        <div class="card custom-card" style="border-radius: 14px">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="custom-card-title">
+                <span class="icon-background">
+                  <img
+                    src="assets/image/user.svg"
+                    alt="User"
+                    style="padding: 7px"
+                  />
+                </span>
+                <span style="margin: auto 16px">{{
+                  direction == "rtl"
+                    ? searchConstants["taxpayer"]["arb"]
+                    : searchConstants["taxpayer"]["eng"]
+                }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="Rectangle-12 mt-0"></div>
+          <div class="card-body">
+            <div class="row" style="text-align: start">
+              <div class="col-md-6 col-12">
+                <p class="refund-label mb-0">
+                  {{
+                    direction == "rtl"
+                      ? searchConstants["tin"]["arb"]
+                      : searchConstants["tin"]["eng"]
+                  }}
+                </p>
+                <p class="refund-value mb-0">{{ tin }}</p>
+              </div>
+              <div class="col-md-6 col-12">
+                <p class="refund-label mb-0">
+                  {{
+                    direction == "rtl"
+                      ? searchConstants["crNumber"]["arb"]
+                      : searchConstants["crNumber"]["eng"]
+                  }}
+                </p>
+                <p class="refund-value mb-0">{{ crNo }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row" style="text-align: start">
+              <div class="col-md-6 col-12">
+                <p class="refund-label mb-0">
+                  {{
+                    direction == "rtl"
+                      ? searchConstants["vatNumber"]["arb"]
+                      : searchConstants["vatNumber"]["eng"]
+                  }}
+                </p>
+                <p class="refund-value mb-0">{{ vatNo }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 addBtn mt-5 p-0">
+          <button
+            class="btnPrimary col-md-6 btnFonxt"
+            type="submit"
+            mat-raised-button
+            (click)="onSubmit()"
+          >
+            {{
+              direction == "rtl"
+                ? searchConstants["continue"]["arb"]
+                : searchConstants["continue"]["eng"]
+            }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+
+      <div class="row mt-3 mx-0" *ngIf="processActive === 2">
+        <div class="col-md-12 px-0">
+          <form class="form" [formGroup]="requestTypeForm">
+            <div class="col-md-12 mt-3 px-0">
+              <label class="headingTitle mb-3">{{ lang["requestType"] }}</label>
+              <div class="row cards mx-0">
+                <div class="my-1">
+                  <mat-card
+                    [ngClass]="{
+                      active: showTab === 1,
+                      disabledTab: formBundle !== null
+                    }"
+                    (click)="formBundle !== null ? false : changeTab(1)"
+                  >
+                    <div class="title-card">
+                      {{ lang["newRequest"] }}
+                    </div>
+                  </mat-card>
+                </div>
+                <div class="mx-3 my-1">
+                  <mat-card
+                    [ngClass]="{
+                      active: showTab === 2,
+                      disabledTab: formBundle !== null
+                    }"
+                    (click)="formBundle !== null ? false : changeTab(2)"
+                  >
+                    <div class="title-card">
+                      {{ lang["cancelRequest"] }}
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="createdWhitelist">
+              <div class="col-md-6 mt-3 px-0">
+                <label class="headingTitle mb-3">{{
+                  direction == "rtl"
+                    ? searchConstants["transportCategory"]["arb"]
+                    : searchConstants["transportCategory"]["eng"]
+                }}</label>
+                <div class="matLabel labelMarginBottom">
+                  {{
+                    direction == "rtl"
+                      ? searchConstants["transportCategory"]["arb"]
+                      : searchConstants["transportCategory"]["eng"]
+                  }}
+                </div>
+                <mat-select
+                  class="commonMatSelect"
+                  placeholder="ID Type"
+                  disableOptionCentering
+                  (selectionChange)="validateTransportCategory()"
+                  [placeholder]="
+                    direction == 'rtl'
+                      ? searchConstants['transportCategory']['arb']
+                      : searchConstants['transportCategory']['eng']
+                  "
+                  formControlName="transportCategory"
+                  [disabled]="mainAttachments.length > 0 || formBundle !== null"
+                  [ngClass]="{
+                    'input-error':
+                      (!isTransportCategoryValidated &&
+                        requestTypeForm.value.transportCategory !== '') ||
+                      (form2Submitted &&
+                        requestTypeForm.controls.transportCategory.invalid)
+                  }"
+                >
+                  <mat-option
+                    [value]="option['Fbtyp']"
+                    *ngFor="let option of typesOfWhiteListing"
+                  >
+                    {{ option["FbtText"] }}</mat-option
+                  >
+                </mat-select>
+                <div
+                  class="textError matLabel mt-1"
+                  *ngIf="
+                    !isTransportCategoryValidated &&
+                    requestTypeForm.value.transportCategory !== ''
+                  "
+                >
+                  {{ invalidTransportCategory }}
+                </div>
+              </div>
+              <div class="col-md-12 mt-3 px-0">
+                <label class="headingTitle">{{
+                  direction == "rtl"
+                    ? searchConstants["document"]["arb"]
+                    : searchConstants["document"]["eng"]
+                }}</label>
+                <div class="row justify-content-between mx-0 mt-3">
+                  <div
+                    class="card-uploaded border mb-3"
+                    [ngClass]="
+                      direction === 'rtl'
+                        ? 'attachment-rtl card-uploaded border mb-3'
+                        : 'attachment card-uploaded border mb-3'
+                    "
+                    *ngFor="
+                      let attachment of mainAttachments;
+                      let attachmentIndex = index
+                    "
+                  >
+                    <div
+                      class="card-delete"
+                      (click)="
+                        deleteAttachment(
+                          'VCWL',
+                          attachment['Doguid'],
+                          attachmentIndex
+                        )
+                      "
+                    >
+                      <img src="assets/image/delete.svg" />
+                    </div>
+                    <div class="card-file-content">
+                      <img
+                        style="width: 24px; margin: 0 auto"
+                        [src]="
+                          isPdf(attachment['Filename'])
+                            ? 'assets/image/generic-documents.png'
+                            : 'assets/image/generic-documents.png'
+                        "
+                      />
+                      <div
+                        class="value textDark mt-1 card-main-text fwb fileName"
+                      >
+                        {{ attachment["Filename"] }}
+                      </div>
+                      <!-- <div class="caption textGray mt-1">
+                        {{ attachment["ZfileSize"] }} MB
+                      </div> -->
+                    </div>
+                  </div>
+                  <div
+                    [ngClass]="[
+                      direction === 'rtl'
+                        ? 'attachment-rtl card-upload border mb-3'
+                        : 'attachment card-upload border mb-3',
+                      requestTypeForm.value.transportCategory !== '' &&
+                      isTransportCategoryValidated
+                        ? ''
+                        : 'zs-disableDraganddrop',
+                      mainAttachments.length === 0 && form2Submitted
+                        ? 'input-error'
+                        : ''
+                    ]"
+                    (click)="
+                      requestTypeForm.value.transportCategory !== '' &&
+                      isTransportCategoryValidated
+                        ? fileInput.click()
+                        : false
+                    "
+                    appDragDrop
+                    (onFileDropped)="
+                      requestTypeForm.value.transportCategory !== '' &&
+                      isTransportCategoryValidated
+                        ? uploadFiles($event, 'VCWL')
+                        : false
+                    "
+                    *ngIf="mainAttachments['length'] < 10"
+                  >
+                    <div class="card-upload-content">
+                      <input
+                        hidden
+                        type="file"
+                        id="mainAttachments"
+                        #fileInput
+                        (change)="uploadFiles($event.target.files, 'VCWL')"
+                      />
+                      <img
+                        src="assets/image/attach-grey.svg"
+                        class="attachIcon"
+                      />
+                      <div class="value textPrimary mt-1 card-main-text fwb">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["dragAndDropFile"]["arb"]
+                            : searchConstants["dragAndDropFile"]["eng"]
+                        }}
+                      </div>
+                      <div class="caption textGray mt-1">5MB</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3 px-0">
+                <label class="headingTitle">{{
+                  direction == "rtl"
+                    ? searchConstants["duration"]["arb"]
+                    : searchConstants["duration"]["eng"]
+                }}</label>
+                <div class="matLabel labelMarginBottom">
+                  {{
+                    direction == "rtl"
+                      ? searchConstants["dates"]["arb"]
+                      : searchConstants["dates"]["eng"]
+                  }}
+                </div>
+                <div
+                  class="dateRangePicker"
+                  style="margin-top: 6px"
+                  [ngClass]="{
+                    'input-error':
+                      (requestTypeForm.controls.StartDate.invalid &&
+                        (requestTypeForm.controls.StartDate.touched ||
+                          form2Submitted)) ||
+                      (requestTypeForm.controls.EndDate.invalid &&
+                        (requestTypeForm.controls.EndDate.touched ||
+                          form2Submitted))
+                  }"
+                >
+                  <input
+                    (click)="picker.open()"
+                    [placeholder]="lang['from']"
+                    [min]="minDate"
+                    [max]="requestTypeForm.value.EndDate"
+                    readonly
+                    [matDatepicker]="picker"
+                    (dateChange)="changesToDate(picker)"
+                    required
+                    matInput
+                    style="border: none"
+                    formControlName="StartDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                    matDatepickerToggleIcon="none"
+                  >
+                  </mat-datepicker-toggle>
+                  <mat-datepicker
+                    #picker
+                    [calendarHeaderComponent]="headerComponent"
+                  >
+                  </mat-datepicker>
+                  <span style="display: flex">
+                    <img
+                      [src]="
+                        direction == 'ltr'
+                          ? 'assets/image/arrow-right-green.svg'
+                          : 'assets/image/arrow-left-green.svg'
+                      "
+                  /></span>
+                  <input
+                    (click)="picker1.open()"
+                    [placeholder]="lang['to']"
+                    formControlName="EndDate"
+                    required
+                    matDatepicker
+                    matInput
+                    [min]="
+                      requestTypeForm.controls.StartDate.value != null
+                        ? requestTypeForm.controls.StartDate.value
+                        : minDate
+                    "
+                    [matDatepicker]="picker1"
+                    style="border: none"
+                    (dateChange)="changesFromDate(picker1)"
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="picker1">
+                    <mat-icon matDatepickerToggleIcon>
+                      <span style="display: flex">
+                        <img src="assets/image/calendar.svg" alt="calendar"
+                      /></span>
+                    </mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker
+                    #picker1
+                    [calendarHeaderComponent]="headerComponent"
+                  >
+                  </mat-datepicker>
+                </div>
+              </div>
+              <div class="col-md-6 addBtn mt-5 px-0">
+                <button
+                  class="btnPrimary col-md-6 btnFonxt"
+                  type="submit"
+                  mat-raised-button
+                  (click)="onSubmit2()"
+                >
+                  {{
+                    direction == "rtl"
+                      ? searchConstants["continue"]["arb"]
+                      : searchConstants["continue"]["eng"]
+                  }}
+                </button>
+              </div>
+            </div>
+            <div class="col-md-6 addBtn mt-5 px-0" *ngIf="!createdWhitelist">
+              <button
+                class="btnPrimary col-md-6 btnFonxt"
+                type="submit"
+                mat-raised-button
+                (click)="onSubmitCancellation()"
+              >
+                {{
+                  direction == "rtl"
+                    ? searchConstants["continue"]["arb"]
+                    : searchConstants["continue"]["eng"]
+                }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+
+      <div class="div">
+        <fieldset *ngIf="WhitelistPath">
+          <div class="row mx-0" *ngIf="processActive === 3">
+            <div class="col-md-12 px-0">
+              <form class="form" [formGroup]="businessInformationForm">
+                <div class="col-md-12 px-0">
+                  <label class="headingDescription">{{
+                    direction == "rtl"
+                      ? searchConstants["description"]["arb"]
+                      : searchConstants["description"]["eng"]
+                  }}</label>
+                  <div
+                    [ngClass]="
+                      direction === 'ltr'
+                        ? 'common-text-area-container-ltr'
+                        : 'common-text-area-container-rtl'
+                    "
+                  >
+                    <textarea
+                      class="common-text-area"
+                      id="description"
+                      (input)="onInputChange()"
+                      [placeholder]="
+                        direction == 'rtl'
+                          ? searchConstants['description']['arb']
+                          : searchConstants['description']['eng']
+                      "
+                      formControlName="textArea"
+                      [ngClass]="{
+                        'input-error':
+                          businessInformationForm.get('textArea').invalid &&
+                          (businessInformationForm.get('textArea').touched ||
+                            form3Submitted)
+                      }"
+                      maxlength="500"
+                    ></textarea>
+                    <span
+                      [ngClass]="
+                        direction === 'ltr'
+                          ? 'common-text-area-counter-ltr'
+                          : 'common-text-area-counter-rtl'
+                      "
+                    >
+                      {{
+                        businessInformationForm.controls.textArea.value.length
+                      }}/500
+                    </span>
+                    <div
+                      class="position-relative"
+                      *ngIf="businessInformationForm.get('textArea').touched"
+                    >
+                      <ng-container
+                        *ngIf="
+                          !businessInformationForm
+                            .get('textArea')
+                            .hasError('required')
+                        "
+                      >
+                        <div
+                          *ngIf="
+                            businessInformationForm
+                              .get('textArea')
+                              .hasError('maxlength')
+                          "
+                        >
+                          <p class="error-container">
+                            {{
+                              direction == "rtl"
+                                ? searchConstants["textArea"]["arb"]
+                                : searchConstants["textArea"]["eng"]
+                            }}
+                          </p>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 px-0">
+                  <div class="row mt-5">
+                    <div class="col-md-6">
+                      <div class="matLabel labelMarginBottom">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["businessWebsite"]["arb"]
+                            : searchConstants["businessWebsite"]["eng"]
+                        }}
+                      </div>
+                      <input
+                        class="commonInputx"
+                        [placeholder]="
+                          direction == 'rtl'
+                            ? searchConstants['businessWebsite']['arb']
+                            : searchConstants['businessWebsite']['eng']
+                        "
+                        formControlName="businessWebsite"
+                        [ngClass]="{
+                          'input-error':
+                            businessInformationForm.get('businessWebsite')
+                              .invalid &&
+                            (businessInformationForm.get('businessWebsite')
+                              .touched ||
+                              form3Submitted)
+                        }"
+                      />
+                      <div
+                        *ngIf="
+                          (businessInformationForm.get('businessWebsite')
+                            .touched ||
+                            form3Submitted) &&
+                          businessInformationForm.get('businessWebsite').invalid
+                        "
+                      >
+                        <div class="position-relative">
+                          <p class="error-container">
+                            {{
+                              errorMessages["businessWebsite"]["required"][
+                                direction === "rtl" ? "arb" : "eng"
+                              ]
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="matLabel labelMarginBottom">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["operation"]["arb"]
+                            : searchConstants["operation"]["eng"]
+                        }}
+                      </div>
+                      <input
+                        class="commonInputx"
+                        (keypress)="restrictNumeric($event)"
+                        [placeholder]="
+                          direction == 'rtl'
+                            ? searchConstants['operation']['arb']
+                            : searchConstants['operation']['eng']
+                        "
+                        formControlName="businessOperation"
+                        maxlength="20"
+                        [ngClass]="{
+                          'input-error':
+                            (businessInformationForm.controls.businessOperation
+                              .touched ||
+                              form3Submitted) &&
+                            businessInformationForm.controls.businessOperation
+                              .invalid
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-5 px-0">
+                  <div class="caution-rtl">
+                    <div class="matLabel" style="color: #151515">
+                      <img
+                        src="assets/images/icon-info.svg"
+                        [ngClass]="
+                          direction == 'ltr' ? 'img-icon-rtl' : 'img-icon-ltr'
+                        "
+                      />
+                      {{ lang["information"] }}
+                    </div>
+                    <div class="matLabel mt-2">
+                      {{ lang["caution"] }}
+                    </div>
+                    <div class="matLabel m-l-4 mt-2">
+                      {{ lang["caution1"] }}
+                    </div>
+                    <div class="matLabel m-l-4">
+                      {{ lang["caution2"] }}
+                    </div>
+                    <div class="matLabel m-l-4">
+                      {{ lang["caution3"] }}
+                    </div>
+                    <div class="matLabel m-l-4">
+                      {{ lang["caution4"] }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 addBtn mt-5 px-0">
+                  <button
+                    class="btnPrimary col-md-6 btnFonxt"
+                    type="submit"
+                    mat-raised-button
+                    (click)="onSubmit3()"
+                  >
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["continue"]["arb"]
+                        : searchConstants["continue"]["eng"]
+                    }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset *ngIf="!WhitelistPath">
+          <div class="row" *ngIf="processActive === 3">
+            <div class="col-md-12">
+              <form class="form" [formGroup]="CategoryForm">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row justify-content-between removeMargin">
+                      <div
+                        class="border py-3 mb-3"
+                        *ngIf="cancelWhitelistData?.CwlpWid"
+                        [ngClass]="[
+                          selectedCancelCategories.indexOf('cwlp') > -1
+                            ? 'accCardbckActive'
+                            : 'accCardbck',
+                          form3CancelSubmitted &&
+                          selectedCancelCategories.length === 0
+                            ? 'input-error'
+                            : ''
+                        ]"
+                        (click)="toggleCancelWhitelists('cwlp')"
+                      >
+                        <div class="verticallyCenter px-3">
+                          <div class="sectionTitle fwb">
+                            {{ lang.cancelWhitelistCategories.cwlp }}
+                          </div>
+                          <div class="caption mt-1">
+                            {{ cancelWhitelistData?.CwlpWid }}
+                          </div>
+                        </div>
+                        <div class="divider mt-3"></div>
+                        <div class="row verticallyCenter px-3 removeMargin">
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.removalDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwlpRdt
+                                )
+                              }}
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.expiryDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwlpEdt
+                                )
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="border py-3 mb-3"
+                        *ngIf="cancelWhitelistData?.CwlgWid"
+                        [ngClass]="[
+                          selectedCancelCategories.indexOf('cwlg') > -1
+                            ? 'accCardbckActive'
+                            : 'accCardbck',
+                          form3CancelSubmitted &&
+                          selectedCancelCategories.length === 0
+                            ? 'input-error'
+                            : ''
+                        ]"
+                        (click)="toggleCancelWhitelists('cwlg')"
+                      >
+                        <div class="verticallyCenter px-3">
+                          <div class="sectionTitle fwb">
+                            {{ lang.cancelWhitelistCategories.cwlg }}
+                          </div>
+                          <div class="caption mt-1">
+                            {{ cancelWhitelistData?.CwlgWid }}
+                          </div>
+                        </div>
+                        <div class="divider mt-3"></div>
+                        <div class="row verticallyCenter px-3 removeMargin">
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.removalDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwlgRdt
+                                )
+                              }}
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.expiryDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwlgEdt
+                                )
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="border py-3 mb-3"
+                        *ngIf="cancelWhitelistData?.CwspWid"
+                        [ngClass]="[
+                          selectedCancelCategories.indexOf('cwsp') > -1
+                            ? 'accCardbckActive'
+                            : 'accCardbck',
+                          form3CancelSubmitted &&
+                          selectedCancelCategories.length === 0
+                            ? 'input-error'
+                            : ''
+                        ]"
+                        (click)="toggleCancelWhitelists('cwsp')"
+                      >
+                        <div class="verticallyCenter px-3">
+                          <div class="sectionTitle fwb">
+                            {{ lang.cancelWhitelistCategories.cwsp }}
+                          </div>
+                          <div class="caption mt-1">
+                            {{ cancelWhitelistData?.CwspWid }}
+                          </div>
+                        </div>
+                        <div class="divider mt-3"></div>
+                        <div class="row verticallyCenter px-3 removeMargin">
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.removalDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwspRdt
+                                )
+                              }}
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.expiryDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwspEdt
+                                )
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="border py-3 mb-3"
+                        *ngIf="cancelWhitelistData?.CwsgWid"
+                        [ngClass]="[
+                          selectedCancelCategories.indexOf('cwsg') > -1
+                            ? 'accCardbckActive'
+                            : 'accCardbck',
+                          form3CancelSubmitted &&
+                          selectedCancelCategories.length === 0
+                            ? 'input-error'
+                            : ''
+                        ]"
+                        (click)="toggleCancelWhitelists('cwsg')"
+                      >
+                        <div class="verticallyCenter px-3">
+                          <div class="sectionTitle fwb">
+                            {{ lang.cancelWhitelistCategories.cwsg }}
+                          </div>
+                          <div class="caption mt-1">
+                            {{ cancelWhitelistData?.CwsgWid }}
+                          </div>
+                        </div>
+                        <div class="divider mt-3"></div>
+                        <div class="row verticallyCenter px-3 removeMargin">
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.removalDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwsgRdt
+                                )
+                              }}
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.expiryDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwsgEdt
+                                )
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="border py-3 mb-3"
+                        *ngIf="cancelWhitelistData?.CwapWid"
+                        [ngClass]="[
+                          selectedCancelCategories.indexOf('cwap') > -1
+                            ? 'accCardbckActive'
+                            : 'accCardbck',
+                          form3CancelSubmitted &&
+                          selectedCancelCategories.length === 0
+                            ? 'input-error'
+                            : ''
+                        ]"
+                        (click)="toggleCancelWhitelists('cwap')"
+                      >
+                        <div class="verticallyCenter px-3">
+                          <div class="sectionTitle fwb">
+                            {{ lang.cancelWhitelistCategories.cwap }}
+                          </div>
+                          <div class="caption mt-1">
+                            {{ cancelWhitelistData?.CwapWid }}
+                          </div>
+                        </div>
+                        <div class="divider mt-3"></div>
+                        <div class="row verticallyCenter px-3 removeMargin">
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.removalDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwapRdt
+                                )
+                              }}
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.expiryDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwapEdt
+                                )
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="border py-3 mb-3"
+                        *ngIf="cancelWhitelistData?.CwagWid"
+                        [ngClass]="[
+                          selectedCancelCategories.indexOf('cwag') > -1
+                            ? 'accCardbckActive'
+                            : 'accCardbck',
+                          form3CancelSubmitted &&
+                          selectedCancelCategories.length === 0
+                            ? 'input-error'
+                            : ''
+                        ]"
+                        (click)="toggleCancelWhitelists('cwag')"
+                      >
+                        <div class="verticallyCenter px-3">
+                          <div class="sectionTitle fwb">
+                            {{ lang.cancelWhitelistCategories.cwag }}
+                          </div>
+                          <div class="caption mt-1">
+                            {{ cancelWhitelistData?.CwagWid }}
+                          </div>
+                        </div>
+                        <div class="divider mt-3"></div>
+                        <div class="row verticallyCenter px-3 removeMargin">
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.removalDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwagRdt
+                                )
+                              }}
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6">
+                            <div class="caption">
+                              {{ lang.cancelWhitelistCategories.expiryDate }}
+                            </div>
+                            <div class="value fwb">
+                              {{
+                                getCancelFormattedDate(
+                                  cancelWhitelistData?.CwagEdt
+                                )
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div
+                      class="caution-rtl"
+                      style="max-width: 899px; height: 96px"
+                    >
+                      <div class="matLabel" style="color: #151515">
+                        <img
+                          src="assets/images/icon-info.svg"
+                          [ngClass]="
+                            direction == 'ltr' ? 'img-icon-rtl' : 'img-icon-ltr'
+                          "
+                        />
+                        {{ lang["acknowledgements"] }}
+                      </div>
+                      <div
+                        class="matLabel mt-2"
+                        style="display: flex; align-items: center"
+                      >
+                        <div class="check row mx-0">
+                          <mat-checkbox
+                            [formControl]="cautionAcknowledgement"
+                            class="checkboxAckCss"
+                            style="margin-inline-end: 10px"
+                            [ngClass]="{
+                              'checkbox-error':
+                                form3CancelSubmitted &&
+                                !cautionAcknowledgement.value
+                            }"
+                          ></mat-checkbox>
+                        </div>
+                        {{ lang["cautionacknowledgements"] }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 addBtn mt-5 px-0">
+                  <button
+                    class="btnPrimary col-md-6 btnFonxt"
+                    type="submit"
+                    mat-raised-button
+                    (click)="onSubmitCategoryForm()"
+                  >
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["continue"]["arb"]
+                        : searchConstants["continue"]["eng"]
+                    }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Step 4 -->
+
+      <div class="row" *ngIf="processActive === 4">
+        <div class="col-md-12">
+          <form class="form" [formGroup]="declarationForm">
+            <div class="col-md-12 px-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="matLabel labelMarginBottom">
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["IdTypeTitle"]["arb"]
+                        : searchConstants["IdTypeTitle"]["eng"]
+                    }}
+                  </div>
+                  <mat-select
+                    disableOptionCentering
+                    class="commonMatSelect"
+                    placeholder="ID Type"
+                    [placeholder]="
+                      direction == 'rtl'
+                        ? searchConstants['IdTypeTitle']['arb']
+                        : searchConstants['IdTypeTitle']['eng']
+                    "
+                    formControlName="identityType"
+                    (selectionChange)="onIdSelect()"
+                    [ngClass]="{
+                      'input-error':
+                        declarationForm.controls.identityType.invalid &&
+                        (declarationForm.controls.identityType.touched ||
+                          form4Submitted)
+                    }"
+                  >
+                    <mat-option
+                      [value]="option['Key']"
+                      *ngFor="let option of idType"
+                      [hidden]="option.Key === ''"
+                    >
+                      {{
+                        option["Text"][direction === "ltr" ? "eng" : "arb"]
+                      }}</mat-option
+                    >
+                  </mat-select>
+                </div>
+                <div class="col-md-6">
+                  <div class="matLabel labelMarginBottom">
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["IdentificationNumber"]["arb"]
+                        : searchConstants["IdentificationNumber"]["eng"]
+                    }}
+                  </div>
+                  <input
+                    class="commonInputx"
+                    [placeholder]="
+                      direction == 'rtl'
+                        ? searchConstants['IdentificationNumber']['arb']
+                        : searchConstants['IdentificationNumber']['eng']
+                    "
+                    formControlName="IdentificationNumber"
+                    [readOnly]="
+                      declarationForm['value']['identityType'] !== 'ZS0003'
+                    "
+                    (input)="removeSpace2()"
+                    (blur)="initiateGCCIDValidation()"
+                    [ngClass]="
+                      (declarationForm.get('identityType').value === 'ZS0003' ||
+                        form4Submitted) &&
+                      declarationForm.controls.IdentificationNumber.invalid &&
+                      (declarationForm.controls.IdentificationNumber.touched ||
+                        form4Submitted)
+                        ? 'input-error'
+                        : ''
+                    "
+                    maxlength="15"
+                  />
+                  <div
+                    *ngIf="
+                      (declarationForm.get('identityType').value === 'ZS0003' ||
+                        form4Submitted) &&
+                      declarationForm.get('IdentificationNumber').touched &&
+                      declarationForm.get('IdentificationNumber').invalid
+                    "
+                  >
+                    <div class="position-relative">
+                      <p class="error-container">
+                        {{ lang["gccValidation"] }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-5 px-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="matLabel labelMarginBottom">
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["contactPersonName"]["arb"]
+                        : searchConstants["contactPersonName"]["eng"]
+                    }}
+                  </div>
+                  <input
+                    class="commonInputx"
+                    [placeholder]="
+                      direction == 'rtl'
+                        ? searchConstants['contactPersonName']['arb']
+                        : searchConstants['contactPersonName']['eng']
+                    "
+                    formControlName="contactPersonName"
+                    [readOnly]="!isIdValidated || idValidatedName !== ''"
+                    [ngClass]="{
+                      'input-error':
+                        (declarationForm.get('contactPersonName').touched ||
+                          form4Submitted) &&
+                        declarationForm.get('contactPersonName').invalid &&
+                        idValidatedName === ''
+                    }"
+                    (input)="nameValidator($event)"
+                    (blur)="onInputBlur()"
+                  />
+                  {{ getValidation() }}
+                  <div
+                    *ngIf="
+                      (declarationForm.get('contactPersonName').touched ||
+                        form4Submitted) &&
+                      declarationForm.get('contactPersonName').invalid &&
+                      idValidatedName === ''
+                    "
+                  >
+                    <div class="position-relative">
+                      <p class="error-container">
+                        {{
+                          errorMessages.contactPersonName.required[
+                            direction === "rtl" ? "arb" : "eng"
+                          ]
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-5 px-0">
+              <div class="check row mx-0">
+                <mat-checkbox
+                  class="checkboxAckCss"
+                  formControlName="instructionsDeclarationAccepted"
+                  [ngClass]="{
+                    'checkbox-error':
+                      form4Submitted &&
+                      !declarationForm.value.instructionsDeclarationAccepted
+                  }"
+                >
+                </mat-checkbox>
+                <div
+                  class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+                  style="
+                    font-size: 12px;
+                    font-weight: 600;
+                    width: 726px;
+                    height: 16px;
+                  "
+                >
+                  {{ lang["Declarationagree"] }}
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="btnPrimary continue mt-5"
+              mat-raised-button
+              (click)="onSubmit4()"
+              type="submit"
+            >
+              {{
+                direction == "rtl"
+                  ? searchConstants["continue"]["arb"]
+                  : searchConstants["continue"]["eng"]
+              }}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+
+      <div class="div">
+        <fieldset *ngIf="WhitelistPath">
+          <div class="row" *ngIf="processActive === 5">
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img src="assets/image/user.svg" alt="details" />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["taxpayer"]["arb"]
+                            : searchConstants["taxpayer"]["eng"]
+                        }}</span
+                      >
+                      <a
+                        [routerLink]=""
+                        style="color: #006450"
+                        class="card-action"
+                        [style.float]="direction === 'rtl' ? 'left' : ''"
+                        (click)="goToTaxpayer()"
+                        *ngIf="
+                          formBundle === null || isExistingApplicationEditable
+                        "
+                      >
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["edit"]["arb"]
+                            : searchConstants["edit"]["eng"]
+                        }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["tin"]["arb"]
+                            : searchConstants["tin"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">{{ tin }}</p>
+                    </div>
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["crNumber"]["arb"]
+                            : searchConstants["crNumber"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">{{ crNo }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["vatNumber"]["arb"]
+                            : searchConstants["vatNumber"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">{{ vatNo }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img
+                          src="assets/image/whitelisting.svg"
+                          alt="details"
+                        />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["whitelist"]["arb"]
+                            : searchConstants["whitelist"]["eng"]
+                        }}</span
+                      >
+                      <a
+                        [routerLink]=""
+                        style="color: #006450"
+                        class="card-action"
+                        [style.float]="direction === 'rtl' ? 'left' : ''"
+                        (click)="goToWhitelist()"
+                        *ngIf="
+                          formBundle === null || isExistingApplicationEditable
+                        "
+                      >
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["edit"]["arb"]
+                            : searchConstants["edit"]["eng"]
+                        }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-12 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["requestsType"]["arb"]
+                            : searchConstants["requestsType"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ lang["bc3"] }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-12 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["transportCategory"]["arb"]
+                            : searchConstants["transportCategory"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{
+                          getTransportCategory(
+                            requestTypeForm.value.transportCategory
+                          )
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-12 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["supportingfile"]["arb"]
+                            : searchConstants["supportingfile"]["eng"]
+                        }}
+                      </p>
+                      <p
+                        class="refund-value mb-0"
+                        *ngFor="let attachment of mainAttachments"
+                      >
+                        <a class="zs-document" [href]="attachment['DocUrl']">{{
+                          attachment["Filename"]
+                        }}</a>
+                        <img
+                          style="margin-inline-start: 10px"
+                          [src]="
+                            isPdf(attachment['Filename'])
+                              ? 'assets/image/generic-documents.png'
+                              : 'assets/image/generic-documents.png'
+                          "
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-12 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["dates"]["arb"]
+                            : searchConstants["dates"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ getFormattedDate(requestTypeForm.value.StartDate) }}
+                        -
+                        {{ getFormattedDate(requestTypeForm.value.EndDate) }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img src="assets/image/home.svg" alt="details" />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["businessInformation"]["arb"]
+                            : searchConstants["businessInformation"]["eng"]
+                        }}</span
+                      >
+                      <a
+                        [routerLink]=""
+                        style="color: #006450"
+                        class="card-action"
+                        [style.float]="direction === 'rtl' ? 'left' : ''"
+                        (click)="goToBusinessInformation()"
+                        *ngIf="
+                          formBundle === null || isExistingApplicationEditable
+                        "
+                      >
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["edit"]["arb"]
+                            : searchConstants["edit"]["eng"]
+                        }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-12 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["description"]["arb"]
+                            : searchConstants["description"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ businessInformationForm.value.textArea }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["businessWebsite"]["arb"]
+                            : searchConstants["businessWebsite"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ businessInformationForm.value.businessWebsite }}
+                      </p>
+                    </div>
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["operation"]["arb"]
+                            : searchConstants["operation"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ businessInformationForm.value.businessOperation }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img src="assets/image/declaration.svg" alt="details" />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["declaration"]["arb"]
+                            : searchConstants["declaration"]["eng"]
+                        }}</span
+                      >
+                      <a
+                        [routerLink]=""
+                        style="color: #006450"
+                        class="card-action"
+                        [style.float]="direction === 'rtl' ? 'left' : ''"
+                        (click)="goToDeclaration()"
+                        *ngIf="
+                          formBundle === null || isExistingApplicationEditable
+                        "
+                      >
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["edit"]["arb"]
+                            : searchConstants["edit"]["eng"]
+                        }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["IdTypeTitle"]["arb"]
+                            : searchConstants["IdTypeTitle"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{
+                          getIdentityType(declarationForm.value.identityType)
+                        }}
+                      </p>
+                    </div>
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["IdentificationNumber"]["arb"]
+                            : searchConstants["IdentificationNumber"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ declarationForm.value.IdentificationNumber }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["contactPersonName"]["arb"]
+                            : searchConstants["contactPersonName"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ declarationForm.value.contactPersonName }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="btnPrimary continue mt-5"
+              [ngClass]="direction == 'ltr' ? 'marginLeft' : 'marginRight'"
+              mat-raised-button
+              (click)="onSubmit5()"
+              type="submit"
+              *ngIf="formBundle === null || isExistingApplicationEditable"
+            >
+              {{ lang["confirm"] }}
+            </button>
+          </div>
+        </fieldset>
+        <fieldset *ngIf="!WhitelistPath">
+          <div class="row" *ngIf="processActive === 5">
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img src="assets/image/user.svg" alt="details" />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["taxpayer"]["arb"]
+                            : searchConstants["taxpayer"]["eng"]
+                        }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["tin"]["arb"]
+                            : searchConstants["tin"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">{{ tin }}</p>
+                    </div>
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["crNumber"]["arb"]
+                            : searchConstants["crNumber"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">{{ crNo }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["vatNumber"]["arb"]
+                            : searchConstants["vatNumber"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">{{ vatNo }}</p>
+                    </div>
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["mobileNumber"]["arb"]
+                            : searchConstants["mobileNumber"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ cancelWhitelistData?.TelNumber }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["email"]["arb"]
+                            : searchConstants["email"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ cancelWhitelistData?.SmtpAddr }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img
+                          src="assets/image/whitelisting.svg"
+                          alt="details"
+                        />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["whitelist"]["arb"]
+                            : searchConstants["whitelist"]["eng"]
+                        }}</span
+                      >
+                      <a
+                        [routerLink]=""
+                        style="color: #006450"
+                        class="card-action"
+                        [style.float]="direction === 'rtl' ? 'left' : ''"
+                        (click)="goToWhitelist()"
+                        *ngIf="formBundle === null"
+                      >
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["edit"]["arb"]
+                            : searchConstants["edit"]["eng"]
+                        }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-12 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["requestsType"]["arb"]
+                            : searchConstants["requestsType"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">{{ lang.cancelRequest }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img src="assets/image/home.svg" alt="details" />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{ lang.whitelistRemoval }}</span
+                      >
+                      <a
+                        [routerLink]=""
+                        style="color: #006450"
+                        class="card-action"
+                        [style.float]="direction === 'rtl' ? 'left' : ''"
+                        (click)="goToCategories()"
+                        *ngIf="formBundle === null"
+                      >
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["edit"]["arb"]
+                            : searchConstants["edit"]["eng"]
+                        }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <fieldset *ngIf="selectedCancelCategories.indexOf('cwlp') > -1">
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12">
+                        <label class="sectionTitle textDark">{{
+                          lang.cancelWhitelistCategories.cwlp
+                        }}</label>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.whitelistingId }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{ cancelWhitelistData?.CwlpWid }}
+                        </p>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.removalDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwlpRdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.expiryDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwlpEdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                </fieldset>
+                <fieldset *ngIf="selectedCancelCategories.indexOf('cwlg') > -1">
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12">
+                        <label class="sectionTitle textDark">{{
+                          lang.cancelWhitelistCategories.cwlg
+                        }}</label>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.whitelistingId }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{ cancelWhitelistData?.CwlgWid }}
+                        </p>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.removalDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwlgRdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.expiryDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwlgEdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                </fieldset>
+                <fieldset *ngIf="selectedCancelCategories.indexOf('cwsp') > -1">
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12">
+                        <label class="sectionTitle textDark">{{
+                          lang.cancelWhitelistCategories.cwsp
+                        }}</label>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.whitelistingId }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{ cancelWhitelistData?.CwspWid }}
+                        </p>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.removalDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwspRdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.expiryDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwspEdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                </fieldset>
+                <fieldset *ngIf="selectedCancelCategories.indexOf('cwsg') > -1">
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12">
+                        <label class="sectionTitle textDark">{{
+                          lang.cancelWhitelistCategories.cwsg
+                        }}</label>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.whitelistingId }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{ cancelWhitelistData?.CwsgWid }}
+                        </p>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.removalDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwsgRdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.expiryDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwsgEdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                </fieldset>
+                <fieldset *ngIf="selectedCancelCategories.indexOf('cwap') > -1">
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12">
+                        <label class="sectionTitle textDark">{{
+                          lang.cancelWhitelistCategories.cwap
+                        }}</label>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.whitelistingId }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{ cancelWhitelistData?.CwapWid }}
+                        </p>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.removalDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwapRdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.expiryDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwapEdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                </fieldset>
+                <fieldset *ngIf="selectedCancelCategories.indexOf('cwag') > -1">
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12">
+                        <label class="sectionTitle textDark">{{
+                          lang.cancelWhitelistCategories.cwag
+                        }}</label>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.whitelistingId }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{ cancelWhitelistData?.CwagWid }}
+                        </p>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.removalDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwagRdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                  <div class="card-body">
+                    <div class="row" style="text-align: start">
+                      <div class="col-md-12 col-12">
+                        <p class="refund-label mb-0">
+                          {{ lang.cancelWhitelistCategories.expiryDate }}
+                        </p>
+                        <p class="refund-value mb-0">
+                          {{
+                            getCancelFormattedDate(cancelWhitelistData?.CwagEdt)
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="Rectangle-12 mt-0"></div>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              <div class="card custom-card" style="border-radius: 14px">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="custom-card-title">
+                      <span class="zs-icon-background">
+                        <img src="assets/image/declaration.svg" alt="details" />
+                      </span>
+                      <span style="margin: auto 16px">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["declaration"]["arb"]
+                            : searchConstants["declaration"]["eng"]
+                        }}</span
+                      >
+                      <a
+                        [routerLink]=""
+                        style="color: #006450"
+                        class="card-action"
+                        [style.float]="direction === 'rtl' ? 'left' : ''"
+                        (click)="goToDeclaration()"
+                        *ngIf="formBundle === null"
+                      >
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["edit"]["arb"]
+                            : searchConstants["edit"]["eng"]
+                        }}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["IdTypeTitle"]["arb"]
+                            : searchConstants["IdTypeTitle"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{
+                          getIdentityType(declarationForm.value.identityType)
+                        }}
+                      </p>
+                    </div>
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["IdentificationNumber"]["arb"]
+                            : searchConstants["IdentificationNumber"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ declarationForm.value.IdentificationNumber }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="Rectangle-12 mt-0"></div>
+                <div class="card-body">
+                  <div class="row" style="text-align: start">
+                    <div class="col-md-6 col-12">
+                      <p class="refund-label mb-0">
+                        {{
+                          direction == "rtl"
+                            ? searchConstants["contactPersonName"]["arb"]
+                            : searchConstants["contactPersonName"]["eng"]
+                        }}
+                      </p>
+                      <p class="refund-value mb-0">
+                        {{ declarationForm.value.contactPersonName }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="btnPrimary continue mt-5"
+              [ngClass]="direction == 'ltr' ? 'marginLeft' : 'marginRight'"
+              mat-raised-button
+              (click)="onSubmit5()"
+              type="submit"
+            >
+              {{ lang["confirm"] }}
+            </button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Id validation Modal -->
+
+<div
+  class="modal"
+  id="aftSelect"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="lang.dir"
+  *ngIf="processActive === 4"
+  style="top: 15%"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row text-center mt-3">
+          <div class="col-md-12">
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="labelTxtCss" style="text-align: center">
+                  {{ lang.modal.idNumber }}
+                </div>
+
+                <input
+                  class="commonInput"
+                  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                  (input)="removeSpace()"
+                  [placeholder]="lang.modal.idNumber"
+                  [formControl]="id1"
+                  name="id1"
+                  maxlength="10"
+                  [ngClass]="{
+                    'input-error': idErr1 || id1.touched || apiIdMsg
+                  }"
+                />
+
+                <div
+                  *ngIf="idErr1 || id1.touched || apiIdMsg"
+                  class="invalid-feedback"
+                  style="margin-inline-start: 10px"
+                >
+                  <p
+                    style="
+                      position: relative;
+                      margin-top: 10px;
+                      font-size: 14px;
+                    "
+                  >
+                    {{ validId() }}{{ idMsg ? idMsg : apiIdMsg }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="labelTxtCss mt-3" style="text-align: center">
+                  {{ lang.modal.dob }}
+                </div>
+                <div
+                  class="commomDatePicker"
+                  style="margin: 0 auto"
+                  [ngClass]="{
+                    'input-error': dobErr || (dob1.touched && dob1.invalid)
+                  }"
+                >
+                  <input
+                    readonly
+                    (click)="datePicker.open()"
+                    matInput
+                    [max]="minDate"
+                    [matDatepicker]="datePicker"
+                    name="dob1"
+                    [formControl]="dob1"
+                    [placeholder]="lang.modal.dobPlaceholder"
+                    (dateChange)="datePicker.close()"
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="datePicker">
+                    <mat-icon matDatepickerToggleIcon>
+                      <span style="display: flex">
+                        <img src="assets/image/calendar.svg" alt="calendar"
+                      /></span>
+                    </mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker
+                    #datePicker
+                    [calendarHeaderComponent]="headerComponent"
+                  >
+                  </mat-datepicker>
+                </div>
+                <!-- <mat-form-field appearance="outline" style="width: 50%">
+				  <input   placeholder="yyyy-mm-dd" ngbDatepicker #dd="ngbDatepicker"
+					name="dob1"   [(ngModel)]="dob1" />
+
+				  <mat-icon matSuffix (click)="dd.toggle()" style="color: #707070; cursor: pointer">
+					date_range
+				  </mat-icon>
+				</mat-form-field> -->
+                <div
+                  *ngIf="dobErr || (dob1.touched && dob1.invalid)"
+                  class="invalid-feedback"
+                  style="margin-inline-start: 10px"
+                >
+                  <p
+                    style="
+                      position: relative;
+                      margin-top: 10px;
+                      font-size: 14px;
+                    "
+                  >
+                    {{ dobErr ? dobMsg : lang["dobMsg"] }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 mb-2">
+              <button
+                mat-button
+                (click)="validateID2()"
+                style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                "
+                class="btnTCss"
+              >
+                {{ lang.modal.validate }}
+              </button>
+              <button
+                mat-button
+                style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                "
+                data-dismiss="modal"
+                (click)="reset()"
+                class="btnTCss"
+              >
+                {{ lang.modal.close }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-whitelisting-success
+  *ngIf="displayAcknowledgement"
+  [acknowledgement]="acknowledgement"
+  [requestType]="submitRequestType"
+></app-whitelisting-success>

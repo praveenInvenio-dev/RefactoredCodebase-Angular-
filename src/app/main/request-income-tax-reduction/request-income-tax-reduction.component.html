@@ -1,0 +1,1058 @@
+<div class="container alignStart" [dir]="direction" *ngIf="instructionAgree">
+  <div>
+    <div *ngIf="processActive < 3" class="row">
+      <div class="col-md-12" [ngClass]="direction === 'rtl' ? 'ar-align' : ''">
+        <span
+          class="exciseTitle1 unicodeDir"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          (click)="backTo('')"
+          >{{ stringConstants.main.nav.bc1 }}
+          &gt;
+        </span>
+        <span
+          class="exciseTitle1"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          (click)="backTo('003')"
+          >{{ stringConstants.main.nav.bc2 }} &gt;</span
+        >
+        <span
+          class="exciseTitle1"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          style="color: #151515"
+        >
+          {{ stringConstants.main.nav.bc3 }}</span
+        >
+      </div>
+    </div>
+    <div *ngIf="processActive < 3" class="row mt-3" style="width: 100%">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="viewMore col-md-6">
+            <div style="cursor: pointer" (click)="back()">
+              <span class="addServiceSpan2">
+                <img
+                  [src]="
+                    direction === 'ltr'
+                      ? 'assets/image/arrow-left-green.svg'
+                      : 'assets/image/arrow-right-green.svg'
+                  "
+                />
+              </span>
+              <span class="addServiceSspan2">{{
+                stringConstants.main.nav.back
+              }}</span>
+            </div>
+          </div>
+          <span class="stepNumber col-md-6 px-0">
+            <img
+              [ngClass]="direction === 'rtl' ? 'rotateImage' : ''"
+              [src]="stringConstants.add.process[processActive]['step']"
+            />
+            <img
+              src="assets/image/check.svg"
+              alt="check"
+              class="mx-2"
+              *ngIf="processActive === 2"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="processActive < 3" class="row mt-4">
+      <div class="col-md-12">
+        <div class="exciseSecondTitle">
+          {{ stringConstants.add.process[processActive]['title'] }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="processActive < 3" class="row mt-2">
+      <div class="col-md-12">
+        <div class="exciseSecondTitle1">
+          {{ stringConstants.add.process[processActive]['subtitle'] }}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="processActive < 3" class="Rectangle-12New mt-3"></div>
+
+    <!-- header end -->
+
+    <div
+      *ngIf="processActive === 0"
+      class="row mt-32px"
+      [formGroup]="requestReductionForm"
+    >
+      <div class="col-md-12">
+        <div class="form-card">
+          <!-- <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  direction === 'rtl' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/image/user.svg" />
+              </div>
+              <span>{{ stringConstants.add.user.title }}</span>
+            </div>
+          </div>
+          <div class="card-divider"></div> -->
+          <div class="form-card-lower">
+            <div class="form-card-detail">
+              <p>{{ stringConstants.add.user.name }}</p>
+              <span>{{ formData.AReceiveBy }}</span>
+            </div>
+            <div class="form-card-detail">
+              <p>{{ stringConstants.add.user.tin }}</p>
+              <span>{{ formData.AGpart }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <mat-accordion class="col-md-12 mt-24px" multi formArrayName="payments">
+        <mat-expansion-panel
+          class="accordin"
+          #panel
+          *ngFor="let item of payments.controls; index as i"
+          [expanded]="true"
+          hideToggle
+        >
+          <mat-expansion-panel-header class="accordin-header">
+            <mat-panel-title>
+              <div class="accordin-title">
+                {{ stringConstants.add.invoice.title }}
+                {{ i + 1 }}
+              </div>
+            </mat-panel-title>
+            <mat-panel-description
+              [ngClass]="
+                direction === 'rtl'
+                  ? 'accordin-actions-rtl'
+                  : 'accordin-actions'
+              "
+            >
+              <img
+                src="assets/image/circle-arrow-up.svg"
+                [ngStyle]="{ transform: panel.expanded ? '' : 'scaleY(-1)' }"
+              />
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="accordin-form" [formGroupName]="i">
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.invoice.invoice
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" [value]="item.value.AInvoiceNo" disabled />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.invoice.period
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" [value]="item.value.APeriodKey" disabled />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.invoice.from
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input
+                    type="text"
+                    [value]="item.value.APeriodFrom"
+                    disabled
+                  />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.invoice.to
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" [value]="item.value.APeriodTo" disabled />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.invoice.due
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" [value]="item.value.ADueDt" disabled />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label">{{
+                stringConstants.add.invoice.amount
+              }}</span>
+              <span class="form-row-input">
+                <div class="accordin-input">
+                  <input type="text" [value]="item.value.AAmount" disabled />
+                </div>
+              </span>
+            </div>
+            <div class="accordin-form-row">
+              <span class="form-row-label required">{{
+                stringConstants.add.invoice.amountNew
+              }}</span>
+              <span class="form-row-input">
+                <div
+                  class="accordin-input"
+                  [ngStyle]="{
+                    'border-color':
+                      validError && item.get('ANewAmount').invalid
+                        ? 'var(--error)'
+                        : ''
+                  }"
+                >
+                  <input
+                    appNumberInput
+                    decimals="2"
+                    [maxlength]="17"
+                    formControlName="ANewAmount"
+                    type="text"
+                  />
+                </div>
+              </span>
+              <span
+                *ngIf="
+                  validError &&
+                  item.get('ANewAmount').value.length < 14 &&
+                  item.get('ANewAmount').invalid
+                "
+                [ngClass]="
+                  direction === 'rtl' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{ stringConstants.add.errors.minmax }}</span
+              >
+              <span
+                *ngIf="
+                  validError &&
+                  item.get('ANewAmount').value.length > 14 &&
+                  item.get('ANewAmount').invalid
+                "
+                [ngClass]="
+                  direction === 'rtl' ? 'accordin-error-rtl' : 'accordin-error'
+                "
+                >{{
+                  stringConstants.add.errors.max + ' ' + '99,999,999,999,999.99'
+                }}</span
+              >
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div class="col-md-6 addBtn mt-5">
+        <button
+          class="btnPrimary col-md-6 btnFonxt"
+          type="submit"
+          mat-raised-button
+          (click)="onSubmit()"
+        >
+          {{ stringConstants.add.continue }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="taxForm mt-32px">
+      <div class="row" *ngIf="processActive === 1">
+        <div class="col-md-12">
+          <form class="form" [formGroup]="requestReductionForm">
+            <div class="col-md-12 removePadding">
+              <div class="matLabel labelMarginBottom">
+                {{ stringConstants.add.remarks }}
+              </div>
+              <input
+                class="commonInputx"
+                formControlName="reason"
+                maxlength="255"
+              />
+            </div>
+
+            <div class="col-md-12 mt-24px removePadding">
+              <div class="matLabel labelMarginBottom">
+                {{ stringConstants.add.notes }}
+              </div>
+              <div
+                [ngClass]="
+                  direction == 'ltr'
+                    ? 'common-text-area-container-rtl'
+                    : 'common-text-area-container-ltr'
+                "
+              >
+                <textarea
+                  class="common-text-area"
+                  [(ngModel)]="textAreaLength"
+                  id="textAreaLength"
+                  (input)="onInputChange()"
+                  formControlName="notes"
+                  [maxlength]="maxChars"
+                ></textarea>
+                <span
+                  [ngClass]="
+                    direction == 'ltr'
+                      ? 'common-text-area-counter-ltr'
+                      : 'common-text-area-counter-rtl'
+                  "
+                >
+                  {{ textAreaLength.length }}/{{ maxChars }}
+                </span>
+              </div>
+            </div>
+
+            <p class="mt-24px matLabel required">
+              {{ stringConstants.add.attachment1 }}
+            </p>
+            <div
+              class="row row justify-content-between mx-0 mt-3"
+              formArrayName="attachment1"
+            >
+              <div
+                class="card-uploaded border mb-3"
+                [ngClass]="
+                  direction === 'rtl'
+                    ? 'attachment-rtl card-uploaded border mb-3'
+                    : 'attachment card-uploaded border mb-3'
+                "
+                *ngFor="let file of attachment1.controls; let i = index"
+              >
+                <div class="card-delete" (click)="deleteFile(i, 'N03A')">
+                  <img src="assets/image/delete.svg" />
+                </div>
+                <div class="card-file-content">
+                  <img
+                    [src]="
+                      file.value.type === 'pdf'
+                        ? 'assets/image/pdf.svg'
+                        : 'assets/image/generic-documents.png'
+                    "
+                  />
+                  <div
+                    class="value textDark mt-1 card-main-text form-filenames fwb"
+                  >
+                    {{ file.value.name }}
+                  </div>
+                </div>
+              </div>
+              <div
+                [ngClass]="
+                  direction === 'rtl'
+                    ? 'attachment-rtl card-upload mb-3'
+                    : 'attachment card-upload mb-3'
+                "
+                (click)="fileInput.click()"
+                appDragDrop
+                (onFileDropped)="
+                  attachment1.controls.length < 1 && uploadFile($event, 'N03A')
+                "
+                [ngStyle]="{
+                  border:
+                    validError && attachment1.controls.length < 1
+                      ? '1px solid var(--error)'
+                      : '1px solid var(--light)',
+                  opacity: attachment1.controls.length >= 1 ? '0.6' : '1'
+                }"
+              >
+                <div class="card-upload-content">
+                  <input
+                    hidden
+                    type="file"
+                    #fileInput
+                    (change)="
+                      attachment1.controls.length < 1 &&
+                        uploadFile($event.target.files, 'N03A')
+                    "
+                    [disabled]="attachment1.controls.length >= 1"
+                  />
+                  <img src="assets/image/attach-grey.svg" />
+                  <div class="value textPrimary mt-1 card-main-text fwb">
+                    {{ stringConstants.add.uploadFile }}
+                  </div>
+                  <div class="caption textGray mt-1">
+                    {{ stringConstants.add.maxSize }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="mt-24px matLabel required">
+              {{ stringConstants.add.attachment2 }}
+            </p>
+            <div
+              class="row row justify-content-between mx-0 mt-3"
+              formArrayName="attachment2"
+            >
+              <div
+                class="card-uploaded border mb-3"
+                [ngClass]="
+                  direction === 'rtl'
+                    ? 'attachment-rtl card-uploaded border mb-3'
+                    : 'attachment card-uploaded border mb-3'
+                "
+                *ngFor="let file of attachment2.controls; let i = index"
+              >
+                <div class="card-delete" (click)="deleteFile(i, 'N03B')">
+                  <img src="assets/image/delete.svg" />
+                </div>
+                <div class="card-file-content">
+                  <img
+                    [src]="
+                      file.value.type === 'pdf'
+                        ? 'assets/image/pdf.svg'
+                        : 'assets/image/generic-documents.png'
+                    "
+                  />
+                  <div
+                    class="value textDark mt-1 card-main-text form-filenames fwb"
+                  >
+                    {{ file.value.name }}
+                  </div>
+                </div>
+              </div>
+              <div
+                [ngClass]="
+                  direction === 'rtl'
+                    ? 'attachment-rtl card-upload mb-3'
+                    : 'attachment card-upload mb-3'
+                "
+                (click)="fileInput2.click()"
+                appDragDrop
+                (onFileDropped)="
+                  attachment2.controls.length < 1 && uploadFile($event, 'N03B')
+                "
+                [ngStyle]="{
+                  border:
+                    validError && attachment2.controls.length < 1
+                      ? '1px solid var(--error)'
+                      : '1px solid var(--light)',
+                  opacity: attachment2.controls.length >= 1 ? '0.6' : '1'
+                }"
+              >
+                <div class="card-upload-content">
+                  <input
+                    hidden
+                    type="file"
+                    #fileInput2
+                    (change)="
+                      attachment2.controls.length < 1 &&
+                        uploadFile($event.target.files, 'N03B')
+                    "
+                    [disabled]="attachment2.controls.length >= 1"
+                  />
+                  <img src="assets/image/attach-grey.svg" />
+                  <div class="value textPrimary mt-1 card-main-text fwb">
+                    {{ stringConstants.add.uploadFile }}
+                  </div>
+                  <div class="caption textGray mt-1">
+                    {{ stringConstants.add.maxSize }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 p-0">
+              <div
+                [ngClass]="direction == 'ltr' ? 'caution-rtl' : 'caution-ltr'"
+              >
+                <div class="matLabel">
+                  <img
+                    src="assets/images/icon-info.svg"
+                    [ngClass]="
+                      direction == 'ltr' ? 'img-icon-rtl' : 'img-icon-ltr'
+                    "
+                  />{{ stringConstants.add.caution }}
+                </div>
+                <div class="matLabel m-l-4">
+                  {{ stringConstants.add.caution1 }}
+                </div>
+              </div>
+            </div>
+            <button
+              class="btnPrimary continue mt-5"
+              mat-raised-button
+              (click)="onSubmit2()"
+              type="submit"
+            >
+              {{ stringConstants.add.continue }}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Decleration -->
+
+      <!-- <div class="row" *ngIf="processActive === 2">
+        <div class="col-md-12">
+          <form [formGroup]="requestReductionForm" (ngSubmit)="onSubmit()">
+            <div class="mt-3" formGroupName="declaration">
+              <div class="row" style="margin-bottom: 56px">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="matLabel mt-2 required labelMarginBottom">
+                    {{ stringConstants.add.declaration.idType }}
+                  </div>
+                  <mat-select
+                    class="commonMatSelect"
+                    style="
+                      min-width: unset;
+                      max-width: unset;
+                      width: 100% !important;
+                    "
+                    formControlName="idType"
+                    (selectionChange)="onIdSelect()"
+                  >
+                    <mat-option value="ZS0001">
+                      {{ stringConstants.add.declaration.natId }}</mat-option
+                    >
+                    <mat-option value="ZS0002">
+                      {{ stringConstants.add.declaration.iqId }}</mat-option
+                    >
+                    <mat-option value="ZS0003">{{
+                      stringConstants.add.declaration.gccId
+                    }}</mat-option>
+                  </mat-select>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="matLabel mt-2 required labelMarginBottom">
+                    {{ stringConstants.add.declaration.idNum }}
+                  </div>
+                  <input
+                    class="commonInput"
+                    formControlName="idNum"
+                    style="
+                      min-width: unset;
+                      max-width: unset;
+                      width: 100% !important;
+                    "
+                    (input)="onIdNumChange()"
+                    onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                    [readOnly]="
+                      (isIdValidated == true &&
+                        requestReductionForm.controls.declaration.value
+                          .idType != 'ZS0003') ||
+                      (isIdValidated == false &&
+                        requestReductionForm.controls.declaration.value
+                          .idType != 'ZS0003')
+                    "
+                    (click)="
+                      requestReductionForm.controls.declaration.value.idType !=
+                        'ZS0003' && onIdSelect()
+                    "
+                  />
+                  <div
+                    class="matLabel helperMarginTop text-danger"
+                    *ngIf="
+                      showIdNumError &&
+                      requestReductionForm.controls.declaration.value.idType ==
+                        'ZS0003'
+                    "
+                  >
+                    {{ stringConstants.add.declaration.idError }}
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="matLabel mt-2 required labelMarginBottom">
+                    {{ stringConstants.add.declaration.name }}
+                  </div>
+                  <input
+                    class="commonInput"
+                    formControlName="name"
+                    style="
+                      min-width: unset;
+                      max-width: unset;
+                      width: 100% !important;
+                    "
+                    [disabled]="!canEditContact"
+                  />
+                </div>
+                <div class="check mt-4 col-12">
+                  <mat-checkbox
+                    class="checkboxAckCss"
+                    formControlName="checkTerm"
+                  >
+                    {{ stringConstants.add.declaration.agree }}
+                  </mat-checkbox>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btnPrimary"
+                style="min-width: 207px !important"
+                mat-raised-button
+                [disabled]="
+                  requestReductionForm.controls.declaration.invalid ||
+                  isIdValidated == false
+                "
+              >
+                {{ stringConstants.add.continue }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div> -->
+
+      <!-- Summary -->
+
+      <div
+        *ngIf="processActive === 2"
+        class="summary mt-32px"
+        [formGroup]="requestReductionForm"
+      >
+        <div class="form-card">
+          <!-- <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  direction === 'rtl' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/image/user.svg" />
+              </div>
+              <span>{{ stringConstants.add.user.title }}</span>
+            </div>
+          </div>
+          <div class="card-divider"></div> -->
+          <div class="form-card-lower">
+            <div class="form-card-detail">
+              <p>
+                {{ stringConstants.add.user.name }}
+              </p>
+              <span>{{ formData.AReceiveBy }}</span>
+            </div>
+
+            <div class="form-card-detail">
+              <p>{{ stringConstants.add.user.tin }}</p>
+              <span>{{ formData.AGpart }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card mt-24px">
+          <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  direction === 'rtl' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/images/excise-goods/summary-goods.svg" />
+              </div>
+              <span>{{ stringConstants.add.invoice.title }}</span>
+            </div>
+            <div class="form-card-edit" (click)="goToStep(0)">
+              {{ stringConstants.add.edit }}
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div
+            *ngFor="let item of payments.controls; index as i"
+            [formGroupName]="i"
+          >
+            <p class="card-section-title">
+              {{ stringConstants.add.invoice.title }} {{ i + 1 }}
+            </p>
+            <div class="form-card-lower">
+              <div class="form-card-detail">
+                <p>{{ stringConstants.add.invoice.invoice }}</p>
+                <span>{{ item.value.AInvoiceNo }}</span>
+              </div>
+              <div class="form-card-detail">
+                <p>{{ stringConstants.add.invoice.period }}</p>
+                <span>{{ item.value.APeriodKey }}</span>
+              </div>
+            </div>
+            <div class="form-card-lower">
+              <div class="form-card-detail">
+                <p>{{ stringConstants.add.invoice.amount }}</p>
+                <span>{{ item.value.AAmount }}</span>
+              </div>
+              <div class="form-card-detail">
+                <p>{{ stringConstants.add.invoice.amountNew }}</p>
+                <span>{{ item.value.ANewAmount }}</span>
+              </div>
+            </div>
+            <div
+              *ngIf="i !== payments.controls.length - 1"
+              class="card-divider"
+            ></div>
+          </div>
+        </div>
+
+        <div class="form-card mt-24px">
+          <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  direction === 'rtl' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/image/attach.svg" />
+              </div>
+              <span>{{ stringConstants.add.process[1].title }}</span>
+            </div>
+            <div class="form-card-edit" (click)="goToStep(1)">
+              {{ stringConstants.add.edit }}
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="form-card-lower">
+            <div class="form-card-detail">
+              <p>
+                {{ stringConstants.add.remarks }}
+              </p>
+              <span>{{
+                requestReductionForm.controls['reason'].value
+                  ? requestReductionForm.controls['reason'].value
+                  : ''
+              }}</span>
+            </div>
+            <div class="form-card-detail">
+              <p>
+                {{ stringConstants.add.notes }}
+              </p>
+              <span>{{
+                requestReductionForm.controls['notes'].value
+                  ? requestReductionForm.controls['notes'].value
+                  : ''
+              }}</span>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="form-card-lower">
+            <div class="form-card-detail" formArrayName="attachment1">
+              <p>{{ stringConstants.add.attachment1 }}</p>
+              <span
+                class="form-filenames"
+                *ngFor="let file of attachment1.controls; index as i"
+                [formGroupName]="i"
+                >{{ file.value.name
+                }}<img
+                  [src]="
+                    file.value.type === 'pdf'
+                      ? 'assets/image/pdf.svg'
+                      : 'assets/image/generic-documents.png'
+                  "
+              /></span>
+            </div>
+            <div class="form-card-detail" formArrayName="attachment2">
+              <p>{{ stringConstants.add.attachment2 }}</p>
+              <span
+                class="form-filenames"
+                *ngFor="let file of attachment2.controls; index as i"
+                [formGroupName]="i"
+                >{{ file.value.name
+                }}<img
+                  [src]="
+                    file.value.type === 'pdf'
+                      ? 'assets/image/pdf.svg'
+                      : 'assets/image/generic-documents.png'
+                  "
+              /></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="form-card mt-24px">
+          <div class="form-card-upper">
+            <div class="form-card-title">
+              <div
+                [ngClass]="
+                  direction === 'rtl' ? 'form-card-img-rtl' : 'form-card-img'
+                "
+              >
+                <img src="assets/images/excise-goods/summary-declaration.svg" />
+              </div>
+              <span>{{ stringConstants.add.process[2].title }}</span>
+            </div>
+            <div class="form-card-edit" (click)="goToStep(2)">
+              {{ stringConstants.add.edit }}
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="form-card-lower">
+            <div class="form-card-detail">
+              <p>
+                {{ stringConstants.add.declaration.idType }}
+              </p>
+              <span>{{
+                requestReductionForm.controls['declaration'].value.idType
+              }}</span>
+            </div>
+            <div class="form-card-detail">
+              <p>
+                {{ stringConstants.add.declaration.dob }}
+              </p>
+              <span>{{ dob1 }}</span>
+            </div>
+          </div>
+          <div class="card-divider"></div>
+          <div class="form-card-lower">
+            <div class="form-card-detail" formArrayName="attachment1">
+              <p>{{ stringConstants.add.declaration.idNum }}</p>
+              <span>{{
+                requestReductionForm.controls['declaration'].value.idNum
+              }}</span>
+            </div>
+            <div class="form-card-detail" formArrayName="attachment2">
+              <p>{{ stringConstants.add.declaration.name }}</p>
+              <span>{{
+                requestReductionForm.controls['declaration'].value.name
+              }}</span>
+            </div>
+          </div>
+        </div> -->
+
+        <button
+          class="btnPrimary continue mt-5"
+          [ngClass]="direction == 'ltr' ? 'marginLeft' : 'marginRight'"
+          mat-raised-button
+          (click)="onSubmit4()"
+          type="submit"
+        >
+          {{ stringConstants.add.confirm }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Success -->
+
+    <div *ngIf="processActive === 3" class="form-success">
+      <img src="assets/image/success.svg" />
+      <span class="form-success-title">{{
+        stringConstants.add.success.title
+      }}</span>
+      <span class="form-success-subtitle">{{
+        stringConstants.add.success.sub
+      }}</span>
+      <div class="mt-32px">
+        <div class="form-success-info">
+          <p>{{ stringConstants.add.success.name }}</p>
+          <span>{{ formData.AReceiveBy }}</span>
+        </div>
+        <div class="form-success-info">
+          <p>{{ stringConstants.add.success.appNo }}</p>
+          <span>{{ formData.Fbnum }}</span>
+        </div>
+        <div class="form-success-info">
+          <p>{{ stringConstants.add.success.date }}</p>
+          <span>{{ formData.AReceiveDt }}</span>
+        </div>
+      </div>
+      <span class="form-success-message">{{
+        stringConstants.add.success.message
+      }}</span>
+      <button class="form-success-dl" (click)="downloadAck()">
+        {{ stringConstants.add.success.download }}
+      </button>
+      <span class="form-success-dl2" (click)="downloadForm()">{{
+        stringConstants.add.success.download2
+      }}</span>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>
+
+<!-- Consent Modal -->
+
+<div
+  class="modal instruction-modal"
+  id="Instruction"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="direction"
+>
+  <div class="modal-dialog center">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('Instruction')"
+            />
+          </div>
+
+          <div
+            class="dark fbl f28 mt-4 mb-3 pageTitle"
+            [ngClass]="direction === 'rtl' ? 'ar-align' : ''"
+          >
+            {{ stringConstants.add.modal.title }}
+          </div>
+          <div class="lightCard py-3 pr-3 mb-3 border">
+            <div class="modalInstructions f12 gray font-color">
+              <span [ngClass]="direction === 'rtl' ? 'ar-align' : ''">{{
+                stringConstants.add.modal.content1
+              }}</span>
+              <!-- <span [ngClass]="direction === 'rtl' ? 'ar-align' : ''">{{
+                stringConstants.add.modal.content2
+              }}</span> -->
+              <span [ngClass]="direction === 'rtl' ? 'ar-align' : ''">{{
+                stringConstants.add.modal.content3
+              }}</span>
+            </div>
+          </div>
+
+          <div class="check row mx-0">
+            <mat-checkbox
+              class="checkboxAckCss"
+              [(ngModel)]="instructionsAccepted"
+            >
+            </mat-checkbox>
+            <div
+              class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+              style="font-size: 12px; font-weight: 600; padding-top: 6px"
+              [ngClass]="direction === 'rtl' ? 'ar-align' : ''"
+            >
+              {{ stringConstants.add.modal.agree }}
+            </div>
+          </div>
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary btnprimary-width"
+              (click)="openForm('Instruction')"
+              mat-raised-button
+              [disabled]="!instructionsAccepted"
+            >
+              {{ stringConstants.add.continue }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Id validation Modal -->
+
+<div
+  class="modal"
+  id="aftSelect"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="direction"
+  style="top: 15%"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row text-center mt-3">
+          <div class="col-md-12">
+            <div class="row text-center">
+              <div class="col-md-12">
+                <div class="labelTxtCss" style="text-align: center">
+                  {{ stringConstants.add.declaration.idNum }}
+                </div>
+
+                <input
+                  class="commonInput"
+                  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));"
+                  [value]="
+                    requestReductionForm.controls.declaration.value.idNum
+                  "
+                  [(ngModel)]="id1"
+                  name="id1"
+                />
+
+                <div *ngIf="idErr1" class="invalid-feedback">
+                  <p
+                    style="
+                      position: relative;
+                      margin-top: 10px;
+                      font-size: 14px;
+                    "
+                  >
+                    {{ idMsg }}
+                  </p>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  requestReductionForm.controls.declaration.value.idType !=
+                  'ZS0003'
+                "
+                class="col-md-12"
+              >
+                <div class="labelTxtCss mt-3" style="text-align: center">
+                  {{ stringConstants.add.declaration.dob }}
+                </div>
+                <div class="commomDatePicker" style="margin: 0 auto">
+                  <input
+                    readonly
+                    (click)="datePicker.open()"
+                    matInput
+                    [matDatepicker]="datePicker"
+                    name="dob1"
+                    [(ngModel)]="dob1"
+                    placeholder="dd-mm-yyyy"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="datePicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datePicker> </mat-datepicker>
+                </div>
+                <div *ngIf="dobErr" class="invalid-feedback">
+                  <p
+                    style="
+                      position: relative;
+                      margin-top: 10px;
+                      font-size: 14px;
+                    "
+                  >
+                    {{ dobMsg }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 mb-2">
+              <button
+                mat-button
+                (click)="validateID2()"
+                style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                "
+                class="btnTCss"
+              >
+                {{ stringConstants.add.declaration.validate }}
+              </button>
+              <button
+                mat-button
+                style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                "
+                data-dismiss="modal"
+                (click)="reset()"
+                class="btnTCss"
+              >
+                {{ stringConstants.add.declaration.close }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

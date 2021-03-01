@@ -1,0 +1,57 @@
+<app-header [direction]="direction" [title]="lang.title" [url]="url"></app-header>
+
+<div dir={{direction}}>
+
+    <div class="container" style="margin-top: 150px;">
+        <div class="row outerDiv">
+            <div class="col-md-3">
+                <mat-card class="cardHover" [routerLink]="['/signup/company']" (mouseover)="mouseover(1)"
+                    (mouseout)="mouseout()" style="cursor: pointer;">
+                    <div class="text-center">
+                        <div>
+                            <img *ngIf="idd === 1" src="assets/images/Company_1.png" alt="Logo" style="width: 50px;">
+                            <img *ngIf="idd !== 1" src="assets/images/company.png" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard" [style.color]="idd ===1? 'white':'#13614c'">{{lang.subtitle.t1}}</p>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-3">
+                <mat-card class="cardHover" [routerLink]="['establishment']" (mouseover)="mouseover(2)"
+                    (mouseout)="mouseout()" style="cursor: pointer;">
+                    <div class="text-center">
+                        <div>
+                            <img *ngIf="idd === 2" src="assets/images/Establishment_1.png" alt="Logo" style="width: 50px;">
+                            <img *ngIf="idd !== 2" src="assets/images/establishment.png" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard" [style.color]="idd ===2? 'white':'#13614c'">{{lang.subtitle.t2}}</p>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-3">
+                <mat-card class="cardHover" [routerLink]="['individual']" (mouseover)="mouseover(3)"
+                    (mouseout)="mouseout()" style="cursor: pointer;">
+                    <div class="text-center">
+                        <div>
+                            <img *ngIf="idd === 3" src="assets/images/Individual_1.png" alt="Logo" style="width: 50px;">
+                            <img *ngIf="idd !== 3" src="assets/images/individual.png" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard" [style.color]="idd ===3? 'white':'#13614c'">{{lang.subtitle.t3}}</p>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-3">
+                <mat-card class="cardHover" [routerLink]="['others']" (mouseover)="mouseover(4)"
+                    (mouseout)="mouseout()" style="cursor: pointer;">
+                    <div class="text-center">
+                        <div>
+                            <img *ngIf="idd === 4" src="assets/images/Other_1.png" alt="Logo" style="width: 50px;">
+                            <img *ngIf="idd !== 4" src="assets/images/other.png" alt="Logo" style="width: 50px;">
+                        </div>
+                        <p class="insideCard" [style.color]="idd ===4? 'white':'#13614c'">{{lang.subtitle.t4}}</p>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

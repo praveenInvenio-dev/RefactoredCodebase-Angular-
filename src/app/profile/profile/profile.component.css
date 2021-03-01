@@ -1,0 +1,331 @@
+.profileTitle {
+  width: 407px;
+  height: auto;
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.residentType {
+  width: 196px;
+  height: 24px;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999;
+  text-align: start;
+}
+
+.lastLoginTime {
+  width: 425px;
+  height: 24px;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: right;
+  color: #999;
+}
+
+.tinTitleText {
+  width: 25px;
+  height: 24px;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999;
+}
+
+.tinValueText {
+  width: 93px;
+  height: 24px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.Contact-Information {
+  width: 193px;
+  height: 24px;
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+  text-align: start;
+  /* margin-left: 15px; */
+}
+
+.mobileNumber {
+  width: 134px;
+  height: 24px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+  text-align: start;
+  cursor: pointer;
+}
+
+.addPOC {
+  width: 107px;
+  height: 48px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-left: 8px;
+}
+
+.contactName {
+  width: 105px;
+  height: 22px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.31;
+  letter-spacing: 0.23px;
+  color: #232323;
+}
+
+.contactEmail {
+  width: 130px;
+  height: 15px;
+  font-family: SSTArabic;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  color: #999;
+}
+
+.quickActionsMenu {
+  width: 148px;
+  height: 24px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+  cursor: pointer;
+}
+
+.status {
+  width: 59px;
+  height: 35px;
+  opacity: 0.1;
+  border-radius: 14px;
+  border: solid 1px #5d6770;
+}
+
+.statusText {
+  width: 28px;
+  height: 16px;
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: var(--solid-fills-primary);
+}
+
+.editDelete {
+  transform: translate3d(16px, 22px, 0px) !important;
+  top: 0px;
+  left: 0px;
+  will-change: transform;
+}
+
+.editText {
+  width: 29px;
+  height: 24px;
+  font-family: SSTArabic;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.deleteText {
+  width: 51px;
+  height: 24px;
+  font-family: SST;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #aa0c19;
+  text-align: start;
+}
+
+.addPOCModalTitle {
+  width: 409px;
+  height: 36px;
+  font-family: SSTArabic-bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.addPOCModalSubTitle {
+  width: 284px;
+  height: 24px;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.addPOCButton {
+  border: 1px solid;
+  color: white;
+  font-size: 16px;
+  width: 207px;
+  height: 48px;
+  border-radius: 14px;
+  background-color: #d99a29;
+  float: right;
+}
+
+.custom {
+  border: 1px solid;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 0.25rem;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+#custom input[type="text"]:focus {
+  box-shadow: 0px 0px 0px 2px #13614c, inset 0 0 0px 0px #13614c;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+#custom .mat-select:focus {
+  box-shadow: 0px 0px 0px 2px #13614c, inset 0 0 0px 0px #13614c;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+::ng-deep #code .mat-select-trigger {
+  height: 3.125em;
+}
+::ng-deep #code .mat-select-value {
+  padding-top: 13px;
+  padding-left: 9px;
+}
+
+.time-picker-component .mat-form-field-infix {
+  display: inherit;
+}
+
+/* .cdk-overlay-container .cdk-overlay-pane .testClass{
+    transform: translate3d(16px, 22px, 0px)!important;
+    } */
+
+::ng-deep #code .mat-select-arrow-wrapper {
+  padding-top: 5px;
+}
+
+.filtercpp {
+  padding: 7px 10px 5px 10px;
+  width: auto;
+  height: 35px;
+  border-radius: 14px;
+  background-color: #e5efed;
+  text-align: center;
+  float: right;
+  position: relative;
+}
+
+.cardTxt5Cssp {
+  width: 35px;
+  height: 16px;
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: right;
+  color: #006450;
+}
+
+mat-card {
+  box-shadow: none !important;
+  border: 1px solid #ebebeb !important;
+}
+
+.mobileInputEng {
+  width: 80% !important;
+  padding-left: 12px;
+  text-align: start;
+}
+
+.mobileInputArb {
+  width: 80% !important;
+  padding-right: 12px;
+  text-align: start;
+  direction: rtl;
+}

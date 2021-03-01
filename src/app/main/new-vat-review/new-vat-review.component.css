@@ -1,0 +1,343 @@
+.taxpayer-card,
+.summary-card {
+    margin-bottom: 56px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.taxpayer-card-section,
+.summary-card-section,
+.summary-header-without-button {
+    min-height: 96px;
+}
+
+.summary-header-with-button {
+    min-height: 96px;
+}
+
+.vCenter {
+    align-items: center;
+}
+.vCenterSingle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.single-input-card {
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    justify-content: center;
+    max-width: 430px;
+    padding-inline-start: 16px;
+}
+
+.cardGap {
+    margin-bottom: 24px;
+}
+
+.rotateSteps {
+    transform: rotate(180deg);
+}
+
+.btnTertiary {
+    min-width: 207px;
+    background: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--primary);
+    text-align: center;
+    line-height: 1.5;
+    height: 48px;
+    border: none;
+}
+
+.btnTertiary:hover {
+    cursor: pointer;
+}
+
+.btnFourth {
+    min-width: 207px !important;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    min-width: 207px;
+    background: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--secondary);
+    text-align: center;
+    line-height: 1.5;
+    height: 48px;
+    border: none;
+    outline: none;
+}
+
+.btnFourth:hover {
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.textDanger {
+    color: var(--error);
+}
+
+@media only screen and (max-width: 600px) {
+    .return-card,
+    .card-upload,
+    .card-uploaded {
+        min-width: 100%;
+    }
+    .commonInput,
+    .commonMatSelect,
+    .commomDatePicker,
+    .dateRangePicker {
+        width: 100%;
+    }
+
+    .customDatepicker {
+        width: 100% !important;
+    }
+
+    .customDatepicker input {
+        width: unset !important;
+    }
+    .commonInput {
+        width: 100% !important;
+    }
+
+    .summary-card-section,
+    .taxpayer-card-section {
+        height: auto;
+    }
+    ::ng-deep .mat-checkbox-layout {
+        white-space: normal !important;
+    }
+}
+
+.common-text-area-container {
+    position: relative;
+    max-width: 900px;
+    font-family: SSTArabic-Roman;
+}
+
+.common-text-area {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 103px;
+    /* position: relative; */
+    width: 100%;
+    padding-bottom: 20px;
+    padding-inline-start: 15px;
+    padding-inline-end: 11%;
+    padding-top: 10px;
+    resize: none;
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    color: var(--dark);
+    line-height: 24px;
+    height: 96px !important;
+    border: solid 1px var(--gray);
+    border-radius: var(--inputBorderRadius);
+}
+
+.common-text-area:hover {
+    border: solid 2px var(--dark);
+}
+
+.common-text-area:focus,
+.common-text-area:active {
+    border: solid 2px var(--primary) !important;
+}
+
+.common-text-area-counter-ltr {
+    position: absolute;
+    right: 3%;
+    display: inline-block;
+    bottom: 7%;
+    color: var(--gray);
+    font-size: bold;
+}
+
+.common-text-area-counter-rtl {
+    position: absolute;
+    left: 3%;
+    display: inline-block;
+    bottom: 7%;
+    color: var(--gray);
+    font-size: bold;
+}
+
+.dateRangeLabel {
+    display: flex;
+    align-items: end;
+    width: auto;
+    margin-top: 3px;
+}
+
+.dateRangePicker input {
+    width: 100%;
+}
+
+.fadeDiv {
+    opacity: 0.6 !important;
+    pointer-events: none;
+}
+
+.exciseAccCss2 {
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #999999;
+}
+
+.exciseAccCssBox {
+    margin: 0 auto;
+    height: 56px;
+    border-radius: 14px;
+    border: solid 1px #ebebeb;
+}
+
+.exciseAccCssBox1 {
+    text-align: start;
+    font-family: SSTArabic-Roman;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #999999;
+    position: relative;
+    top: 12px;
+    left: 10px;
+}
+
+.exciseAccCssBox2 {
+    font-family: SSTArabic-Medium;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: right;
+    color: #232323;
+    float: right;
+    position: relative;
+    right: 15px;
+}
+
+.customDialog {
+    max-width: fit-content;
+    margin: 12% auto;
+}
+
+.btnSecondary:disabled {
+    color: var(--gray);
+    cursor: default;
+}
+
+input:read-only {
+    color: var(--gray);
+    cursor: default;
+}
+::ng-deep .calendarIconDisabled {
+    color: var(--gray) !important;
+    pointer-events: none !important;
+}
+
+.fadeCard {
+    pointer-events: none;
+    color: var(--gray) !important;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+    height: 24px !important;
+    width: 24px !important;
+}
+::ng-deep .mat-checkbox-background {
+    border-radius: 4px !important;
+}
+
+::ng-deep .mat-checkbox-frame {
+    border-radius: 4px !important;
+}
+
+.oval {
+    height: 48px;
+    width: 48px;
+    border-radius: 50px;
+    background-color: rgba(0, 100, 80, 0.1);
+    /* opacity: .1; */
+    display: flex;
+    justify-content: center;
+}
+
+.centerImage {
+    width: 24px;
+    margin: 0 auto;
+}
+
+.statusSummary {
+    height: fit-content;
+    width: fit-content;
+    min-width: 100px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    padding: 7px 10px;
+}
+.errMsg {
+    color: #e62e2d;
+    font-size: 12px;
+}
+
+::ng-deep .checkboxErr .mat-checkbox-frame {
+    border-radius: 6px !important;
+    border-color: red;
+}
+.inputErr {
+    border: 1px solid red !important ;
+}
+
+.modal-dialog {
+    max-width: 708px;
+}
+.modal {
+    top: 17%;
+    text-align: start;
+}
+
+::ng-deep .mat-datepicker-toggle {
+    background: url("../../../assets/images/calendar.svg") no-repeat center !important;
+    margin-top: -2px;
+    /* position: absolute; */
+}
+
+::ng-deep .mat-datepicker-toggle-default-icon {
+    display: none;
+}
+
+.refreshBtn {
+    min-width: 102px !important;
+    box-shadow: none;
+    padding: 0;
+}
+
+#sadadConfirmation .modal-dialog {
+    max-width: 550px;
+}
+
+#ReasonConfirmation .modal-dialog {
+    max-width: 550px;
+    top: 13%;
+}

@@ -1,0 +1,65 @@
+<div class="row mt-4">
+  <div class="col-md-12">
+    <div
+      class="container row iptax-add-new p-0 m-0"
+      style="cursor: pointer"
+      (click)="onNewRequestClick()"
+    >
+      <div>
+        <img src="assets/image/add.svg" />
+      </div>
+      <div>
+        <span class="greenBold">{{ pageTranslation.newRequest }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 mt-4">
+    <div class="container row p-0 m-0">
+      <mat-table
+        class="iptax-table"
+        [dataSource]="dataSource"
+        [dir]="translation.direction"
+        #ipTaxTable
+        *ngIf="dataList.length > 0"
+      >
+        <ng-container
+          *ngFor="let headerInfo of headerInfoList"
+          [matColumnDef]="headerInfo.id"
+        >
+          <mat-header-cell *matHeaderCellDef>
+            <div>
+              {{ pageTranslation[headerInfo.translationId] }}
+            </div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <div
+              [ngClass]="{
+                tag32: headerInfo.id === 'FbustTxt',
+                'tag-partial':
+                  headerInfo.id === 'FbustTxt' && row.Fbust !== 'E0045',
+                'tag-success':
+                  headerInfo.id === 'FbustTxt' && row.Fbust === 'E0045'
+              }"
+              [matTooltip]="headerInfo.id === 'FbustTxt' && row.FbustTxt"
+            >
+              <span *ngIf="headerInfo.id === 'Receipt'">
+                {{ getCreationDate(row[headerInfo.id]) }}
+              </span>
+              <span *ngIf="headerInfo.id !== 'Receipt'">
+                {{ row[headerInfo.id] }}
+              </span>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row
+          class="fontSstR"
+          *matHeaderRowDef="getHeaderIds()"
+        ></mat-header-row>
+        <mat-row
+          *matRowDef="let row; columns: getHeaderIds()"
+          (click)="onStatementClick(row)"
+        ></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

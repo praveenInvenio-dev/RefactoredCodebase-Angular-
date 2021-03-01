@@ -1,0 +1,320 @@
+<div class="container" [dir]="direction">
+  <div class="taskAllocMiddle row">
+    <div class="taskAllocLocation col-md-12">
+      <span class="taProfile" style="cursor: pointer;" (click)="navigateToProfile()" >
+        {{
+          direction == "rtl"
+            ? taskAllocConstants["profile"]["arb"]
+            : taskAllocConstants["profile"]["eng"]
+        }}
+      </span>
+      <span class="taprofile2">></span>
+      <span class="taprofile2" style="cursor: pointer;" (click)="navigateToUsermanagement()">
+        {{
+          direction == "rtl"
+            ? taskAllocConstants["userMgmg"]["arb"]
+            : taskAllocConstants["userMgmg"]["eng"]
+        }}
+      </span>
+      <span class="xyz">></span>
+      <span class="taProfile2">
+        {{
+          direction == "rtl"
+            ? taskAllocConstants["taskAllocation"]["arb"]
+            : taskAllocConstants["taskAllocation"]["eng"]
+        }}
+      </span>
+    </div>
+  </div>
+  <div class="taskAllocBack row">
+    <div class="col-md-12 taskAllocBacki">
+      <span class="hspanx" (click)="goBackToUserManagement()">
+        <img
+          [src]="
+            direction === 'ltr'
+              ? 'assets/image/arrow-left-green.svg'
+              : 'assets/image/arrow-right-green.svg'
+          "
+        /> </span
+      ><span class="hspanx" (click)="goBackToUserManagement()">
+        {{
+          direction == "rtl"
+            ? taskAllocConstants["back"]["arb"]
+            : taskAllocConstants["back"]["eng"]
+        }}
+      </span>
+    </div>
+  </div>
+  <div class="taTaskAlloc row">
+    <div class="col-md-12 rtlfixer rtlfixer2">
+      {{
+        direction == "rtl"
+          ? taskAllocConstants["lonyaskAllocationh"]["arb"]
+          : taskAllocConstants["lonyaskAllocationh"]["eng"]
+      }}
+    </div>
+  </div>
+  <div class="taskAllocCards row">
+    <div class="col-md-6">
+      <div class="taskAlloct1">
+        <div class="taName">
+          {{
+            direction == "rtl"
+              ? taskAllocConstants["name"]["arb"]
+              : taskAllocConstants["name"]["eng"]
+          }}
+        </div>
+        <div class="taNameValue">{{ queryParamName }}</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="taskAlloct1">
+        <div class="taName">
+          {{
+            direction == "rtl"
+              ? taskAllocConstants["branch"]["arb"]
+              : taskAllocConstants["branch"]["eng"]
+          }}
+        </div>
+        <div class="taNameValue">{{ pageBranchName["BranchNm"] }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="taskTabMenu row">
+    <div class="col-md-12">
+      <div class="row">
+        <div
+          [ngClass]="taxTraker === j ? 'zs-taxttpta' : 'zs-taxttpta2'"
+          *ngFor="let item of taxTypesList; index as j"
+        >
+          <span class="onhover-hand" (click)="getTaxType(j)">{{
+            item["TaxtpDesc"] === "Zakat / Income Tax (Annual)"
+              ? "Zakat & CIT"
+              : item["TaxtpDesc"]
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Js code -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card custom-card border">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="custom-card-title">
+              <span>
+                {{
+                  direction == "rtl"
+                    ? taskAllocConstants["listOfOnR"]["arb"]
+                    : taskAllocConstants["listOfOnR"]["eng"]
+                }}
+              </span>
+              <a
+                href="#"
+                data-toggle="collapse"
+                href="#collapseRefund1"
+                role="button"
+                aria-expanded="false"
+                class="card-action-icon"
+                [style.float]="direction === 'rtl' ? 'left' : ''"
+                id="id1"
+                (click)="toggleIcon('id1')"
+              >
+                <img
+                  [src]="
+                    showId1
+                      ? 'assets/image/circle-arrow-down.svg'
+                      : 'assets/image/circle-arrow-up.svg'
+                  "
+                  style="width: 24px; margin: auto 15px"
+                  class="show"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12 mt-0"></div>
+        <div
+          [ngClass]="showId1 ? 'collapse show' : 'show'"
+          id="collapseRefund1"
+        >
+          <div class="card-body" style="padding: 0">
+            <div class="row" style="text-align: start">
+              <div
+                class="col-4 ber"
+                style="padding: 1.25rem; padding-inline-start: 2rem"
+              >
+                {{
+                  direction == "rtl"
+                    ? taskAllocConstants["Year"]["arb"]
+                    : taskAllocConstants["Year"]["eng"]
+                }}
+              </div>
+              <div
+                class="col-4 ber"
+                style="
+                  padding: 1.25rem;
+                  border-inline-start: solid 1px #ebebeb;
+                  text-align: center;
+                "
+              >
+                <span class="imgsp">
+                  <img src="assets/image/return.svg" /> </span
+                ><span>
+                  {{
+                    direction == "rtl"
+                      ? taskAllocConstants["Returns"]["arb"]
+                      : taskAllocConstants["Returns"]["eng"]
+                  }}
+                </span>
+              </div>
+              <div
+                class="col-4 ber"
+                style="
+                  padding: 1.25rem;
+                  border-inline-start: solid 1px #ebebeb;
+                  text-align: center;
+                "
+              >
+                <span class="imgsp">
+                  <img src="assets/image/objections.svg" />
+                </span>
+                <span>
+                  {{
+                    direction == "rtl"
+                      ? taskAllocConstants["Objections"]["arb"]
+                      : taskAllocConstants["Objections"]["eng"]
+                  }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="Rectangle-12 mt-0"></div>
+        </div>
+        <div
+          [ngClass]="showId1 ? 'collapse show' : 'collapse'"
+          class="fontSetterta"
+          *ngFor="let i of fiscalYearDetails; index as j"
+        >
+          <div class="card-body" style="padding: 0">
+            <div class="row" style="text-align: start">
+              <div
+                class="col-4 ber"
+                style="padding: 1.25rem; padding-inline-start: 2rem"
+              >
+                {{ i["Period"] }}
+              </div>
+              <div
+                class="col-4"
+                style="
+                  padding: 1.25rem;
+                  border-inline-start: solid 1px #ebebeb;
+                  text-align: center;
+                "
+              >
+                <mat-slide-toggle
+                  [checked]="i['ReturnCb'] === 'X' ? true : false"
+                  [disabled]="i['Flag'] == 'X' ? false : true"
+                  (toggleChange)="authorizeReturns(j, 'return')"
+                  class="zs-customSlider"
+                >
+                </mat-slide-toggle>
+              </div>
+              <div
+                class="col-4"
+                style="
+                  padding: 1.25rem;
+                  border-inline-start: solid 1px #ebebeb;
+                  text-align: center;
+                "
+              >
+                <mat-slide-toggle
+                  [checked]="i['ObjectionCb'] === 'X' ? true : false"
+                  [disabled]="i['FlagDis'] == 'X' ? false : true"
+                  (toggleChange)="authorizeReturns(j, 'objections')"
+                  class="zs-customSlider"
+                >
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+          <div class="Rectangle-12 mt-0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card custom-card border">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="custom-card-title">
+              <span>
+                {{
+                  direction == "rtl"
+                    ? taskAllocConstants["listofServices"]["arb"]
+                    : taskAllocConstants["listofServices"]["eng"]
+                }}
+              </span>
+              <a
+                role="button"
+                aria-expanded="false"
+                class="card-action-icon"
+                [style.float]="direction === 'rtl' ? 'left' : ''"
+                id="id2"
+                (click)="toggleIcon('id2')"
+              >
+                <img
+                  [src]="
+                    showId2
+                      ? 'assets/image/circle-arrow-down.svg'
+                      : 'assets/image/circle-arrow-up.svg'
+                  "
+                  style="width: 24px; margin: auto 15px"
+                  class="show"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="Rectangle-12 mt-0"></div>
+
+        <div
+          [ngClass]="showId2 ? 'collapse show' : 'collapse'"
+          *ngFor="let i of listOfServices; index as j"
+          class="fontSetterta"
+        >
+          <div class="card-body">
+            <div class="row" style="text-align: start">
+              <div
+                class="col-7"
+                style="padding-top: 1rem; padding-inline-start: 2rem"
+              >
+                {{ i["Zdesc"] }}
+              </div>
+              <div
+                class="col-5"
+                style="
+                  padding: 1.25rem;
+                  border-inline-start: solid 1px #ebebeb;
+                  text-align: center;
+                "
+              >
+                <mat-slide-toggle
+                  [checked]="i['EnableCb'] == 'X' ? true : false"
+                  (toggleChange)="authServcies(j)"
+                  class="zs-customSlider"
+                >
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+          <div class="Rectangle-12 mt-0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

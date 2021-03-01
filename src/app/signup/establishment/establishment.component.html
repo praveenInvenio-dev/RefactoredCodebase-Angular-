@@ -1,0 +1,1235 @@
+<app-header [direction]="lang.dir" [title]="lang.establishment.title"></app-header>
+
+<div class="container" style="margin-top: 150px;" dir="{{ lang.dir }}">
+  <div *ngIf="!show">
+    <!-- PROGRESS BAR - START -->
+    <div class="row" *ngIf="!showVerification && !show">
+      <div class="col-md-12">
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div [ngClass]="optionActive === 1 ? 'viewCssActive' : 'viewCss'" (click)="backClick(1)">
+              <div class="card cardz" [ngClass]="optionActive === 1 ? 'cardCss' : 'cardCssActive'">
+                <div class="card-body">
+                  <i class="fa fa-check-circle" [ngClass]="lang.dir === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'"
+                    *ngIf="showOne" aria-hidden="true"></i>
+                  <p class="ellipse-inner" [style.left]="lang.dir === 'rtl' ? '-4px' : '4px'" *ngIf="!showOne"></p>
+                </div>
+
+              </div>
+
+            </div>
+            <p [ngClass]="optionActive === 1 ? 'txtCss' : 'txtCssActive'"> {{lang.establishment.header.h1}}
+            </p>
+
+          </div>
+          <div class="col-md-4">
+            <div [ngClass]="optionActive === 2 ? 'viewCssActive' : 'viewCss'" (click)="backClick(2)">
+              <div class="card cardz" [ngClass]="optionActive === 2 ? 'cardCss' : 'cardCssActive'">
+
+                <div class="card-body">
+                  <i class="fa fa-check-circle" [ngClass]="lang.dir === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'"
+                    *ngIf="showTwo" aria-hidden="true"></i>
+                  <p class="ellipse-inner" *ngIf="!showTwo" [style.left]="lang.dir === 'rtl' ? '-4px' : '4px'"
+                    [style.background]="defaultValue === 1 ? 'white' : ''"
+                    [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'">
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+            <p [ngClass]="optionActive === 2 ? 'txtCss' : 'txtCssActive'"
+              [style.color]="defaultValue === 1 ? '#c0c0c0' : ''"
+              [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+              {{lang.establishment.header.h2}}
+            </p>
+
+            <hr class="hrCss2">
+            <hr class="hrCss3">
+          </div>
+          <div class="col-md-4">
+            <div [ngClass]="optionActive === 3 ? 'viewCssActive' : 'viewCss'" (click)="backClick(3)">
+              <div class="card cardz" [ngClass]="optionActive === 3 ? 'cardCss' : 'cardCssActive'">
+
+                <div class="card-body">
+
+                  <i class="fa fa-check-circle" [ngClass]="lang.dir === 'rtl' ? 'stepperArbIcon' : 'stepperIcon'"
+                    *ngIf="show" aria-hidden="true"></i>
+
+                  <p class="ellipse-inner" *ngIf="!show" [style.left]="lang.dir === 'rtl' ? '-4px' : '4px'"
+                    [style.border]="defaultValue === 3 ||defaultValue === 1 ? 'solid 1px #c0c0c0' : 'none'"
+                    [style.background]="defaultValue === 3 ||defaultValue === 1 ? 'white' : ''">
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+            <p [ngClass]="optionActive === 3 ? 'txtCss' : 'txtCssActive'"
+              [style.color]="defaultValue === 3 || defaultValue === 1 ? '#c0c0c0' : ''"
+              [style.font-family]="defaultValue === 1 ? 'SSTArabic-Light' : 'SSTArabic-Bold'">
+              {{lang.establishment.header.h3}}</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PROGRESS BAR - END -->
+
+
+    <!-- ESTABLISHMENT REGISTER SCREEN 1 - START -->
+    <div class="row rowCss mt-2" *ngIf="optionActive === 1 && !showVerification">
+      <div class="col-md-12">
+
+        <mat-card class="mt-3">
+          <mat-card-content>
+
+            <div class="sideHeading">
+              {{lang.establishment.c1.title}} <span
+                *ngIf="establishmentdto.idSet[0].Type !== '' && !idErr && establishmentdto.idSet[0].Idnumber !== '' && (establishmentdto.Birthdt !== null) && !dobErr1">
+                <i class="fa fa-check-circle" aria-hidden="true"
+                  [ngClass]="lang.dir === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i>
+              </span>
+              <p class="Rectangle-12"></p>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="registerLabelCss">{{ lang.establishment.c1.in1}}<span style="color: red;">*</span></div>
+                <mat-form-field appearance="outline">
+                  <mat-select [(ngModel)]="establishmentdto.idSet[0].Type" name="type1" [disabled]="showContactInfo">
+                    <mat-option [value]="idType.value" (click)="checkGcc(idType.value);hideContactInfo();"
+                      *ngFor="let idType of lang.idTypes">
+                      {{idType.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div *ngIf="idTErr" class="invalid-feedback">
+                  <p>{{lang.vatError.e4}}</p>
+                </div>
+
+              </div>
+
+              <div class="col-md-4">
+                <div class="registerLabelCss">{{ lang.establishment.c1.in2}}<span style="color: red;">*</span></div>
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder="" [disabled]="showContactInfo"
+                    [ngModel]="establishmentdto.idSet[0].Idnumber" maxlength="15"
+                    (ngModelChange)="establishmentdto.idSet[0].Idnumber = $event; IDtypeValidation1(); hideContactInfo();"
+                    name="num1" type="text" (keypress)='restrictAlphabets($event)'>
+                </mat-form-field>
+                <div *ngIf="idErr" class="invalid-feedback">
+                  <div
+                    *ngIf="establishmentdto.idSet[0].Idnumber === '' || establishmentdto.idSet[0].Idnumber === undefined">
+                    <p>{{lang.vatError.e5}}</p>
+                  </div>
+                  <p>{{idMsg}}</p>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+
+                <div class="registerLabelCss">{{ lang.establishment.c1.in3}}<span style="color: red;">*</span></div>
+
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="picker" [disabled]="showContactInfo" (dateChange)="getdateErr()"
+                    [min]="startDate" [max]="enddate" [ngModel]="establishmentdto.Birthdt"
+                    (ngModelChange)="establishmentdto.Birthdt = $event; validateDOB();hideContactInfo();" name="sd"
+                    placeholder="" type="text" (keypress)='restrictAlphabets($event)'>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                  </mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="dobErr" class="invalid-feedback">
+                  <p>{{lang.vatError.e6}}
+                  </p>
+                </div>
+                <div *ngIf="dobErr1" class="invalid-feedback">
+                  <p>
+                    {{dateMsg}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="showContactInfo || showGcc">
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c1.in4 }}</div>
+                <!-- <mat-form-field appearance="outline">
+                  <input matInput type="text" placeholder="Name" [(ngModel)]="fname" />
+                </mat-form-field> -->
+
+
+                <mat-form-field appearance="outline">
+
+                  <input matInput (ngModelChange)="establishmentdto.NameFirst = $event; validate(1)"
+                    [ngModel]="establishmentdto.NameFirst" maxlength="80" placeholder="">
+                  <!-- [disabled]="showContactInfo && !IsGCC" -->
+                </mat-form-field>
+                <div class="invalid-feedback" *ngIf="nameErr1">
+                  {{nameMsg}}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c1.in5 }}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput type="text" placeholder="name" [(ngModel)]="establishmentdto.NameLast" />
+                </mat-form-field>
+                <!-- [disabled]="showContactInfo && !IsGCC" -->
+              </div>
+            </div>
+          </mat-card-content>
+
+        </mat-card>
+        <!-- PASSPORT DETAILS - START -->
+        <mat-card class="mt-3" *ngIf="showGcc">
+          <mat-card-content>
+            <div class="sideHeading">
+              {{ lang.establishment.c2.title }}
+              <span *ngIf="!paasportDetailsError">
+                <i class="fa fa-check-circle" aria-hidden="true"
+                  [ngClass]="lang.dir === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i></span>
+              <p class="Rectangle-12"></p>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c2.in1 }}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder="1234567890" [(ngModel)]="establishmentdto.idSet[1].Idnumber" />
+                </mat-form-field>
+                <div *ngIf="pssprtNumErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e2}}</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c2.in2 }}</div>
+
+                <mat-form-field appearance="outline">
+                  <mat-select [(ngModel)]="establishmentdto.idSet[1].Country" name="city2">
+                    <mat-option [value]="item.CityName" (click)=" validateCity(establishmentdto.idSet[1].Country)"
+                      *ngFor="let item of cityList">
+                      {{item.CityName}}</mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- <mat-form-field appearance="outline">
+                  <input matInput placeholder="Issue City" [(ngModel)]="issueCity"  />
+                </mat-form-field> -->
+                <!-- <div *ngIf="issueCityErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e3}}</p>
+                </div> -->
+                <div class="invalid-feedback" *ngIf="nameErr2">
+                  {{cityMsg}}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c2.in3 }}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="picker2" placeholder="4/5/2018"
+                    [(ngModel)]="establishmentdto.idSet[1].ValidDateFrom" />
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker [calendarHeaderComponent]="headerComponent" #picker2></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="issueDateErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e4}}</p>
+                </div>
+                <div *ngIf="issueDateFutureErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e5}}</p>
+                </div>
+                <div *ngIf="issueDateDOBErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e6}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c2.in4 }}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="picker3" placeholder="4/5/2021"
+                    [(ngModel)]="establishmentdto.idSet[1].ValidDateTo" />
+                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                  <mat-datepicker [calendarHeaderComponent]="headerComponent" #picker3></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="expiryDateErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e7}}</p>
+                </div>
+                <div *ngIf="expiryDatePastErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e8}}</p>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c2.in5 }}</div>
+                <div class="form-group attBoxCss">
+                  <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                    <span class="material-icons attIconCss" style="line-height: 1.5;">
+                      attach_file
+                    </span>
+                    <input type="file" style="display: none;" placeholder="1234567890" [(ngModel)]="pssprtAttchmnt" />
+                  </label>
+                </div>
+                <div *ngIf="pssprtAttchmntErr" class="invalid-feedback">
+                  <p>{{lang.establishment.err.e9}}</p>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-4">
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop
+                  (onFileDropped)="uploadFile($event, j);getFileDetails($event, j)" *ngIf="attach.value.id !== ''">
+
+                  <input hidden type="file" #fileInput
+                    (change)="uploadFile($event.target.files, j);getFileDetails($event, j)">
+                  <div class="row text-center mt-5">
+                    <div class="col-md-12">
+                      <img src="assets/image/attach.svg" style="width: 24px;">
+                      <div class="fileUploadTxt">{{lang.establishment.c5.t10}}
+                      </div>
+                      <div class="fileUploadTxt1">{{lang.establishment.c5.t11}}<br>{{lang.establishment.c5.t13}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uploadfilecontainer" *ngIf="attach.value.id == ''" (click)="checkDocTyp()">
+
+                  <div class="row text-center mt-5">
+                    <div class="col-md-12">
+                      <img src="assets/image/attach.svg" style="width: 24px;">
+                      <div class="fileUploadTxt">{{lang.establishment.c5.t10}}
+                      </div>
+                      <div class="fileUploadTxt1">{{lang.establishment.c5.t11}}<br>{{lang.establishment.c5.t13}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <!-- PASSPORT DETAILS - END -->
+
+        <!-- CONTACT SECTION - START  -->
+        <mat-card class="mt-3" *ngIf="showContactInfo">
+          <mat-card-content>
+            <div class="sideHeading">
+              {{ lang.establishment.c3.title }}
+              <p class="Rectangle-12"></p>
+            </div>
+            <div class="row">
+
+              <div class="time-picker-component col-md-4">
+
+                <div class="registerLabelCss required">{{ lang.establishment.c3.in1 }}</div>
+                <div id="custom">
+                  <mat-select id="code" class="custom" style="width: 30%;" [(ngModel)]="cncode" name="cncode">
+                    <mat-option [value]="item.Telefto" *ngFor="let item of codes"
+                      (click)="getMaxLength(item.maxLength)">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <span> +{{item.Telefto}} &nbsp;&nbsp;&nbsp;&nbsp; </span>
+                        </div>
+                        <div class="col-md-6">
+                          {{ item.Landx50 }}
+                        </div>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                  <input matInput (ngModelChange)="establishmentdto.Mobno = $event; validate(8)"
+                    (keypress)='restrictAlphabets($event)' [ngModel]="establishmentdto.Mobno" maxlength={{maxLength}}
+                    name="MobileNo2" class="custom" placeholder="" style="width: 70%; padding-left: 12px;">
+                  <!-- [disabled]="showContactInfo && !IsGCC" -->
+                </div>
+                <div style="margin-top: 11px;" class="invalid-feedback" *ngIf="nameErr8">
+                  {{msMsg}}
+                </div>
+
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c3.in2 }}</div>
+                <mat-form-field appearance="outline">
+                  <input (ngModelChange)="establishmentdto.PortalUsrx = $event; validate(9)"
+                    [ngModel]="establishmentdto.PortalUsrx" maxlength="240" name="establishmentdto.PortalUsrx" matInput
+                    placeholder="">
+                </mat-form-field>
+                <!-- [disabled]="showContactInfo && !IsGCC" -->
+                <div class="invalid-feedback" *ngIf="nameErr9">
+                  {{eMsg}}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c3.in3 }}</div>
+                <mat-form-field appearance="outline">
+                  <input (ngModelChange)="cemail = $event; validate(10)" [ngModel]="cemail" maxlength="240" name="email"
+                    matInput placeholder="">
+                </mat-form-field>
+                <!-- [disabled]="showContactInfo && !IsGCC" -->
+                <div class="invalid-feedback" *ngIf="nameErr10">
+                  {{ceMsg}}
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <!-- CONTACT SECTION - END -->
+        <div class="mt-3">
+          <button mat-raised-button [disabled]="establishmentdto.idSet[0].Type === ''" [ngClass]="lang.dir === 'rtl' ?
+            'btnArbCss' : 'btnCss'" (click)="onSubmit1();">
+            {{lang.establishment.c1.btn}}</button>
+        </div>
+
+      </div>
+    </div>
+    <!-- ESTABLISHMENT REGISTER SCREEN 1 - END -->
+    <!-- COMPLETE INFORMATION SCREEN 2 - START -->
+    <div class="row rowCss mt-2" *ngIf="optionActive === 2">
+      <div class="col-md-12">
+
+
+        <!-- FACILITY INFORMATION -START -->
+        <mat-card class="mt-3">
+          <mat-card-content>
+            <div class="sideHeading">
+              {{ lang.establishment.c8.title }}
+              <span *ngIf="facilityValid">
+                <i class="fa fa-check-circle" aria-hidden="true"
+                  [ngClass]="lang.dir === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i>
+              </span>
+              <p class="Rectangle-12"></p>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="registerLabelCss">{{ lang.establishment.c8.in1 }}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder="" [(ngModel)]="establishmentdto.Gpart" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.establishment.c8.in2 }}</div>
+                <mat-form-field appearance="outline">
+                  <mat-select [(ngModel)]="establishmentdto.Augrp">
+                    <mat-option [value]="item.Augrp" *ngFor="let item of branches">{{item.Bez50}}</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+                <div class="invalid-feedback" *ngIf="branchErr">
+                  {{ceMsg}}
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="registerLabel2Css required">{{ lang.establishment.c8.in3 }}</p>
+                <div class="row mr-3" style="margin-left: 5rem !important;">
+                  <mat-radio-group aria-label="Select an option" name="r2" [(ngModel)]="establishmentdto.Tpresidence">
+
+                    <mat-radio-button value="1" class="mr-2 radioCss" [style.background]="
+                        establishmentdto.Tpresidence === '3'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        establishmentdto.Tpresidence === '3'
+                          ? '#ffffff'
+                          : 'black'
+                      ">{{ lang.establishment.c8.in4 }}
+                    </mat-radio-button>
+                    <mat-radio-button value="2" class="mr-2 radioCss" [style.background]="
+                        establishmentdto.Tpresidence === '1'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        establishmentdto.Tpresidence === '1'
+                          ? '#ffffff'
+                          : 'black'
+                      ">{{ lang.establishment.c8.in5 }}
+                    </mat-radio-button>
+                  </mat-radio-group>
+
+                </div>
+                <div class="invalid-feedback" *ngIf="resStatusErr">
+                  {{ceMsg}}
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div class="row" *ngIf="establishmentdto.Tpresidence == '3'">
+              <div class="col-md-12">
+                <p class="registerLabel2Css required">{{ lang.establishment.c8.in6 }}</p>
+                <div class="row mr-3" style="margin-left: 5rem !important;">
+                  <mat-radio-group aria-label="Select an option" name="r3"
+                    [(ngModel)]="establishmentdto.Orgnonresident">
+
+                    <mat-radio-button value="1" class="mr-2 radioCss" [style.background]="
+                        establishmentdto.Orgnonresident === '1'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        establishmentdto.Orgnonresident === '1'
+                          ? '#ffffff'
+                          : 'black'
+                      ">{{ lang.establishment.c8.in7 }}
+                    </mat-radio-button>
+                    <mat-radio-button value="2" class="mr-2 radioCss" [style.background]="
+                        establishmentdto.Orgnonresident === '2'
+                          ? '#d2a02a'
+                          : 'none'
+                      " [style.color]="
+                        establishmentdto.Orgnonresident === '2'
+                          ? '#ffffff'
+                          : 'black'
+                      ">{{ lang.establishment.c8.in8 }}
+                    </mat-radio-button>
+                  </mat-radio-group>
+
+                </div>
+                <div class="invalid-feedback" *ngIf="legalEntityErr">
+                  {{ceMsg}}
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="establishmentdto.Tpresidence == '3'">
+              <div class="col-md-8" *ngIf="establishmentdto.Orgnonresident == '1'">
+                <div class="registerLabelCss required">{{ lang.establishment.c8.in9 }}</div>
+                <mat-form-field appearance="outline">
+                  <mat-select [(ngModel)]="establishmentdto.Orgnonresidentoptions">
+                    <mat-option [value]="item" *ngFor="let item of permLegalDD">{{item}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="invalid-feedback" *ngIf="legalEntityErr">
+                  {{ceMsg}}
+                </div>
+              </div>
+              <div class="col-md-8" *ngIf="establishmentdto.Orgnonresident == '2'">
+                <div class="registerLabelCss required">{{ lang.establishment.c8.in9 }}</div>
+                <mat-form-field appearance="outline">
+                  <mat-select [(ngModel)]="establishmentdto.Orgnonresidentactivity">
+                    <mat-option [value]="item" *ngFor="let item of nonPermLegalDD">{{item}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="invalid-feedback" *ngIf="legalEntityErr">
+                  {{ceMsg}}
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <!-- FACILITY INFORMATION - END -->
+
+        <!-- FACILITY BRANCHES - START -->
+        <mat-card class="mt-3">
+          <mat-card-content>
+            <div class="sideHeading">
+              {{ lang.establishment.c9.title }}
+              <span *ngIf="facilityBranchValid">
+                <i class="fa fa-check-circle" aria-hidden="true"
+                  [ngClass]="lang.dir === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i>
+              </span>
+              <p class="Rectangle-12"></p>
+            </div>
+
+            <label style="width: 100%;">
+              <input matInput type="text" style="margin-top: 20px;" (keyup)="doFilter($event.target.value)" />
+              <span class="material-icons" style="color: #c0c0c0; position: relative; top: 10px; font-size: 30px; right:10px;
+             float:right;">
+                search
+              </span>
+            </label>
+
+            <p class="Rectangle-12"></p>
+            <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+              <ng-container matColumnDef="branchName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  <span [style.float]="lang.dir === 'rtl'? 'left': 'right'">{{lang.establishment.c9.in1}}</span>
+                </th>
+                <td [ngClass]="lang.dir === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                  *matCellDef="let element">Branch Name A</td>
+              </ng-container>
+
+              <ng-container matColumnDef="crLicense">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{lang.establishment.c9.in2}}
+                </th>
+                <td [ngClass]="lang.dir === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                  *matCellDef="let element">
+                  {{ element.crLicense }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="city">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{lang.establishment.c9.in3}}
+                </th>
+                <td [ngClass]="lang.dir === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                  *matCellDef="let element">{{ element.city }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{lang.establishment.c9.in4}}</th>
+                <td [ngClass]="lang.dir === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                  *matCellDef="let element">{{ element.type }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="update">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td [ngClass]="lang.dir === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                  *matCellDef="let element">
+                  <button mat-icon-button>
+                    <mat-icon class="mat-18" [style.color]="'#d2a02a'">edit</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td [ngClass]="lang.dir === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+                  *matCellDef="let element">
+                  <button mat-icon-button color="warn">
+                    <mat-icon class="mat-18">delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <div class="row mt-2">
+              <div class="col-md-12">
+                <button mat-button [ngClass]="lang.dir === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button"
+                  style="width: auto;" href="#addModal" data-toggle="modal">{{lang.establishment.c9.btn}}
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <!-- FACILITY BRANCHES - END -->
+
+        <!-- FACILITY FINANCIAL INFORMATION - START -->
+        <mat-card class="mt-3">
+          <mat-card-content>
+            <div class="sideHeading">
+              {{ lang.establishment.c10.title }}
+              <span *ngIf="facilityFinancialValid">
+                <i class="fa fa-check-circle" aria-hidden="true"
+                  [ngClass]="lang.dir === 'rtl' ? 'sideheaderArIcon' : 'sideheaderIcon'"></i>
+              </span>
+              <p class="Rectangle-12"></p>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.establishment.c10.in1}}</div>
+                <mat-form-field appearance="outline">
+                  <mat-select [(ngModel)]="establishmentdto.Accmethod">
+                    <mat-option value="A" selected>{{lang.establishment.c14.in1}}</mat-option>
+                    <mat-option value="E">{{lang.establishment.c14.in2}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="invalid-feedback" *ngIf="accountingErr">
+                  {{lang.establishment.err.e11}}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss">{{lang.establishment.c10.in2}}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput [(ngModel)]="establishmentdto.Capamt" placeholder="Capital"
+                    (keypress)='restrictAlphabets($event)' />
+                </mat-form-field>
+              </div>
+              <div class="invalid-feedback" *ngIf="capitalErr">
+                {{lang.establishment.err.e12}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="registerLabel2Css required">{{lang.establishment.c10.in3}}</p>
+                <div class="row mr-3" style="margin-left: 5rem !important;">
+                  <mat-radio-group aria-label="Select an option" name="r2" [(ngModel)]="establishmentdto.Fdcalender">
+
+                    <mat-radio-button value="1" class="mr-2 radioCss" [style.background]="
+                      establishmentdto.Fdcalender === '2'
+                        ? '#d2a02a'
+                        : 'none'
+                    " [style.color]="
+                      establishmentdto.Fdcalender === '2'
+                        ? '#ffffff'
+                        : 'black'
+                    ">{{lang.establishment.c10.in4}}
+                    </mat-radio-button>
+                    <mat-radio-button value="2" class="mr-2 radioCss" [style.background]="
+                      establishmentdto.Fdcalender === '1'
+                        ? '#d2a02a'
+                        : 'none'
+                    " [style.color]="
+                      establishmentdto.Fdcalender === '1'
+                        ? '#ffffff'
+                        : 'black'
+                    ">{{lang.establishment.c10.in5}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+
+                </div>
+                <div class="invalid-feedback" *ngIf="calendarTypeErr">
+                  {{lang.establishment.err.e13}}
+                </div>
+              </div>
+            </div> <br>
+            <div class="row">
+              <div class="col-md-2">
+                <div class="registerLabelCss required">{{lang.establishment.c10.in6}}</div>
+                <div class="input-group mb-3" style="top: 21px;" id="day">
+                  <input type="text" class="form-control" placeholder="5" aria-label="Recipient's username"
+                    [(ngModel)]="establishmentdto.Fdday" aria-describedby="basic-addon2" style="height: 50px;"
+                    [ngClass]="lang.dir === 'rtl' ? 'inputDayField' : ''">
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2" style="height: 50px;"
+                      [ngClass]="lang.dir === 'rtl' ? 'dayField' : ''">{{lang.establishment.c15.in2}}</span>
+                  </div>
+                </div>
+                <div class="invalid-feedback" *ngIf="endDayErr">
+                  {{lang.establishment.err.e14}}
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="registerLabelCss"></div>
+                <div class="input-group mb-3" style="top: 49px;" id="month">
+                  <input type="text" class="form-control" placeholder="5" aria-label="Recipient's username"
+                    [(ngModel)]="establishmentdto.Fdmonth" aria-describedby="basic-addon2" style="height: 50px;"
+                    [ngClass]="lang.dir === 'rtl' ? 'inputDayField' : ''">
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2" style="height: 50px;"
+                      [ngClass]="lang.dir === 'rtl' ? 'dayField' : ''">{{lang.establishment.c15.in2}}</span>
+                  </div>
+                </div>
+                <div class="invalid-feedback" *ngIf="endMonthErr">
+                  {{lang.establishment.err.e15}}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.establishment.c10.in7}}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder="8/4/1438" [(ngModel)]="establishmentdto.Commdt" />
+                </mat-form-field>
+                <div class="invalid-feedback" *ngIf="commencementDateErr">
+                  {{lang.establishment.err.e16}}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.establishment.c10.in8}}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder="8/4/1438" [(ngModel)]="establishmentdto.Fdenddt" />
+                </mat-form-field>
+                <div class="invalid-feedback" *ngIf="taxableDateErr">
+                  {{lang.establishment.err.e17}}
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <!-- FACILITY FINANCIAL INFORMATION - END -->
+
+        <div class="mt-3">
+          <button mat-raised-button [ngClass]="lang.dir === 'rtl' ? 'btnArbCss' : 'btnCss'" (click)="onSubmit2()">
+            {{ lang.establishment.c3.btn }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- COMPLETE INFORMATION SCREEN 2 - START -->
+
+    <!-- PASSWORD SCREEN - START -->
+    <app-Create-Password (completed)="submit($event)" *ngIf="optionActive === 3"></app-Create-Password>
+    <!-- PASSWORD SCREEN - END -->
+  </div>
+  <!-- ACKNOWLEDGMNET SECTION - START -->
+  <app-acknowledgment *ngIf="show"></app-acknowledgment>
+  <!-- ACKNOWLEDGMNET SECTION - END -->
+</div>
+<!-- model start -->
+<!-- Add Modal HTML -->
+<div id="addModal" class="modal fade" dir="{{ lang.dir }}">
+  <div class="modal-dialog" style="margin:0 auto;top:20%;margin-bottom:30px; max-width:828px;height: auto;">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background:#13614c;color: #fff;text-align: center;">
+        <p class="modal-title" style="background:#13614c;color: #fff;text-align: center;margin:0 auto">
+          {{lang.charity.c11.title}}</p>
+      </div>
+      <form>
+        <mat-vertical-stepper fxLayout="column" [linear]="true" #stepper>
+          <mat-step [stepControl]="branchDetailsForm">
+            <ng-template matStepLabel>Branch Details</ng-template>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <div class="registerLabelCss required">{{ lang.charity.c11.in1 }}</div>
+                <mat-form-field appearance="outline">
+                  <input matInput placeholder="Branch Name" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{ lang.charity.c11.in2 }}</div>
+                <div class="form-group attBoxCss">
+                  <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                    <span class="material-icons attIconCss" style="line-height: 2;">
+                      attach_file
+                    </span>
+                    <input type="file" style="display: none;" placeholder="1234567890" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </mat-step>
+
+          <mat-step [stepControl]="activityDetailsForm">
+            <ng-template matStepLabel>Activity Details</ng-template>
+            <!-- <div class="sideHeading">
+                          {{lang.charity.c12.title}}
+                          <p class="Rectangle-12"></p>
+                      </div> -->
+            <div class="row mt-3 mb-5">
+              <div class="col-md-12">
+                <p class="registerLabel2Css required">{{lang.charity.c11.subtitle}}</p>
+                <div class="row mr-3" style="margin-left: 5rem !important;">
+                  <mat-radio-group aria-label="Select an option" name="r2" [(ngModel)]="activityType">
+                    <!-- [ngClass]="{ 'is-invalid': submitted && f1.type.errors }"  -->
+                    <mat-radio-button value="cr" class="mr-4 ml-4 radioCss radio" [style.background]="
+                              activityType == 'cr'
+                                        ? '#13614c'
+                                        : 'none'
+                                    " [style.color]="
+                                    activityType == 'cr'
+                                        ? '#ffffff'
+                                        : 'black'
+                                    ">{{lang.charity.c11.in7}}
+                    </mat-radio-button>
+                    <mat-radio-button value="ls" class="mr-4 ml-4 radioCss radio" [style.background]="
+                              activityType == 'ls'
+                                        ? '#13614c'
+                                        : 'none'
+                                    " [style.color]="
+                                    activityType == 'ls'
+                                        ? '#ffffff'
+                                        : 'black'
+                                    ">{{lang.charity.c11.in8}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                  <!-- <div *ngIf="submitted && f.accounting.errors" class="invalid-feedback mt-2">
+                              <div *ngIf="f.accounting.errors.required">{{ lang.charity.c1.in3 }} is required</div>
+                            </div> -->
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 mb-3">
+              <div class="col-md-12">
+                <div class="registerBox" style="display: flex;">
+
+                  <span class="material-icons" style="color: #c0c0c0;">
+                    error_outline
+                  </span>
+                  <p class="registerLabelnCss"> {{lang.charity.c11.in6}}
+                  </p>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="row mt-3" *ngIf="activityType == 'ls'">
+              <div class="col-md-12 mt-3">
+                <mat-accordion>
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="sideHeadingExpansionBar">
+                        {{lang.charity.c12.title}} (1)
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <!-- <p class="registerLabel2Css"> {{lang.charity.c12.subtitle}}</p> -->
+                        <p [ngClass]="lang.dir === 'rtl' ? 'ackArbCss' : ''">
+                          <mat-checkbox class="checkCss"></mat-checkbox>
+                          <b>{{lang.charity.c12.subtitle}}</b>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in1}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Enter  Issue Country ">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in2}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Issue By">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in3}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Issued City">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in4}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="1234567890 ">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{ lang.charity.c12.in5 }}</div>
+                        <mat-form-field appearance="outline">
+                          <input matInput [matDatepicker]="picker4" placeholder="4/5/2018" />
+                          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                          <mat-datepicker #picker4></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{ lang.charity.c12.in6 }}</div>
+                        <div class="form-group attBoxCss">
+                          <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                            <span class="material-icons attIconCss" style="line-height: 1.5;">
+                              attach_file
+                            </span>
+                            <input type="file" style="display: none;" placeholder="Explore" />
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in7}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Main Group of Activity">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in8}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Sub Group Of Activity">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in9}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Main Activity">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+            </div>
+            <div class="row" *ngIf="activityType == 'ls'">
+              <div class="col-md-12 mt-3">
+                <mat-accordion>
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="sideHeadingExpansionBar">
+                        {{lang.charity.c12.title}}(2)
+                      </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p class="registerLabel2Css" [ngClass]="lang.dir === 'rtl' ? 'ackArbCss' : ''">
+                          <mat-checkbox class="checkCss"></mat-checkbox>
+                          {{lang.charity.c12.subtitle}}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in1}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Enter  Issue Country ">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in2}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Issue By">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in3}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Issued City">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in4}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="License Number ">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{ lang.charity.c12.in5 }}</div>
+                        <mat-form-field appearance="outline">
+                          <input matInput [matDatepicker]="picker5" placeholder="4/5/2018" />
+                          <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                          <mat-datepicker #picker5></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{ lang.charity.c12.in6 }}</div>
+                        <div class="form-group attBoxCss">
+                          <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                            <span class="material-icons attIconCss" style="line-height: 1.5;">
+                              attach_file
+                            </span>
+                            <input type="file" style="display: none;" placeholder="Explore" />
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in7}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Main Group of Activity">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in8}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Sub Group Of Activity">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in9}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Main Activity">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+            </div>
+            <div class="row" *ngIf="activityType == 'cr'">
+              <div class="col-md-12 mt-3">
+                <mat-accordion>
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="sideHeadingExpansionBar">
+                        {{lang.charity.c12.title1}}
+                      </mat-panel-title>
+
+                    </mat-expansion-panel-header>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p class="registerLabel2Css" [ngClass]="lang.dir === 'rtl' ? 'ackArbCss' : ''">
+                          <mat-checkbox class="checkCss"></mat-checkbox>
+                          {{lang.charity.c12.subtitle}}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in1}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Enter  Issue Country ">
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in2}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Issue By">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in3}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Issued City">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in4}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="License Number ">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{ lang.charity.c12.in5 }}</div>
+                        <mat-form-field appearance="outline">
+                          <input matInput [matDatepicker]="picker9" placeholder="4/5/2018" />
+                          <mat-datepicker-toggle matSuffix [for]="picker9"></mat-datepicker-toggle>
+                          <mat-datepicker #picker9></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{ lang.charity.c12.in6 }}</div>
+                        <div class="form-group attBoxCss">
+                          <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                            <span class="material-icons attIconCss" style="line-height: 1.5;">
+                              attach_file
+                            </span>
+                            <input type="file" style="display: none;" placeholder="Explore" />
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{ lang.charity.c12.in10 }}</div>
+                        <div class="form-group attBoxCss">
+                          <label class="btn btn-default btn-sm center-block btn-file" style="float: right;">
+                            <span class="material-icons attIconCss" style="line-height: 1.5;">
+                              attach_file
+                            </span>
+                            <input type="file" style="display: none;" placeholder="Explore" />
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in7}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Main Group of Activity">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in8}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Sub Group Of Activity">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="registerLabelCss required">{{lang.charity.c12.in9}}</div>
+                        <mat-form-field appearance="outline">
+
+                          <input matInput placeholder="Main Activity">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+            </div>
+          </mat-step>
+
+          <mat-step [stepControl]="addressDetailsForm">
+            <ng-template matStepLabel>Address Details</ng-template>
+            <div class="row rowCss">
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in1}}</div>
+                <mat-form-field appearance="outline">
+                  <mat-select>
+                    <mat-option value="ZS0001" selected>Riyadh</mat-option>
+                    <mat-option value="ZS0002">Dubai</mat-option>
+                    <mat-option value="ZS0003">Saudi Arabia</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in2}}</div>
+                <mat-form-field appearance="outline">
+                  <mat-select>
+                    <mat-option value="ZS0001" selected>Riyadh</mat-option>
+                    <mat-option value="ZS0002">Dubai</mat-option>
+                    <mat-option value="ZS0003">Saudi Arabia</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in3}}</div>
+                <mat-form-field appearance="outline">
+                  <mat-select>
+                    <mat-option value="ZS0001" selected>Riyadh</mat-option>
+                    <mat-option value="ZS0002">Dubai</mat-option>
+                    <mat-option value="ZS0003">Saudi Arabia</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in4}}</div>
+                <mat-form-field appearance="outline">
+
+                  <input matInput placeholder="Enter Street Name ">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in5}}</div>
+                <mat-form-field appearance="outline">
+
+                  <input matInput placeholder="Enter  Postal Code ">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in6}}</div>
+                <mat-form-field appearance="outline">
+
+                  <input matInput placeholder="Enter Building Number">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in8}}</div>
+                <mat-form-field appearance="outline">
+
+                  <input matInput placeholder="Enter Unit Number">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in9}}</div>
+                <mat-form-field appearance="outline">
+
+                  <input matInput placeholder="Enter Unit Number">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <div class="registerLabelCss required">{{lang.charity.c13.in7}}</div>
+                <mat-form-field appearance="outline">
+
+                  <input matInput placeholder="Enter Unit Number">
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+        <div class="modal-footer" style="justify-content: flex-start !important;">
+          <div class="mt-3 mb-2">
+            <button mat-raised-button data-dismiss="modal" style="width:106px; height: 35px; border-radius: 9px;"
+              [ngClass]="lang.dir === 'rtl' ? 'btnArbCss' : 'btnCss'">
+              {{ lang.charity.c13.btn1 }}
+            </button>
+          </div>
+          <div class="mt-3 mb-2">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="{{ lang.charity.c13.btn2 }}">
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- VERIFICATION CARD SCREEN - START -->
+<app-otp-verification *ngIf="showVerification && !show" [resend]="resend" [mobile]="mobile"
+  (validateOTP)="getOTPFromUser($event)" (resend)="resendOTP()"></app-otp-verification>
+<!-- VERIFICATION CARD SCREEN - END -->
+<notifier-container></notifier-container>

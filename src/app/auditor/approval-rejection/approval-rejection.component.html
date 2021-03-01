@@ -1,0 +1,729 @@
+<div class="sucess-message-box bg-Green mb-40  position-relative mt--5" *ngIf="approveMsg" dir={{Direction}}
+    [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex  justify-content-between align-items-strat">
+                    <div class="d-flex  align-items-start">
+                        <img src="assets/images/icon-info-green.svg" class="mr-15 mt-31" alt="">
+                        <div class="text">
+                            <h3 class="mb-10">{{lang.sucessmessage.t1}}</h3>
+                            <span class="font-16 text-black">{{lang.sucessmessage.t1}}</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <a (click)="back1()"><img src="assets/images/icon-close-green.svg" class="mr-15" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="error-message-box bg-red mb-40  position-relative mt--5" *ngIf="errorMsg" dir={{Direction}}
+    [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex  justify-content-between align-items-strat">
+                    <div class="d-flex  align-items-start">
+                        <img src="assets/images/icon-info-green.svg" class="mr-15 mt-31" alt="">
+                        <div class="text">
+                            <span class="font-16 text-black">{{errorDisplayMsg}}</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <a (click)="back1()"><img src="assets/images/icon-close-green.svg" class="mr-15" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="reject-message-box bg-orange mb-40  position-relative mt--5" *ngIf="showrejectMsg" dir={{Direction}}
+    [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex  justify-content-between align-items-strat">
+                    <div class="d-flex  align-items-start">
+                        <img src="assets/images/icon-info-white.svg" class="mr-15 mt-31" alt="">
+                        <div class="text">
+                            <h3 class="mb-10 text-white">{{lang.rejectmessage.t1}}</h3>
+                            <span class="font-16 text-white">{{lang.rejectmessage.t1}}</span>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <a (click)="back1()"><img src="assets/images/icon-close-white.svg" class="mr-15" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="Step==1" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <!-- <div class="mb-24">
+        <a class="text-Gray">{{lang.nav1.t1}} </a> {{lang.nav1.t2}}
+    </div>  -->
+    <h2>{{lang.step1.title}}</h2>
+    <!-- Nav tabs -->
+    <div class="custom-nav-tabs d-flex justify-content-between align-items-center mb-32">
+        <ul class="nav nav-tabs ">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#All">{{lang.step1.t1}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#zakatcit">{{lang.step1.t2}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#vat">{{lang.step1.t3}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#exciseTax">{{lang.step1.t4}}</a>
+            </li>
+        </ul>
+        <div class="d-flex icons-viewtype">
+            <a (click)="changeView('grid')" [ngClass]="{'active': isGridView}">
+                <img src="assets/images/icon-cards-active.svg" alt="" class="cursor-pointer">
+            </a>
+            <a (click)="changeView('list')" [ngClass]="{'active': isListView}">
+                <img src="assets/images/icon-list.svg" alt="" class="cursor-pointer">
+            </a>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center width100P mb-32">
+        <div class="searchBox card position-relative">
+            <input type="text" placeholder="{{lang.filter.search}}" (input)="homeSearch($event.target.value)" [(ngModel)]="searchTerm" name="searchTerm"
+                class="placeholder-text-gray">
+            <button>
+                <img src="assets/images/icon-search.svg" alt=""
+                    class="position-absolute search-with-shadow ar-search-with-shadow">
+            </button>
+        </div>
+        <img class="ml-15 ar-mr cursor-pointer" src="assets/images/icon-filter.svg" alt="" data-toggle="modal"
+            data-target="#filter">
+    </div>
+    <div *ngIf="WorkItemsList?.length == 0 && searchTerm !== undefined">
+        <h4 style="text-align: center;">{{lang.step1.searchmsg}}</h4>
+    </div>
+    <!-- Tab panes -->
+    <div class="tab-content custom-navtab-content pt-0">
+        <div class="tab-pane  active" id="All">
+            <div class="row custom-row" *ngIf="isGridView">
+                <div class="col-sm-6" *ngFor="let item of WorkItemsList; let i = index;">
+                    <div class="card mb-24 mb-24 position-relative">
+                        <div class="text-right pt-10 mr-32">
+                            <div class="dropdown dropdown-dots dots-menu">
+                                <a type="button" class="material-icons ar-text-align-left ar-ml-34" data-toggle="dropdown" [ngClass]="{'disable': item.StatusCode !='IP015'}">
+                                    more_horiz
+                                </a>
+                                <div class="dropdown-menu"> 
+                                        <a class="dropdown-item item p-16 font-weight-500" (click)="approveFromStep1(item)">{{lang.nav1.approve}}</a>
+                                    <div class="border-bottom-whisper"></div>
+                                    <a class="dropdown-item item p-16 text-Shiraz font-weight-bold mb-1"
+                                        (click)="rejectFromStep1(item)">{{lang.nav1.reject}}</a> 
+                                </div>
+                            </div>
+                        </div>
+                        <div (click)="goToStep2(item)">
+                            <div class="d-flex width100P align-items-center justify-content-between p-24 pb-0 mb-16">
+                                <div>
+                                    <h3 class="mb-0">
+                                        {{item.AudName}}
+                                    </h3>
+                                    <p class="font-12 text-Gray mb-0">{{item.TaxpayerTin}}</p>
+                                </div>
+                                <span class="status custom"
+                                    [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                    {{item.Status}}
+                                </span>
+                            </div>
+
+                            <div class="border-bottom-whisper">
+                            </div>
+                            <div class="row  p-24 ">
+                                <div class="col-sm-6">
+                                    <p class="font-12 text-Gray  mb-0">{{lang.listView.taxtype}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="item.Taxtp=='05'">
+                                        {{lang.listView.zakatcit}}
+                                    </div>
+                                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="item.Taxtp=='03'">
+                                        {{lang.listView.vat}}
+                                    </div>
+
+                                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="item.Taxtp=='07'">
+                                        {{lang.listView.excisetax}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- list view -->
+            <div class='listView' *ngIf="isListView">
+                <div class="table mb-32 border-top-whisper card" *ngIf="WorkItemsList?.length>0">
+                    <table width="100%" class="table-bordered table-bordered-less">
+                        <thead>
+                            <tr>
+                                <th class="font-16 text-Eerie-Black font-weight-500" width="33%">
+                                    {{lang.listView.t1}}
+                                </th>
+                                <th class="font-16 text-Eerie-Black font-weight-500">
+                                    {{lang.listView.t2}}
+                                </th>
+                                <th class="font-16 text-Eerie-Black font-weight-500">
+                                    {{lang.listView.t3}}
+                                </th>
+                                <th class="font-16 text-Eerie-Black font-weight-500">
+                                    {{lang.listView.t4}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of WorkItemsList; let i = index;" (click)="goToStep2(item)">
+                                <td class="font-12 text-Eerie-Black font-weight-500">
+                                    {{item.AudName}}
+                                </td>
+                                <td class="font-12 text-Eerie-Black font-weight-500">
+                                    {{item.TaxpayerTin}}
+                                </td>
+                                <td class="font-12 text-Gray font-weight-500" *ngIf="item.Taxtp=='05'">
+                                    {{lang.listView.zakatcit}}
+                                </td>
+                                <td class="font-12 text-Gray font-weight-500" *ngIf="item.Taxtp=='03'">
+                                    {{lang.listView.vat}}
+                                </td>
+                                <td class="font-12 text-Gray font-weight-500" *ngIf="item.Taxtp=='07'">
+                                    {{lang.listView.excisetax}}
+                                </td>
+                                <td class="font-12 text-Gray font-weight-500">
+                                    <span class="status custom"
+                                        [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                        {{item.Status}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- list view end -->
+        </div>
+        <div class="tab-pane  fade" id="zakatcit">
+            <div class="row custom-row" *ngIf="isGridView">
+                <div class="col-sm-6" *ngFor="let item of ZakatList; let i = index;">
+                    <div class="card mb-24 mb-24 position-relative">
+                        <div class="text-right pt-10 mr-32">
+                            <div class="dropdown dropdown-dots dots-menu">
+                                <a type="button" class="material-icons ar-text-align-left ar-ml-34" data-toggle="dropdown">
+                                    more_horiz
+                                </a>
+                                <div class="dropdown-menu" *ngIf="item.StatusCode =='IP015'">
+                                    <a class="dropdown-item item p-16 font-weight-500" (click)="approveFromStep1(item)"
+                                        [ngClass]="{'displayStatus':item.StatusCode !='IP015'}">{{lang.nav1.approve}}</a>
+                                    <div class="border-bottom-whisper"></div>
+                                    <a class="dropdown-item item p-16 text-Shiraz font-weight-bold mb-1"
+                                        (click)="rejectFromStep1(item)"
+                                        [ngClass]="{'displayStatus':item.StatusCode !='IP015'}">{{lang.nav1.reject}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div (click)="goToStep2(item)">
+                            <div class="d-flex width100P align-items-center justify-content-between p-24 pb-0 mb-16">
+                                <div>
+                                    <h3 class="mb-0">
+                                        {{item.AudName}}
+                                    </h3>
+                                    <p class="font-12 text-Gray mb-0">{{item.TaxpayerTin}}</p>
+                                </div>
+                                <span class="status custom"
+                                    [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                    {{item.Status}}
+                                </span>
+                            </div>
+                            <div class="border-bottom-whisper">
+                            </div>
+                            <div class="row  p-24 ">
+                                <div class="col-sm-6">
+                                    <p class="font-12 text-Gray  mb-0">{{lang.listView.taxtype}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{lang.listView.zakatcit}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- list view -->
+            <div class='listView' *ngIf="isListView">
+                <div class="table mb-32 border-top-whisper card" *ngIf="WorkItemsList?.length>0">
+                    <table width="100%" class="table-bordered table-bordered-less">
+                        <thead>
+                            <tr>
+                                <th class="font-16 text-Eerie-Black font-weight-500" width="33%">
+                                    {{lang.listView.t1}} 
+                                </th>
+                                <th class="font-16 text-Eerie-Black font-weight-500">
+                                    {{lang.listView.t2}}
+                                </th>
+                                <th class="font-16 text-Eerie-Black font-weight-500">
+                                    {{lang.listView.t3}} 
+                                </th>
+                                <th class="font-16 text-Eerie-Black font-weight-500">
+                                    {{lang.listView.t4}} 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of ZakatList; let i = index;" (click)="goToStep2(item)">
+                                <td class="font-12 text-Eerie-Black font-weight-500">
+                                    {{item.AudName}}
+                                </td>
+                                <td class="font-12 text-Eerie-Black font-weight-500">
+                                    {{item.TaxpayerTin}}
+                                </td>
+                                <td class="font-12 text-Gray font-weight-500">
+                                    {{lang.listView.t5}} 
+                                </td>
+                                <td class="font-12 text-Gray font-weight-500">
+                                    <span class="status custom"
+                                        [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                        {{item.Status}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- list view -->
+        </div>
+        <div class="tab-pane  fade" id="vat">
+                <div class="row custom-row" *ngIf="isGridView">
+                    <div class="col-sm-6" *ngFor="let item of VatList; let i = index;">
+                        <div class="card mb-24 mb-24 position-relative">
+                            <div class="text-right pt-10 mr-32">
+                                <div class="dropdown dropdown-dots dots-menu">
+                                    <a type="button" class="material-icons ar-text-align-left ar-ml-34" data-toggle="dropdown">
+                                        more_horiz
+                                    </a>
+                                    <div class="dropdown-menu" *ngIf="item.StatusCode =='IP015'">
+                                        <a class="dropdown-item item p-16 font-weight-500"
+                                            (click)="approveFromStep1(item)"
+                                            [ngClass]="{'displayStatus':item.StatusCode !='IP015'}">{{lang.nav1.approve}}</a>
+                                        <div class="border-bottom-whisper"></div>
+                                        <a class="dropdown-item item p-16 text-Shiraz font-weight-bold mb-1"
+                                            (click)="rejectFromStep1(item)"
+                                            [ngClass]="{'displayStatus':item.StatusCode !='IP015'}">{{lang.nav1.reject}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div (click)="goToStep2(item)">
+                                <div
+                                    class="d-flex width100P align-items-center justify-content-between p-24 pb-0 mb-16">
+                                    <div>
+                                        <h3 class="mb-0">
+                                            {{item.AudName}}
+                                        </h3>
+                                        <p class="font-12 text-Gray mb-0">{{item.TaxpayerTin}}</p>
+                                    </div>
+                                    <span class="status custom"
+                                        [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                        {{item.Status}}
+                                    </span>
+                                </div>
+                                <div class="border-bottom-whisper">
+                                </div>
+                                <div class="row  p-24 ">
+                                    <div class="col-sm-6">
+                                        <p class="font-12 text-Gray  mb-0">{{lang.listView.taxtype}}</p>
+                                        <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="item.Taxtp=='03'">
+                                            {{lang.listView.vat}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- list view -->
+                <div class='listView' *ngIf="isListView">
+                    <div class="table mb-32 border-top-whisper card" *ngIf="WorkItemsList?.length>0">
+                        <table width="100%" class="table-bordered table-bordered-less">
+                            <thead>
+                                <tr>
+                                    <th class="font-16 text-Eerie-Black font-weight-500" width="33%">
+                                        {{lang.listView.t1}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.listView.t2}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.listView.t3}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.listView.t4}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of VatList; let i = index;" (click)="goToStep2(item)">
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.AudName}}
+                                    </td>
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.TaxpayerTin}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{lang.listView.vat}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        <span class="status custom"
+                                            [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                            {{item.Status}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- list view -->
+            </div>
+        <div class="tab-pane  fade" id="exciseTax">
+                <div class="row custom-row" *ngIf="isGridView">
+                    <div class="col-sm-6" *ngFor="let item of ETList; let i = index;">
+                        <div class="card mb-24 mb-24 position-relative">
+                            <div class="text-right pt-10 mr-32">
+                                <div class="dropdown dropdown-dots dots-menu">
+                                    <a type="button" class="material-icons ar-text-align-left ar-ml-34" data-toggle="dropdown">
+                                        more_horiz
+                                    </a>
+                                    <div class="dropdown-menu" *ngIf="item.StatusCode =='IP015'">
+                                        <a class="dropdown-item item p-16 font-weight-500"
+                                            (click)="approveFromStep1(item)"
+                                            [ngClass]="{'displayStatus':item.StatusCode !='IP015'}">{{lang.nav1.approve}}</a>
+                                        <div class="border-bottom-whisper"></div>
+                                        <a class="dropdown-item item p-16 text-Shiraz font-weight-bold mb-1"
+                                            (click)="rejectFromStep1(item)"
+                                            [ngClass]="{'displayStatus':item.StatusCode !='IP015'}">{{lang.nav1.reject}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div (click)="goToStep2(item)">
+                                <div
+                                    class="d-flex width100P align-items-center justify-content-between p-24 pb-0 mb-16">
+                                    <div>
+                                        <h3 class="mb-0">
+                                            {{item.AudName}}
+                                        </h3>
+                                        <p class="font-12 text-Gray mb-0">{{item.TaxpayerTin}}</p>
+                                    </div>
+                                    <span class="status custom"
+                                        [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                        {{item.Status}}
+                                    </span>
+                                </div>
+                                <div class="border-bottom-whisper">
+                                </div>
+                                <div class="row  p-24 ">
+                                    <div class="col-sm-6">
+                                        <p class="font-12 text-Gray  mb-0">{{lang.listView.taxtype}}</p>
+                                        <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="item.Taxtp=='07'">
+                                            {{lang.listView.excisetax}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- list view -->
+                <div class='listView' *ngIf="isListView">
+                    <div class="table mb-32 border-top-whisper card" *ngIf="WorkItemsList?.length>0">
+                        <table width="100%" class="table-bordered table-bordered-less">
+                            <thead>
+                                <tr>
+                                    <th class="font-16 text-Eerie-Black font-weight-500" width="33%">
+                                        {{lang.listView.t1}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.listView.t2}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.listView.t3}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.listView.t4}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of ETList; let i = index;" (click)="goToStep2(item)">
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.AudName}}
+                                    </td>
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.TaxpayerTin}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{lang.listView.excisetax}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        <span class="status custom"
+                                            [ngClass]="{'status-submitted': item.StatusCode=='IP018', 'status-pending': item.StatusCode=='IP015', 'status-error': item.StatusCode=='IP019'}">
+                                            {{item.Status}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- list view -->
+            </div>
+    </div>
+</div>
+<div class="container" *ngIf="Step==2" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="mb-24">
+        <a (click)="back()" class="text-Gray cursor-pointer"> {{lang.nav1.t4}} </a> {{lang.nav1.t5}}
+    </div>
+    <div class="mb-32 d-flex justify-content-between align-items-center">
+        <a (click)="back()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+            <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav2.t3}}
+        </a>
+    </div>
+    <div class="mb-32">
+        <div class="d-flex justify-content-between align-items-center" *ngIf="WorkItemDetails!=undefined">
+            <h2 class="mb-12">{{WorkItemDetails.Tptxt}}</h2>
+           <span class="status status-h40 font-16"
+                [ngClass]="{'status-submitted': StatusCode=='IP018', 'status-pending': StatusCode=='IP015', 'status-error': StatusCode=='IP019'}">
+               <span *ngIf="Language == 'E'">{{CurrentStatus}}</span> <span *ngIf="Language == 'A'">{{CurrentStatus}}</span> 
+            </span>
+        </div>
+    </div>
+    <div class="card  card-shadow-none mb-24">
+        <div class="p-24 d-flex align-items-center justify-content-between ">
+            <h3 class="d-flex align-items-center mb-0">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-establishments.svg" class=""
+                        alt=""></span>{{lang.step2.s1.t1}}
+            </h3>
+            <a data-toggle="collapse" href="#toggle1" role="button" aria-expanded="false" aria-controls="toggle1">
+                <img src="assets/images/icon-arrow-up.svg" alt="">
+            </a>
+        </div>
+        <div class="collapse show multi-collapse" id="toggle1">
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step2.s1.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="WorkItemDetails!=undefined">
+                        {{TINNumber}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step2.s1.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="WorkItemDetails!=undefined">
+                        {{TaxpName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card  card-shadow-none mb-24">
+        <div class="p-24 d-flex align-items-center justify-content-between ">
+            <h3 class="d-flex align-items-center mb-0">
+                <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-calendar.svg" class=""
+                        alt=""></span> {{lang.step2.s2.t1}}
+            </h3>
+            <a data-toggle="collapse" href="#toggle2" role="button" aria-expanded="false" aria-controls="toggle1">
+                <img src="assets/images/icon-arrow-up.svg" alt="">
+            </a>
+        </div>
+        <div class="collapse show multi-collapse" id="toggle2">
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step2.s2.t2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{formatFromDate}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step2.s2.t3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{formatToDate}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step2.s2.t4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500" *ngIf="WorkItemDetails!=undefined">
+                        {{WorkItemDetails.Tptxt}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content custom-navtab-content pt-0 mb-60">
+        <div class="tab-pane  active" id="Zakat-CIT">
+            <div class="table mb-32 border-top-whisper card">
+                <div class="p-24 d-flex align-items-center justify-content-between ">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg"
+                                class="" alt=""></span> {{lang.step2.s3.t1}}
+                    </h3>
+                    <a data-toggle="collapse" href="#toggle3" role="button" aria-expanded="false"
+                        aria-controls="toggle1">
+                        <img src="assets/images/icon-arrow-up.svg" alt="">
+                    </a>
+                </div>
+                <div class="collapse show multi-collapse" id="toggle3">
+                    <table width="100%" class="table-bordered table-bordered-less">
+                        <thead>
+                            <tr>
+                                <th colspan="3" class="font-16 text-Eerie-Black font-weight-500"
+                                    style="border-bottom: 1px solid #dee2e6!important;">{{lang.step2.s3.t2}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="font-12 text-Eerie-Black font-weight-500" width="33%">
+                                    {{lang.step2.s3.t3}}
+                                </th>
+                                <th class="font-12 text-Eerie-Black font-weight-500">
+                                    {{lang.step2.s3.t4}}
+                                </th>
+                                <th class="font-12 text-Eerie-Black font-weight-500">
+                                    {{lang.step2.s3.t5}}
+                                </th>
+                            </tr>
+                            <tr *ngFor="let workitem of listOfAuthorization">
+                                <td class="font-12 text-Eerie-Black font-weight-500">
+                                    <label class="custom-checkBox card-inactive">
+                                        <input type="checkbox" checked="workitem.ReturnCb=='x'">
+                                        <span class="checkmark checkmark-24"></span>
+                                    </label>
+                                </td>
+                                <td class="font-12 text-Eerie-Black font-weight-500">
+                                    <label class="custom-checkBox card-inactive">
+                                        <input type="checkbox" checked="workitem.ObjectiobCb=='x'">
+                                        <span class="checkmark checkmark-24"></span>
+                                    </label>
+                                </td>
+                                <td class="font-12 text-Gray font-weight-500">{{workitem.Period}}</td>
+                            </tr>
+                            <tr *ngIf="listOfAuthorization==undefined" style="align-content: center">
+                                {{lang.step2.s3.nodata}}</tr>
+                            <tr>
+                                <td colspan="3" class="font-16 text-Eerie-Black font-weight-500">{{lang.step2.s3.t6}}
+                                </td>
+                            </tr>
+                      </tbody>
+                    </table>
+                    <table width="100%" class="table-bordered table-bordered-less">
+                        <tr>
+                            <td class="font-12 text-Eerie-Black font-weight-500" width="50%">{{lang.step2.s3.t7}}</td>
+                            <td class="font-12 text-Eerie-Black font-weight-500">{{lang.step2.s3.t8}}</td>
+                        </tr>
+                        <tr *ngFor="let list of listOfActivitySet;let i=index;">
+                            <td class="font-12 text-Eerie-Black font-weight-500">
+                                <label class="custom-checkBox card-inactive">
+                                    <input type="checkbox" checked="checked">
+                                    <span class="checkmark checkmark-24"></span>
+                                </label>
+                            </td>
+                            <td class="font-12 text-Gray font-weight-500">{{list.Text}}</td>
+                        </tr>
+                        <tr *ngIf="listOfActivitySet==undefined">{{lang.step2.s3.nodata}}</tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" mb-24" *ngIf="StatusCode=='IP015'">
+        <button type="button" class="btn btn-link text-Shiraz" data-toggle="modal"
+            data-target="#reject">{{lang.step2.s3.btn1}}</button>
+        <button class="btn btn-primary ml-15" (click)="approve(WorkItemDetails)">{{lang.step2.s3.btn2}}</button>
+    </div>
+</div>
+<!--Start reject popup--->
+<div class="modal modal-filter fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="assets/images/icon-close-1.svg" alt="">
+                </button>
+            </div>
+            <div class="modal-body px-60 pt-40">
+                <h2 class="mb-24">{{lang.step2.popup.t1}}</h2>
+                <div class="form-group mb-56">
+                    <label>{{lang.step2.popup.t2}}</label>
+                    <div class="position-relative">
+                        <!-- <textarea class="form-control h-96 card resize-none" [(ngModel)]="reason" 
+                            placeholder="{{lang.step2.popup.t4}}" (keypress)="Checklength($event)" (keyup)="Checklength($event)"></textarea>   -->
+
+                            <textarea rows="10" cols="132" class="form-control h-216" [(ngModel)]="reason" maxlength="1000">
+                            </textarea>
+                          <!--   <div *ngIf="reasonError">
+                                Maximum 132 charecters
+                            </div> -->
+                            
+                        <!-- <span class="error" *ngIf="IsResonErrormsg">
+                                {{lang.step2.popup.t5}}
+                        </span>
+                             -->
+                             
+                    </div>
+                </div>
+                <div class="form-group text-right mb-16 ar-text-align-left">
+                    <button class="btn btn-primary ml-15" (click)="reject(WorkItemDetails)"
+                        >{{lang.step2.popup.btn2}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter popup models start -->
+<div class="modal modal-filter fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="assets/images/icon-close-1.svg" alt="">
+                </button>
+            </div>
+            <div class="modal-body modal-body-3">
+                <h2 class="mb-32">{{lang.filter.filter}}</h2>
+                <div class="mb-60">
+                    <div class="form-group mb-20">
+                        <label>{{lang.filter.status}}</label>
+                        <div class="custom-dropdown position-relative">
+                            <select class="form-control default-arrow-hide card" [(ngModel)]="selectedStatus">
+                                <option *ngFor="let status of StatusList" [value]="status" placeholder="Select status">
+                                    {{status}}</option>
+                            </select>
+                            <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-20 mx-auto d-block ar-text-align-left">
+                    <button type="button" class="btn btn-link ml-15" (click)="clear()">{{lang.filter.clear}}</button>
+                    <button class="btn btn-primary arbtn" [disabled]="!selectedStatus"
+                        (click)="search(selectedStatus)">{{lang.filter.search}}</button>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Filter popup models End-->

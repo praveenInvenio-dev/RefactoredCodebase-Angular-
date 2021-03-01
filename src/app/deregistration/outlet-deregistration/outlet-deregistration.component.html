@@ -1,0 +1,1706 @@
+<div class="container" [dir]="dir">
+    <ng-container *ngIf="!show">
+        <div class="row" style="text-align: start;">
+            <!-- <div class="col-md-12">
+                <span class="exciseTitle1"> <span [routerLink]="['/mains/profile']">{{lang.t1}} </span>
+
+                    <mat-icon class="backIcon1">{{lang.t6}}</mat-icon>
+                    <span class="exciseTitle1" [routerLink]="['/mains/deregister']">{{lang.t2}}</span>
+                    <mat-icon class="backIcon1">{{lang.t6}}</mat-icon>
+                    <span class="exciseTitle1"  [routerLink]="['/mains/zakat-deregister']">{{lang.t3}}</span>
+                </span>
+                <mat-icon class="backIcon1">{{lang.t6}}</mat-icon>
+                <span class="exciseTitle1" style="color: #151515;">{{lang.t8}}</span>
+            </div> -->
+            <div class="col-md-12">
+                <span class="title1" [style.float]="dir==='rtl'?'right':'left'" [routerLink]="['/mains/profile']" style="cursor: pointer;">{{lang.t1}} <mat-icon class="backIcon1">{{lang.t6}}</mat-icon> &nbsp;</span>
+                <span class="title1" [style.float]="dir==='rtl'?'right':'left'" [routerLink]="['/mains/deregister']" style="cursor: pointer;">{{lang.t2}} <mat-icon class="backIcon1">{{lang.t6}}</mat-icon>&nbsp;</span>
+                <span class="title1" [style.float]="dir==='rtl'?'right':'left'" [routerLink]="['/mains/zakat-deregister']" style="cursor: pointer;">{{lang.t3}} <mat-icon class="backIcon1">{{lang.t6}}</mat-icon>&nbsp;</span>
+                <span class="title1" style="color: #151515;margin-top: 5px;" [style.float]="dir==='rtl'?'right':'left'" [style.margin-right]="dir === 'rtl' ? '3px' : ''" [style.margin-left]="dir === 'ltr' ? '3px' : ''"> {{lang.t8}}</span>
+            </div>
+        </div>
+
+        <div class="row mt-3" style="width:100%">
+            <div class="col-md-12">
+                <div class="viewMore" (click)="Back();" style="cursor: pointer;">
+                    <span style="cursor: pointer;">
+                        <mat-icon class="backIcon">{{lang.t5}}</mat-icon>
+                        {{lang.t7}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" style="text-align: start;">
+            <div class="col-md-12">
+                <div class="exciseSecondTitle">
+                    {{ menu[optionActive - 1].t1 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2" style="text-align: start;">
+            <div class="col-md-12">
+                <div class="exciseSecondTitle1">
+                    {{ menu[optionActive - 1].t2 }}
+                </div>
+            </div>
+        </div>
+        <div class="Rectangle-12New mt-3"></div>
+        <div class="mt-3" *ngIf="optionActive === 1">
+            <div class="row">
+                <div class="col-md-12">
+                    <form (ngSubmit)="onSubmit()">
+
+
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-5 mt-2" style="display: inherit; padding-right: 0;"
+                                *ngFor="let item of outletData; let i = index">
+                                <div class="mr-3">
+                                    <mat-card [ngClass]="item.flag ? 'cardActive1' : 'cardInActive1'"
+                                        (click)="selectedOutlet(i, item, outletData)" class="mr-0">
+                                        <div [ngClass]="dir==='rtl' ? 'acctxt2Arb' : 'acctxt2'">
+                                            <div [ngClass]="item.flag ? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                                <div class="row mb-4">
+                                                    <div class="col-md-12 storeName"
+                                                        [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                        {{item?.AOutletNameTb}}
+                                                    </div>
+                                                </div>
+                                                <mat-divider [style.background-color]="item?.flag ? 'rgba(255, 255, 255, 0.1)' : 'rgba(235, 235, 235, 0.2)' "></mat-divider>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="acctxt1">
+                                                            <div class="row"
+                                                                style="margin-top: 50px; text-align: start;">
+                                                                <div class="col-md-12 address"
+                                                                    [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                                    {{lang.c2.t3}}</div>
+                                                                <div class="col-md-12 address1 mt-1"
+                                                                    [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                                    {{item?.AOutletCompAddr}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="acctxt1">
+                                                            <div class="row"
+                                                                style="margin-top: 50px; text-align: start;">
+                                                                <div class="col-md-12 address"
+                                                                    [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                                    {{lang.outNm}}</div>
+                                                                <div class="col-md-12 address1 mt-1"
+                                                                    [style.color]="!item?.flag ? '#232323' : '#ffffff'">
+                                                                    {{item?.AOutletNoTb}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback" *ngIf="outletSelectedFlag">
+                                {{lang.err.slct1outlt}}
+                            </div>
+
+                            <div class="invalid-feedback" *ngIf="outletAllSelectedFlag">
+                                {{lang.err.slctAoutlt}}
+                            </div>
+                        </div>
+
+                        <div class="mt-4 mb-5" style="text-align: start">
+                            <button mat-button type="submit" class="btnCss mt-5"
+                                (click)="onSubmit()">{{lang.btn}}</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3" *ngIf="optionActive === 2">
+            <div class="row" *ngIf="mainOutletSelected">
+                <div class="col-md-6">
+                    <div class="registerLabelCss required">
+                        <span *ngIf="dir == 'ltr'">Select another outlet as main outlet
+                        </span>
+                        <span *ngIf="dir !== 'ltr'">
+                            اختر احد الفروع كفرع رئيسي
+                        </span></div> 
+                        <mat-form-field appearance="outline">
+                        <mat-select (ngModelChange)="nxtMnOutlt = $event;" 
+                        [ngModel]="nxtMnOutlt">
+                            <mat-option [value]="outlt.AOutletNoTb" *ngFor="let outlt of getOtherOutlets()">{{outlt.AOutletNoTb}}
+                            </mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                    <div *ngIf="submitted1 && mainOutletSelected && nxtMnOutlt == undefined" class="invalid-feedback">
+                        <span *ngIf="dir == 'ltr'">Select another outlet as main outlet
+                        </span>
+                        <span *ngIf="dir !== 'ltr'">
+                            اختر احد الفروع كفرع رئيسي
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="text-align: start;">
+                <div class="col-md-6">
+                    <div class="registerLabelCss">{{lang.c1.t1}}<span style="color: red;">*</span></div>
+                   
+                </div>
+                <ng-container>
+                    <div class="col-md-12 mt-4 mb-3" style="display: inherit;">
+                        <div class="mr-3" *ngFor="let item of reaList; let i = index">
+                            <mat-card [ngClass]="item.flag ? 'cardActive' : 'cardInActive'"
+                                (click)="selectedReason(item, item.id);resetdata()">
+                                <div [ngClass]="dir==='rtl' ? 'acctxt2Arb' : 'acctxt2'">
+                                    <div [ngClass]="item.flag ? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                        {{item.name}}
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+            </div>
+            <div class="row mt-3 mb-3" *ngIf="activeOutlet === 1">
+                <div class="col-md-6">
+                    <div class="registerLabelCss">{{lang.c1.t11}}<span style="color: red;">*</span></div>
+                    <mat-form-field appearance="outline">
+                        <!-- <input matInput name="deregDate" (ngModelChange)="tinDeregDto.deregDate = $event;"
+                            [ngModel]="tinDeregDto.deregDate"> -->
+                        <input matInput [matDatepicker]="pickerd" (dateChange)="getdateErr(tinDeregDto.deregDate,1,0,0);compareDate(tinDeregDto, tinDeregDto.deregDate);"
+                            (ngModelChange)="tinDeregDto.deregDate = $event;" [ngModel]="tinDeregDto.deregDate"
+                            name="sd" placeholder="" type="text" (keypress)='restrictAlphabetss($event)' >
+                        <mat-datepicker-toggle matSuffix [for]="pickerd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerd [calendarHeaderComponent]="headerComponent">
+                        </mat-datepicker>
+                    </mat-form-field>
+                    <div class="invalid-feedback" *ngIf="deregDateErr">
+                        {{derehMsg}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="dtValidationFLag">
+                        <span *ngIf="dir === 'ltr'">Deregistration date cannot be before Valid from date</span>
+                        <span *ngIf="dir !== 'ltr'">تاريخ الإيقاف يجب ان لا يكون قبل تاريخ بدء الصلاحية</span>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <div class="row mt-3 mb-3" *ngIf="activeOutlet === 2">
+
+                <div class="col-md-6">
+                    <div class="registerLabelCss">{{lang.c1.t11}}<span style="color: red;">*</span></div>
+                    <mat-form-field appearance="outline">
+                        <!-- <input matInput name="deregDate" (ngModelChange)="tinDeregDto.deregDate = $event;"
+                            [ngModel]="tinDeregDto.deregDate"> -->
+                        <input matInput [matDatepicker]="pickerd" (dateChange)="getdateErr(tinDeregDto.deregDate,1,0,0);compareDate(tinDeregDto, tinDeregDto.deregDate);"
+                            (ngModelChange)="tinDeregDto.deregDate = $event;" [ngModel]="tinDeregDto.deregDate"
+                            name="sd" placeholder="" type="text" (keypress)='restrictAlphabetss($event)'>
+                        <mat-datepicker-toggle matSuffix [for]="pickerd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerd [calendarHeaderComponent]="headerComponent">
+                        </mat-datepicker>
+                    </mat-form-field>
+                    <div class="invalid-feedback" *ngIf="deregDateErr1">
+                        {{derehMsg}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="dtValidationFLag">
+                        <span *ngIf="dir === 'ltr'">Deregistration date cannot be before Valid from date</span>
+                        <span *ngIf="dir !== 'ltr'">تاريخ الإيقاف يجب ان لا يكون قبل تاريخ بدء الصلاحية</span>
+                    </div>
+                </div>
+
+
+                <ng-container>
+                    <div class="col-md-6">
+                        <div class="registerLabelCss">{{lang.c1.t12}}</div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="tin"
+                                (ngModelChange)="tinDeregDto.tin = $event;getUserByTin(tinDeregDto,1,0,0)"
+                                [ngModel]="tinDeregDto.tin" maxlength="10">
+                        </mat-form-field>
+
+                        <div class="invalid-feedback" *ngIf="nameErr9">
+                            {{tinMsg}}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="registerLabelCss">{{lang.c1.t20}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <mat-select (ngModelChange)="tinDeregDto.idType = $event;resetTPDetails(tinDeregDto,'idtype');" 
+                            
+                                [ngModel]="tinDeregDto.idType" name="type1">
+                                <mat-option [value]="idType.value" (click)="checkGcc(1, 0, 0)"
+                                    *ngFor="let idType of idTypes">
+                                    {{idType.name}}</mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="idTypeErr">
+                            {{idTypeMsg}}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="registerLabelCss">{{lang.c1.t13}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="idNumber" maxlength={{maxLength1}}
+                                (ngModelChange)="tinDeregDto.idNumber = $event;IDtypeValidation1(tinDeregDto,1,0,0)"
+                                [ngModel]="tinDeregDto.idNumber" (keypress)='restrictAlphabets($event)'>
+                        </mat-form-field>
+                        <div *ngIf="idErr" class="invalid-feedback">
+                            <!-- <div *ngIf="tinDeregDto.idNumber === '' || tinDeregDto.idNumber === undefined">
+                                <p>{{IDErrz.e5}}</p>
+                            </div> -->
+                            <p>{{idMsg}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="tinDeregDto.idType !== 'ZS0005'">
+                        <div class="registerLabelCss">{{lang.c1.t19}}<span style="color: red;" *ngIf="tinDeregDto.idType!=='ZS0003'">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="pickerdob"  [disabled]="(tinDeregDto.tin !== null && tinDeregDto.tin !== undefined && tinDeregDto.tin !== '') || idValue "
+                                (ngModelChange)="tinDeregDto.dob = $event;"
+                                (dateChange)="getdobErr(tinDeregDto, 1, 0,0)" [ngModel]="tinDeregDto.dob" name="sd"
+                                placeholder="" type="text" (keypress)='restrictAlphabetss($event)'>
+                            <mat-datepicker-toggle matSuffix [for]="pickerdob"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerdob [calendarHeaderComponent]="headerComponent">
+                            </mat-datepicker>
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="dobErr">
+                            {{dobMsg}}
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="col-md-6">
+                        <div class="registerLabelCss"><span *ngIf="tinDeregDto.idType !== 'ZS0005'">{{lang.c1.t25}}</span><span *ngIf="tinDeregDto.idType == 'ZS0005'">{{lang.c1.t29}}</span>
+                            <span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="name" [disabled]="!isEmpty(tinDeregDto.tin) || tinDeregDto.idType !== 'ZS0003' || idValue"
+                                (ngModelChange)="tinDeregDto.name = $event;ValidateValues(1, tinDeregDto, 1, 0, 0)"
+                                [ngModel]="tinDeregDto.name">
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="fNameErr">
+                            {{fNameMsg}}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="registerLabelCss"><span *ngIf="tinDeregDto.idType !== 'ZS0005'">{{lang.c1.t24}}</span><span *ngIf="tinDeregDto.idType == 'ZS0005'">{{lang.c1.t30}}</span>
+                            <span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="surname" [disabled]="!isEmpty(tinDeregDto.tin) || tinDeregDto.idType !== 'ZS0003' || idValue"
+                                (ngModelChange)="tinDeregDto.surname = $event;ValidateValues(1, tinDeregDto, 2, 0, 0)"
+                                [ngModel]="tinDeregDto.surname">
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="lNameErr">
+                            {{lNameMsg}}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" *ngIf="tinDeregDto.idType !== 'ZS0005'">
+                        <div class="registerLabelCss">{{lang.c1.t16}}</div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="fName" [disabled]="!isEmpty(tinDeregDto.tin) || tinDeregDto.idType !== 'ZS0003' || idValue"
+                                (ngModelChange)="tinDeregDto.fName = $event;validate(tinDeregDto,2)"
+                                [ngModel]="tinDeregDto.fName">
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="nameErr2">
+                            {{fnMsg}}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" *ngIf="tinDeregDto.idType !== 'ZS0005'">
+                        <div class="registerLabelCss">{{lang.c1.t18}}</div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="gfName" [disabled]="!isEmpty(tinDeregDto.tin) || tinDeregDto.idType !== 'ZS0003' || idValue"
+                                (ngModelChange)="tinDeregDto.gfName = $event;validate(tinDeregDto,3)"
+                                [ngModel]="tinDeregDto.gfName">
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="nameErr3">
+                            {{gfMsg}}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" *ngIf="tinDeregDto.idType !== 'ZS0005'">
+                        <div class="registerLabelCss">{{lang.c1.t17}}</div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="famName" [disabled]="!isEmpty(tinDeregDto.tin) || tinDeregDto.idType !== 'ZS0003' || idValue"
+                                (ngModelChange)="tinDeregDto.famName = $event;validate(tinDeregDto,4)"
+                                [ngModel]="tinDeregDto.famName">
+
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="nameErr4">
+                            {{faMsg}}
+                        </div>
+                    </div>
+                    
+                </ng-container>
+
+
+            </div>
+
+            <mat-accordion class="example-headers-align mt-3" *ngIf="activeOutlet === 3">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                    *ngFor="let outlet of filtertinDeregDtoData();let i= index">
+                    <mat-expansion-panel-header >
+                        <mat-panel-title style="margin-top: 10px;">
+                            <!-- {{item.AOutletNoTb}} &nbsp; &nbsp; {{item.AOutletNameTb}} {{i}} -->
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-11" style="display: inherit;">
+                                    <div class="summaryCss1">
+                                        <img class="summaryCss2" src="assets/image/details.svg">
+                                    </div>
+
+                                    <div class="summaryCss3">{{outlet.outletNum}} 
+                                        <!-- &nbsp; &nbsp;{{item.AOutletNameTb}} -->
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="summaryCss4"></div>
+                                </div>
+                            </div>
+                        </mat-panel-title>
+                        <mat-panel-description>
+
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="col-md-12"> 
+                             <ng-container  >
+                                <div class="row mt-3">
+                                    <div class="col-md-12 mt-3" style="display: inherit;">
+                                        <div class="mr-2"
+                                            *ngFor="let item of outlet.permit; let k=index">
+                                            <mat-card [ngClass]="k === activeLicense ? 'cardActive' : 'cardInActive'"
+                                                (click)="selectReason3(k)" data-toggle="collapse" data-target="#demo">
+                                                <div [ngClass]="dir==='rtl' ? 'acctxt2Arb' : 'acctxt2'">
+                                                    <div
+                                                        [ngClass]="k === activeLicense ? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                                        <span >
+                                                            {{item.pType === 'ZS0004' ? lang.c1.t26 : item.pType === 'BUP002' ? lang.c1.t28 : lang.c1.t27}}                                                      
+                                                            {{item.pNumber}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" *ngFor="let item of outlet.permit; let m=index">
+                                    <ng-container *ngIf="m === activeLicense">
+                                        <div class="col-md-6">
+                                            <div class="registerLabelCss">{{lang.c1.t21}}<span
+                                                    style="color: red;">*</span>
+                                            </div>
+                                            <mat-form-field appearance="outline">
+                                                <mat-select name="pTypev"
+                                                    (ngModelChange)="item.pType = $event;"
+                                                    [ngModel]="item.pType" disabled>
+                                                    <mat-option [value]="idType.key" *ngFor="let idType of permitTypes">
+                                                        {{idType.text}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="registerLabelCss">{{lang.c1.t22}}<span
+                                                    style="color: red;">*</span>
+                                            </div>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput name="pNumber"
+                                                    (ngModelChange)="item.pNumber = $event;"
+                                                    [ngModel]="item.pNumber" disabled
+                                                    (keypress)='restrictAlphabets($event)'>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="registerLabelCss">{{lang.c1.t23}}<span
+                                                    style="color: red;">*</span>
+                                            </div>
+                                            <mat-form-field appearance="outline">                                               
+                                                <input matInput [matDatepicker]="pickerdobss" disabled
+                                                    (ngModelChange)="item.vFrom = $event;"
+                                                    [ngModel]="item.vFrom" placeholder=""
+                                                    type="text">
+                                                <mat-datepicker-toggle matSuffix [for]="pickerdobss">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #pickerdobss
+                                                    [calendarHeaderComponent]="headerComponent">
+                                                </mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="registerLabelCss">{{lang.c1.t11}}<span
+                                                    style="color: red;">*</span>
+                                            </div>
+                                            <mat-form-field appearance="outline">
+
+                                                <input matInput [matDatepicker]="pickerdobssssss"
+                                                    name="pNumberderegDate"
+                                                    (dateChange)="getdateErr(item.deregDate,3,i,m);compareDate(tinDeregDto, item.deregDate);"
+                                                    (ngModelChange)="item.deregDate = $event;"
+                                                    [ngModel]="item.deregDate" placeholder=""
+                                                    type="text">
+                                                <mat-datepicker-toggle matSuffix [for]="pickerdobssssss">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #pickerdobssssss
+                                                    [calendarHeaderComponent]="headerComponent">
+                                                </mat-datepicker>
+                                            </mat-form-field>
+                                            <div class="invalid-feedback" *ngIf="outletNumErr[i]?.permitArr[m][0]">
+                                                {{derehMsg}}
+                                            </div>
+                                            <div class="invalid-feedback" *ngIf="dtValidationFLag">
+                                                <span *ngIf="dir === 'ltr'">Deregistration date cannot be before Valid from date</span>
+                                                <span *ngIf="dir !== 'ltr'">تاريخ الإيقاف يجب ان لا يكون قبل تاريخ بدء الصلاحية</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="registerLabelCss">{{lang.c1.t8}}<span
+                                                    style="color: red;">*</span>
+                                            </div>
+                                            <mat-form-field appearance="outline">
+                                                <mat-select
+                                                    (ngModelChange)="item.deregReason = $event;"
+                                                    [ngModel]="item.deregReason"
+                                                    name="deregReason">
+                                                    <mat-option [value]="idType.key"
+                                                        *ngFor="let idType of deregReasons">
+                                                        {{idType.text}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <div class="invalid-feedback" *ngIf="outletNumErr[i]?.permitArr[m][7]">
+                                                {{derehMsg1}}
+                                            </div>
+
+                                        </div>
+
+                                        <ng-container *ngIf="item.deregReason === '3'">
+                                            <div class="col-md-6">
+                                                <div class="registerLabelCss">{{lang.c1.t12}}
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput name="pNumbertin"
+                                                        (ngModelChange)="item.tin = $event;getUserByTin(item,3,i,m)"
+                                                        [ngModel]="item.tin"
+                                                        (keypress)='restrictAlphabets($event)'>
+                                                </mat-form-field>
+                                                <div class="invalid-feedback"
+                                                    *ngIf=" this.outletNumErr[i].permitArr[m][7]">
+                                                    {{tinMsg}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="registerLabelCss">{{lang.c1.t20}}<span
+                                                        style="color: red;">*</span>
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <mat-select
+                                                        (ngModelChange)="item.idType = $event;resetTPDetails(item,'idtype');"                                                        
+                                                        [ngModel]="item.idType" name="type1">
+                                                        <mat-option [value]="idType.value" (click)="checkGcc(3,i, m)"
+                                                            *ngFor="let idType of idTypes">
+                                                            {{idType.name}}</mat-option>
+
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <div class="invalid-feedback" *ngIf="outletNumErr[i]?.permitArr[m][1]">
+                                                    {{idTypeMsg}}
+                                                </div>
+                                              
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="registerLabelCss">{{lang.c1.t13}}<span
+                                                        style="color: red;">*</span>
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput name="pNumberidNumber" maxlength={{maxLength1}}
+                                                        (ngModelChange)="item.idNumber = $event;IDtypeValidation1(item,3,i,m)"
+                                                        [ngModel]="item.idNumber"
+                                                        (keypress)='restrictAlphabets($event)'>
+                                                </mat-form-field>
+                                                <div *ngIf="outletNumErr[i]?.permitArr[m][2]" class="invalid-feedback">
+
+                                                    <p>{{idMsg}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" *ngIf="item.idType !== 'ZS0005'">
+                                                <div class="registerLabelCss">{{lang.c1.t19}}<span
+                                                        style="color: red;" *ngIf="item.idType!=='ZS0003'">*</span>
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput [matDatepicker]="pickerdobsssss" name="pNumberdob"
+                                                        (dateChange)="getdobErr(item, 3, i,m)"
+                                                        [disabled]="item.tin !== null && item.tin !== undefined && item.tin !== ''"
+                                                        (ngModelChange)="item.dob = $event;"
+                                                        [ngModel]="item.dob" placeholder=""
+                                                        type="text">
+                                                    <mat-datepicker-toggle matSuffix [for]="pickerdobsssss">
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #pickerdobsssss
+                                                        [calendarHeaderComponent]="headerComponent">
+                                                    </mat-datepicker>
+                                                </mat-form-field>
+                                                <div class="invalid-feedback" *ngIf="outletNumErr[i]?.permitArr[m][3]">
+                                                    {{dobMsg}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="registerLabelCss"><span *ngIf="item.idType !== 'ZS0005'">{{lang.c1.t25}}</span>
+                                                    <span *ngIf="item.idType == 'ZS0005'">{{lang.c1.t29}}</span>
+                                                    <span style="color: red;">*</span>
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput name="namecw"
+                                                    [disabled]="item.tin!==null && item.tin!==undefined && item.tin!==''"
+                                                        (ngModelChange)="item.name = $event;ValidateValues(3, item, 1, i, m)"
+                                                        [ngModel]="item.name">
+                                                </mat-form-field>
+                                                <div class="invalid-feedback" *ngIf="outletNumErr[i]?.permitArr[m][4]">
+                                                    {{fNameMsg}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="registerLabelCss">
+                                                    <span *ngIf="item.idType !== 'ZS0005'">{{lang.c1.t24}}</span>
+                                                    <span *ngIf="item.idType == 'ZS0005'">{{lang.c1.t30}}</span>
+                                                    <span style="color: red;">*</span>
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput name="surncame"
+                                                    [disabled]="item.tin!==null && item.tin!==undefined && item.tin!==''"
+                                                        (ngModelChange)="item.surname = $event;ValidateValues(3, item, 2, i, m)"
+                                                        [ngModel]="item.surname">
+                                                </mat-form-field>
+                                                <div class="invalid-feedback" *ngIf="outletNumErr[i]?.permitArr[m][5]">
+                                                    {{lNameMsg}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6" *ngIf="item.idType !== 'ZS0005'">
+                                                <div class="registerLabelCss">{{lang.c1.t16}}
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput name="fNacmec"
+                                                    [disabled]="item.tin!==null && item.tin!==undefined  && item.tin!==''"
+                                                        (ngModelChange)="item.fName = $event;"
+                                                        [ngModel]="item.fName">
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-6" *ngIf="item.idType !== 'ZS0005'">
+                                                <div class="registerLabelCss">{{lang.c1.t18}}
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput name="gfNamced"
+                                                    [disabled]="item.tin!==null && item.tin!==undefined  && item.tin!==''"
+                                                        (ngModelChange)="item.gfName = $event;"
+                                                        [ngModel]="item.gfName">
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-md-6" *ngIf="item.idType !== 'ZS0005'">
+                                                <div class="registerLabelCss">{{lang.c1.t17}}
+                                                </div>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput name="famNxamex"
+                                                    [disabled]="item.tin!==null && item.tin!==undefined  && item.tin!==''"
+                                                        (ngModelChange)="item.famName = $event;"
+                                                        [ngModel]="item.famName">
+                                                </mat-form-field>
+                                            </div>
+
+                                            
+                                            
+
+                                        </ng-container>
+
+
+                                    </ng-container>
+
+
+                                </div>
+
+                            </ng-container>
+
+                          
+
+                          
+
+                        </div>
+
+
+
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+
+
+
+
+            <div class="invalid-feedback" *ngIf="nameErr13">
+                {{name13Msg}}
+            </div>
+
+            <div class="mb-5" style="text-align: start;">
+
+                <button mat-button type="submit" (click)="onSubmit1()" class="btnCss mt-5">
+                    {{ lang.btn }}
+                </button>
+            </div>
+        </div>
+        <div class="mt-3" *ngIf="optionActive === 3">
+            <div class="row" style="text-align: start;">
+                <div class="col-md-6 mt-3">
+                    <div class="attachtxt1 mb-3">
+                        {{lang.c3.t5}} <span *ngIf="licenseAtt" style="color: red;">*</span>
+                    </div>
+                    <mat-card style="height: 216px;border: 1px dashed #ebebeb;" [style.opacity]="licenseAtt ? '1':'0.4'" *ngIf="files[4].size === 0"
+                        (click)="openAttchment(4, lang.c3.t5)">
+                        <div>
+
+                            <input hidden type="file">
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                    <div class="fileUploadTxt">{{lang.c3.t7}}
+                                    </div>
+                                    <div class="fileUploadTxt1">{{lang.c3.t8}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="height: 216px;margin-top:10px;" *ngIf="files[4].size>0" (click)="openAttchment(4, lang.c3.t5)">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <img src="assets/image/delete.svg" style="width: 24px;float: right;"> -->
+                                </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                    <!-- <img src="assets/image/Word-icon.png" *ngIf="files[j].name.includes('.doc') || files[j].name.includes('.docx')" style="width: 24px;">
+                              <img src="assets/image/excel.png" *ngIf="files[j].name.includes('.xls') || files[j].name.includes('.xlsx')" style="width: 24px;">
+                              <img src="assets/image/jpg.png" *ngIf="files[j].name.includes('.jpg') || files[j].name.includes('.jpeg')" style="width: 24px;"> -->
+                                    <p class="fileName"> {{ files[4].name }} </p>
+                                    <div class="fileSize">{{files[4].size}} MB</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <div class="attachtxt1 mb-3">
+                        {{lang.c3.t3}} <span *ngIf="transferAtch" style="color: red;">*</span>
+                    </div>
+                    <mat-card style="height: 216px;border: 1px dashed #ebebeb;" [style.opacity]="transferAtch ? '1':'0.4'" *ngIf="files[2].size === 0"
+                        (click)="openAttchment(2, lang.c3.t3)">
+                        <div>
+
+                            <input hidden type="file" disabled>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                    <div class="fileUploadTxt">{{lang.c3.t7}}
+                                    </div>
+                                    <div class="fileUploadTxt1">{{lang.c3.t8}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="height: 216px;margin-top:10px;" *ngIf="files[2].size>0" (click)="openAttchment(2,lang.c3.t3)">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <img src="assets/image/delete.svg" style="width: 24px;float: right;"> -->
+                                </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                    <!-- <img src="assets/image/Word-icon.png" *ngIf="files[j].name.includes('.doc') || files[j].name.includes('.docx')" style="width: 24px;">
+                              <img src="assets/image/excel.png" *ngIf="files[j].name.includes('.xls') || files[j].name.includes('.xlsx')" style="width: 24px;">
+                              <img src="assets/image/jpg.png" *ngIf="files[j].name.includes('.jpg') || files[j].name.includes('.jpeg')" style="width: 24px;"> -->
+                                    <p class="fileName"> {{ files[2].name }} </p>
+                                    <div class="fileSize">{{files[2].size}} MB</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="col-md-6 mt-3" style="display: none;"> 
+                    <div class="attachtxt1 mb-3">
+                        {{attachArray[0]?.title}} <span style="color: red;">*</span>
+                    </div>
+                    <mat-card style="height: 216px;border: 1px dashed #ebebeb;" (click)="openAttchment(0, attachArray[0].title)"
+                        *ngIf="files[0].size === 0">
+                        <div>
+
+                            <input hidden type="file">
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                    <div class="fileUploadTxt">{{lang.c3.t7}}
+                                    </div>
+                                    <div class="fileUploadTxt1">{{lang.c3.t8}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="height: 216px;margin-top:10px;" *ngIf="files[0].size>0" (click)="openAttchment(0, attachArray[0].title)">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <img src="assets/image/delete.svg" style="width: 24px;float: right;"> -->
+                                </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                    <!-- <img src="assets/image/Word-icon.png" *ngIf="files[j].name.includes('.doc') || files[j].name.includes('.docx')" style="width: 24px;">
+                              <img src="assets/image/excel.png" *ngIf="files[j].name.includes('.xls') || files[j].name.includes('.xlsx')" style="width: 24px;">
+                              <img src="assets/image/jpg.png" *ngIf="files[j].name.includes('.jpg') || files[j].name.includes('.jpeg')" style="width: 24px;"> -->
+                                    <p class="fileName"> {{ files[0].name }} </p>
+                                    <div class="fileSize">{{files[0].size}} MB</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="attachtxt1 mb-3">
+                        {{lang.c3.t2}} <span *ngIf="crAtt" style="color: red;">*</span>
+                    </div>
+                    <mat-card style="height: 216px;border: 1px dashed #ebebeb;" (click)="openAttchment(1, lang.c3.t2)"  [style.opacity]="crAtt ? '1':'0.4'"
+                        *ngIf="files[1].size === 0">
+                        <div>
+
+                            <input hidden type="file">
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                    <div class="fileUploadTxt">{{lang.c3.t7}}
+                                    </div>
+                                    <div class="fileUploadTxt1">{{lang.c3.t8}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="height: 216px;margin-top:10px;" (click)="openAttchment(1, lang.c3.t2)" *ngIf="files[1].size>0">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <img src="assets/image/delete.svg" style="width: 24px;float: right;"> -->
+                                </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                    <!-- <img src="assets/image/Word-icon.png" *ngIf="files[j].name.includes('.doc') || files[j].name.includes('.docx')" style="width: 24px;">
+                              <img src="assets/image/excel.png" *ngIf="files[j].name.includes('.xls') || files[j].name.includes('.xlsx')" style="width: 24px;">
+                              <img src="assets/image/jpg.png" *ngIf="files[j].name.includes('.jpg') || files[j].name.includes('.jpeg')" style="width: 24px;"> -->
+                                    <p class="fileName"> {{ files[1].name }} </p>
+                                    <div class="fileSize">{{files[1].size}} MB</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+               
+
+                <div class="col-md-6 mt-3" style="display: none;">
+                    <div class="attachtxt1 mb-3">
+                      <span *ngIf="tinDeregDto.reason !== '1'">
+                        {{lang.c3.t4}}
+                      </span>
+                      <span  *ngIf="tinDeregDto.reason === '1'">
+                        {{lang.c3.t15}}
+                      </span>
+                    </div>
+                    <mat-card style="height: 216px;border: 1px dashed #ebebeb;"  [style.opacity]="contrct ? '1':'0.4'" 
+                    (click)="openAttchment(3,  lang.c3.t4)"  *ngIf="files[3].size === 0">
+                        <div>
+
+                            <input hidden type="file">
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                    <div class="fileUploadTxt">{{lang.c3.t7}}
+                                    </div>
+                                    <div class="fileUploadTxt1">{{lang.c3.t8}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="height: 216px;margin-top:10px;" *ngIf="files[3].size>0" (click)="openAttchment(3,  lang.c3.t4)">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <img src="assets/image/delete.svg" style="width: 24px;float: right;"> -->
+                                </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                    <!-- <img src="assets/image/Word-icon.png" *ngIf="files[j].name.includes('.doc') || files[j].name.includes('.docx')" style="width: 24px;">
+                              <img src="assets/image/excel.png" *ngIf="files[j].name.includes('.xls') || files[j].name.includes('.xlsx')" style="width: 24px;">
+                              <img src="assets/image/jpg.png" *ngIf="files[j].name.includes('.jpg') || files[j].name.includes('.jpeg')" style="width: 24px;"> -->
+                                    <p class="fileName"> {{ files[3].name }} </p>
+                                    <div class="fileSize">{{files[3].size}} MB</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+            
+
+
+                <div class="col-md-6 mt-3">
+                    <div class="attachtxt1 mb-3">
+                        {{lang.c3.t6}}
+                    </div>
+                    <mat-card style="height: 216px;border: 1px dashed #ebebeb;opacity: 0.4;" *ngIf="files[5].size === 0">
+                        <div>
+
+                            <input hidden type="file" disabled>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                    <div class="fileUploadTxt">{{lang.c3.t7}}
+                                    </div>
+                                    <div class="fileUploadTxt1">{{lang.c3.t8}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card style="height: 216px;margin-top:10px;" *ngIf="files[5].size>0">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="assets/image/delete.svg" style="width: 24px;float: right;">
+                                </div>
+                            </div>
+                            <div class="row text-center mt-5">
+                                <div class="col-md-12">
+                                    <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                    <!-- <img src="assets/image/Word-icon.png" *ngIf="files[j].name.includes('.doc') || files[j].name.includes('.docx')" style="width: 24px;">
+                              <img src="assets/image/excel.png" *ngIf="files[j].name.includes('.xls') || files[j].name.includes('.xlsx')" style="width: 24px;">
+                              <img src="assets/image/jpg.png" *ngIf="files[j].name.includes('.jpg') || files[j].name.includes('.jpeg')" style="width: 24px;"> -->
+                                    <p class="fileName"> {{ files[5].name }} </p>
+                                    <div class="fileSize">{{files[5].size}} MB</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="mt-5 mb-5" style="text-align: start;">
+                <button mat-button type="submit" (click)="onSubmit4()" class="btnCss mt-5">
+                    {{ lang.btn }}
+                </button>
+            </div>
+        </div>
+        <div class="mt-3" *ngIf="optionActive === 4">
+            <div style="text-align: start;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="registerLabelCss">{{lang.c4.t1}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="names"
+                                (ngModelChange)="tinDeregDto.names = $event;validate(tinDeregDto,6)"
+                                [ngModel]="tinDeregDto.names"  maxlength="40">
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="nameErr6">
+                            {{nsMsg}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="registerLabelCss">{{lang.c4.t2}}<span style="color: red;">*</span></div>
+
+                        <!-- <div id="custom" style="direction: initial"> -->
+                            <!-- <mat-select id="code" class="custom" style="width: 30%;" disabled [(ngModel)]="cncode"
+                                name="cncode">
+                                <mat-select-trigger>
+                                    +{{cncode}}
+                                </mat-select-trigger>
+                                <mat-option [value]="item.Telefto" *ngFor="let item of codes"
+                                    (click)="getMaxLength(item.maxLength)">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span> +{{item.Telefto}} &nbsp;&nbsp;&nbsp;&nbsp; </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ item.Landx50 }}
+                                        </div>
+                                    </div>
+
+                                </mat-option>
+
+                            </mat-select> -->
+                            <mat-form-field appearance="outline">
+                            <input matInput type="text"
+                                (ngModelChange)="tinDeregDto.MobileNo = $event; validate(tinDeregDto,8)"
+                                (keypress)='restrictAlphabets($event)' [ngModel]="tinDeregDto.MobileNo"
+                                maxlength="14" name="MobileNo"  placeholder=""
+                                style="width: 70%; padding-left: 12px;">
+                                </mat-form-field>
+                        <!-- </div> -->
+                        <div class="invalid-feedback" *ngIf="nameErr8" style="margin-top: 11px !important">
+                            {{mbMsg}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="registerLabelCss">{{lang.c4.t3}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput name="designation"
+                                (ngModelChange)="tinDeregDto.designation = $event;validate(tinDeregDto,7)"
+                                [ngModel]="tinDeregDto.designation"  maxlength="40">
+                        </mat-form-field>
+                        <div class="invalid-feedback" *ngIf="nameErr7">
+                            {{dsgMsg}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="registerLabelCss">{{lang.c4.t4}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <!-- <input matInput name="date" (ngModelChange)="tinDeregDto.date = $event;"
+                                [ngModel]="tinDeregDto.date"> -->
+                            <input matInput [matDatepicker]="pickervd" disabled
+                                (ngModelChange)="tinDeregDto.date = $event;" [ngModel]="tinDeregDto.date" name="sd"
+                                placeholder="" type="text" (keypress)='restrictAlphabetss($event)'>
+                            <mat-datepicker-toggle matSuffix [for]="pickervd"></mat-datepicker-toggle>
+                            <mat-datepicker #pickervd [calendarHeaderComponent]="headerComponent">
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row mt-3 ackTxtvalue">
+                    <div class="col-md-12">
+                        <mat-checkbox [(ngModel)]="tinDeregDto.flag2" name="flag1" style="position: relative;
+                        top: 3px; right: 5px;"></mat-checkbox> {{lang.c4.t5}}
+                    </div>
+                    <div class="invalid-feedback mt-3" *ngIf="nameErr11">
+                        {{name11Msg}}
+                    </div>
+                </div>
+
+
+
+                <button mat-button type="submit" (click)="onSubmit5()" class="btnCss mt-5"
+                    >
+                    {{ lang.btn }}
+                </button>
+            </div>
+
+        </div>
+        <div class="mat-3" *ngIf="optionActive === 5">
+            <div class="mt-5 mb-5" style="text-align: start;">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-card class="mt-3" style="text-align: start;">
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-11" style="display: inherit;">
+                                    <div class="summaryCss1">
+                                        <img class="summaryCss2" src="assets/image/tax-details.svg">
+                                    </div>
+
+                                    <div class="summaryCss3">{{ lang.outlt }}</div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="summaryCss4"></div>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="row" style="margin-top: 30px; ">
+                                <div class="col-md-12">
+                                    <mat-accordion class="example-headers-align mt-5" >
+                                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false"
+                                            *ngFor="let item of filtertinDeregDtoData(); let i= index">
+                                            <mat-expansion-panel-header style="height: auto !important;">
+                                                <mat-panel-title style="margin-top: 10px;">
+                                                    <div class="row mt-2 mb-2">
+                                                        <div class="col-md-11" style="display: inherit;">
+                                                            <div class="summaryCss1">
+                                                                <img class="summaryCss2"
+                                                                    src="assets/image/tax-establishments.svg">
+                                                            </div>
+
+                                                            <div class="summaryCss3">{{ item?.crName}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <div class="summaryCss4"></div>
+                                                        </div>
+                                                    </div>
+                                                </mat-panel-title>
+                                                <mat-panel-description>
+
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                        
+                                                <div class="row mt-4 mb-4">
+                                                        <div class="col-md-6">
+                                                            <div class="summaryCss5">{{lang.c2.t1}}</div>
+                                                            <div class="summaryCss6"> {{ item?.outletNum}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="summaryCss5">{{lang.c2.t3}}</div>
+                                                            <div class="summaryCss6"> {{ item?.address}}
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-4 mb-4">                                                        
+                                                        <div class="col-md-6">
+                                                            <div class="summaryCss5">{{lang.c2.t15}}</div>
+                                                            <div class="summaryCss6" *ngIf="item?.mainFlagTb === '1'"> {{ lang.mainOutlet}}
+                                                            </div>
+                                                            <div class="summaryCss6" *ngIf="item?.mainFlagTb !== '1'"> {{ lang.subOutlet}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                            </div>
+
+                        </mat-card>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">                         
+                        <mat-card class="mt-3" style="text-align: start;">
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-12">
+                                    <div class="row mt-2 mb-2">
+                                        <div class="col-md-11" style="display: inherit;">
+                                            <div class="summaryCss1">
+                                                <img class="summaryCss2" src="assets/image/tax-establishments.svg">
+                                            </div>
+
+                                            <div class="summaryCss3">{{ menu[1].t1 }}</div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="summaryCss4"></div>
+                                        </div>
+                                    </div>
+
+                                    <mat-divider></mat-divider>
+                                    <div class="row" style="margin-top: 30px; ">
+                                        <div class="col-md-12">
+
+                                            <mat-accordion class="example-headers-align mt-5">
+                                                <mat-expansion-panel (opened)="panelOpenState = true"
+                                                    (closed)="panelOpenState = false"
+                                                    *ngFor="let item of filtertinDeregDtoData(); let i= index">
+                                                    <mat-expansion-panel-header style="height: auto !important;">
+                                                        <mat-panel-title style="margin-top: 10px;">
+                                                            <div class="row mt-2 mb-2">
+                                                                <div class="col-md-11" style="display: inherit;">
+                                                                    <div class="summaryCss1">
+                                                                        <img class="summaryCss2"
+                                                                            src="assets/image/tax-establishments.svg">
+                                                                    </div>
+
+                                                                    <div class="summaryCss3">{{ item?.crName}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <div class="summaryCss4"></div>
+                                                                </div>
+                                                            </div>
+                                                        </mat-panel-title>
+                                                        <mat-panel-description>
+
+                                                        </mat-panel-description>
+                                                    </mat-expansion-panel-header>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row mt-4 mb-4">
+                                                                <div class="col-md-6">
+                                                                    <div class="summaryCss5">{{lang.c2.t1}}</div>
+                                                                    <div class="summaryCss6"> {{
+                                                                        item?.outletNum}}
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="summaryCss5">{{lang.c2.t3}}</div>
+                                                                    <div class="summaryCss6"> {{
+                                                                        item?.address}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <mat-divider></mat-divider>
+                                                            <ng-container
+                                                                *ngFor="let item of item?.permit">
+                                                                <mat-divider style="border: 1px solid;"></mat-divider>
+
+                                                                <div class="row mt-5 mb-4">
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t4}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            <ng-container
+                                                                                *ngFor="let items of permitTypes">
+                                                                                <ng-container
+                                                                                    *ngIf="item.pType === items.key">
+                                                                                    <span
+                                                                                        *ngIf="dir === 'rtl'">{{items.text1}}</span>
+                                                                                    <span
+                                                                                        *ngIf="dir !== 'rtl'">{{items.text}}</span>
+                                                                                </ng-container>
+                                                                            </ng-container>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t5}}</div>
+                                                                        <div class="summaryCss6"> {{ item.pNumber}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <mat-divider></mat-divider>
+
+                                                                <div class="row mt-5 mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t7}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            {{item.deregDateValue}}</div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6" *ngIf="tinDeregDto.reason === '3'">
+                                                                        <div class="summaryCss5">{{lang.c2.t8}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            <ng-container
+                                                                                *ngFor="let items of deregReasons">
+                                                                                <ng-container
+                                                                                    *ngIf="item.deregReason === items.key">
+                                                                                    {{items.text}}
+                                                                                </ng-container>
+                                                                            </ng-container>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6" *ngIf="tinDeregDto.reason !== '3'">
+                                                                        <div class="summaryCss5">{{lang.c2.t8}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            <ng-container
+                                                                                *ngFor="let items of reaList">
+                                                                                <ng-container
+                                                                                    *ngIf="tinDeregDto.reason === items.id">
+                                                                                    {{items.name}}
+                                                                                </ng-container>
+                                                                            </ng-container>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- <mat-divider *ngIf="item.deregReason !== '3'">
+                                                                </mat-divider>
+
+                                                                <div class="row  mt-5 mb-3"
+                                                                    *ngIf="item.deregReason !== '3'">
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t6}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            {{item.vfromDateValue}}</div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c1.t19}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            {{item.dob}}</div>
+
+                                                                    </div>
+                                                                </div> -->
+
+                                                                <mat-divider *ngIf="item.deregReason !== '1'">
+                                                                </mat-divider>
+
+
+                                                                <div class="row mt-5 mb-3"
+                                                                    *ngIf="item.deregReason !== '1'">
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t10}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            <ng-container *ngFor="let items of idTypes">
+                                                                                <ng-container
+                                                                                    *ngIf="item.idType === items.value">
+                                                                                    {{items.name}}
+                                                                                </ng-container>
+                                                                            </ng-container>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t11}}</div>
+                                                                        <div class="summaryCss6"> {{item.idNumber}}
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <mat-divider *ngIf="item.deregReason !== '1'">
+                                                                </mat-divider>
+
+
+                                                                <div class="row mt-5 mb-3"
+                                                                    *ngIf="item.deregReason !== '1'">
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t12}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            {{item.tin}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t6}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            {{item.vfromDateValue}}</div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <mat-divider *ngIf="item.deregReason !== '1'">
+                                                                </mat-divider>
+
+
+                                                                <div class="row mt-5 mb-3"
+                                                                    *ngIf="item.deregReason !== '1'">
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t13}}</div>
+                                                                        <div class="summaryCss6">
+                                                                            {{item.name}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="summaryCss5">{{lang.c2.t14}}</div>
+                                                                        <div class="summaryCss6"> {{item.surname}}</div>
+
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </mat-expansion-panel>
+                                            </mat-accordion>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-card class="mt-3" style="text-align: start;">
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-11" style="display: inherit;">
+                                    <div class="summaryCss1">
+                                        <img class="summaryCss2" src="assets/image/main-attach.svg">
+                                    </div>
+
+                                    <div class="summaryCss3">{{ menu[2].t1 }}</div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="summaryCss4"></div>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="row mt-4 mb-4"  >
+                                <div class="col-md-6 mt-3"  *ngIf="licenseAtt" >
+                                    <div class="summaryCss5">{{lang.c3.t5}}</div>
+                                    <div class="summaryCss6" *ngFor="let item of filez[4]?.at; let i=index">
+                                        <div>
+                                            {{item.name}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="col-md-6 mt-3" *ngIf="transferAtch">
+                                    <div class="summaryCss5">{{lang.c3.t3}}</div>
+                                    <div class="summaryCss6" *ngFor="let item of filez[2]?.at; let i=index">
+                                        <div>
+                                            {{item.name}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            <!-- </div>
+                            <mat-divider  ></mat-divider>
+                            <div class="row mt-4 mb-4"> -->
+
+                                <div class="col-md-6 mt-3" *ngIf="crAtt">
+                                    <div class="summaryCss5">{{lang.c3.t2}}</div>
+                                    <div class="summaryCss6" *ngFor="let item of filez[1]?.at; let i=index">
+                                        <div>
+                                            {{item.name}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6 mt-3"  *ngIf="files[5].size>0">
+                                    <div class="summaryCss5">{{lang.c3.t6}}</div>
+                                    <div class="summaryCss6" *ngFor="let item of filez[5]?.at; let i=index">
+                                        <div>
+                                            {{item.name}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                             
+
+
+                        </mat-card>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-card class="mt-3" style="text-align: start;">
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-11" style="display: inherit;">
+                                    <div class="summaryCss1">
+                                        <img class="summaryCss2" src="assets/image/tax-declaration.svg">
+                                    </div>
+
+                                    <div class="summaryCss3">{{ menu[3].t1 }}</div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="summaryCss4"></div>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+
+                            <div class="row mt-4 mb-4">
+                                <div class="col-md-6 mt-3">
+                                    <div class="summaryCss5">{{lang.c4.t1}}</div>
+                                    <div class="summaryCss6">{{tinDeregDto.names}}</div>
+
+                                </div>
+                                <div class="col-md-6 mt-3">
+                                    <div class="summaryCss5">{{lang.c4.t2}}</div>
+                                    <div class="summaryCss6">+966{{tinDeregDto.MobileNo.substr(5)}}</div>
+                                </div>
+                            </div>
+
+                            <mat-divider></mat-divider>
+
+                            <div class="row mt-4 mb-4 mt-3">
+                                <div class="col-md-6 mt-3">
+                                    <div class="summaryCss5">{{lang.c4.t3}}</div>
+                                    <div class="summaryCss6">{{tinDeregDto.designation}}</div>
+
+                                </div>
+                                <div class="col-md-6 mt-3">
+                                    <div class="summaryCss5">{{lang.c4.t4}}</div>
+                                    <div class="summaryCss6">{{tinDeregDto.date | date}}</div>
+                                </div>
+                            </div>
+
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="mt-5 mb-5" style="text-align: start;">
+                    <button mat-button type="submit" (click)="submitFinal()" class="btnCss mt-5">
+                        {{ lang.btn1 }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
+    </ng-container>
+
+    <div *ngIf="show">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="mt-5" style="height:159px">
+                    <img src="assets/image/success.svg" width="112px">
+                </div>
+                <div class="exciseAccCss1">
+                    {{lang.ack.t9}}
+                </div>
+                <div class="exciseAccCss2 mt-2">
+                    {{lang.ack.t10}}
+                </div>
+
+                <div class="exciseAccCssBox mt-4">
+                    <div class="exciseAccCssBox1">
+                        <span [style.margin-right]="dir === 'rtl' ? '20px' : ''"> {{lang.ack.t3}}</span>
+                        <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'"> {{name}}
+                        </span>
+                    </div>
+                </div>
+                <div class="exciseAccCssBox mt-3">
+                    <div class="exciseAccCssBox1">
+                        <span [style.margin-right]="dir === 'rtl' ? '20px' : ''"> {{lang.ack.t4}}</span>
+                        <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'"> {{no}}
+                        </span>
+                    </div>
+                </div>
+                <div class="exciseAccCssBox mt-3">
+                    <div class="exciseAccCssBox1">
+                        <span [style.margin-right]="dir === 'rtl' ? '20px' : ''"> {{lang.ack.t5}}</span>
+                        <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'">{{ackDate |
+                            date}}</span>
+                    </div>
+                </div>
+                <!-- <button mat-button type="button" class="btnCss2 mt-4">{{lang.c8.btn}}</button> -->
+                <!-- <div>
+                    <button mat-button type="button" [routerLink]="['/mains/dashboard']"
+                        class="btnCss3 mt-4 mb-5">   {{lang.ack.t6}}</button>
+                </div> -->
+                <div>
+                    <button mat-button type="button" class="btnCss3 mt-4 mb-5"
+                        (click)="ackDownload()">{{lang.ack.t7}}</button>
+                </div>
+                <div>
+                    <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                        (click)="goto()">{{lang.ack.t8}}</button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal" id="attch" data-keyboard="false" data-backdrop="static" [dir]="dir">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-header" style="border-bottom: none !important;">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 100%;"
+                        [style.text-align]="dir === 'rtl' ? 'end' : 'end'"><img src="assets/image/close.svg" /></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="text-align: start;" >
+                        <div class="col-md-12">
+                            <div class="tnc">
+                                {{attchTile}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Rectangle-12New mt-3"></div>
+                    <div class="row mt-4" style="text-align: start; ">
+                        <div class="col-md-12">
+                            <div class="exciseSecondTitle1">
+                                {{lang.txt1}}
+                            </div>
+                            <div class="exciseSecondTitle1">
+                                {{lang.txt2}}
+                            </div>
+                            <div class="exciseSecondTitle1">
+                                {{lang.txt3}}
+                            </div>
+                            <div class="exciseSecondTitle1">
+                                {{lang.txt4}}
+                            </div>
+                            <!-- <div>
+                                {{lang.txt5}}
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="row mt-3 mb-2" style="min-height: 500px;max-height: 500px;overflow:auto;">
+                        <div class="col-md-6 mt-3 mb-3" *ngFor="let item of filez[attchId]?.at; let i=index">
+                            <mat-card style="height: 216px; ">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <img src="assets/image/delete.svg" style="width: 24px;float: right;"
+                                                (click)="deleteAttachments(attchId,i)">
+                                        </div>
+                                    </div>
+                                    <div class="row text-center mt-5">
+                                        <div class="col-md-12">
+                                            <img src="assets/image/GAZT 2020.png" style="width: 24px;">
+                                            
+                                            <p class="fileName"> {{ item.name}} </p>
+                                            <div class="fileSize" >{{item.size}} MB</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+                        <div class="col-md-6 mt-3 mb-3" *ngIf="filez[attchId]?.at.length < 5">
+                            <mat-card style="height: 216px;border: 1px dashed #ebebeb;">
+                                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop
+                                    (onFileDropped)="uploadFile($event, attchId);getFileDetails($event)">
+
+                                    <input hidden type="file" #fileInput
+                                        (change)="uploadFile($event.target.files, attchId);getFileDetails($event)">
+                                    <div class="row text-center mt-5">
+                                        <div class="col-md-12">
+                                            <img src="assets/image/attach.svg" style="width: 24px;">
+                                            <div class="fileUploadTxt">{{lang.c3.t7}}
+                                            </div>
+                                            <div class="fileUploadTxt1">{{lang.c3.t8}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row ml-2 mt-3" >
+                        <button mat-button data-dismiss="modal" class="btnCss">
+                            {{lang.btn}}
+                        </button>
+                    </div> -->
+                    <div class="modal-footer" style="border-top: none">
+                        <div class="row">
+                            <button mat-button data-dismiss="modal" class="btnCss">
+                                {{lang.btn}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer">
+                   
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="attch1" data-keyboard="false" data-backdrop="static" [dir]="dir">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-header" style="border-bottom: none !important;">
+                    <button type="button" class="close" data-dismiss="modal" style="width: 100%;" *ngIf="res2 !== 3"
+                        [style.text-align]="dir === 'rtl' ? 'end' : 'end'"><img src="assets/image/close.svg" /></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tnc" style="text-align: start;">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 mb-2 text-center">
+                        <div class="col-md-12 mt-3 mb-3">
+                            <div class="ackScreenTitle2">
+                                {{res1}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button data-dismiss="modal" *ngIf="res2 === 1 || res2 === 2" class="btnCss"
+                                (click)="reloadApi()">
+                                {{lang.ack.t11}} 
+                            </button>
+                            <button data-dismiss="modal" class="btnCss" *ngIf="res2 === 1 || res2 === 2"
+                                [routerLink]="['/mains/dashboard']">
+                                {{lang.attach.t3}}
+                            </button>
+                            <button data-dismiss="modal" class="btnCss" *ngIf="res2 === 3"
+                                [routerLink]="['/mains/dashboard']">
+                                {{lang.ack.t6}}
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!-- <div class="modal-footer">
+                    <div class="row">
+                        <button mat-button data-dismiss="modal" class="btnCss3">
+                            close
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="aftslct1" data-keyboard="false" data-backdrop="static" [dir]="dir" style="margin-top: 15%;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div class="ackScreenTitle2">
+                            <span *ngIf="dir == 'ltr'" style="font-size: 16px;">
+                               Outlet No-{{outnm}} will Deregister. Please choose any other valid outlet as the Main Outlet
+                            </span>
+                            <span *ngIf="dir != 'ltr'" style="font-size: 16px;">
+                                <!-- رقم الفرع-{{outnm}} سوف يتم ايقافه.يرجى اختيار أي فرع آخر كفرع الرئيسي -->
+                                رقم الفرع-{{outnm}} سوف يتم إغلاق ، يرجى اختيار أي فرع آخر كفرع رئيسي 
+                             </span>
+                        </div>
+                        <!-- <div class="ackScreenTitle2">{{ resText1 }}</div> -->
+                        <div class="mt-3 mb-2" [style.float]="dir=='ltr' ? 'right' : 'left'">
+                           
+                            <button mat-button style="
+                    width: auto;
+                    border: none;
+                    color: #d2a02a;
+                    font-size: 16px;
+                  " data-dismiss="modal" class="btnTCss">
+                 <span *ngIf="dir == 'ltr'">Close</span>
+                 <span *ngIf="dir !== 'ltr'">اغلاق</span>
+              </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<notifier-container></notifier-container>

@@ -1,0 +1,53 @@
+<div class="container" [dir]="dir">
+    <!-- bread crumb menu -->
+    <div class="row">
+        <div class="col-md-12">
+            <span class="menu-title" [style.float]="dir === 'rtl' ? 'right' : 'left'">{{labels.breadcrumb.Refunds}}
+                >&nbsp;</span>
+            <span class="menu-title"
+                [style.float]="dir === 'rtl' ? 'right' : 'left'">{{labels.breadcrumb.ExciseTaxRefundDetails}}
+                >&nbsp;</span>
+            <span class="menu-title" style="color: #151515;" [style.float]="dir === 'rtl' ? 'right' : 'left'"
+                [style.padding-right]="dir === 'rtl' ? '4px' : ''">
+                {{labels.breadcrumb.NewExciseTaxRefund}} </span>
+        </div>
+    </div>
+    <div class="row mt-3" style="width:100%">
+        <div class="col-md-12">
+            <div class="menu-back">
+                <span style="cursor: pointer;" (click)="back()"> <img src="assets/image/arrow-left.svg"
+                        style="width: 24px;"> {{labels.breadcrumb.Back}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- title and sub title -->
+    <div class="row mt-4" style="text-align: start;">
+        <div class="col-md-12">
+            <div class="title">
+                {{labels.newRefund.RefundType}}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2" style="text-align: start;">
+        <div class="col-md-12">
+            <div class="sub-title">
+                {{labels.newRefund.CompleteTheBelowDetails}}
+            </div>
+        </div>
+    </div>
+    <!-- divider -->
+    <div class="Rectangle-12New mt-3"></div>
+    <!-- menu options -->
+    <div class="second-title mt-4" style="text-align: start;">Select a Refund Type</div>
+    <div class="row mt-3">
+        <div class="col-md-3 col-12 mt-2" *ngFor="let refundType of labels.newRefund.RefundTypes; let i=index">
+            <mat-card [ngClass]="RefundType === i? 'cardActive' : 'cardInActive'" (click)="getRefundType(i)">
+                <div class="action-txt">
+                    <div [ngClass]="RefundType === i? 'card-txt' : 'active-card-txt'">
+                        {{refundType.name}}
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

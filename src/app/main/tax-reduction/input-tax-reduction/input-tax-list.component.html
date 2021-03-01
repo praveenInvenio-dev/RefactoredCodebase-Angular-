@@ -1,0 +1,203 @@
+<div class="container" [dir]="translation.direction" style="max-width: 903px">
+  <div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb iptax-breadcrumb">
+        <li
+          class="breadcrumb-item"
+          *ngFor="let item of pageTranslation.breadcrumb; let i = index"
+          [ngClass]="item.active ? 'active' : ''"
+          (click)="bredCrumbClick(i)"
+        >
+          <a (click)="bredCrumbClick(i)">{{ item.text }}</a>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row mt-3" style="width: 100%">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="viewMore col-md-6">
+          <div style="cursor: pointer" (click)="vatServicesClicked()">
+            <span class="addServiceSpan2">
+              <img
+                [src]="
+                  translation.direction === 'ltr'
+                    ? 'assets/image/arrow-left-green.svg'
+                    : 'assets/image/arrow-right-green.svg'
+                "
+              />
+            </span>
+            <span class="addServiceSspan2" (click)="vatServicesClicked()">
+              {{ translation.back }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-10">
+      <div
+        class="exciseSecondTitle"
+        [ngClass]="{ 'ar-align': translation.direction === 'rtl' }"
+      >
+        {{ pageTranslation.step1.heading }}
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-2">
+      <ul class="nav justify-content-end iptax-view-change-container">
+        <li class="nav-item" [ngClass]="isCardLayout ? 'active' : ''">
+          <a
+            class="nav-link"
+            [ngClass]="isCardLayout ? 'navitemTxtActive' : 'navitemTxt'"
+          >
+            <img
+              [src]="
+                isCardLayout
+                  ? 'assets/image/cards-green.svg'
+                  : 'assets/image/cards-gray.svg'
+              "
+              style="cursor: pointer"
+              (click)="onLayoutViewClick(true)"
+            />
+          </a>
+          <p [ngClass]="isCardLayout ? 'navTxtActive' : 'navTxtInActive'"></p>
+        </li>
+        <li class="nav-item" [ngClass]="!isCardLayout ? 'active' : ''">
+          <a
+            class="nav-link"
+            [ngClass]="!isCardLayout ? 'navitemTxtActive' : 'navitemTxt'"
+          >
+            <img
+              [src]="
+                isCardLayout
+                  ? 'assets/image/table-gray.svg'
+                  : 'assets/image/table.svg'
+              "
+              style="cursor: pointer"
+              (click)="onLayoutViewClick(false)"
+            />
+          </a>
+          <p [ngClass]="!isCardLayout ? 'navTxtActive' : 'navTxtInActive'"></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-1 iptax-divider"></div>
+  <div class="row mt-3">
+    <div
+      class="col-md-11"
+      style="padding-inline-end: 0px; width: -webkit-fill-available"
+    >
+      <div
+        [ngClass]="
+          translation.direction === 'ltr'
+            ? 'filter-search'
+            : 'filter-search-rtl'
+        "
+      >
+        <input
+          type="text"
+          [placeholder]="translation.search"
+          [formControl]="searchBox"
+          (keyup)="onSearch()"
+        />
+        <img src="assets/images/inbox/search.svg" alt="" (click)="onSearch()" />
+      </div>
+    </div>
+    <div
+      (click)="showFilter()"
+      class="col-md-1 mt-3"
+      style="
+        margin-inline-start: 0px;
+        padding-inline-start: 15px;
+        cursor: pointer;
+      "
+    >
+      <img
+        src="assets/images/filter.svg"
+        alt="filter"
+        [ngClass]="translation.direction == 'ltr' ? 'float-right' : ''"
+      />
+    </div>
+  </div>
+  <div
+    class="modal alignStart"
+    id="filterModal"
+    data-keyboard="false"
+    data-backdrop="static"
+    [dir]="translation.direction"
+  >
+    <div class="modal-dialog center">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="py-3 col-md-12">
+            <div class="col-md-12 alignEnd">
+              <img
+                src="assets/image/close.svg"
+                class="modalCloseIcon"
+                (click)="closeFilter()"
+              />
+            </div>
+
+            <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+              {{ translation['filter']['title'] }}
+            </div>
+            <div class="caption textGray mt-3">
+              {{ translation['filter']['status'] }}
+            </div>
+            <mat-select
+              class="commonMatSelect mat-1"
+              [(ngModel)]="filterStatusValue"
+              name="filterStatusValue"
+            >
+              <mat-option
+                *ngFor="let filter of filterTypes"
+                [value]="filter['Estat']"
+                >{{ filter['Txt30'] }}</mat-option
+              >
+            </mat-select>
+            <div class="caption textGray mt-3">
+              {{ translation['filter']['date'] }}
+            </div>
+            <div class="commomDatePicker mt-1">
+              <input
+                readonly
+                (click)="filterDate.open()"
+                matInput
+                [matDatepicker]="filterDate"
+                placeholder=" {{ translation['chooseADate'] }} "
+                [formControl]="filteredDate"
+              />
+              <mat-datepicker-toggle matSuffix [for]="filterDate">
+                <mat-icon matDatepickerToggleIcon>
+                  <span style="display: flex">
+                    <img src="assets/image/calendar.svg" alt="calendar"
+                  /></span>
+                </mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker
+                #filterDate
+                [calendarHeaderComponent]="headerComponent"
+              >
+              </mat-datepicker>
+            </div>
+
+            <div class="col-md-12 p-0 mt-4 mb-2 alignEnd">
+              <button
+                class="btnPrimary btnprimary-width"
+                mat-raised-button
+                (click)="applyFilter()"
+              >
+                {{ translation['filter']['apply'] }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-tax-card-view *ngIf="isCardLayout"> </app-tax-card-view>
+  <app-tax-tabular-view *ngIf="!isCardLayout"></app-tax-tabular-view>
+</div>
+<notifier-container></notifier-container>

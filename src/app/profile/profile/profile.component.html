@@ -1,0 +1,406 @@
+<div class="container" [dir]="dir">
+    <div class="row mt-4" style="text-align: start">
+        <div class="col-md-12">
+            <div class="profileTitle" *ngIf="profileObject?.TypeChk == 'X'">{{profileObject?.NameFirst}}
+                {{profileObject?.NameLast}}</div>
+            <div class="profileTitle" *ngIf="profileObject?.TypeChk == ''">{{profileObject?.NameOrg1}}</div>
+        </div>
+    </div>
+    <div class="row mt-3 mb-2" style="width: 100%">
+        <div class="col-md-6 residentType">
+            <span>{{profileObject?.TpType}}</span>
+        </div>
+        <div class="col-md-6 lastLoginTime" style="text-align: end;" *ngIf="lastAccessedDate">
+            <span>{{lang.labels.lastAccessed + " "}}{{lastAccessedDate | date : 'dd'}}, {{ lastAccessedDate | date :
+                'MMMM' }}, {{ lastAccessedDate | date : 'yyy' }}{{" " +lang.labels.at+ " "}} {{lastLoginTime}}
+            </span><img src="assets/image/clock-profile.svg" style="width: 24px; "
+                [style.margin]="dir == 'rtl' ? '0 8px 0 0' : '0 0 0 8px'" />
+        </div>
+    </div>
+    <div class="Rectangle-12New mt-4 md-4"></div>
+
+    <div class="row mt-4 md-4">
+        <div class="col-md-8">
+            <!-- TIN DETAILS -->
+            <mat-card>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="text-align: start">
+                            <span class="tinTitleText"> {{lang.labels.tin}} </span> <br />
+                            <span class="tinValueText"> {{profileObject?.Partner}} </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 " style="align-self: center;">
+                        <div style="text-align: center;" class="filtercpp" [style.float]="dir == 'rtl' ? 'left' : ''">
+                            <!-- <img src="assets/image/selected-profile.svg" /> -->
+                            <span class="cardTxt5Cssp"> {{profileObject?.Stattxt}}</span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+
+            <!-- MAIN OUTLET -->
+            <div class="row mt-4 md-4">
+                <div class="col-md-6" *ngIf="profileObject?.Actnm != ''">
+                    <mat-card>
+                        <div style="text-align: start">
+                            <span class="tinTitleText"> {{lang.labels.mainOutlet}} </span> <br />
+                            <span class="tinValueText"> {{profileObject?.Actnm}} </span>
+                        </div>
+                    </mat-card>
+                </div>
+
+                <!-- REGISTRATION TYPE -->
+                <div class="col-md-6" *ngIf="profileObject?.Crno !== ''">
+                    <mat-card>
+                        <div style="text-align: start">
+                            <span class="tinTitleText" *ngIf="profileObject?.Idtype == 'ZS0004'">
+                                {{lang.labels.license}} </span>
+                            <span class="tinTitleText" *ngIf="profileObject?.Idtype == 'BUP002'">
+                                {{lang.labels.commReg}} </span> <br />
+                            <span class="tinValueText"> {{profileObject?.Crno}} </span>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+
+            <!-- Contact Information - Label -->
+            <div class="row mt-4 mb-4" style="text-align: start">
+                <div class="col-md-12">
+                    <div class="Contact-Information" style="width:auto !important;">{{lang.labels.contactInfo}}</div>
+                </div>
+            </div>
+
+            <div class="row mt-4 md-4">
+                <!-- MOBILE NUMBER -->
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6">
+                    <mat-card>
+                        <div class="row align-items-center p-1">
+                            <div class="col-2" style="text-align: start; width: 24px; height: 24px">
+                                <img style="margin-top:-5px !important" src="assets/image/phone-profile.svg" />
+                            </div>
+                            <div class="col-8 mobileNumber" dir="ltr" [style.text-align]="dir=='rtl'? 'end': 'start'">
+                                +{{profileObject?.Mobile | slice:2}}</div>
+                            <!-- <div class="col-md-8 mobileNumber" *ngIf="dir=='rtl'" > {{profileObject?.Mobile | slice:2}}+</div> -->
+                            <div class="col-2 text-center">
+
+                                <!-- <img [src]="img" /> -->
+
+                                <button style="width: 30px;height:30px;line-height: 30px;" mat-icon-button
+                                    [matMenuTriggerFor]="mobileOptions">
+                                    <img style="width: 20px;height:20px;" src="assets/image/dots (2).svg" />
+                                </button>
+                                <mat-menu #mobileOptions="matMenu" xPosition="before">
+                                    <button mat-menu-item [routerLink]="['/mains/updateMobile']">
+                                        <span style="font-family:SSTArabic-Bold !important">{{lang?.labels?.changePhone
+                                            }}</span>
+                                    </button>
+                                </mat-menu>
+
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xlg-6">
+                    <mat-card matTooltip="{{profileObject?.Email}}">
+                        <div class="row align-items-center p-1">
+                            <div class="col-2" style="text-align: start; width: 24px; height: 24px">
+                                <img style="margin-top:-5px !important" src="assets/image/message.svg" />
+                            </div>
+                            <div class="col-8 mobileNumber" dir="ltr"
+                                style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                {{profileObject?.Email}}</div>
+                            <div class="col-2 text-center">
+                                <!-- <img [src]="img" /> -->
+
+                                <button style="width: 30px;height:30px;line-height: 30px;" mat-icon-button
+                                    [matMenuTriggerFor]="emailOptions">
+                                    <img style="width: 20px;height:20px;" src="assets/image/dots (2).svg" />
+                                </button>
+                                <mat-menu #emailOptions="matMenu" xPosition="before">
+                                    <button mat-menu-item [routerLink]="['/mains/updateEmail']">
+                                        <span style="font-family:SSTArabic-Bold !important">{{lang?.labels?.changeEmail
+                                            }}</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+
+        <!-- Taxpayer Account - Section -->
+        <div class="col-md-4">
+            <mat-card style="padding-left: 0; padding-right: 0; padding-bottom: 0;">
+
+                <div class="card-body" style="border-bottom:1px solid #dfdfdf">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="Contact-Information">{{lang.labels.tpAcc}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="border-bottom:1px solid #dfdfdf" (click)="navigate()">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="assets/image/registration.svg" style="width: 24px;" alt="Logo">
+                        </div>
+                        <div class="col-md-8" style="text-align: start;">
+                            <span class="quickActionsMenu">{{lang.labels.regDetails}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <img [src]="img" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body" style="border-bottom:1px solid #dfdfdf" [routerLink]="['/mains/changePwd']">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="assets/image/password-profile.svg" style="width: 24px;" alt="Logo">
+                        </div>
+                        <div class="col-md-8" style="text-align: start;">
+                            <span class="quickActionsMenu">{{lang.labels.chgPwd}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <img [src]="img" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body" style="border-bottom:1px solid #dfdfdf" *ngIf="showTile('00','39')"
+                    [routerLink]="['/mains/usermanagement']">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="assets/image/user.svg" style="width: 24px;" alt="Logo">
+                        </div>
+                        <div class="col-md-8" style="text-align: start;">
+                            <span class="quickActionsMenu">{{lang.labels.userMngmt}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <img [src]="img" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body" [routerLink]="['/mains/deregister']"
+                    *ngIf="showTile('02','41') || showTile('03','45') || showTile('00','05')">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="assets/image/deregistration.svg" style="width: 24px;" alt="Logo">
+                        </div>
+                        <div class="col-md-8" style="text-align: start;">
+                            <span class="quickActionsMenu">{{lang.labels.deReg}}</span>
+                        </div>
+                        <div class="col-md-2">
+                            <img [src]="img" />
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- POINT OF CONTACT - LABEL -->
+    <div class="row mt-5 md-4" style="text-align: start">
+        <div class="col-md-12">
+            <div class="Contact-Information">{{lang.labels.poc}}</div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-3 mt-2">
+            <mat-card [style.cursor]="profileObject?.TPOC_DataSet['results'].length < 2 ? 'pointer' : ''"
+                class="accCardbck" data-toggle="modal" (click)="openPOCPopup()" style="width: 207px; height: 140px">
+                <div class="acctxt1">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: start;">
+                            <img src="assets/image/add.svg" style="width: 40px;
+                      margin-right: 10px;
+                      margin-top: 5px; text-align: start;" />
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: start;" [style.margin-right]="dir == 'rtl' ? '15px' : ''">
+                        <div class="addPOC" [style.width]="dir=='rtl'? '128px':'107px'">{{lang.labels.addPoc}}</div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="col-md-3 mt-2" *ngFor="let item of profileObject?.TPOC_DataSet.results; let i = index">
+            <mat-card class="accCardbck" data-toggle="modal" style="width: 207px; height: 140px">
+                <div class="dropdown" id="delete">
+                    <button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        style="color: #999999; border: none; padding: 0px;"
+                        [style.float]="dir == 'rtl' ? 'left' : 'right'">
+                        <img src="assets/image/dots-profile.svg">
+                    </button>
+                    <div class="dropdown-menu editDelete" aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-item edittext" (click)="editPOCPopup(item)"
+                            style="text-align: start; cursor: pointer;">{{lang.labels.edit}}</li>
+                        <div class="dropdown-divider"></div>
+                        <li class="dropdown-item deleteText" (click)="deletePOC(i)"
+                            style="cursor: pointer;width: 158px;height: 32px;">{{lang.labels.delete}}</li>
+                    </div>
+                </div>
+                <div class="acctxt1">
+                    <div class="row" style="margin-top: 50px; text-align: start;">
+                        <div class="col-md-12 contactName" matTooltip="{{item.NamePoc}}" style="text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;" [style.direction]="isEnglish(item.NamePoc) ? 'ltr' : 'rtl'">{{item.NamePoc}}</div>
+                        <div class="col-md-12 contactEmail mt-2" dir="ltr" style="text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;" matTooltip="{{item.SmtpAddr}}">{{item.SmtpAddr}}</div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<!-- ADD POINT OF CONTACT MODAL - START -->
+<div class="modal" id="openPOCPopup" data-keyboard="false" data-backdrop="static" [dir]="dir">
+    <div class="modal-dialog  modal-md">
+        <div class="modal-content" style="width: 667px;
+      height: 740px;" [style.height]="pocFormSubmitted && pocForm.status == 'INVALID' ? '770px' : '740px'">
+
+            <!-- Modal body -->
+            <!-- <div class="modal-body" style="padding-top: 2rem; padding-left: 5rem; padding-right: 0rem;" [style.padding]="dir == 'rtl'? '2rem 5rem 0 0' : '2rem 0 0 5rem'"> -->
+            <div class="modal-body" [style.padding]="dir == 'rtl'? '2rem 5rem 0 0' : '2rem 0 0 5rem'">
+                <div class="row" style="text-align: end;" [style.padding]="dir == 'rtl'? '0 0 0 4rem' : '0 4rem 0 0'">
+                    <div class="col-md-12">
+                        <img src="assets/image/close.svg" class="" data-dismiss="modal">
+                    </div>
+                </div>
+                <div class="row mt-2" style="text-align: start;">
+                    <div class="col-md-12 addPOCModalTitle" *ngIf="action == 'ADD'">
+                        {{lang.labels.addPoc}}
+                    </div>
+                    <div class="col-md-12 addPOCModalTitle" *ngIf="action == 'UPDATE'">
+                        {{lang.labels.addPoc}}
+                    </div>
+                </div>
+                <div class="row" style="text-align: start;">
+                    <div class="col-md-12 addPOCModalSubTitle">
+                        {{lang.labels.subHead}}
+                    </div>
+                </div>
+                <div class="row text-center mt-2">
+                    <div class="col-md-10">
+                        <form [formGroup]="pocForm" #formRef="ngForm">
+                            <div>
+                                <div class="registerLabelCss required">{{lang.labels.name}}</div>
+                                <mat-form-field appearance="outline" style="height: 70px!important;">
+                                    <input matInput formControlName="name" (keypress)='allowAlphabets($event)'>
+                                </mat-form-field>
+                                <div *ngIf="pocFormSubmitted && pocF.name.errors" class="invalid-feedback">
+                                    <div *ngIf="pocF.name.errors.required">{{lang.errMsgs.e2}}</div>
+                                </div>
+                                <!-- <div *ngIf="f3.Decname.errors.pattern">{{lang.errorMsgs.e7}}</div> -->
+                            </div>
+
+                            <div>
+                                <div class="registerLabelCss required">{{lang.labels.pos}}</div>
+                                <mat-form-field appearance="outline" style="height: 70px!important;">
+                                    <input matInput formControlName="position" (keypress)='allowAlphabets($event)'>
+                                </mat-form-field>
+                                <div *ngIf="pocFormSubmitted && pocF.position.errors" class="invalid-feedback">
+                                    <div *ngIf="pocF.position.errors.required">{{lang.errMsgs.e3}}</div>
+                                </div>
+                            </div>
+
+                            <div class="time-picker-component">
+                                <div class="registerLabelCss required">{{lang.labels.phNo}}</div>
+                                <!-- <mat-form-field appearance="outline" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;"> -->
+                                <div id="custom" dir="ltr">
+                                    <mat-select id="code" class="custom" style="width: 20%;" formControlName="cc"
+                                        disabled>
+                                        <mat-option [value]="item.Telefto" *ngFor="let item of codes"
+                                            (click)="onChange(item.Telefto)">
+                                            +{{item.Telefto}}</mat-option>
+                                    </mat-select>
+                                    <input matInput type="text" formControlName="phNo" class="custom" minlength="9"
+                                        maxlength="9" (keypress)='restrictAlphabets($event)'
+                                        [style.border]="(pocFormSubmitted && pocF.phNo.errors !== null ) ? '2px solid red' : ''"
+                                        placeholder="5xxxxxxxx"
+                                        [ngClass]="dir=='rtl'? 'mobileInputArb' : 'mobileInputEng'">
+                                </div>
+                                <div *ngIf="pocFormSubmitted && pocF.phNo.errors" class="invalid-feedback mt-2">
+                                    <div *ngIf="pocF.phNo.errors.required">{{lang.errMsgs.e4}}</div>
+                                    <!-- <div *ngIf="setMobPatternError" >Mobile Number should start from 5</div> -->
+                                    <!-- <div *ngIf="setMobPatternError && pocF.phNo.value != ''" >{{lang.errMsgs.e5}}</div> -->
+                                    <div *ngIf="pocF.phNo.errors.minlength">{{lang.errMsgs.e6}}</div>
+                                </div>
+                                <div class="invalid-feedback mt-2" *ngIf="setMobPatternError && pocF.phNo.value != ''">
+                                    {{lang.errMsgs.e5}}</div>
+                                <!-- </mat-form-field> -->
+                            </div>
+
+                            <div>
+                                <div class="registerLabelCss required">{{lang.labels.email}}</div>
+                                <mat-form-field appearance="outline" style="height: 70px!important;">
+                                    <input matInput maxlength="240" formControlName="email">
+                                </mat-form-field>
+                                <div *ngIf="pocFormSubmitted && pocF.email.errors" class="invalid-feedback">
+                                    <div *ngIf="pocF.email.errors.required">{{lang.errMsgs.e8}}</div>
+                                    <div *ngIf="pocF.email.errors.pattern">{{lang.errMsgs.e7}}</div>
+                                </div>
+                            </div>
+
+                            <div style="display: none;">
+                                <div class="registerLabelCss">{{lang.labels.ext}}</div>
+                                <mat-form-field appearance="outline" style="height: 70px!important;">
+                                    <input matInput maxlength="24" formControlName="ext">
+                                </mat-form-field>
+                                <!-- <div *ngIf="pocFormSubmitted && pocF.ext.errors.required">Email is required</div> -->
+                                <!-- <div *ngIf="f3.Decname.errors.pattern">{{lang.errorMsgs.e7}}</div> -->
+                            </div>
+
+                            <div class="mt-3 mb-2" [style.float]="dir == 'rtl' ? 'left' : 'right'">
+                                <button mat-button class="btnTCss addPOCButton" *ngIf="action == 'ADD'"
+                                    (click)="addpoc(formRef)">{{lang.labels.add}}</button>
+                                <button mat-button class="btnTCss addPOCButton" *ngIf="action == 'UPDATE'"
+                                    (click)="editpoc(formRef)">{{lang.labels.add}}</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ADD POINT OF CONTACT MODAL - END -->
+
+<div class="modal" id="deletePoc" data-keyboard="false" data-backdrop="static" [dir]="dir" style="margin-top: 25%;">
+    <div class="modal-dialog  modal-md">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div class="ackScreenTitle2">{{lang.labels.deleteInfo}}</div>
+                        <div class="mt-3 mb-2">
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                data-dismiss="modal" class="btnTCss mr-2"
+                                (click)="delete(pocIndex);">{{lang.labels.yes}}</button>
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                data-dismiss="modal" class="btnTCss m2-2">{{lang.labels.no}}</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<notifier-container></notifier-container>

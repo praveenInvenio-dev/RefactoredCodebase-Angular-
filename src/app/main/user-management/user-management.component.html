@@ -1,0 +1,310 @@
+<div
+  class="userMgmtRoot container alignStart"
+  [dir]="direction"
+>
+  <div class="userMgmtMiddle col-md-10 justify-content-center">
+    <div class="userMgmtLocation">
+      <span class="usrSpanx" (click)="navigateToProfile()"  >
+      {{lang.profile}}
+    </span>
+      <span class="usrSpan1">></span>
+      <span class="taprofile2" (click)="navigateToUsermanagement()" >
+        {{lang.userManagement}}
+      </span>
+    </div>
+    <div class="userMgmtBack">
+      <span
+        class="hspan2"
+        [ngClass]="{'transform': direction == 'rtl'}"
+        (click)="gotoProfile()"
+      >
+
+        <img
+          [src]="
+            direction === 'ltr'
+              ? 'assets/image/arrow-left-green.svg'
+              : 'assets/image/arrow-right-green.svg'
+          "
+        /> </span
+      ><span class="hspanx" (click)="gotoProfile()">
+      {{lang.back}}
+    </span>
+    </div>
+    <div class="userMgmtH" >
+      {{lang.userManagement}}
+    </div>
+    <div class="userMgmtBody">
+      <div class="row userMgmtTabMenu">
+        <div class="col-md-10 px-0">
+          <span
+            class="userMgmtspan"
+            (click)="filterAll()"
+            [ngClass]="{'activeTabStyle': clickTracker == 'all','inactiveTabStyle':clickTracker !='all'}"
+            >
+            {{lang.allUsers}}
+            </span
+          >
+          <span
+            class="userMgmtspan2"
+            (click)="filterActive()"
+            id="active"
+          
+            [ngClass]="{'activeTabStyle': clickTracker == 'active','inactiveTabStyle':clickTracker !='active'}"
+          >
+            {{lang.activeUsers}}
+          </span>
+          <span
+            class="userMgmtspan2"
+            (click)="filterInactive()"
+            [ngClass]="{'activeTabStyle': clickTracker == 'inactive','inactiveTabStyle':clickTracker !='inactive'}"
+          >
+            {{lang.inactiveUsers}}
+          </span>
+        </div>
+        <div class="tabBuns col-md-2 px-0 d-none d-md-block">
+          <div class="d-flex align-items-end flex-column">
+            <span class="userMgmtspan3">
+              <span class="test" id="grid" (click)="toggleCardView($event)">
+                <img
+                  class="test2"
+                  src="assets/image/cards.svg"
+                
+                  [ngClass]="{'filterContrast': viewToggler,'activeViewIndicator':!viewToggler}"
+                
+                />
+              </span>
+              <span class="test" id="list" (click)="toggleCardView($event)"
+                ><img
+                  class="test3"
+                  src="assets/image/table.svg"
+                  [ngClass]="{'filterContrast': !viewToggler,'activeViewIndicator':viewToggler}"
+              /></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="userMgmtMap row">
+        <div class="col-md-6 pr-2" *ngIf="!viewToggler" id="addUserFirstCard">
+          <div class="userMapAdd1" (click)="addUserNav()">
+            <div class="addUserBtn">
+              <div class="userMapAddImg">
+                <img src="assets/image/add.svg" />
+              </div>
+              <a routerLink="/mains/adduser" class="userMapAddImg2">
+                {{lang.addUser}}
+              
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-md-6 pl-2 menuRender"
+          id="addUserSecondCard"
+          *ngFor="let user of getUserResponseDisplayVar; index as i"
+          (click)="openUserDetails(user['AuthUsrno'], user['Name'],user['Branch'])"
+          class="col-md-6 pr-2"
+        >
+       
+          <div class="userMapAdd" *ngIf="!viewToggler">
+            <div>
+              <div
+                class="umpop row"
+                [ngClass]="direction == 'rtl' ? 'umpop2' : ''"
+                *ngIf="user['AuthUsrno'] === selectedAuthUserNo"
+              >
+                <div
+                  class="umpopOption col-md-12"
+                  (click)="
+                    goToTaskAlloc($event, user['AuthUsrno'], user['Name'])
+                  "
+                  *ngIf="getUserResponseDisplayVar[i]['status']"
+                >
+                  {{lang.taskAllocationh}}
+                </div>
+                <div
+                  class="umpopOption col-md-12"
+                  [ngClass]="user['status'] == false ? 'blackNormal' : 'redBold'"
+                  
+                  (click)="getModal($event, 'dialogueboxUserDeactivate')"
+                >
+                
+                  {{
+                    user["status"] == false ? activateMember : deactivateMember
+                  }}
+                </div>
+              </div>
+
+              <div
+                (click)="activateUserMenu($event, i, user['AuthUsrno'])"
+                class="dots"
+                id="{{ i }}"
+              >
+                <div><img src="assets/image/dots.svg" /></div>
+              </div>
+
+              <div class="d-flex pt-2">
+                <div class="">
+                  <div class="usrActualName">{{ user["Name"] }}</div>
+                </div>
+
+                <div class="mis-auto usrBadge2">
+                  <div
+                    class="usrBadge te"
+                    [ngClass]="
+                    user['status'] === true ? 'tag-success' : 'tag-danger'
+                    "
+                  >
+                    {{ user["status"] == true ? activeBadge : inactiveBadge }}
+                  </div>
+                </div>
+              </div>
+              <div class="userCardFoot row mx-0">
+                <div class="usrBranch col-md-6 col-sm-12 px-0">
+                  <div class="usrBranchName">
+                    {{lang.branch}}
+                  </div>
+                  <div class="usrBranchName2" [title]="user['Branch']">
+                    {{ user["Branch"] }}
+                  </div>
+                </div>
+                <div class="allocateService col-md-6 col-sm-12 px-0">
+                  <div class="usrBranchName">
+                    {{lang.allocatedService}}
+                  </div>
+                  <div class="usrBranchName2 zs-textReducer">
+                    {{ user["linked"] }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 p-0 marginAddAcc"  *ngIf="viewToggler">
+        <div class="mb-2 border">
+            <div class="row addAccListheight" (click)="addUserNav()" >
+                <img class="col-auto" src="assets/image/add.svg">
+                <div class="value fwb textPrimary mt-2 mx-1 col noMarginPadiingStart" > 
+                   <a routerLink="/mains/adduser" class="ListViewAddText">
+                  {{lang.addUser}}
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+      <div class="userMgmtMap2 border txtSizeuml" *ngIf="viewToggler">
+        <div class="row mx-0">
+          <span class="col-3 name">
+         {{lang.name}}
+        </span>
+          <span class="col-4 name3">
+          {{lang.branch}}
+        </span>
+          <span class="col-3 name">
+          {{lang.allocatedService}}
+        </span>
+          <span class="col-2 name2">
+          {{lang.status}}
+        </span>
+        </div>
+        <div
+          class="row mx-0 glowClass"
+          *ngFor="let user of getUserResponseDisplayVar; index as i"
+          (click)="openUserDetails(user['AuthUsrno'], user['Name'], user['Branch'])"
+        >
+          <span class="col-3 name grayTxtList">{{ user["Name"] }}</span>
+          <span class="col-4 name3 grayTxtList">{{ user["Branch"] }}</span>
+          <span class="col-3 name grayTxtList">{{
+            user["linked"] !== "" ? user["linked"] : "-"
+          }}</span>
+          <span class="col-2 name2">
+            <div
+              class="usrBadge te"
+              [ngClass]="user['status'] === true ? 'tag-success' : 'tag-danger'"
+            >
+              {{ user["status"] == true ? activeBadge : inactiveBadge }}
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal alignStart"
+    id="dialogueboxUserDeactivate"
+    data-keyboard="false"
+    data-backdrop="static"
+  >
+    <div class="modal-dialog center" id="modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="px-4 py-3 col-md-12">
+            <div
+              class="col-md-12 alignEnd zs-modalCloser"
+              (click)="closeModal('dialogueboxUserDeactivate')"
+            >
+              <img src="assets/image/close.svg" class="modalCloseIcon" />
+            </div>
+            <div
+              class="dark fbl f28 mt-4 pageTitle"
+              *ngIf="selectedUserIndex !== null"
+            >
+              {{lang.deactivate}}
+              {{ getUserResponseDisplayVar[selectedUserIndex]["Name"] }} {{
+                direction == "rtl"
+                  ? "؟"
+                  : "?"
+              }}
+            </div>
+            <div class="py-3 pr-3">
+              <div
+                class="zs-umMt2 f12 gray font-color"
+                *ngIf="selectedUserIndex !== null"
+              >
+                {{lang.whtHappensWhenUserisDeactivated}}
+              </div>
+              <div
+                class="zs-umMt f12 gray font-color"
+                *ngIf="selectedUserIndex !== null"
+              >
+                {{lang.modalBodyA}}
+              </div>
+              <div
+                class="zs-umMt f12 gray font-color"
+                *ngIf="selectedUserIndex !== null"
+              >
+                {{lang.modalBodyB}}
+              </div>
+            </div>
+            <div class="col-md-12 mt-4 mb-2 alignEnd btnStyleum">
+              <div class="row">
+                <div class="col zs-decbtaligner">
+                  <button
+                    class="btnSecum"
+                    (click)="modalConfirm()"
+                    *ngIf="selectedUserIndex !== null"
+                  >
+                    
+                    {{lang.deactivate}}
+                  </button>
+                </div>
+                <div class="col-auto">
+                  <button
+                    class="btnPrimary btnprimary-width modalPrum btnStyleum"
+                    mat-raised-button
+                    (click)="closeModal('dialogueboxUserDeactivate')"
+                  >
+                    {{lang.no}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

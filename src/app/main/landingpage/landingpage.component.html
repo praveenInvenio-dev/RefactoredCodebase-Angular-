@@ -1,0 +1,420 @@
+<div [dir]="direction">
+  <!-- <nav class="navbar navbar-expand-lg navbar-light navBackground" style="background-color: #316954">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="margin-left: 22px">
+      <a class="navbar-brand" style="cursor: pointer">
+        <img src="assets/image/negative.svg" style="width: 150px" />
+      </a>
+    </div>
+  
+    <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
+      <ul class="navbar-nav">
+        <li class="nav-item active dropdown" (click)="getInitialData()">
+
+          <a class="nav-link " href="#" id="navbardrop" data-toggle="dropdown" *ngIf="tpType !== 'TA'">
+            <img src="assets/image/main-message-notification.svg" style="width: 24px; margin-right: 25px" />
+          </a>
+          <div class="dropdown-menu p-0 m-0 dropdown-menu-right notifications-dropdown">
+
+            <ul [ngClass]="{'text-right':direction=='rtl'}" class="list-group list-group-flush">
+              <li [routerLink]="['/mains/inbox']" [queryParams]="{Cokey: notification.Cokey, indexValue: i}"
+                skipLocationChange=true class="list-group-item"
+                *ngFor="let notification of filteredList | slice:0:3; ;let i=index;">
+                <div class="d-flex justify-content-between">
+                  <div>
+                  </div>
+                  <div class="w-90">
+                    <div class="font-weight-bold text-truncate">{{notification?.Cotxt}}</div>
+                    <div class="text-muted mt-1 text-truncate">{{notification?.Descript}}</div>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item text-center small text-primary" *ngIf="filteredList?.length==0">
+                No Messages
+              </li>
+              <li [routerLink]="['/mains/inbox']" class="font-weight-bold list-group-item text-center p-2 text-primary">
+                {{ direction=='ltr' ? 'View All':'عرض الكل'}}
+              </li>
+
+
+            </ul>
+          </div>
+
+
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" [attr.href]="helpLink1" target="_blank">
+            <img src="assets/image/chat.svg" style="width: 24px; margin-right: 25px" />
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="tpType !== 'TA'">
+          <a class="nav-link" [routerLink]="['/mains/setting']">
+            <img src="assets/image/settings.svg" style="width: 24px; margin-right: 25px" />
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="tpType !== 'TA'">
+          <a class="nav-link" [attr.href]="helpLink" target="_blank">
+            <img src="assets/image/help.svg" style="width: 24px; margin-right: 25px" />
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">
+            <p style="
+                width: 1px;
+                height: 24px;
+                border-radius: 0.5px;
+                background-color: #d8d8d8;
+              "></p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="navigate(); changeColor()" style="cursor: pointer">
+            <img src="assets/image/user.svg" style="width: 24px; border: 1px solid white; border-radius: 30px"
+              [style.background]="changeColor() ? 'white' : ''" />
+            <span style="color: white; margin-right: 25px; margin-left: 10px">{{
+              name
+              }}</span>
+          </a>
+        </li>
+        <li class="nav-item" (click)="logout()">
+          <a class="nav-link disabled">
+            <img src="assets/image/log-out.svg" style="width: 24px; margin-right: 25px" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navBackground" style="color: white; background-color: #316954">
+    <ul class="navbar-nav" *ngFor="let item of dashMenu; let i = index" [style.margin-left]="i === 0 ? '20px' : '0px'">
+      <li class="nav-item active mr-3">
+        <a class="nav-link" [ngClass]="item.active ? 'navitemTxtActive' : 'navitemTxt'"
+          (click)="makeActive(item.name); cancleReturn()" [routerLink]="item.path">{{ item.name }}</a>
+
+        <p [ngClass]="item.active ? 'navTxtActive' : 'navTxtInActive'"></p>
+      </li>
+    </ul>
+  </nav> -->
+
+  <nav
+    class="navbar navbar-expand-md fixed-top-sm justify-content-start flex-nowrap bg-dark navbar-dark navBackground ">
+    <a class="navbar-brand"> <img class="logosize" src="assets/image/negative.svg" /></a>
+
+    <ul class="navbar-nav flex-row" style="width: 100%;
+    justify-content: flex-end;">
+      <!-- <li class="nav-item active">
+        <a class="nav-link px-2" href="#">Link</a>
+      </li> -->
+      <li class="nav-item dropdown" (click)="getInitialData()">
+
+        <a class="nav-link " id="navbardrop" data-toggle="dropdown" *ngIf="tpType !== 'TA'">
+          <img src="assets/image/main-message-notification.svg" class="iconsize" />
+        </a>
+        <div class="dropdown-menu p-0 m-0 dropdown-menu-right notifications-dropdown">
+
+          <ul [ngClass]="{'text-right':direction=='rtl'}" class="list-group list-group-flush">
+            <li [routerLink]="['/mains/inbox']" [queryParams]="{Cokey: notification.Cokey, indexValue: i}"
+              skipLocationChange=true class="list-group-item"
+              *ngFor="let notification of filteredList | slice:0:3; ;let i=index;">
+              <div class="d-flex justify-content-between">
+                <div>
+                </div>
+                <div class="w-90">
+                  <div class="font-weight-bold text-truncate">{{notification?.Cotxt}}</div>
+                  <div class="text-muted mt-1 text-truncate">{{notification?.Descript}}</div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item text-center small text-primary" *ngIf="filteredList?.length==0">
+              No Messages
+            </li>
+            <li [routerLink]="['/mains/inbox']" class="font-weight-bold list-group-item text-center p-2 text-primary">
+              {{ direction=='ltr' ? 'View All':'عرض الكل'}}
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [attr.href]="helpLink1" target="_blank">
+          <img src="assets/image/chat.svg" class="iconsize" />
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="tpType !== 'TA'">
+        <a class="nav-link" [routerLink]="['/mains/setting']">
+          <img src="assets/image/settings.svg" class="iconsize" />
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="tpType !== 'TA'">
+        <a class="nav-link" [attr.href]="helpLink" target="_blank">
+          <img src="assets/image/help.svg" class="iconsize" />
+        </a>
+      </li>
+      <li class="nav-item nameCss">
+        <a class="nav-link disabled" href="#">
+          <p style="
+              width: 1px;
+              height: 24px;
+              border-radius: 0.5px;
+              background-color: #d8d8d8;
+            "></p>
+        </a>
+      </li>
+      <li class="nav-item nameCss">
+        <a class="nav-link" (click)="navigate(); changeColor()" style="cursor: pointer">
+          <img src="assets/image/user.svg" class="iconsize" style="border: 1px solid white; border-radius: 30px"
+            [style.background]="changeColor() ? 'white' : ''" />
+          <span style="color: white; margin-right: 25px; margin-left: 10px">{{
+            name
+            }}</span>
+        </a>
+      </li>
+      <li class="nav-item" (click)="logout()">
+        <a class="nav-link disabled">
+          <img src="assets/image/log-out.svg" class="iconsize" />
+        </a>
+      </li>
+    </ul>
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+  <nav class="navbar navbar-expand-md  navBackground secondNav">
+    <div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
+      <ul class="navbar-nav ulsize">
+        <li class="nav-item mr-3" *ngFor="let item of dashMenu; let i = index"
+          [style.margin-left]="i === 0 ? '20px' : '0px'">
+          <a class="nav-link" [ngClass]="item.active ? 'navitemTxtActive' : 'navitemTxt'"
+            (click)="makeActive(item.name); cancleReturn()" [routerLink]="item.path">{{ item.name }}</a>
+
+          <p [ngClass]="item.active ? 'navTxtActive' : 'navTxtInActive'"></p>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<!-- <div class="row">
+    <div class="col-md-12">
+        <mat-card style="position: relative;bottom: 10px;min-height: calc(100vh - 100px);">
+        <mat-card-content>
+            <router-outlet></router-outlet>
+        </mat-card-content>
+    </mat-card>
+
+    </div>
+</div> -->
+<mat-card style="position: relative; background: #95d600; min-height: 100px; top: -10px" *ngIf="qmenu">
+  <mat-card-content>
+    <div class="row" *ngIf="direction !== 'rtl'">
+      <div class="col-md-11">
+        <div>
+          <img src="assets/image/information.svg" style="
+              width: 24px;
+              position: relative;
+              bottom: 2px;
+              margin-right: 10px;
+              margin-left: 10px;
+            " />
+          <span class="quickAction">
+            {{ txt1 }}
+          </span>
+        </div>
+        <div class="quickAction1">
+          {{ txt2 }}
+        </div>
+      </div>
+      <div class="col-md-1" style="text-align: center">
+        <img src="assets/image/close1.svg" style="width: 24px; cursor: pointer" (click)="closeQuickMenu()" />
+      </div>
+    </div>
+
+    <div class="row" *ngIf="direction === 'rtl'">
+      <div class="col-md-1" style="text-align: center">
+        <img src="assets/image/close1.svg" style="width: 24px; cursor: pointer" (click)="closeQuickMenu()" />
+      </div>
+      <div class="col-md-11" style="text-align: end">
+        <div>
+          <img src="assets/image/information.svg" style="
+              width: 24px;
+              position: relative;
+              bottom: 2px;
+              margin-right: 10px;
+              margin-left: 10px;
+            " />
+          <span class="quickAction">
+            {{ txt1 }}
+          </span>
+        </div>
+        <div class="quickAction1">
+          {{ txt2 }}
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!-- <mat-card style="position: relative;bottom: 10px;min-height: calc(100vh - 100px);top: -20px;">
+    <mat-card-content>
+        <router-outlet></router-outlet>
+    </mat-card-content>
+</mat-card> -->
+
+<div class="modal" id="restrictProfileView" data-keyboard="false" data-backdrop="static" [dir]="direction"
+  style="margin-top: 25%">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row text-center mt-3">
+          <div class="col-md-12">
+            <div class="ackScreenTitle2">{{ restrictProfileViewText }}</div>
+            <div class="mt-3 mb-2">
+              <button mat-button style="
+                  width: auto;
+                  border: none;
+                  color: #d2a02a;
+                  font-size: 16px;
+                " data-dismiss="modal" class="btnTCss m2-2">
+                {{ close }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Zensark Notification card -->
+<mat-card class="notification-card cardMargin">
+
+  <mat-card-content class="mb-0" *ngIf="notification.show === true" style="text-align: start" [dir]="direction">
+    <div class="media py-4 px-5" style="text-align: start" [dir]="direction">
+      <img class="mx-3" src="assets/image/combined-shape.svg" />
+      <div class="media-body">
+        <h5 class="mt-0 notification-title">{{ notification.title }}</h5>
+        <span class="notification-description">{{notification.description}}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-content *ngFor="let notification of notifications | slice:0:1;" class="mb-0"
+    (click)="openNotification(notification)" style="text-align: start; background-color: #d99a29;" [dir]="direction"
+    [ngStyle]="{'background-color': notification.NotifTy === '01' ? '#d99a29' :     notification.NotifTy === '02' ? '#95d600' :  notification.NotifTy === '03' ? '#d99a29' : '#aa0c19'   }">
+    <!-- [ngStyle]="{'background-color': notification.NotifTy === '02' ? '#95d600' : '' }"
+    [ngStyle]="{'background-color': notification.NotifTy === '03' ? '#aa0c19' : '#aa0c19' }" -->
+    <div *ngIf="showNotif" class="media py-4 px-5" style="text-align: start" [dir]="direction">
+      <img class="mx-3"
+        [src]="notification.NotifTy === '02'? 'assets/image/combined-shape.svg': 'assets/images/information.svg'" />
+
+      <div class="media-body">
+        <h5 class="mt-0 notification-title"
+          [ngStyle]="{'color': notification.NotifTy === '02' ? '#232323' : '#ffffff'}">
+          {{ notification.title }}
+          <img class="modalCloseIcon close" *ngIf="notification.NotifTy !== '03'"
+            [src]="notification.NotifTy === '02'? 'assets/images/close_bg_black.svg': 'assets/images/close_bg_white.svg'"
+            [style.float]="direction === 'rtl' ? 'left' : ''" [ngStyle]="{
+              'margin-right': direction === 'ltr' ? '40px' : '0px',
+              'margin-left': direction === 'rtl' ? '0px' : '0px'
+            }" style="width: 24px; height: 24px;" (click)="closeNotif(notification)" />
+
+        </h5>
+
+        <span class="notification-description"
+          [ngStyle]="{'color': notification.NotifTy === '02' ? '#232323' : '#ffffff'}">{{ notification.description
+          }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card class="content-card ">
+    <mat-card-content>
+      <router-outlet></router-outlet>
+    </mat-card-content>
+  </mat-card>
+</mat-card>
+<!-- <iframe [src]="url" style="display:none"></iframe> -->
+
+<div class="modal" id="tiles" data-keyboard="false" data-backdrop="static" [dir]="direction">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-header" style="border-bottom: none !important;">
+        <button type="button" class="close" style="width: 100%;" (click)="logout()"
+          [style.text-align]="direction === 'rtl' ? 'end' : 'end'"><img src="assets/image/close.svg" /></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6 mt-3" *ngFor="let item of listDashboardz">
+                <mat-card style="height: 152px;margin-top:10px;cursor: pointer;">
+                  <div>
+
+                    <div class="row text-center mt-4">
+                      <div class="col-md-12">
+                        <img src="assets/image/zakat.svg" style="width: 36px;">
+                        <div class="taxMgttxt2">{{item.Tilenm}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="applicationPendingModal" class="modal" dir="{{ direction }}" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center text-white">{{pendingAppLabels?.title}}</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-4">
+          <div class="col-12" [ngClass]="{'text-right':direction == 'rtl'}">
+            {{pendingAppLabels?.message}}
+          </div>
+        </div>
+        <div class="row mt-4" [ngClass]="{'text-right':direction == 'rtl'}">
+          <div class="col-5">
+            {{pendingAppLabels?.referenceNumber}}
+          </div>
+          <div class="col-7 font-weight-bold">
+            {{applicationPendingInfo?.referenceNumber}}
+          </div>
+        </div>
+        <div class="row mt-4" [ngClass]="{'text-right':direction == 'rtl'}">
+          <div class="col-5">
+            {{pendingAppLabels?.dateOfReceipt}}
+          </div>
+          <div class="col-7" dir="ltr">
+            <span>{{applicationPendingInfo?.dateOfReceipt | date:'dd MMM yyyy'}}</span>
+          </div>
+        </div>
+        <div class="row mt-4" [ngClass]="{'text-right':direction == 'rtl'}">
+          <div class="col-5">
+            {{pendingAppLabels?.status}}
+          </div>
+          <div class="col-7">
+            {{pendingAppLabels?.statusMesage}}
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12 " [ngClass]="{'text-left':direction == 'rtl','text-right':direction == 'ltr'}">
+            <button mat-button class="btnGCss" style="width: auto;cursor: pointer;" (click)="logout()">
+              {{pendingAppLabels?.logOut}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<iframe *ngIf="logouts" style="display: none;" [src]="url" width="400" id="myIframe" height="300"></iframe>

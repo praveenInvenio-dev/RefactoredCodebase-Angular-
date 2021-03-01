@@ -1,0 +1,568 @@
+<div class="container" [dir]="direction">
+    <nav class="p-3" style="background-image: url('assets/images/header02.jpg');">
+      <div class="d-flex m-0 justify-content-between">
+        <div class="text-white">
+          <div class="pointer-hand text-left" (click)="goBack()">
+            <i class="ionicons "
+              [ngClass]="{'ion-arrow-left-c':direction=='ltr','ion-arrow-right-c':direction=='rtl'}"></i>
+            &nbsp;{{lang.back}}
+          </div>
+          <div class="titleCssS">
+            {{lang.title}}
+          </div>
+        </div>
+        <div class="">
+          <img height="74px" class="rounded-circle bg-white p-3" src="assets/images/consortium_logo.png" alt="Logo">
+        </div>
+      </div>
+    </nav>
+    <div *ngIf="!showAcknowledgement" class="mt-4">
+      <mat-horizontal-stepper [disableRipple]="true" [hidden]="hideOnOtpVerification" [linear]="true"
+        #mainStepper labelPosition="bottom" (selectionChange)="onMainStepChange($event)">
+       
+        <mat-step [stepControl]="companyForm.get('orgInfo')" [label]="lang.header.h2">
+  
+          <form [formGroup]="companyForm" autocomplete="off">
+            <div class="row">
+              <div class="col-12 pl-0 pr-0">
+                <form formGroupName="orgInfo" autocomplete="off">
+                  <mat-card class="mt-3">
+                    <mat-card-content>
+                      <div class="sideHeading">
+                        {{lang.c1.title}}
+                        <mat-icon
+                          *ngIf="!companyForm.get('orgInfo').get('nameBCE').invalid 
+                              && !companyForm.get('orgInfo').get('gccId').invalid 
+                              && !companyForm.get('orgInfo').get('cr').invalid 
+                              && !companyForm.get('orgInfo').get('copyOfCommercialNumberFile').invalid 
+                              && !companyForm.get('orgInfo').get('description').invalid "
+                          
+                          [ngClass]="
+                            direction === 'rtl'
+                              ? 'checkCircleARB'
+                              : 'checkCircleENG'
+                          ">check_circle
+                        </mat-icon>
+                        <p class="Rectangle-12"></p>
+                      </div>
+                      <div class="row">                         
+                        <div class="col-8">
+                          <div class="registerLabelCss required">{{lang?.c1?.in1}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="nameBCE" maxlength="120" (keypress)='allowAlphabets($event)'/>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('nameBCE').hasError('required')">
+                              {{lang?.err?.nameBCEReq}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('nameBCE').hasError('maxlength')">
+                              {{lang?.err?.nameBCELen}}
+                             </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c1?.in2}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput numbersOnly formControlName="gccId" minlength="8" maxlength="15" />
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('gccId').hasError('required')">
+                              {{lang?.err?.enterGccID}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('gccId').hasError('minlength') || companyForm.get('orgInfo').get('gccId').hasError('maxlength')  ">
+                              {{lang?.err?.gccIDMinlength}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>  
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c1?.in3}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput numbersOnly  formControlName="cr" pattern="^[1-9][0-9]*$" maxlength="15" oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';"/>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('cr').hasError('required')">
+                              {{lang?.err?.enterCRNumber}}
+                            </mat-error>
+                            
+                          </mat-form-field>
+                        </div>  
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c1?.in4}}</div>
+                          <mat-form-field
+                            (click)="onClickFileControl('ETN6','',companyForm.get('orgInfo').get('copyOfCommercialNumberFile').value,companyForm.get('orgInfo').get('copyOfCommercialNumberFile'),lang?.c1?.in6,'');"
+                            (blur)="companyForm.get('orgInfo').get('copyOfCommercialNumberFile').markAsTouched();"
+                            appearance="outline" class="attachment-field pointer-hand">
+                            <input matInput style="display: none;"
+                              formControlName="copyOfCommercialNumberFile" />
+                            <input type="file" #fileInput2 style="display: none;" />
+                            <span class="material-icons float-right pointer-hand">
+                              attach_file
+                            </span>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('copyOfCommercialNumberFile').hasError('required')">
+                              {{lang?.err?.copyOfCRRequired}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>  
+                        <div class="col-12">
+                          <div class="registerLabelCss required">{{lang?.c1?.in5}}</div>
+                          <mat-form-field appearance="outline">
+                            <textarea matInput  class="form-control h-96 card resize-none" formControlName="description" maxlength="150" ></textarea>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('description').hasError('required')">
+                              {{lang?.err?.enterDesc}}
+                            </mat-error>       
+                          </mat-form-field>
+                        </div>  
+                          </div>
+                    </mat-card-content>
+                  </mat-card>
+                  <mat-card class="mt-3">
+                    <mat-card-content>
+                      <div class="sideHeading">
+                        {{lang.c2.title}}
+                        <mat-icon 
+                    *ngIf="!companyForm.get('orgInfo').get('country').invalid 
+                        && !companyForm.get('orgInfo').get('city').invalid 
+                        && !companyForm.get('orgInfo').get('streetName').invalid 
+                        && !companyForm.get('orgInfo').get('buildingNumber').invalid 
+                        && !companyForm.get('orgInfo').get('additionalNumber').invalid 
+                        && !companyForm.get('orgInfo').get('zipCode').invalid 
+                        && !companyForm.get('orgInfo').get('phoneNumber').invalid 
+                        && !companyForm.get('orgInfo').get('website').invalid 
+                        && !companyForm.get('orgInfo').get('confirmEmail').invalid" 
+                        [ngClass]=" direction === 'rtl'
+                    ? 'checkCircleARB'
+                    : 'checkCircleENG'">check_circle
+                        </mat-icon>
+                        <p class="Rectangle-12"></p>
+                      </div>                       
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c2?.in1}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="country">
+                              <mat-option [value]="country.id" *ngFor="let country of nationList">
+                                {{ country.value }}</mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('country').hasError('required')">
+                              <!-- {{lang?.c8?.in1}} -->
+                              {{lang?.err?.countryrqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                         
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c2?.in2}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="city" />
+
+                            <!-- <mat-select formControlName="city">
+                              <mat-option [value]="city.CityCode"
+                                *ngFor="let city of citiesList | cityfilter:companyForm.get('orgInfo').get('province').value  : 'province' : companyForm.get('orgInfo').get('country').value">
+                                {{ city.CityName }}</mat-option>
+                            </mat-select> -->
+                            <mat-error *ngIf="companyForm.get('orgInfo').get('city').hasError('required')">
+
+                              {{lang?.err?.cityrqrd}}
+
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                         
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c2?.in3}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="streetName" maxlength="40" />
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('streetName').hasError('required')">
+                              <!-- {{lang?.c8?.in5}} -->
+                              {{lang?.err?.streetrqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c2?.in4}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="buildingNumber" maxlength="12" />
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('buildingNumber').hasError('required')">
+                              <!-- {{lang?.c8?.in6}} -->
+                              {{lang?.err?.bnorqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c2?.in5}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="additionalNumber" maxlength="8"  (keypress)='restrictAlphabetss($event)'/>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('additionalNumber').hasError('required')">
+                              {{lang?.err?.enterAdditionalNumber}}
+                              {{lang?.err?.unorqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c2?.in6}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="zipCode" maxlength="8"  (keypress)='restrictAlphabetss($event)'/>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('zipCode').hasError('required')">
+                              <!-- {{lang?.c8?.in7}} -->
+                              {{lang?.err?.ziprqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>                      
+                       
+                        <div class="col-4">
+                          <div class="registerLabelCss required"> {{lang.c2.in7}}</div>
+                          <div class="row m-0">
+                             
+                            <mat-form-field   
+                              appearance="outline">
+                              <input matInput   formControlName="phoneNumber"  (keypress)='restrictAlphabetss($event)'/>
+                              <mat-error
+                                *ngIf="companyForm.get('orgInfo').get('phoneNumber').hasError('required')">
+                                {{lang?.err?.enterPhoneNumber}}
+                              </mat-error>
+                              <mat-error
+                                *ngIf="companyForm.get('orgInfo').get('phoneNumber').hasError('startsWithZero')">
+                                {{lang?.err?.startsWithZero}}
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c2.in8}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput  formControlName="website" maxlength="260" />
+                            <mat-error *ngIf="companyForm.get('orgInfo').get('website').hasError('required')">
+                              {{lang.err.enterEmail}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('website').value && companyForm.get('orgInfo').get('website').invalid">
+                              {{lang.err.emailinvalid}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      
+                    </mat-card-content>
+                  </mat-card>
+
+                  <mat-card class="mt-3" >
+                    <mat-card-content>
+                      <div class="sideHeading">
+                        {{lang.c3.title}}
+                        <mat-icon 
+                    *ngIf="!companyForm.get('orgInfo').get('designation').invalid 
+                    && !companyForm.get('orgInfo').get('idType').invalid 
+                    && !companyForm.get('orgInfo').get('idNumber').invalid 
+                    && !companyForm.get('orgInfo').get('firstName').invalid 
+                    && !companyForm.get('orgInfo').get('country1').invalid 
+                    && !companyForm.get('orgInfo').get('mobileCode').invalid 
+                    && !companyForm.get('orgInfo').get('mobileNumber').invalid 
+                    && !companyForm.get('orgInfo').get('email').invalid 
+                    && !companyForm.get('orgInfo').get('confirmEmail').invalid
+                    && !companyForm.get('orgInfo').get('copyOfGMID').invalid" [ngClass]="
+                  direction === 'rtl'
+                    ? 'checkCircleARB'
+                    : 'checkCircleENG'">check_circle
+                        </mat-icon>
+                        <p class="Rectangle-12"></p>
+                      </div>
+                      <div class="row">                        
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c3?.in1}}</div>
+                          <mat-form-field appearance="outline">
+                            <input  matInput formControlName="designation"  />
+                            <mat-error
+                            *ngIf="companyForm.get('orgInfo').get('designation').hasError('required')">
+                             <span>{{lang?.err?.enterPassportNumber}}</span>
+                          </mat-error>                             
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4" >
+                          <div class="registerLabelCss"> {{lang?.c3?.in2}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="idType" (selectionChange)="onIdTypeChange()">
+                              <mat-option [value]="idTyp.value" *ngFor="let idTyp of lang.idTypes">
+                                {{ idTyp.name }}</mat-option>
+                            
+                          </mat-select>
+                          <mat-error
+                          *ngIf="companyForm.get('orgInfo').get('idType').hasError('required')">
+                          {{lang?.err?.selectIDType}}
+                        </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss">{{lang?.c3?.in3}}</div>
+                          <mat-form-field appearance="outline">
+                            <input  type="text" matInput formControlName="idNumber"
+                            [mask]="cpIdNumberMask"   />
+                              <mat-error *ngIf="companyForm.get('orgInfo').get('idNumber').hasError('required')">                               
+                                <span >{{lang?.err?.enterIDNumber}}</span>
+                            </mat-error>
+                            <mat-error *ngIf="!companyForm.get('orgInfo').get('idNumber').hasError('pattern') 
+                              && companyForm.get('orgInfo').get('idNumber').hasError('minlength')">
+                              <span *ngIf="companyForm.value.orgInfo.idType=='ZS0001'">
+                                {{lang?.err?.nationalIDMinLength}}
+                              </span>
+                              <span *ngIf="companyForm.value.orgInfo.idType=='ZS0002'">
+                                {{lang?.err?.iqamaIDMinLength}}
+                              </span>
+                              <span *ngIf="companyForm.value.orgInfo.idType=='ZS0003'">
+                                {{lang?.err?.gccIDMinlength}}
+                              </span>
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('idNumber').hasError('pattern')">
+                              <span *ngIf="companyForm.value.orgInfo.idType=='ZS0001'">
+                                {{lang?.err?.nationalIDStartWith}}
+                              </span>
+                              <span *ngIf="companyForm.value.orgInfo.idType=='ZS0002'">
+                                {{lang?.err?.iqamaIDStartWith}}
+                              </span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c3?.in10}}</div>
+                          <mat-form-field appearance="outline">
+                            <input (dateChange)="onBCPIdNumberChange('dob')" matInput [matDatepicker]="dob"
+                              formControlName="dateOfBirth" (keypress)='restrictAlphabetss($event)'/>
+                            <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                            <mat-datepicker [calendarHeaderComponent]="headerComponent" #dob></mat-datepicker>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('dateOfBirth').hasError('required')">
+                              {{lang?.err?.enterDateOfBirth}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('dateOfBirth').hasError('futureDate')">
+                              {{lang?.err?.dobFutureDate}}
+                            </mat-error>
+
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c3?.in4}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="firstName" maxlength="40" (keypress)='allowAlphabets($event)'/>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('firstName').hasError('required')">
+                              {{lang?.err?.enterFirstName}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c3?.in5}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="country1">
+                              <mat-option [value]="country.Land1" *ngFor="let country of countiesList">
+                                {{ country.Landx50 }}</mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('country1').hasError('required')">
+                              <!-- {{lang?.c8?.in1}} -->
+                              {{lang?.err?.nationalityrqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required"> {{lang.c3.in6}}</div>
+                          <div class="row m-0">
+                            <mat-form-field [ngClass]="{'order-2':direction=='rtl'}" style="width: 30%;"
+                              appearance="outline">
+                              <mat-select formControlName="mobileCode" (selectionChange)="onMobileCodeChange()">
+                                <mat-select-trigger>
+                                  +{{companyForm.get('orgInfo.mobileCode').value}}
+                                </mat-select-trigger>
+                                <mat-option [value]="item.Telefto" *ngFor="let item of phoneCodes">
+                                  <div dir="ltr" class="d-flex justify-content-between">
+                                    <div class="" style="font-size: 14px;">
+                                      +{{ item.Telefto }}
+                                    </div>
+                                    <div class="text-truncate pl-4" [title]="item.Landx50" style="font-size: 14px;">
+                                      {{ item.Landx50 }}
+                                    </div>
+                                  </div>
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <mat-form-field [ngClass]="{'order-1':direction=='rtl'}" style="width: 70%;"
+                              appearance="outline">
+                              <input matInput mask="0{10}"  formControlName="mobileNumber"  (keypress)='restrictAlphabetss($event)' />
+                              <mat-error
+                                *ngIf="companyForm.get('orgInfo').get('mobileNumber').hasError('required')">
+                                {{lang?.err?.enterMobileNumber}}
+                              </mat-error>
+                              <mat-error
+                                *ngIf="companyForm.get('orgInfo').get('mobileNumber').hasError('startsWithZero')">
+                                {{lang?.err?.startsWithZero}}
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c3.in7}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput type="email" formControlName="email" maxlength="260" />
+                            <mat-error *ngIf="companyForm.get('orgInfo').get('email').hasError('required')">
+                              {{lang.err.enterEmail}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('email').value && companyForm.get('orgInfo').get('email').invalid">
+                              {{lang.err.emailinvalid}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="registerLabelCss required">{{lang.c3.in8}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput type="email" formControlName="confirmEmail" maxlength="260" />
+                            <mat-error *ngIf="companyForm.get('orgInfo').get('confirmEmail').hasError('required')">
+                              {{lang.err.enterConfirmEmail}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('confirmEmail').value && companyForm.get('orgInfo').get('confirmEmail').invalid && !companyForm.get('orgInfo').get('confirmEmail').hasError('notMatch')">
+                              {{lang.err.emailinvalid}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('confirmEmail').value && companyForm.get('orgInfo').get('confirmEmail').hasError('notMatch')">
+                              {{lang?.err?.emailsNotMatch}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div  class="registerLabelCss required">{{lang?.c3?.in9}}</div>
+                          <mat-form-field
+                            (click)="onClickFileControl('ETN7','','',companyForm.get('orgInfo').get('copyOfGMID'),
+                            lang?.passport?.attach,'GM1');"
+                            (blur)="companyForm.get('orgInfo').get('copyOfGMID').markAsTouched();"
+                            appearance="outline" class="attachment-field pointer-hand">
+                            <input matInput style="display: none;" formControlName="copyOfGMID" />
+                            <input type="file" #fileInput7 style="display: none;" />
+                            <span class="material-icons float-right pointer-hand">
+                              attach_file
+                            </span>
+                            <mat-error
+                              *ngIf="companyForm.get('orgInfo').get('copyOfGMID').hasError('required')">
+                              {{lang?.err?.copyOfGMIDRequired}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                         
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </form>
+              </div>
+            </div>
+            <div class="row mt-5 mb-5">
+              <div class="col-12 pl-0 pr-0">
+                <div class="d-flex justify-content-start mt-5 mb-5">
+                  <button (click)="onSubmit();" class="rounded btnCss save-btn" mat-button> {{lang?.continue}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form> 
+        </mat-step>   
+        <mat-step [label]="lang.header.h3" [completed]="step2Completed">
+          <signup-create-password [TC]="true"  [type2]="'ZVTI'" (completed)="submitConsortiumRegistration($event)">
+          </signup-create-password>
+        </mat-step>
+  
+        <ng-template matStepperIcon="create">
+          <mat-icon>brightness_1</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="edit">
+          <mat-icon>brightness_1</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="done">
+          <mat-icon>check_circle</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="number" let-index="index" let-active="active">
+          <mat-icon *ngIf="!mainStepper.selected.interacted">panorama_fish_eye</mat-icon>
+          <mat-icon *ngIf="mainStepper.selected.interacted">brightness_1</mat-icon>
+        </ng-template>
+  
+      </mat-horizontal-stepper>
+    </div>
+    <signup-otp *ngIf="hideOnOtpVerification" [params]="otpParams" (onOTPSuccess)="onOTPSuccess($event)"
+      (onInvalidOTP)="onInvalidOTP($event)" (onOTPError)="onOTPError($event)">
+    </signup-otp>
+    <div id="addPassportDetailsModal" class="modal fade" dir="{{ direction }}" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+          <div class="modal-header text-white text-center">
+            <p class="modal-title  text-white text-center">
+              {{lang?.c6?.title || 'Title'}}</p>
+          </div>
+    
+          <div class="modal-body">
+            <div [hidden]="!showAttachments" class="container-attachments-list">
+              <signup-attachments [viewType]="'inline'" [attachmentsList]="attachmentsList"
+                [ReturnIdx]="registrationObj.ReturnIdx" (onFileUploadSuccess)="onFileUploadSuccess($event)"
+                (onClose)="onAttachmentsClose($event);"></signup-attachments>
+            </div>
+          </div>
+
+        </div>
+        </div>
+    </div>
+    <!-- REGISTRATION SUCCESSFUL - START -->
+<mat-card class="mt-3" *ngIf="showAcknowledgement"  style="margin-left: 20%;  margin-right: 20%;">
+    <mat-card-content>
+        <div class="row text-center" style="margin-top: 40px;">
+            <div class="col-md-12">
+                <i class="fa fa-check-circle" aria-hidden="true" style="font-size: 50px; color: #00e695;"></i>
+                <div class="mt-3">
+                    <p class="mainTitle">{{ lang1.c1.t1 }}</p>
+                </div>
+                <div class="subTitle">
+                    <p>{{ lang1.c1.t2 }}</p>
+                    <p>{{ lang1.c1.t3 }}</p>
+                    <p>{{ lang1.c1.t4 }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <button mat-button class="btnCss" [routerLink]="['/login']">
+            {{ lang1.c1.btn2 }}
+          </button>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<!-- REGISTRATION SUCCESSFUL - END -->
+  </div>
+  
+  <notifier-container></notifier-container>
+  
+  <div class="modal sh-info-modal" id="errorMsgsModal" data-keyboard="false" data-backdrop="static" [dir]="direction">
+    <div class="modal-dialog modal-lg max-width-550">
+        <div class="modal-content">
+            <div class="modal-header text-white text-center">
+                <p class="modal-title  text-white text-center">
+                    <i class="fa fa-info-circle"></i>&nbsp;{{lang?.error}}
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-3">
+                    <div class="col-12 text-left text-error">
+                        <h6 *ngFor="let error of errorMsgsList" class="font-weight-normal font-14">{{error?.message}}
+                        </h6>
+                    </div>
+                    <div class="col-12 mt-3 mb-2 text-right">
+                        <button mat-raised-button class="rounded save-btn btn-bg-success" type="button"
+                            style="width: auto;" (click)="closeModal('errorMsgsModal')">{{lang?.ok}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

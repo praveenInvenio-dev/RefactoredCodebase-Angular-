@@ -1,0 +1,119 @@
+.cardz {
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.fontCss {
+  padding: 5px;
+  border-right: 1px solid;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+  color: white;
+  font-family: SSTArabic-Medium;
+}
+
+.fontCss1 {
+  padding: 5px;
+  border-left: 1px solid;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+  color: white;
+  font-family: SSTArabic-Medium;
+}
+
+.fontCssAr {
+  padding: 5px;
+  border-right: 1px solid;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+  color: white;
+  font-family: SSTArabic-Medium;
+}
+
+.fontCssAr2 {
+  padding: 5px;
+
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+  color: white;
+  font-family: SSTArabic-Medium;
+}
+
+.fontCssAr1 {
+  padding: 5px;
+  border-right: 1px solid;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+  color: white;
+  font-family: SSTArabic-Medium;
+}
+
+.txtHCss {
+  position: relative;
+  right: 15px;
+  top: 0px !important;
+}
+
+.txtCss {
+  position: relative;
+  right: 15px;
+}
+.textCss2 {
+  position: relative;
+  left: 10px;
+}
+
+.textCss2Ar {
+  position: relative;
+  right: 10px;
+}
+
+.ifrmCss {
+  position: fixed;
+  top: 115px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  max-height: 550px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: 999999;
+}
+.outerFrame {
+  background-color: whitesmoke;
+  max-height: 565px;
+  min-height: 565px;
+  width: 100%;
+  overflow: auto;
+}
+.ifrmCss1 {
+  position: fixed;
+  top: 225px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  max-height: 500px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: 999999;
+}
+
+.navbar-nav {
+  float: right;
+  margin: 0;
+}

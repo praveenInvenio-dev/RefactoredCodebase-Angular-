@@ -1,0 +1,150 @@
+<!-- <div class="container" dir="rtl">
+  <nav class="navbar navbar-expand-sm  navbar-dark  fixed-top" style="box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+   margin-left: 10%;margin-right: 10%;height: 100px;background-image: url('assets/images/header02.jpg');">
+
+    <div class="row text-center mb-5" style="width: 100%;    position: relative;
+    top: 20px;">
+      <div class="col-md-12">
+        <div id="textbox">
+          <div class="alignleft">
+            <div class="card cardz" style="border-radius:50%;width: 70px;" [routerLink]="['/home']">
+
+              <div class="card-body">
+                <i class="fa fa-arrow-left" style="font-size: 25px;" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+          <div class="alignright">
+            <div class="card cardz" style="border-radius:50%;width: 70px;float: right;">
+              <div class="card-body">
+                <img src="assets/images/chat01.png" alt="Logo">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </nav>
+  <div class="container">
+    <div class="row text-center mt-5" style="margin-left: 20%;margin-right: 20%;width: 60%;">
+      <div class="col-md-12">
+        <mat-card>
+          <div class="row mt-5 mb-5">
+            <div class="col-md-12">
+              <p style="font-size: 15px;
+              width: 90%;
+              margin-left: 5%;
+              margin-right: 5%;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.97;
+            letter-spacing: normal;
+            text-align: center;
+            color: #100f0f;">
+                {{lang.title}}
+              </p>
+            </div>
+          </div>
+          <div class="row mt-4 mb-4" style="margin-right: 15%;margin-left: 15%;width:70%;">
+            <div class="col-md-12">
+              <div class="form-inline" style="margin-left: 11%;">
+                <input type="password" maxlength="1" class="form-control otpbox">
+                <input type="password" maxlength="1" class="form-control otpbox">
+                <input type="password" maxlength="1" class="form-control otpbox">
+                <input type="password" maxlength="1" class="form-control otpbox">
+              </div>
+
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-12">
+              <h5>
+                00:59
+              </h5>
+              <p style="margin-top: 10px;font-size: 15px;
+              font-weight: 500;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: 1.97;
+              letter-spacing: normal;
+              text-align: center;
+              color: #d2d2d2;"><a>{{lang.verifyTitle}}</a></p>
+            </div>
+          </div>
+
+          <button class="btn" style="background-color: black;color: white;" [routerLink]="['/home']">Submit</button>
+        </mat-card>
+      </div>
+    </div>
+  </div> -->
+
+
+<!-- <iframe  src= this.baseUrl + "sap/bc/ui5_ui5/sap/zuib_ang_demo/index.html?sap-client=100&sap-ui-language=EN" referrerpolicy="allow-same-origin">
+</iframe> -->
+  <!-- <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+      <div class="col-md-6" style="border: 1px solid;">
+  
+      </div>
+      <div class="col-md-6" style="border: 1px solid; ">
+        <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+          <div class="col-md-12">
+            <div class="row" >
+              <div class="col-md-12">
+                <img src="assets/images/logo2.png" alt="Logo" style="width:140px;">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <form action="/action_page.php">
+                  <div class="form-group">
+                    <label for="tin">Tax Identification Number</label>
+                    <input type="email" class="form-control" placeholder="Please Enter your Tin" id="tin">
+                  </div>
+                  <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" placeholder="Enter password" id="pwd">
+                  </div>
+                  <div class="form-group">
+                    <label>
+                      Forgot Username or Password
+                    </label>
+                  </div>
+                  <button type="submit" class="btn" style="width: 100%; background-color: black;color: white;" data-toggle="modal" (click)="resetTimer()"
+                    data-target="#myModal">Login</button>
+                </form>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 50px;">
+              <div class="col-md-12">
+                Dont have account <a href="">SignUp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+      </div>
+    </div> -->
+<!-- </div> -->
+
+<div class="modal" id="loader" data-backdrop="static" data-keyboard="false" style="background-color:whitesmoke;opacity: 0.8;">
+  <div class="modal-dialog  modal-sm modal-dialog-centered">
+      <div class="modal-content h-100 " style="border: none;  background-color: rgba(0,0,0,.0001) !important">
+
+          <!-- Modal body -->
+          <div class="modal-body" style="left:30%">
+               <!-- <img  src="../../assets/images/loader.gif" />  -->
+              <mat-spinner class="text-center" mode="indeterminate"></mat-spinner>
+              <!-- <p-progressSpinner></p-progressSpinner> -->
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<notifier-container></notifier-container>
+
+<iframe style="display: none;" [src]="url" width="400" id="myIframe" height="300"></iframe>

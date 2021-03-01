@@ -1,0 +1,89 @@
+
+
+/* CHAT RELATED CSS STRATS HERE */
+.max-width-860{
+	max-width:860px;
+}
+.active-arrow{
+	top:3px;
+	
+}
+.custom.card{
+	flex-direction:unset !important;
+}
+.chat-main{
+	top:36%;
+	right:10px;
+	transform:translateY(-50%);
+}
+img.active-arrow{
+	opacity:0;
+}
+.chat ul>li.active img.active-arrow, .chat ul>li:active img.active-arrow,  .chat ul>li:hover img.active-arrow{
+	opacity:1;
+}
+.chat ul>li.active, .chat ul>li:hover {
+
+background-image: linear-gradient(108deg, #009d88 3%, #006450 85%);
+}
+.chat ul>li.active .inner p, .chat ul>li.active .inner label, .chat ul>li:hover .inner p, .chat ul>li:hover .inner label{
+    color:#fff !important;
+}
+.chat ul>li.active .inner p{
+	font-weight:500;
+}
+.chat ul>li:nth-child(1).active{
+    border-top-left-radius: 12px;
+}
+.chat input::placeholder{
+	color:#999999!important;
+	font-weight:normal !important;
+}
+.send-icon{
+	top:50%;
+	right:10px;
+	transform:translateY(-50%);
+}
+.border-right-whisper-1{
+	border-right:1px solid #ebebeb;
+}
+.default-line{
+	 width: 21px;
+     height:1px;
+	 background-color:#999999;
+	 
+}
+/* CHAT RELATED CSS ENDS HERE */
+
+
+/* NOTES CSS STRATS HERE */
+.custom.notes{
+	bottom:20px;
+	
+}
+.notes{
+  width: 129px;
+  height: 48px;
+  right:10px;
+  padding: 12px 24px;
+  border-radius: 24px;
+  background-color:#006450;
+}
+.notes .badge{
+	height:16px;
+	width:16px;
+	padding: 0 5px 0 6px;
+	border-radius:50%;
+	top:-7px;
+	right:5px;
+}
+
+/* NOTES CSS ENDS HERE */
+
+.input165 {
+	width:200px !important;
+}
+
+.disablePointer {
+	pointer-events: none;
+   }

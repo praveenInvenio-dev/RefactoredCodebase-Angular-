@@ -1,0 +1,250 @@
+<div class="container" [dir]="dir">
+    <div *ngIf="!isSuccess">
+        <div class="row mt-3">
+            <div class="col-md-12" style="text-align: start;">
+                <span class="title1">{{lang.title1}} </span><span class="title1" style="color: #151515">{{lang.title2}}</span>
+            </div>
+        </div>
+        <div class="row mt-4" style="width: 100%">
+            <div class="col-md-12" [style.padding-right]="dir == 'rtl' ? '0' : ''">
+                <div class="viewMore">
+                    <span style="cursor: pointer" (click)="back()">
+          <img src="assets/image/arrow-left.svg" style="width: 24px" *ngIf="dir === 'ltr'" />
+          <img src="assets/image/arrow-right.svg" style="width: 24px"  *ngIf="dir === 'rtl'"/>
+          {{lang.back}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" style="text-align: start">
+            <div class="col-md-12">
+                <div class="secondTitle">
+                    {{ menu[optionActive - 1].t1 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3" style="text-align: start">
+            <div class="col-md-12">
+                <div class="secondTitle1">
+                    {{ menu[optionActive - 1].t2 }}
+                </div>
+            </div>
+        </div>
+        <div class="Rectangle-12New mt-3"></div>
+
+        <div *ngIf="optionActive == 1">
+            <form [formGroup]="mobForm">
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="time-picker-component">
+                            <!-- <mat-form-field appearance="outline" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;"> -->
+                            <div class="registerLabelCss required">{{lang.nwPhNo}}</div>
+                            <div id="custom" dir="ltr">
+                                <mat-select id="code" class="custom" style="width: 20%;" formControlName="cc">
+                                    <!-- [ngClass]="{'arabicFont' : dir == 'rtl'}" -->
+                                    <mat-select-trigger>
+                                        +{{mobForm.controls['cc'].value}}
+                                    </mat-select-trigger>
+                                    <mat-option [value]="item.Telefto" *ngFor="let item of codes" (click)="onChange(item)">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="">
+                                                +{{ item.Telefto }}
+                                            </div>
+                                            <div class="text-truncate pl-4" [title]="item.Landx50">
+                                                {{ item.Landx50 }}
+                                            </div>
+                                        </div>
+                                        <!-- <span>+{{ item.Telefto }}</span> <span style="float: right;"> {{ item.Landx50 }}</span> -->
+                                    </mat-option>
+                                </mat-select>
+                                <input matInput type="text" #p class="custom" formControlName="mob" (keypress)='restrictAlphabets($event)' [style.border]="(submitted && f.mob.errors !== null ) ? '2px solid red' : ''" maxlength={{maxLength}} [ngClass]="dir=='rtl'? 'mobileInputArb' : 'mobileInputEng'"
+                                />
+                                <!-- [ngClass]="{'arabicFont mobileInputArb' : dir == 'rtl', 'mobileInputEng' :dir != 'rtl'}"/> -->
+                            </div>
+                            <div *ngIf="submitted && f.mob.errors" class="invalid-feedback mt-2">
+                                <div *ngIf="f.mob.errors.required">
+                                    {{lang.errMsgs.e1}}
+                                </div>
+                                <!-- <div *ngIf="setMobPatternError" >Mobile Number should start from 5</div> -->
+                                <!-- <div *ngIf="f.mob.errors.pattern" >{{lang.errMsgs.e5}}</div> -->
+                            </div>
+                            <div *ngIf="f.mob.errors && f.mob.errors.pattern" class="invalid-feedback mt-2">{{lang.errMsgs.e5}}</div>
+                            <!-- </mat-form-field> -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="time-picker-component">
+                            <!-- <mat-form-field appearance="outline" style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center;"> -->
+                            <div class="registerLabelCss required">{{lang.cnfrmPh}}</div>
+                            <div id="custom" dir="ltr">
+                                <mat-select id="code" class="custom" style="width: 20%;" formControlName="confrmCC">
+                                    <mat-select-trigger>
+                                        +{{mobForm.controls['confrmCC'].value}}
+                                    </mat-select-trigger>
+                                    <mat-option [value]="item.Telefto" *ngFor="let item of codes" (click)="onChange1(item)" class="">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="">
+                                                +{{ item.Telefto }}
+                                            </div>
+                                            <div class="text-truncate pl-4">
+                                                {{ item.Landx50 }}
+                                            </div>
+                                        </div>
+                                        <!-- <span></span> <span style="float: right;"> </span> -->
+                                    </mat-option>
+                                </mat-select>
+                                <input matInput type="text" class="custom" formControlName="cnfrmMob" (keypress)='restrictAlphabets($event)' [style.border]="(submitted && f.cnfrmMob.errors !== null ) ? '2px solid red' : ''" maxlength={{maxLength}} [ngClass]="dir=='rtl'? 'mobileInputArb' : 'mobileInputEng'"
+                                    (paste)="$event.preventDefault()" />
+                            </div>
+                            <!-- <pre>
+            f.cnfrmMob.errors :: {{f.cnfrmMob.errors}} <br>
+            matchErr :: {{matchErr}}<br>
+            f.cnfrmMob.value :: {{f.cnfrmMob.value}}
+          </pre> -->
+                            <div *ngIf="submitted && f.cnfrmMob.errors" class="invalid-feedback mt-2">
+                                <div *ngIf="f.cnfrmMob.errors.required">
+                                    {{lang.errMsgs.e1}}
+                                </div>
+                                <div *ngIf="matchErr && f.cnfrmMob.value != ''">{{lang.errMsgs.e3}}</div>
+                            </div>
+                            <div *ngIf="submitted && (f.cc.value != f.confrmCC.value)" class="invalid-feedback mt-2">
+                                <div *ngIf="!matchErr && (f.cc.value != f.confrmCC.value)">{{lang.errMsgs.e4}}</div>
+                            </div>
+                            <!-- </mat-form-field> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 mb-5" style="text-align: start">
+                    <button mat-button type="submit" class="btnCss mt-5" (click)="onSubmit()">
+        {{lang.confirm}}
+      </button>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="optionActive == 2" style="text-align: start;">
+            <div class="row mt-3">
+                <div class="col-md-6 mobileNumberText">
+                    {{lang.mobNum}} {{ "xxxxxx" + this.mobForm.value.mob.substring(this.mobForm.value.mob.length - 4)}}
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="row mt-3">
+                        <div class="col-md-12 vBox" [style.padding-right]="dir == 'rtl' ? '0' : ''" dir="ltr" [style.justify-content]="dir === 'rtl'? 'flex-end':''">
+                            <input id="e1Id" #e1 type="password" class="Verif-box ash" maxlength="1" [disabled]="enableResendButton" (keyup)="keyUpEvent($event, 1)" />
+                            <input #e2 type="password" class="Verif-box ash" maxlength="1" [disabled]="enableResendButton" (keyup)="keyUpEvent($event, 2)" />
+                            <input #e3 type="password" class="Verif-box ash" maxlength="1" [disabled]="enableResendButton" (keyup)="keyUpEvent($event, 3)" />
+                            <input #e4 type="password" class="Verif-box ash" maxlength="1" [disabled]="enableResendButton" (keyup)="keyUpEvent($event, 4)" style="color: transparent;text-shadow: 0 0 0 black" />
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="smallHeading" style="text-align: start;">
+                                <img src="assets/image/forgotClock.svg" /> &nbsp; <span>{{counterDisplay}}
+              </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="resend">
+                                <button (click)="resendOTP()" class="resend" [style.opacity]="enableResendButton ? '1' : '0.2'" [style.cursor]="enableResendButton ? 'pointer' : ''" style="border: none; color: #006450;background-color: white;  " [disabled]="!enableResendButton">{{lang.resend}}</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isSuccess">
+        <!-- <div class="row ml-5 text-center">
+          <div class="col-md-12 mt-5" style="height:159px">
+              <img src="assets/image/success.svg" width="112px">
+          </div>
+      </div>
+      <div class="row ml-5 text-center">
+          <div class="col-md-12">
+              <div class="exciseAccCss1 ">
+                {{lang.title2}}
+              </div>
+          </div>
+      </div>
+      <div class="row ml-5 text-center">
+          <div class="col-md-12">
+              <div class="exciseAccCss2 mt-2 ">
+                {{lang.updMsg}}
+              </div>
+          </div>
+      </div>
+
+    <div class="exciseAccCssBox mt-4" style="width: 437px; height: 56px;" [style.margin-right]="dir == 'rtl' ? '22%' : ''">
+      <div class="exciseAccCssBox1">
+        <span [style.margin-right]="dir == 'rtl' ? '20px' : ''">{{lang.phNo}}</span>
+        <span class="exciseAccCssBox2" [style.float]="dir == 'rtl' ? 'left' : ''" [style.margin-left]="dir == 'rtl' ? '15px' : ''"> +{{mobile.substr(2,mobile.length)}}</span>
+      </div>
+    </div>
+
+      <div class="row ml-5 text-center">
+          <div class="col-md-12">
+              <button mat-button type="button" class="btnCss mt-5" (click)="logout()">{{lang.goto}}</button>
+          </div>
+      </div>
+  </div> -->
+    </div>
+
+    <div class="modal" id="openModal" data-keyboard="false" data-backdrop="static" style="padding-top: 120px;" [dir]="dir">
+        <div class="modal-dialog  modal-md">
+            <div class="modal-content" style="width: 600px;
+    height: 500px;">
+                <div class="modal-body">
+                    <div class="row text-center">
+                        <div class="col-md-12 mt-4" style="height:159px">
+                            <img src="assets/image/success.svg" width="112px">
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="exciseAccCss1 ">
+                                {{lang.title2}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="exciseAccCss2 ">
+                                {{lang.updMsg}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="col-md-10">
+                            <div class="exciseAccCssBox mt-4" style="width: 437px; height: 56px;" [style.margin-right]="dir=== 'rtl' ? '50px' : ''" [style.margin-left]="dir=== 'ltr' ? '50px' : ''">
+                                <div class="exciseAccCssBox1">
+                                    <span [style.margin-right]="dir == 'rtl' ? '20px' : ''">{{lang.phNo}}</span>
+                                    <span class="exciseAccCssBox2" dir='ltr' *ngIf="mobile" [style.float]="dir == 'rtl' ? 'left' : ''" [style.margin-left]="dir == 'rtl' ? '15px' : ''"> +{{mobile.substr(2,mobile.length)}}</span>
+                                </div>
+                            </div>
+
+                            <div class="row ml-5 text-center">
+                                <div class="col-md-12" [style.margin-right]="dir=== 'rtl' ? '68px' : ''">
+                                    <button mat-button type="button" class="btnCss mt-5" (click)="logout()">{{lang.goto}}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <notifier-container></notifier-container>

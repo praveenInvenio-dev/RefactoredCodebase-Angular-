@@ -1,0 +1,1855 @@
+<div *ngIf="!showReviewDetails && isResSuccess" class="container alignStart" style="max-width: 899px; font-family: SSTArabic-Roman;"
+    [dir]="lang.dir =='ltr'?'ltr':'rtl'">
+    <div *ngIf="!showSuccess">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="bcTitle unicodeDir" style="cursor: pointer;" (click)="goBackToNewObjectionReview(false)">{{lang.bc1}} &gt;</span> <span class="bcTitle unicodeDir"style="cursor: pointer;" (click)="goBackToNewObjectionReview(true)">{{lang.bc2}} &gt;</span> 
+                <span style="padding-inline-start: 2px;"
+                    class="bcTitle bcTitleActive">{{lang.bc3}}</span>
+            </div>
+        </div>
+        <div class="row mt-3" style="width: 100%">
+            <div class="col-md-12">
+                <div class="stepHeader row">
+                    <span class="stepBack col-md-6" (click)="back()">
+                        <img [src]="lang['dir'] =='ltr'?'assets/image/arrow-left-green.svg':'assets/image/arrow-right-green.svg'"
+                            style="width: 24px">
+                        {{lang.back}}</span>
+                    <span class="stepNumber col-md-6" style="padding: 0;"   *ngIf="isApplicationEditable">
+                        <img [ngClass]="lang.dir=='rtl'?'rotateSteps':''" src="{{ lang.menu[optionActive - 1].step }}"
+                            style="width: 106px" />
+                        <img *ngIf="optionActive==7" style="padding-inline-start: 4px;" src="assets/image/check.svg" />
+                    </span>
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div *ngIf="isApplicationEditable" class="pageTitle">
+                    {{ lang.menu[optionActive - 1].title }}
+                </div>
+                <div *ngIf="!isApplicationEditable" class="pageTitle" style="font-family: SSTArabic-bold;">
+                    {{ lang.bc3}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2" *ngIf="isApplicationEditable">
+            <div class="col-md-12">
+                <div class="value textGray">
+                    {{ lang.menu[optionActive - 1].subtitle }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" class="alignEnd"  *ngIf="optionActive == 7 && !isApplicationEditable" style="margin-top: -16px;">
+            <div [ngClass]="statusColor(data['d']['Statusx'])"  class="statusSummary">{{getStatus}}</div>
+        </div>
+        <div *ngIf="isApplicationEditable" class="Rectangle-12New mt-3"></div>
+       
+
+        <!-- header end -->
+        <div class="mt-3 mb-3">
+            <form style="width: 100%">
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 1
+
+
+
+                -------------------------------------------->
+                <div class="row" *ngIf="optionActive === 1">
+                    <div class="col-md-12">
+                        <form [formGroup]="vatReviewFormGroup" (ngSubmit)="onSubmit()">
+
+                            <div class="mt-3">
+                                <div class="taxpayer-card border textDark py-3 col-md-12 col-sm-12 col-xs-12">
+
+                                    <div class="row  vCenter px-3 mx-0 taxpayer-card-section">
+                                        <div class="oval"><img  class="centerImage" src="assets/image/user.svg"></div>
+                                        <div class="sectionTitle fwb px-2">{{lang.f1.taxpayerDetails}}</div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 taxpayer-card-section">
+
+                                        <div class="col-md-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.tin}}</div>
+                                            <div class="value fwb">{{data['d']['Gpartx']}}</div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.taxpayerName}}</div>
+                                            <div class="value fwb">{{data['d']['FullName']}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+                                    <div class="row vCenter px-3 taxpayer-card-section">
+
+                                        <div class="col-md-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.crLicence}}</div>
+                                            <div class="value fwb">{{data['d']['CrNo']}}</div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.mainOutlet}}</div>
+                                            <div class="value fwb">{{data['d']['Actnm']}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f1.address}}</div>
+                                        <div class="value fwb" *ngIf="data['d']['AddressSet']['results'].length>0">{{data['d']['AddressSet'].results[0].BuildingNo}}, {{data['d']['AddressSet'].results[0].Street}},
+                                            {{data['d']['AddressSet'].results[0].Addrnumber}}, 
+                                            {{data['d']['AddressSet'].results[0].RegionDesc}},
+                                            {{data['d']['AddressSet'].results[0].City}},
+                                            {{data['d']['AddressSet'].results[0].PostalCd}}</div>
+
+                                    </div>
+
+                                </div>
+
+                                <button type="submit" class="btnPrimary" style="min-width: 207px !important;"
+                                    mat-raised-button>
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 2
+
+
+
+                -------------------------------------------->
+                <div class="row" *ngIf="optionActive === 2">
+                    <div class="col-md-12">
+                        <form [formGroup]="vatReviewFormGroup2" (ngSubmit)="onSubmit2()">
+
+                            <div class="mt-3">
+
+                                <div class="row" style="margin-bottom: 56px;">
+
+                                    <div class="col-xs-12 col-sm-6 mt-2">
+                                        <div class="matLabel labelMarginBottom">{{lang.f2.label1}}</div>
+                                        <mat-select class="commonMatSelect" (selectionChange)="filterSubReasons()" formControlName="selectedReason"
+                                            style="min-width: unset;max-width:unset;width: 100% !important;"  [disabled]="disableSadadParams"  [ngClass]="vatReviewFormGroup2.controls.selectedReason.errors && !isSubmit ?'inputErr':''" >
+
+                                            <mat-option *ngFor="let each of data['d']['MainReasonSet']['results']" [value]="each.ProcCd"> {{each.TypeT}}</mat-option>
+                                           
+
+                                        </mat-select>
+                                        <!-- <div  *ngIf="vatReviewFormGroup2.controls.selectedReason.invalid && !isFormValid"  class="matLabel helperMarginTop">Helper Text</div> -->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 mt-2">
+                                        <div class="matLabel labelMarginBottom">{{lang.f2.label2}}</div>
+                                        <mat-select class="commonMatSelect" (selectionChange)="getRejectedForms()" formControlName="selectedSubReason" [disabled]="disableSadadParams"
+                                            style="min-width: unset;max-width:unset;width: 100% !important;" [ngClass]="vatReviewFormGroup2.controls.selectedSubReason.errors && !isSubmit ?'inputErr':''" >
+                                        <ng-container *ngFor="let each of data['d']['ReasonSet']['results']">
+                                            <mat-option   *ngIf="each.ProcCd == vatReviewFormGroup2.controls.selectedReason.value"  [value]="each.Code">{{each.SubtypT}}</mat-option>
+                                           
+                                        </ng-container>
+                                        </mat-select>
+                                        <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 mt-4">
+                                        <div class="matLabel labelMarginBottom">{{lang.f2.label3}}</div>
+                                        <mat-select   class="commonMatSelect"   (selectionChange)="setNextValues()" formControlName="referenceNumber" 
+                                            style="min-width: unset;max-width:unset;width: 100% !important;" [disabled]="(rejectedFormSet && rejectedFormSet['d']['RejectedFormSet']['results'].length==0)||(disableSadadParams)" [ngClass]="vatReviewFormGroup2.controls.referenceNumber.errors && !isSubmit ?'inputErr':''">
+                                            <ng-container  *ngIf="rejectedFormSet && rejectedFormSet['d']['RejectedFormSet']['results'].length>0" >
+                                            <mat-option *ngFor="let each of rejectedFormSet['d']['RejectedFormSet']['results']"  [value]='["VTPC", "VTPN"].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) == -1 ? each.Fbnum : each.Opbel'> {{["VTPC", "VTPN"].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) == -1 ? each.Fbnum : each.Opbel}}</mat-option>
+                                        </ng-container>
+                                        </mat-select>
+                                        <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 mt-4">
+
+                                    <div class="matLabel  labelMarginBottom"  *ngIf="vatReviewFormGroup2.controls.decisionDate.value.trim().length>0">
+                                        {{lang.f2.decisionDate}}</div>
+                                    <input  *ngIf="vatReviewFormGroup2.controls.decisionDate.value.trim().length>0" class="commonInput" type="text" formControlName="decisionDate"
+                                        style="min-width: unset;max-width:unset;width: 100% !important;"  
+                                         readonly />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 mt-4" style="display: flex;
+                                    align-items: center;">
+
+                                        <button type="button" *ngIf="['VTPC', 'VTPN'].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) === -1" (click)="viewApplication()" class="btnSecondary"  [disabled]="vatReviewFormGroup2.controls.referenceNumber.value==''">{{lang.f2.btnSecondary}} </button>
+                                        <button  type="button" *ngIf="['VTPC', 'VTPN'].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) !== -1"    [disabled]="vatReviewFormGroup2.controls.referenceNumber.value==''"  (click)="viewBill()" class="btnSecondary">{{lang.f2.viewBill}} </button>
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 mt-4" style="display: flex;
+                                    align-items: center;">
+
+
+                                    <button type="submit" class="btnPrimary" style="min-width: 207px !important;"
+                                    mat-raised-button >
+                                    {{ lang.continue }}
+                                    
+                                </button>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+                               
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 3
+
+
+
+                -------------------------------------------->
+
+                <div class="row" *ngIf="optionActive === 3">
+                    <div class="col-md-12">
+                        <form [formGroup]="vatReviewFormGroup3" (ngSubmit)="onSubmit3()">
+
+                            <div class="mt-3">
+
+
+                                <div class="form-3-container" style="margin-bottom: 56px;">
+
+                                    <div class="matLabel  labelMarginBottom">{{lang.f3.reportDetails}}</div>
+                                    <div class="common-text-area-container mb-5">
+                                        <textarea class="common-text-area"  formControlName="reviewDetailNote" [readOnly]="disableSadadParams" id="t1" [ngClass]="vatReviewFormGroup3.controls.reviewDetailNote.errors && !isSubmit ?'inputErr':''" (input)="onInputChange('t1')"></textarea>
+                                        <span
+                                            [ngClass]="lang.dir=='ltr'?'common-text-area-counter-ltr':'common-text-area-counter-rtl'"> {{vatReviewFormGroup3.controls.reviewDetailNote.value.length}}/1006 </span>
+                                            <div *ngIf="vatReviewFormGroup3.controls.reviewDetailNote.value.length>1006" class="text-danger mb-2" style="font-size: 12px;">{{lang.textArea}}</div>
+                                    </div>
+
+
+                                    <div class="mb-4 sectionTitle fwb">{{lang.f3.supportingDocuments}}</div>
+
+                                    <div class="row" >
+                                        
+                                        <ng-container *ngFor="let attach of vatReviewFormGroup3.get('doc')['controls']; let j = index;">
+                                        <div    *ngIf="attach['controls']['id'].value==='RAGA'" class="col-md-6 col-sm-12 col-xs-12">
+
+                                            <div class="mb-3"  >
+
+
+
+                                                <div class="matLabel  labelMarginBottom">
+                                                    {{lang.f3.attachmentName}}</div>
+                                                <input class="commonInput" readonly [value]="attach['controls']['name'].value"
+                                                    style="min-width: unset;max-width:unset;width: 100% !important;"
+                                                    [placeholder]="lang.f3.attachmentNamePlaceholder" />
+                                                <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+                                            </div>
+
+                                            <div   class="card-uploaded  border" style="min-width: unset;max-width:unset">
+                                               
+                                                <div class="card-delete"><img   (click)="deleteAttachmentFromSer(attach['controls']['id'].value, attach['controls']['did'].value,j)" src="assets/image/delete.svg" />
+                                                </div>
+                                                <div class="card-file-content">
+                                                    <img [src]="
+                                                    isPdf( attach['controls']['name'].value)
+                                                    ? 'assets/images/generic-documents.png'
+                                                    : 'assets/images/generic-documents.png'
+                                                    " style="width: 24px;
+                                                    margin: 0 auto;" />
+                                                    
+                                                    <div class="value textDark mt-1  card-main-text fwb">{{ attach['controls']['name'].value }}</div>
+                                                    <!-- <div class="caption textGray mt-1">{{  attach['controls']['size'].value}}</div> -->
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </ng-container>
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+
+                                            <div class="mb-3">
+
+
+                                                <div class="matLabel  labelMarginBottom"  >
+                                                    {{lang.f3.attachmentName}}</div>
+                                                <input class="commonInput" type="text" formControlName="supportingDocName"
+                                                    style="min-width: unset;max-width:unset;width: 100% !important;"  
+                                                    [placeholder]="lang.f3.attachmentNamePlaceholder"   [readOnly]="disableSadadParams"/>
+                                                <!-- <div *ngIf="this.vatReviewFormGroup3.controls.supportingDocName.value==''" class="matLabel helperMarginTop">add name</div> -->
+                                            </div>
+
+
+                                            <div class="card-upload border "   [ngClass]="vatReviewFormGroup3.controls.supportingDocName.value.trim()=='' ? 'fadeDiv':''"  style="min-width: unset;max-width:unset"  (click)="fileInput.click()" appDragDrop
+                                            (onFileDropped)="uploadFiles($event,1)">
+
+
+                                                <div class="card-upload-content">
+                                                    <input hidden type="file" #fileInput
+                                                    (change)="uploadFiles($event.target.files,1)" onclick="this.value = null"/>
+                                                    <img src="assets/image/attach.svg" class="centerImage" />
+                                                    <div class="value textPrimary mt-1 card-main-text fwb">
+                                                        {{lang.f3.dragText}}</div>
+                                                    <div class="caption textGray mt-1">{{lang.mbMax5}}</div>
+
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+
+                                </div>
+
+
+
+                                <button type="submit" class="btnPrimary" style="min-width: 207px !important;" 
+                                    mat-raised-button>
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 4
+
+
+
+            -------------------------------------------->
+
+
+                <div class="row" *ngIf="optionActive === 4">
+                    <div class="col-md-12">
+                        <form [formGroup]="vatReviewFormGroup4" (ngSubmit)="onSubmit4()">
+
+                            <div class="mt-3">
+
+                                <div class="form-4-container textDark" style="margin-bottom: 56px;">
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mb-4">
+
+                                            <div class="matLabel  labelMarginBottom">{{lang.f4.label1}}</div>
+
+                                            <div class="commomDatePicker customDatepicker">
+
+                                                <input readonly  matInput formControlName="taxPeriod"
+                                                     name="sd" placeholder="Choose a date" style="padding-top: 7px;">
+                                                <mat-datepicker-toggle matSuffix  class="calendarIconDisabled">
+                                                </mat-datepicker-toggle>
+                                                <!-- <mat-datepicker #datePicker [calendarHeaderComponent]="headerComponent">
+                                                </mat-datepicker> -->
+
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 mb-4">
+                                            <div class="matLabel  labelMarginBottom">{{lang.f4.label2}}</div>
+
+                                            <div class="dateRangePicker">
+                                                <span class="dateRangeLabel">{{lang.f4.from}}</span>
+
+                                                <input readonly  matInput
+                                                     name="fromdate" formControlName="periodFrom" style="border: none;"
+                                                    placeholder="">
+                                                <mat-datepicker-toggle class="calendarIconDisabled" matSuffix></mat-datepicker-toggle>
+                                                <!-- <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                                                </mat-datepicker> -->
+                                                <span class="dateRangeLabel"> <img
+                                                        [src]="lang.dir=='ltr'?'assets/image/arrow-right-green.svg':'assets/image/arrow-left-green.svg'"  style="filter: invert(.55);"/>
+                                                    {{lang.f4.to}}</span>
+                                                <input readonly  matInput
+                                                     name="todate"  formControlName="periodTo" style="border: none;"
+                                                    placeholder="">
+                                                <mat-datepicker-toggle matSuffix class="calendarIconDisabled" >
+                                                </mat-datepicker-toggle>
+                                                <!-- <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+                                                </mat-datepicker> -->
+
+                                            </div>
+
+                                        </div>
+                                        <div  *ngIf='["VTPC", "VTPN"].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) == -1' class="col-md-6 col-sm-12 col-xs-12">
+
+
+                                            <div class="matLabel  labelMarginBottom">{{lang.f4.label3}}</div>
+                                            <input class="commonInput" readonly formControlName="totalTaxLiability" placeholder="placeholder" />
+                                            <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+
+                                        </div>
+                                        <div *ngIf='["VTPC", "VTPN"].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) == -1' class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="matLabel  labelMarginBottom">{{lang.f4.label4}}</div>
+                                            <input class="commonInput" readonly formControlName="taxPaid" placeholder="placeholder" />
+                                            <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+                                        </div>
+
+                                        <div  *ngIf='["VTPC", "VTPN"].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) != -1'  class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="matLabel  labelMarginBottom">{{lang.f4.label4Alt}}</div>
+                                            <input class="commonInput" readonly formControlName="penaltyAmount" />
+                                            <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+                                        </div>
+
+                                       
+
+                                    </div>
+
+                                    <!-- section 2 -->
+                                    <ng-container *ngIf='["VTPC", "VTPN"].indexOf(this.vatReviewFormGroup2.controls.selectedReason.value) == -1'>
+                                    <div class="value mt-5 mb-3">{{lang.f4.request}}</div>
+                                    <div class="row" style="margin: 0; flex-direction: row;">
+
+                                        <div   [ngClass]="[vatReviewFormGroup4.controls.amountType.value=='F'?'selector-card-active':'',vatReviewFormGroup4.controls.amountType.errors && !isSubmit?'inputErr':'',disableSadadParams ?'fadeCard':'']"  class="selector-card border pb-3 px-3 mb-4"
+                                            style="margin-inline-end: 15px;width:207px" (click)="amountTypeSelect('F')" >
+                                            <div class="value  fwb">{{lang.f4.cardFull}}</div>
+                                        </div>
+
+                                        <div [ngClass]="[vatReviewFormGroup4.controls.amountType.value=='P'?'selector-card-active':'',vatReviewFormGroup4.controls.amountType.errors && !isSubmit?'inputErr':'',disableSadadParams?'fadeCard':'']" class="selector-card border pb-3 mb-4 px-3"
+                                            style="width:207px" (click)="amountTypeSelect('P')">
+                                            <div class="value fwb">{{lang.f4.cardPartial}}</div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                    <div class="matLabel   labelMarginBottom">{{lang.f4.label5}}</div>
+                                    <input class="commonInput"  [readonly]="vatReviewFormGroup4.controls.amountType.value=='F' || disableSadadParams"  [ngClass]="vatReviewFormGroup4.controls.amountValue.errors && !isSubmit?'inputErr':''" formControlName='amountValue'
+                                    
+                                    mask="separator.2"
+                        thousandSeparator=","
+                        maxlength="18"
+                        (blur)="validateNumbers()"
+                        separatorLimit="100000000000"
+                        [allowNegativeNumbers]="true"
+                                    />
+                                    <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                                    <!--  -->
+
+
+                                    <div class="sectionTitle mt-4 mb-3">
+                                        {{lang.f4.dispute}}
+                                    </div>
+
+
+                                    <div class="matLabel  labelMarginBottom">{{lang.f4.label6}}</div>
+                                    <div class="common-text-area-container mb-5">
+                                        <textarea class="common-text-area" formControlName="disputeDetailNote" [readOnly]="disableSadadParams" [ngClass]="vatReviewFormGroup4.controls.disputeDetailNote.errors && !isSubmit?'inputErr':''" (input)="onInputChange('t2')" id="t2"></textarea>
+                                        <span
+                                            [ngClass]="lang.dir=='ltr'?'common-text-area-counter-ltr':'common-text-area-counter-rtl'">
+                                              {{vatReviewFormGroup4.controls.disputeDetailNote.value.length}}/1006  </span>
+                                              <div *ngIf="vatReviewFormGroup4.controls.disputeDetailNote.value.length>1006" class="text-danger mb-2" style="font-size: 12px;">{{lang.textArea}}</div>
+                                       
+                                    </div>
+                                </ng-container>
+
+                                </div>
+                                <button type="submit" class="btnPrimary" style="min-width: 207px !important;"
+                                    mat-raised-button   >
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 5
+
+
+
+            -------------------------------------------->
+
+                <div class="row" *ngIf="optionActive === 5">
+                    <div class="col-md-12">
+                        <form [formGroup]="vatReviewFormGroup5" (ngSubmit)="onSubmit5()">
+
+                            <div class="mt-3">
+
+                                <div class="form-5-container textDark" style="margin-bottom: 56px;">
+
+                                    <div class="border single-input-card mb-5">
+
+                                        <div class="value textGray">
+                                            {{lang.f5.secAmount}}
+                                        </div>
+                                        <div class="value fwb">
+                                            {{parseNumber(vatReviewFormGroup5.controls.secAmount.value)}} {{lang['sar']}}
+                                        </div>
+
+                                    </div>
+                                    <ng-container  *ngIf="showPaymentMethod">
+                                    <div class="sectionTitle">{{lang.f5.secType}}</div>
+
+                                    <div class="value mt-4 mb-3"> {{lang.f5.selectMethod}}</div>
+
+                                    <div class="row" style="margin: 0; flex-direction: row;">
+
+                                        <div [ngClass]="[vatReviewFormGroup5.controls.securityType.value=='C'?'selector-card-active':'',vatReviewFormGroup5.controls.securityType.errors && !isSubmit?'inputErr':'',disableSadadParams?'fadeCard':'']" class="selector-card border pb-3 px-3"
+                                            style="margin-inline-end: 15px; width:207px" (click)="securityTypeSelect('C')" >
+                                            <div class="value  fwb">{{lang.f5.cardL}}</div>
+                                        </div>
+
+                                        <div class="selector-card border pb-3  px-3"
+                                        [ngClass]="[vatReviewFormGroup5.controls.securityType.value=='B'?'selector-card-active':'',(sadadNumber && sadadNumber.trim().length > 0)||enableRefresh?'fadeCard':'',vatReviewFormGroup5.controls.securityType.errors && !isSubmit?'inputErr':'',disableSadadParams?'fadeCard':'']"
+                                       
+                                            style="width:207px"  (click)="securityTypeSelect('B')">
+                                            <div class="value fwb">{{lang.f5.cardR}}</div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                    <div class="border single-input-card my-4"   *ngIf="sadadNumber!= undefined && sadadNumber.length>0 && this.vatReviewFormGroup5.controls.securityType.value=='C'">
+
+                                        <div class="value textGray">
+                                            {{lang.f5.sadadNumber}}
+                                        </div>
+                                        <div class="value fwb">
+                                            {{sadadNumber}}
+                                        </div>
+
+                                    </div>
+                                    <div class="mt-4"  *ngIf="this.vatReviewFormGroup5.controls.securityType.value=='C'">
+                                    <div class="value  mb-3">{{lang.f5.note1}} </div>
+                                    <div class="value  mb-3">{{lang.f5.note2}}</div>
+                                </div>
+
+                                <div class="mt-4"  *ngIf="this.vatReviewFormGroup5.controls.securityType.value=='B'">
+                                    
+
+                                    <div class="check">
+                                        <mat-checkbox class="checkboxAckCss" [ngClass]="vatReviewFormGroup5.controls.checkBank.errors && !isSubmit?'checkboxErr':''"  [checked]="this.vatReviewFormGroup5.controls.checkBank.value"  formControlName="checkBank"   >
+                                            {{lang.f5.checkBank}}
+                                        </mat-checkbox>
+                                    </div>
+                                </div>
+
+                                    <div class="check">
+                                        <mat-checkbox class="checkboxAckCss"  [ngClass]="vatReviewFormGroup5.controls.checkCash.errors && !isSubmit?'checkboxErr':''" [checked]="this.vatReviewFormGroup5.controls.checkCash.value" formControlName="checkCash">
+                                            {{lang.f5.term}}
+                                        </mat-checkbox>
+                                    </div>
+
+
+                                    <div *ngIf="this.vatReviewFormGroup5.controls.securityType.value=='C'"style="text-align: start;" class="mt-3"> <button type="button" (click)="showSadadPopup()"  [disabled]="enableRefresh || vatReviewFormGroup5.controls.checkCash.value !=true || this.sadadNumber.trim().length!=0" class="btnPrimary" style="min-width: 207px !important;"
+                                        mat-raised-button>
+                                        {{lang.f5.generateSadadBill}}
+                                    </button> <button type="button" class="btnSecondary refreshBtn mx-3" *ngIf="enableRefresh" (click)="generateSadadBill(true)"  [disabled]="!enableRefresh"
+                                    mat-raised-button>
+                                    {{lang.f5.refresh}}
+                                </button> </div>
+
+
+                                <!-- Bank guarantee Attachment -->
+
+
+                                
+                                <div class="row mt-3"  *ngIf="this.vatReviewFormGroup5.controls.securityType.value=='B'">
+                                        
+                                    <ng-container *ngFor="let attach of vatReviewFormGroup3.get('doc')['controls']; let j = index;">
+                                       
+                                    <div  *ngIf="attach['controls']['id'].value==='RVBT'" class="col-md-6 col-sm-12 col-xs-12">
+
+                                        <div class="mb-3">
+
+
+
+                                            <div class="matLabel  labelMarginBottom">
+                                                {{lang.f3.attachmentName}}</div>
+                                            <input class="commonInput" readonly [value]="attach['controls']['name'].value"
+                                                style="min-width: unset;max-width:unset;width: 100% !important;"
+                                                [placeholder]="lang.f3.attachmentNamePlaceholder" />
+                                            <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+                                        </div>
+
+                                        <div  class="card-uploaded  border" style="min-width: unset;max-width:unset">
+                                           
+                                            <div class="card-delete"><img   (click)="deleteAttachmentFromSer(attach['controls']['id'].value, attach['controls']['did'].value,j)" src="assets/image/delete.svg" />
+                                            </div>
+                                            <div class="card-file-content">
+                                                <img [src]="
+                                                isPdf( attach['controls']['name'].value)
+                                                ? 'assets/images/generic-documents.png'
+                                                : 'assets/images/generic-documents.png'
+                                                " style="width: 24px;
+                                                margin: 0 auto;" />
+                                                
+                                                <div class="value textDark mt-1  card-main-text fwb">{{ attach['controls']['name'].value }}</div>
+                                                <!-- <div class="caption textGray mt-1">{{  attach['controls']['size'].value}}</div> -->
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                    </ng-container>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+
+                                        <div class="mb-3">
+
+
+                                            <div class="matLabel  labelMarginBottom">
+                                                {{lang.f3.attachmentName}}</div>
+                                            <input class="commonInput" type="text"  [ngClass]="!getAttachmentCount()&&vatReviewFormGroup5.controls.supportingDocName.value.trim()==''&& !isSubmit?'inputErr':''"  formControlName="supportingDocName"
+                                                style="min-width: unset;max-width:unset;width: 100% !important;"  
+                                                [placeholder]="lang.f3.attachmentNamePlaceholder" />
+                                            <!-- <div *ngIf="this.vatReviewFormGroup5.controls.supportingDocName.value==''" class="matLabel helperMarginTop">add name</div> -->
+                                        </div>
+
+
+                                        <div class="card-upload border " [ngClass]="[vatReviewFormGroup5.controls.supportingDocName.value.trim()=='' ? 'fadeDiv':'',!getAttachmentCount()&&!isSubmit?'inputErr':'']" style="min-width: unset;max-width:unset"  (click)="fileInput.click()" appDragDrop
+                                        (onFileDropped)="uploadFiles($event,2)">
+
+
+                                            <div class="card-upload-content">
+                                                <input hidden type="file" #fileInput
+                                                (change)="uploadFiles($event.target.files,2)" onclick="this.value = null"/>
+                                                <img src="assets/image/attach.svg" class="centerImage"/>
+                                                <div class="value textPrimary mt-1 card-main-text fwb">
+                                                    {{lang.f3.dragText}}</div>
+                                                <div class="caption textGray mt-1">{{lang.mbMax5}}</div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                                    </ng-container>
+
+                                </div>
+
+
+
+                                <button type="submit" class="btnPrimary"  style="min-width: 207px !important;"
+                                    mat-raised-button>
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 6
+
+
+
+                -------------------------------------------->
+
+                <div class="row" *ngIf="optionActive === 6">
+                    <div class="col-md-12">
+                        <form [formGroup]="vatReviewFormGroup6" (ngSubmit)="onSubmit6()">
+
+                            <div class="mt-3">
+
+
+
+                                <div class="row" style="margin-bottom: 56px;">
+
+                                    <div class="col-xs-12 col-sm-6">
+
+                                        <div class="matLabel mt-2  labelMarginBottom">{{lang.f6.label1}}</div>
+                                        <mat-select class="commonMatSelect" 
+                                            style="min-width: unset;max-width:unset;width: 100% !important;"
+                                            formControlName="idType"   (selectionChange)="onIdSelect()" [ngClass]="vatReviewFormGroup6.controls.idType.errors && !isSubmit?'inputErr':''"
+                                            >
+
+                                            <mat-option value="ZS0001"> {{lang.f6.id1}}</mat-option>
+                                            <mat-option value="ZS0002"> {{lang.f6.id2}}</mat-option>
+                                            <mat-option value="ZS0003">{{lang.f6.id3}}</mat-option>
+
+                                        </mat-select>
+                                        <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="matLabel mt-2  labelMarginBottom">{{lang.f6.label2}}</div>
+                                        <input class="commonInput" [placeholder]="lang.f6.label2" formControlName="idNum"
+                                        style="min-width: unset;max-width:unset;width: 100% !important;" (input)="onIdNumChange()"  maxlength="15" [ngClass]="vatReviewFormGroup6.controls.idNum.errors && !isSubmit?'inputErr':''" onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));" [readOnly]="(isIdValidated == true && vatReviewFormGroup6.controls.idType.value!='ZS0003') || (isIdValidated==false && this.vatReviewFormGroup6.controls.idType.value!='ZS0003')" />
+                                     <div class="matLabel helperMarginTop text-danger" *ngIf="showIdNumError && this.vatReviewFormGroup6.controls.idType.value=='ZS0003'">{{lang.gccError}}</div> 
+                                       
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="matLabel mt-2  labelMarginBottom">{{lang.f6.label3}}</div>
+                                        <input class="commonInput" [placeholder]="lang.f6.label3" formControlName="name"
+                                            style="min-width: unset;max-width:unset;width: 100% !important;" [ngClass]="vatReviewFormGroup6.controls.name.errors&& !isSubmit ?'inputErr':''"  (input)="nameValidator($event)"    maxlength="80" />
+                                        <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+                                    </div>
+
+
+
+                                    <div class="check mt-4 col-12" >
+                                        <mat-checkbox class="checkboxAckCss" formControlName="checkTerm" [ngClass]="vatReviewFormGroup6.controls.checkTerm.errors && !isSubmit?'checkboxErr':''">
+                                            {{lang.f6.term}}
+                                        </mat-checkbox>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <button type="submit" class="btnPrimary" style="min-width: 207px !important;"
+                                    mat-raised-button >
+                                    {{ lang.continue }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 7
+
+
+
+                -------------------------------------------->
+
+                <div class="row" *ngIf="optionActive === 7">
+                    <div class="col-md-12">
+                        <form [formGroup]="vatReviewFormGroup7" (ngSubmit)="onSubmit7()">
+
+                            <div class="mt-3">
+
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-without-button">
+                                        <div class="oval"><img  class="centerImage" src="assets/image/user.svg"></div>
+                                        <div class="sectionTitle fwb px-3">{{lang.f1.taxpayerDetails}}</div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.tin}}</div>
+                                            <div class="value fwb">{{data['d']['Gpartx']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.taxpayerName}}</div>
+                                            <div class="value fwb">{{data['d']['FullName']}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.crLicence}}</div>
+                                            <div class="value fwb">{{data['d']['CrNo']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.mainOutlet}}</div>
+                                            <div class="value fwb">{{data['d']['Actnm']}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f1.address}}</div>
+                                        <div class="value fwb" *ngIf="data['d']['AddressSet']['results'].length>0">{{data['d']['AddressSet'].results[0].BuildingNo}}, {{data['d']['AddressSet'].results[0].Street}},
+                                            {{data['d']['AddressSet'].results[0].Addrnumber}}, 
+                                            {{data['d']['AddressSet'].results[0].RegionDesc}},
+                                            {{data['d']['AddressSet'].results[0].City}},
+                                            {{data['d']['AddressSet'].results[0].PostalCd}}</div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-----------------------------  
+                                
+                                    CARD2 
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div class="oval"><img class="centerImage" src="assets/image/details.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f2.title}}</div>
+                                        </div>
+
+                                        <div  *ngIf="isApplicationEditable" class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;"   (click)="step(2)">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f2.label1}}</div>
+                                            <div class="value fwb">{{selectedReason}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f2.label2}}</div>
+                                            <div class="value fwb">{{selectedSubReason}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f2.label3}}</div>
+                                        <div class="value fwb">{{vatReviewFormGroup2.controls.referenceNumber.value}}</div>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <!-----------------------------  
+                                
+                                    CARD3
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div class="oval"><img class="centerImage" src="assets/image/details.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f3.title}}</div>
+                                        </div>
+
+                                        <div *ngIf="isApplicationEditable" class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;" (click)="step(3)">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f3.reportDetails}}</div>
+                                            <div class="value fwb" style="word-break: break-all;">{{vatReviewFormGroup3.controls.reviewDetailNote.value}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f3.attachmentName}}</div>
+                                            <div class="value fwb" style="word-break: break-all;">
+                                                <ng-container *ngFor="let each of getControls()">
+                                                <span *ngIf="each.id == 'RAGA'"  class="mx-3">{{each.name}}</span>
+                                            </ng-container>
+                                            </div>
+                
+                                            </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f3.attachment}}</div>
+                                        <div class="value fwb"> <ng-container *ngFor="let each of getControls()">
+                                            <span style="margin-inline-end: 15px;" *ngIf="each.id == 'RAGA'"  >{{each.name}}<img src="assets/images/generic-documents.png" style="width: 24px;
+                                                margin: 0 auto;    margin-inline-start: 3px;" /></span>
+                                        </ng-container>
+                                        </div>
+
+                                        <!-- <div class="value fwb">File.pdf <span><img style="padding: 0 5px;
+                                            width: 28px;" src="assets/image/pdf.svg"></span>
+                                        </div> -->
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+                                <!-----------------------------  
+                                
+                                    CARD4
+                                
+                                --------------------------------------------->
+                                <div *ngIf="showAllStep()" class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div class="oval"><img class="centerImage" src="assets/image/details.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f4.title}}</div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;" (click)="step(4)"  *ngIf="isApplicationEditable" >{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label1}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.taxPeriod.value}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label2}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.periodFrom.value}} - {{vatReviewFormGroup4.controls.periodTo.value}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6"  *ngIf="showBill()">
+                                            <div class="value mb-1 textGray">{{lang.f4.label4Alt}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.penaltyAmount.value}} {{lang['sar']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6"  *ngIf='!showBill()'>
+                                            <div class="value mb-1 textGray">{{lang.f4.label3}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.totalTaxLiability.value}} {{lang['sar']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6"  *ngIf='!showBill()'>
+                                            <div class="value mb-1 textGray">{{lang.f4.label4}}</div>
+                                            <div class="value fwb"> {{vatReviewFormGroup4.controls.taxPaid.value}} {{lang['sar']}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"  *ngIf='!showBill()'></div>
+
+
+                                    <div class="row vCenter px-3 summary-card-section"  *ngIf='!showBill()'>
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.request}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.amountType.value=="F"?'Full':'Partial'}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label5}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.amountValue.value}} {{lang['sar']}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New" *ngIf='!showBill()'></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section"  *ngIf='!showBill()'>
+                                        <div class="value mb-1 textGray">{{lang.f4.label6}}</div>
+                                        <div class="value fwb">{{vatReviewFormGroup4.controls.disputeDetailNote.value}}</div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-----------------------------  
+                                
+                                    CARD5
+                                
+                                --------------------------------------------->
+                                <div  *ngIf="showAllStep()"class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div class="oval"><img class="centerImage" src="assets/image/details.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f5.title}}</div>
+                                        </div>
+
+                                        <div *ngIf="isApplicationEditable" class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;" (click)="step(5)">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f5.secAmount}}</div>
+                                            <div class="value fwb">{{parseNumber(vatReviewFormGroup5.controls.secAmount.value)}} {{lang['sar']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6"  *ngIf="showPaymentMethod">
+                                            <div class="value mb-1 textGray">{{lang.f5.method}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup5.controls.securityType.value == "B"?lang.f5.cardR:lang.f5.cardL}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"  *ngIf="vatReviewFormGroup5.controls.securityType.value == 'C' && showPaymentMethod"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section" *ngIf="vatReviewFormGroup5.controls.securityType.value == 'C' && showPaymentMethod">
+                                        <div class="value mb-1 textGray">{{lang.f5.sadadNumber}}</div>
+                                        <div class="value fwb">{{sadadNumber}}</div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-----------------------------  
+                                
+                                    CARD6
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img  src="assets/image/summary.svg"></div>
+                                            <div class="sectionTitle fwb px-3"  >{{lang.f6.title}}</div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;" (click)="step(6)"  *ngIf="isApplicationEditable">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f6.label1}}</div>
+                                            <div class="value fwb" *ngIf="vatReviewFormGroup6.controls.idType.value=='ZS0001'" >{{lang.f6.id1}}</div>
+                                            <div class="value fwb" *ngIf="vatReviewFormGroup6.controls.idType.value=='ZS0002'" >{{lang.f6.id2}}</div>
+                                            <div class="value fwb" *ngIf="vatReviewFormGroup6.controls.idType.value=='ZS0003'" >{{lang.f6.id3}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f6.label2}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup6.controls.idNum.value}}</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f6.label3}}</div>
+                                        <div class="value fwb">{{vatReviewFormGroup6.controls.name.value}}</div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <button *ngIf="isApplicationEditable" type="submit" class="btnPrimary"   style="min-width: 207px !important;"
+                                    mat-raised-button>
+                                    {{ lang.confirm }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <!------------------------ 
+         
+        
+        
+        success  
+    
+    
+    -------------------------------->
+
+
+
+    <div *ngIf="showSuccess">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="mt-5" style="height:159px">
+                    <img src="assets/image/success.svg" width="112px">
+                </div>
+                <div class="pageTitle">
+                    {{lang.confirmPage.title}}
+                </div>
+                <div class="value textGray mt-2">
+                    {{lang.confirmPage.subtitle}}
+
+                </div>
+
+                <div class="exciseAccCssBox mt-4 col-12 col-xs-12 col-md-6">
+                    <div class="exciseAccCssBox1 row">
+                        <div class="col-6">{{lang.success.name}}</div>
+                        <div class="exciseAccCssBox2 col-6"> {{successData['FullName']}} </div>
+                    </div>
+                </div>
+                <div class="exciseAccCssBox mt-3 col-12 col-xs-12 col-md-6">
+                    <div class="exciseAccCssBox1 row">
+                        <div class="col-6">{{lang.success.applicationNumber}}</div>
+                        <div class="exciseAccCssBox2 col-6"> {{successData['Fbnumx']}} </div>
+                    </div>
+                </div>
+                <div class="exciseAccCssBox mt-3 col-12 col-xs-12 col-md-6">
+                    <div class="exciseAccCssBox1 row">
+                        <div class="col-6">{{lang.success.date}}</div>
+                        <div class="exciseAccCssBox2 col-6">{{formatDate(successData['Declarationdt'])}}</div>
+                    </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <button class="btnFourth mt-4" type="button" (click)="downloadAck()" style="min-width: 207px !important;">
+                    {{lang.success.acknowledgement}}</button>
+
+            </div>
+            <div class="col-xs-12 col-sm-12  col-md-12">
+                <button class="btnPrimary mt-4" style="min-width: 207px !important;"  [routerLink]="['/mains/objectionreviews']" mat-raised-button>
+                    {{lang.confirmPage.btnTitle}}</button>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <button class="btnFourth mt-4 mb-5" [routerLink]="['/mains']" style="min-width: 207px !important;">
+                    {{lang.confirmPage.redirect}}</button>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="showReviewDetails && isResSuccess" class="container alignStart" style="max-width: 899px; font-family: SSTArabic-Roman;"
+    [dir]="lang.dir =='ltr'?'ltr':'rtl'">
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="bcTitle unicodeDir">{{lang.bc1}} &gt; </span><span
+                    class="bcTitle bcTitleActive">{{lang.bc2}}</span>
+            </div>
+        </div>
+        <div class="row mt-3" style="width: 100%">
+            <div class="col-md-12">
+                <div class="stepHeader row">
+                    <span class="stepBack col-md-6">
+                        <img [src]="lang['dir'] =='ltr'?'assets/image/arrow-left-green.svg':'assets/image/arrow-right-green.svg'"
+                            style="width: 24px">
+                        {{lang.back}}</span>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- header end -->
+
+
+        <div class="row mt-4">
+            <div class="col-md-6 col-xs-6 col-sm-6 pageTitle">
+                {{lang.reviewDetails.title}}
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6" style="display: flex;
+            justify-content: flex-end;">
+                <div class="tag32 tag-success">Approved</div>
+
+            </div>
+        </div>
+
+        <div class="mt-3 mb-3">
+            <form style="width: 100%">
+
+                <!-- ---------------------------- ------------
+                        
+                    
+
+                   FORM 1
+
+
+
+                -------------------------------------------->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form [formGroup]="reviewDetailFormGroup" (ngSubmit)="onSubmit7()">
+
+                            <div class="mt-3">
+
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-without-button">
+                                        <div><img src="assets/image/summary.svg"></div>
+                                        <div class="sectionTitle fwb px-3">{{lang.f1.taxpayerDetails}}</div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.tin}}</div>
+                                            <div class="value fwb">{{data['d']['Gpartx']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.taxpayerName}}</div>
+                                            <div class="value fwb">{{data['d']['FullName']}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.crLicence}}</div>
+                                            <div class="value fwb">{{data['d']['CrNo']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f1.mainOutlet}}</div>
+                                            <div class="value fwb">{{data['d']['Actnm']}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f1.address}}</div>
+                                        <div class="value fwb">{{data['d']['AddressSet'].results[0].BuildingNo}}, {{data['d']['AddressSet'].results[0].Street}},
+                                            {{data['d']['AddressSet'].results[0].Addrnumber}}, 
+                                            {{data['d']['AddressSet'].results[0].RegionDesc}},
+                                            {{data['d']['AddressSet'].results[0].City}},
+                                            {{data['d']['AddressSet'].results[0].PostalCd}}</div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-----------------------------  
+                                
+                                    CARD2 
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img src="assets/image/summary.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f2.title}}</div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f2.label1}}</div>
+                                            <div class="value fwb">{{selectedReason}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f2.label2}}</div>
+                                            <div class="value fwb">{{selectedSubReason}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f2.label3}}</div>
+                                        <div class="value fwb">{{vatReviewFormGroup2.controls.referenceNumber.value}}</div>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <!-----------------------------  
+                                
+                                    CARD3
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img src="assets/image/summary.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f3.title}}</div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f2.label1}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup3.controls.reviewDetailNote.value}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f3.attachmentName}}</div>
+                                            <div class="value fwb" *ngFor="let each of vatReviewFormGroup3.controls.doc"><span>{{each.name}}</span></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f3.attachment}}</div>
+                                        <div class="value fwb">File.pdf <span><img style="padding: 0 5px;
+                                            width: 28px;" src="assets/image/pdf.svg"></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+                                <!-----------------------------  
+                                
+                                    CARD4
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img src="assets/image/summary.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f4.title}}</div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label1}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.taxPeriod.value}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label2}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.periodFrom.value}} - {{vatReviewFormGroup4.controls.periodTo.value}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label3}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.totalTaxLiability.value}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label4}}</div>
+                                            <div class="value fwb"> {{vatReviewFormGroup4.controls.taxPaid.value}} {{lang['sar']}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.request}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.amountType.value=="F"?'Full':'Partial'}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f4.label5}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup4.controls.amountValue.value}} {{lang['sar']}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f4.label6}}</div>
+                                        <div class="value fwb">{{vatReviewFormGroup4.controls.disputeDetailNote.value}}</div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-----------------------------  
+                                
+                                    CARD5
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img src="assets/image/summary.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f5.title}}</div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f5.secAmount}}</div>
+                                            <div class="value fwb">{{parseNumber(vatReviewFormGroup5.controls.secAmount.value)}} {{lang['sar']}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6" *ngIf="showPaymentMethod">
+                                            <div class="value mb-1 textGray">{{lang.f5.method}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup5.controls.securityType.value == "B"?lang.f5.cardR:lang.f5.cardL}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"  *ngIf="showPaymentMethod"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f5.sadadNumber}}</div>
+                                        <div class="value fwb"> {{data['d']['SecurityDtl']['Sopbel']}}</div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-----------------------------  
+                                
+                                    CARD6
+                                
+                                --------------------------------------------->
+                                <div class="summary-card  cardGap border">
+
+
+                                    <div class="row  vCenter px-3 mx-0 summary-header-with-button">
+                                        <div class="col-xs-6 col-md-6 vCenter row">
+                                            <div><img src="assets/image/summary.svg"></div>
+                                            <div class="sectionTitle fwb px-3">{{lang.f6.title}}</div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-md-6" style="text-align: end;"><button
+                                                class="btnTertiary  textPrimary"
+                                                style=" min-width: fit-content;">{{lang.edit}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="row vCenter px-3 summary-card-section">
+
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f6.label1}}</div>
+                                            <div class="value fwb" *ngIf="vatReviewFormGroup6.controls.idType.value=='ZS0001'" >{{lang.f6.id1}}</div>
+                                            <div class="value fwb" *ngIf="vatReviewFormGroup6.controls.idType.value=='ZS0002'" >{{lang.f6.id2}}</div>
+                                            <div class="value fwb" *ngIf="vatReviewFormGroup6.controls.idType.value=='ZS0003'" >{{lang.f6.id3}}</div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="value mb-1 textGray">{{lang.f6.label2}}</div>
+                                            <div class="value fwb">{{vatReviewFormGroup6.controls.idNum.value}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Rectangle-12New"></div>
+
+                                    <div class="vCenterSingle px-3 taxpayer-card-section">
+                                        <div class="value mb-1 textGray">{{lang.f6.label3}}</div>
+                                        <div class="value fwb">{{vatReviewFormGroup6.controls.name.value}}</div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-md-3 textDanger value fwb">{{lang.reviewDetails.dangerTitle}}</div>
+                                    <button type="submit" class="btnPrimary col-md-9" style="max-width: fit-content"
+                                        mat-raised-button>
+                                        {{ lang.reviewDetails.btnTitle }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<!-- Id validation Modal -->
+
+
+<div class="modal textDark" id="aftSelect" [dir]="lang.dir" data-keyboard="false" data-backdrop="static"  style="font-family: SSTArabic-Roman;"  *ngIf="optionActive === 6">
+    <div class="modal-dialog" style="max-width: 481px;">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row text-center mt-3">
+            <div class="col-md-12">
+              <div class="row text-center">
+                <div class="col-md-12 alignEnd" style="padding-bottom: 14px;"> <img src="assets/image/close.svg" class="modalCloseIcon"
+                     style="cursor: pointer;"  data-dismiss="modal" (click)="reset()"/>
+            </div>
+                <div class="col-md-12">
+                  <div class="labelTxtCss" style="text-align: center">
+                    {{lang.f6.label2}}
+                  </div>
+  
+                  
+                    <input  class="commonInput"  [placeholder]="lang.f6.label2" (blur)="idValidationOnBlur()" [ngClass]="idErr1?'inputErr':''"  (input)="onIdinputChange()" [value]="vatReviewFormGroup6['controls']['idNum'].value"  [(ngModel)]="id1" name="id1"  maxlength="10" />
+                  
+                  <div *ngIf="idErr1" class="invalid-feedback">
+                    <p style="margin-top: 10px;font-size: 14px;text-align: center;">
+                      {{ idMsg }}
+                    </p>
+                  </div>
+                </div>
+                <div *ngIf="this.vatReviewFormGroup6.controls.idType.value!='ZS0003'" class="col-md-12">
+                  <div class="labelTxtCss mt-3" style="text-align: center">
+                    {{ lang.modal.dob }}
+                  </div>
+
+
+
+                  <div class="commomDatePicker" style="margin: 0 auto;" [ngClass]="dobErr?'inputErr':''">
+
+                    <input readonly (click)="datePicker.open()" [max]="today" matInput [matDatepicker]="datePicker"  name="dob1"   (dateChange)="onDobChange()" [(ngModel)]="dob1" 
+                    placeholder="dd-mm-yyyy"  style="margin-top: 5px;">
+                    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePicker >
+                    </mat-datepicker>
+            
+                </div>
+
+                 
+                  <div *ngIf="dobErr" class="invalid-feedback">
+                    <p style="margin-top: 10px;font-size: 14px;text-align: center;">
+                      {{ dobMsg }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="mt-4 mb-4 alignEnd">
+                <button mat-button (click)="validateID2()" 
+                   class="btnPrimary" mat-raised-button>
+                  {{lang.modal.validate}}
+                </button>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="modal" id="viewBill" data-keyboard="false" data-backdrop="static" *ngIf="showBillModal"  >
+    <div class="customDialog">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="mb-4">
+              <div class="value fwb
+            " style="font-size: 20px;text-align: center;">{{lang['bill']['billDetails']}}</div>
+            <table class="table table-bordered table-responsive mt-4" style="border: solid 1px #dee2e6 !important;">
+                <thead>
+                  <tr>
+                    <th scope="col">{{lang.bill.docNo}}</th>
+                    <th scope="col">{{lang.bill.sadadNo}}</th>
+                    <th scope="col">{{lang.bill.penaltyDate}}</th>
+                    <th scope="col">{{lang.bill.penaltyDesc}}</th>
+                    <th scope="col">{{lang.bill.periodkey}}</th>
+                    <th scope="col">{{lang.bill.startDate}}</th>
+                    <th scope="col">{{lang.bill.endDate}}</th>
+                    <th scope="col">{{lang.bill.dueDate}}</th>
+                    <th scope="col">{{lang.bill.amount}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="billDetailData && billDetailData['results'].length>0">
+                    <td>{{billDetailData['results'][0].Opbel}}</td>
+                    <td>{{billDetailData['results'][0].Vtre2}}</td>
+                    <td>{{formatDate(billDetailData['results'][0].Bldat)}}</td>
+                    <td>{{billDetailData['results'][0].Desc}}</td>
+                    <td>{{billDetailData['results'][0].Perslt}}</td>
+                    <td>{{formatDate(billDetailData['results'][0].Abrzu)}}</td>
+                    <td>{{formatDate(billDetailData['results'][0].Abrzo)}}</td>
+                    <td>{{formatDate(billDetailData['results'][0].Studt)}}</td>
+                    <td>{{billDetailData['results'][0].Betrh}}</td>
+                  </tr>
+                                  </tbody>
+              </table>
+            </div>
+<div style="text-align: end">
+              <button mat-button data-dismiss="modal"   class="btnPrimary">
+                  {{lang.modal.close}}
+                  
+                </button>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal" id="sadadConfirmation" data-keyboard="false" data-backdrop="static"   >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="col-md-12 alignEnd" style="padding-bottom: 20px;"> <img src="assets/image/close.svg" class="modalCloseIcon"
+                style="cursor: pointer;"  data-dismiss="modal"/>
+       </div>
+       <div>
+          {{lang.f5.modalPopup}}
+        </div>
+            <div style="text-align: end" class="mt-3">
+              
+
+                <button  data-dismiss="modal"  style="min-width: unset; width: 150px;" class="btnSecondary">
+                  {{lang.modal.close}}
+                </button>
+
+                <button  class="btnPrimary" data-dismiss="modal" style="min-width: unset; width: 150px;" (click)="saveData(true)" >
+                  {{lang.modal.ok}}
+                </button>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal" id="ReasonConfirmation" data-keyboard="false" data-backdrop="static"   >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="col-md-12 alignEnd" style="padding-bottom: 20px;"> <img src="assets/image/close.svg" class="modalCloseIcon"
+                style="cursor: pointer;"  data-dismiss="modal"/>
+       </div>
+
+       <div class="fwb mb-3" *ngIf="!isAlert" style="
+    font-size: 20px;
+"> {{lang['warning']}} </div>
+        <div class="fwb mb-3" *ngIf="isAlert" style="
+    font-size: 20px;
+"> {{lang['alert']}} </div>
+       <div>
+          {{this.reasonPopupText}}
+        </div>
+            <div style="text-align: end" class="mt-3">
+              
+
+                <button  *ngIf="!isAlert" data-dismiss="modal"  style="min-width: unset; width: 150px;" class="btnSecondary">
+                  {{lang['cancel']}}
+                </button>
+
+                <button  class="btnPrimary" data-dismiss="modal"  style="min-width: unset; width: 150px;" (click)="confirmReasonPopup()" >
+                  {{lang.modal.ok}}
+                </button>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="modal" id="ApplicationIframe" data-keyboard="false" data-backdrop="static"  style="top: 14%;" >
+    <div class="modal-dialog" style="max-width: 1111px !important;">
+      <div class="modal-content" style="height: auto;">
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="col-md-12 alignEnd" style="padding-bottom: 20px;"> <img src="assets/image/close.svg" class="modalCloseIcon"
+                style="cursor: pointer;"  data-dismiss="modal"/>
+       </div>
+
+       
+       <div>
+        <iframe height="500" id="iframe" (load)="myLoadEvent()" allowTransparency="true" frameborder="0" scrolling="yes" style="width:100%;"></iframe>
+        </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<notifier-container></notifier-container>

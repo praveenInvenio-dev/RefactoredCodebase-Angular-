@@ -1,0 +1,128 @@
+.ml-50{margin-left: 50px;}
+.mt-40 {
+    margin-top: 40px;
+}
+
+.pt-9 {
+    padding-top: 9px;
+}
+
+.mtd-25 {
+    margin-top: -25px;
+}
+
+.modal-filter .modal-body.px-60{
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+}
+.list-style-none{
+    list-style-type: none !important;
+}
+/* steps css starts here */
+.vat-steps ul li{
+    z-index:9;
+}
+.vat-steps ul li a{
+	 
+	height:40px;
+	width:40px;
+	box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+	border-radius:50%;
+	display:flex;
+	justify-content:center;
+	text-align:center;
+    line-height:35px;
+    z-index: 99999;
+	margin-right:16px;
+    font-size:16px;
+	color:#999999;
+	padding-bottom:0px;
+	text-decoration:none !important;
+	background-color:#fff;
+ }
+.vat-steps ul li a:hover,  .vat-steps ul li a:active,  .vat-steps ul li a.active,  .vat-steps ul li a:focus{
+	 background-color:#006450;
+	 color:#fff;
+ }
+.vat-steps ul li:nth-last-child(1) a{
+	margin-right:0px;
+ }
+.vat-steps ul:before{
+	 width:100%;
+	 height:1px;
+	 background-color:#ebebeb;
+	 position:absolute;
+	 content:'';
+	 left:0;
+	 top:50%;
+	 transform:translateY(-50%);
+	 z-index:1;
+}
+
+.white-space-nowrap{
+    white-space: nowrap !important;
+}
+
+/* steps css ends here */
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+.bg-white{
+    background-color: #fff !important;
+}
+.p-16{
+	padding: 16px;
+}
+.h-24{
+	height:24px;
+}
+.mat-datepicker-toggle{
+	position: absolute;
+	right:15px;
+}
+
+.form-control:disabled, .form-control[readonly] {
+	position:absolute;
+	width:95% !important;
+	top:28px;
+	left:15px;
+}
+
+input::placeholder,textarea::placeholder{
+	color:lightgray !important;
+}
+
+.lang-arabic .ar-ml-15{margin-left: 15px !important;}
+.lang-arabic .vat-steps ul:before {
+	width: 93% !important;
+}
+.lang-arabic .ar-delete{
+    float: left;
+	margin-top: 0px;
+}
+.lang-arabic .ar-mt-10{margin-top:10px !important}
+
+.error{
+    color:red;
+	font-size: 12px;
+}
+.datePickers{
+    position: relative;
+    right: 3%;
+    top: 26%;
+}
+.disabled1 {
+	pointer-events:none; 
+	opacity:0.6;        
+}
+.border-red{
+	color:red;
+}
+.green{
+	color: #006450;
+}

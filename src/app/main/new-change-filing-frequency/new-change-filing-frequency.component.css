@@ -1,0 +1,579 @@
+.stepNumber {
+  float: right;
+}
+
+.searchbar {
+  height: 48px;
+  border-radius: 14px;
+  border: solid 1px #999999;
+  width: 100%;
+  float: left;
+}
+
+.single-input-card {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: center;
+  max-width: 437px;
+  padding-inline-start: 16px;
+}
+
+.cardGap {
+  margin-bottom: 24px;
+}
+.c-filing-font-black {
+  height: 16px;
+  object-fit: contain;
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #151515;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.summary-card {
+  /* margin-bottom: 56px; */
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.frequency-detail-card-section {
+  height: 96px;
+}
+
+.summary-header-with-button {
+  height: 96px;
+}
+
+.vCenter {
+  align-items: center;
+}
+
+.vCenterSingle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.btnCss {
+  width: 207px;
+  height: 48px;
+  border-radius: 14px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  background-color: #d2a02a;
+}
+.descriptiontext {
+  object-fit: contain;
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  white-space: pre-line;
+}
+.btnEdit {
+  height: 24px;
+  object-fit: contain;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: right;
+  color: #006450;
+  background-color: transparent;
+  border: none;
+}
+.single-line-sec {
+  height: 56px;
+}
+.centerItem {
+  text-align: center;
+}
+.rightTableCard {
+  width: 24px;
+  /* height: 24px; */
+  /* margin: 8px; */
+  object-fit: contain;
+  float: right;
+  position: relative;
+  margin-left: 15px;
+}
+/* .Rectangle {
+  position: absolute;
+  width: 31px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d99a29;
+  top: 35px;
+  left: 14px;
+}
+.RectangleDeselect{
+  position: absolute;
+  width: 31px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: transparent;
+  top: 35px;
+  left: 59px;
+} */
+
+.contentCenter {
+  text-align: -webkit-center;
+}
+.submiTtext {
+  height: 24px;
+  object-fit: contain;
+  font-family:SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #999999;
+  text-align: center;
+}
+.goToDas {
+  height: 24px;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #d99a29;
+  cursor: pointer;
+}
+.pad-0-rt {padding-right:0; }
+.pad-0-lt {padding-left:0; }
+.searchIcon {position: absolute; right: 12px;top: 13px;cursor: pointer;}
+.attchIcon {float: left;margin-left: 19px;margin-bottom: 10px;}
+.imgAra {float: right; margin-top: 15px;}
+.posrel {position: relative;}
+.Rectangle-12New {margin-top: 0px;} 
+.Rectangle {border-bottom: 4px solid #d99a29;padding-bottom: 5px;}
+.RectangleDeselect {border-bottom: 4px solid transparent;padding-bottom: 5px;}
+.form-control.searchbar {
+  /* background: url(sweettexture.jpg); */
+  /* background: url(assets/image/check.svg) no-repeat scroll right; */
+  background-image: url(../../../assets/image/search.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-origin: content-box;
+}
+
+[dir="rtl"] .form-control.searchbar {
+  background-position: left center;
+}
+[dir="rtl"] .rightTableCard {
+  float: left;
+}
+
+[dir="rtl"] .searchIcon {
+  float: left;
+}
+.selector-card{
+  height: 96px;
+  width: 207px;
+}
+.tileLvl{
+  /* width: 175px;
+  height: 48px; */
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  /* color:#232323 */
+}
+/deep/ .mat-checkbox-layout .mat-checkbox-label {white-space: normal;}
+
+
+@media only screen and (max-width: 415px) {
+  .pageTitle {font-size: 24px}
+  .frequency-detail-card-section {height: 140px;}
+  .sectionTitle {font-size: 14px;}
+  .mbMrTp1 {margin-top: 20px;}
+}
+
+@media only screen and (max-width: 320px) {
+  .value {font-size: 13px;}
+  .submiTtext {font-size: 13px;}
+  .sectionTitle {font-size: 14px;}
+}
+
+@media only screen and (max-width: 767px) {
+.filing-card {height: auto;padding-bottom: 20px;}
+.cardCntrMb {display: flex;justify-content: center; margin-bottom: 20px!important;}
+.mobpad1 {padding-top: 15px;}
+.frequency-detail-card-section {height: 140px;}
+  .pageTitle {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .filing-card {
+    height: auto;
+    padding-bottom: 20px;
+  }
+  .cardCntrMb {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px !important;
+  }
+  .mobpad1 {
+    padding-top: 15px;
+  }
+}
+.tag32 {
+  height: 35px;
+  width: 140px;
+  padding: 15px;
+}
+
+/* table view  */
+.myTable.table {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  border-spacing: 0;
+  display: block;
+  width: max-content;
+
+}
+
+.myTable.table th { 
+  border-top: 0;
+  border-left: 1px solid #dee2e6;
+  border-right:0;
+  border-bottom: 0;
+  padding: 10px; 
+  }
+
+.myTable.table th:first-child {border-left: 0;}
+
+.myTable.table td  { 
+  border-top:1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+  border-right:0;
+  border-bottom: 0;
+  padding: 10px; 
+  color: #777;
+  }
+
+.myTable.table td:first-child {border-left: 0;}
+
+.myTable.table thead th {
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: 800;
+}
+.myTable.table td, .myTable.table th {
+  padding: 10px;
+  vertical-align: middle;
+  font-size: 13px;
+
+}
+
+.tblBtn {
+  /* background-color: #ccc; */
+  /* color: #000; */
+  padding: 4px 30px 7px 30px;
+  font-weight: 800;
+  border-radius: 20px;
+  text-decoration: none;
+ }
+  
+.myTable.table tbody tr {transition: 0.3s;}
+.myTable.table tbody tr:last-child {border-radius: 10px;}
+
+.myTable.table tbody tr:hover{
+  transition: 0.3s;
+  -webkit-box-shadow: 0px 5px 9px 0px rgba(50, 50, 50, 0.2);
+-moz-box-shadow:    0px 5px 9px 0px rgba(50, 50, 50, 0.2);
+box-shadow:         0px 5px 9px 0px rgba(50, 50, 50, 0.2);
+}
+
+
+.mat-checkbox-inner-container {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.optionText{
+  height: 24px;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+/*  */
+
+.Headellipses{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.Statusellipse{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block !important;
+  padding: 6px 10px 6px 10px !important;
+  text-align: center;
+}
+.filterIcon {width: 30px; margin-left: 10px; margin-right: 10px; display: flex; justify-content: flex-start; height: 24px; width: 24px; margin-top: 10px;}
+
+::ng-deep .mat-checkbox-inner-container {
+  height: 24px !important;
+  width: 24px !important;
+  border-radius: 6px !important;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate,
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate {
+  background-color: #006450 !important; /* Red background for example */
+}
+
+::ng-deep .mat-checkbox-background{
+  border-radius: 6px !important;
+}
+::ng-deep .mat-checkbox-frame{
+  border-radius: 6px !important;
+}
+/* popup */
+.modalCloseIcon {
+  cursor: pointer;
+}
+.center {
+  margin-top: 10%;
+  max-width: 647px;
+}
+.modalCloseIcon {
+  cursor: pointer;
+}
+.font-color {
+  font-size: 12px;
+  color: #999999;
+  margin-left: 5%;
+}
+.btnprimary-width {
+  width: 207px;
+  height: 48px;
+}
+.Rectanglengp{
+  height: 1px;
+  margin-top: 0px;
+  background-color: #ebebeb;
+}
+
+.ff-search-box {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.ff-search-box .ff-search-input-container {
+  max-width: none;
+  width: 94%;
+}
+.commonInput {
+  max-width: none;
+  width: 100%;
+}
+.ff-search-icon {
+  /* .Search  */
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  position: absolute;
+  margin-top: 11px;
+  cursor: pointer;
+}
+
+.ff-search-icon-left {
+  margin-right: -36px;
+}
+
+.ff-search-icon-right {
+  margin-left: -36px;
+}
+.ff-filter-icon {
+  height: 24px;
+  width: 24px;
+  margin-top: 0.8em;
+  cursor: pointer;
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}
+/* .row {
+  margin-top: 23px;
+} */
+.filter1 {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+  cursor: pointer;
+}
+.filter2 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+}
+.filter3 {
+  /* height: 40px; */
+  border-radius: 20px;
+  width: max-content;
+  border: solid 1px #ebebeb;
+  padding: 5px 15px 5px 15px;
+  cursor: pointer;
+}
+.filter3Paid {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #e5efed;
+  width: max-content;
+  border: solid 1px #ebebeb;
+  padding: 5px 15px 5px 15px;
+  color: #006450;
+  cursor: pointer;
+}
+.filter4 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #232323;
+}
+
+.commonMatSelect {
+  width: 100% !important;
+  max-width: none !important;
+  /* jira2fix */
+  /* font-weight: bold; */
+  
+}
+
+.commonDatePicker{
+  width: 100%;
+}
+.chpNormal{
+  background-color: transparent;
+}
+.chpSelected{
+  background-color: lightgray !important;
+}
+.sstcls{
+  font-family: SSTArabic-Roman;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* jira issue */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-weight: 400;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  font-weight: 400;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  font-weight: 400;
+}
+
+.matoptxt{
+  font-family: SSTArabic-Roman;
+}
+
+.rotate{
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.arbstep{
+  width: 50%;
+  text-align: end;
+}
+.inputErr {
+  border: 1px solid red !important ;
+}
+
+.checkboxerr{
+  color: red;
+}
+
+::ng-deep .checkboxErr .mat-checkbox-frame {
+  border-radius: 6px !important;
+  border-color: red;
+}
+
+::ng-deep .checkboxErr .mat-checkbox-label {
+  color: red;
+}
+
+.pr-zero {
+  padding-right: 0 !important;
+}
+
+.pageTitle, .sectionTitle {
+  font-family: SSTArabic-Bold;
+  color: #232323
+}

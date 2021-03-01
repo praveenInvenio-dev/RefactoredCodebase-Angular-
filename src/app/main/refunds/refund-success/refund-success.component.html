@@ -1,0 +1,32 @@
+<div class="container" [dir]="dir">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-12 justify-content-center" style="text-align: center;">
+            <img src="assets/image/success.svg" alt="Success" />
+            <p class="heading mt-4">{{labels.RefundSuccess.ExciseTaxRefund}}</p>
+            <p class="heading-caption">{{labels.RefundSuccess.YourExciseTaxRefund}}</p>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-5 col-12">
+                    <div class="info-box" style="text-align:start;">
+                        <div class="info-text">
+                            <div class="row">
+                                <div class="col-md-8 col-12">
+                                    <p class="info-sub-text mb-0">{{labels.RefundSuccess.ReturnReferenceNumber}}</p>
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <p class="info-text mb-0">1234567890123</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button mat-button type="button" class="btnCss mt-5"
+                    (click)="goToRefunds()">{{labels.RefundSuccess.Refunds}}</button>
+            </div>
+            <div style="text-align: center;" class="mt-5">
+                <a routerLink="/mains" class="dashboard-link">{{labels.RefundSuccess.GoToDashBoard}}</a>
+            </div>
+        </div>
+    </div>
+</div>

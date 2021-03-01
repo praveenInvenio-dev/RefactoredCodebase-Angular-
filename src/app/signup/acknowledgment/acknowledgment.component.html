@@ -1,0 +1,68 @@
+<!-- REGISTRATION SUCCESSFUL - START -->
+<mat-card class="mt-3" *ngIf="type === 'individual'" style="margin-left: 20%; 
+margin-right: 20%;">
+    <mat-card-content>
+        <div class="row text-center" style="margin-top: 40px;">
+            <div class="col-md-12">
+                <i class="fa fa-check-circle" aria-hidden="true" style="font-size: 50px; color: #00e695;"></i>
+                <div class="mt-3">
+                    <p class="mainTitle">{{ lang.c1.t1 }}</p>
+                </div>
+                <div class="subTitle">
+                    <p>{{ lang.c1.t2 }}</p>
+                    <p>{{ lang.c1.t3 }}</p>
+                    <p>{{ lang.c1.t4 }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <button mat-button class="btnCss" [routerLink]="['/login']">
+            {{ lang.c1.btn2 }}
+          </button>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<!-- REGISTRATION SUCCESSFUL - END -->
+
+
+<mat-card class=" mt-3 ackCard text-center" *ngIf="type === 'govt' || type === 'npo'" style="margin-left: 20%;
+margin-right: 20%;">
+    <i class="fa fa-check-circle ackScreenIcon" style="margin-top: 15px;
+    margin-bottom: 20px" aria-hidden="true"></i>
+    <div class="mt-2 mb-4">
+        <p class="ackScreenTitle">{{lang.c2.t1}}</p>
+    </div>
+    <div class="ackScreenTitle2">
+
+        <p>{{lang.c2.t2}}</p>
+    </div>
+    <div class="mt-4 mb-4 ackScreenTiles">
+        <div class="mt-2 mb-2">
+            <div class="ackScreenBox">
+                <p [ngClass]="direction === 'rtl' ? 'ackScreenBox2Ar' : 'ackScreenBox2'"><span style="color: #6f6f6e">
+            {{lang.c2.t3}}</span> <span [ngClass]="direction === 'rtl' ? 'txtBxArb' : 'txtBxEng'">{{name}}</span></p>
+            </div>
+        </div>
+        <div class="mt-2 mb-2">
+            <div class="ackScreenBox">
+                <p [ngClass]="direction === 'rtl' ? 'ackScreenBox2Ar' : 'ackScreenBox2'"><span style="color: #6f6f6e">
+            {{lang.c2.t4}}</span><span [ngClass]="direction === 'rtl' ? 'txtBxArb' : 'txtBxEng'">{{no}}</span></p>
+            </div>
+        </div>
+        <div class="mt-2 mb-2">
+            <div class="ackScreenBox">
+                <p [ngClass]="direction === 'rtl' ? 'ackScreenBox2Ar' : 'ackScreenBox2'"> <span style="color: #6f6f6e">
+            {{lang.c2.t5}}</span> <span [ngClass]="direction === 'rtl' ? 'txtBxArb' : 'txtBxEng'">{{date | date}}</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 mb-3">
+        <button mat-button class="btnCss" [routerLink]="['/login']">
+      {{ lang.c1.btn }}
+    </button>
+    </div>
+
+
+</mat-card>

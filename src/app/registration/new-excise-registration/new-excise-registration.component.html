@@ -1,0 +1,919 @@
+<div class="container" [dir]="dir">
+    <div *ngIf="!sub">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="exciseTitle1" [style.float]="dir === 'rtl' ? 'right' : 'left'"
+                    (click)="backto('')">{{lang.t1}} > </span><span class="exciseTitle1"
+                    [style.float]="dir === 'rtl' ? 'right' : 'left'" [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+                    [style.padding-left]="dir === 'ltr' ? '4px' : ''" (click)="backto('002')"> {{lang.t3}} > </span>
+                <span class="exciseTitle1" [style.float]="dir === 'rtl' ? 'right' : 'left'"
+                    [style.padding-right]="dir === 'rtl' ? '4px' : ''" [style.padding-left]="dir === 'ltr' ? '4px' : ''"
+                    (click)="backto('002')"> {{lang.t2}} </span>
+            </div>
+        </div>
+        <div class="row mt-3" style="width:100%">
+            <div class="col-md-6">
+                <div class="viewMore">
+                    <span style="cursor: pointer;" (click)="back()">
+                        <img src="assets/image/arrow-left.svg" style="width: 24px;" *ngIf="dir === 'ltr'">
+                        <img src="assets/image/arrow-right.svg" style="width: 24px" *ngIf="dir === 'rtl'">
+                        {{lang.back}}</span>
+                </div>
+            </div>
+            <div class="col-md-6 p-0">
+                <div class="process-steps" [ngClass]="{'text-right': dir === 'ltr'}">
+                    <ul role="tablist">
+                        <li role="presentation" *ngFor="let step of processSteps">
+                            <a role="button"
+                                [ngClass]="{'active':step.id==optionSlected,'completed':(step.id<optionSlected)}"
+                                class="completed" tabindex="0" [attr.data-stepnumber]="step.id">
+                                <span
+                                    *ngIf="(step.id==optionSlected && step.id==processSteps?.length)?false: step.id>=optionSlected">{{step?.label}}</span>
+                                <img *ngIf="(step.id<optionSlected || (step.id==optionSlected && step.id==processSteps?.length))"
+                                    src="assets/image/icons-24-px-main-check.svg" style="width: 24px" />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4" style="text-align: start;">
+            <div class="col-md-12">
+                <div class="exciseSecondTitle">
+                    {{menu[optionSlected-1].t1}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2" style="text-align: start;">
+            <div class="col-md-12">
+                <div class="exciseSecondTitle1">
+                    {{menu[optionSlected-1].t2}}
+                </div>
+            </div>
+        </div>
+        <div class="Rectangle-12New mt-3"></div>
+        <div *ngIf="optionSlected === 1">
+            <form [formGroup]="exciseFormGroup" (ngSubmit)="onSubmit()" style="width: 100%;">
+                <div class="titleTwo mt-3" style="text-align: start;">{{lang.s1.t1}}<span style="color: red;">*</span>
+                </div>
+                <div class="row mt-2">
+                    <ng-container formArrayName="doc">
+                        <ng-container *ngFor="let attach of exciseFormGroup.get('doc')['controls']; let j = index;">
+                            <div class="col-md-6 mt-2" [formGroupName]="j">
+                                <ng-container>
+                                    <div class="labelTxtCss" style="text-align: start;">{{lang.s1.t2}}</div>
+                                    <img *ngIf="dir === 'rtl'" src="assets/image/delete.svg" style="width: 24px;float: left;position: relative;
+                                    top: 30px; margin-right: 25px;" (click)="deleteAttachment(j);">
+                                    <mat-form-field appearance="outline" style="width: 90%;">
+
+                                        <mat-select formControlName="id">
+                                            <mat-select-trigger>
+                                                {{selectedCRNo}}
+                                            </mat-select-trigger>
+                                            <mat-option *ngFor="let item of crdSet; let i=index" [value]="item.CrNo"
+                                                [disabled]="item.flag" (click)="mapcrn(item, i)">
+                                                <!-- {{
+                                            item.CrNo }} -->
+                                                {{ item.CrNo }} {{item.CrNm}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <img *ngIf="dir === 'ltr'" src="assets/image/delete.svg" style="width: 24px;float: right;position: relative;
+                                    top: 30px" (click)="deleteAttachment(j);">
+                                    <!--
+                                    <mat-card style="height: 216px;border: 1px dashed #ebebeb;"
+                                        *ngIf="!attach.value.flag">
+                                        <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop
+                                            (onFileDropped)="uploadFile($event);getFileDetails($event, j)">
+
+                                            <input hidden type="file" #fileInput
+                                                (change)="uploadFile($event.target.files);getFileDetails($event, j)">
+                                            <div class="row text-center mt-5">
+                                                <div class="col-md-12">
+                                                    <img src="assets/image/attach.svg" style="width: 24px;">
+                                                    <div class="fileUploadTxt">Drag and drop file to upload
+                                                        documentation
+                                                    </div>
+                                                    <div class="fileUploadTxt1">50MB max</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-card>
+
+                                    <div *ngIf="attach.value.flag">
+                                        <mat-card style="height: 216px;margin-top:10px;" *ngIf="files.length>0">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <img src="assets/image/delete.svg"
+                                                            style="width: 24px;float: right;"
+                                                            (click)="deleteAttachment(j);deleteAttachmentFromSer(attach.value.id, attach.value.did)">
+                                                    </div>
+                                                </div>
+                                                <div class="row text-center mt-5">
+                                                    <div class="col-md-12">
+                                                        <img src="assets/image/pdf.svg" style="width: 24px;">
+                                                        <p class="fileName"> {{ files[j].name }} </p>
+                                                        <div class="fileSize">{{files[j].size}} MB</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-card>
+
+                                    </div> -->
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+                <div *ngIf="crnErr1" class="invalid-feedback mt-3">
+                    {{lang.errorMsgs.e1}}
+                </div>
+                <div *ngIf="crnErr" class="invalid-feedback mt-3">
+                    {{lang.errorMsgs.e2}}
+                </div>
+
+                <div style="text-align: start;"><button mat-button class="btnOne mt-3" (click)="addAttachment()"
+                        [disabled]="crdSet?.length === (count + 1)">
+                        <img src="assets/image/add.svg" style="width: 24px;margin-right:5px">
+                        <span [style.padding-right]="dir === 'rtl' ? '7px' : ''">{{lang.s1.t3}}</span>
+                    </button></div>
+                <div class="titleTwo mt-3" style="text-align: start;">{{lang.s1.t4}}<span style="color: red;">*</span>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3" style="text-align: start;">
+                        <button mat-stroked-button disabled class="accCardbck accLabel" data-toggle="modal"
+                            data-target="#ibanValidation" (click)="resetIban()" [disabled]="ibnList.length===1" style="width:206px;height:136px; border-radius: 14px;
+                            border: solid 1px #ebebeb; text-align: start;">
+                            <img src="assets/image/add.svg" style="width: 32px;"
+                                [style.opacity]="ibnList.length===1 ? 0.2 : 1">
+                            <br>
+                            <span>
+                                {{lang.s1.t5}}
+                            </span>
+
+                        </button>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-4" *ngFor="let attach of ibnList">
+                                <!-- <div class="col-md-4"> -->
+                                <mat-card [ngClass]="attach.flag? 'accCardbckActive' : 'accCardbck'">
+                                    <img src="assets/image/positive.svg" [style.float]="dir !=='rtl' ? 'left' : 'right'"
+                                        style="width: 32px;" *ngIf="!attach.flag">
+                                    <img [src]="attach.img" [style.float]="dir !=='rtl' ? 'left' : 'right'"
+                                        style="width: 32px;" *ngIf="attach.flag">
+                                    <div [ngClass]="dir ==='rtl' ? 'acctxt1Arb' : 'acctxt1'" style="text-align: start;">
+
+                                        <div [ngClass]="attach.flag? 'acctxt2Active' : 'acctxt2'"
+                                            style="direction: ltr;" [style.text-align]="dir === 'rtl'? 'end': 'start'">
+                                            {{attach.id}}</div>
+                                        <div [ngClass]="attach.flag? 'acctxt3Active' : 'acctxt3'">
+                                            {{attach.name}}
+                                        </div>
+
+                                    </div>
+                                    <div style="text-align: end;">
+                                        <!-- <img src="assets/image/delete.svg"
+                                            (click)="deleteIban();"> -->
+                                        <div class="dropdown" id="delete">
+                                            <button class="btn btn-outline-secondary btn-sm" type="button"
+                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false"
+                                                style="color: white;cursor: pointer; border: none;">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                                    class="bi bi-three-dots" fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                                </svg>
+                                                <!-- <img src="assets/image/ellipsis-h-solid.svg" /> -->
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                                style="min-width: 1rem!important; cursor: pointer; padding: 0px;">
+                                                <span class="dropdown-item" (click)="deleteIban();"
+                                                    style="color: red;font-size: smaller;">{{lang.delete}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </mat-card>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div *ngIf="ibnErr1" class="invalid-feedback mt-3">
+                    {{lang.errorMsgs.e3}}
+                </div>
+            </form>
+
+            <div style="text-align: start;"><button mat-button type="submit" class="btnCss mt-5"
+                    (click)="sub1()">{{lang.continue}}</button></div>
+        </div>
+        <div *ngIf="optionSlected === 2">
+            <form style="width: 100%;">
+                <div class="titleTwo mt-3" style="text-align: start;">{{lang.s2.t1}}<span style="color: red;">*</span>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="labelTxtCss" style="text-align: start;">{{lang.s2.t2}}</div>
+                        <mat-form-field appearance="outline">
+
+                            <mat-select [(ngModel)]="exType" name="extype">
+                                <mat-option value="01" (click)="checkEType()">{{lang.s2.t3}}</mat-option>
+                                <mat-option value="02" (click)="checkEType()">{{lang.s2.t4}}</mat-option>
+                                <mat-option value="03" (click)="checkEType()">{{lang.s2.t5}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <div class="labelTxtCss">Excise Type Activities</div>
+
+
+                        <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div> -->
+                </div>
+                <div *ngIf="exTypeErr" class="invalid-feedback mt-3">
+                    {{lang.errorMsgs.e4}}
+                </div>
+                <div class="row mt-3" *ngIf="exType !== '02'">
+                    <div class="col-md-12">
+                        <div class="infoBoxCss" style="text-align: start;">
+                            <div class="infoTxt1"><img src="assets/image/combined-shape.svg"
+                                    style="width: 24px;margin-right: 5px;"> {{lang.s2.t6}}
+                            </div>
+                            <div class="infoTxt2">{{lang.s2.t7}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="titleTwo mt-3" style="text-align: start;">{{lang.s2.t8}}<span style="color: red;">*</span>
+                </div>
+                <div class="exciseGoodCss mt-3" style="text-align: start;">
+                    {{lang.s2.t9}}
+                </div>
+                <div class="row mt-3" [style.margin-right]="dir === 'rtl' ? '-30px' : ''">
+                    <div class="col-md-12" style="display: inherit;">
+                        <div class="mr-3" *ngFor="let item of
+                        goodsTypeList; let i=index">
+                            <mat-card [ngClass]="item.selected? 'cardActive' : 'cardInActive'"
+                                (click)="getType(item.selected, i)">
+                                <div [ngClass]="dir==='rtl' ? 'acctxt1Arb' : 'acctxt1'">
+                                    <div [ngClass]="item.selected? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                        {{item.GoodsTxt}}
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-3">
+                        <mat-card
+                            style="height: 104px;width: 207px;background: linear-gradient(to bottom, #8fd3c6, #56a894);">
+                            <div class="acctxt1">
+                                <div class="exciseCardTxt1">
+                                    Sweetened Beverages
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div> -->
+                </div>
+                <div *ngIf="gTypeErr" class="invalid-feedback mt-3">
+                    {{lang.errorMsgs.e5}}
+                </div>
+                <span *ngIf="exType === '01'">
+                    <div class="titleTwo mt-3" style="text-align: start;">{{lang.s2.t10}}</div>
+                    <div class="exciseGoodCss mt-3" style="text-align: start;">
+                        {{lang.s2.t11}}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="co-md-12" style="display: inherit;margin-left: 15px;">
+                            <div class="mr-3">
+                                <mat-card [ngClass]="tWar? 'cardActive' : 'cardInActive'" (click)="getTWar(tWar)">
+                                    <div [ngClass]="dir==='rtl' ? 'acctxt1Arb' : 'acctxt1'">
+                                        <div [ngClass]="tWar? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                            {{lang.yes}}
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                            <div class="mr-3">
+                                <mat-card [ngClass]="!tWar? 'cardActive' : 'cardInActive'" (click)="getTWar(tWar)">
+                                    <div [ngClass]="dir==='rtl' ? 'acctxt1Arb' : 'acctxt1'">
+                                        <div [ngClass]="!tWar? 'exciseCardTxt1' : 'exciseCardTxt1In'">
+                                            {{lang.no}}
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="infoBoxCss"
+                                style="height: 72px !important;padding:25px !important;text-align: start;">
+                                <div class="infoTxt1"><img src="assets/image/combined-shape.svg"
+                                        style="width: 24px;margin-right: 5px;">
+                                    {{lang.s2.t12}}</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </span>
+
+            </form>
+            <div style="text-align: start;"><button mat-button type="submit" class="btnCss mt-5"
+                    (click)="sub2()">{{lang.continue}}</button></div>
+        </div>
+        <div *ngIf="optionSlected === 3">
+            <form [formGroup]="exciseFormGroup3" style="width: 100%;">
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="labelTxtCss">{{lang.s3.t1}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{lang.name}}" formControlName="Decname" maxlength="40"
+                                (change)="validateDecname($event)"
+                                [ngClass]="{ 'is-invalid': submitted3 && f3.Decname.errors }">
+                        </mat-form-field>
+                        <div *ngIf="!submitted3 && f3.Decname.errors" class="invalid-feedback">
+                            <div *ngIf="f3.Decname.errors.pattern">{{lang.errorMsgs.e7}}</div>
+                        </div>
+                        <div *ngIf="submitted3 && f3.Decname.errors" class="invalid-feedback">
+                            <div *ngIf="f3.Decname.errors.required">{{lang.errorMsgs.e6}}</div>
+                            <div *ngIf="f3.Decname.errors.pattern">{{lang.errorMsgs.e7}}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="labelTxtCss">{{lang.s3.t2}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{lang.egDesg}}" formControlName="Owner"
+                                (change)="validateDecDesig($event)"
+                                [ngClass]="{ 'is-invalid': submitted3 && f3.Owner.errors }" maxlength="40">
+                        </mat-form-field>
+                        <div *ngIf="!submitted3 && f3.Owner.errors" class="invalid-feedback">
+                            <div *ngIf="f3.Owner.errors.pattern">{{lang.errorMsgs.e7}}</div>
+                        </div>
+                        <div *ngIf="submitted3 && f3.Owner.errors" class="invalid-feedback">
+                            <div *ngIf="f3.Owner.errors.required">{{lang.errorMsgs.e8}}</div>
+                            <div *ngIf="f3.Owner.errors.pattern">{{lang.errorMsgs.e7}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="labelTxtCss">{{lang.s3.t3}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+
+                            <mat-select formControlName="Type"
+                                [ngClass]="{ 'is-invalid': submitted3 && f3.Type.errors }">
+                                <mat-option value='ZS0001' (click)="getSelected()">{{lang.national}}</mat-option>
+                                <mat-option value='ZS0002' (click)="getSelected()">{{lang.iqama}}</mat-option>
+                                <mat-option value='ZS0003' (click)="GccClick()">{{lang.gcc}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="submitted3 && f3.Type.errors" class="invalid-feedback">
+                            <div *ngIf="f3.Type.errors.required">{{lang.errorMsgs.e9}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="labelTxtCss">{{lang.s3.t4}}<span style="color: red;">*</span></div>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="" formControlName="Idnumber" [disabled]='flags' maxlength="15"
+                                [ngClass]="{ 'is-invalid': submitted3 && f3.Idnumber.errors }">
+                        </mat-form-field>
+                        <div *ngIf="submitted3 && f3.Idnumber.errors" class="invalid-feedback">
+                            <div *ngIf="f3.Idnumber.errors.required">{{lang.errorMsgs.e10}}</div>
+                            <div *ngIf="f3.Idnumber.errors.minlength">{{lang.errorMsgs.e11}}</div>
+                            <div *ngIf="f3.Idnumber.errors.pattern">{{lang.errorMsgs.e12}}</div>
+
+                        </div>
+                        <div *ngIf="idErr1" class="invalid-feedback">
+                            <p>{{idMsg}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="labelTxtCss">{{lang.s3.t5}}<span style="color: red;">*</span></div>
+
+
+                        <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="picker1" placeholder="{{lang.chooseDate}}" disabled
+                                [readonly]="inputReadonly" formControlName="Decdate"
+                                [ngClass]="{ 'is-invalid': submitted3 && f3.Decdate.errors }">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row mt-3" style="text-align: start;">
+                    <div class="col-md-12">
+                        <div class="infoBoxCss" style="height: 72px !important;padding:25px !important">
+                            <div class="infoTxt1"><img src="assets/image/combined-shape.svg"
+                                    style="width: 24px;margin-right: 5px;"> {{lang.s3.t6}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: start;"><button mat-button type="submit" class="btnCss mt-5"
+                        (click)="onSubmitx()">{{lang.continue}}</button></div>
+            </form>
+
+        </div>
+        <div *ngIf="optionSlected === 4">
+
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <mat-card class="mt-3">
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-11" style="display: inherit;">
+                                <div class="summaryCss1" [style.left]="dir === 'rtl' ? '10px' : ''">
+                                    <img class="summaryCss2" src="assets/images/ChatBot@2x.png">
+                                </div>
+
+                                <div class="summaryCss3">{{lang.summary.c1.t1}}</div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="summaryCss4"></div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row mt-4 mb-2" *ngFor="let attach of exciseFormGroup.get('doc')['controls'];">
+                            <ng-container *ngIf="attach.value.id !== ''">
+                                <div class="col-md-6">
+                                    <div class="summaryCss5">{{lang.summary.c1.t2}}</div>
+                                    <div class="summaryCss6">{{attach.value.id}}</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="summaryCss5">{{lang.summary.c1.t3}}</div>
+                                    <div class="summaryCss6">{{CrNm}}</div>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                    </mat-card>
+                    <mat-card class="mt-3">
+                        <ng-container>
+                            <div class="row mt-2 mb-2">
+                                <div class="col-md-11" style="display: inherit;">
+                                    <div class="summaryCss1" [style.left]="dir === 'rtl' ? '10px' : ''">
+                                        <img class="summaryCss2" [src]="bankLogo">
+                                    </div>
+
+                                    <div class="summaryCss3">{{newIban[0].name}}</div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="summaryCss4"></div>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-md-6">
+                                    <div class="summaryCss5">{{lang.summary.c2.t1}}</div>
+                                    <div class="summaryCss6">{{ibanCode}} {{newIban[0].id}}</div>
+                                </div>
+
+                            </div>
+                        </ng-container>
+
+
+
+                    </mat-card>
+                    <mat-card class="mt-3">
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-11" style="display: inherit;">
+                                <div class="summaryCss1" [style.left]="dir === 'rtl' ? '10px' : ''">
+                                    <img class="summaryCss2" src="assets/image/manage-tax.svg">
+                                </div>
+
+                                <div class="summaryCss3">{{lang.summary.c3.t1}}</div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="summaryCss4"></div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div class="summaryCss3" [style.margin-right]="dir==='rtl'? '0' : ''">
+                                    {{lang.summary.c3.t2}}</div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-2">
+                            <div class="col-md-6">
+                                <div class="summaryCss5">{{lang.summary.c3.t3}}</div>
+                                <div class="summaryCss6" *ngIf="exType === '01'">{{lang.summary.c3.t4}}</div>
+                                <div class="summaryCss6" *ngIf="exType === '02'">{{lang.summary.c3.t5}}</div>
+                                <div class="summaryCss6" *ngIf="exType === '03'">{{lang.summary.c3.t6}}</div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                    <div class="summaryCss5">Vadility Date</div>
+                                    <div class="summaryCss6">{{newDate | date}}</div>
+                                </div> -->
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div class="summaryCss3" [style.margin-right]="dir==='rtl'? '0' : ''">
+                                    {{lang.summary.c3.t7}}</div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-2" style="text-align: start;">
+                            <div class="col-md-12">
+                                <div class="summaryCss5">{{lang.summary.c3.t10}}</div>
+                                <span *ngFor="let item of goodsTypeList1; let i=index">
+                                    <span class="summaryCss6" *ngIf="item.selected">{{item.GoodsTxt}}
+                                        <span *ngIf="i<goodsTypeList1.length-2"> , </span>
+                                        <span *ngIf="i === goodsTypeList1.length-2"> & </span>
+                                    </span>
+                                </span>
+
+                            </div>
+
+                        </div>
+                        <mat-divider *ngIf="exType === '01'"></mat-divider>
+                        <div class="row mt-4" *ngIf="exType === '01'">
+                            <div class="col-md-12">
+                                <div class="summaryCss3" [style.margin-right]="dir==='rtl'? '0' : ''">
+                                    {{lang.summary.c3.t8}}</div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-2" *ngIf="exType === '01'">
+                            <div class="col-md-6">
+                                <div class="summaryCss5">{{lang.summary.c3.t9}}</div>
+                                <div class="summaryCss6" *ngIf="tWar">{{lang.yes}}</div>
+                                <div class="summaryCss6" *ngIf="!tWar">{{lang.no}}</div>
+
+                            </div>
+
+                        </div>
+
+                    </mat-card>
+
+                    <mat-card class="mt-3">
+
+                        <div class="row mt-2 mb-2">
+                            <div class="col-md-11" style="display: inherit;">
+                                <div class="summaryCss1" [style.left]="dir === 'rtl' ? '10px' : ''">
+                                    <img class="summaryCss2" src="assets/image/declaration.svg">
+                                </div>
+
+                                <div class="summaryCss3">{{lang.summary.c4.t1}}</div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="summaryCss4"></div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row mt-4 mb-2">
+                            <div class="col-md-6">
+                                <div class="summaryCss5">{{lang.summary.c4.t2}}</div>
+                                <div class="summaryCss6">{{exciseFormGroup3.value.Decname}}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="summaryCss5">{{lang.summary.c4.t3}}</div>
+                                <div class="summaryCss6">{{exciseFormGroup3.value.Owner}}</div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row mt-4 mb-2">
+                            <div class="col-md-6">
+                                <div class="summaryCss5">{{lang.summary.c4.t4}} </div>
+                                <div class="summaryCss6" *ngIf="exciseFormGroup3.value.Type === 'ZS0001'">
+                                    {{lang.national}}
+                                </div>
+                                <div class="summaryCss6" *ngIf="exciseFormGroup3.value.Type === 'ZS0002'">{{lang.iqama}}
+                                </div>
+                                <div class="summaryCss6" *ngIf="exciseFormGroup3.value.Type === 'ZS0003'">{{lang.gcc}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="summaryCss5">{{lang.summary.c4.t5}}</div>
+                                <div class="summaryCss6" *ngIf="exciseFormGroup3.value.Type !== 'ZS0003'">{{idnumber}}
+                                </div>
+                                <div class="summaryCss6" *ngIf="exciseFormGroup3.value.Type === 'ZS0003'">
+                                    {{exciseFormGroup3.value.Idnumber}} </div>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <div class="row mt-4 mb-2">
+                            <div class="col-md-6">
+                                <div class="summaryCss5">{{lang.summary.c4.t6}} </div>
+                                <div class="summaryCss6">{{newDate | date}}</div>
+                            </div>
+
+                        </div>
+
+                    </mat-card>
+
+                </div>
+            </div>
+
+            <div class="ackTxtvalue mt-3">
+                <mat-checkbox [(ngModel)]="agr" name="agree" style="position: relative;
+                top: 3px; right: 5px;"></mat-checkbox> {{lang.summary.c4.t7}} <span style="color: #00664f;"
+                    (click)="getTermsAndCondition();">{{lang.summary.c4.t8}}</span> .
+            </div>
+
+            <div style="text-align: start;"><button mat-button type="submit" class="btnCss mt-5"
+                    [ngClass]="agr === false ? 'btnCssDisabled' : 'btnCss'" (click)="sub3()"
+                    [disabled]="!agr">{{lang.confirm}}</button></div>
+        </div>
+    </div>
+    <div *ngIf="sub">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="mt-5" style="height:159px">
+                    <img src="assets/image/success.svg" width="112px">
+                </div>
+                <div class="exciseAccCss1">
+                    {{lang.s5.t1}}
+                </div>
+                <div class="exciseAccCss2 mt-2">
+                    {{lang.s5.t2}}
+                </div>
+
+                <div class="exciseAccCssBox mt-4">
+                    <div class="exciseAccCssBox1">
+                        <span [style.margin-right]="dir === 'rtl' ? '20px' : ''">{{lang.s5.t3}}</span>
+                        <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'">
+                            {{ postResponse['Decname'] }} </span>
+                    </div>
+                </div>
+                <div class="exciseAccCssBox mt-3">
+                    <div class="exciseAccCssBox1">
+                        <span [style.margin-right]="dir === 'rtl' ? '20px' : ''">{{lang.s5.t4}}</span>
+                        <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'">
+                            {{ postResponse['Fbnumz'] }} </span>
+                    </div>
+                </div>
+                <div class="exciseAccCssBox mt-3">
+                    <div class="exciseAccCssBox1">
+                        <span [style.margin-right]="dir === 'rtl' ? '20px' : ''">{{lang.s5.t5}}</span>
+                        <span [ngClass]="dir === 'rtl' ? 'exciseAccCssBox2Arb' : 'exciseAccCssBox2'">{{newDate |
+                            date}}</span>
+                    </div>
+                </div>
+                <button mat-button type="submit" class="btnCss2 mt-4"
+                    [routerLink]="['/mains/tax']">{{lang.s5.btn}}</button>
+                <!-- <div>
+                    <button mat-button type="submit" class="btnCss3 mt-4 mb-5">Application for Tax Warehouse</button>
+                </div> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- MODAL START -->
+<div class="modal" id="idValidation" data-keyboard="false" data-backdrop="static" [dir]="dir">
+    <div class="modal-dialog  modal-md">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row" style="text-align: end;">
+                    <div class="col-md-12">
+                        <img (click)="resetIDErrors();" src="assets/image/close.svg" class="" data-dismiss="modal"
+                            style="width: 20px; height: 20px;">
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        <div class="titleTwo mt-3" style="text-align: center;">{{lang.m2.btn1}}</div>
+                    </div>
+                </div> -->
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div>
+                            <div class="registerLabelCss">{{lang.m2.t1}}<span style="color: red;">*</span></div>
+                            <mat-form-field appearance="outline">
+                                <input matInput [ngModel]="id1" (ngModelChange)="id1 = $event; validateID()"
+                                    maxlength="10">
+                            </mat-form-field>
+                            <div *ngIf="idErr1" class="invalid-feedback">
+                                <p>{{idMsg}}</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="registerLabelCss">{{lang.m2.t2}}<span style="color: red;">*</span></div>
+
+                            <form #testForm="ngForm" id="testForm">
+                                <mat-form-field appearance="outline">
+                                    <input matInput [matDatepicker]="picker3" [max]="enddate" [(ngModel)]="dob1"
+                                        name="sd">
+                                    <!-- placeholder="{{lang.chooseDate}}" -->
+                                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker3 [calendarHeaderComponent]="headerComponent">
+                                    </mat-datepicker>
+                                </mat-form-field>
+                            </form>
+
+                            <div *ngIf="dobErr && !testForm.touched" class="invalid-feedback">
+                                <p>{{dobMsg}}</p>
+                            </div>
+                            <div *ngIf="testForm.touched && !dob1" class="invalid-feedback">{{lang.errorMsgs.e13}}</div>
+
+                        </div>
+
+                        <div class="mt-3 mb-2" style="text-align: end;">
+
+                            <button mat-button type="submit" class="btnCss"
+                                (click)="validateIDz();onSubmitf(testForm);">{{lang.m2.btn1}}</button>
+                        </div>
+
+
+                        <!-- <div class="mt-3 mb-2">
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                class="btnTCss" (click)="validateIDz();onSubmitf(testForm);">{{lang.m2.btn1}}</button>
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                data-dismiss="modal" class="btnTCss">{{lang.close}}</button>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- MODAL END -->
+
+
+
+
+<!-- MODAL START -->
+<div class="modal" id="ibanValidation" data-keyboard="false" data-backdrop="static" [dir]="dir" data-dismiss="modal">
+    <div class="modal-dialog  modal-md">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row" style="text-align: end;">
+                    <div class="col-md-12">
+                        <img src="assets/image/close.svg" class="" (click)="resetErrors()" data-dismiss="modal"
+                            style="width: 20px; height: 20px;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titleTwo mt-3" style="text-align: center;">{{lang.m1.t2}}</div>
+                    </div>
+                </div>
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <!-- <div>
+                            <div class="registerLabelCss">{{lang.m1.t1}}<span style="color: red;">*</span></div>
+                            <mat-form-field appearance="outline">
+                                <input matInput [ngModel]="ibn | ibanformatter" (ngModelChange)="ibn = $event.toUpperCase();validateibn(ibn)" maxlength="29">
+                            </mat-form-field>
+                            <div *ngIf="numErr" class="invalid-feedback">
+                                <p>{{ibanErr}}</p>
+                            </div>
+                            <div *ngIf="ibnErr2" class="invalid-feedback">
+                                <p>{{ibnErrMsg2}}</p>
+                            </div>
+                        </div> -->
+                        <form [formGroup]="formz">
+                            <div class="registerLabelCss">{{lang.m1.t1}}<span style="color: red;">*</span></div>
+                            <!-- <mat-form-field appearance="outline">
+                                <span style="  float: left !important;
+                              margin-top: -3px !important; text-align: left !important; margin-left: 10px;
+                           margin-right: 10px;
+                           color: gray;
+                           font-family: 'SSTArabic-Medium';">SA</span> <input dir="ltr"
+                                    [ngClass]="{ 'is-invalid': ibnErrMsg2}"
+                                    style="text-align: left !important;width: 90%;" matInput type="text" appIbnMask
+                                    formControlName="ibn" (ngModelChange)="ibn = $event.toUpperCase();validateibn(ibn)"
+                                    id="phone-number">
+                            </mat-form-field>
+                            <div *ngIf="numErr" class="invalid-feedback">
+                                <p>{{ibanErr}}</p>
+                            </div>
+                            <div *ngIf="ibnErr2" class="invalid-feedback">
+                                <p>{{ibnErrMsg2}}</p>
+                            </div> -->
+                            <div style="border: 1px solid #e0e0e0; margin-top: 20px;
+                            padding: 1em 0 1em 0;
+                            border-radius: 5px;" [style.border-color]="ibnErr21 ? '#aa0c19':'#e0e0e0'">
+                                <span style="   float: left !important;
+                                margin-top: 1px !important;  text-align: left !important; margin-left: 10px;
+                             margin-right: 10px;
+                             color: gray;
+                             font-family: 'SSTArabic-Medium';">SA</span>
+                                <input type="text" style="text-align: left !important;width: 90%;border:none" appIbnMask
+                                    formControlName="ibn" (ngModelChange)="ibn = $event.toUpperCase();validateibn(ibn)"
+                                    id="phone-number">
+
+
+                            </div>
+                            <div *ngIf="numErr" style="margin-top: 10px;" class="invalid-feedback">
+                                <p>{{ibanErr}}</p>
+                            </div>
+                            <div *ngIf="ibnErr2" style="margin-top: 10px;" class="invalid-feedback">
+                                <p>{{ibnErrMsg2}}</p>
+                            </div>
+                        </form>
+
+                        <div class="mt-3 mb-2" style="text-align: end;">
+                            <!-- <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                class="btnTCss btn"  (click)="validateIbanz(ibn)">{{lang.m1.btn1}}</button> -->
+                            <button mat-button type="submit" class="btnCss" (click)="validateIbanz(ibn)"
+                                [disabled]="numErr">{{lang.m1.btn1}}</button>
+                            <!-- <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                data-dismiss="modal" class="btnTCss">{{lang.close}}</button> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- MODAL END -->
+
+
+<notifier-container></notifier-container>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" [dir]="dir"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none !important ;">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tnc" style="text-align: start;">
+                            {{lang.summary.c4.t8}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div [innerHTML]="htmlStr | safe" style="overflow: auto;
+                        min-height: 350px;
+                        max-height: 350px;
+                        border: 1px solid #ebebeb;
+                        border-radius: 14px;
+                        padding: 10px; text-align: start;
+                        color: #999999;font-family: 'SSTArabic-Roman'; line-height: 16px;font-size: 12px;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="aftsubmit" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered  modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row text-center mt-3">
+                    <div class="col-md-12">
+                        <div class="ackScreenTitle2">{{resText}}</div>
+                        <div class="ackScreenTitle2">{{resText1}}</div>
+                        <div class="mt-3 mb-2">
+                            <button mat-button style="width: auto; border: none;color: #d2a02a;font-size: 16px;"
+                                data-dismiss="modal" class="btnTCss"
+                                [routerLink]="['/mains/dashboard']">{{lang.backToDashboard}}</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

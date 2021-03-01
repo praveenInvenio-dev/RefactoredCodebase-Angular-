@@ -1,0 +1,484 @@
+<div class="container alignStart px-0" [dir]="direction" *ngIf="!formOpened">
+  <div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <span
+          class="exciseTitle1 unicodeDir"
+          style="cursor: pointer"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          (click)="backTo('')"
+          >{{ lang["bc1"] }}
+          &gt;
+        </span>
+        <span
+          class="exciseTitle1 unicodeDir"
+          style="cursor: pointer"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          (click)="backTo('001')"
+          >{{ lang["bc2"] }} &gt;</span
+        >
+        <span
+          class="exciseTitle1"
+          [style.float]="direction === 'rtl' ? 'rtl' : 'ltr'"
+          style="color: #151515"
+        >
+          {{ lang["bc3"] }}</span
+        >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div
+            class="viewMore col-md-6 px-0"
+            style="margin-top: 40px"
+            [ngStyle]="{ right: direction === 'rtl' ? '' : 'unset' }"
+          >
+            <div style="cursor: pointer" (click)="backTo('001')">
+              <span class="addServiceSpan2">
+                <img
+                  [src]="
+                    direction === 'ltr'
+                      ? 'assets/image/arrow-left-green.svg'
+                      : 'assets/image/arrow-right-green.svg'
+                  "
+                />
+              </span>
+              <span class="addServiceSspan2"> {{ lang["back"] }} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4 mx-0 justify-content-between">
+      <div class="">
+        <div class="exciseSecondTitle" *ngIf="!whiteliting">
+          {{ lang["titleAfterModal"] }}
+        </div>
+        <div class="exciseSecondTitle" *ngIf="whiteliting">
+          {{ lang["titleAfterModal"] }}
+        </div>
+      </div>
+      <div class="row justifyContentEnd mx-0 viewIcons" style="cursor: pointer">
+        <div class="layoutOptions img-alignment">
+          <img
+            [ngClass]="
+              layoutType == 'grid' ? 'layoutId layoutId-active' : 'layoutId'
+            "
+            (click)="changeView('grid')"
+            [src]="
+              layoutType === 'grid'
+                ? 'assets/image/card-green.svg'
+                : 'assets/image/cards-gray.svg'
+            "
+          />
+          <img
+            [ngClass]="
+              layoutType == 'table' ? 'layoutId layoutId-active' : 'layoutId'
+            "
+            (click)="changeView('table')"
+            [src]="
+              layoutType === 'table'
+                ? 'assets/image/table.svg'
+                : 'assets/image/table-gray.svg'
+            "
+          />
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New mt-1"></div>
+    <div class="row mt-3 mx-0 justify-content-between">
+      <div style="width: 851px">
+        <div
+          [ngClass]="
+            direction === 'ltr' ? 'filter-search' : 'filter-search-rtl'
+          "
+        >
+          <input
+            type="text"
+            [placeholder]="
+              direction == 'rtl'
+                ? searchConstants.filters.search.arb
+                : searchConstants.filters.search.eng
+            "
+            [(ngModel)]="searchFilter"
+          />
+          <img src="assets/images/inbox/search.svg" alt="" />
+        </div>
+      </div>
+      <div class="row justify-content-end mx-0">
+        <img
+          src="assets/images/filter.svg"
+          alt="filter"
+          class="ff-filter-icon"
+          [ngClass]="direction == 'ltr' ? 'right' : ''"
+          (click)="showFilter()"
+        />
+      </div>
+    </div>
+    <div class="col-md-12 px-0" *ngIf="layoutType == 'grid'">
+      <div class="row mt-4 mx-0 justify-content-between">
+        <div
+          class="col-md-6 col-sm-6 margin-bottom"
+          [ngClass]="direction === 'ltr' ? 'padding-lft' : 'padding-rtl'"
+        >
+          <mat-card class="addCard" (click)="newWhitelistRequest()">
+            <img src="assets/image/add.svg" class="px-2" />
+            <div class="value fwb textPrimary mx-1 mt-2">
+              {{ lang["newWhitelistRequest"] }}
+            </div>
+          </mat-card>
+        </div>
+        <div
+          class="col-md-6 pointer"
+          [ngClass]="direction === 'ltr' ? 'padding-lft' : 'padding-rtl'"
+          *ngFor="let whitelist of listOfWhiteListing | filter: searchFilter"
+          (click)="openFormBundle(whitelist)"
+        >
+          <div class="filing-card textDark border">
+            <div class="row filing-card-upper px-3">
+              <div class="col-md-8">
+                <div class="value fwb1">{{ whitelist.title }}</div>
+                <div class="caption textGray">{{ whitelist.FbtText }}</div>
+              </div>
+              <div
+                class="col-md-4 statusResponsiveness"
+                style="justify-content: flex-end; display: flex"
+              >
+                <div
+                  class="tag32"
+                  [matTooltip]="whitelist.FbustTxt"
+                  [ngClass]="getStatusClass(whitelist.Fbust)"
+                >
+                  {{ whitelist.FbustTxt }}
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="row filing-card-space mx-0">
+              <div class="col-md-6 px-0 mb-1">
+                <div class="caption textGray margin-inline-start">
+                  {{ lang["requestNumber"] }}
+                </div>
+                <div class="requestNumber margin-inline-start">
+                  {{ whitelist.Fbnum }}
+                </div>
+              </div>
+              <div class="col-md-6 px-0 mb-1">
+                <div class="caption textGray margin-inline-start">
+                  {{ lang["requestDate"] }}
+                </div>
+                <div class="requestNumber margin-inline-start">
+                  {{ getDay(whitelist.Receipt) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5 mt-3" *ngIf="layoutType == 'table'">
+      <div class="col-md-12">
+        <div class="mb-2 border">
+          <div
+            class="row"
+            style="margin: 0; cursor: pointer"
+            (click)="newWhitelistRequest()"
+          >
+            <img class="col-auto" src="assets/image/add.svg" />
+            <div class="value fwb textPrimary mt-3 mb-3 mx-1 col">
+              {{ lang["newWhitelistRequest"] }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 listViewWhitelisting">
+        <table style="width: 100%">
+          <tr class="tabHeader" *ngIf="listOfWhiteListing.length > 0">
+            <ng-container *ngIf="direction !== 'rtl'">
+              <th colspan="8">{{ lang["requestName"] }}</th>
+            </ng-container>
+            <ng-container *ngIf="direction === 'rtl'">
+              <th
+                colspan="8"
+                [style.border-right]="
+                  direction === 'rtl' ? '1px solid #bbb' : ''
+                "
+                [style.border-top-left-radius]="
+                  direction === 'rtl' ? '0px' : '16px'
+                "
+                [style.border-top-right-radius]="
+                  direction === 'rtl' ? '16px' : '0px'
+                "
+              >
+                {{ lang["requestName"] }}
+              </th>
+            </ng-container>
+            <th colspan="8">{{ lang["requestNumber"] }}</th>
+            <th colspan="8">{{ lang["requestDate"] }}</th>
+
+            <ng-container *ngIf="direction !== 'rtl'">
+              <th colspan="1">{{ lang["filter"]["status"] }}</th>
+            </ng-container>
+            <ng-container *ngIf="direction === 'rtl'">
+              <th
+                colspan="1"
+                [style.border-top-right-radius]="
+                  direction === 'rtl' ? '0px' : '0px'
+                "
+                [style.border-top-left-radius]="
+                  direction === 'rtl' ? '16px' : '0px'
+                "
+              >
+                {{ lang["filter"]["status"] }}
+              </th>
+            </ng-container>
+          </tr>
+
+          <ng-container
+            *ngFor="
+              let whitelist of listOfWhiteListing | filter: searchFilter;
+              let i = index
+            "
+          >
+            <tr class="tabheader2" (click)="openFormBundle(whitelist)">
+              <ng-container *ngIf="direction === 'rtl'">
+                <td
+                  colspan="8"
+                  [style.border-bottom-right-radius]="
+                    i === listOfWhiteListing.length - 1 ? '16px' : '0px'
+                  "
+                  [style.border-bottom-left-radius]="'0px'"
+                >
+                  {{ whitelist.FbtText }}
+                </td>
+              </ng-container>
+
+              <ng-container *ngIf="direction !== 'rtl'">
+                <td
+                  colspan="8"
+                  [style.border-bottom-right-radius]="'0px'"
+                  [style.border-bottom-left-radius]="
+                    i === listOfWhiteListing.length - 1 ? '16px' : '0px'
+                  "
+                >
+                  {{ whitelist.FbtText }}
+                </td>
+              </ng-container>
+
+              <td colspan="8">{{ whitelist.Fbnum }}</td>
+              <td colspan="8">{{ getDay(whitelist.Receipt) }}</td>
+
+              <ng-container *ngIf="direction !== 'rtl'">
+                <td
+                  colspan="1"
+                  [style.border-bottom-right-radius]="
+                    i === listOfWhiteListing.length - 1 ? '16px' : '0px'
+                  "
+                  [style.border-bottom-left-radius]="'0px'"
+                >
+                  <span
+                    class="tag32"
+                    [matTooltip]="whitelist.FbustTxt"
+                    [ngClass]="getStatusClass(whitelist.Fbust)"
+                    style="height: 35px; width: 80%"
+                  >
+                    {{ whitelist.FbustTxt }}
+                  </span>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="direction === 'rtl'">
+                <td
+                  colspan="1"
+                  [style.border-bottom-left-radius]="
+                    i === listOfWhiteListing.length - 1 ? '16px' : '0px'
+                  "
+                  [style.border-bottom-right-radius]="'0px'"
+                >
+                  <span
+                    class="tag32"
+                    [matTooltip]="whitelist.FbustTxt"
+                    [ngClass]="getStatusClass(whitelist.Fbust)"
+                    style="height: 35px; width: 80%"
+                  >
+                    {{ whitelist.FbustTxt }}
+                  </span>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-new-white-list-request
+  *ngIf="formOpened"
+  (closeForm)="closeForm()"
+  [formBundle]="selectedFormBundle"
+></app-new-white-list-request>
+
+<div
+  class="modal alignStart"
+  id="Instruction"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="direction"
+>
+  <div class="modal-dialog center">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeModal('Instruction')"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+            {{ lang["modalTitle"] }}
+          </div>
+          <div class="lightCard py-3 pr-3 mb-3 border">
+            <div class="modalInstructions f12 gray font-color">
+              {{ lang["contentLine1"] }}
+            </div>
+            <div class="modalInstructions f12 gray font-color mt-3">
+              {{ lang["contentLine2"] }}
+            </div>
+            <div class="modalInstructions f12 gray font-color mt-3">
+              {{ lang["contentLine3"] }}
+            </div>
+            <div class="modalInstructions f12 gray font-color mt-3">
+              {{ lang["contentLine4"] }}
+            </div>
+          </div>
+
+          <div class="check row mx-0">
+            <mat-checkbox
+              class="checkboxAckCss"
+              [(ngModel)]="instructionsAccepted"
+              [ngClass]="{
+                'checkbox-error': instructionsSubmitted && !instructionsAccepted
+              }"
+            >
+            </mat-checkbox>
+            <div
+              class="value textDark col-md-9 col-sm-9 col-xs-9 px-0 mx-2"
+              style="font-size: 12px; font-weight: 600"
+            >
+              {{ lang["agree"] }}
+            </div>
+          </div>
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary btnprimary-width"
+              style="max-width: 245px; line-height: 2.5"
+              (click)="openForm('Instruction')"
+              mat-raised-button
+            >
+              {{ lang["submitConsolidated"] }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal alignStart"
+  id="filterModal"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="direction"
+>
+  <div class="modal-dialog center">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              src="assets/image/close.svg"
+              class="modalCloseIcon"
+              (click)="closeFilter()"
+            />
+          </div>
+
+          <div class="dark fbl f28 mt-4 mb-3 pageTitle">
+            {{ lang["filter"]["title"] }}
+          </div>
+          <div class="caption textGray mt-3">
+            {{ lang["filter"]["status"] }}
+          </div>
+          <!-- <div class="row mx-0 mt-1">
+            <span
+              class="mx-1 zs-filterBlock"
+              [ngClass]="
+                filterStatus.indexOf('E0045') > -1 ? 'zs-filterBlockActive' : ''
+              "
+              (click)="toggleFilterStatus('E0045')"
+              >{{ lang["filter"]["success"] }}</span
+            >
+            <span
+              class="mx-1 zs-filterBlock"
+              [ngClass]="
+                filterStatus.indexOf('E0015') > -1 ? 'zs-filterBlockActive' : ''
+              "
+              (click)="toggleFilterStatus('E0015')"
+              >{{ lang["filter"]["pending"] }}</span
+            >
+          </div> -->
+          <mat-select
+            class="commonMatSelect mat-1"
+            [(ngModel)]="filterStatusValue"
+            name="filterStatusValue"
+          >
+            <mat-option
+              *ngFor="let filter of filterTypes"
+              [value]="filter['key']"
+              >{{ filter["value"] }}</mat-option
+            >
+          </mat-select>
+          <div class="caption textGray mt-3">{{ lang["requestDate"] }}</div>
+          <div class="commomDatePicker mt-1">
+            <input
+              readonly
+              (click)="filterDate.open()"
+              matInput
+              [matDatepicker]="filterDate"
+              placeholder="{{ lang['chooseADate'] }}"
+              [formControl]="filteredDate"
+            />
+            <mat-datepicker-toggle matSuffix [for]="filterDate">
+              <mat-icon matDatepickerToggleIcon>
+                <span style="display: flex">
+                  <img src="assets/image/calendar.svg" alt="calendar"
+                /></span>
+              </mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker
+              #filterDate
+              [calendarHeaderComponent]="headerComponent"
+            >
+            </mat-datepicker>
+          </div>
+
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <button
+              class="btnPrimary btnprimary-width"
+              mat-raised-button
+              (click)="applyFilter()"
+            >
+              {{ lang["filter"]["apply"] }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

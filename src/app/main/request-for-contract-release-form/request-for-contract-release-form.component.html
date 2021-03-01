@@ -1,0 +1,1967 @@
+<div *ngIf="!sub" class="rfcr container alignStart" [dir]="dir">
+  <div *ngIf="optionActive === 0" class="rfcr-container">
+    <div class="row d-flex margin-t-40 margin-b-40 vCenter">
+      <div class="col-md-12 col-sm-12">
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [routerLink]="['/mains/tax']"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+        >
+          {{ page1.hamb1 }} &gt; &nbsp;</span
+        >
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [routerLink]="['/mains/tax']"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          >{{ page1.hamb2 }} &gt;
+        </span>
+        <span
+          class="bcTitle bcTitleActive textDark"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+        >
+          &nbsp;{{ page1.hamb3 }}&nbsp;
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="back-button cursor-pointer">
+          <span (click)="back()">
+            <img
+              src="assets/image/arrow-left.svg"
+              [ngClass]="dir === 'rtl' ? 'transform-img' : 'auth-img'"
+            />
+            {{ page1.back }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row margin-t-32 margin-b-16 alignStart">
+      <div class="col-md-10 col-sm-10">
+        <div class="pageTitle textDark">
+          {{ page1.title1 }}
+        </div>
+      </div>
+      <div
+        class="col-md-2 col-sm-2 justifyContentEnd"
+        style="
+          display: flex;
+          bottom: -16px;
+          width: 100%;
+          height: 100%;
+          align-items: end;
+          margin-bottom: 0 px;
+        "
+      >
+        <div class="flex-col">
+          <div>
+            <div class="filterIcons">
+              <img
+                [src]="img2"
+                [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                (click)="changeView('grid')"
+                [style.margin-left]="dir === 'rtl' ? '0px' : '10px'"
+                [style.margin-right]="dir === 'rtl' ? '20px' : '0px'"
+              />
+            </div>
+            <div
+              class="navTxtActive"
+              [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+              [style.background-color]="
+                viewListView ? 'transparent' : '#d99a29'
+              "
+              [style.margin-left]="dir === 'rtl' ? '0px' : '10px'"
+              [style.margin-right]="dir === 'rtl' ? '20px' : '0px'"
+            ></div>
+          </div>
+        </div>
+        <div class="flex-col">
+          <div class="mx-0 my-0">
+            <div class="filterIcons">
+              <img
+                [src]="img1"
+                [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                (click)="changeView('list')"
+                [style.margin-left]="dir === 'rtl' ? '0px' : '10px'"
+                [style.margin-right]="dir === 'rtl' ? '10px' : '0px'"
+              />
+            </div>
+            <div
+              class="navTxtActive"
+              [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+              [style.background-color]="
+                viewListView ? '#d99a29' : 'transparent'
+              "
+              [style.margin-left]="dir === 'rtl' ? '0px' : '10px'"
+              [style.margin-right]="dir === 'rtl' ? '10px' : '0px'"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Rectangle-12New mx-0 my-0"></div>
+    <!-- header end -->
+
+    <div class="mt-4 row mx-0 my-0" id="rfcrsearch">
+      <div
+        class="searchBar vCenter col-md-12 col-sm-12"
+        style="display: inline-flex"
+      >
+        <input
+          [placeholder]="page1.search"
+          class="commonInput vCenter"
+          [(ngModel)]="searchKeyword"
+          (input)="filterItem($event)"
+        /><span
+          [ngClass]="dir == 'ltr' ? 'searchIcon-ltr' : 'searchIcon-rtl'"
+          class="searchIcon"
+          ><img [src]="img3"
+        /></span>
+        <img
+          [src]="img4"
+          class="no-cursor"
+          [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+        />
+      </div>
+    </div>
+    <div class="row" *ngIf="!viewListView">
+      <div class="rfcr col-md-6 col-sm-6 margin-top">
+        <mat-card
+          class="flex-col contact-release-add-card2 border cursor-pointer"
+          (click)="onAddREquest()"
+        >
+          <div class="vCenter">
+            <img class="px-2" src="assets/image/add.svg" />
+            <div class="tag-partial-bold textPrimary f16 fwb mx-1 mt-2">
+              {{ page1.title2 }}
+            </div>
+          </div>
+        </mat-card>
+      </div>
+      <div
+        class="rfcr col-md-6 col-sm-6 margin-top"
+        *ngFor="let item of filteredList; let listIndex = index"
+      >
+        <mat-card
+          *ngIf="!hiddenElement"
+          class="rfcr contact-release-add-card textDark border cursor-pointer"
+          (click)="getContractByReqNum($event, item)"
+        >
+          <div class="row contact-release-top-card px-3 py-3">
+            <div
+              class="col-md-8 col-sm-8"
+              [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+              [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+            >
+              <div class="sectionTitle textDark f20 fwb">
+                {{ item["FbtText"] }}
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <div
+                class="tag32 vCenter f12 px-2"
+                [matTooltip]="item.StatText"
+                [ngClass]="getStyle(item.Fbsta)"
+              >
+                {{ item["StatText"] }}
+              </div>
+            </div>
+          </div>
+          <div class="Rectangle-12New px-0 py-0 mx-0 my-0"></div>
+          <div class="row contact-release-bottom-card px-3 py-3">
+            <div
+              class="rfcr col-md-6 col-sm-6"
+              [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+              [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+            >
+              <div class="caption textGray">{{ page8.number }}</div>
+              <div class="value textDark fwb">{{ item["Fbnum"] }}</div>
+            </div>
+            <div class="rfcr col-md-6 col-sm-6">
+              <div class="caption textGray">{{ page3.period }}</div>
+              <div class="value textDark fwb">
+                {{ getLocaleString(item["CrdtText"]) }}
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div class="col-md-12 mt-3 alignStart" *ngIf="viewListView">
+      <div class="row mt-3">
+        <div
+          class="mat-card col-md-12 mt-3 cursor-pointer"
+          (click)="onAddREquest()"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <img class="px-2" src="assets/image/add.svg" alt="" />
+              <div
+                class="tag-partial-bold f16 fwb textPrimary mx-1 mt-2"
+                style="display: inline-flex"
+              >
+                {{ page1.title2 }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <table *ngIf="count >= 0">
+          <tr class="tabHeader">
+            <ng-container *ngIf="dir !== 'rtl'">
+              <th class="tabheader f16 fwb" colspan="3">
+                {{ page1.requestTitle }}
+              </th>
+            </ng-container>
+            <ng-container *ngIf="dir === 'rtl'">
+              <th
+                colspan="3"
+                [style.border-right]="dir === 'rtl' ? '1px solid #bbb' : ''"
+                [style.border-top-left-radius]="dir === 'rtl' ? '0px' : '16px'"
+                [style.border-top-right-radius]="dir === 'rtl' ? '16px' : '0px'"
+              >
+                {{ page1.requestTitle }}
+              </th>
+            </ng-container>
+            <th class="tabheader f16 fwb" colspan="3">{{ page8.number }}</th>
+            <th class="tabheader f16 fwb" colspan="3">{{ page3.period }}</th>
+
+            <ng-container *ngIf="dir !== 'rtl'">
+              <th class="tabheader f16 fwb" colspan="3">{{ page1.status }}</th>
+            </ng-container>
+            <ng-container *ngIf="dir === 'rtl'">
+              <th
+                colspan="3"
+                [style.border-top-right-radius]="dir === 'rtl' ? '0px' : '16px'"
+                [style.border-top-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+              >
+                {{ page1.status }}
+              </th>
+            </ng-container>
+          </tr>
+          <ng-container *ngFor="let item of filteredList; let i = index">
+            <tr
+              class="tabheader2 f12"
+              (click)="getContractByReqNum($event, item)"
+              *ngIf="!hiddenElement"
+            >
+              <ng-container *ngIf="dir === 'rtl'">
+                <td colspan="3" *ngIf="i !== count">{{ item["FbtText"] }}</td>
+                <td
+                  colspan="3"
+                  class="align-items-center"
+                  [style.border-bottom-right-radius]="
+                    dir === 'rtl' ? '16px' : '0px'
+                  "
+                  [style.border-bottom-left-radius]="
+                    dir === 'rtl' ? '0px' : '0px'
+                  "
+                  *ngIf="i === count"
+                >
+                  {{ item["FbtText"] }}
+                </td>
+              </ng-container>
+
+              <ng-container *ngIf="dir !== 'rtl'">
+                <td colspan="3">{{ item["FbtText"] }}</td>
+              </ng-container>
+
+              <td colspan="3">{{ item["Fbnum"] }}</td>
+              <td colspan="3">{{ getLocaleString(item["CrdtText"]) }}</td>
+
+              <ng-container *ngIf="dir !== 'rtl'">
+                <td colspan="3">
+                  <div
+                    class="tag32 px-3 f12"
+                    [matTooltip]="item.StatText"
+                    [ngClass]="getStyle(item.Fbsta)"
+                  >
+                    {{ item["StatText"] }}
+                  </div>
+                </td>
+              </ng-container>
+              <!-- [ngClass]="[item.Status==='Paid' || item.Status ==='مدفوعة' ? 'text-success' : '',item.Status==='Unpaid' || item.Status ==='جزئيا' ? 'text-danger':'',  item.Status ==='Partially' || item.Status ===' غير مدفوعة'? 'text-warning':'']" -->
+              <ng-container *ngIf="dir === 'rtl'">
+                <td colspan="3" *ngIf="i !== count">
+                  <div
+                    class="tag32 px-3 f12"
+                    [matTooltip]="item.StatText"
+                    [ngClass]="getStyle(item.Fbsta)"
+                  >
+                    {{ item["StatText"] }}
+                  </div>
+                </td>
+
+                <td
+                  colspan="3"
+                  [style.border-bottom-left-radius]="
+                    dir === 'rtl' ? '16px' : '0px'
+                  "
+                  [style.border-bottom-right-radius]="
+                    dir === 'rtl' ? '0px' : '0px'
+                  "
+                  *ngIf="i === count"
+                >
+                  <div
+                    class="tag32 px-3 f12"
+                    [matTooltip]="item.StatText"
+                    [ngClass]="getStyle(item.Fbsta)"
+                  >
+                    {{ item["StatText"] }}
+                  </div>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!--SECOND PAGE BEGIN -->
+  <div *ngIf="optionActive === 1" class="rfcr-container">
+    <div class="row d-flex margin-t-40 margin-b-40 vCenter">
+      <div class="col-md-12 col-sm-12">
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [routerLink]="['/mains/tax']"
+        >
+          {{ page3.hamb1 }} &gt; &nbsp;</span
+        >
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [routerLink]="['/mains/tax']"
+          >{{ page3.hamb2 }} &gt;&nbsp;
+        </span>
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          (click)="contractReleaseHome()"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          >{{ page3.hamb3 }} &gt;&nbsp;
+        </span>
+        <span
+          class="bcTitle bcTitleActive textDark"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+        >
+          {{ page3.hamb4 }}&nbsp;
+        </span>
+      </div>
+    </div>
+    <div class="stepHeader row">
+      <div class="col-md-9 col-sm-9">
+        <span class="back-button cursor-pointer" (click)="back()">
+          <img
+            src="assets/image/arrow-left.svg"
+            [ngClass]="dir === 'rtl' ? 'transform-img' : 'auth-img'"
+          />
+          {{ page1.back }}</span
+        >
+      </div>
+      <div class="col-md-3 col-sm-3 justifyContentEnd">
+        <span class="stepNumber">
+          <img
+            [ngClass]="dir == 'rtl' ? 'rotateSteps' : ''"
+            src="{{ this.rfcr.menu[optionActive - 1].step }}"
+          />
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12 col-sm-12">
+        <div class="pageTitle textDark">
+          {{ page3.title }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-12 col-sm-12">
+        <div class="f16 textGray">
+          {{ page3.subtitle }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New margin-top"></div>
+    <form [formGroup]="ContactRequestRFormGroup2" (ngSubmit)="onSubmit()">
+      <div class="rfcr row input-container margin-t-32">
+        <div class="rfcr col-md-6 col-sm-6">
+          <div class="f12 textGray py-1">{{ page3.name }}</div>
+          <input
+            type="text"
+            class="commonInput"
+            placeholder="{{ page3.nameData }}"
+            formControlName="AContNm"
+            (keypress)="allowAlphabets($event)"
+            required
+            [ngClass]="{
+              inputErr:
+                form1Submitted &&
+                ContactRequestRFormGroup2.controls.AContNm.errors
+            }"
+          />
+          <div
+            *ngIf="
+              form1Submitted &&
+              ContactRequestRFormGroup2.controls.AContNm.errors
+            "
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ contractReleaseErrors.AContNmMsg }}</p>
+          </div>
+        </div>
+        <div class="rfcr col-md-6 col-sm-6">
+          <div class="f12 textGray py-1">{{ page3.number }}</div>
+          <input
+            type="text"
+            class="commonInput"
+            placeholder="1234567890"
+            formControlName="AContNo"
+            [maxLength]="20"
+            (input)="spaceValidator($event)"
+            required
+            [ngClass]="{
+              inputErr:
+                form1Submitted &&
+                ContactRequestRFormGroup2.controls.AContNo.errors
+            }"
+          />
+          <div
+            *ngIf="
+              form1Submitted &&
+              ContactRequestRFormGroup2.controls.AContNo.errors
+            "
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ contractReleaseErrors.AContNoMsg }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rfcr row input-container margin-t-32">
+        <div class="rfcr col-md-6 col-sm-6">
+          <div class="f12 textGray py-1">{{ page3.type }}</div>
+          <mat-select
+            class="commonMatSelect"
+            [ngClass]="{
+              inputErr:
+                form1Submitted &&
+                ContactRequestRFormGroup2.controls.Atype.errors
+            }"
+            (selectionChange)="onTaxType($event)"
+            formControlName="Atype"
+          >
+            <mat-option
+              *ngFor="let each of contractTypeList"
+              [value]="each.Key"
+              class="f16"
+            >
+              {{ each.Text }}
+            </mat-option>
+          </mat-select>
+          <div
+            *ngIf="
+              form1Submitted && ContactRequestRFormGroup2.controls.Atype.errors
+            "
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ contractReleaseErrors.AtypeMsg }}</p>
+          </div>
+        </div>
+
+        <div class="rfcr col-md-6 col-sm-6 alignStart">
+          <div class="f12 textGray py-1">{{ page7.period }}</div>
+          <div
+            class="rfcr dateRangePicker rfcr-shadow contain"
+            [ngClass]="{
+              inputErr:
+                form1Submitted &&
+                (ContactRequestRFormGroup2.controls.AContDt.errors ||
+                  ContactRequestRFormGroup2.controls.AContEndDt.errors)
+            }"
+          >
+            <input
+              (click)="picker1.close(); picker.open()"
+              [max]="
+                ContactRequestRFormGroup2.controls.AContEndDt.value
+                  ? ContactRequestRFormGroup2.controls.AContEndDt.value
+                  : maxDate
+              "
+              readonly
+              [matDatepicker]="picker"
+              (dateChange)="chanangeDateAdapter('from', picker)"
+              required
+              matInput
+              formControlName="AContDt"
+              class="alignStart noborder"
+              placeholder="{{ page3.from }}"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+              matDatepickerToggleIcon="none"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #picker
+              [calendarHeaderComponent]="headerComponent"
+              (input)="(false)"
+            >
+            </mat-datepicker>
+            <span class="d-flex">
+              <img style="margin-inline-end: 5px;"
+                [src]="
+                  dir == 'ltr'
+                    ? 'assets/image/arrow-right-green.svg'
+                    : 'assets/image/arrow-left-green.svg'
+                "
+            /></span>
+            <input
+              (click)="picker.close(); picker1.open()"
+              [max]="maxDate"
+              required
+              matDatepicker
+              matInput
+              [matDatepicker]="picker1"
+              class="alignStart noborder"
+              placeholder="{{ page3.to }}"
+              (dateChange)="chanangeDateAdapter('to', picker1)"
+              formControlName="AContEndDt"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker1">
+              <mat-icon matDatepickerToggleIcon>
+                <span class="d-flex">
+                  <img src="assets/image/calendar.svg" alt="calendar"
+                /></span>
+              </mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker
+              #picker1
+              [calendarHeaderComponent]="headerComponent"
+              (input)="(false)"
+            >
+            </mat-datepicker>
+          </div>
+          <div class="row px-0 py-0">
+            <div class="col-md-12 col-sm-12 d-flex px-0 py-0">
+              <div
+                class="col-md-6 col-sm-6"
+                [style.margin-left]="dir === 'rtl' ? '24px' : '-8px'"
+                [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+              >
+                <div
+                  *ngIf="
+                    form1Submitted &&
+                    ContactRequestRFormGroup2.controls.AContDt.errors
+                  "
+                  class="rfcr invalid-feedback px-0"
+                >
+                  <p>{{ contractReleaseErrors.AContDtMsg }}</p>
+                </div>
+              </div>
+              <div
+                class="col-md-6 col-sm-6 px-0 py-0"
+                [style.margin-left]="dir === 'rtl' ? '0px' : '-24px'"
+                [style.margin-right]="dir === 'rtl' ? '-24px' : '0px'"
+              >
+                <div
+                  *ngIf="
+                    form1Submitted &&
+                    ContactRequestRFormGroup2.controls.AContEndDt.errors
+                  "
+                  class="rfcr invalid-feedback px-0"
+                >
+                  <p>{{ contractReleaseErrors.AContEndMsg }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              *ngIf="form1Submitted && isFormErrors && AcontEndErr"
+              class="rfcr invalid-feedback col-md-10 col-sm-10"
+              [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+              [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+            >
+              <span>{{ AContEndDtMsg }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rfcr row input-container margin-t-32">
+        <div class="rfcr col-md-6 col-sm-6">
+          <div class="f12 textGray py-1">{{ page3.amount_total }}</div>
+          <input
+            type="text"
+            class="commonInput"
+            formControlName="ATotalAmt"
+            [maxLength]="14"
+            mask="separator.2"
+            thousandSeparator=","
+            pattern="^\d{0,12}(\.\d{0,2})?$"
+            (input)="spaceValidator2($event)"
+            (blur)="validateNumbers()"
+            required
+            [ngClass]="{
+              inputErr:
+                form1Submitted &&
+                ContactRequestRFormGroup2.controls.ATotalAmt.errors
+            }"
+          />
+          <div
+            *ngIf="
+              form1Submitted &&
+              ContactRequestRFormGroup2.controls.ATotalAmt.errors
+            "
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ contractReleaseErrors.ATotalAmtMsg }}</p>
+          </div>
+          <div
+            *ngIf="
+              ContactRequestRFormGroup2.controls.ATotalAmt.touched &&
+              isFormErrors &&
+              balanceError
+            "
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ validAmountMsg1 }}</p>
+          </div>
+        </div>
+        <div class="rfcr col-md-6 col-sm-6">
+          <div class="f12 textGray py-1">{{ page3.amount_requested }}</div>
+          <input
+            type="text"
+            class="commonInput"
+            [maxLength]="14"
+            mask="separator.2"
+            thousandSeparator=","
+            formControlName="AReqAmt"
+            pattern="^\d{0,12}(\.\d{0,2})?$"
+            required
+            (input)="onCalculateDues()"
+            (blur)="validateNumbers()"
+            [ngClass]="{
+              inputErr:
+                form1Submitted &&
+                ContactRequestRFormGroup2.controls.AReqAmt.errors
+            }"
+          />
+          <div
+            *ngIf="
+              form1Submitted &&
+              ContactRequestRFormGroup2.controls.AReqAmt.errors
+            "
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ contractReleaseErrors.AReqAmtMsg }}</p>
+          </div>
+          <div
+            *ngIf="
+              (ContactRequestRFormGroup2.controls.AReqAmt.touched ||
+                ContactRequestRFormGroup2.controls.ATotalAmt.touched) &&
+              isFormErrors &&
+              limitError
+            "
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ validAmountMsg2 }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row margin-top">
+        <div class="col-md-12 px-0 py-0">
+          <div class="mt-3">
+            <div
+              class="textDark col-md-12 px-0 mx-0 col-sm-12 col-xs-12 rfcr-shadow border px-0 py-0"
+            >
+              <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                <div class="col-md-7 fwb px-0 f16 textDark fwb">
+                  <div>{{ page3.table_h1 }}</div>
+                </div>
+                <div class="col-md-2 fwb px-2 f16 textDark fwb alignEnd">
+                  <div>{{ page3.table_h2 }}</div>
+                </div>
+                <div class="col-md-3 fwb px-0 f16 textDark fwb alignEnd">
+                  <div>{{ page3.table_h3 }}</div>
+                </div>
+              </div>
+              <div
+                class="Rectangle-12New row col-md-12 mx-0 my-0 px-0 py-0"
+              ></div>
+
+              <div
+                class="row vCenter px-3 mx-0 taxpayer-card-section alignStart"
+              >
+                <div class="col-md-7 px-0 mx-0 my-0">
+                  <div class="value mb-1">
+                    {{ page3.tr1 }}
+                    <img
+                      src="assets/image/information.svg"
+                      class="Information"
+                      [matTooltip]="tools.proftForContract"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2 px-2 mx-0 my-0">
+                  <div class="value mb-1 px-2 alignEnd">
+                    {{
+                      ContactRequestRFormGroup2.controls.AContProfitPer.value
+                    }}%
+                  </div>
+                </div>
+                <div class="col-md-3 justifyContentEnd px-0 alignEnd">
+                  <div class="value mb-1 px-0">
+                    {{
+                      this.ContactRequestRFormGroup2.value.AContProfit
+                        | number: "1.2-2"
+                    }}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="Rectangle-12New row col-md-12 mx-0 my-0 px-0 py-0"
+              ></div>
+              <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                <div class="col-md-7 px-0">
+                  <div class="value mb-1">
+                    {{ page3.tr2 }}
+                    <img
+                      src="assets/image/information.svg"
+                      class="Information"
+                      [matTooltip]="tools.proftForZakat"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2 px-2 mx-0 my-0">
+                  <div class="value mb-1 px-2 alignEnd">
+                    {{ zakatProfitPer }}%
+                  </div>
+                </div>
+                <div class="col-md-3 justifyContentEnd px-0 alignEnd">
+                  <div class="value mb-1 px-0">
+                    {{
+                      this.ContactRequestRFormGroup2.value.AZakatProfit
+                        | number: "1.2-2"
+                    }}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="Rectangle-12New row col-md-12 mx-0 my-0 px-0 py-0"
+              ></div>
+              <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                <div class="col-md-7 px-0">
+                  <div class="value mb-1">
+                    {{ page3.tr3 }}
+                    <img
+                      src="assets/image/information.svg"
+                      class="Information"
+                      [matTooltip]="tools.proftForTax"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2 px-2 mx-0 my-0">
+                  <div class="value mb-1 px-2 alignEnd">
+                    {{ ataxProfitPer }}%
+                  </div>
+                </div>
+                <div class="col-md-3 justifyContentEnd px-0 alignEnd">
+                  <div class="value mb-1 px-0">
+                    {{
+                      this.ContactRequestRFormGroup2.value.ATaxProfi
+                        | number: "1.2-2"
+                    }}
+                  </div>
+                </div>
+              </div>
+              <div
+                class="Rectangle-12New row col-md-12 mx-0 my-0 px-0 py-0"
+              ></div>
+
+              <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                <div class="col-md-7 px-0">
+                  <div class="value mb-1">
+                    {{ page3.tr5 }}
+                    <img
+                      src="assets/image/information.svg"
+                      class="Information"
+                      [matTooltip]="tools.valueZakatDues"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2 px-2">
+                  <div class="value mb-1 px-2 alignEnd">-</div>
+                </div>
+                <div class="col-md-3 justifyContentEnd px-0 alignEnd">
+                  <div class="value mb-1 px-0">
+                    {{
+                      this.ContactRequestRFormGroup2.value.ADueZakat
+                        | number: "1.2-2"
+                    }}
+                  </div>
+                </div>
+              </div>
+              <div
+                class="Rectangle-12New row col-md-12 mx-0 my-0 px-0 py-0"
+              ></div>
+
+              <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+                <div class="col-md-7 px-0">
+                  <div class="value mb-1">
+                    {{ page3.tr4 }}
+                    <img
+                      src="assets/image/information.svg"
+                      class="Information"
+                      [matTooltip]="tools.valueTaxDues"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2 px-2 py-0 mx-0 my-0">
+                  <div class="value mb-1 px-2 alignEnd">-</div>
+                </div>
+                <div class="col-md-3 justifyContentEnd px-0 alignEnd">
+                  <div class="value mb-1 px-0">
+                    {{
+                      this.ContactRequestRFormGroup2.value.ADueTax
+                        | number: "1.2-2"
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="row vCenter rfcr_totalDues_container margin-top border rfcr-shadow"
+            >
+              <div class="col-xs-6 col-md-6 vCenter row dues_card_content">
+                <div class="sectionTitle textDark fwb px-3">
+                  {{ page7.total_dues }}
+                </div>
+              </div>
+
+              <div
+                class="col-xs-6 col-md-6 dues_card_content vCenter justifyContentEnd font-500 alignEnd"
+              >
+                <span
+                  >{{
+                    this.ContactRequestRFormGroup2.value.ADueTot
+                      | number: "1.2-2"
+                  }}{{ " " }}{{ page1.SAR }}</span
+                >
+              </div>
+            </div>
+
+            <div class="rfcr col-md-12 px-0 margin-t-56">
+              <button
+                type="submit"
+                class="btnPrimary"
+                (click)="onSubmit()"
+                mat-raised-button
+              >
+                {{ page3.continue }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--FORM1 END-->
+  <!--SECOND PAGE BEGIN -->
+  <div *ngIf="optionActive === 2" class="rfcr-container">
+    <div class="row d-flex margin-t-40 margin-b-40 vCenter">
+      <div class="col-md-12 col-sm-12">
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [routerLink]="['/mains/tax']"
+        >
+          {{ page3.hamb1 }} &gt; &nbsp;</span
+        >
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [routerLink]="['/mains/tax']"
+          >{{ page3.hamb2 }} &gt;&nbsp;
+        </span>
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          (click)="contractReleaseHome()"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          >{{ page3.hamb3 }} &gt;&nbsp;
+        </span>
+        <span
+          class="bcTitle bcTitleActive textDark"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+        >
+          {{ page3.hamb4 }}&nbsp;
+        </span>
+      </div>
+    </div>
+    <div class="stepHeader row">
+      <div class="col-md-9 col-sm-9">
+        <span class="back-button cursor-pointer" (click)="back()">
+          <img
+            src="assets/image/arrow-left.svg"
+            [ngClass]="dir === 'rtl' ? 'transform-img' : 'auth-img'"
+          />
+          {{ page1.back }}</span
+        >
+      </div>
+      <div class="col-md-3 col-sm-3 justifyContentEnd">
+        <span class="stepNumber">
+          <img
+            [ngClass]="dir == 'rtl' ? 'rotateSteps' : ''"
+            src="{{ this.rfcr.menu[optionActive - 1].step }}"
+          />
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12 col-sm-12">
+        <div class="pageTitle textDark">
+          {{ page4.title }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-12 col-sm-12">
+        <div class="f16 textGray">
+          {{ page4.subtitle }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New margin-top"></div>
+    <div class="row margin-t-32">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <p class="rfcr-subtitle" [ngClass]="dir == 'rtl' ? 'rfcr-subtitle-rtl' : ''">
+          {{ page4.caption }}<br />
+         <span [style.float]="dir === 'rtl' ? 'right' : ''"> {{ page4.t13 }} </span>
+        </p>
+      </div>
+    </div>
+    <form (ngSubmit)="onSubmit2()">
+      <div class="row">
+        <div
+          class="col-md-6 col-sm-12 col-xs-12"
+          *ngFor="
+            let certificate of certificatesAttachments;
+            let certificateIndex = index
+          "
+        >
+          <div class="card-uploaded border">
+            <div
+              class="card-delete"
+              (click)="
+                deleteAttachment(
+                  'N11A',
+                  certificate['Doguid'],
+                  certificateIndex
+                )
+              "
+            >
+              <img src="assets/image/delete.svg" />
+            </div>
+            <div class="card-file-content">
+              <img
+                class="image"
+                [src]="
+                  isPdf(certificate['Filename'])
+                    ? 'assets/image/generic-documents.png'
+                    : 'assets/image/generic-documents.png'
+                "
+              />
+              <div class="form-upload-name">
+                {{ certificate["Filename"] }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div
+            [ngClass]="[
+              dir === 'rtl'
+                ? 'attachment-rtl card-upload border bg_white cursor-pointer'
+                : 'attachment card-upload border bg_white cursor-pointer',
+              form2Submitted && attachment1Err ? 'inputErr' : ''
+            ]"
+            [ngStyle]="
+              dir === 'rtl' ? { marginLeft: '22px' } : { marginRight: '22px' }
+            "
+            (click)="fileInput1.click()"
+            appDragDrop
+            (onFileDropped)="
+              !enableFileUpload1 ? uploadFiles($event, 'N11A') : ''
+            "
+          >
+            <div class="card-upload-content">
+              <input
+                hidden
+                type="file"
+                #fileInput1
+                required
+                [disabled]="enableFileUpload1"
+                (click)="fileInput1.value = null"
+                (change)="uploadFiles($event.target.files, 'N11A')"
+              />
+              <img class="image" src="assets/image/attach.svg" />
+              <div
+                class="value mt-1 card-main-text fwb"
+                [ngStyle]="
+                  !enableFileUpload1
+                    ? { color: '#006450' }
+                    : { color: 'rgba(0, 0, 0, 0.12)' }
+                "
+              >
+                {{ page4.card_title }}
+              </div>
+              <div
+                class="caption mt-1"
+                [ngStyle]="
+                  !enableFileUpload1
+                    ? { color: '#999999' }
+                    : { color: 'rgba(0, 0, 0, 0.12)' }
+                "
+              >
+                {{ page1.mbMax }}
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="form2Submitted && attachment1Err"
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ contractReleaseErrors.attachMsg }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row margin-t-32 margin-b-16">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <span class="rfcr-subtitle" [ngClass]="dir == 'rtl' ? 'rfcr-subtitle-rtl' : ''">
+            <span [style.float]="dir === 'rtl' ? 'right' : ''">{{ page4.caption2 }}</span>
+            <br />
+            <span>{{ page4.t13 }}</span>
+          </span>
+        </div>
+        <br />
+      </div>
+      <div class="row">
+        <div
+          class="col-md-6 col-sm-12 col-xs-12"
+          *ngFor="
+            let certificate2 of certificatesAttachments2;
+            let certificateIndex2 = index
+          "
+        >
+          <div class="card-uploaded border">
+            <div
+              class="card-delete"
+              (click)="
+                deleteAttachment(
+                  'N11B',
+                  certificate2['Doguid'],
+                  certificateIndex2
+                )
+              "
+            >
+              <img src="assets/image/delete.svg" class="image cursor-pointer" />
+            </div>
+            <div class="card-file-content">
+              <img
+                class="rfcrAttachment"
+                [src]="
+                  isPdf(certificate2['Filename'])
+                    ? 'assets/image/generic-documents.png'
+                    : 'assets/image/generic-documents.png'
+                "
+              />
+              <div class="form-upload-name">
+                {{ certificate2["Filename"] }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div
+            [ngClass]="[
+              dir === 'rtl'
+                ? 'attachment-rtl card-upload border my-0 py-0  bg_white'
+                : 'attachment card-upload border  my-0 py-0  bg_white',
+              form2Submitted && attachment2Err ? 'inputErr' : ''
+            ]"
+            [ngStyle]="
+              dir === 'rtl' ? { marginLeft: '22px' } : { marginRight: '22px' }
+            "
+            (click)="fileInput2.click()"
+            appDragDrop
+            (onFileDropped)="
+              !enableFileUpload2 ? uploadFiles($event, 'N11B') : ''
+            "
+          >
+            <div class="card-upload-content cursor-pointer">
+              <input
+                hidden
+                type="file"
+                #fileInput2
+                required
+                [disabled]="enableFileUpload2"
+                (click)="fileInput2.value = null"
+                (change)="uploadFiles($event.target.files, 'N11B')"
+              />
+              <img class="image" src="assets/image/attach.svg" />
+              <div
+                class="value mt-1 card-main-text fwb"
+                [ngStyle]="
+                  !enableFileUpload2
+                    ? { color: '#006450' }
+                    : { color: 'rgba(0, 0, 0, 0.12)' }
+                "
+              >
+                {{ page4.card_title }}
+              </div>
+              <div
+                class="caption mt-1"
+                [ngStyle]="
+                  !enableFileUpload2
+                    ? { color: '#999999' }
+                    : { color: 'rgba(0, 0, 0, 0.12)' }
+                "
+              >
+                {{ page1.mbMax }}
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="form2Submitted && attachment2Err"
+            class="rfcr invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+          >
+            <p>{{ contractReleaseErrors.attachMsg }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rfcr col-md-12 px-0 margin-t-56">
+        <button type="submit" class="btnPrimary" mat-raised-button>
+          {{ page3.continue }}
+        </button>
+      </div>
+    </form>
+  </div>
+  <!--FORM3 END->
+                          
+            <!--FORM4 BEGIN-->
+  <div *ngIf="optionActive === 3" class="rfcr-container">
+    <form [formGroup]="ContactRequestRFormGroup4" (ngSubmit)="onSubmit3()">
+      <div class="row d-flex margin-t-40 margin-b-40 vCenter">
+        <div class="col-md-12 col-sm-12">
+          <span
+            class="bcTitle unicodeDir cursor-pointer"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            [routerLink]="['/mains/tax']"
+          >
+            {{ page3.hamb1 }} &gt; &nbsp;</span
+          >
+          <span
+            class="bcTitle unicodeDir cursor-pointer"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            [routerLink]="['/mains/tax']"
+            >{{ page3.hamb2 }} &gt;&nbsp;
+          </span>
+          <span
+            class="bcTitle unicodeDir cursor-pointer"
+            (click)="contractReleaseHome()"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            >{{ page3.hamb3 }} &gt;&nbsp;
+          </span>
+          <span
+            class="bcTitle bcTitleActive textDark"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+          >
+            {{ page3.hamb4 }}&nbsp;
+          </span>
+        </div>
+      </div>
+      <div class="stepHeader row">
+        <div class="col-md-9 col-sm-9">
+          <span class="back-button cursor-pointer" (click)="back()">
+            <img
+              src="assets/image/arrow-left.svg"
+              [ngClass]="dir === 'rtl' ? 'transform-img' : 'auth-img'"
+            />
+            {{ page1.back }}</span
+          >
+        </div>
+        <div class="col-md-3 col-sm-3 justifyContentEnd">
+          <span class="stepNumber">
+            <img
+              [ngClass]="dir == 'rtl' ? 'rotateSteps' : ''"
+              src="{{ this.rfcr.menu[optionActive - 1].step }}"
+            />
+          </span>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-12 col-sm-12">
+          <div class="pageTitle textDark">
+            {{ page5.title }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-12 col-sm-12">
+          <div class="f16 textGray">
+            {{ page5.subtitle }}
+          </div>
+        </div>
+      </div>
+      <div class="Rectangle-12New margin-top"></div>
+      <div class="row margin-t-32 input-container margin-bottom">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="matLabel labelMarginBottom">
+            {{ page5.remarks }}
+          </div>
+          <input
+            class="commonInput"
+            type="text"
+            formControlName="Acomments"
+            [placeholder]=""
+          />
+          <!-- <div class="matLabel helperMarginTop">Helper Text</div> -->
+        </div>
+      </div>
+      <div class="matLabel labelMarginBottom">{{ page5.desc }}</div>
+      <div class="common-text-area-container">
+        <textarea
+          class="common-text-area"
+          [maxlength]="1000"
+          (input)="onInputChange()"
+          formControlName="tdline"
+        ></textarea>
+        <span
+          [ngClass]="
+            dir == 'ltr'
+              ? 'common-text-area-counter-ltr'
+              : 'common-text-area-counter-rtl'
+          "
+          >{{
+            this.ContactRequestRFormGroup4.controls["tdline"].value.length
+          }}
+          /1000</span
+        >
+      </div>
+      <div class="rfcr col-md-12 px-0 margin-t-56">
+        <button
+          type="submit"
+          class="btnPrimary"
+          (click)="onSubmit3()"
+          mat-raised-button
+        >
+          {{ page3.continue }}
+        </button>
+      </div>
+    </form>
+  </div>
+  <!--FORM4 END-->
+  <!--FORM4 BEGIN-->
+  <div *ngIf="optionActive === 4" class="rfcr-container">
+    <form [formGroup]="ContactRequestRFormGroup5" (ngSubmit)="onSubmit4()">
+      <div class="row d-flex margin-t-40 margin-b-40 vCenter">
+        <div class="col-md-12 col-sm-12">
+          <span
+            class="bcTitle unicodeDir cursor-pointer"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            [routerLink]="['/mains/tax']"
+          >
+            {{ page3.hamb1 }} &gt; &nbsp;</span
+          >
+          <span
+            class="bcTitle unicodeDir cursor-pointer"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            [routerLink]="['/mains/tax']"
+            >{{ page3.hamb2 }} &gt;&nbsp;
+          </span>
+          <span
+            class="bcTitle unicodeDir cursor-pointer"
+            (click)="contractReleaseHome()"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            >{{ page3.hamb3 }} &gt;&nbsp;
+          </span>
+          <span
+            class="bcTitle bcTitleActive textDark"
+            [style.float]="dir === 'rtl' ? 'right' : 'left'"
+            [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+          >
+            {{ page3.hamb4 }}&nbsp;
+          </span>
+        </div>
+      </div>
+      <div class="stepHeader row">
+        <div class="col-md-9 col-sm-9">
+          <span class="back-button cursor-pointer" (click)="back()">
+            <img
+              src="assets/image/arrow-left.svg"
+              [ngClass]="dir === 'rtl' ? 'transform-img' : 'auth-img'"
+            />
+            {{ page1.back }}</span
+          >
+        </div>
+        <div class="col-md-3 col-sm-3 justifyContentEnd">
+          <span class="stepNumber">
+            <img
+              [ngClass]="dir == 'rtl' ? 'rotateSteps' : ''"
+              src="{{ this.rfcr.menu[optionActive - 1].step }}"
+            />
+          </span>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-12 col-sm-12">
+          <div class="pageTitle textDark">
+            {{ page6.title }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-12 col-sm-12">
+          <div class="designation f16 textGray">
+            {{ page6.subtitle }}
+          </div>
+        </div>
+      </div>
+      <div class="Rectangle-12New margin-top"></div>
+      <div class="row margin-t-32">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="mb-3">
+            <div class="matLabel labelMarginBottom">
+              {{ page6.name }}
+            </div>
+            <input
+              class="commonInput"
+              formControlName="fullName"
+              required
+              [placeholder]=""
+              [ngClass]="{
+                inputErr:
+                  form5Submitted &&
+                  ContactRequestRFormGroup5.controls.fullName.errors
+              }"
+            />
+            <div
+              *ngIf="
+                form5Submitted &&
+                ContactRequestRFormGroup5.controls.fullName.errors
+              "
+              class="rfcr invalid-feedback"
+              [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+              [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+            >
+              <p>{{ contractReleaseErrors.FullNameMsg }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="mb-3">
+            <div class="matLabel labelMarginBottom">
+              {{ page6.designation }}
+            </div>
+            <input
+              class="commonInput"
+              type="text"
+              required
+              formControlName="designation"
+              [placeholder]=""
+              [ngClass]="{
+                inputErr:
+                  form5Submitted &&
+                  ContactRequestRFormGroup5.controls.designation.errors
+              }"
+            />
+            <div
+              *ngIf="
+                form5Submitted &&
+                ContactRequestRFormGroup5.controls.designation.errors
+              "
+              class="rfcr invalid-feedback"
+              [style.margin-left]="dir === 'rtl' ? '24px' : '0px'"
+              [style.margin-right]="dir === 'rtl' ? '0px' : '24px'"
+            >
+              <p>{{ contractReleaseErrors.DesMsg }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rfcr col-md-12 px-0 margin-t-56">
+        <button type="submit" class="btnPrimary" mat-raised-button>
+          {{ page3.continue }}
+        </button>
+      </div>
+    </form>
+  </div>
+  <!--FORM 6 END-->
+  <!--FORM 7 BEGIN-->
+
+  <!--FORM 5 END-->
+  <!--FORM 6 BEGIN-->
+  <div *ngIf="optionActive === 5" class="rfcr-container">
+    <div class="row d-flex margin-t-40 margin-b-40 vCenter">
+      <div class="col-md-12 col-sm-12">
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [routerLink]="['/mains/tax']"
+        >
+          {{ page3.hamb1 }} &gt; &nbsp;</span
+        >
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [routerLink]="['/mains/tax']"
+          >{{ page3.hamb2 }} &gt;&nbsp;
+        </span>
+        <span
+          class="bcTitle unicodeDir cursor-pointer"
+          (click)="contractReleaseHome()"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          >{{ page3.hamb3 }} &gt;&nbsp;
+        </span>
+        <span
+          class="bcTitle bcTitleActive textDark"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+        >
+          {{ page3.hamb4 }}&nbsp;
+        </span>
+      </div>
+    </div>
+    <div class="stepHeader row">
+      <div class="col-md-9 col-sm-9">
+        <span class="back-button cursor-pointer" (click)="back()">
+          <img
+            src="assets/image/arrow-left.svg"
+            [ngClass]="dir === 'rtl' ? 'transform-img' : 'auth-img'"
+          />
+          {{ page1.back }}</span
+        >
+      </div>
+      <div class="col-md-3 col-sm-3 justifyContentEnd">
+        <span class="stepNumber">
+          <img
+            [ngClass]="dir == 'rtl' ? 'rotateSteps' : ''"
+            src="{{ this.rfcr.menu[optionActive - 1].step }}"
+          />
+          <img
+            *ngIf="optionActive == 5"
+            style="padding-inline-start: 4px"
+            src="assets/image/check.svg"
+          />
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12 col-sm-12">
+        <div class="pageTitle textDark">
+          {{ page7.title }}
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 col-sm-12">
+        <div class="f16 textGray">
+          {{ page7.subtitle }}
+        </div>
+      </div>
+    </div>
+    <div class="Rectangle-12New margin-top"></div>
+    <form [formGroup]="ContactRequestRSummary">
+      <div class="mt-4">
+        <div class="summary-card cardGap">
+          <div
+            class="row vCenter px-3 mx-0 summary-header-without-button"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-xs-6 col-md-6 vCenter row">
+              <div class="Oval">
+                <img class="details-img" src="assets/image/details.svg" />
+              </div>
+
+              <div class="sectionTitle textDark fwb px-3">
+                {{ page7.card1_title }}
+              </div>
+            </div>
+
+            <div *ngIf="!ViewOnly" class="col-xs-6 col-md-6 px-3 alignEnd">
+              <button
+                class="btnTertiary textPrimary f16 fwb"
+                (click)="optionActive = 1"
+              >
+                {{ page1.edit }}
+              </button>
+            </div>
+          </div>
+          <div class="Rectangle-12New mt-0"></div>
+
+          <div class="row vCenter px-3 mx-0 summary-card-section">
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.name }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryAContNm" />{{
+                  ContactRequestRSummary.controls.summaryAContNm.value
+                }}
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.number }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryAContNo" />{{
+                  ContactRequestRSummary.controls.summaryAContNo.value
+                }}
+              </div>
+            </div>
+          </div>
+          <div class="Rectangle-12New mt-0"></div>
+
+          <div class="row vCenter px-3 mx-0 summary-card-section">
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.type }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryType" />{{
+                  ContactRequestRSummary.controls.summaryType.value
+                }}
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.period }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryAContFromdate" />{{
+                  getLocaleString(
+                    ContactRequestRSummary.controls.summaryAContFromdate.value
+                  )
+                }}
+                - <input hidden formcontrol="summaryAContEndDt" />{{
+                  getLocaleString(
+                    ContactRequestRSummary.controls.summaryAContEndDt.value
+                  )
+                }}
+              </div>
+            </div>
+          </div>
+          <div class="Rectangle-12New mt-0"></div>
+
+          <div class="row vCenter px-3 mx-0 taxpayer-card-section">
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.amount_required }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryAReqAmt" />{{
+                  ContactRequestRSummary.controls.summaryAReqAmt.value
+                    | number: "1.2-2"
+                }}
+                {{ page1.SAR }}
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.amount_total }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryATotalAmt" />{{
+                  ContactRequestRSummary.controls.summaryATotalAmt.value
+                    | number: "1.2-2"
+                }}
+                {{ page1.SAR }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="row vCenter mx-0 px-3 rfcr_totalDues_container margin-bottom rfcr-shadow border"
+          [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+          [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+        >
+          <div class="col-xs-6 col-md-6 vCenter px-3 row dues_card_content">
+            <div class="sectionTitle textDark fwb">{{ page7.total_dues }}</div>
+          </div>
+
+          <div
+            class="col-xs-6 col-md-6 dues_card_content font-500 px-0 py-0 alignEnd"
+          >
+            <input hidden formcontrol="summaryADueTot" />{{
+              ContactRequestRSummary.controls.summaryADueTot.value
+                | number: "1.2-2"
+            }}
+            {{ page1.SAR }}
+          </div>
+        </div>
+
+        <div class="summary-card cardGap">
+          <div
+            class="row vCenter px-3 mx-0 summary-header-with-button"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-xs-6 col-md-6 vCenter row px3">
+              <div class="Oval">
+                <img class="details-img" src="assets/image/attach.svg" />
+              </div>
+
+              <div class="sectionTitle textDark fwb px-3">
+                {{ page7.file_Title }}
+              </div>
+            </div>
+
+            <div *ngIf="!ViewOnly" class="col-xs-6 col-md-6 alignEnd">
+              <button
+                class="btnTertiary textPrimary f16 fwb"
+                (click)="optionActive = 2"
+              >
+                {{ page1.edit }}
+              </button>
+            </div>
+          </div>
+          <div class="Rectangle-12New mt-0"></div>
+
+          <div
+            class="row vCenter px-3 mx-0 taxpayer-card-section"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.file1 }}</div>
+              <div class="form-upload-name value textDark font-500">
+                <span
+                  [style.padding-right]="dir === 'rtl' ? '0' : '4px'"
+                  [style.padding-left]="dir === 'rtl' ? '4px' : ''"
+                  >{{ certificatesAttachments[0]["Filename"] }}</span
+                >
+                <span
+                  ><img
+                    class="image"
+                    [src]="
+                      isPdf(certificatesAttachments[0]['Filename'])
+                        ? 'assets/image/generic-documents.png'
+                        : 'assets/image/generic-documents.png'
+                    "
+                /></span>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.file2 }}</div>
+              <div class="form-upload-name value textDark font-500">
+                <span
+                  [style.padding-right]="dir === 'rtl' ? '0' : '4px'"
+                  [style.padding-left]="dir === 'rtl' ? '4px' : ''"
+                  >{{ certificatesAttachments2[0]["Filename"] }}</span
+                >
+                <span
+                  ><img
+                    class="image"
+                    [src]="
+                      isPdf(certificatesAttachments2[0]['Filename'])
+                        ? 'assets/image/generic-documents.png'
+                        : 'assets/image/generic-documents.png'
+                    "
+                /></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-----------------------------  
+                                
+                                    CARD5
+                                
+                                --------------------------------------------->
+        <div class="summary-card cardGap">
+          <div
+            class="row vCenter px-3 mx-0 summary-header-with-button"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-xs-6 col-md-6 vCenter row px-3">
+              <div class="Oval">
+                <img class="details-img" src="assets/image/details.svg" />
+              </div>
+              <div class="sectionTitle textDark fwb px-3">
+                {{ page7.remarks_Title }}
+              </div>
+            </div>
+
+            <div *ngIf="!ViewOnly" class="col-xs-6 col-md-6 alignEnd">
+              <button
+                class="btnTertiary textPrimary f16 fwb"
+                (click)="optionActive = 3"
+              >
+                {{ page1.edit }}
+              </button>
+            </div>
+          </div>
+          <div class="Rectangle-12New mt-0"></div>
+
+          <div
+            class="row vCenter px-3 mx-0 taxpayer-card-section"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.remarks }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryAcomments" />{{
+                  ContactRequestRSummary.controls.summaryAcomments.value
+                }}
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.desc }}</div>
+              <div class="rfcr-summary-desc value textDark font-500">
+                <input hidden formcontrol="summarytdline" />{{
+                  ContactRequestRSummary.controls.summarytdline.value
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-----------------------------  
+                                
+                                    CARD6
+                                
+                                --------------------------------------------->
+        <div *ngIf="!ViewOnly" class="summary-card cardGap margin-b-32">
+          <div
+            class="row vCenter px-3 mx-0 summary-header-with-button"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-xs-6 col-md-6 vCenter px-3 row">
+              <div><img src="assets/image/summary.svg" /></div>
+              <div class="sectionTitle textDark fwb px-3">
+                {{ page7.declaration_title }}
+              </div>
+            </div>
+
+            <div *ngIf="!ViewOnly" class="col-xs-6 col-md-6 alignEnd">
+              <button
+                class="btnTertiary textPrimary f16 fwb"
+                (click)="optionActive = 4"
+              >
+                {{ page1.edit }}
+              </button>
+            </div>
+          </div>
+          <div class="Rectangle-12New mt-0"></div>
+
+          <div
+            class="row vCenter px-3 mx-0 summary-card-section"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">
+                {{ page7.declaration_name }}
+              </div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summaryfullName" />{{
+                  ContactRequestRSummary.controls.summaryfullName.value
+                }}
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 px-0 py-0">
+              <div class="value mb-1 textGray">{{ page7.designation }}</div>
+              <div class="value textDark font-500">
+                <input hidden formcontrol="summarydesignation" />{{
+                  ContactRequestRSummary.controls.summarydesignation.value
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div
+            class="row vCenter px-3 mx-0 dues_caption2-section"
+            [style.padding-left]="dir === 'rtl' ? '0px' : '24px'"
+            [style.padding-right]="dir === 'rtl' ? '24px' : '0px'"
+          >
+            <div class="col-xs-12 col-md-12 col-sm-12 px-0 py-0">
+              <span class="f12 textGray">
+                <img src="assets/image/information.svg" class="Information" />{{
+                  page7.terms
+                }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="rfcr col-md-12 px-0" *ngIf="!ViewOnly">
+          <button
+            type="submit"
+            class="btnPrimary"
+            (click)="onSubmitRequest()"
+            mat-raised-button
+          >
+            {{ page1.confirm }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!--FORM 6 END-->
+  <!--FORM 7 BEGIN-->
+  <!--FORM 7 END-->
+</div>
+<div *ngIf="sub">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <div class="mt-5" style="height: 159px">
+        <img src="assets/image/success.svg" width="112px" />
+      </div>
+      <div class="pageTitle textDark">
+        {{ page8.title }}
+      </div>
+      <div class="f16 textGray mt-2">
+        {{ page8.subtitle }}
+      </div>
+      <div class="exciseAccCssBox px-3 margin-t-50">
+        <div
+          class="d-flex align-items-center justify-content-between px-3"
+          [ngClass]="dir === 'rtl' ? 'row-rtl' : ''"
+        >
+          <span class="exciseAccCssBox1 f16 textGray">{{ page8.number }}</span>
+          <span class="exciseAccCssBox2 f16-m textDark"> {{ Fbnum }}</span>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 margin-t-56">
+        <button
+          mat-button
+          type="button"
+          class="btnPrimary mx-3"
+          (click)="printConfirmmation()"
+        >
+          {{ page8.button }}
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <button
+          mat-button
+          type="button"
+          class="btnPrimary mt-4 mx-3"
+          (click)="downloadAcknoledgement()"
+        >
+          {{ page8.link }}
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <button class="btnFourth margin-t-40 f16 font-500" (click)="redirect()">
+          {{ page8.title }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  id="RFCRFID"
+  data-keyboard="false"
+  data-backdrop="static"
+  [dir]="dir"
+>
+  <div class="modal-dialog modal-rflg center">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div class="col-md-12 alignEnd">
+            <img
+              class="modalCloseIcon"
+              src="assets/image/close.svg"
+              (click)="closeModal('RFCRFID')"
+            />
+          </div>
+          <div class="dark fbl f28 mt-4 mb-4 pageTitle alignStart">
+            {{ page2.title }}
+          </div>
+          <div class="lightCard py-3 pr-3 mb-3 border">
+            <ul class="modalInstructions f12 gray alignStart">
+              <li class="rfcr_li">
+                {{ page2.p1 }}
+                <a
+                  href="https://www.gazt.gov.sa"
+                  target="_blank"
+                  class="text-link f12 fwb textPrimary cursor-pointer"
+                >
+                  {{ page2.p4 }}</a
+                >
+              </li>
+              <li class="rfcr_li">{{ page2.p2 }}</li>
+              <li>{{ page2.p3 }}</li>
+            </ul>
+          </div>
+
+          <form [formGroup]="ContactRequestRModel">
+            <div class="col-md-12 px-0 py-0 alignStart">
+              <mat-checkbox
+                type="checkbox"
+                id="createCheck"
+                [checked]="ContactRequestRModel.controls.createCheck.value"
+                formControlName="createCheck"
+                (change)="ckeckBoxClick()"
+              ></mat-checkbox>
+              <span
+                class="checkBoxText f12 font-500 textDark"
+                [style.margin-left]="dir === 'rtl' ? '0px' : '16px'"
+                [style.margin-right]="dir === 'rtl' ? '16px' : '0px'"
+                >{{ page2.checkbox }}</span
+              >
+            </div>
+            <div class="col-md-12 px-0 py-0 mt-4 mb-2 alignEnd">
+              <button
+                class="btnPrimary"
+                [disabled]="button0Disabled"
+                (click)="createRequest()"
+                mat-raised-button
+              >
+                {{ page3.continue }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

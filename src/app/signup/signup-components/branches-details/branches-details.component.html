@@ -1,0 +1,1101 @@
+<mat-card class="mt-3">
+  <mat-card-content>
+    <div class="sideHeading">
+      {{lang.c3.title}}
+      <mat-icon *ngIf="BranchesList.length>0" [ngClass]="
+            direction === 'rtl'
+              ? 'checkCircleARB'
+              : 'checkCircleENG'
+          ">check_circle
+      </mat-icon>
+      <p class="Rectangle-12"></p>
+    </div>
+    <form class="search-field" autocomplete="off">
+      <mat-form-field class="pb-0">
+        <input type="text" matInput (keyup)="searchBranchList($event.target.value)">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+    <table class="br-table" mat-table [dataSource]="branchListdataSource" matSort #brDisplayTable>
+      <ng-container matColumnDef="branchName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span [style.float]="direction === 'rtl'? 'left': 'right'">{{lang.c3.columns.c1}}</span>
+        </th>
+        <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+          *matCellDef="let branch">{{branch?.branchName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="licenseNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{lang.c3.columns.c2}}
+        </th>
+        <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+          *matCellDef="let branch">
+          {{branch?.licenseNumber}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="branchCity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{lang.c3.columns.c3}}
+        </th>
+        <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+          *matCellDef="let branch">{{ branch?.branchCity }}</td>
+      </ng-container>
+      <ng-container matColumnDef="branchType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{lang.c3.columns.c4}}
+        </th>
+        <td [ngClass]="direction === 'rtl' ? 'thMatHeaderCellRightArb' : 'thMatHeaderCellLeftEng'" mat-cell
+          *matCellDef="let branch">
+          <span>{{branch?.branchType}}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td
+          [ngClass]="{'width-50':!branch.isMCIData, 'thMatHeaderCellRightArb':direction === 'rtl','thMatHeaderCellLeftEng': direction != 'rtl'}"
+          mat-cell *matCellDef="let branch">
+
+          <button *ngIf="!branch.isMCIData" mat-icon-button (click)="editBranch(branch.branchFormData)">
+            <mat-icon class="mat-18" [style.color]="'#d2a02a'">edit</mat-icon>
+          </button>
+
+          <button *ngIf="branch.isMCIData && !branch.isMCIDataSaved" (click)="editMCIBranch(branch.branchFormData)"
+            mat-raised-button class="rounded btnCss mci-save-button">
+            <span *ngIf="!branch.isMCIDataSaved">Verify & Save</span>
+          </button>
+
+          <button *ngIf="branch.isMCIData && branch.isMCIDataSaved" mat-icon-button
+            (click)="editMCIBranch(branch.branchFormData)">
+            <mat-icon class="mat-18" [style.color]="'#d2a02a'">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td
+          [ngClass]="{'width-50':!branch.isMCIData, 'thMatHeaderCellRightArb':direction === 'rtl','thMatHeaderCellLeftEng': direction != 'rtl'}"
+          mat-cell *matCellDef="let branch">
+          <button *ngIf="!branch.isMCIData" mat-icon-button color="warn"
+            (click)="confirmDeleteBranch(branch.branchFormData)">
+            <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="branchDisplayColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: branchDisplayColumns"></tr>
+    </table>
+    <div class="row mt-3">
+      <div class="col-12">
+        <button mat-button [ngClass]="direction === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button" style="width: auto;"
+          (click)="addNewBranch()">{{lang?.c3?.addbtn}}
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+<div id="addBranchDetailsModal" class="modal fade" dir="{{ direction }}" data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white text-center">
+        <p class="modal-title  text-white text-center">
+          {{lang?.c6?.title || 'Title'}}</p>
+      </div>
+
+      <div class="modal-body">
+        <div [hidden]="showAttachments">
+          <form [formGroup]="branchDetailsForm" autocomplete="off" #branchFormDirective="ngForm">
+            <div class="row mt-4">
+              <div class="col-12">
+                <mat-vertical-stepper [linear]="true" #branchDetailsStepper
+                  (selectionChange)="onBranchStepChange($event)">
+                  <mat-step [stepControl]="branchDetailsForm.get('branchDetails')" [label]="lang?.c6?.s1">
+                    <form formGroupName="branchDetails" autocomplete="off">
+                      <div class="row">
+                        <div class="col">
+                          <div class="registerLabelCss required"> {{lang?.c6?.in1}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="branchName" maxlength="80" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('branchDetails').get('branchName').hasError('required')">
+                              <!-- {{lang?.c6?.in1}} {{lang?.err?.in1}} -->
+
+                              {{lang?.err?.branchNamerequired}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col"
+                          *ngIf="ATYPE != '1' ? branchDetailsForm.get('branchDetails').get('branchNo').value == '00000' :false">
+                          <div class="registerLabelCss required">{{lang.c6.in2}}</div>
+                          <!-- fileInput1.click(); -->
+                          <mat-form-field class="pointer-hand"
+                            (click)="onClickFileControl('RG23','BR','',branchDetailsForm.get('branchDetails').get('companyMemorondum'),lang.c6.in2,'CM1');"
+                            (blur)="branchDetailsForm.get('branchDetails').get('companyMemorondum').markAsTouched();"
+                            appearance="outline" class="attachment-field pointer-hand">
+                            <input matInput style="display: none;" formControlName="companyMemorondum" />
+                            <input type="file" #fileInput1 style="display: none;" />
+                            <span class="w-75 d-inline-block text-truncate pointer-hand">
+                              {{branchDetailsForm.get('branchDetails').get('companyMemorondum').value}}
+                            </span>
+                            <span class="material-icons float-right pointer-hand">
+                              attach_file
+                            </span>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('branchDetails').get('companyMemorondum').hasError('required')">
+                              {{lang?.err?.copyofmemorequired}}
+                              {{branchDetailsForm.get('branchDetails').get('branchNo').value }}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step [completed]="branchDetailsForm.getRawValue().stepCompleted">
+                    <ng-template matStepLabel>
+                      <p class="m-0">{{lang?.c7?.title}} </p>
+                    </ng-template>
+                    <form formGroupName="activityDetails" autocomplete="off">
+                      <!-- type of identification -->
+                      <p class="registerLabel2Css"> {{lang?.c7?.label1}}</p>
+                      <div class="row text-center">
+                        <!-- <div class="col-12 text-center"> -->
+                        <div class="col-4">
+                          <div class="btn-group-toggle" data-toggle="buttons">
+                            <label class="btn  btn-success-outline btn-block rounded"
+                              [ngClass]="{'disabled':branchDetailsForm.value.isMCIData, 'btn-success': branchDetailsForm.get('activityDetails').get('crTypeSelected').value,'btn-success-outline':!branchDetailsForm.get('activityDetails').get('crTypeSelected').value}">
+                              <i class="fa"
+                                [ngClass]="{'fa-check-circle': branchDetailsForm.get('activityDetails').get('crTypeSelected').value,'fa-plus-circle':!branchDetailsForm.get('activityDetails').get('crTypeSelected').value}"></i>
+                              <input formControlName="crTypeSelected" type="checkbox" autocomplete="off"
+                                (change)="onIdentificationTypeSelect()">
+                              {{ lang?.c7?.label2 }}
+                            </label>
+
+
+
+                            <!-- <mat-form-field appearance="outline">
+                                <mat-select formControlName="issuedBy">
+                                  <mat-option [value]="item.key" *ngFor="let item of issueByList">
+                                    {{ item.text }}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="identification.get('issuedBy').hasError('required')">                               
+                                </mat-error>
+                              </mat-form-field> -->
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="btn-group-toggle" data-toggle="buttons">
+                            <label class="btn  btn-success-outline btn-block rounded"
+                              [ngClass]="{'btn-success': branchDetailsForm.get('activityDetails').get('licenseTypeSelected').value,'btn-success-outline':!branchDetailsForm.get('activityDetails').get('licenseTypeSelected').value}">
+                              <i class="fa"
+                                [ngClass]="{'fa-check-circle': branchDetailsForm.get('activityDetails').get('licenseTypeSelected').value,'fa-plus-circle': !branchDetailsForm.get('activityDetails').get('licenseTypeSelected').value}"></i>
+                              <input formControlName="licenseTypeSelected" type="checkbox" autocomplete="off"
+                                (change)="onIdentificationTypeSelect()">
+                              {{ lang?.c7?.label3 }}
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-4" *ngIf="showContractNumber">
+                          <div class="btn-group-toggle" data-toggle="buttons">
+                            <label class="btn  btn-success-outline btn-block rounded"
+                              [ngClass]="{'btn-success': branchDetailsForm.get('activityDetails').get('contractTypeSelected').value,'btn-success-outline':!branchDetailsForm.get('activityDetails').get('contractTypeSelected').value}">
+                              <i class="fa"
+                                [ngClass]="{'fa-check-circle': branchDetailsForm.get('activityDetails').get('contractTypeSelected').value,'fa-plus-circle':!branchDetailsForm.get('activityDetails').get('contractTypeSelected').value}"></i>
+                              <input formControlName="contractTypeSelected" type="checkbox" autocomplete="off"
+                                (change)="onIdentificationTypeSelect()">
+                              {{ lang?.c7?.label4 }}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-4 mb-4">
+                        <div class="col-12 ">
+                          <!-- <div class="registerBox d-flex mb-2"
+                              *ngIf="branchDetailsForm.get('activityDetails').get('crTypeSelected').value">
+                              <span class="material-icons" style="color: #c0c0c0;">
+                                error_outline
+                              </span>
+                              <p class="registerLabelnCss">
+                                {{lang?.c7?.hint1}}
+                              </p>
+                            </div> -->
+
+                          <div class="registerBox d-flex mb-2"
+                            *ngIf="true || branchDetailsForm.get('activityDetails').get('licenseTypeSelected').value">
+                            <span class="material-icons" style="color: #c0c0c0;">
+                              error_outline
+                            </span>
+                            <p class="registerLabelnCss">
+                              {{lang?.c7?.hint2}}
+                            </p>
+                          </div>
+
+                          <!-- <div class="registerBox d-flex mb-2"
+                              *ngIf="branchDetailsForm.get('activityDetails').get('contractTypeSelected').value">
+                              <span class="material-icons" style="color: #c0c0c0;">
+                                error_outline
+                              </span>
+                              <p class="registerLabelnCss">
+                                {{lang?.c7?.hint3}}
+                              </p>
+                            </div> -->
+                        </div>
+                      </div>
+                      <div class="mb-2" formArrayName="identificationsList">
+                        <div class="row"
+                          *ngFor="let identification of branchDetailsForm.get('activityDetails').get('identificationsList')['controls']; let i = index;let j=index;"
+                          [formGroupName]="i">
+                          <ng-container
+                            *ngIf="(identification.value.identificationType == 1 && branchDetailsForm.get('activityDetails').get('crTypeSelected').value) || (identification.value.identificationType == 2 && branchDetailsForm.get('activityDetails').get('licenseTypeSelected').value) || (identification.value.identificationType == 3 && branchDetailsForm.get('activityDetails').get('contractTypeSelected').value)">
+                            <div class="col-12 mb-2">
+                              <mat-accordion>
+                                <mat-expansion-panel (opened)="panelOpenState = true; "
+                                  (closed)="panelOpenState = false">
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title class="sideHeadingExpansionBar"
+                                      *ngIf="identification.value.identificationType == 1">
+                                      {{lang?.c7?.idtypeLabel1 }}
+                                    </mat-panel-title>
+                                    <mat-panel-title class="sideHeadingExpansionBar"
+                                      *ngIf="identification.value.identificationType ==2">
+                                      {{lang?.c7?.idtypeLabel2 }} ({{identification.value.serialNo}})
+                                    </mat-panel-title>
+                                    <mat-panel-title class="sideHeadingExpansionBar"
+                                      *ngIf="identification.value.identificationType == 3">
+                                      {{lang?.c7?.idtypeLabel3 }}
+                                    </mat-panel-title>
+                                  </mat-expansion-panel-header>
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="d-flex justify-content-between">
+                                        <p>
+
+                                          <mat-checkbox [color]="'custom-orange'" class="checkCss"
+                                            formControlName="isMainActivity" (change)="onMainActivitySelect(j)">
+                                          </mat-checkbox>
+                                          <b>{{lang?.c7?.in1}}</b>
+                                          <mat-error [ngClass]="{'text-left':direction === 'rtl'}"
+                                            class="mat-form-field-subscript-wrapper"
+                                            *ngIf="identification.get('isMainActivity').touched && identification.get('isMainActivity').hasError('required')">
+                                            {{lang?.err?.selectMainActivity}}
+                                          </mat-error>
+                                        </p>
+                                        <span *ngIf="identification.value.identificationType ==2"
+                                          (click)="deleteIdentificationType(j)"
+                                          class="float-right text-danger pointer-hand">
+                                          <mat-icon class="mat-18">delete</mat-icon>
+                                        </span>
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in2}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <mat-select formControlName="issueCountry"
+                                          (selectionChange)="onIssueCountryChange(identification)">
+                                          <mat-option [value]="country.Land1" *ngFor="let country of countiesList"
+                                            matTooltip="{{country.Landx50}}">
+                                            {{ country.Landx50 }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="identification.get('issueCountry').hasError('required')">
+                                          {{lang?.err?.selectIssueCountry}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in3}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <mat-select formControlName="issuedBy">
+                                          <mat-option [value]="item.key" *ngFor="let item of issueByList"
+                                            matTooltip="{{item.text}}">
+                                            {{ item.text }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="identification.get('issuedBy').hasError('required')">
+                                          {{lang?.err?.selectIssueBy}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <!-- <div class="col-4" *ngIf="identification.value.identificationType ==1">
+                                    <div class="registerLabelCss required">{{lang?.c7?.in4}}</div>
+                                    <mat-form-field appearance="outline">
+                                      <input matInput formControlName="issuedCity" />
+                                    </mat-form-field>
+                                  </div> -->
+                                    <!-- *ngIf="identification.value.identificationType !=1" -->
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in4}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <mat-select formControlName="issuedCity">
+                                          <!-- identification.value.identificationType !=1 &&  -->
+                                          <mat-option [hidden]="city.Country!=identification.value.issueCountry"
+                                            [value]="city.CityCode" *ngFor="let city of citiesList"
+                                            matTooltip="{{city.CityName}}">
+                                            {{ city.CityName }}
+                                          </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="identification.get('issuedCity').hasError('required')">
+
+                                          {{lang?.err?.selectIssueCity}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <!-- <div class="w-100"></div> -->
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required"
+                                        *ngIf="identification.value.identificationType ==1">{{lang?.c7?.in14}}</div>
+                                      <div class="registerLabelCss required"
+                                        *ngIf="identification.value.identificationType ==2">{{lang?.c7?.in5}}</div>
+                                      <div class="registerLabelCss required"
+                                        *ngIf="identification.value.identificationType ==3">{{lang?.c7?.in15}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <!-- identification.value.identificationType ==1?true:false -->
+                                        <input *ngIf="identification.value.identificationType==1" matInput
+                                          [mask]="identification.value.licenseNumberMask" [validation]="false"
+                                          formControlName="licenseNumber" (change)="validateCRNumber(identification);">
+                                        <input *ngIf="identification.value.identificationType==2" matInput
+                                          formControlName="licenseNumber" maxlength="30">
+                                        <input *ngIf="identification.value.identificationType==3" matInput
+                                          formControlName="licenseNumber" maxlength="20">
+                                        <mat-error *ngIf="identification.get('licenseNumber').hasError('required')">
+
+                                          <span
+                                            *ngIf="identification.value.identificationType ==1">{{lang?.err?.enterCRNumber}}</span>
+
+                                          <span
+                                            *ngIf="identification.value.identificationType ==2">{{lang?.err?.enterLicenseNumber}}</span>
+
+                                          <span
+                                            *ngIf="identification.value.identificationType ==3">{{lang?.err?.enterContractNumber}}</span>
+
+                                        </mat-error>
+
+
+                                        <mat-error
+                                          *ngIf="identification.value.identificationType ==1 && identification.get('licenseNumber').hasError('minlength')">
+
+                                          <span>{{lang?.err?.invalidCR}}</span>
+                                        </mat-error>
+
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in6}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <input matInput [matDatepicker]="i" formControlName="validFrom"
+                                          [attr.id]="'pp'+i" />
+                                        <mat-datepicker-toggle matSuffix [for]="i"></mat-datepicker-toggle>
+                                        <mat-datepicker #i [calendarHeaderComponent]="headerComponent"></mat-datepicker>
+                                        <mat-error *ngIf="identification.get('validFrom').hasError('required')">
+                                          {{lang.err.enterValidFromDate}}
+                                        </mat-error>
+                                        <mat-error *ngIf="identification.get('validFrom').hasError('futureDate')">
+                                          {{lang?.err?.validFromFutureDate}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <!-- ------------------------------------------ -->
+
+                                    <div class="col-4" *ngIf="identification.value.identificationType == 1">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in8}}</div>
+                                      <!-- (click)="fileInput2.click();" -->
+                                      <mat-form-field
+                                        (click)="onClickFileControl('RG01','BR',identification.getRawValue().licenseNumber,identification.get('copyOfCommercialNumberFile'),lang?.c7?.in8,identification.value.uniqueID);"
+                                        (blur)="identification.get('copyOfCommercialNumberFile').markAsTouched();"
+                                        appearance="outline" class="attachment-field pointer-hand">
+                                        <input matInput style="display: none;"
+                                          formControlName="copyOfCommercialNumberFile" />
+                                        <input type="file" #fileInput2 style="display: none;" />
+                                        <span class="w-75 d-inline-block text-truncate pointer-hand">
+                                          {{identification.get('copyOfCommercialNumberFile').value}}
+                                        </span>
+                                        <span class="material-icons float-right pointer-hand">
+                                          attach_file
+                                        </span>
+                                        <mat-error
+                                          *ngIf="identification.get('copyOfCommercialNumberFile').hasError('required')">
+                                          <!-- {{lang?.c7?.in8}} -->
+                                          {{lang?.err?.copyOfCRRequired}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+
+                                    <div class="col-4" *ngIf="identification.value.identificationType == 1">
+                                      <div class="registerLabelCss">{{lang?.c7?.in13}}</div>
+                                      <!-- (click)="fileInput3.click();" -->
+                                      <mat-form-field class="pointer-hand"
+                                        (click)="onClickFileControl('RG12','BR',identification.value.licenseNumber,identification.get('transferCopyOfCRFile'),lang?.c7?.in13,identification.value.uniqueID);"
+                                        (blur)="identification.get('transferCopyOfCRFile').markAsTouched();"
+                                        appearance="outline" class="attachment-field pointer-hand">
+                                        <input matInput style="display: none;" formControlName="transferCopyOfCRFile" />
+                                        <input type="file" #fileInput3 style="display: none;" />
+                                        <span class="w-75 d-inline-block text-truncate pointer-hand">
+                                          {{identification.get('transferCopyOfCRFile').value}}
+                                        </span>
+                                        <span class="material-icons float-right pointer-hand">
+                                          attach_file
+                                        </span>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-4" *ngIf="identification.value.identificationType == 2">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in7}}</div>
+                                      <!-- (click)="fileInput4.click();" -->
+                                      <mat-form-field
+                                        (click)="onClickFileControl('RG02','BR',identification.value.licenseNumber,identification.get('copyOfLicenseFile'),lang?.c7?.in7,identification.value.uniqueID);"
+                                        (blur)="identification.get('copyOfLicenseFile').markAsTouched();"
+                                        appearance="outline" class="attachment-field pointer-hand">
+                                        <input matInput style="display: none;" formControlName="copyOfLicenseFile" />
+                                        <input type="file" #fileInput4 style="display: none;" />
+                                        <span class="w-75 d-inline-block text-truncate pointer-hand">
+                                          {{identification.get('copyOfLicenseFile').value}}
+                                        </span>
+                                        <span class="material-icons float-right pointer-hand">
+                                          attach_file
+                                        </span>
+                                        <mat-error *ngIf="identification.get('copyOfLicenseFile').hasError('required')">
+                                          <!-- {{lang?.c7?.in7}} -->
+                                          {{lang?.err?.copyOfLicenseRequired}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-4" *ngIf="identification.value.identificationType == 3">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in9}}</div>
+                                      <!-- (click)="fileInput5.click();" -->
+                                      <mat-form-field class="pointer-hand"
+                                        (click)="onClickFileControl('RG08','BR',identification.value.licenseNumber,identification.get('copyOfContractFile'),lang?.c7?.in9,identification.value.uniqueID);"
+                                        (blur)="identification.get('copyOfContractFile').markAsTouched();"
+                                        appearance="outline" class="attachment-field pointer-hand">
+                                        <input matInput style="display: none;" formControlName="copyOfContractFile" />
+                                        <input type="file" #fileInput5 style="display: none;" />
+                                        <span class="w-75 d-inline-block text-truncate pointer-hand">
+                                          {{identification.get('copyOfContractFile').value}}
+                                        </span>
+                                        <span class="material-icons float-right pointer-hand">
+                                          attach_file
+                                        </span>
+                                        <mat-error
+                                          *ngIf="identification.get('copyOfContractFile').hasError('required')">
+                                          <!-- {{lang?.c7?.in9}} -->
+                                          {{lang?.err?.copyOfContractRequired}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <!-- --------------------------------- -->
+                                    <!-- <div class="w-100"></div> -->
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in10}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <mat-select formControlName="mainGroupActivity"
+                                          (selectionChange)="onActivitiesChange(identification,'mainGroupActivity')">
+                                          <mat-option [value]="mgal.IndSector"
+                                            *ngFor="let mgal of mainGroupActivityList" matTooltip="{{mgal.Text}}">
+                                            {{ mgal.Text }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="identification.get('mainGroupActivity').hasError('required')">
+                                          <!-- {{lang?.c7?.in10}} -->
+                                          {{lang?.err?.mgarqrd}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in11}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <mat-select formControlName="subGroupActivity"
+                                          (selectionChange)="onActivitiesChange(identification,'subGroupActivity')">
+                                          <mat-option
+                                            [hidden]="(!identification.value.mainGroupActivity)? false: identification.value.mainGroupActivity!=sga.IndSector.substring(0,2)"
+                                            [value]="sga.IndSector" *ngFor="let sga of subGroupActivityList"
+                                            matTooltip="{{sga.Text}}">
+                                            {{ sga.Text }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="identification.get('subGroupActivity').hasError('required')">
+                                          <!-- {{lang?.c7?.in11}} -->
+                                          {{lang?.err?.sgarqrd}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                    <div class="col-4">
+                                      <div class="registerLabelCss required">{{lang?.c7?.in12}}</div>
+                                      <mat-form-field appearance="outline">
+                                        <mat-select formControlName="mainActivity"
+                                          (selectionChange)="onActivitiesChange(identification,'mainActivity')">
+                                          <mat-option
+                                            [hidden]="(!identification.value.mainGroupActivity || !identification.value.subGroupActivity)? false: identification.value.subGroupActivity!=ma.IndSector.substring(0,4)"
+                                            [value]="ma.IndSector" *ngFor="let ma of mainActivityList"
+                                            matTooltip="{{ma.Text}}">
+                                            {{ ma.Text }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="identification.get('mainActivity').hasError('required')">
+                                          <!-- {{lang?.c7?.in12}} -->
+                                          {{lang?.err?.ma2rqrd}}
+                                        </mat-error>
+                                      </mat-form-field>
+                                    </div>
+                                  </div>
+                                </mat-expansion-panel>
+                              </mat-accordion>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                      <div class="text-left">
+                        <button
+                          *ngIf="branchDetailsForm.get('activityDetails').get('licenseTypeSelected').value && !hideAddLicensesOption"
+                          class="mt-4 mb-2 mat-focus-indicator mat-button mat-button-base btnGCss"
+                          (click)="addNewIdentificationType(2)">
+                          <span>{{lang?.c7?.label3}}</span>
+                        </button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step [stepControl]="branchDetailsForm.get('addressDetails')" [label]="lang?.c8?.title">
+                    <ng-template matStepLabel>
+                      <!-- (click)="validateIdentificationsList();" -->
+                      <p class="m-0" (click)="markMainActivityAsTouched();">
+                        {{lang?.c8?.title}}</p>
+                    </ng-template>
+                    <div class="cr-addresses-list" [ngClass]="{'show':showCRAdressesList}">
+                      <div class="row m-0 p-0 mt-3">
+                        <div class="col-12 text-left">
+                          <div>{{lang?.c8?.selectAddress}}</div>
+                        </div>
+                      </div>
+                      <div class="row m-0 p-0">
+                        <div class="col-6" *ngFor="let address of crAddressesList;let i=index">
+                          <mat-card class="border mt-3 address-card pointer-hand" (click)="setBranchAddress(address);">
+                            <div class="row">
+                              <div class="col-12">
+                                <ul class="modalTxt3">
+                                  <li>{{lang?.c8?.in3}} : <span class="modalTxtBold">{{address.CityName}}</span></li>
+                                  <li>{{lang?.c8?.in4}} : <span class="modalTxtBold">{{address.DistrictName}}</span>
+                                  </li>
+                                  <li>{{lang?.c8?.in7}} : <span class="modalTxtBold">{{address.Zipcode}}</span></li>
+                                  <li>{{lang?.c8?.in5}} : <span class="modalTxtBold">{{address.StreetName}}</span></li>
+                                  <li>{{lang?.c8?.in6}} : <span class="modalTxtBold">{{address.BuildingNo}}</span></li>
+                                  <li>{{lang?.c8?.in8}} : <span class="modalTxtBold">{{address.AdditionalNo}}</span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <!-- <div class="col-3">
+                                  <label class="containers">
+                                    <input [ngModelOptions]="{standalone: true}" type="checkbox" name="flag{{i}}"
+                                      [ngModel]="address.flag" maxlength="15"
+                                      (ngModelChange)="address.flag = $event; setBranchAddress(address);">
+                                    <span class="checkmark1"></span>
+                                  </label>
+                                </div> -->
+                            </div>
+                          </mat-card>
+                        </div>
+                      </div>
+                    </div>
+                    <form formGroupName="addressDetails" autocomplete="off">
+                      <div class="row">
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in1}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="country">
+                              <mat-option [value]="country.Land1" *ngFor="let country of countiesList">
+                                {{ country.Landx50 }}</mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('country').hasError('required')">
+                              <!-- {{lang?.c8?.in1}} -->
+                              {{lang?.err?.countryrqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in2}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="province">
+                              <mat-option [value]="state.Bland"
+                                *ngFor="let state of statesList | cityfilter: branchDetailsForm.get('addressDetails').get('country').value : 'state'">
+                                {{ state.Bezei }}</mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('province').hasError('required')">
+                              <!-- {{lang?.c8?.in2}} -->
+                              {{lang?.err?.provincerqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in3}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="city">
+                              <!-- | cityfilter: addr.province.value : 'province' : addr.country.value -->
+                              <mat-option [value]="city.CityCode"
+                                *ngFor="let city of citiesList | cityfilter:branchDetailsForm.get('addressDetails').get('province').value  : 'province' : branchDetailsForm.get('addressDetails').get('country').value">
+                                {{ city.CityName }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="branchDetailsForm.get('addressDetails').get('city').hasError('required')">
+                              <!-- {{lang?.c8?.in3}} -->
+
+                              {{lang?.err?.cityrqrd}}
+
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in4}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="district" maxlength="10" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('district').hasError('required')">
+
+                              <!-- {{lang?.c8?.in4}} -->
+                              <!-- {{lang?.err?.quarterrqrd}} -->
+                              {{lang?.err?.enterDistrict}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in5}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="streetName" maxlength="60" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('streetName').hasError('required')">
+                              <!-- {{lang?.c8?.in5}} -->
+                              {{lang?.err?.streetrqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in6}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="buildingNumber" maxlength="10" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('buildingNumber').hasError('required')">
+                              <!-- {{lang?.c8?.in6}} -->
+                              {{lang?.err?.bnorqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in7}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="zipCode" maxlength="6" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('zipCode').hasError('required')">
+                              <!-- {{lang?.c8?.in7}} -->
+                              {{lang?.err?.ziprqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in8}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="additionalNumber" maxlength="10" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('additionalNumber').hasError('required')">
+                              {{lang?.err?.enterAdditionalNumber}}
+                              <!-- {{lang?.err?.bnorqrd}} -->
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col">
+                          <div class="registerLabelCss required">{{lang?.c8?.in9}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="unitNumber" maxlength="10" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('addressDetails').get('unitNumber').hasError('required')">
+                              <!-- {{lang?.c8?.in9}} -->
+                              {{lang?.err?.unorqrd}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <!-- ------------------------------ Contact Person -->
+                  <mat-step
+                    *ngIf="ATYPE != '1' ? branchDetailsForm.get('branchDetails').get('branchNo').value == '00000' :false"
+                    [stepControl]="branchDetailsForm.get('contactPersonDetails')" [label]="lang?.c9?.title">
+                    <form formGroupName="contactPersonDetails" autocomplete="off">
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="registerLabelCss">{{lang?.c9?.in1}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput (change)="getTINDetails()" maxlength="10" mask="0000000000"
+                              formControlName="tinNumber" />
+                            <!-- <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('tinNumber').hasError('required')">
+                              {{lang.c9.in1}} 
+                            </mat-error> -->
+                            <mat-error
+                              *ngIf="!branchDetailsForm.get('contactPersonDetails').get('tinNumber').hasError('pattern') && branchDetailsForm.get('contactPersonDetails').get('tinNumber').hasError('minlength')">
+                              {{lang?.err?.tinNumberMinlength}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('tinNumber').hasError('pattern')">
+                              {{lang?.err?.tinNumberStartWith}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in2}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="idType" (selectionChange)="onIdTypeChange()">
+                              <mat-option [value]="idType.value" *ngFor="let idType of idTypesList">
+                                {{ idType.name }}</mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('idType').hasError('required')">
+                              <!-- {{lang?.c9?.in2}} -->
+                              {{lang?.err?.selectIDType}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4" *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='FS0002'">
+                          <div class="registerLabelCss required">{{lang?.c9?.in4}}</div>
+                          <mat-form-field appearance="outline">
+                            <mat-select formControlName="issueCountry">
+                              <mat-option [value]="country.Land1" *ngFor="let country of countiesList">
+                                {{ country.Landx50 }}</mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('issueCountry').hasError('required')">
+                              <!-- {{lang?.c9?.in4}} -->
+                              {{lang?.err?.enterIssueCountryPassport}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in3}}</div>
+                          <mat-form-field appearance="outline">
+                            <input (change)="onBCPIdNumberChange()" type="text" matInput formControlName="idNumber"
+                              [mask]="cpIdNumberMask" [validation]="false" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('idNumber').hasError('required')">
+                              <!-- <span
+                                *ngIf="!branchDetailsForm.value.contactPersonDetails.idType">{{lang?.err?.enterIDNumber}}</span> -->
+
+                              <span
+                                *ngIf="branchDetailsForm.value.contactPersonDetails.idType!='FS0002'">{{lang?.err?.enterIDNumber}}</span>
+
+
+                              <!-- <span
+                                *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0001'">{{lang?.err?.enterNationalID}}</span>
+                              <span
+                                *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0002'">{{lang?.err?.enterIqamaID}}</span>
+                              <span
+                                *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0003'">{{lang?.err?.enterGccID}}</span> -->
+                              <span
+                                *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='FS0002'">{{lang?.err?.enterPassportNumber}}</span>
+                            </mat-error>
+                            <mat-error
+                              *ngIf="!branchDetailsForm.get('contactPersonDetails').get('idNumber').hasError('pattern') && branchDetailsForm.get('contactPersonDetails').get('idNumber').hasError('minlength')">
+                              <span *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0001'">
+                                {{lang?.err?.nationalIDMinLength}}
+                              </span>
+                              <span *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0002'">
+                                {{lang?.err?.iqamaIDMinLength}}
+                              </span>
+                              <span *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0003'">
+                                {{lang?.err?.gccIDMinlength}}
+                              </span>
+                            </mat-error>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('idNumber').hasError('pattern')">
+                              <span *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0001'">
+                                {{lang?.err?.nationalIDStartWith}}
+                              </span>
+                              <span *ngIf="branchDetailsForm.value.contactPersonDetails.idType=='ZS0002'">
+                                {{lang?.err?.iqamaIDStartWith}}
+                              </span>
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in5}}</div>
+                          <mat-form-field appearance="outline">
+                            <input (dateChange)="onBCPIdNumberChange('dob')" matInput [matDatepicker]="bcpddob"
+                              formControlName="dateOfBirth" />
+                            <mat-datepicker-toggle matSuffix [for]="bcpddob"></mat-datepicker-toggle>
+                            <mat-datepicker [calendarHeaderComponent]="headerComponent" #bcpddob></mat-datepicker>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('dateOfBirth').hasError('required')">
+                              <!-- {{lang?.c9?.in5}} -->
+                              {{lang?.err?.enterDateOfBirth}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('dateOfBirth').hasError('futureDate')">
+                              <!-- {{lang?.c9?.in5}} -->
+                              {{lang?.err?.dobFutureDate}}
+                            </mat-error>
+
+                          </mat-form-field>
+
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in6}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="firstName" maxlength="40"
+                              (keypress)='allowAlphabets($event)' />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('firstName').hasError('required')">
+                              <!-- {{lang?.c9?.in6}} -->
+                              {{lang?.err?.enterFirstName}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in7}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput formControlName="lastName" maxlength="40"
+                              (keypress)='allowAlphabets($event)' />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('lastName').hasError('required')">
+                              <!-- {{lang?.c9?.in7}} -->
+                              {{lang?.err?.enterLastName}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in8}}</div>
+                          <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="bcpdstdt" formControlName="startDate" />
+                            <mat-datepicker-toggle matSuffix [for]="bcpdstdt"></mat-datepicker-toggle>
+                            <mat-datepicker [calendarHeaderComponent]="headerComponent" #bcpdstdt></mat-datepicker>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('startDate').hasError('required')">
+                              <!-- {{lang?.c9?.in8}} -->
+                              {{lang?.err?.enterStartDate}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('startDate').hasError('futureDate')">
+                              <!-- {{lang?.c9?.in5}} -->
+                              {{lang?.err?.startDateFutureDate}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in9}}</div>
+                          <div class="row m-0 bcpm-wrapper">
+                            <mat-form-field class="w-45" [ngClass]="{'order-2':direction=='rtl'}" appearance="outline"
+                              *ngIf="!branchDetailsForm.get('contactPersonDetails').get('tinNumber').value">
+                              <mat-select formControlName="mobileCode" (selectionChange)="onBCPMobileCodeChange()">
+                                <mat-select-trigger>
+                                  +{{branchDetailsForm.get('contactPersonDetails.mobileCode').value}}
+                                </mat-select-trigger>
+                                <mat-option [value]="item.Telefto" *ngFor="let item of phoneCodes">
+                                  <!-- {{ item.Land1 }}&nbsp; +{{item.Telefto}} -->
+                                  <div dir="ltr" class="d-flex justify-content-between">
+                                    <div class="" style="font-size: 14px;">
+                                      +{{ item.Telefto }}
+                                    </div>
+                                    <div class="text-truncate pl-4" [title]="item.Landx50" style="font-size: 14px;">
+                                      {{ item.Landx50 }}
+                                    </div>
+                                  </div>
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="" appearance="outline"
+                              [ngClass]="{'w-55':!branchDetailsForm.get('contactPersonDetails').get('tinNumber').value,'order-1':direction=='rtl'}">
+                              <input (input)="onBCPMobileNumberChange()" matInput formControlName="mobileNumber"
+                                mask="9{10}" [validation]="false" />
+                            </mat-form-field>
+                            <div class="custom-bcpm-error mat-form-field-subscript-wrapper m-0 pl-2">
+                              <mat-error
+                                *ngIf="branchDetailsForm.get('contactPersonDetails').get('mobileNumber').hasError('required')">
+                                <!-- {{lang?.c9?.in9}} -->
+                                {{lang?.err?.enterMobileNumber}}
+                              </mat-error>
+                              <mat-error
+                                *ngIf="branchDetailsForm.get('contactPersonDetails').get('mobileNumber').hasError('minlength') && !branchDetailsForm.get('contactPersonDetails').get('mobileNumber').hasError('startsWith')">
+                                {{lang?.err?.bcpMobileNumberMaxLength}}
+                                <!-- Phone Number should be of 14 digit -->
+                              </mat-error>
+                              <mat-error
+                                *ngIf="branchDetailsForm.get('contactPersonDetails').get('mobileNumber').hasError('startsWith')">
+                                {{lang?.err?.bcpMobileNumberStartWith}}
+                              </mat-error>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in10}}</div>
+                          <mat-form-field appearance="outline">
+                            <input type="email" matInput formControlName="email" maxlength="260" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('email').hasError('required')">
+                              <!-- {{lang?.c9?.in10}} -->
+                              {{lang?.err?.enterEmail}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('email').value && branchDetailsForm.get('contactPersonDetails').get('email').invalid">
+                              {{lang?.err?.emailinvalid}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div class="registerLabelCss required">{{lang?.c9?.in11}}</div>
+                          <mat-form-field appearance="outline">
+                            <input type="email" matInput formControlName="confirmEmail" maxlength="260" />
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('confirmEmail').hasError('required')">
+                              <!-- {{lang?.c9?.in11}} -->
+                              {{lang?.err?.enterConfirmEmail}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('confirmEmail').value && branchDetailsForm.get('contactPersonDetails').get('confirmEmail').invalid && !branchDetailsForm.get('contactPersonDetails').get('confirmEmail').hasError('notMatch')">
+                              {{lang?.err?.emailinvalid}}
+                            </mat-error>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('confirmEmail').value && branchDetailsForm.get('contactPersonDetails').get('confirmEmail').hasError('notMatch')">
+                              {{lang?.err?.emailsNotMatch}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                          <div *ngIf="branchDetailsForm.get('contactPersonDetails').get('idType').value!='FS0002'"
+                            class="registerLabelCss required">{{lang?.c9?.in12}}</div>
+                          <div *ngIf="branchDetailsForm.get('contactPersonDetails').get('idType').value=='FS0002'"
+                            class="registerLabelCss required">{{lang?.err?.copyOfPassport}}</div>
+                          <!-- (click)="fileInput6.click();" -->
+                          <mat-form-field
+                            (click)="onClickFileControl('RG11','BR','',branchDetailsForm.get('contactPersonDetails').get('copyOfGMID'),(branchDetailsForm.get('contactPersonDetails').get('idType').value=='FS0002')?lang?.err?.copyOfPassport : lang?.c9?.in12,'GM1');"
+                            (blur)="branchDetailsForm.get('contactPersonDetails').get('copyOfGMID').markAsTouched();"
+                            appearance="outline" class="attachment-field pointer-hand">
+                            <input matInput style="display: none;" formControlName="copyOfGMID" />
+                            <input type="file" #fileInput6 style="display: none;" />
+                            <span class="w-75 d-inline-block text-truncate pointer-hand">
+                              {{branchDetailsForm.get('contactPersonDetails').get('copyOfGMID').value}}
+                            </span>
+                            <span class="material-icons float-right pointer-hand">
+                              attach_file
+                            </span>
+                            <mat-error
+                              *ngIf="branchDetailsForm.get('contactPersonDetails').get('copyOfGMID').hasError('required')">
+                              <!-- {{lang?.c9?.in12}} -->
+                              {{lang?.err?.copyOfGMIDRequired}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <ng-template matStepperIcon="create">
+                    <mat-icon>brightness_1</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="edit">
+                    <mat-icon>brightness_1</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="done">
+                    <mat-icon>check_circle</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="number" let-index="index" let-active="active">
+                    <mat-icon *ngIf="!branchDetailsStepper.selected.interacted">panorama_fish_eye</mat-icon>
+                    <mat-icon *ngIf="branchDetailsStepper.selected.interacted">brightness_1</mat-icon>
+                  </ng-template>
+                </mat-vertical-stepper>
+              </div>
+            </div>
+            <div class="pl-4 pr-4 d-flex justify-content-start mt-4 mb-4">
+              <button type="submit" (click)="saveBranch();" mat-raised-button class="rounded btnCss save-btn">
+                {{ lang?.c13?.btn1 || 'Save'}}
+              </button>&nbsp;&nbsp;
+              <button mat-button class="rounded text-muted cancel-button" data-dismiss="modal">{{ lang?.c13?.btn2 ||
+                'Cancel' }}</button>
+            </div>
+          </form>
+        </div>
+        <!-- Attachments Template Here -->
+        <!-- [ngClass]="{'show':showAttachments}" -->
+        <!-- #attachmentsListDiv -->
+        <div [hidden]="!showAttachments" class="container-attachments-list">
+          <!-- <ng-container *ngTemplateOutlet="attachmentsTemplate"></ng-container> -->
+          <signup-attachments [viewType]="'inline'" [attachmentsList]="attachmentsList"
+            [ReturnIdx]="registrationObj.ReturnIdx" (onFileUploadSuccess)="onFileUploadSuccess($event)"
+            (onClose)="onAttachmentsClose($event);"></signup-attachments>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal sh-info-modal " id="deleteOutletModal" data-keyboard="false" data-backdrop="static" [dir]="direction">
+  <div class="modal-dialog modal-lg max-width-550 modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white text-center">
+        <p class="modal-title  text-white text-center">
+          {{lang?.confirm}}
+        </p>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-3">
+          <div class="col-12">
+            <div *ngIf="selectedLanguage == 'en'">
+              <span *ngIf="deleteBranchObj?.branchDetails?.branchNo == '00000'">
+                {{lang?.deleteBranch?.cannotDelete}}</span>
+              <span *ngIf="deleteBranchObj?.branchDetails?.branchNo != '00000'">Are you sure
+                Outlet '{{ deleteBranchObj?.branchDetails?.branchNo }}' should be deleted? All entered
+                details will be
+                lost. </span>
+            </div>
+            <div class="text-left" *ngIf="selectedLanguage == 'ar'">
+              <span *ngIf="deleteBranchObj?.branchDetails?.branchNo == '00000'">
+                {{lang?.deleteBranch?.cannotDelete}}
+              </span>
+              <span *ngIf="deleteBranchObj?.branchDetails?.branchNo != '00000'">الفرع
+                '{{deleteBranchObj?.branchDetails?.branchNo}}' هل انت متأكد من حذف بيانات الفرع؟ جميع
+                التفاصيل المدخلة
+                لهذا الفرع سيتم حذفها </span>
+            </div>
+          </div>
+          <div class="col-12 mt-3 mb-2 text-right">
+            <button *ngIf="deleteBranchObj?.branchDetails?.branchNo != '00000'" mat-button
+              class="rounded text-muted cancel-button" data-dismiss="modal" (click)="deleteBranchObj={};">
+              {{lang?.cancel}}</button>
+            &nbsp;&nbsp;
+            <button *ngIf="deleteBranchObj?.branchDetails?.branchNo != '00000'" (click)="deleteBranch(deleteBranchObj);"
+              mat-raised-button class="rounded save-btn btn-bg-success">
+              {{lang?.ok}}
+            </button>
+            <button data-dismiss="modal" *ngIf="deleteBranchObj?.branchDetails?.branchNo == '00000'" mat-raised-button
+              class="rounded save-btn btn-bg-success">
+              {{lang?.ok}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- <notifier-container [dir]="direction"></notifier-container> -->
+
+
+<div class="modal sh-info-modal" id="brErrorMsgsModal" data-keyboard="false" data-backdrop="static" [dir]="direction">
+  <div class="modal-dialog modal-lg max-width-550">
+    <div class="modal-content">
+      <div class="modal-header text-white text-center">
+        <p class="modal-title  text-white text-center">
+          <i class="fa fa-info-circle"></i>&nbsp;{{lang?.error}}
+        </p>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-3">
+          <div class="col-12 text-left text-error">
+            <h6 *ngFor="let error of errorMsgsList" class="font-weight-normal font-14">{{error?.message}}</h6>
+          </div>
+          <div class="col-12 mt-3 mb-2 text-right">
+            <button mat-raised-button class="rounded save-btn btn-bg-success" type="button" style="width: auto;"
+              (click)="closeModal('brErrorMsgsModal')">{{lang?.ok}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

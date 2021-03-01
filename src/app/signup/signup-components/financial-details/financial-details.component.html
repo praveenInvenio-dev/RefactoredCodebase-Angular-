@@ -1,0 +1,145 @@
+<form [formGroup]="financialDetails" autocomplete="off">
+    <mat-card class="mt-3">
+        <mat-card-content>
+            <div class="sideHeading">
+                {{ labels?.c5?.title }}
+                <p class="Rectangle-12"></p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="registerLabelCss required">{{labels?.c5?.in1}}</div>
+                    <mat-form-field appearance="outline">
+                        <mat-select formControlName="accounting" (selectionChange)="onFinancialDetailsChange()">
+                            <mat-option value="A">{{labels?.accounting}}</mat-option>
+                            <mat-option value="E">{{labels?.estimated}}</mat-option>
+                        </mat-select>
+                        <mat-error>
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4" *ngIf="registrationObj.Atype!=='1'">
+                    <div class="registerLabelCss">{{labels?.c5?.in2}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput mask="0{15}" maxlength="15" formControlName="tinNumber"  [validation]="false"/>                        
+                    </mat-form-field>
+                </div>
+                <div class="col-4" *ngIf="registrationObj.Atype!=='1'">
+                    <div class="registerLabelCss">{{labels?.c5?.in3}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="tanNumber" mask="0{10}" maxlength="10" [validation]="false"/>                     
+                    </mat-form-field>
+                </div>
+                <div class="col-4" *ngIf="registrationObj.Atype!=='1'">
+                    <div class="registerLabelCss">{{labels?.c5?.in4}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput [matDatepicker]="cfcprd" formControlName="capitalRegistrationDate" />
+                        <mat-datepicker-toggle matSuffix [for]="cfcprd"></mat-datepicker-toggle>
+                        <mat-datepicker [calendarHeaderComponent]="headerComponent" #cfcprd></mat-datepicker>
+                        <mat-error *ngIf="financialDetails.get('capitalRegistrationDate').hasError('futureDate')">
+
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <div class="registerLabelCss">{{labels?.c5?.in5}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="capitalAmount" />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="registerLabel2Css required">{{labels?.c5?.label1}}</p>
+                    <div class="row ml-5 mr-5">
+                        <div class="btn-group-toggle" data-toggle="buttons">
+                            <label class="btn min-width-135 rounded"
+                                [ngClass]="{
+                                    'btn-warning': financialDetails.get('calendarType').value === 'H',
+                                    'btn-warning-outline':financialDetails.get('calendarType').value != 'H',
+                                    'disabled': MCI_FINANCIAL_DETAILS?.Caltp
+                                }">
+                                <i class="fa-lg align-middle"
+                                    [ngClass]="{'ion-checkmark-circled': financialDetails.get('calendarType').value === 'H','ion-ios-circle-outline':financialDetails.get('calendarType').value!= 'H'}"></i>
+                                &nbsp;&nbsp;&nbsp;
+                                <input formControlName="hijriSelected" type="checkbox"
+                                    (change)="onFinancialCalendarChange('H')">
+                                {{labels?.c5?.label2}}
+                            </label>
+                        </div>
+                        <div class="btn-group-toggle pl-3 pr-3"></div>
+                        <div class="btn-group-toggle" data-toggle="buttons">
+                            <label class="btn min-width-135 rounded"
+                                [ngClass]="{
+                                    'btn-warning': financialDetails.get('calendarType').value === 'G',
+                                    'btn-warning-outline':financialDetails.get('calendarType').value != 'G',
+                                    'disabled': MCI_FINANCIAL_DETAILS?.Caltp
+                                }">
+                                <i class="fa-lg align-middle"
+                                    [ngClass]="{'ion-checkmark-circled': financialDetails.get('calendarType').value === 'G','ion-ios-circle-outline' :financialDetails.get('calendarType').value!= 'G'}"></i>
+                                &nbsp;&nbsp;&nbsp;
+                                <input name="ctype" id="gregc" formControlName="gregorianSelected" type="checkbox"
+                                    (change)="onFinancialCalendarChange('G')">
+                                {{labels?.c5?.label3}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div> <br>
+            <div class="row">
+                <div class="col">
+                    <div class="registerLabelCss required mb-20p">{{labels?.c5?.in6}}</div>
+                    <div class="input-group mb-2">
+                        <mat-select class="form-control text-center"
+                            (selectionChange)="onFinancialDetailsChange('month')" formControlName="endOfFinancialMonth">
+                            <mat-option [value]="month.key" *ngFor="let month of financialMonths">
+                                {{ month.value }}</mat-option>
+                        </mat-select>
+                        <div [ngClass]="{'input-group-append':direction!='rtl','input-group-prepend':direction=='rtl'}">
+                            <span class="input-group-text bg-white">{{labels?.c5?.in8}}</span>
+                        </div>
+                    </div>
+                    <mat-error class="custom-mat-error"
+                        *ngIf="financialDetails.get('endOfFinancialMonth').touched && financialDetails.get('endOfFinancialMonth').hasError('required')">
+                        {{labels?.err?.selectAnyOne}}
+                    </mat-error>
+                </div>
+                <div class="col p-0">
+                    <div class="registerLabelCss mb-20p">&nbsp;</div>
+                    <div class="input-group mb-2">
+                        <mat-select class="form-control text-center" (selectionChange)="onFinancialDetailsChange()"
+                            formControlName="endOfFinancialDay">
+                            <mat-option [hidden]="hideDay(day.key)" [value]="day.key"
+                                *ngFor="let day of financialDdays">
+                                {{ day.value }}</mat-option>
+                        </mat-select>
+                        <div [ngClass]="{'input-group-append':direction!='rtl','input-group-prepend':direction=='rtl'}">
+                            <span class="input-group-text bg-white">{{labels?.c5?.in7}}</span>
+                        </div>
+                    </div>
+                    <mat-error class="custom-mat-error"
+                        *ngIf="financialDetails.get('endOfFinancialDay').touched && financialDetails.get('endOfFinancialDay').hasError('required')">
+                        {{labels?.err?.selectAnyOne}}
+                    </mat-error>
+                </div>
+                <div class="col-3">
+                    <div class="registerLabelCss ">{{labels?.c5?.in9}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="commencementDate" />
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <div class="registerLabelCss">{{labels?.c5?.in10}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="taxableDate" />
+                    </mat-form-field>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</form>
+<!-- 
+<button (click)="submit()">submit</button>
+<button (click)="pristine()">pristine</button>
+<button (click)="pristineall()">pristine all</button> -->

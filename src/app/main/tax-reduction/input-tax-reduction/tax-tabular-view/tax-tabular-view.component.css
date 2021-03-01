@@ -1,0 +1,84 @@
+.iptax-add-new {
+  border-radius: 14px;
+  border: 1px solid var(--light);
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.iptax-add-new > div {
+  margin-inline-start: 16px;
+}
+.greenBold {
+  font-family: SSTArabic-Bold;
+  color: #006450;
+}
+.fontSstR {
+  font-family: SSTArabic-Roman;
+}
+.iptax-table {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--light);
+  overflow: hidden;
+}
+
+.iptax-table > mat-row {
+  cursor: pointer;
+}
+
+.iptax-table > mat-header-row > mat-header-cell {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #151515;
+}
+
+.iptax-table > mat-row > mat-cell {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+}
+
+.iptax-table > mat-header-row > mat-header-cell,
+.iptax-table > mat-row > mat-cell {
+  padding-inline-start: 16px;
+  border-inline-start: 1px solid var(--light);
+}
+
+.iptax-table > mat-header-row > mat-header-cell:first-child,
+.iptax-table > mat-row > mat-cell:first-child {
+  border-inline-start: none;
+}
+
+.iptax-table > mat-row:last-child {
+  border: none;
+}
+
+.mat-column-description {
+  flex: 2;
+}
+
+/* Override */
+
+.tag32 {
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 6px 10px;
+  max-height: 32px;
+  width: max-content;
+  min-width: 100px;
+}

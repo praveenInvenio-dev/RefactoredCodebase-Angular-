@@ -1,0 +1,52 @@
+.acc-download-dialog-subheading {
+  object-fit: contain;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--gray);
+}
+
+/* Override */
+.dateRangePicker {
+  width: 100%;
+  max-width: 100%;
+}
+
+input {
+  padding-bottom: 8px;
+}
+
+.dateRangePicker input::placeholder {
+  text-align: left;
+}
+
+.acc-arabic input::placeholder {
+  text-align: right;
+}
+
+.popup-cstm-btn {
+  font-family: SSTArabic-Roman;
+  max-width: 207px;
+  height: 48px;
+}
+
+.popup-cstm-btn-left {
+  text-align: start;
+  padding: 0;
+}
+
+.popup-cstm-btn-right {
+  text-align: start;
+  padding: 0;
+  margin-top: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .popup-cstm-btn-right {
+    text-align: end;
+    margin-top: 0px;
+  }
+}

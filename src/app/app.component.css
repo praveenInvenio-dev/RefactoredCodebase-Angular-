@@ -1,0 +1,12 @@
+ .top-25 {
+     top: 25% !important;
+ }
+
+ #sessionExpiryModal .modal-header {
+    border-top-left-radius: 11px !important;
+    border-top-right-radius: 11px !important;
+  }
+  
+  #sessionExpiryModal .modal-header, .modal-title {
+    background: #13614c !important;
+  }

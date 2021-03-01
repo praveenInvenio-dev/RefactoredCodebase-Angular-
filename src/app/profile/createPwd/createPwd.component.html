@@ -1,0 +1,95 @@
+<div class="row" dir="{{ direction }}">
+  <div class="col-md-12 mt-4">
+      <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+
+          <div class="row">
+            <div class="col-md-6">
+              <div>
+                <div class="registerLabelCss">{{lang.s2.t4}}</div>
+                <mat-form-field appearance="outline" style="border-radius: 14px;">
+                  <input matInput type="password" [type]="hide1 ? 'password' : 'text'" formControlName="prevPwd" />
+                  <mat-icon matSuffix (click)="hide1 = !hide1">{{hide ? 'visibility_off' : 'visibility'}}
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="registerLabelCss">{{lang.s2.t2}}</div>
+                  <mat-form-field appearance="outline"  style="border-radius: 14px;">
+                      <input matInput type="password" formControlName="pwd" [type]="hide ? 'password' : 'text'" />
+                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+                      </mat-icon>
+                  </mat-form-field>
+                  <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback">
+                      <div *ngIf="f.pwd.errors.required">
+                          <!-- {{lang.s2.err.e1}} -->
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="registerLabelCss">{{lang.s2.t3}}</div>
+                <mat-form-field appearance="outline" style="border-radius: 14px;">
+                    <input matInput type="password" formControlName="cnfrmPwd"
+                        [type]="cnfmHide ? 'password' : 'text'" />
+                    <mat-icon matSuffix (click)="cnfmHide = !cnfmHide">
+                        {{cnfmHide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                </mat-form-field>
+                <div *ngIf="submitted && f.cnfrmPwd.errors" class="invalid-feedback">
+                    <div *ngIf="f.cnfrmPwd.errors.required">
+                        <!-- {{lang.s2.err.e2}} -->
+                    </div>
+                    <div *ngIf="f.cnfrmPwd.errors.mustMatch">
+                        <!-- {{lang.s2.err.e3}} -->
+                    </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-12  mt-3">
+
+                  <p class="pwdcss"  [style.color]="minLen ? '#006450': '#AA0C19'">
+                      <i  [ngClass]="minLen? 'fa fa-check-circle' : 'fa fa-times-circle'"
+                          aria-hidden="true"  ></i>
+                          {{lang.s2.err.e4}}
+
+                  </p>
+
+                  <p class="pwdcss" [style.color]="maxLen ? '#006450': '#AA0C19'">
+                      <i  [ngClass]="maxLen? 'fa fa-check-circle ' : 'fa fa-times-circle '"
+                      aria-hidden="true" ></i>
+                      {{lang.s2.err.e5}}
+                  </p>
+
+                  <p class="pwdcss" [style.color]="caseSens ? '#006450': '#AA0C19'">
+                      <i  [ngClass]="caseSens? 'fa fa-check-circle ' : 'fa fa-times-circle '"
+                      aria-hidden="true" ></i>
+                      {{lang.s2.err.e6}}
+                  </p>
+
+                  <p class="pwdcss" [style.color]="numSymb ? '#006450': '#AA0C19'">
+                      <i  [ngClass]="numSymb? 'fa fa-check-circle ' : 'fa fa-times-circle '"
+                      aria-hidden="true"  ></i>
+                      {{lang.s2.err.e7}}
+                  </p>
+                  <p class="pwdcss" [style.color]="matchErr ? '#006450': '#AA0C19'">
+                    <i  [ngClass]="matchErr? 'fa fa-check-circle ' : 'fa fa-times-circle '"
+                    aria-hidden="true"  ></i>
+                    {{lang.s2.err.e3}}
+                </p>
+
+              </div>
+          </div>
+
+          <div class="mt-3 mb-3">
+              <button mat-raised-button class="mt-5" [ngClass]="(passwordForm.valid) ? 'btnCss' : 'btnCssDisabled'" type="submit" [disabled]="!(passwordForm.valid)">
+                  {{continue}}
+              </button>
+          </div>
+      </form>
+  </div>
+</div>

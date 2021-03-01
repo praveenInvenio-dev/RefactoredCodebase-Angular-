@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="388" height="48" viewBox="0 0 388 48">
+    <defs>
+        <filter id="n5dljb1pva" width="103.6%" height="129.2%" x="-1.8%" y="-10.4%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <filter id="5r6cu87ulc" width="158.3%" height="158.3%" x="-29.2%" y="-20.8%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0 0.137254902 0 0 0 0.1 0"/>
+        </filter>
+        <circle id="2ncj41svtd" cx="12" cy="12" r="12"/>
+        <rect id="j7uk4y5vab" width="388" height="48" x="0" y="0" rx="14"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero">
+            <g>
+                <g>
+                    <g transform="translate(-523 -388) translate(366 108) translate(133 168) translate(24 112)">
+                        <g>
+                            <use fill="#000" filter="url(#n5dljb1pva)" xlink:href="#j7uk4y5vab"/>
+                            <rect width="388" height="48" fill="#FFF" rx="14"/>
+                            <rect width="387" height="47" x=".5" y=".5" stroke="#EBEBEB" rx="14" transform="rotate(-180 194 24)"/>
+                        </g>
+                        <rect width="178" height="4" x="16" y="22" fill="#006450" rx="2"/>
+                        <rect width="178" height="4" x="194" y="22" fill="#999" opacity=".2" rx="2"/>
+                        <circle cx="76" cy="24" r="2" fill="#FFF" fill-opacity=".5"/>
+                        <circle cx="18" cy="24" r="2" fill="#FFF" fill-opacity=".5"/>
+                        <circle cx="134" cy="24" r="2" fill="#FFF" fill-opacity=".5"/>
+                        <circle cx="192" cy="24" r="2" fill="#FFF" fill-opacity=".5"/>
+                        <circle cx="249" cy="24" r="2" fill="#999"/>
+                        <circle cx="318" cy="24" r="2" fill="#999"/>
+                        <circle cx="370" cy="24" r="2" fill="#999"/>
+                        <g transform="translate(182 12)">
+                            <use fill="#000" filter="url(#5r6cu87ulc)" xlink:href="#2ncj41svtd"/>
+                            <circle cx="12" cy="12" r="12" fill="#006450"/>
+                            <circle cx="12" cy="12" r="11.5" stroke="#FFF"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

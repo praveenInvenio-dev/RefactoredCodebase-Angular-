@@ -1,0 +1,164 @@
+<div class="container-fluid" [dir]="data.direction" style="margin-top: 24px">
+  <div class="row">
+    <div class="col-md-12 p-0">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb acc-breadcrumb p-0 m-0">
+          <li class="breadcrumb-item acc-breadcrumb-item">
+            <a style="cursor: pointer" (click)="gotoCategoryPage()">
+              {{ this.translation.tableHeader }}
+            </a>
+          </li>
+          <li class="breadcrumb-item acc-breadcrumb-item">
+            <a style="cursor: pointer" (click)="gotoListPage()">
+              {{
+                selectedCategory === "D"
+                  ? translation.directTaxBreadcrumb
+                  : translation.indirectTaxBreadcrumb
+              }}
+            </a>
+          </li>
+          <li
+            class="breadcrumb-item acc-breadcrumb-item"
+            aria-current="page"
+          >
+            <a style="cursor: pointer;" (click)="gotoListPage()">
+              {{ subTaxTypeName }}
+            </a>
+          </li>
+          <li
+            class="breadcrumb-item acc-breadcrumb-item active"
+            aria-current="page"
+          >
+            {{ this.translation.detailsBreadcrumb }}
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 40px">
+    <div class="col-md-12 stepHeader p-0">
+      <span
+        class="stepBack col-md-6 p-0"
+        (click)="gotoListPage()"
+        style="cursor: pointer; display: flex"
+      >
+        <img
+          src="assets/image/arrow-left.svg"
+          [style.transform]="
+            data.direction === 'rtl' ? 'rotate(180deg)' : 'rotate(0deg)'
+          "
+          style="width: 24px"
+        />
+        <span style="width: 7px"></span>
+        <span>
+          {{ translation.back }}
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 32px; height: 40px">
+    <div class="col-md-12 p-0">
+      <div
+        class="pageTitle d-inline-block"
+        [ngClass]="data.direction === 'ltr' ? 'float-left' : 'float-right'"
+      >
+        {{ selectedInfo.desc }}
+      </div>
+      <div
+        class="d-inline-block"
+        [ngClass]="data.direction === 'ltr' ? 'float-right' : 'float-left'"
+      >
+        <span
+          class="d-flex acc-detail-status-pill"
+          style="height: 32px; margin-top: 8px"
+          [ngClass]="getStatusPillClass(selectedInfo._raw.Status)"
+        >
+          {{ selectedInfo.status }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12 p-0">
+      <div class="return-card return-card-inactive border acc-detail-card">
+        <div class="row" style="margin: 24px">
+          <div class="col-md-6 p-0">
+            <div class="caption acc-card-label">
+              {{ translation.sadadNumber }}
+            </div>
+            <div class="acc-card-value value fwb">
+              {{ selectedInfo.sadad_number }}
+            </div>
+          </div>
+          <div class="col-md-6 p-0">
+            <div class="caption acc-card-label">{{ translation.txnDate }}</div>
+            <div class="acc-card-value value fwb">
+              {{ getDateFormat(selectedInfo.txn_date) }}
+            </div>
+          </div>
+        </div>
+        <div class="divider"></div>
+
+        <div class="row" style="margin: 24px; margin-top: 16px">
+          <div class="col-md-6 p-0">
+            <div class="caption acc-card-label">
+              {{ translation.taxablePeriod }}
+            </div>
+            <div class="acc-card-value value fwb">
+              {{ selectedInfo.taxable_period }}
+            </div>
+          </div>
+
+          <div class="col-md-6 p-0">
+            <div class="caption acc-card-label">
+              {{ translation.duedt }}
+            </div>
+            <div class="acc-card-value value fwb">
+              {{ getDateFormat(selectedInfo.due_date) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4" style="height: 72px">
+    <div class="col-md-12 p-0">
+      <div
+        class="row acc-total-container"
+        [ngClass]="
+          selectedInfo.amount >= 0
+            ? 'acc-green-background'
+            : 'acc-red-background'
+        "
+      >
+        <div
+          class="col-md-6 p-0"
+          [ngClass]="data.direction === 'rtl' ? 'text-right' : ''"
+        >
+          <div
+            class="acc-total-label"
+            style="margin-left: 24px; margin-right: 24px"
+          >
+            {{ translation.filterStatementAmount }}
+          </div>
+        </div>
+        <div
+          class="col-md-6 p-0"
+          [ngClass]="data.direction === 'ltr' ? 'text-right' : ''"
+        >
+          <div
+            class="acc-total-amount"
+            style="margin-left: 24px; margin-right: 24px"
+          >
+            <span
+              [ngClass]="data.direction === 'rtl' ? 'acc-number-align' : ''"
+            >
+              {{ getAmountString(selectedInfo.amount) }}
+            </span>
+            {{ translation.sar }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

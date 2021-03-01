@@ -1,0 +1,30 @@
+.acc-detail-card {
+  height: max-content;
+}
+
+.acc-card-label {
+  object-fit: contain;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--gray);
+}
+
+.acc-card-value {
+  min-height: 24px;
+}
+
+/* Override */
+
+.return-card {
+  width: 100%;
+  max-width: 100%;
+  background-image: none;
+}
+
+.acc-detail-card .value {
+  margin-top: 5px;
+}

@@ -1,0 +1,215 @@
+.userDetailsCrumb1 {
+  color: #999999;
+  font-size: 16px;
+  padding-inline-end: 0.5rem;
+}
+
+.userDetailsLocation {
+  padding-top: 40px;
+}
+
+.userDetailsBack {
+  padding-top: 40px;
+  color: #006450;
+  font-weight: bold;
+  border: none;
+  width: fit-content;
+}
+
+.zs-btn-len {
+  width: 200px;
+}
+
+.userDetailsBack:hover {
+  cursor: pointer;
+}
+
+.userDetailsCrumb2 {
+  font-size: 16px;
+  padding-inline-end: 0.5rem;
+  color: #151515;
+}
+
+.userDetailRoot {
+  display: flex;
+  justify-content: center;
+}
+
+.taskAllocLocation {
+  padding-top: 40px;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.userDetailsH {
+  font-weight: bold;
+  font-size: 28px;
+  color: #232323;
+  padding-top: 32px;
+  font-family: "SSTARABIC-BOLD";
+}
+
+.zs-ud-ui {
+  padding-inline-start: 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  color: #232323;
+  font-family: "SSTARABIC-BOLD";
+}
+
+.userDetailsCard {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  border: solid 1px #ebebeb;
+  border-bottom: unset !important;
+}
+
+.zs-gtab {
+  width: 200px;
+  font-family: "SSTARABIC-BOLD";
+}
+
+.zs-gtab:hover {
+  cursor: pointer;
+}
+
+.userDetailsCardx {
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+  min-height: 80px;
+  padding-inline-start: 2rem;
+  padding-top: 1rem;
+  max-width: 420px;
+  font-size: 16px;
+}
+
+.zs-btns-sep {
+  margin-top: 68px;
+}
+
+.zs-modalCloser:hover {
+  cursor: pointer;
+}
+
+.zs-editColor {
+  color: #006450 !important;
+  font-size: 16px;
+  font-family: "SSTARABIC-BOLD";
+  font-weight: bold;
+}
+
+.zs-btnSecum3 {
+  border: none;
+  outline: none;
+  background-color: white;
+  font-weight: bold;
+  color: #aa0c19;
+  display: flex;
+  align-items: center;
+}
+
+.zs-decbtaligner2 {
+  display: flex;
+  align-items: center;
+}
+
+.zs-decbtaligner2 {
+  justify-content: flex-end;
+}
+
+.tabBord {
+  border-bottom-left-radius: 14px !important;
+  border-bottom-right-radius: 14px !important;
+}
+
+.zs-btnSecum2 {
+  border: none;
+  outline: none;
+  background-color: white;
+  font-weight: bold;
+  color: #aa0c19;
+  margin-inline-start: 1rem;
+  font-family: "SSTARABIC-BOLD";
+  font-size: 16px;
+}
+
+.udc-name {
+  font-family: "SSTARABIC-ROMAN";
+  color: #999999;
+  font-size: 16px;
+}
+
+.udc-name:hover {
+  cursor: pointer;
+}
+
+.udc-branch {
+  font-family: "SSTARABIC-MEDIUM";
+}
+
+.btnSecum {
+  font-weight: bold;
+  color: #aa0c19;
+  border: none;
+  outline: none;
+  background-color: white;
+  font-size: 16px;
+  font-family: "SSTARABIC-BOLD";
+}
+
+.userDetailsCard3 {
+  border: solid 1px#ebebeb;
+  border-bottom: unset !important;
+}
+
+.zs-ud-h {
+  margin: 1rem;
+  margin-inline-start: 1rem;
+}
+
+.zs-btn-modal-cancel {
+  width: 200px;
+  font-family: "SSTARABIC-BOLD";
+}
+
+.zs-serial {
+  font-size: 16px;
+  color: #999999;
+  font-family: "SSTARABIC-ROMAN";
+}
+
+.zs-ans {
+  font-size: 16px;
+  color: #232323;
+  font-family: "SSTARABIC-MEDIUM";
+}
+
+.pageTitle {
+  font-family: "SSTArabic-Bold";
+}
+
+.ws-tableSpacer {
+  padding: 1rem;
+}
+
+.zs-div {
+  margin-top: 1rem;
+}
+
+.zs-userInfoCard {
+  padding: 24px;
+}
+
+.Rectangle-12 {
+  margin: 0 -24px;
+}
+
+.zs-umMt {
+  margin-top: 1.5rem;
+  font-family: "SSTARABIC-ROMAN";
+}
+
+.zs-umMt2 {
+  font-family: "SSTARABIC-ROMAN";
+}

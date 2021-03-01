@@ -1,0 +1,149 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+.datepickerIcon1{
+    position: absolute;
+    right: 3%;
+    /* top: 38%; */
+}
+
+.error{
+  color:red;
+  /* font-size: 12px; */
+}
+
+/* Rajasekhar newly added css for aRABIC language translation starts */
+.lang-arabic {
+    text-align: right !important;
+  }
+  .lang-arabic .ml-15 {
+    margin-left: 0px !important;
+    margin-right: 15px !important;
+  }
+  .lang-arabic .ml-10 {
+    margin-left: 0px !important;
+    margin-right: 10px !important;
+  }
+  .lang-arabic .mr-15,
+  .lang-arabic .btn-link,
+  .lang-arabic .btn-link:hover,
+  .lang-arabic .btn-link:active,
+  .lang-arabic .btn-link:focus,
+  .lang-arabic .mr-3 {
+    margin-right: 0 !important;
+    margin-left: 15px !important;
+  }
+  .lang-arabic .mr-10 {
+    margin-right: 0;
+    margin-left: 15px;
+  }
+  /* .lang-arabic td.text-right {
+  text-align: left !important;
+  } */
+  .lang-arabic .bg-Watercourse-opa1 td.text-right {
+    text-align: left !important;
+  }
+  .lang-arabic .multi-collapse .bg-Watercourse-opa1 td.text-right {
+    text-align: right !important;
+  }
+  .lang-arabic .bg-Watercourse-opa1 .lang-arabic-text-right.text-right {
+    text-align: right !important;
+  }
+  .lang-arabic .multi-collapse .bg-Watercourse-opa1 .lang-arabic-text-left.text-right {
+    text-align: left !important;
+  }
+  .lang-arabic .bg-Watercourse-opa1 td.text-right .font-20.text-right {
+    text-align: left !important;
+  }
+  .lang-arabic .lang-arabic-text-left.text-right {
+    text-align: left !important;
+  }
+  .lang-arabic .lang-arabic-text-right.text-right {
+    text-align: right !important;
+  }
+  .lang-arabic .ar-text-right {
+    text-align: right !important;
+  }
+  .lang-arabic .ar-text-left,
+  .lang-arabic .ar-text-left.text-right {
+    text-align: left !important;
+  }
+  
+  .lang-arabic .ar-w-368 {
+    width: 368px;
+    text-align: right;
+  }
+  .lang-arabic .img-reverse.mr-10 {
+    position: relative;
+    top: 5px;
+  }
+  
+  .lang-arabic .btn.btn-primary {
+    margin-left: 20px;
+    margin-right: 0 !important;
+  }
+  .lang-arabic .ar-ml-0 {
+    margin-left: 0 !important;
+  }
+  .lang-arabic .ml-auto {
+    margin-right: auto!important;
+    margin-left: 0 !important;
+  }
+  .lang-arabic .custom-nav-tabs .nav-tabs {
+    border-bottom: none !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+  }
+  .lang-arabic .card-inner .dropdown.mini-dropdown .custom-right-align.dropdown-menu {
+    right: auto !important;
+    left: -3px !important;
+  }
+  .disabled {
+    pointer-events:none; 
+    opacity:0.6;        
+}
+  .lang-arabic .custom-checkBox .checkmark {
+    right: 0 !important;
+    left: auto !important;
+  }
+  .lang-arabic .custom-checkBox {
+    padding-right: 35px;
+    padding-left: 0 !important;
+  }
+  .lang-arabic th.font-16.text-Eerie-Black.font-weight-500.text-right>div {
+    flex-direction: row-reverse;
+  }
+  .lang-arabic th.font-16.text-Eerie-Black.font-weight-500.text-right>div a.mr-15 {
+    margin-right: 15px !important;
+  }
+  .lang-arabic .l-w-432 {
+    width: 415px !important;
+  }
+  .lang-arabic .l-w-240 {
+    width: 285px !important;
+  }
+  
+  .lang-arabic .arbtn-right{float:right}
+  .lang-arabic .arBtn-left{float: left;}
+  .lang-arabic .lable-switch > label::after {
+    right: 0 !important;}
+    .lang-arabic .custom-dropdown img {
+      right: 93% !important;
+  }
+  .lang-arabic .ar-ml-15{margin-left: 15px;}
+  .lang-arabic .datepickerIcon1,.lang-arabic .mat-datepicker-toggle {
+    right: 90% !important;
+  }
+  .lang-arabic .locationImg {
+    right: 90% !important;
+    top: 37% !important;
+  }
+  
+  .lang-arabic .countryCode{
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-right-radius: 14px !important;
+    border-top-right-radius: 14px !important;
+    
+  }
+  /* Rajasekhar newly added css for aRABIC language translation starts */

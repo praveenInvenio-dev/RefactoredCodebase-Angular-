@@ -1,0 +1,31 @@
+<router-outlet></router-outlet>
+<app-loader></app-loader>
+<div id="sessionExpiryModal" class="modal top-25" dir="{{ direction }}" data-keyboard="false"
+    data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title text-center text-white">{{langLables?.data?.title}}</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-4">
+                    <div class="col-12" [style.text-align]="direction == 'rtl' ? 'right' : 'left'">
+                        <div>{{langLables?.data?.message}} {{ timeLeft | minuteSeconds}}
+                            <span *ngIf="timeLeft<=60">{{langLables?.data?.timeLabelSeconds}}</span>
+                            <span *ngIf="timeLeft>60">{{langLables?.data?.timeLabelMinutes}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4 mb-4"
+                    [style.text-align]="direction == 'rtl' ? 'left' : 'right'">
+                        <!-- [ngClass]="direction === 'rtl' ? 'btnGArbCss' : 'btnGCss'" type="button"                             -->
+                        <button mat-button class="btnGCss" style="width: auto;"
+                            (click)="stayConnected()">{{langLables?.data?.stayConnected}}</button>
+                        &nbsp;&nbsp;
+                        <button mat-button class="btnGCss" style="width: auto;"
+                            (click)="disconnect()">{{langLables?.data?.disconnectBtn}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

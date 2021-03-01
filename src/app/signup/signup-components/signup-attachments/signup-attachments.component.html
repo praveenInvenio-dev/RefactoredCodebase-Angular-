@@ -1,0 +1,126 @@
+<div *ngIf="viewType=='inline'">
+    <ng-container *ngTemplateOutlet="attachmentsTemplate"></ng-container>
+</div>
+
+
+
+<div *ngIf="viewType=='modal'" class="modal" [attr.id]="modalId" data-keyboard="false" data-backdrop="static"
+    [dir]="direction">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <ng-container *ngTemplateOutlet="attachmentsTemplate"></ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #attachmentsTemplate>
+    <div class="row m-0">
+        <div class="col-12 p-0">
+            <div class="row m-0 pl-4 pr-4" *ngIf="!hideCloseButton">
+                <div class="col-12 position-relative text-right">
+                    <img class="position-absolute pointer-hand" (click)="hide('attachmentsModal');"
+                        src="assets/image/close.svg">
+                </div>
+            </div>
+            <div class="row mt-5 pl-2 pr-2">
+                <div class="col-12 text-left">
+                    <h3>{{lang?.attachments?.title}}</h3>
+                    <h6 class="small text-muted font-weight-normal mb-0">{{attachmentObj?.displayLabel}}
+                    </h6>
+                </div>
+                <div class="col-12">
+                    <hr />
+                </div>
+            </div>
+            <div class="row pl-2 pr-2">
+                <div class="col-12 text-left">
+                    <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt1}}</h6>
+                    <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt2}}</h6>
+                    <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt3}}</h6>
+                    <h6 class="small text-muted font-weight-normal mb-0 line-height-2">{{lang?.attachments?.txt4}}</h6>
+                    <h6 class="small text-muted font-weight-normal mb-0 line-height-2 ">{{lang?.attachments?.txt5}}</h6>
+                </div>
+                <div class="col-12">
+                    <hr />
+                </div>
+            </div>
+            <div class="row pl-4 pr-4">
+                <ng-container *ngFor="let file of attachmentsList.value">
+                    <ng-container *ngIf="file.uniqueDocTypeRef==attachmentObj.uniqueDocTypeRef">
+                        <div class="col-6 mb-4">
+                            <mat-card class="height-180 border">
+                                <mat-card-content class="h-100 position-relative">
+                                    <div class="position-absolute text-right w-100">
+                                        <img class="pointer-hand width-18" src="assets/image/delete.svg"
+                                            (click)="deleteAttachment(file.Dotyp,file.Doguid);">
+                                    </div>
+                                    <div class="d-flex h-100 flex-column justify-content-center align-items-center">
+                                        <div>
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='DOC'"
+                                                src="assets/images/icon-doc.svg" class="mb-10">
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='DOCX'"
+                                                src="assets/images/icon-doc.svg" class="mb-10">
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='XLS'"
+                                                src="assets/images/icon-excel.svg" class="mb-10">
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='XLSX'"
+                                                src="assets/images/icon-excel.svg" class="mb-10">
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='PDF'"
+                                                src="assets/images/icon-pdf.svg" class="mb-10">
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='JPG'"
+                                                src="assets/images/icon-jpg.svg" class="mb-10">
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='JPEG'"
+                                                src="assets/images/icon-jpg.svg" class="mb-10">
+                                            <img *ngIf="file.FileExtn.toUpperCase()=='PNG'"
+                                                src="assets/images/icon-png.svg" class="mb-10">
+                                        </div>
+                                        <div class="font-weight-bold text-center text-wrap text-overflow-wrap w-100">
+                                            {{file?.Filename || 'File Name'}}
+                                        </div>
+                                        <div class="text-muted small">
+                                            {{file?.ZfileSize || 'File Size'}} MB
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <div class="col-6 mb-4" *ngIf="attachmentObj.atttchedFilesCount<5">
+                    <mat-card class="height-180 pointer-hand border" appDragDrop
+                        (onFileDropped)="onFileDrop($event);attachFileControl.value='';"
+                        (click)="attachFileControl.click();">
+                        <mat-card-content class="h-100">
+                            <div class="h-100 d-flex flex-column text-center justify-content-center align-items-center">
+                                <div>
+                                    <span class="material-icons text-muted">
+                                        attach_file
+                                    </span>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="text-primary font-weight-bold text-wrap">
+                                    {{lang?.attachments?.label1}}
+                                </div>
+                                <div class="text-muted small">
+                                    {{lang?.attachments?.label2}}
+                                </div>
+                                <input type="file" #attachFileControl style="display: none;"
+                                    (change)="onFileSelect($event);attachFileControl.value='';" />
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="row m-0 mt-4 mb-4">
+                <div class="col-12 text-right">
+                    <button class="rounded btnCss rounded" style="min-width: 200px;" mat-button
+                        (click)="hide('attachmentsModal');"> {{lang?.attachments?.continue}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>

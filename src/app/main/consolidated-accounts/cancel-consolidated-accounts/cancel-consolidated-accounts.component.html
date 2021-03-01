@@ -1,0 +1,997 @@
+<!-- <p>cancel-consolidated-accounts works!</p> -->
+<div *ngIf="Step==1" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="container">
+            <div class="mb-40">
+                <a (click)="cancelConsolidateStep1()" class="text-Gray">{{lang.nav.t1}}  </a>
+                <a (click)="cancelConsolidateStep2()" class="text-Gray">{{lang.nav.t4}}  </a>
+                <a (click)="cancelConsolidateStep3();" class="text-Gray">{{lang.nav.t2}}  </a> 
+            </div>
+            <div class="mb-26 d-flex">
+                <a routerLink="/mains/tax" class="text-Watercourse font-weight-bold cursor-pointer">
+                    <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt="">{{lang.nav.t3}} 
+                </a>
+            </div>
+            
+            <div class="custom-nav-tabs d-flex justify-content-between align-items-center">
+                <h2>{{lang.step1.t1}}</h2>
+                <div class="d-flex icons-viewtype">
+                    <a href="#" onclick="return false" class="active">
+                        <img src="assets/images/icon-cards-active.svg" alt="">
+                    </a>
+                    <a href="#" onclick="return false">
+                        <img src="assets/images/icon-list.svg" alt="">
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Tab panes -->
+            <div class="tab-content custom-navtab-content">
+                <div class="tab-pane  active" id="AllReturns">
+                    <div class="d-flex align-items-center width100P mb-32">
+                        <div class="searchBox card position-relative">
+                            <img src="assets/images/icon-search.svg" alt="" class="position-absolute search-with-shadow pt-15 ar-ml-search">
+                            <input type="text" class="placeholder-text-gray pl-30">
+                        </div>
+                        <img class="ml-15" src="assets/images/icon-filter.svg" alt="">
+                    </div>
+    
+                    <div class="row custom-row d-flex">
+                        <div class="col-md-6 col-sm-6 d-flex">
+                            <div class="card  card-inner cursor-pointer height173 w-100 text-center justify-content-center mb-24" (click)="createRequest()">
+                                <img src="assets/images/icon-plus.svg" alt="" class="mb-10 height40">
+                                <span class="text-Watercourse font-weight-bold font-16">{{lang.step1.t2}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 " *ngIf="CCAListData?.length > 0">
+                            <div *ngFor="let item of CCAListData">
+                                <div class="card mb-24 w-100 height173" >
+                                    <div class="d-flex width100P align-items-center justify-content-between p-24">
+                                        <div>
+                                            <h3 class="mb-0">
+                                                {{item.FbtText}}
+                                            </h3>
+                                        </div>
+                                        <span class="status status-submitted custom white-space-nowrap">
+                                            {{item.StatText}}
+                                        </span>
+                                    </div>
+                                    <div class="border-bottom-whisper"></div>
+        
+                                    <div class="row p-24">
+                                        <div class="col-sm-6">
+                                            <p class="font-12 text-Gray  mb-0">{{lang.step1.t3}}</p>
+                                            <div class="text-Eerie-Black font-16 font-weight-500">
+                                                {{item.Fbnum}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <p class="font-12 text-Gray mb-0">{{lang.step1.t4}}</p>
+                                            <div class="text-Eerie-Black font-16 font-weight-500">
+                                                {{item.CrdtText | date}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==2" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="container">
+            <div class="mb-24">
+                <a routerLink="/mains/tax" class="text-Gray"> {{lang.nav.t1}} </a> 
+                <a (click)="Step=1" class="text-Gray"> {{lang.nav.t2}} </a>
+            </div>
+        
+            <div class="mb-32 d-flex justify-content-between align-items-center">
+                <a (click)="back1()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                    <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+                </a>
+        
+                <div class="bullet-nav d-flex align-items-center">
+                    <a href="#" onclick="return false;" class="active">
+                        <span></span>
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <span></span>
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <span></span>
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="mb-24">
+                <h2 class="mb-12">{{lang.step2.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step2.t2}}</div>
+            </div>
+            <div class="border-bottom-whisper mb-32"></div>
+        
+            <div class="card  card-shadow-none mb-56">
+                <div class="p-24">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span> {{lang.step2.t3}}
+                    </h3>
+                </div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step2.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{this.WholeData?.AHoldingCompany}}
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step2.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{this.WholeData?.ATaxpayerType}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step2.t6}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{this.WholeData?.ATaxpayer}}
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step2.t7}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{this.WholeData?.AAuthGroupsTexts}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step2.t8}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{this.WholeData?.AAddress}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step2.t9}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{this.WholeData?.AFinancialYear}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-24">
+                <button class="btn btn-primary mr-10" (click)="continueFirstScreen()">{{lang.nav.continue}}</button>
+                <!-- <button class="btn btn-primary" (click)="saveReleaseDetails()">{{lang.nav.savedrft}}</button> -->
+            </div>
+        </div>
+
+        <!-- INSTRUCTIONS MODAL STARTS -->
+        <button [hidden]="true" #instructions data-toggle="modal" data-target="#instructions" data-backdrop="static" data-keyboard="false"></button>
+        <div class="modal modal-filter fade" id="instructions" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="text-right modal-filter-head">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="back1()">
+                            <span class="material-icons font-28">
+                                clear
+                            </span>
+                        </button>
+                    </div>
+        
+                    <div class="modal-body px-60 pt-40" [formGroup]="InstructionFormGroup">
+                        <h2 class="mb-24">{{lang.step2.popup.t1}}</h2>
+                        <div class="card-inner mb-24">
+                            <div class="font-12 text-Gray mb-16">
+                                {{lang.step2.popup.h1}} <a href="https://www.gazt.gov.sa" target="_blank" class="text-link font-weight-500">{{lang.step2.popup.h2}}</a>
+                            </div>
+                            <ul class="mb-24 text-Gray font-12 list-style-none p-0 m-0">
+                                <li class="mb-16">1.{{lang.step2.popup.t2}}</li>
+                                <li class="mb-16">2. {{lang.step2.popup.t3}}</li>
+                                <li>3.{{lang.step2.popup.t4}}</li>
+                            </ul>
+                        </div>
+                            <div class="font-12 text-Gray">
+                                <label class="custom-checkBox d-flex align-items-center">
+                                    <span class="ml-10 font-12 font-weight-500"> {{lang.step2.popup.t5}}</span>
+                                    <input type="checkbox" formControlName="agree">
+                                    <span class="checkmark checkmark-24"></span>
+                                </label>
+                            </div>
+                        
+                        
+                        <div class="form-group text-right pt-32 ar-text-align-left">
+                            <button class="btn btn-primary popupbtn" [disabled]="!InstructionFormGroup.valid || InstructionFormGroup.value.agree == false" (click)="termsAndConditionsOfInstructionAcceptance()">{{lang.nav.confirm}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- INSTRUCTIONS MODAL ENDS -->
+    </div>
+</div>
+
+<div *ngIf="Step==3" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="container" [formGroup]="ParentHoldingCompanyFormGroup">
+            <div class="mb-24">
+                <a routerLink="/mains/tax" class="text-Gray"> {{lang.nav.t1}} </a> 
+                <a (click)="Step=1" class="text-Gray"> {{lang.nav.t2}} </a>
+            </div>
+        
+            <div class="mb-32 d-flex justify-content-between align-items-center">
+                <a (click)="back2()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                    <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}}
+                </a>
+        
+                <div class="bullet-nav d-flex align-items-center">
+                    <a href="#" onclick="return false;" class="active2">
+                        <span></span>
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <span></span>
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <span></span>
+                    </a>             
+                </div>
+            </div>
+        
+            <div class="mb-24">
+                <h2 class="mb-12">{{lang.step3.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step3.t2}}</div>
+            </div>
+            <div class="border-bottom-whisper mb-32"></div>
+        
+            <div class="row mb-32">
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.t21}} *</label>
+                        <input type="text" class="form-control card" formControlName="financialYear">
+                        <span *ngIf="ParentHoldingCompanyFormGroup.controls['financialYear'].errors?.pattern">
+                            {{lang.step3.t3}} 
+                            {{lang.step3.t4}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="inner">
+                <p class="mb-16 font-16">{{lang.step3.t5}} *</p>
+            </div>
+
+            <div class="row mb-32">
+                <div class="col-md-12">
+                    <div class="card p-24 card-shadow-none">
+                        <div class="row">
+                            <div class="d-flex col-md-10 col-sm-12 mb-24">
+                                <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                                <span class="font-12 text-Nero">
+                                    {{lang.step3.ins1}}
+                                </span>
+                            </div>
+                        </div>
+                        <ol class="font-12 text-Gray p-0 m-0 pl-12">
+                            <li class="mb-16">
+                                {{lang.step3.ins2}}
+                            </li>
+                            <li class="mb-16">
+                                {{lang.step3.ins3}}
+                            </li>
+                            <li class="mb-16">                                
+                                {{lang.step3.ins4}}
+                            </li>
+                            <li>
+                                {{lang.step3.ins5}}
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="inner mb-26">
+                <div class="row d-flex">
+                    <div class="col-md-6 mb-24">
+                        <div class="cardh216 card p-24 d-flex justify-content-center align-items-center" style="border: 1px dashed #bbbbbb;">
+                            <div class="m-0 font-weight-500 font-16 text-center">
+                                <div formArrayName="document">
+                                <div *ngFor="let attach of ParentHoldingCompanyFormGroup.get('document')['controls']; let j = index;">
+                                <div [formGroupName]="j">
+                                <div class="uploadfilecontainer" (click)="ParentFiles?.length < 5 && fileInput.click()" appDragDrop
+                                    (onFileDropped)="ParentFiles?.length < 5 && uploadFile($event, j, 'parent')">
+                                    <input hidden type="file" #fileInput
+                                        (change)="ParentFiles?.length < 5 && uploadFile($event.target.files, j, 'parent')">
+                                        <div class="row text-center  d-flex align-items-center">
+                                            <div class="col-md-12 bg-white">
+                                                <img src="assets/image/attach.svg" style="width: 24px;">
+                                                <div class="fileUploadTxt text-Watercourse font-weight-bold mx-5 plr-30 mb-2">{{lang.nav.dragdrop}}
+                                                </div>
+                                                <div class="fileUploadTxt1 font-12 font-weight-normal text-Gray">{{lang.nav.mbmax}}</div>
+                                            </div>
+                                        </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div> 
+                                <span *ngIf="ParentFilesizeError">{{lang.nav.filevalidationmsg}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-24" *ngFor="let file of ParentFiles; let i = index;">
+                        <div class="cardh216 card p-24" style="border:1px solid gray" *ngIf="ParentFiles.length>0">
+                            <div class="d-flex justify-content-end"><img src="assets/image/delete.svg" style="width: 24px;float: right;"
+                                (click)="deleteAttachment(i);"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <div class="row text-center ">
+                                    <div class="col-md-12">
+                                        <img src="assets/images/pdf.svg" class="mb-10" *ngIf="file.type == 'pdf'">
+                                        <img src="assets/images/icon-excel.svg" class="mb-10" *ngIf="file.type == 'xlsx'">
+                                        <img src="assets/images/icon-jpg.svg" class="mb-10" *ngIf="file.type == 'jpeg'">
+                                        <img src="assets/images/icon-jpg.svg" class="mb-10" *ngIf="file.type == 'jpg'">
+                                        <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'msword'"> 
+                                        <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'docx'"> 
+                                        <p class="FileName"> {{ file.name }}.{{ file.type }} </p>
+                                        <div class="FileSize">{{ file.size }} MB</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>  
+                </div>
+            </div>
+            
+            <div *ngIf="ChildCompanies.length > 0">
+                <div [formGroup]="ChildHoldingCompanyFormGroup">
+                    <div class="table mb-56 border-top-whisper card" *ngFor="let childItems of ChildHoldingCompanyFormGroup.get('childControls')['controls']; let k = index;">
+                        <div formArrayName="childControls">
+                            <div [formGroupName]="k">
+                                <div class="p-24 d-flex align-items-center justify-content-between">
+                                    <h3 class="d-flex align-items-center mb-0">
+                                        {{k+1}}. {{lang.step3.statement}}
+                                    </h3>
+                                    <div class="lable-switch position-absolute right120 cursor-pointer">
+                                        <input id="{{k}}" name="" type="checkbox" formControlName="ARowSelectTb" (change)="switchChange($event,k)"> 
+                                        <label for="{{k}}" class="label-primary"></label>
+                                    </div>
+
+                                    <a class="text-link cursor-pointer" data-toggle="collapse" [attr.data-target]="'#collapseExample' + k">
+                                        <img src="assets/images/icon-arrow-up.svg" alt="">
+                                    </a>
+                                </div>
+            
+                                <div class="collapse show multi-collapse" id="collapseExample{{k}}">
+                                    <table width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    {{lang.step3.t6}} 
+                                                </td>
+                        
+                                                <td class="w-25 text-right">
+                                                    {{ChildCompanies[k].ATaxpayerTb}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    {{lang.step3.t7}} 
+                                                </td>
+                        
+                                                <td class="w-25 text-right">
+                                                    {{ChildCompanies[k].AChildCompanyTb}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    {{lang.step3.t8}} 
+                                                </td>
+                        
+                                                <td class="w-25 text-right">
+                                                    {{ChildCompanies[k].ATpTypDesc}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    {{lang.step3.t9}} 
+                                                </td>
+                                                <td class="w-50 text-right">
+                                                    <div class="d-flex justify-content-end">
+                                                        <div class="d-flex custom date-control-group">
+                                                            <input type="text" [matDatepicker]="picker2" formControlName="date" class="input165 text-right font-weight-normal card">
+                                                            <mat-datepicker-toggle matSuffix [for]="picker2" class="date-picker-switch"></mat-datepicker-toggle>
+                                                            <mat-datepicker #picker2 [calendarHeaderComponent]="headerComponent"></mat-datepicker>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                        
+                                            <tr>
+                                                <td>
+                                                    {{lang.step3.t10}} 
+                                                </td>
+                                                <td class="w-25 text-right">
+                                                    {{ChildCompanies[k].APercentageTb}}%
+                                                </td>
+                                            </tr>                        
+                                            
+                                        </tbody>
+                                    </table>
+                                    <div class="border-bottom-whisper"> </div>
+                                    <div *ngFor="let company of ChildCompanies; let i = index;">
+                                        <div *ngIf="i == k"> 
+                                            <div class="mb-32">
+                                                <div class="col-sm-12">
+                                                    <div class="text-Gray font-16 mb-16">{{lang.step3.t11}}</div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="card p-24 card-shadow-none">
+                                                        <div class="row">
+                                                            <div class="d-flex col-md-10 col-sm-12 mb-24">
+                                                                <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                                                                <span class="font-12 text-Nero">
+                                                                    {{lang.step3.ins1}}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <ol class="font-12 text-Gray p-0 m-0 pl-12">
+                                                            <li class="mb-16">
+                                                                {{lang.step3.ins2}}
+                                                            </li>
+                                                            <li class="mb-16">
+                                                                {{lang.step3.ins3}}
+                                                            </li>
+                                                            <li class="mb-16">                                
+                                                                {{lang.step3.ins4}}
+                                                            </li>
+                                                            <li>
+                                                                {{lang.step3.ins5}}
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row  p-24"> 
+                                                <div class="col-sm-6 mb-24">
+                                                    <div class="cardh216 card p-24 d-flex justify-content-center align-items-center" [ngClass]="{'child-div2' : ChildFiles[i]?.length < 1}" style="border: 1px dashed #bbbbbb;">
+                                                        <div class="m-0 font-weight-500 font-16 text-center pl-5 pr-5">
+                                                            <div formArrayName="document">
+                                                            <div *ngFor="let attach of childAttachments(k).controls; let j = index;" class="mb-16">
+                                                            <div [formGroupName]="j">
+                                                            <div class="uploadfilecontainer" (click)="ChildFiles[i]?.length < 5 && fileInput1.click()" appDragDrop
+                                                                (onFileDropped)="ChildFiles[i]?.length < 5 && uploadFile($event, k, 'child')">
+                                                                <input hidden type="file" #fileInput1
+                                                                    (change)="ChildFiles[i]?.length < 5 && uploadFile($event.target.files, k, 'child')">
+                                                                <div class="row text-center d-flex align-items-center">
+                                                                    <div class="col-md-12 bg-white">
+                                                                        <img src="assets/image/attach.svg" style="width: 24px;">
+                                                                        <div class="fileUploadTxt text-Watercourse font-weight-bold mx-5 plr-30 mb-2">{{lang.nav.dragdrop}}
+                                                                        </div>
+                                                                        <div class="fileUploadTxt1 font-12 font-weight-normal text-Gray">{{lang.nav.mbmax}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            </div> 
+                                                            <span *ngIf="ChildFilesizeError">{{lang.nav.filevalidationmsg}}</span>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <span class="text-danger" *ngIf="childItems.get('ARowSelectTb').value && count>0">
+                                                        Attachment is required
+                                                     </span>   
+                                                </div>   
+                                                                              
+                                                <div class="col-sm-6 mb-24" *ngFor="let file of ChildFiles[i]; let g = index;">
+                                                    <div  class="ar-ml-30">
+                                                        <div class="cardh216 card p-24 w-50 mr-4" [ngClass]="ChildFiles[i]?.length < 1 ? '' : 'child-div1'" style=" border:1px solid gray" *ngIf="ChildFiles.length>0">
+                                                            <div class="d-flex justify-content-end"><img src="assets/image/delete.svg" style="width: 24px;float: right;"
+                                                                (click)="deleteChildAttachments(k, g);"></div>
+                                                            <div class="d-flex justify-content-center align-items-center h-100">
+                                                                <div class="row text-center">
+                                                                    <div class="col-md-12"> 
+                                                                        <img src="assets/images/pdf.svg" class="mb-10" *ngIf="file.type == 'pdf'">
+                                                                        <img src="assets/images/icon-excel.svg" class="mb-10" *ngIf="file.type == 'xlsx'">
+                                                                        <img src="assets/images/icon-jpg.svg" class="mb-10" *ngIf="file.type == 'jpeg'">
+                                                                        <img src="assets/images/icon-jpg.svg" class="mb-10" *ngIf="file.type == 'jpg'">
+                                                                        <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'msword'"> 
+                                                                        <img src="assets/images/icon-doc.svg" class="mb-10" *ngIf="file.type == 'docx'"> 
+                                                                        <p class="FileName"> {{ file.name }}.{{ file.type }} </p>
+                                                                        <div class="FileSize">{{ file.size }} MB</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="row mb-24">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary mr-10" [disabled]="!ParentHoldingCompanyFormGroup.valid || ParentFiles.length == 0" (click)="saveAttachmentDetails()">{{lang.nav.savedrft}}</button>
+                                        <button class="btn btn-primary" [disabled]="!ParentHoldingCompanyFormGroup.valid || ParentFiles.length == 0 " (click)="continueSecondScreen()">{{lang.nav.continue}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==4" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="container" [formGroup]="DeclarationFormGroup">
+            <div class="mb-24">
+                <a routerLink="/mains/tax" class="text-Gray"> {{lang.nav.t1}} </a> 
+                <a (click)="Step=1" class="text-Gray"> {{lang.nav.t2}} </a>
+            </div>
+        
+            <div class="mb-32 d-flex justify-content-between align-items-center pt-25p">
+                <a (click)="back3()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                    <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}} 
+                </a>
+        
+                <div class="bullet-nav d-flex align-items-center">
+                    <a href="#" onclick="return false;" class="active3">
+                        <span></span>
+                    </a>
+                    <a href="#" onclick="return false;">
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="mb-24">
+                <h2 class="mb-12">{{lang.step4.t1}}</h2>
+                <div class="row">
+                    <div class="col-md-9 col-sm-12">
+                        <div class="text-Gray font-16">{{lang.step4.t2}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper mb-32"></div>
+        
+            <div class="row mb-24">
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step4.t3}} *</label>
+                        <input type="text" class="form-control card" formControlName="name">
+                    </div>
+                    <span *ngIf="DeclarationFormGroup.controls['name'].errors?.pattern" class="invalid-feedback">
+                        {{lang.step4.t4}}
+                    </span>
+                </div>
+        
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step4.t5}} *</label>
+                        <input type="text" class="form-control card" formControlName="contactNumber" (keypress)="isNumberKey($event)" (input)="isNumberValid()" maxlength="9">
+                    </div>
+                    <span *ngIf="isValidNumber" class="invalid-feedback">
+                        {{lang.step4.t7}}
+                    </span>
+                    <span *ngIf="isStartFiveBellowNine" class="invalid-feedback">                       
+                        {{lang.step4.t8}}
+                    </span>
+                                        
+                </div>
+            </div>
+        
+            <div class="row mb-40">
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step4.t10}} *</label>
+                        <input type="text" class="form-control card" formControlName="designation">
+                    </div>
+                    <span *ngIf="DeclarationFormGroup.controls['designation'].errors?.pattern" class="invalid-feedback">
+                        {{lang.step4.t11}}
+                    </span>
+                </div>
+        
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step4.t12}}</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control card" [matDatepicker]="picker1" formControlName="date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker1" [disabled]="true"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-56">
+                <div class="col-md-9 col-sm-12">
+                    <div class="inner d-flex">
+                        <label class="custom-checkBox d-flex align-items-center">
+                            <span class="ml-10 font-12 font-weight-500">* {{lang.step4.t13}}</span>
+                            <input type="checkbox" formControlName="agree">
+                            <span class="checkmark checkmark-24"></span>
+                         </label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="mb-24 pt-64p">
+                <button class="btn btn-primary  mr-10" [disabled]="!DeclarationFormGroup.valid || DeclarationFormGroup.value.agree == false" (click)="continueThirdScreen()">{{lang.nav.continue}}</button>
+                <button class="btn btn-primary" [disabled]="!DeclarationFormGroup.valid || DeclarationFormGroup.value.agree == false" (click)="saveDeclarationDetails()">{{lang.nav.savedrft}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==5" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <div class="container">
+            <div class="mb-24">
+                <a routerLink="/mains/tax" class="text-Gray"> {{lang.nav.t1}} </a> 
+                <a (click)="Step=1" class="text-Gray"> {{lang.nav.t2}} </a>
+            </div>
+        
+            <div class="mb-32 d-flex justify-content-between align-items-center">
+                <a (click)="back4()" class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                    <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav.t3}} 
+                </a>
+        
+                <div class="bullet-nav d-flex align-items-center">
+                    <a href="#" onclick="return false;" class="active5 mr-7p">
+                        <span></span>
+                    </a>
+                    <a href="#" onclick="return false;" class="ml-10">
+                        <img src="assets/images/icon-gcheck.svg" alt="">
+                    </a>
+                </div>
+            </div>
+        
+            <div class="mb-24">
+                <h2 class="mb-12">{{lang.step5.t1}}</h2>
+                <div class="text-Gray font-16">{{lang.step5.t2}}</div>
+            </div>
+            <div class="border-bottom-whisper mb-32"></div>
+        
+            <div class="card mb-24">
+                <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class="" alt=""></span>{{lang.step5.t3}}
+                    </h3>
+                </div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray  mb-0">{{lang.step5.t4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ReleaseData.AHoldingCompany}}
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ReleaseData.ATaxpayerType}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t6}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ReleaseData.ATaxpayer}}
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t7}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ReleaseData.AAuthGroupsTexts}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t8}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ReleaseData.AAddress}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t24}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{ReleaseData.AAFinancialYear}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card mb-24">
+                <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-attachment-2.svg" class="" alt=""></span> {{lang.step5.t9}}
+                    </h3>
+        
+                    <a (click)="setAttachmentControls()" class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.nav.edit}}</a>
+                </div>
+                <div class="border-bottom-whisper"></div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t10}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{AttachmentData.AFinancialYear}}
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t11}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center" *ngFor="let parentAttch of ParentFiles;">
+                            {{parentAttch.name}}.{{parentAttch.type}} 
+                            <img src="assets/images/pdf.svg" class="ml-15" *ngIf="parentAttch.type == 'pdf'">
+                            <img src="assets/images/icon-excel.svg" class="ml-15" *ngIf="parentAttch.type == 'xlsx'">
+                            <img src="assets/images/icon-jpg.svg" class="ml-15" *ngIf="parentAttch.type == 'jpeg'">
+                            <img src="assets/images/icon-png.svg" class="ml-15" *ngIf="parentAttch.type == 'png'">
+                            <img src="assets/images/icon-doc.svg" class="ml-15" *ngIf="parentAttch.type == 'msword'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table mb-24 border-top-whisper card" *ngFor="let child of AttachmentData.zhcd_childSet; let i = index;">
+                <div class="p-24 d-flex align-items-center justify-content-between">
+                    <h3 class="d-flex align-items-center mb-0">
+                        {{i+1}}. {{lang.step3.statement}}
+                    </h3>
+        
+                    <a class="text-link cursor-pointer" data-toggle="collapse" [attr.data-target]="'#collapseExample' + i" >
+                        <img src="assets/images/icon-arrow-up.svg" alt="">
+                    </a>
+                </div>
+        
+                <div class="collapse show multi-collapse" id="collapseExample{{i}}">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{lang.step5.t12}}
+                                </td>
+        
+                                <td class="w-25 text-right">
+                                    {{child.ATaxpayerTb}}
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <td>
+                                    {{lang.step5.t13}} 
+                                </td>
+        
+                                <td class="w-25 text-right">
+                                    {{child.AChildCompanyTb}}
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <td>
+                                    {{lang.step5.t14}}
+                                </td>
+        
+                                <td class="w-25 text-right">
+                                    {{child.ATpTypDesc}}
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <td>
+                                    {{lang.step5.t15}} 
+                                </td>
+        
+                                <td class="w-25 text-right">
+                                    {{child.ARatificationDateHTb}}
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <td>
+                                    {{lang.step5.t16}} 
+                                </td>
+        
+                                <td class="w-25 text-right">
+                                    {{child.APercentageTb}}%
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <td colspan="2">
+                                    <p class="font-16 text-Gray mb-0">{{lang.step5.t17}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500 d-flex align-items-center pt-4p" *ngFor="let childAttch of ChildFiles[i]">
+                                        {{childAttch.name}}.{{childAttch.type}} 
+                                        <img src="assets/images/pdf.svg" class="ml-15" *ngIf="childAttch.type == 'pdf'">
+                                        <img src="assets/images/icon-excel.svg" class="ml-15" *ngIf="childAttch.type == 'xlsx'">
+                                        <img src="assets/images/icon-jpg.svg" class="ml-15" *ngIf="childAttch.type == 'jpeg'">
+                                        <img src="assets/images/icon-png.svg" class="ml-15" *ngIf="childAttch.type == 'png'">
+                                        <img src="assets/images/icon-doc.svg" class="ml-15" *ngIf="childAttch.type == 'msword'">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="card mb-32">
+                <div class="pxy-2412 d-flex justify-content-between align-items-center">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-declaration.svg" class="" alt=""></span> {{lang.step5.t18}}
+                    </h3>
+        
+                    <a (click)="setDeclarationControls()" class="text-Watercourse font-weight-bold font-16 cursor-pointer">{{lang.nav.edit}}</a>
+                </div>
+                <div class="border-bottom-whisper"></div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t19}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeclarationData.ADecName}}
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t20}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeclarationData.ADecContact}}
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom-whisper"></div>
+        
+                <div class="row p-24">
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t21}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeclarationData.ADecJobTitle}}
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-6">
+                        <p class="font-16 text-Gray mb-0">{{lang.step5.t22}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">
+                            {{DeclarationData.Date | date}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-56">
+                <div class="col-lg-12 col-md-11 col-sm-12">
+                    <label class="custom-checkBox d-flex align-items-center">
+                        <span class="ml-10 font-16"> {{lang.step5.t23}} 
+                        </span>
+                        <input type="checkbox" [(ngModel)]="agree">
+                        <span class="checkmark checkmark-24"></span>
+                    </label>
+                </div>
+            </div> 
+            <div class="row mb-24">
+                <div class="col-md-12">
+                    <button class="btn btn-primary mr-10"  (click)="continueFourthScreen()" [disabled]="agree == false">{{lang.nav.confirm}}</button>
+                    <button class="btn btn-primary" (click)="saveSummaryDetails()" [disabled]="agree == false">{{lang.nav.savedrft}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==6" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" id="htmlData" #htmlData>
+        <div class="container d-flex align-items-center justify-content-center">
+            <div class="inner">
+                <div class="text-center mb-56">
+                    <div class="text-center mb-40">
+                        <img src="assets/images/icon-success.svg" alt="">
+                    </div>
+        
+                    <h2 class="mb-12">{{lang.step6.t1}}</h2>
+                    <div class="text-Gray font-16 mb-56">{{lang.step6.t2}}</div>
+        
+                    <div class="inner">
+                        <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails card-shadow-none">
+                            <span class="font-16 text-Gray mb-0">
+                                {{lang.step6.t3}}
+                            </span>
+                            <span class="text-Eerie-Black font-16 font-weight-500">
+                                {{AcknowledgementData.Name}}  
+                            </span>
+                        </div>
+        
+                        <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails card-shadow-none">
+                            <span class="font-16 text-Gray mb-0">
+                                {{lang.step6.t4}}
+                            </span>
+                            <span class="text-Eerie-Black font-16 font-weight-500">
+                                {{AcknowledgementData.ReferenceNumber}}
+                            </span>
+                        </div>
+        
+                        <div class="d-flex align-items-center justify-content-between item-cardetails card-shadow-none">
+                            <span class="font-16 text-Gray mb-0">
+                                {{lang.step6.t5}} 
+                            </span>
+                            <span class="text-Eerie-Black font-16 font-weight-500">
+                                {{AcknowledgementData.Date | date}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- <div class="mb-24 text-center d-flex flex-column justify-content-center align-items-center">
+                    <button class="btn btn-primary d-inline-block mb-40" (click)="downloadDoc()">{{lang.step6.btn1}}</button>
+                    <button class="btn btn-link d-inline-block"> {{lang.step6.btn2}} </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<notifier-container></notifier-container>
+
+
+<!-- Error modal  starts-->
+<div class="modal modal-filter fade" id="ErrorModal" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="back1()">
+                    <span class="material-icons font-28">
+                        clear
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body px-60 pt-40" [formGroup]="InstructionFormGroup">
+                <div class="card-inner mb-24">
+                    <div class="font-12 text-Gray mb-16">
+                        {{errMSg}}
+                    </div>
+                    
+                </div>
+                    
+                
+                
+                <div class="form-group text-right pt-32 ar-text-align-left">
+                    <button class="btn btn-primary popupbtn" data-dismiss="modal">{{lang.nav.ok}}</button>
+                </div>
+            </div>
+            
+               
+        </div>
+    </div>
+</div>
+<!-- Error modal  ends-->

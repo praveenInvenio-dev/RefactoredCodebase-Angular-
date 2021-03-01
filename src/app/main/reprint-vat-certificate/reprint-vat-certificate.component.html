@@ -1,0 +1,137 @@
+<div *ngIf="isDataAvailable">
+    <div class="container" [dir]="dir">
+        <!-- bread crumb menu -->
+        <div class="row">
+            <div class="col-md-12">
+                <span class="menu-title" [style.float]="dir === 'rtl' ? 'right' : 'left'" style="cursor: pointer" (click)="backTo('')">{{ labels.breadcrumb.TaxManagement }} >&nbsp;</span
+        >
+        <span
+          class="menu-title"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          style="cursor: pointer" (click)="backTo('001')" >{{ labels.breadcrumb.VATServices }} >&nbsp;</span
+        >
+        <span
+          class="menu-title"
+          style="color: #151515"
+          [style.float]="dir === 'rtl' ? 'right' : 'left'"
+          [style.padding-right]="dir === 'rtl' ? '4px' : ''"
+        >
+          {{ labels.breadcrumb.VATCertificate }}
+        </span>
+            </div>
+        </div>
+        <div class="row back-margin-top" style="width: 100%">
+            <div class="col-md-12">
+                <div class="menu-back">
+                    <span style="cursor: pointer" (click)="backTo('001')">
+            <img
+              [src]="
+                dir === 'ltr'
+                  ? 'assets/image/arrow-left-green.svg'
+                  : 'assets/image/arrow-right-green.svg'
+              "
+              style="width: 24px"
+            />{{ labels.breadcrumb.Back }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <!-- title and sub title -->
+    <div class="row title-margin-top" style="text-align: start">
+      <div class="col-md-12">
+        <div class="title">
+          {{ labels.breadcrumb.VATCertificate }}
+        </div>
+      </div>
+    </div>
+    <!-- divider -->
+    <div class="Rectangle-12New mt-3"></div>
+    <div class="row title-margin-top" style="text-align: start">
+      <div class="col-md-12">
+        <div class="info-box">
+          <div class="info-text">
+            <img
+              src="assets/image/combined-shape.svg"
+              style="width: 24px; margin: auto 5px"
+            />
+            {{ labels.declaration }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row title-margin-top">
+      <div class="col-md-12">
+        <div class="card custom-card">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="custom-card-title">
+                <span class="icon-background">
+                  <img src="assets/image/user.svg" alt="User" />
+                </span>
+                    <span style="margin: auto 16px">{{
+                  labels.taxPayerDetails.taxPayerDetails
+                }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="Rectangle-12 mt-0"></div>
+        <div class="card-body">
+            <div class="row" style="text-align: start">
+                <div class="col-md-6 col-12">
+                    <p class="refund-label mb-0">
+                        {{ labels.taxPayerDetails.Name }}
+                    </p>
+                    <p class="refund-value mb-0">{{ taxpayerName }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <p class="refund-label mb-0">
+                        {{ labels.taxPayerDetails.TIN }}
+                    </p>
+                    <p class="refund-value mb-0">{{ tin }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="Rectangle-12 mt-0"></div>
+        <div class="card-body">
+            <div class="row" style="text-align: start">
+                <div class="col-md-6 col-12">
+                    <p class="refund-label mb-0">
+                        {{ labels.taxPayerDetails.VATAC }}
+                    </p>
+                    <p class="refund-value mb-0">{{ vatAccount }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <p class="refund-label mb-0">
+                        {{ labels.taxPayerDetails.ReferenceNumber }}
+                    </p>
+                    <p class="refund-value mb-0">{{ refNumber }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<form [formGroup]="rePrintVATForm" (ngSubmit)="downloadCertificate()">
+    <!-- Certificate Type -->
+    <div class="row title-margin-top">
+        <div class="col-12" style="text-align: start">
+            <div class="matLabel labelMarginBottom">
+                {{ labels.CertificateType }}
+            </div>
+            <mat-select class="commonMatSelect" formControlName="certificate_type" (ngModelChange)="onCertTypeChange($event)" [(ngModel)]="selectedCertType">
+                <mat-option *ngFor="let certificateType of certificateTypes" value="{{ certificateType.Cokey }}">{{ certificateType.Cotxt }}</mat-option>
+            </mat-select>
+        </div>
+    </div>
+    <!-- Download Button -->
+    <div class="row button-margin-top" style="text-align: start">
+        <div class="col-12">
+            <button mat-button type="submit" class="btnCss">
+            {{ labels.DownloadCertificate }}
+          </button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+<notifier-container></notifier-container>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>0AB63684-B5A1-487A-94AC-738B5262BBCD</title>
+    <defs>
+        <path d="M14,0 L18.9321142,0 C20.4398515,0 21.8,1.35076812 21.8,2.8481073 L21.8,7.7462069 L14,0 Z" id="path-1"></path>
+        <filter x="-25.6%" y="-38.7%" width="151.3%" height="151.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="-1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0909637238 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Returns" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Zakat-&amp;-CIT-Return-Form-11---2.3" transform="translate(-477.000000, -593.000000)">
+            <g id="Group-Copy" transform="translate(270.000000, 529.000000)">
+                <g id="Icons-/-24px-/-Main-/-Excel" transform="translate(207.000000, 64.000000)">
+                    <path d="M14,0 L22,8 L22,21.2 C22,22.7463973 20.7463973,24 19.2,24 L4.8,24 C3.2536027,24 2,22.7463973 2,21.2 L2,2.8 C2,1.2536027 3.2536027,0 4.8,0 L14,0 Z" id="PDF" fill="#006450" fill-rule="nonzero"></path>
+                    <path d="M8,17 L10.5888,12.9888 L8.2176,9 L10.1256,9 L11.42,11.5496 C11.5389333,11.7912 11.6208,11.9714667 11.6656,12.0904 L11.6824,12.0904 C11.7677333,11.8973333 11.8570667,11.7096 11.9504,11.5272 L13.3336,9 L15.0848,9 L12.6528,12.9664 L15.1464,17 L13.2824,17 L11.7872,14.2 C11.7167581,14.0807321 11.6570565,13.9554391 11.6088,13.8256 L11.5864,13.8256 C11.5427667,13.9525773 11.484792,14.0741632 11.4136,14.188 L9.8752,17 L8,17 Z" id="Path" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    <g id="Path" transform="translate(17.900000, 3.873103) scale(-1, -1) translate(-17.900000, -3.873103) ">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill-opacity="0.4" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

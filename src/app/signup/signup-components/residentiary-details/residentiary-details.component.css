@@ -1,0 +1,66 @@
+.checkCircleENG {
+    float: right;
+    width: 26.2px;
+    height: 26.2px;
+    color: #00e695;
+  }
+  
+  .checkCircleARB {
+    float: left;
+    width: 26.2px;
+    height: 26.2px;
+    color: #00e695;
+  }
+
+  .mat-radio-label-content {
+    font-size: 14px !important;
+    font-family: SSTArabic-Medium !important;
+    position: relative;
+    top: -1px;
+  }
+  
+  .mat-radio-label :focus  {
+    border: 1px solid #d2a02a !important;
+  }
+
+
+  .side-label {
+    width: 259px;
+    height: 33px;
+    margin: 0 0 18px 0;
+    font-family: SSTArabic;
+    font-size: 17px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.94;
+    letter-spacing: normal;
+    text-align: start;
+    color: #000000;
+  }
+
+  
+.custom-mat-error {
+  font-size: 75%;
+  letter-spacing: normal;
+  line-height: 1.125;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  padding: 0.5rem 1rem, 0, 1rem;
+  text-align: start;
+}
+
+.default-selected-label{
+    width: 69px;
+    height: 28px;
+    margin: 0 0 16px 1px;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #6f6f6e;
+    font-family: SSTArabic-Medium !important;
+}

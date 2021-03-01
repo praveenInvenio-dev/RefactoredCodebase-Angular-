@@ -1,0 +1,8 @@
+.modal-filter .modal-body.px-60{
+    padding-left:60px !important;
+    padding-right:60px !important;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}

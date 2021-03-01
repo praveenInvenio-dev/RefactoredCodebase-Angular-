@@ -1,0 +1,1059 @@
+ 
+<div *ngIf="Step==1" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container">
+        <!-- <div class="mb-24">
+            <a onclick="return false" class="text-Gray">{{lang.nav.t1}} </a> {{lang.nav.t2}}
+        </div> -->
+
+        
+         
+        <h2 class="mb-24">{{lang.step1.h1}}</h2> 
+       
+        <!-- Nav tabs -->
+        <div class="custom-nav-tabs d-flex justify-content-between align-items-center mb-32">
+            <ul class="nav nav-tabs cursor-pointer">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" (click)="usersList('All')">{{lang.step1.t1}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" (click)="usersList('Active')">{{lang.step1.t2}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" (click)="usersList('Inactive')">{{lang.step1.t3}}</a>
+                </li>
+            </ul>
+
+            <div class="d-flex icons-viewtype cursor-pointer">
+                <a (click)="changeView('grid')" [ngClass]="{'active': isGridView}">
+                    <img src="assets/images/icon-cards-active.svg" alt="">
+                </a>
+                <a (click)="changeView('list')" [ngClass]="{'active': isListView}">
+                    <img src="assets/images/icon-list.svg" alt="">
+                </a>
+            </div>
+            
+        </div>
+        <div class="d-flex align-items-center width100P mb-32">
+            <div class="searchBox card position-relative">
+                <input type="text" placeholder="{{lang.nav.search}}"  name="searchTerm"
+                    class="placeholder-text-gray" (input)="homeSearch()" [(ngModel)]="searchTerm" autocomplete="off"> 
+                <button>
+                    <img src="assets/images/icon-search.svg" alt=""
+                        class="position-absolute search-with-shadow ar-search-with-shadow">
+                </button>
+            </div> 
+        </div>
+        <div *ngIf="employeeList?.length == 0 && searchTerm !== undefined">
+            <h4 style="text-align: center;">{{lang.nav.norecords}}</h4>
+        </div>
+        
+        <!-- Tab panes -->
+        <div class="tab-content custom-navtab-content pt-0" *ngIf="isAll">
+            <div class="tab-pane active">
+                <div class="row custom-row " *ngIf="isGridView">
+                    <div class="col-md-6 col-sm-12 d-flex cursor-pointer" *ngIf="searchTerm == '' || searchTerm == undefined">
+                        <div class="card card-inner w-100 text-center justify-content-center mb-24"
+                            (click)="userType('Add','','')">
+                            <img src="assets/images/icon-plus.svg" alt="" class="mb-10 height40">
+                            <span class="text-Watercourse font-weight-bold font-16">{{lang.step1.t4}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6" *ngFor="let item of employeeList;let i = index">
+                        <div class="card mb-24 p-15 px-24">
+                            <div class="text-right mb-16 pt-10" *ngIf="item.Delete !== 'X'">
+                                <a onclick="return false" class="text-link ar-text-align-left" data-toggle="collapse"
+                                    [attr.data-target]="'#collapseExample' + i">
+                                    <span class="material-icons cursor-pointer">
+                                        more_horiz
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="text-right mb-16 pt-10" *ngIf="item.Delete == 'X'">
+                                <a onclick="return false" class="text-link ar-text-align-left" data-toggle="collapse"
+                                    [attr.data-target]="'#inActiveEmpExample' + i">
+                                    <span class="material-icons cursor-pointer">
+                                        more_horiz
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="collapse card card-popup position-absolute pop-up-right popIndex"
+                                id="collapseExample{{i}}" *ngIf="item.Delete !== 'X'">
+                                <div class="item p-16 font-weight-500 cursor-pointer ar-text-left" (click)="userType('Task',item,'')">
+                                    {{lang.nav1.t7}}
+                                </div>
+                                <div class="border-bottom-whisper"></div>
+                                <div class="item p-16 font-weight-500 cursor-pointer ar-text-left" (click)="userType('Update',item,'')">
+                                    {{lang.step1.upmember}}
+                                </div>
+                                <div class="border-bottom-whisper"></div>
+
+                                <div class="item p-16 text-Shiraz font-weight-bold mb-1 cursor-pointer ar-text-left"
+                                    (click)="userType('Delete',item,'')">
+                                    {{lang.step1.deactivemember}}
+                                </div>
+                            </div>
+                            <div class="collapse card card-popup position-absolute pop-up-right"
+                                id="inActiveEmpExample{{i}}" style="top: 36%;" *ngIf="item.Delete == 'X'">
+                                <div class="border-bottom-whisper"></div>
+                                <div class="item p-16 font-weight-500 text-Shiraz cursor-pointer ar-text-left"
+                                    (click)="userType('reActive',item,'')">
+                                    {{lang.step1.reactivatemember}}
+                                </div>
+                            </div>
+                            <div (click)="userType('Update',item,'cardClick')" class="cursor-pointer">
+                                <div class="d-flex width100P align-items-center justify-content-between mb-16">
+                                    <div>
+                                        <h3 class="mb-0">
+                                            {{item.Name}}
+                                        </h3>
+                                    </div>
+
+                                    <span class="status status-error custom" *ngIf="item.Delete == 'X'">
+                                        {{lang.step1.isInActive.t6}}
+                                    </span>
+
+                                    <span class="status status-submitted custom" *ngIf="item.Delete !== 'X'">
+                                        {{lang.step1.isActive.t6}}
+                                    </span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6 mb-16">
+                                        <p class="font-12 text-Gray  mb-0">{{lang.step1.t6}}</p>
+                                        <div class="text-Eerie-Black font-16 font-weight-500">
+                                            {{item.Branch}}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 mb-16">
+                                        <p class="font-12 text-Gray mb-0">{{lang.step1.t7}}</p>
+                                        <div class="text-Eerie-Black font-16 font-weight-500">
+                                            {{item.UserNo}}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 mb-16">
+                                        <p class="font-12 text-Gray  mb-0">{{lang.step1.t8}}</p>
+                                        <div class="text-Eerie-Black font-16 font-weight-500">
+                                            {{item.Mobileno}}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 mb-16">
+                                        <p class="font-12 text-Gray mb-0">{{lang.step1.t9}}</p>
+                                        <div class="text-Eerie-Black font-16 font-weight-500">
+                                            {{item.Emailid}}
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-row listView" *ngIf="isListView">
+                    <div>
+                        <div class="d-flex mb-24 addCard01"div (click)="userType('Add','','')" >
+                            <img src="assets/images/icon-plus.svg" alt="" class="mb-10" style="height: 30px">
+                            <span class="text-Watercourse font-weight-bold font-16 ml-10">{{lang.step1.t4}}</span>
+                        </div>
+                    </div>                    
+                    <div class="table mb-32 border-top-whisper card" *ngIf="employeeList?.length > 0">
+                        
+                        <table width="100%" class="table-bordered table-bordered-less">
+                            <thead>
+                                <tr>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t10}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t6}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t7}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t8}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t9}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t11}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="cursor-pointer">
+                                <tr *ngFor="let item of employeeList;let i = index" (click)="userType('Update',item,'cardClick')">
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.Name}}
+                                    </td>
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.Branch}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.UserNo}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.Mobileno}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.Emailid}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        <span class="status status-error custom" *ngIf="item.Delete == 'X'">
+                                            {{lang.step1.isInActive.t6}}
+                                        </span>
+                                        <span class="status status-submitted custom" *ngIf="item.Delete !== 'X'">
+                                            {{lang.step1.isActive.t6}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div class="tab-content custom-navtab-content pt-0" *ngIf="isActive">
+            <div class="tab-pane active">
+                <div class="row custom-row" *ngIf="isGridView">
+                    <div class="col-sm-6" *ngFor="let item of employeeList;let i = index">
+                        <div class="card mb-24 p-15 px-24">
+                            <div class="text-right mb-16 pt-10">
+                                <a onclick="return false" class="text-link ar-text-align-left" data-toggle="collapse"
+                                    [attr.data-target]="'#collapseExample' + i">
+                                    <span class="material-icons cursor-pointer">
+                                        more_horiz
+                                    </span>
+                                </a>
+                            </div>
+                            <div (click)="userType('Update',item,'cardClick')">
+                            <div class="d-flex width100P align-items-center justify-content-between mb-16">
+                                <div>
+                                    <h3 class="mb-0">
+                                        {{item.Name}}
+                                    </h3>
+                                </div> 
+                                <span class="status status-submitted custom">
+                                    {{lang.step1.isActive.t6}}
+                                </span> 
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray  mb-0">{{lang.step1.isActive.t2}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.Branch}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray mb-0">{{lang.step1.isActive.t3}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.UserNo}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray  mb-0">{{lang.step1.isActive.t4}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.Mobileno}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray mb-0">{{lang.step1.isActive.t5}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.Emailid}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="collapse card card-popup position-absolute pop-up-right popIndex" 
+                                id="collapseExample{{i}}">
+                                <div class="item p-16 font-weight-500 cursor-pointer ar-text-left" (click)="userType('Task',item,'')">
+                                    {{lang.nav1.t7}}
+                                </div>
+                                <div class="border-bottom-whisper"></div>
+                                <div class="item p-16 font-weight-500 cursor-pointer ar-text-left" (click)="userType('Update',item,'')">
+                                    {{lang.step1.upmember}}
+                                </div>
+                                <div class="border-bottom-whisper"></div>
+
+                                <div class="item p-16 text-Shiraz font-weight-bold mb-1 cursor-pointer ar-text-left"
+                                    (click)="userType('Delete',item,'')">
+                                    {{lang.step1.deactivemember}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-row listView" *ngIf="isListView">
+                    <div class="table mb-32 border-top-whisper card" *ngIf="employeeList?.length > 0">
+                        <table width="100%" class="table-bordered table-bordered-less">
+                            <thead>
+                                <tr>
+                                    <th class="font-16 text-Eerie-Black font-weight-500" >
+                                        {{lang.step1.t10}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t6}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t7}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t8}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t9}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t11}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="cursor-pointer"> 
+                                <tr *ngFor="let item of employeeList;let i = index" (click)="userType('Update',item,'cardClick')">
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.Name}}
+                                    </td>
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.Branch}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.UserNo}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.Mobileno}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.Emailid}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        <span class="status status-submitted custom" *ngIf="item.Delete !== 'X'">
+                                            {{lang.step1.isActive.t6}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div class="tab-content custom-navtab-content pt-0" *ngIf="isInActive">
+            <div class="tab-pane active">
+                <div class="row custom-row" *ngIf="isGridView">
+                    <div class="col-sm-6" *ngFor="let item of employeeList;let i = index">
+                        <div class="card mb-24 p-15 px-24">
+                            <div class="text-right mb-16 pt-10">
+                                <a onclick="return false" class="text-link ar-text-align-left" data-toggle="collapse"
+                                    [attr.data-target]="'#inActiveEmpExample' + i">
+                                    <span class="material-icons cursor-pointer">
+                                        more_horiz
+                                    </span>
+                                </a>
+                            </div>
+                            <div (click)="userType('reActive',item,'reActiveFromDet')">
+                                <div class="d-flex width100P align-items-center justify-content-between mb-16">
+                                    <div>
+                                        <h3 class="mb-0">
+                                            {{item.Name}}
+                                        </h3>
+                                    </div>
+
+                                    <span class="status status-error custom">
+                                        {{lang.step1.isInActive.t6}}
+                                    </span>
+                                </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray  mb-0">{{lang.step1.isInActive.t2}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.Branch}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray mb-0">{{lang.step1.isInActive.t3}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.UserNo}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray  mb-0">{{lang.step1.isInActive.t4}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.Mobileno}}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-16">
+                                    <p class="font-12 text-Gray mb-0">{{lang.step1.isInActive.t5}}</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        {{item.Emailid}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="collapse card card-popup position-absolute pop-up-right"
+                                id="inActiveEmpExample{{i}}" style="top: 36%;">
+                                <div class="border-bottom-whisper"></div>
+                                <div class="item p-16 font-weight-500 text-Shiraz cursor-pointer ar-text-left"
+                                    (click)="userType('reActive',item,'')">
+                                    {{lang.step1.reactivatemember}}
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-row listView" *ngIf="isListView">
+                    <div class="table mb-32 border-top-whisper card" *ngIf="employeeList?.length > 0">
+                        <table width="100%" class="table-bordered table-bordered-less">
+                            <thead>
+                                <tr>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t10}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t6}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t7}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t8}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t9}}
+                                    </th>
+                                    <th class="font-16 text-Eerie-Black font-weight-500">
+                                        {{lang.step1.t11}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="cursor-pointer">
+                                <tr *ngFor="let item of employeeList;let i = index"  (click)="userType('reActive',item,'reActiveFromDet')">
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.Name}}
+                                    </td>
+                                    <td class="font-12 text-Eerie-Black font-weight-500">
+                                        {{item.Branch}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.UserNo}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.Mobileno}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        {{item.Emailid}}
+                                    </td>
+                                    <td class="font-12 text-Gray font-weight-500">
+                                        <span class="status status-error custom" *ngIf="item.Delete == 'X'">
+                                            {{lang.step1.isInActive.t6}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+<div *ngIf="Step==2" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="sucess-message-box bg-Green mb-40  position-relative mt--5" *ngIf="isDelSuccess">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex  justify-content-between align-items-strat">
+                        <div class="d-flex  align-items-start">
+                            <img src="assets/images/icon-info-green.svg" class="mr-15 mt-31" alt="">
+                            <div class="text" *ngIf="Language == 'E'">
+                                <h3 class="mb-10">{{lang.step2.isDelSuccess.t1}}</h3>
+                                <span class="font-16 text-black">{{lang.step2.isDelSuccess.t2}}</span>
+                            </div>
+                            <div class="text" *ngIf="Language == 'A'">
+                                <h3 class="mb-10">{{lang.step2.isDelSuccess.t1}}</h3>
+                                <span class="font-16 text-black">{{lang.step2.isDelSuccess.t2}}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="cursor-pointer" (click)="delClose()"><img
+                                    src="assets/images/icon-close-green.svg" class="mr-15" alt=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reject-message-box bg-orange mb-40  position-relative mt--5" *ngIf="isDelError">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex  justify-content-between align-items-strat">
+                        <div class="d-flex  align-items-start">
+                            <img src="assets/images/icon-info-white.svg" class="mr-15 mt-31" alt="">
+                            <div class="text" *ngIf="Language == 'E'">
+                                <h3 class="mb-10 text-white">{{lang.step2.isDelError.t1}}</h3>
+                                <span class="font-16 text-white">{{lang.step2.isDelError.t2}}</span>
+                            </div>
+                            <div class="text" *ngIf="Language == 'A'">
+                                <h3 class="mb-10 text-white">{{lang.step2.isDelError.t1}}</h3>
+                                <span class="font-16 text-white">{{lang.step2.isDelError.t2}}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="cursor-pointer" (click)="delClose()"><img
+                                    src="assets/images/icon-close-white.svg" class="mr-15" alt=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sucess-message-box bg-Green mb-40  position-relative mt--5" *ngIf="isSuccess">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex  justify-content-between align-items-strat">
+                        <div class="d-flex  align-items-start">
+                            <img src="assets/images/icon-info-green.svg" class="mr-15 mt-31" alt="">
+                            <div class="text">
+                                <h3 class="mb-10">{{lang.step2.isSuccess.t1}}</h3>
+                                <span class="font-16 text-black" *ngIf="isCreateSuccess">{{lang.step2.isSuccess.t2}}</span>
+                                <span class="font-16 text-black" *ngIf="isUpdateSuccess">{{lang.step2.isSuccess.t3}}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="cursor-pointer" (click)="back1()"><img
+                                    src="assets/images/icon-close-green.svg" class="mr-15" alt=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reject-message-box bg-orange mb-40  position-relative mt--5" *ngIf="isError">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex  justify-content-between align-items-strat">
+                        <div class="d-flex  align-items-start">
+                            <img src="assets/images/icon-info-white.svg" class="mr-15 mt-31" alt="">
+                            <div class="text">
+                                <h3 class="mb-10 text-white">{{lang.step2.isError.t1}}</h3>
+                                <span class="font-16 text-white">{{lang.step2.isError.t2}}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="cursor-pointer" (click)="back1()"><img
+                                    src="assets/images/icon-close-white.svg" class="mr-15" alt=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sucess-message-box bg-Green mb-40  position-relative mt--5" *ngIf="isReactiveSuccess">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex  justify-content-between align-items-strat">
+                        <div class="d-flex  align-items-start">
+                            <img src="assets/images/icon-info-green.svg" class="mr-15 mt-31" alt="">
+                            <div class="text">
+                                <h3 class="mb-10">{{lang.step2.isReactiveSuccess.t1}}</h3>
+                                <span class="font-16 text-black">{{lang.step2.isReactiveSuccess.t2}}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="cursor-pointer" (click)="back1()"><img
+                                    src="assets/images/icon-close-green.svg" class="mr-15" alt=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="reject-message-box bg-orange mb-40  position-relative mt--5" *ngIf="isReactiveError">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex  justify-content-between align-items-strat">
+                        <div class="d-flex  align-items-start">
+                            <img src="assets/images/icon-info-white.svg" class="mr-15 mt-31" alt="">
+                            <div class="text">
+                                <h3 class="mb-10 text-white">{{lang.step2.isReactiveError.t1}}</h3>
+                                <span class="font-16 text-white">{{lang.step2.isReactiveError.t2}}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <span class="cursor-pointer" (click)="back1()"><img
+                                    src="assets/images/icon-close-white.svg" class="mr-15" alt=""></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="container">
+        
+        <div class="mb-24">
+            <p *ngIf="Type=='Add'">
+                <a (click)="back()"  class="text-Gray cursor-pointer"> {{lang.nav1.t8}} </a>
+                <a class="text-Gray"> {{lang.nav1.t2}} </a>
+            </p>
+            <p *ngIf="Type=='Update'">  
+                <a (click)="back()" class="text-Gray cursor-pointer">{{lang.nav1.t8}} </a>
+                <a  class="text-Gray">{{lang.nav1.t4}} </a>
+            </p>
+
+            <p *ngIf="Type=='reActive'"> 
+                <a (click)="back()" class="text-Gray cursor-pointer">{{lang.nav1.t8}}</a>
+                <a class="text-Gray">{{lang.nav1.t6}}</a>
+            </p>
+        </div>
+        <div class="mb-32 d-flex">
+            <a (click)="back()" onclick="return false"
+                class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav1.t3}}
+            </a>
+        </div> 
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step2.employeeDetails.t1}}</h2>
+            <div class="text-Gray font-16">{{lang.step2.employeeDetails.t2}} </div>
+            <span class="status status-submitted custom branch-status" *ngIf="isBranchAdmin == true">
+                {{lang.step1.t5}}
+            </span>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+
+        <form [formGroup]="EmployeeFormGroup">
+            <div class="row mb-56">
+                <div class="col-sm-6 mb-24">
+                    <div class="form-group">
+                        <label>{{lang.step2.employeeDetails.t3}}</label>
+                        <input type="text" class="form-control card" formControlName="name" (input)="isEnabled()">
+                        <span class="error" *ngIf="EmployeeFormGroup.controls['name'].errors?.pattern">
+                            {{lang.step2.employeeDetails.t4}}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-24">
+                    <div class="form-group">
+                        <label>{{lang.step2.employeeDetails.t5}}</label>
+                        <input type="text" class="form-control card"
+                            formControlName="email">
+                        <span class="error" *ngIf="EmployeeFormGroup.controls['email'].errors?.pattern">
+                            {{lang.step2.employeeDetails.t6}}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-24">
+                    <div class="form-group">
+                        <label>{{lang.step2.employeeDetails.t7}}</label>
+                        <div class="input-group phone-number-group">
+                            <input type="text" value="+966" class="countryCode" readonly>
+                            <input type="text" class="form-control custom-phone-number"
+                                formControlName="phoneNumber" (keypress)="isNumberKey($event)" (input)="isNumberValid()" maxlength="9">
+                        </div>
+                        <div class="error" *ngIf="isValidNumber"> 
+                            {{lang.step2.employeeDetails.t13}}
+                        </div>
+                        
+                        <div class="error" *ngIf="EmployeeFormGroup.controls['phoneNumber'].errors?.pattern">
+                            {{lang.step2.employeeDetails.t8}}
+                        </div>
+                        <div class="error" *ngIf="isNumberExist"> 
+                            {{lang.step2.employeeDetails.t14}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-24">
+                    <div class="form-group">
+                        <label>{{lang.step2.employeeDetails.t11}}</label>
+                        <div class="custom-dropdown position-relative card">
+                            <select class="form-control default-arrow-hide" 
+                                formControlName="branch" (change)="onBranchSelection($event.target.value)">
+                                <option *ngFor="let item of BranchList" [value]="item.Addrnumber">{{item.Branch}}
+                                </option>
+                            </select>
+                            <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-24">
+                    <div class="d-flex align-items-center material-switch">
+                        <span
+                            class="pr-26 font-12 text-Gray switch-span-change">{{lang.step2.employeeDetails.t12}}</span>
+                        <label class="switch switch-label-change">
+                            <input type="checkbox" class="form-control card" formControlName="isBranchAdmin"
+                                (change)="isSwitchChange($event.target.checked)">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-24">
+                         <button class="btn btn-primary" (click)="saveEmployee()" [disabled]="!EmployeeFormGroup.valid || !isEnabledUpdate"><span
+                        *ngIf="isAdd">{{lang.step2.employeeDetails.add}}</span><span
+                        *ngIf="isUpdate">{{lang.step2.employeeDetails.update}}</span></button> 
+                        <button class="btn btn-link ml-15" (click)="userType('Task',updateEmployeeObj,'taskAllocateFromDet')" *ngIf="isUpdate">{{lang.nav1.t7}}</button>
+                        <button class="btn btn-link ml-15 text-Shiraz" (click)="userType('Delete',updateEmployeeObj,'delFromDet')" *ngIf="isUpdate">{{lang.step1.deactivemember}}</button>
+            </div>
+        </form> 
+    </div>
+</div>
+
+<div *ngIf="Step==3" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}"> 
+
+    <div class="container">
+        <div class="mb-24">
+            <a  class="text-Gray">
+            <span (click)="back()" class="text-Gray cursor-pointer" onclick="return false"> {{lang.nav1.t8}}</span>  
+                <span class="text-Gray cursor-pointer"> {{lang.nav1.t7}} </span></a>
+        </div>
+        <div class="mb-32">
+            <a (click)="back()" onclick="return false"
+                class="text-Watercourse d-flex font-weight-bold align-items-center cursor-pointer">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-mt-10" alt=""> {{lang.nav1.t3}}
+            </a>
+        </div>
+        <div class="sucess-message-box bg-Green mb-40  position-relative mt--5" *ngIf="isTaskSuccess">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex  justify-content-between align-items-strat">
+                            <div class="d-flex  align-items-start"> 
+                                <div class="text">
+                                    <h3 class="mb-10">{{lang.nav1.t7}}</h3>
+                                    <span class="font-16 text-black">{{lang.step3.t10}}</span>
+                                </div> 
+                            </div> 
+                            <div class="d-flex">
+                                <img src="assets/images/icon-close-white.svg" class="mr-15 mt-31 cursor-pointer" alt="" (click)="taskSuccessClose()">
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reject-message-box bg-orange mb-40  position-relative mt--5" *ngIf="isTaskError">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex  justify-content-between align-items-strat">
+                            <div class="d-flex  align-items-start">
+                                <img src="./images/icon-info-white.svg" class="mr-15 mt-31" alt="">
+                                <div class="text">
+                                    <h3 class="mb-10 text-white">{{lang.nav1.t7}}</h3>
+                                    <span class="font-16 text-white">{{errorString}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <img src="assets/images/icon-close-white.svg" class="mr-15 mt-31 cursor-pointer" alt="" (click)="taskErrorClose()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sucess-message-box bg-Green mb-40  position-relative mt--5" *ngIf="isTaskDlink">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex  justify-content-between align-items-strat">
+                            <div class="d-flex  align-items-start"> 
+                                <div class="text">
+                                    <h3 class="mb-10">{{lang.nav1.t7}}</h3>
+                                    <span class="font-16 text-black">{{lang.step3.t11}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <img src="assets/images/icon-close-white.svg" class="mr-15 mt-31 cursor-pointer" alt="" (click)="taskDlinkClose()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reject-message-box bg-orange mb-40  position-relative mt--5" *ngIf="isTaskDlinkError">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex  justify-content-between align-items-strat">
+                            <div class="d-flex  align-items-start">
+                                <img src="./images/icon-info-white.svg" class="mr-15 mt-31" alt="">
+                                <div class="text">
+                                    <h3 class="mb-10 text-white">{{lang.nav1.t7}}</h3>
+                                    <span class="font-16 text-white">{{lang.step3.t12}}</span>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <img src="assets/images/icon-close-white.svg" class="mr-15 mt-31 cursor-pointer" alt="" (click)="taskDlinkErrorClose()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="reject-message-box bg-orange mb-40  position-relative mt--5" *ngIf="isConfirmError">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex  justify-content-between align-items-strat">
+                            <div class="d-flex  align-items-start">
+                                <img src="./images/icon-info-white.svg" class="mr-15 mt-31" alt="">
+                                <div class="text" *ngIf="Language == 'E'"> 
+                                    <span class="font-16 text-white">Please allocate some task to selected Branch/User</span>
+                                </div>
+                                <div class="text" *ngIf="Language == 'A'"> 
+                                    <span class="font-16 text-white">الرجاء تعيين بعض المهام إلى الفرع/المستخدم المختار</span>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <img src="assets/images/icon-close-white.svg" class="mr-15 mt-31 cursor-pointer" alt="" (click)="taskConfirmErrorClose()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.nav1.t7}}</h2>
+        </div>
+        <div class="row mb-16">
+            <div class="col-md-6 col-sm-12">
+                <div class="card card-inner px-24 card-shadow-none">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step3.t13}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{empName}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card card-inner  px-24 card-shadow-none">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step3.t14}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{empBranchName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content custom-navtab-content pt-0 mb-60">
+            <div class="tab-pane  active" id="Zakat-CIT">
+                <div class="table mb-32 border-top-whisper card">
+
+                    <table width="100%" class="table-bordered table-bordered-less">
+
+                        <thead>
+                            <tr>
+                                <th class="font-20 text-Eerie-Black font-weight-500">
+                                    {{lang.step3.t15}} 
+                                </th>
+                                <th class="font-20 text-Eerie-Black font-weight-500 ">
+                                    {{lang.step3.t16}} 
+                                </th>
+                                <th class="font-20 text-Eerie-Black font-weight-500">
+                                    {{lang.step3.t17}}
+                                </th>
+                                <th class="font-20 text-Eerie-Black font-weight-500">
+                                    {{lang.nav1.t7}}
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of taskAllocationList;let i = index;">
+                                <td class="font-16 text-Eerie-Black font-weight-500">{{item.TaxPayerTin}}</td>
+                                <td class="font-16 text-Eerie-Black font-weight-500">{{item.TaxPayerName}}</td>
+                                <td class="font-16 text-Eerie-Black font-weight-500">{{item.Activties}}</td>
+
+                                <td class="font-16 text-Eerie-Black font-weight-500">
+                                     <div class="lable-switch text-center mr-5 cursor-pointer" >
+                                        <input id="{{i}}" name="someSwitchOption001" type="checkbox"
+                                            (change)="taskAllocationChange($event.target.checked,item)" [checked]="item.TaemTin!==''?true:false">
+                                        <label for="{{i}}" class="label-primary bg-Gray"></label>
+                                    </div>  
+                                </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <button class="btn btn-primary cursor-pointer" (click)="linkedTaskAllocation()">{{lang.step3.confirm}}</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal modal-filter fade" id="confirmModalAll" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile">
+        <div class="modal-content">
+
+            <div class="modal-body px-40 pt-40">
+                <h2 class="mb-16">{{lang.step1.confirmModal.t1}} &nbsp; {{empName}}?</h2> 
+                <div class="form-group text-right mb-16 position-relative">
+                    <button class="btn btn-primary"
+                        (click)="close()">{{lang.step1.confirmModal.no}}</button>
+                    <button class="btn btn-link ml-15"
+                        (click)="deactiveMember()">{{lang.step1.confirmModal.deActiveBtn}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-filter fade" id="confirmModal" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile">
+        <div class="modal-content">
+
+            <div class="modal-body px-40 pt-40">
+                <h2 class="mb-16">{{lang.step1.confirmModal.t1}} {{empName}}?</h2>
+                <p class="mb-36">{{lang.step1.confirmModal.t2}}</p>
+                <div class="mb-60">
+                    <ul class="font-16  p-0 m-0 list-style-none  bullet-list">
+                        <li>
+                            {{lang.step1.confirmModal.t3}}
+                        </li>
+                        <li>
+                            {{lang.step1.confirmModal.t4}}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-group text-right mb-16 position-relative">
+                    <button class="btn btn-primary"
+                        (click)="close()">{{lang.step1.confirmModal.no}}</button>
+                    <button class="btn btn-link ml-15"
+                        (click)="deactiveMember()">{{lang.step1.confirmModal.deActiveBtn}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<div class="modal modal-filter fade" id="delTaskAllocatedMember" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile" style="top:30%">
+        <div class="modal-content">
+            <div class="modal-body px-40 pt-40">
+                <p class="mb-16 font-20">{{errMsg}}</p>
+                <div class="form-group text-right mb-16 position-relative">
+                    <button class="btn btn-primary"
+                        (click)="isDelTaskAllocatedMember()">{{lang.step1.delTaskAllocatedMember.okBtn}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<div class="modal modal-filter fade" id="ErrorModal" role="dialog" style="margin-top: 15%;" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog pop-up-align-mddile">
+        <div class="modal-content">
+            <div class="modal-body px-40 pt-40 mt-15">
+                <h2 class="mb-16">{{lang.step2.errorModal.t1}}</h2>
+
+                <div class="form-group text-right mb-16 position-relative">
+                    <button class="btn btn-primary btn-popupprimary"
+                        (click)="enableBranch()">{{lang.step2.errorModal.yes}}</button>
+                    <button class="btn btn-primary btn-popupprimary ml-15"
+                        (click)="disableBranch()">{{lang.step2.errorModal.no}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-filter fade" id="branchValidation" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile">
+        <div class="modal-content">
+            <div class="modal-body px-40 pt-40">
+                <h2 class="mb-16">{{lang.step2.errorModal.select}} {{EMPName}}</h2>
+
+                <div class="form-group text-right mb-16 position-relative">
+                    <button class="btn btn-primary" (click)="isBranchOk()">{{lang.step2.errorModal.ok}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-filter fade" id="branchListModal" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile">
+        <div class="modal-content">
+            <!-- <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="assets/images/icon-close.svg" alt="">
+                </button>
+            </div> -->
+
+            <div class="modal-body px-40 pt-40">
+                <h2 class="mb-16">{{lang.step2.branchListModal.t1}}</h2>
+                <p class="font-16 font-weight-500">{{lang.step2.branchListModal.t2}} &nbsp; {{branchName}}</p>
+                <table class="table table-bordered table-bordered-less" style="border-radius: 0px;">
+                    <thead>
+                        <tr style="border: 1px solid #ebebeb;">
+                            <th>{{lang.step2.branchListModal.t3}}</th>
+                            <th>{{lang.step2.branchListModal.t4}}</th>
+                            <th>{{lang.step2.branchListModal.t5}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of supervisorBranchList; let i = index;"
+                            style="border: 1px solid #ebebeb;">
+                            <td>
+                                {{item.UserNo}}
+                            </td>
+                            <td>
+                                {{item.Name}}
+                            </td>
+                            <td>
+                                <label class='radio-model'><input type="radio" id="i" name="i"
+                                        (change)="supervisorSelectChange(item)"> </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-group text-right mb-16 position-relative">
+                    <button class="btn btn-primary"
+                        (click)="supervisorSave()">{{lang.step2.branchListModal.save}}</button>
+                    <button class="btn btn-link ml-15"
+                        (click)="supervisorCancel()">{{lang.step2.branchListModal.cancel}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-filter fade" id="delinkPopup" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog max-width-708 pop-up-align-mddile">
+        <div class="modal-content">
+
+            <div class="modal-body px-40 pt-40">
+                <h2 class="mb-16">{{lang.step3.t18}} &nbsp;{{remarks}}</h2>    
+                <div class="form-group text-right mb-16 position-relative"> 
+                    <button class="btn btn-primary"
+                        (click)="dlinkTaxpayer()">{{lang.step3.ok}}</button>
+                   <button class="btn btn-link ml-15 "
+                        (click)="cancelTaxpayer()">{{lang.step3.cancel}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<notifier-container></notifier-container>
+ 
+ 

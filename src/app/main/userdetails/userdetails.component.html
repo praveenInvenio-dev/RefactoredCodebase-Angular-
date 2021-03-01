@@ -1,0 +1,290 @@
+<div
+  class="container userDetailRoot"
+  [ngStyle]="{ textAlign: 'start' }"
+  [dir]="direction"
+>
+  <div class="col-md-10 justify-content-center">
+    <div class="userDetailsLocation">
+      <span class="userDetailsCrumb1" style="cursor: pointer;" (click)="navigateToProfile()">
+        {{
+          direction == "rtl"
+            ? userManagementConstants["Profile"]["arb"]
+            : userManagementConstants["Profile"]["eng"]
+        }}
+      </span>
+      <span class="userDetailsCrumb1">></span>
+      <span class="userDetailsCrumb1" style="cursor: pointer;"  (click)="navigateToUsermanagement()">
+        {{
+          direction == "rtl"
+            ? userManagementConstants["UserManagement"]["arb"]
+            : userManagementConstants["UserManagement"]["eng"]
+        }}
+      </span>
+      <span class="userDetailsCrumb1">></span>
+      <span class="userDetailsCrumb2" style="cursor: pointer;">
+        {{
+          direction == "rtl"
+            ? userManagementConstants["Userdetail"]["arb"]
+            : userManagementConstants["Userdetail"]["eng"]
+        }}
+      </span>
+    </div>
+    <div class="userDetailsBack col-md-12 px-0" (click)="goToUserManagement()">
+      <span
+        class="hspan2"
+        (style)="(direction == 'rtl' ? 'transform: rotate(180deg);' : '')"
+      >
+        <img
+          [src]="
+            direction === 'ltr'
+              ? 'assets/image/arrow-left-green.svg'
+              : 'assets/image/arrow-right-green.svg'
+          "
+        /> </span
+      ><span class="hspanx">{{
+        direction == "rtl"
+          ? userManagementConstants["Back"]["arb"]
+          : userManagementConstants["Back"]["eng"]
+      }}</span>
+    </div>
+    <div class="userDetailsH col-md-12" style="padding-inline-start: 0.2rem">
+      {{
+        direction == "rtl"
+          ? userManagementConstants["Userdetails"]["arb"]
+          : userManagementConstants["Userdetails"]["eng"]
+      }}
+    </div>
+    <div class="zs-div">
+      <div class="row mx-0 justify-content-between">
+        <div class="userDetailsCardx col-md-6 mt-2">
+          <div class="udc-name">
+            {{
+              direction == "rtl"
+                ? userManagementConstants["Name"]["arb"]
+                : userManagementConstants["Name"]["eng"]
+            }}
+          </div>
+          <div class="udc-branch">{{ queryParamName }}</div>
+        </div>
+        <div class="userDetailsCardx col-md-6 mt-2">
+          <div class="udc-name">
+            {{
+              direction == "rtl"
+                ? userManagementConstants["Branch"]["arb"]
+                : userManagementConstants["Branch"]["eng"]
+            }}
+          </div>
+          <div class="udc-branch">{{ queryParamBranch }}</div>
+        </div>
+      </div>
+    </div>
+    <!-- <div>
+      <div class="row mx-0 mt-5 justify-content-end"></div>
+    </div> -->
+    <div class="border zs-userInfoCard mt-5" *ngIf="showTaskAlloc">
+      <div class="col-md-12 px-0 mx-0 justify-content-between row">
+        <div>
+          <span><img src="assets/image/user.svg" /></span>
+          <span class="zs-ud-ui">
+            {{
+              direction == "rtl"
+                ? userManagementConstants["userInformation"]["arb"]
+                : userManagementConstants["userInformation"]["eng"]
+            }}
+          </span>
+        </div>
+        <span (click)="gotoEditUser()" class="udc-name zs-editColor">
+          {{
+            direction == "rtl"
+              ? userManagementConstants["edit"]["arb"]
+              : userManagementConstants["edit"]["eng"]
+          }}
+        </span>
+      </div>
+      <div class="Rectangle-12 mt-3"></div>
+      <div class="col-md-12 col-sm-12 px-0 mt-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="zs-serial">
+              {{
+                direction == "rtl"
+                  ? userManagementConstants["SerialNo"]["arb"]
+                  : userManagementConstants["SerialNo"]["eng"]
+              }}
+            </div>
+            <div class="zs-ans">{{ queryParam }}</div>
+          </div>
+          <div class="col-md-6">
+            <div class="zs-serial">
+              {{
+                direction == "rtl"
+                  ? userManagementConstants["taxType"]["arb"]
+                  : userManagementConstants["taxType"]["eng"]
+              }}
+            </div>
+            <div class="zs-ans">
+              <span
+                *ngFor="
+                  let taxType of linkedTaxPayerArray;
+                  inded as taxTypeIndex
+                "
+              >
+                {{ taxType["TaxtpDesc"]
+                }}{{
+                  taxTypeIndex === linkedTaxPayerArray.length - 1 ? ", " : ""
+                }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Rectangle-12 mt-3"></div>
+      <div class="col-md-12 col-sm-12 px-0 mt-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="zs-serial">
+              {{
+                direction == "rtl"
+                  ? userManagementConstants["linkedTaxPayer"]["arb"]
+                  : userManagementConstants["linkedTaxPayer"]["eng"]
+              }}
+            </div>
+            <div class="zs-ans">{{ tin }}-{{ taxPayerName }}</div>
+          </div>
+          <div class="col-md-6">
+            <div class="zs-serial">
+              {{
+                direction == "rtl"
+                  ? userManagementConstants["linkedActivities"]["arb"]
+                  : userManagementConstants["linkedActivities"]["eng"]
+              }}
+            </div>
+            <div class="zs-ans">
+              <span
+                *ngFor="
+                  let activity of linkedTaxPayerArray;
+                  inded as activityIndex
+                "
+              >
+                {{
+                  activity["TaxtpDesc"] +
+                    "(" +
+                    activity["LinkedActivity"] +
+                    ")"
+                }}{{
+                  activityIndex === linkedTaxPayerArray.length - 1 ? ", " : ""
+                }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 px-0">
+      <div class="row zs-btns-sep">
+        <div class="col-md-6" class="zs-btnSecum3">
+          <button
+            class="zs-btnSecum2"
+            (click)="getModal($event, 'sukukBondsCard')"
+            [ngStyle]="{ color: !showTaskAlloc ? '#006450' : 'red' }"
+          >
+            {{ showTaskAlloc ? deactivateBUttonVar : activateButtonVar }}
+          </button>
+        </div>
+        <div class="col-md-6" *ngIf="showTaskAlloc">
+          <button
+            class="btnPrimary btnprimary-width zs-gtab"
+            mat-raised-button
+            (click)="gotoTaskAlloc(queryParam, queryParamName)"
+          >
+            {{
+              direction == "rtl"
+                ? userManagementConstants["taskAllocation"]["arb"]
+                : userManagementConstants["taskAllocation"]["eng"]
+            }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal alignStart"
+  id="sukukBondsCard"
+  data-keyboard="false"
+  data-backdrop="static"
+>
+  <div class="modal-dialog center" id="modal" [dir]="direction">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="px-4 py-3 col-md-12">
+          <div
+            class="col-md-12 alignEnd zs-modalCloser"
+            (click)="closeModal('sukukBondsCard')"
+          >
+            <img src="assets/image/close.svg" class="modalCloseIcon" />
+          </div>
+          <div class="dark fbl f28 mt-4 pageTitle">
+            {{ !showTaskAlloc ? activateButtonVar : deactivateBUttonVar }}
+            {{ queryParamName }} 
+            <span *ngIf="direction == 'rtl'">؟</span>
+            <span *ngIf="direction != 'rtl'">?</span>
+          </div>
+          <div class="py-3 pr-3">
+            <div class="zs-umMt2 f12 gray font-color">
+              {{
+                direction == "rtl"
+                  ? userManagementConstants["whtHappensWhenUserisDeactivated"][
+                      "arb"
+                    ]
+                  : userManagementConstants["whtHappensWhenUserisDeactivated"][
+                      "eng"
+                    ]
+              }}
+            </div>
+            <div class="zs-umMt f12 gray font-color">
+              <!-- {{getUserResponseDisplayVar[selectedUserIndex]['status'] == false ? 'The user will be able to sign in and perform the allocated tasks': 'The user will no longer be able to sign in nor perform the allocated tasks'}}   -->
+              {{
+                direction == "rtl"
+                  ? userManagementConstants["modalBodyA"]["arb"]
+                  : userManagementConstants["modalBodyA"]["eng"]
+              }}
+            </div>
+            <div class="zs-umMt f12 gray font-color">
+              {{
+                direction == "rtl"
+                  ? userManagementConstants["modalBodyB"]["arb"]
+                  : userManagementConstants["modalBodyB"]["eng"]
+              }}
+            </div>
+          </div>
+          <div class="col-md-12 mt-4 mb-2 alignEnd">
+            <div class="row">
+              <div class="col zs-decbtaligner2">
+                <button class="btnSecum" (click)="modalConfirm()">
+                  {{ !showTaskAlloc ? activateButtonVar : deactivateBUttonVar }}
+                </button>
+              </div>
+              <div class="col-auto">
+                <button
+                  class="btnPrimary btnprimary-width zs-btn-modal-cancel"
+                  mat-raised-button
+                  (click)="closeModal('sukukBondsCard')"
+                >
+                  {{
+                    direction == "rtl"
+                      ? userManagementConstants["No"]["arb"]
+                      : userManagementConstants["No"]["eng"]
+                  }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

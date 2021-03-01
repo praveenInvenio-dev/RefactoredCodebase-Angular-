@@ -1,0 +1,2068 @@
+<div *ngIf="Step==1" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="mb-40">
+            <!-- <a class="text-Gray"> {{lang.creamburds.c1}} >  {{lang.creamburds.c2}} > </a>  {{lang.creamburds.c3}} -->
+        </div>
+        <div class="mb-26 d-flex ar-text-left row-reverse" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+            <a [routerLink]="['/mains/tax']" class="text-Watercourse font-weight-bold custom-ar-direction-link">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10" alt="">{{lang.direction.back}}
+            </a>
+        </div>
+
+        <div class="custom-nav-tabs d-flex justify-content-between align-items-center">
+            <h2>{{lang.step1.heading.h1}}</h2>
+        </div>
+
+
+        <!-- Tab panes -->
+        <div class="tab-content custom-navtab-content">
+            <div class="tab-pane  active" id="AllReturns">
+                <div class="d-flex align-items-center width100P mb-32">
+                </div>
+
+                <div class="row d-flex row-reverse">
+                    <div class="col-sm-6 d-flex">
+
+                        <div class="card cursor-pointer  card-inner w-100 text-center justify-content-center mb-24" data-toggle="modal" data-target="#infoModal">
+                            <img src="assets/images/icon-plus-24.svg" alt="" class="mb-10 h-24">
+                            <span class="text-Watercourse font-weight-bold font-16">{{lang.step1.tabpanel.tp1}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 d-flex">
+                        <div class="card  w-100 text-center justify-content-center mb-24">
+                            <a href="#" class="text-link ml-15" data-toggle="modal" data-target="#paymenthistory">
+                               {{lang.step1.tabpanel.tp2}} 
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-sm-6" data-toggle="modal" data-target="#infoModal">
+                        <div class="card mb-24 ">
+
+                            <div class="d-flex width100P align-items-center justify-content-between p-24 pb-0 mb-16">
+                                <div>
+                                    <h3 class="mb-0">
+                                        Excise Tax
+                                    </h3>
+                                    <p class="font-12 text-Gray mb-0">Monthly</p>
+                                </div>
+                                <span class="status status-error p-16 d-flex align-items-center ">
+                                    Overdue
+                                </span>
+
+                            </div>
+
+                            <div class="border-bottom-whisper">
+
+                            </div>
+
+                            <div class="row  p-24 ">
+                                <div class="col-sm-6">
+                                    <p class="font-12 text-Gray  mb-0">SADAD Number</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        1234567890
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="font-12 text-Gray mb-0">Due Date</p>
+                                    <div class="text-Eerie-Black font-16 font-weight-500">
+                                        20th May 2020
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- FILTER  MODAL  STARTS HERE-->
+    <div class="modal modal-filter fade show" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog max-width-708" role="document">
+            <div class="modal-content">
+                <div class="text-right modal-filter-head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <img src="assets/images/icon-close-1.svg" alt="">
+                    </button>
+                </div>
+                <div class="modal-body px-60 pt-40">
+                    <h2 class="mb-24">{{lang.popup.infoModal.heading}}</h2>
+                    <div class="card-inner mb-32">
+                        <div class="font-12 text-Gray mb-16">
+                            {{lang.popup.infoModal.text.t1}} <a href="https://www.gazt.gov.sa" target="_blank" class="text-link font-weight-500">https://www.gazt.gov.sa</a>
+                        </div>
+                        <ul class="font-12 text-Gray p-0 m-0 pl-12">
+                            <li class="mb-16">
+                                <div class="d-flex la-row-reverse"><span> &nbsp;1&nbsp; </span>
+                                {{lang.popup.infoModal.text.t2}}
+                            </div>
+                            </li>
+                            <li class="mb-16">
+                                <div class="d-flex la-row-reverse"><span> &nbsp;2&nbsp; </span>
+                                    {{lang.popup.infoModal.text.t3}}
+                                </div>
+                            </li>
+                            <li class="mb-16">
+                                <div class="d-flex la-row-reverse"><span> &nbsp;3&nbsp; </span>
+                                    {{lang.popup.infoModal.text.t4}}
+                                </div>
+                            </li>
+                            <li class="mb-16">
+                                <div class="d-flex la-row-reverse"><span> &nbsp;4&nbsp; </span>
+                                    {{lang.popup.infoModal.text.t5}}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex la-row-reverse"><span> &nbsp;5&nbsp; </span>
+                                    {{lang.popup.infoModal.text.t6}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=" d-flex align-items-center mb-56 ar-text-left">
+                        <label class="custom-checkBox d-flex align-items-center pl-40 h-20">
+                            <span class="font-12 font-weight-500"> {{lang.confirmation.agree}}</span>
+                            <input type="checkbox" [checked]="AgreeClick==true" (change)="agreeChange($event)">
+                            <span class="checkmark checkmark-24"></span>
+                        </label>
+                    </div>
+                    <div class="form-group text-right mb-16 ar-text-left">
+                        <button class="btn btn-primary ar-ml-0" [disabled]="!AgreeClick" (click)="Step=2; basicInfo();">{{lang.btns.btnconfirm}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FILTER MODAL ENDS -->
+</div>
+<div *ngIf="Step==2" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="mb-24">
+            <a [routerLink]="['/mains/tax']" class="text-Gray"> {{lang.creamburds.c1}} <span class="ar-direction-align"> > </span> {{lang.creamburds.c2}} <span class="ar-direction-align"> > </span>   </a> {{lang.creamburds.c3}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+            <a class="text-Watercourse d-flex font-weight-bold align-items-center flex-direction-inherit">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-dir-reverse" alt="" (click)="Step=1">{{lang.direction.back}}
+            </a>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=2" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=3">
+                    <span></span>
+                </a>
+                <a (click)="step=4">
+                    <span></span>
+                </a>
+                <a (click)="step=5">
+                    <span></span>
+                </a>
+            </div> -->
+
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative row-reverse">
+                    <li>
+                        <a (click)="Step=2" class="active">1
+                        </a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=3">2</a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=4;">3</a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=8;">4</a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=5;">5</a>
+                    </li>
+                    <li>
+                        <!-- (click)="Step=6;" -->
+                        <a class="pointer-none">6</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <li><a href="#" class="active">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li> -->
+
+        </div>
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step2.heading1}}</h2>
+            <div class="text-Gray font-16">{{lang.step2.text}}</div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+        <div class="card  card-shadow-none mb-56">
+            <div class="p-24">
+                <h3 class="d-flex align-items-center mb-0 ar-text-left">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg" class=""
+                            alt=""></span> {{lang.step2.heading2}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step2.labels.l1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- {{PeronalDetailsObj2.Type || '-'}} -->
+                        {{idDisplayName || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step2.labels.l2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.Idnumber || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <!-- <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step2.labels.l3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.NameFirst || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step2.labels.l4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.NameLast || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div> -->
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step2.labels.l5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.SmtpAddr || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step2.labels.l6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.MobNumber || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step2.labels.l7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.Taxpayer || '-'}}
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step2.labels.l8}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.NameOrg1 || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step2.labels.l9}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.CrNumber || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step2.labels.l10}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.OutletName || '-'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-24">
+            <button class="btn btn-primary" (click)="Step=3; continuePerInfo();">{{lang.btns.btncontinue}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Step==3" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="mb-24">
+            <a (click)="Step=1" class="text-Gray">{{lang.creamburds.c1}} <span class="ar-direction-align"> > </span>  {{lang.creamburds.c2}} <span class="ar-direction-align"> > </span>  {{lang.creamburds.c3}} <span class="ar-direction-align"> > </span> </a>            {{lang.creamburds.c4}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center ">
+
+            <a class="text-Watercourse d-flex font-weight-bold align-items-center flex-direction-inherit">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-dir-reverse" alt="" (click)="Step=2">{{lang.direction.back}}
+            </a>
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative  row-reverse">
+                    <li>
+                        <a (click)="Step=2" class="active">
+                            <img src="assets/images/icon-wcheck.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=3" class="active">2</a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=4;">3</a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=8;">4</a>
+                    </li>
+                    <li>
+                        <a [ngClass]="{'pointer-none':totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0}" (click)="Step=5;">5</a>
+                    </li>
+                    <li>
+                        <!-- (click)="Step=6;" -->
+                        <a class="pointer-none" >6</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=2" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=3" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=4">
+                    <span></span>
+                </a>
+                <a (click)="step=5">
+                    <span></span>
+                </a>
+            </div> -->
+        </div>
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step3.heading1}}</h2>
+            <div class="text-Gray font-16"> {{lang.step3.text}}</div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+        <div class="d-flex mb-40 d-flex ar-text-left">
+            <label class="radio-thumb cursor-pointer card custom-option-small mr-24 text-Eerie-Black ">
+                <input type="checkbox" name="radio" [(ngModel)]="Sweetendtiles" (click)="SweetendTilesChange()"
+                    class="position-absolute cursor-pointer">
+                <span
+                    class="checkmark m-0 font-16 mt-auto la-justify-content-end font-weight-500 d-flex align-items-end py-10 px-15 h-100">{{lang.confirmation.c1}}</span>
+            </label>
+            <label class="radio-thumb cursor-pointer card custom-option-small mr-24 text-Eerie-Black ">
+                <input type="checkbox" name="radio" [(ngModel)]="toboccotiles" (click)="ToboccoTilesChange()"
+                    class="position-absolute cursor-pointer">
+                <span
+                    class="checkmark m-0 font-16 mt-auto la-justify-content-end text-black font-weight-500 d-flex align-items-end py-10 px-15 h-100">{{lang.confirmation.c2}}</span>
+            </label>
+        </div>
+
+
+        <div *ngIf="Sweetendtiles">
+            <h3 class="text-Eerie-Black font-weight-bold mb-0">{{lang.step3.heading2}}</h3>
+            <p class="font-16 text-Gray">{{lang.step3.text1}}
+            </p>
+            <!-- <div class="d-flex mb-24 ar-text-left">
+                <label class="radio-thumb cursor-pointer card custom-option-small mr-24 text-Eerie-Black">
+                    <input type="radio" name="radio1" checked="checked" (change)="fillManuallycheckChange($event)"
+                        class="position-absolute cursor-pointer">
+                    <span
+                        class="checkmark m-0 font-16 mt-auto font-weight-500 d-flex align-items-end py-10 px-15 h-100">{{lang.file.f1}}</span>
+                </label>
+                <label class="radio-thumb cursor-pointer card custom-option-small mr-24 text-Eerie-Black">
+                    <input type="radio" name="radio1" (change)="uploadcheckChange($event)"
+                        class="position-absolute cursor-pointer">
+                    <span
+                        class="checkmark m-0 font-16 mt-auto text-black font-weight-500 d-flex align-items-end py-10 px-15 h-100"> {{lang.file.f2}}</span>
+                </label>
+            </div> -->
+            <div class="d-flex mb-32 align-items-end justify-content-between">
+                <div class="d-flex align-items-center la-row-reverse">
+                    <div class="card mark-dark-green mr-24 p-15" style="width: 200px;height: 104px;" [ngClass]="{'mark-dark-green':action=='FillManually','mark-light-gray':action!='FillManually'}" (click)="action='FillManually'">
+                        <p class="m-0 font-weight-500 font-16 mt-auto text-white" [ngClass]="{'text-white':action=='FillManually'}">
+                            {{lang.file.f1}} </p>
+                    </div>
+                    <div class="card mark-light-gray mr-24 p-15 position-relative" style="width: 200px;height: 104px;" [ngClass]="{'mark-dark-green':action!='FillManually','mark-light-gray':action=='FillManually'}" (click)="action='Autofill'">
+                        <input type="file" class="custom-upload-file position-absolute" title="{{titleText}}" (change)="ExcelUploadFile($event, 'ExcelUpload')" accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+                        <p class="m-0 font-weight-500 font-16 mt-auto" [ngClass]="{'text-white':action!='FillManually'}"> {{lang.file.f2}} </p>
+                    </div>
+                </div>
+                <div class="download-btn mb-15 position-relative" *ngIf="language == 'ar'">
+                    <a href="{{baseUrl}}/irj/go/km/docs/documents/PortalContent/DZIT_HomePage/returnforms/Template/Excel%20Template%20Arabic.xlsx" title="{{downloadExcelbuttonTitle}}">
+                        <img src="assets/images/icon-exceldownload.svg" alt="download">
+
+                    </a>
+                </div>
+                <div class="download-btn position-relative mb-15" *ngIf="language == 'en'">
+                    <a href="{{baseUrl}}/irj/go/km/docs/documents/PortalContent/DZIT_HomePage/returnforms/Template/Excel%20Template%20English.xlsx" title="{{downloadExcelbuttonTitle}}">
+                        <img src="assets/images/icon-exceldownload.svg" alt="download">
+
+                    </a>
+                </div>
+            </div>
+
+            <div *ngIf="uploadCheck">
+                <p class="mb-16 font-16">{{lang.file.f3}}</p>
+                <div class="row d-flex align-items-center  mb-24">
+                    <div class="col-sm-6">
+                        <div class="cardh216 card mb-40 p-24" style="width:100%">
+                            <div class="d-flex justify-content-end"><img src="assets/images/icon-delete.svg"></div>
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <p class="m-0 font-weight-500 font-16 text-center">
+                                    <img src="assets/images/excel.svg" class="mb-10">
+                                    <!-- <span class="font-12 font-weight-normal text-Gray">20MB</span> -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="text-right d-flex align-items-end justify-content-center">
+                            <button class="btn btn-primary" (click)="downLoadExcel()">{{lang.file.f4}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-24 mb-40">
+                    <div class="d-flex align-items-start">
+                        <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                        <span class="font-12 text-Gray">
+                           {{lang.file.condition}}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="table mb-40 table-responsive custom-width-table custom-scrollbar">
+                <form [formGroup]="SweetenedBeveragesFormGroup">
+                    <div>
+                        <!-- <div > -->
+                        <div>
+                            <table width="100%" class="table-bordered-less ">
+                                <thead>
+                                    <tr>
+                                        <th class="font-12 text-Eerie-Black font-weight-normal">
+
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang.step3.table.tr1.th1}}
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang.step3.table.tr1.th2}}
+                                            <!--change here--->
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold ">
+                                            {{lang.step3.table.tr1.th3}}
+                                            <!--change here--->
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang.step3.table.tr1.th4}}
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            <div class="d-flex align-items-start text-nowrap justify-content-end la-row-reverse">
+                                                <span>{{lang.step3.table.tr1.th5}}</span>
+                                                <a href="#" data-toggle="modal" data-target="#toolTips" (click)="infoNum=1">
+                                                    <img src="assets/images/icon-information-16.svg" class="ml-10"></a>
+                                            </div>
+
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            <div class="d-flex align-items-start text-nowrap la-row-reverse">
+                                                <span>{{lang.step3.table.tr1.th6}}</span>
+                                                <a href="#" data-toggle="modal" data-target="#toolTips" (click)="infoNum=2">
+                                                    <img src="assets/images/icon-information-16.svg" class="ml-10">
+                                                </a>
+                                            </div>
+                                            <!--change here--->
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold whitespace-nowrap">
+                                            {{lang.step3.table.tr1.th7}}
+                                            <!--change here--->
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="fields">
+                                    <!-- <tr *ngFor="let field of sweetenedBeveragesList; let i = index;" [formGroupName]="i" > -->
+                                    <tr *ngFor="let field of formsControls1?.controls; let i = index;" [formGroupName]="i">
+
+                                        <td class="font-16 text-center">
+                                            <a><img src="assets/images/icon-delete-normal.svg" (click)="deleteSweetend(i)"></a>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <div class="form-group mb-0">
+                                                <div class="custom-dropdown position-relative">
+                                                    <select dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" class="selectpicker form-control card input-161 w-225 py-0" formControlName="producttype">
+                                                        <option *ngFor="let producttype of productTypesdropdown"
+                                                            [value]="producttype.ItemSr">
+                                                            <span>{{ producttype.ItemDes }}</span>
+                                                        </option>
+                                                        <!-- {{ producttype.ItemDes }}</option> -->
+                                                    </select>
+
+                                                    <!-- <img src="assets/images/icon-dropdown-up.svg"
+                                                        class="mr-10 table-dropdown-arrow position-absolute" alt=""> -->
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <!-- [ngClass]="{'border-red':field.get('ItemDescrption').value.length==0&&field.get('ItemDescrption').touched}" -->
+                                            <input type="text" placeholder="" formControlName="ItemDescrption" maxlength="50" (keydown)="restrictFirstSpace($event, field.get('ItemDescrption').value)"
+                                                class="input165  d-inline card font-weight-normal ar-text-right">
+                                            <div *ngIf="field.get('ItemDescrption')?.errors?.maxlength">
+                                                {{lang.inputrange.r1}}
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <div class="form-group mb-0">
+                                                <div>
+                                                    <select dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" class="form-control card input-161" formControlName="measuringunit">
+                                                        <option *ngFor="let munit of measureunitdropdown"
+                                                            [value]="munit.Msehi">
+                                                            {{ munit.Text }}</option>
+                                                    </select>
+                                                    <!-- <img src="assets/images/icon-dropdown-up.svg"
+                                                        class="mr-10 table-dropdown-arrow position-absolute" alt=""> -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <input type="text" min="1" placeholder="0.000" formControlName="quantity" (blur)="totalretailCalculations()" pattern="^\d{0,6}(\.\d{0,3})?$" mask="separator" thousandSeparator="," (keydown)="GlobalNumberAllow($event)" [ngClass]="{'border-red':field.get('quantity').hasError('pattern')||(field.get('quantity').value==0&&field.get('quantity').touched)}"
+                                                class="input165 text-right d-inline card font-weight-normal">
+                                            <div class="text-danger" *ngIf="field.get('quantity').value<0&&field.get('quantity').touched">
+                                                {{lang.inputrange.r2}}
+                                            </div>
+                                            <div class="text-danger" *ngIf="field.get('quantity').value<0 || field.get('quantity').value>999999.999">
+                                                {{lang.inputrange.r3}}
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <input type="text" placeholder="0.00" formControlName="retailingPriceUnit" (blur)="totalretailCalculations()" pattern="^\d{0,9}(\.\d{0,2})?$" mask="separator" thousandSeparator="," (keydown)="GlobalNumberAllow($event)" [ngClass]="{'border-red':field.get('retailingPriceUnit').hasError('pattern')}"
+                                                class="input165 text-right d-inline card font-weight-normal">
+                                                <div class="text-danger" *ngIf="field.get('retailingPriceUnit').value<0 || field.get('retailingPriceUnit').value>999999999.99">
+                                                    {{lang.inputrange.r3}}
+                                                </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <label class="text-Gray font-16 font-weight-500">{{field.get('totalretailsellingPrice').value
+                                                | number:'1.2-2' | mask:'separator':','}}</label>
+
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <label class="text-Gray font-16 font-weight-500">{{field.get('dueExciseTax').value
+                                                | number:'1.2-2' | mask:'separator':','}}</label>
+
+                                        </td>
+                                    </tr>
+
+                                    <!--latest change strats here--->
+                                    <tr>
+                                        <td class="font-16 text-center" colspan="8">
+                                            <div class="d-flex align-items-center">
+                                                <a>
+                                                    <img src="assets/images/icon-plus.svg" class="mr-15 la-ml-0 withheight24" (click)="onAddRowSweetend()">
+                                                    <span class="font-weight-500 text-Watercourse"> {{lang.popup2.addrow}}</span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!--latest change strats here--->
+
+                                    <tr class="bg-Watercourse-opa1">
+
+                                        <td class="font-20  font-weight-bold font-20 border-0" colspan="4">
+                                            {{lang.popup.total}}
+                                        </td>
+                                        <td class="font-16  border-0 font-weight-500 text-right ar-text-right">
+                                            {{totalQuantity | number:'1.2-3' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16  border-0 font-weight-500 text-right ar-text-right">
+                                            {{totalRSP | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16 border-0 font-weight-500 text-right ar-text-right">
+                                            {{totalTRSP | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16 border-0 font-weight-500 text-right ar-text-right">
+                                            {{totalDueExciseTax | number:'1.2-2'}}
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div *ngIf="toboccotiles">
+            <h3 class="mb-24 font-weight-bold">{{lang.step3.heading3}}</h3>
+            <div class="table mb-40 table-responsive custom-width-table custom-scrollbar">
+                <form [formGroup]="TobaccoFormGroup">
+                    <!-- <div formArrayName="fields" *ngFor="let field of formsControls2; let i = index;">
+                    <div [formGroupName]="i"> -->
+                    <div>
+                        <div>
+                            <table width="100%" class="table-bordered-less custom-width-table">
+                                <thead>
+                                    <tr>
+                                        <th class="font-12 text-Eerie-Black font-weight-normal">
+
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang.step3.table1.tr1.th1}}
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang.step3.table1.tr1.th2}}
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold ">
+                                            {{lang.step3.table1.tr1.th3}}
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang.step3.table1.tr1.th4}}
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            {{lang.step3.table1.tr1.th5}}
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            <div class="d-flex align-items-start justify-content-end text-nowrap la-row-reverse">
+                                                <span>{{lang.step3.table1.tr1.th6}}</span>
+                                                <a href="#" data-toggle="modal" data-target="#toolTips" (click)="infoNum=3">
+                                                    <img src="assets/images/icon-information-16.svg" class="ml-10">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            <div class="d-flex align-items-start text-nowrap la-row-reverse">
+                                                <span>{{lang.step3.table1.tr1.th7}}</span>
+                                                <a href="#" data-toggle="modal" data-target="#toolTips" (click)="infoNum=4">
+                                                    <img src="assets/images/icon-information-16.svg" class="ml-10">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            <div class="d-flex align-items-start text-nowrap la-row-reverse">
+                                                <span>{{lang.step3.table1.tr1.th8}}</span>
+                                                <a href="#" data-toggle="modal" data-target="#toolTips" (click)="infoNum=5">
+                                                    <img src="assets/images/icon-information-16.svg" class="ml-10">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            <div class="d-flex align-items-start text-nowrap la-row-reverse">
+                                                <span>{{lang.step3.table1.tr1.th9}}</span>
+                                                <a href="#" data-toggle="modal" data-target="#toolTips" (click)="infoNum=6">
+                                                    <img src="assets/images/icon-information-16.svg" class="ml-10">
+                                                </a>
+                                            </div>
+                                        </th>
+                                        <th class="font-16 text-Eerie-Black font-weight-bold">
+                                            <div class="d-flex align-items-start text-nowrap la-row-reverse">
+                                                <span> {{lang.step3.table1.tr1.th10}}</span>
+                                                <a href="#" data-toggle="modal" data-target="#toolTips" (click)="infoNum=7">
+                                                    <img src="assets/images/icon-information-16.svg" class="ml-10">
+                                                </a>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="fields">
+                                    <tr *ngFor="let field of formsControls2?.controls; let i = index;" [formGroupName]="i">
+                                        <td class="font-16 text-center">
+                                            <a>
+                                                <img src="assets/images/icon-delete-normal.svg" (click)="deleteTobacco(i)">
+                                            </a>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <div class="form-group mb-0">
+                                                <div>
+                                                    <select dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" class="form-control card input-161" formControlName="ItemType" (change)="ItemTypeChange($event, i)">
+                                                        <option value="">{{lang.selectoption.t1}}</option>
+                                                        <option *ngFor="let itemType of ItemTypesdropdown"
+                                                            [value]="itemType.ItemSr">
+                                                            {{ itemType.ItemDes }}</option>
+                                                    </select>
+
+                                                    <!-- <img src="assets/images/icon-dropdown-up.svg"
+                                                        class="table-dropdown-arrow small position-absolute" alt=""> -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <div class="form-group mb-0">
+                                                <div>
+                                                    <select dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" class="form-control card input-161" formControlName="description" (change)="descriptionChange($event)">
+                                                        <option value="">{{lang.selectoption.t1}}</option>
+                                                        <option *ngFor="let description of Descriptiondropdown1[i]"
+                                                            [value]="description.DesCode">
+                                                            {{ description.ProductDes }}</option>
+                                                    </select>
+                                                    <!-- <img src="assets/images/icon-dropdown-up.svg"
+                                                        class="table-dropdown-arrow small position-absolute" alt=""> -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <div class="form-group mb-0">
+                                                <div>
+                                                    <select dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" class="form-control card input-161" formControlName="measuringunitstobocco" (change)="measuringunitChange($event, i)" name="measuringunitstobocco">
+                                                        <option value="">{{lang.selectoption.t1}}</option>
+                                                        <option *ngFor="let met of measuringunitstoboccosdrpdwn1[i]"
+                                                            [value]="met.Msehi">
+                                                            {{ met.Text }}</option>
+                                                    </select>
+                                                    <!-- <img src="assets/images/icon-dropdown-up.svg"
+                                                        class="table-dropdown-arrow small position-absolute" alt=""> -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <input type="text" placeholder="0.00" formControlName="met" disabled class="input165 text-right d-inline card w-124 font-weight-normal">
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <input type="text" placeholder="0.000" formControlName="quanitityToboco" (blur)="totalToboccoCalculations()" pattern="^\d{0,6}(\.\d{0,3})?$" mask="separator" thousandSeparator="," (keydown)="GlobalNumberAllow($event)" [ngClass]="{'border-red':field.get('quanitityToboco').hasError('pattern')||field.get('quanitityToboco').value<0&&field.get('quanitityToboco').touched}"
+                                                class="input165 text-right d-inline card w-124 font-weight-normal">
+                                            <div class="text-danger" *ngIf="field.get('quanitityToboco').value==0&&field.get('quanitityToboco').touched">
+                                                {{lang.inputrange.r2}}
+                                            </div>
+                                            <div class="text-danger" *ngIf="field.get('quanitityToboco').value<0 || field.get('quanitityToboco').value>999999.999">
+                                                {{lang.inputrange.r3}}
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <input type="text" placeholder="0.00" formControlName="retailpricetoboco" (blur)="totalToboccoCalculations()" pattern="^\d{0,9}(\.\d{0,2})?$" mask="separator" thousandSeparator="," (keydown)="GlobalNumberAllow($event)" [ngClass]="{'border-red':field.get('retailpricetoboco').hasError('pattern')}"
+                                                class="input165 text-right d-inline card font-weight-normal">
+                                            <div class="text-danger" *ngIf="field.get('retailpricetoboco').value<0 || field.get('retailpricetoboco').value>999999999.99">
+                                                    {{lang.inputrange.r3}}
+                                            </div>
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <label class="text-Gray font-16 font-weight-500">{{field.get('totalsellingPriceToboco').value
+                                                | number:'1.2-2' | mask:'separator':','}}</label>
+
+                                            <!-- <label formControlName="totalsellingPriceToboco">0.00</label> -->
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <label class="text-Gray font-16 font-weight-500">{{field.get('exciseTax').value
+                                                | number:'1.2-2' | mask:'separator':','}}</label>
+
+                                            <!-- <label formControlName="exciseTax">0.00</label> -->
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <label class="text-Gray font-16 font-weight-500">{{field.get('exciseTaxtomet').value
+                                                | number:'1.2-2' | mask:'separator':','}}</label>
+
+                                            <!-- <label formControlName="exciseTaxtomet">0.00</label> -->
+                                        </td>
+                                        <td class="font-16 text-right">
+                                            <label class="text-Gray font-16 font-weight-500">{{field.get('dueexciseTaxToboco').value
+                                                | number:'1.2-2' | mask:'separator':','}}</label>
+
+                                            <!-- <label formControlName="dueexciseTaxToboco">0.00</label> -->
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="font-16 text-center" colspan="11">
+                                            <div class="d-flex align-items-center">
+                                                <a>
+                                                    <img src="assets/images/icon-plus.svg" class="mr-15 la-ml-0 withheight24" (click)="onAddRowTobacco()">
+                                                    <span class="font-weight-500 text-Watercourse"> {{lang.popup2.addrow}}</span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!--latest change strats here--->
+
+                                    <tr class="bg-Watercourse-opa1">
+
+                                        <td class="font-20  font-weight-bold font-20 border-0" colspan="4">
+                                            {{lang.popup.total}}
+                                        </td>
+                                        <td class="font-16  border-0 font-weight-500 text-right ar-text-right">
+                                            {{totalMET | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16  border-0 font-weight-500 text-right ar-text-right">
+                                            {{totaltoboccoQty | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16 border-0 font-weight-500 text-right ar-text-right">
+                                            {{totaltoboccoRsp | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16 border-0 font-weight-500 text-right ar-text-right">
+                                            {{totaltoboccoTrsp | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16  border-0 font-weight-500 text-right ar-text-right">
+                                            {{totaltoboccoExciseTax | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16 border-0 font-weight-500 text-right ar-text-right">
+                                            {{totalTaxtoMET | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                        <td class="font-16 border-0 font-weight-500 text-right ar-text-right">
+                                            {{totaltoboccoDueExciseTax | number:'1.2-2' | mask:'separator':','}}
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card  card-shadow-none mb-24">
+
+
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="font-16 mb-0 text-Eerie-Black">{{lang.step3.card.c1}}</p>
+                        <!-- <div class="text-Eerie-Black font-16 font-weight-500">{{PeronalDetailsObj2.SsbExcise}}</div> -->
+                        <div class="text-Eerie-Black font-16 font-weight-500">{{totalDueExciseTax | number:'1.2-2' | mask:'separator':','}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="font-16 mb-0 text-Eerie-Black">{{lang.step3.card.c6}}</p>
+                        <!-- <div class="text-Eerie-Black font-16 font-weight-500">{{PeronalDetailsObj2.TobacoExcise}}</div> -->
+                        <div class="text-Eerie-Black font-16 font-weight-500">{{totaltoboccoDueExciseTax | number:'1.2-2' | mask:'separator':','}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-y-14">
+                <div class="text-Eerie-Black font-20 font-weight-bold ">{{lang.step3.card.c2}}</div>
+                <!-- <div class="text-Eerie-Black font-16 font-weight-500">{{PeronalDetailsObj2.TotalExcise}}</div> -->
+                <div class="text-Eerie-Black font-16 font-weight-500">{{totalDueExciseTax*1 + totaltoboccoDueExciseTax*1 | number:'1.2-2' | mask:'separator':','}}</div>
+
+            </div>
+        </div>
+        <div class="card  card-shadow-none mb-24">
+
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="font-16 mb-0 text-Eerie-Black">{{lang.step3.card.c3}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">{{latePaymentPnaltyObj.LateFillpenalty || 0.00 | number:'1.2-2'| mask:'separator':','}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="font-16 mb-0 text-Eerie-Black">{{lang.step3.card.c4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">{{latePaymentPnaltyObj.LatePaypenalty || 0.00 | number:'1.2-2' | mask:'separator':','}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-14 mb-56">
+            <div class="text-Eerie-Black font-20 font-weight-bold ">
+                {{lang.step3.card.c5}}
+            </div>
+            <!-- <div class="font-16 font-weight-500 text-Eerie-Black">{{latePaymentPnaltyObj.TotalExcise}}</div> -->
+            <div class="font-16 font-weight-500 text-Eerie-Black">{{latePaymentPnaltyObj.LateFillpenalty*1 + latePaymentPnaltyObj.LatePaypenalty*1 + totalDueExciseTax*1 + totaltoboccoDueExciseTax*1 || 0.00 | number:'1.2-2' | mask:'separator':','}}</div>
+
+        </div>
+        <div class="mb-56 ">
+            <button class="btn btn-primary mr-15" [disabled]="!SweetenedBeveragesFormGroup.valid && !TobaccoFormGroup.valid" (click)="SaveasDraft()">{{lang.btns.btnsaveasdraft}}</button>
+            <!-- <button class="btn btn-primary" [disabled]="totalDueExciseTax == 0 && totaltoboccoDueExciseTax == 0" (click)="Step=4">{{lang.btns.btncontinue}}</button> -->
+            <button class="btn btn-primary" [disabled]="(!SweetenedBeveragesFormGroup.valid && !TobaccoFormGroup.valid)" (click)="Step=4">{{lang.btns.btncontinue}}</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="Step==10" class="chat-main max-width-860 position-fixed" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="collapse chat d-flex custom card mb-24 " id="demo">
+        <ul class="nav nav-pills nav-stacked col-md-4  d-block border-right-whisper-1 pr-0">
+            <li class="active">
+                <a href="#tab_b" data-toggle="pill" class="d-flex align-items-center justify-content-between p-24">
+                    <div class="inner">
+                        <p class="lh-10  text-Eerie-Black mb-0">{{lang.step10.label.l1}}</p>
+                        <label class="font-12 text-Gray">{{lang.step10.label.l2}}</label>
+                    </div>
+                    <div class="inner position-relative">
+                        <img src="assets/images/icon-arrow-right-white.svg" class="position-absolute active-arrow" alt="" />
+                        <img src="assets/images/icon-arrow-right.svg" class="" alt="" />
+                    </div>
+                </a>
+            </li>
+            <div class="border-bottom-whisper"> </div>
+            <li>
+                <a href="#tab_a" data-toggle="pill" class="d-flex align-items-center justify-content-between p-24">
+                    <div class="inner">
+                        <p class="lh-10  text-Eerie-Black mb-0">{{lang.step10.label.l3}}</p>
+                        <label class="font-12 text-Gray">{{lang.step10.label.l4}}</label>
+                    </div>
+                    <div class="inner position-relative">
+                        <img src="assets/images/icon-arrow-right-white.svg" class="position-absolute active-arrow" alt="" />
+                        <img src="assets/images/icon-arrow-right.svg" class="" alt="" />
+                    </div>
+                </a>
+            </li>
+            <div class="border-bottom-whisper"> </div>
+            <li>
+                <a href="#tab_b" data-toggle="pill" class="d-flex align-items-center justify-content-between p-24">
+                    <div class="inner">
+                        <p class="lh-10  text-Eerie-Black mb-0"> {{lang.step10.label.l5}}</p>
+                        <label class="font-12 text-Gray"> {{lang.step10.label.l6}}</label>
+                    </div>
+                    <div class="inner position-relative">
+                        <img src="assets/images/icon-arrow-right-white.svg" class="position-absolute active-arrow" alt="" />
+                        <img src="assets/images/icon-arrow-right.svg" class="" alt="" />
+                    </div>
+                </a>
+            </li>
+            <div class="border-bottom-whisper"> </div>
+
+        </ul>
+        <div class="tab-content col-md-8 px-0">
+            <div class="tab-pane active" id="tab_a">
+                <div class="chat-inner p-24">
+                    <div class="d-flex align-items-center justify-content-between mb-24">
+                        <h3 class="mb-0">{{lang.step10.heading}}</h3>
+                        <div class="default-line"></div>
+                    </div>
+                    <div class="border-bottom-whisper mb-16"> </div>
+                    <div class="user-name d-flex align-items-center mb-16">
+
+                        <img src="assets/images/icon-partial-logo.svg" class="mr-15" alt="" />
+                        <div class="inner">
+                            <p class="font-16 font-weight-bold mb-8 lh-0">{{lang.step10.messages.chatpersonname1}}</p>
+                            <label class="font-12 text-Gray mb-0">{{lang.step10.messages.messagetime1}}</label>
+                        </div>
+                    </div>
+                    <div class="message mb-24">
+                        {{lang.step10.messages.message1}}
+                    </div>
+                    <div class="border-bottom-whisper mb-24"> </div>
+
+                    <div class="d-flex justify-content-end">
+                        <div class="user-name d-flex align-items-center mb-16">
+                            <div class="inner mr-15 text-right">
+                                <p class="font-16 font-weight-bold mb-8 lh-0"> {{lang.step10.messages.chatpersonname2}}</p>
+                                <label class="font-12 text-Gray mb-0">{{lang.step10.messages.chatpersonname2}}</label>
+                            </div>
+                            <img src="assets/images/icon-chat-user.svg" class="" alt="" />
+
+                        </div>
+                    </div>
+                    <div class="message mb-24 text-right d-block mb-56">
+                        {{lang.step10.messages.message2}}
+                    </div>
+                    <div class="mb-20 d-flex"></div>
+                    <div class="form-group mb-0 position-relative w-100">
+                        <input type="text" class="form-control card" placeholder="Type Something">
+                        <img src="assets/images/icon-send.svg" class="position-absolute send-icon" alt="" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- tab content -->
+    </div>
+    <!-- end of container -->
+    <div *ngIf="Step==9" class="d-flex justify-content-end">
+        <div class="notes cursor-pointer" data-toggle="collapse" data-target="#demo">
+            <a class="d-flex font-weight-bold font-16 text-white align-items-center">
+                <img src="assets/images/icon-calender-normal.svg" class="mr-15" alt=""> {{lang.btns.btnotes}}
+                <!--<span class="badge badge-light d-flex align-items-center justify-content-center text-white font-12 position-absolute bg-Shamrock">1</span>!-->
+            </a>
+
+        </div>
+    </div>
+</div>
+<!-- Attachments Step -->
+<div *ngIf="Step==4" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="mb-24">
+            <a (click)="Step=1" class="text-Gray">{{lang.creamburds.c1}} <span class="ar-direction-align"> > </span>  {{lang.creamburds.c2}} <span class="ar-direction-align"> > </span> {{lang.creamburds.c3}} <span class="ar-direction-align"> > </span> </a>            {{lang.creamburds.c4}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+
+            <a class="text-Watercourse d-flex font-weight-bold align-items-center flex-direction-inherit">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-dir-reverse" alt="" (click)="Step=3">{{lang.direction.back}}
+            </a>
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative row-reverse">
+                    <li>
+                        <a (click)="Step=2" class="active">
+                            <img src="assets/images/icon-wcheck.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="Step=3" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                    </li>
+                    <li>
+                        <a (click)="Step=4;" class="active">3</a>
+                    </li>
+                    <li>
+                        <a (click)="Step=8;">4</a>
+                    </li>
+                    <li>
+                        <a (click)="Step=5;">5</a>
+                    </li>
+                    <li>
+                        <!-- (click)="Step=6;" -->
+                        <a class="pointer-none">6</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=2" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=3" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=4">
+                    <span></span>
+                </a>
+                <a (click)="step=5">
+                    <span></span>
+                </a>
+            </div> -->
+        </div>
+        <div class="d-flex justify-content-between mb-24 align-items-center">
+            <!--- VAT STEPS STARTS HERE --->
+            <div class="inner">
+                <h2 class="mb-0">{{lang.file.f5}}</h2>
+
+            </div>
+
+        </div>
+        <!--- VAT STEPS ENDS HERE --->
+        <div class="border-bottom-whisper mb-32"></div>
+        <div class="row d-flex mb-60 flex-dir-reserve">
+            <div class="col-sm-6" *ngFor="let obj of AttachSet">
+                <div class="cardh180 card mb-40 p-24 border-gray">
+                    <div class="d-flex justify-content-end "><img src="assets/images/icon-delete.svg" (click)="deleteFile(obj)" class="cursor-pointer"></div>
+                    <div class="d-flex align-items-center h-100 justify-content-center">
+                        <p class="m-0 font-weight-500 font-16 text-center">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'" src="assets/images/icon-pdf.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'" src="assets/images/icon-excel.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'" src="assets/images/icon-excel.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'" src="assets/images/icon-doc.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'" src="assets/images/icon-doc.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                            <!-- <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                            <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'" src="assets/images/icon-png.svg" class="mb-10">   -->
+                            <br /> {{obj.Filename}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+
+                <div class="cardh180 card mb-40 p-24 width100P  d-flex justify-content-center align-items-center border-gray-dashed position-relative">
+                    <input type="file" class="custom-upload-file  cursor-pointer position-absolute opacity-0 cardh219 d-flex align-items-center justify-content-center w-100" #inputFile (change)="fileUpload($event)">
+                    <div class="m-0 font-weight-500 font-16 text-center">
+                        <img src="assets/images/icon-plus.svg" class="mb-10 la-ml-0 withheight24"> <br>
+                        <p class="text-Watercourse font-weight-bold mx-5 plr-30 ">{{lang.file.f6}} </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card p-24 mb-56">
+            <div class="d-flex ar-text-left">
+                <img src="assets/images/icon-info.svg" class="mr-15" alt="">
+                <span class="font-12 text-Gray">
+                    {{lang.file.condition}}
+                </span>
+            </div>
+        </div>
+
+        <div class="mb-24">
+            <button class="btn btn-link mr-15" (click)="Step=8">{{lang.btns.btnskip}}</button>
+            <button class="btn btn-primary" (click)="Step=8">{{lang.btns.btncontinue}}</button>
+        </div>
+    </div>
+</div>
+
+<!-- Declaration -->
+<div *ngIf="Step==5" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <form [formGroup]="declarationFormGroup" (ngSubmit)="onSubmit()">
+            <div class="mb-24">
+                <a (click)="Step=1" class="text-Gray"> {{lang.creamburds.c1}} <span class="ar-direction-align"> > </span>  {{lang.creamburds.c2}} <span class="ar-direction-align"> > </span> {{lang.creamburds.c3}} <span class="ar-direction-align"> > </span> </a>                {{lang.creamburds.c4}}
+            </div>
+            <div class="mb-32 d-flex justify-content-between align-items-center">
+
+                <a class="text-Watercourse d-flex font-weight-bold align-items-center flex-direction-inherit">
+                    <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-dir-reverse" alt="" (click)="Step=8">{{lang.direction.back}}
+                </a>
+                <div class="vat-steps">
+                    <ul class="p-0 m-0 list-style-none d-flex position-relative row-reverse">
+                        <li>
+                            <a (click)="Step=2" class="active">
+                                <img src="assets/images/icon-wcheck.svg" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a (click)="Step=3" class="active">
+                                <img src="assets/images/icon-wcheck.svg" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a (click)="Step=4;" class="active"> <img src="assets/images/icon-wcheck.svg" alt=""> </a>
+                        </li>
+                        <li>
+                            <a (click)="Step=8;" class="active"> <img src="assets/images/icon-wcheck.svg" alt=""> </a>
+                        </li>
+                        <li>
+                            <a (click)="Step=5;" class="active">5</a>
+                        </li>
+                        <li>
+                            <!-- (click)="Step=6;" -->
+                            <a class="pointer-none">6</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <div class="bullet-nav d-flex align-items-center">
+                    <a (click)="step=2" class="active2">
+                        <span></span>
+                    </a>
+                    <a (click)="step=3" class="active2">
+                        <span></span>
+                    </a>
+                    <a (click)="step=4" class="active2">
+                        <span></span>
+                    </a>
+                    <a (click)="step=5">
+                        <span></span>
+                    </a>
+                </div> -->
+            </div>
+            <div class="mb-24">
+                <h2 class="mb-12">{{lang.step3.step5.heading}}</h2>
+                <div class="text-Gray font-16">{{lang.step3.step5.text}}
+                </div>
+            </div>
+            <div class="border-bottom-whisper mb-32"></div>
+            <div class="row mb-32">
+                <!-- <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>ID Type</label>
+                        <div class="custom-dropdown position-relative">
+                            <select type="text"  dir={{Direction}} class="selectpicker form-control default-arrow-hide card  w-100"
+                                formControlName="idType" (change)="idTypeSelect($event)">
+                                <option *ngFor="let idtype of IdTypes" [value]="idtype.Key">
+                                    {{ idtype.Key }}</option>
+                            </select>
+                            <img src="assets/images/icon-dropdown-up.svg" class="mr-10 position-absolute" alt="">
+                        </div>
+
+                        <div *ngIf="submitted && f.idType.errors" class="invalid-feedback">
+                            <div *ngIf="f.idType.errors.required">Required</div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <img src="assets/images/icon-dropdown-up.svg"
+                                class="table-dropdown-arrow small position-absolute" alt=""> -->
+                <div class="col-sm-6">
+                    <div class="form-group mb-24">
+                        <label>{{lang.step3.step5.labels.l1}}</label>
+                        <input type="text" class="form-control card ar-text-right" minlength="10" maxlength="10" placeholder="" mask="separator" thousandSeparator="" [ngClass]="{'border-red':declarationFormGroup.get('idNumber').hasError('minlength')|| (declarationFormGroup.get('idNumber').value.length==0&&declarationFormGroup.get('idNumber').touched)}"
+                            formControlName="idNumber">
+                        <div *ngIf="submitted && f.idNumber.errors" class="invalid-feedback">
+                            <div *ngIf="f.idNumber.errors.required">{{lang.step5.labels.l2}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.step5.labels.l3}}</label>
+                        <input type="text" class="form-control card ar-text-right" placeholder="" pattern="[a-zA-Z \s]*$" (keydown)="restrictFirstSpace($event, declarationFormGroup.get('contactPersonName').value)" [ngClass]="{'border-red': declarationFormGroup.get('contactPersonName').hasError('pattern')}"
+                            formControlName="contactPersonName">
+                        <div *ngIf="submitted && f.contactPersonName.errors" class="invalid-feedback">
+                            <div *ngIf="f.contactPersonName.errors.required">{{lang.step5.labels.l2}}</div>
+                        </div>
+                        <div class="text-danger" *ngIf="declarationFormGroup.get('contactPersonName').hasError('pattern')">
+                            {{lang.step3.step5.labels.l8}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.step5.labels.l4}}</label>
+                        <input type="text" class="form-control card ar-text-right" placeholder="" pattern="[a-zA-Z \s]*$" (keydown)="restrictFirstSpace($event, declarationFormGroup.get('occupation').value)" formControlName="occupation" [ngClass]="{'border-red': declarationFormGroup.get('occupation').hasError('pattern')}">
+                        <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                            <div *ngIf="f.occupation.errors.required">{{lang.step5.labels.l2}}</div>
+                        </div>
+                        <div class="text-danger" *ngIf="declarationFormGroup.get('occupation').hasError('pattern')">
+                            {{lang.step3.step5.labels.l8}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group mb-0">
+                        <label>{{lang.step3.step5.labels.l5}}</label>
+                        <input type="text" class="form-control card ar-text-right" disabled formControlName="declarationDate">
+                        <div *ngIf="submitted && f.declarationDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.declarationDate.errors.required">{{lang.step5.labels.l2}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex mb-56 ar-text-left">
+                <label class="custom-checkBox d-flex align-items-center h-24 mb-0">
+                    <span class="font-12 font-weight-500 mt-4">{{lang.step3.step5.labels.l7}} 
+                    </span>
+                    <input type="checkbox" [checked]="declareClick==true" (change)="declareChange($event)">
+                    <span class="checkmark checkmark-24 "></span>
+                </label>
+            </div>
+            <div class="mb-24">
+                <button class="btn btn-primary mb-24" [disabled]="(!declareClick)||(!declarationFormGroup.valid)" (click)="Step=6;continueSummary()">{{lang.btns.btncontinue}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- summary -->
+<div *ngIf="Step==6" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="mb-24">
+            <a (click)="Step=1" class="text-Gray"> {{lang.creamburds.c1}} <span class="ar-direction-align"> > </span>  {{lang.creamburds.c2}} <span class="ar-direction-align"> > </span> {{lang.creamburds.c3}} <span class="ar-direction-align"> > </span> </a>            {{lang.creamburds.c4}}
+        </div>
+        <div class="mb-32 d-flex justify-content-between align-items-center">
+            <a class="text-Watercourse d-flex font-weight-bold align-items-center flex-direction-inherit">
+                <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-dir-reverse" alt="" (click)="Step=5">{{lang.direction.back}}
+            </a>
+            <div class="vat-steps">
+                <ul class="p-0 m-0 list-style-none d-flex position-relative row-reverse">
+                    <li>
+                        <a (click)="Step=2" class="active">
+                            <img src="assets/images/icon-wcheck.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="Step=3" class="active">
+                            <img src="assets/images/icon-wcheck.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="Step=4" class="active">
+                            <img src="assets/images/icon-wcheck.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="Step=8" class="active">
+                            <img src="assets/images/icon-wcheck.svg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="Step=5;" class="active"> <img src="assets/images/icon-wcheck.svg" alt=""> </a>
+                    </li>
+                    <li>
+                        <!-- (click)="Step=6;" -->
+                        <a class="active">6</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div class="bullet-nav d-flex align-items-center">
+                <a (click)="step=2" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=3" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=4" class="active2">
+                    <span></span>
+                </a>
+                <a (click)="step=5" class="active2">
+                    <span></span>
+                </a>
+            </div> -->
+
+        </div>
+        <div class="mb-24">
+            <h2 class="mb-12">{{lang.step3.step6.heading}} </h2>
+            <div class="text-Gray font-16">{{lang.step3.step6.text}} </div>
+        </div>
+        <div class="border-bottom-whisper mb-32"></div>
+        <div class="card  card-shadow-none mb-24">
+            <div class="p-24">
+                <h3 class="d-flex align-items-center mb-0 ar-text-left">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-user.svg" class=""
+                            alt=""></span> {{lang.step3.step6.heading1}}
+                </h3>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step3.step6.labels.l1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- Company ID -->
+                        <!-- {{PeronalDetailsObj2.Type || '-'}} -->
+                        {{idDisplayName || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step3.step6.labels.l2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- 1234567890 -->
+                        {{PeronalDetailsObj2.Idnumber || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step3.step6.labels.l3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- 0987654321 -->
+                        {{PeronalDetailsObj2.Taxpayer || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step3.step6.labels.l4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- iHardy -->
+                        {{PeronalDetailsObj2.NameOrg1 || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <!-- <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step3.step6.labels.l5}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.NameFirst || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step3.step6.labels.l6}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{PeronalDetailsObj2.NameLast || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div> -->
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step3.step6.labels.l7}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- 1234567890 -->
+                        {{PeronalDetailsObj2.CrNumber || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step3.step6.labels.l8}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- iHardy -->
+                        {{PeronalDetailsObj2.OutletName || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step3.step6.labels.l9}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- zaedhardy@ihardy.com -->
+                        {{PeronalDetailsObj2.SmtpAddr || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step3.step6.labels.l10}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- 0009668558812 -->
+                        {{PeronalDetailsObj2.MobNumber || '-'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="p-24 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-note.svg" class=""
+                            alt=""></span> {{lang.step3.step6.card.heading}}
+                </h3>
+                <a class="text-Watercourse font-weight-bold font-16" (click)="Step=3">{{lang.btns.btnedit}}</a>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+
+            <div class="row  p-24">
+                <!-- <div class="col-md-12">
+                    <h3 class="mb-16">Excise Payable Details</h3>
+                </div> -->
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step3.step6.card1.labels.l1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{ totalDueExciseTax | number:'1.2-2'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step3.step6.card1.labels.l2}} </p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{totaltoboccoDueExciseTax | number:'1.2-2'}}
+                    </div>
+                </div>
+            </div>
+            <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-y-14">
+
+                <div class="text-Eerie-Black font-16">
+                    {{lang.step3.step6.card1.labels.l3}}
+                </div>
+                <div class="text-Eerie-Black font-20 font-weight-bold">
+                    <!-- {{TotalExcise | number:'1.2-2'}} -->
+                    {{totalDueExciseTax*1 + totaltoboccoDueExciseTax*1 | number:'1.2-2'}}
+                </div>
+            </div>
+        </div>
+
+        <div class="card  card-shadow-none mb-24">
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="font-16 mb-0 text-Eerie-Black">{{lang.step3.step6.card1.labels.l4}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">{{latePaymentPnaltyObj.LateFillpenalty}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="font-16 mb-0 text-Eerie-Black">{{lang.step3.step6.card1.labels.l5}}</p>
+                        <div class="text-Eerie-Black font-16 font-weight-500">{{latePaymentPnaltyObj.LatePaypenalty}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-Watercourse-opa1 d-flex justify-content-between p-24 border-radius-14 mb-24">
+            <div class="text-Eerie-Black font-16 ">
+                {{lang.step3.step6.card1.labels.l6}}
+            </div>
+            <div class="font-20 font-weight-bold text-Eerie-Black">
+                {{latePaymentPnaltyObj.LateFillpenalty*1 + latePaymentPnaltyObj.LatePaypenalty*1 + TotalExcise*1 + totalDueExciseTax*1 + totaltoboccoDueExciseTax*1 | number:'1.2-2' | mask:'separator':','}}
+            </div>
+        </div>
+        <div class="card  mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-attach.svg"
+                                class="" alt=""></span> {{lang.file.f7}}
+                    </h3>
+                    <span class="text-Watercourse font-weight-bold cursor-pointer" (click)="Step=4">{{lang.btns.btnedit}}</span>
+                </div>
+            </div>
+
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-12">
+                    <div *ngFor="let obj of AttachSet">
+                        <div class="d-flex">
+                            <p class="m-0 font-weight-500 font-16 text-center">
+                                <span class="mr-3">{{obj.Filename}}</span>
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PDF'" src="assets/images/icon-pdf.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLSX'" src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='XLS'" src="assets/images/icon-excel.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOC'" src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='DOCX'" src="assets/images/icon-doc.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='JPEG'" src="assets/images/icon-jpg.svg" class="mb-10">
+                                <img *ngIf="obj.FileExtn.toString().toUpperCase()=='PNG'" src="assets/images/icon-png.svg" class="mb-10">
+                            </p>
+                        </div>
+                        <div *ngIf="obj.length < 0">
+                            N/A
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card mb-24 card-shadow-none">
+            <div class="pxy-2412">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="d-flex align-items-center mb-0">
+                        <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-receipt.svg" class=""
+                                alt=""></span> {{lang?.NotesStep.p}}
+                    </h3>
+                    <span class="text-Watercourse font-weight-bold cursor-pointer" (click)="Step=8">{{lang.btns.btnedit}}</span>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="mr-24">
+                    {{notesAttached}}
+                </div>
+            </div>
+            <div class="row p-24" *ngIf="notesAttached == null ">
+                <div class="mr-24">
+                    No Data
+                </div>
+            </div>
+
+        </div>
+        <div class="card  card-shadow-none mb-56">
+            <div class="p-24 d-flex justify-content-between align-items-center">
+                <h3 class="d-flex align-items-center mb-0">
+                    <span class="ellipse48 bg-Watercourse-opa1 mr-15"><img src="assets/images/icon-declaration.svg"
+                            class="" alt=""></span> {{lang.step3.step6.card2.heading}}
+                </h3>
+                <a class="text-Watercourse font-weight-bold font-16" (click)="Step=5">{{lang.btns.btnedit}}</a>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+            <div class="row p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray  mb-0">{{lang.step3.step6.card2.labels.l1}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        {{declarationFormGroup.value.idNumber || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0">{{lang.step3.step6.card2.labels.l2}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- Q1720187 -->
+                        {{declarationFormGroup.value.contactPersonName || '-'}}
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom-whisper"> </div>
+
+            <div class="row  p-24">
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step3.step6.card2.labels.l3}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- Zaed Hardy -->
+                        {{declarationFormGroup.value.occupation || '-'}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <p class="font-16 text-Gray mb-0"> {{lang.step3.step6.card2.labels.l4}}</p>
+                    <div class="text-Eerie-Black font-16 font-weight-500">
+                        <!-- Manager -->
+                        {{declarationFormGroup.value.declarationDate || '-'}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="mb-24">
+            <!-- <button class="btn btn-primary" (click)="Step=6">Continue</button> -->
+            <button class="btn btn-primary" (click)="submit()">{{lang.btns.btnsubmit}}</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="Step==7" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="container" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+        <div class="vat-steps">
+            <!-- <ul class="p-0 m-0 list-style-none d-flex position-relative">
+                <li>
+                    <a (click)="step=2" class="active">
+                        <img src="assets/images/icon-wcheck.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a (click)="step=3" class="active">
+                        <img src="assets/images/icon-wcheck.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a (click)="step=4" class="active">
+                        <img src="assets/images/icon-wcheck.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a (click)="step=4" class="active">
+                        <img src="assets/images/icon-wcheck.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a (click)="step=6;" class="active">5</a>
+                </li>
+            </ul> -->
+        </div>
+        <div class="text-right">
+            <!-- (click)="Step=1; AgreeClick=false;" -->
+            <a [routerLink]="['/mains/tax']" class="btn btn-link mb-24 d-inline-block">{{lang.direction.back1}}</a>
+        </div>
+        <div class="text-center">
+            <div class="text-center mb-40">
+                <img src="assets/images/icon-success.svg" alt="">
+            </div>
+            <h2 class="mb-12" *ngIf="!isrefund">{{lang.step7.heading}}</h2>
+            <div class="text-Gray font-16 mb-24" *ngIf="!isrefund"></div>
+            <h2 class="mb-12" *ngIf="isrefund">{{lang.step7.text}}</h2>
+            <div class="text-Gray font-16 mb-24" *ngIf="isrefund">
+                {{lang.step7.heading1}}
+            </div>
+            <div class="pb-24">
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                       {{lang.step7.label.l1}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{submitObj?.Fbnum || '-'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.step7.label.l5}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{submitObj?.DecDate || '-'}}
+                    </span>
+                </div>
+                <div *ngIf='sadadDetails?.Zsopbel != ""' class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.step7.label.l2}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{sadadDetails?.Zsopbel || '-'}}
+                    </span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-16 item-cardetails">
+                    <span class="font-16 text-Gray  mb-0">
+                        {{lang.step7.label.l3}}
+                    </span>
+                    <span class="text-Eerie-Black font-16 font-weight-500">
+                        {{sadadDetails?.TotalDue || 0 | number:'1.2-2' | mask:'separator':','}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="font-16 text-Gray text-center max-width650 mx-auto" *ngIf="!isrefund">
+            {{lang.step7.label.l4}}
+        </div> -->
+
+        <div class="mb-24 pt-32 text-center  d-flex flex-column justify-content-center align-items-center">
+            <div *ngIf='sadadDetails?.Zsopbel == ""'>
+                <button class="btn btn-link mb-24 d-inline-block" (click)="onRefresh(submitObj?.Fbnum)">{{lang.btns.btnrefresh}}</button>
+            </div>
+            <div *ngIf='sadadDetails?.Zsopbel != "" '>
+                <button class="btn btn-primary mb-24 d-inline-block" (click)="DownloadInvoice()">{{lang.btns.btndwndackng}}</button>
+                <!-- <button class="btn btn-link d-inline-block" (click)="onDownloadForm()"> Download Form</button> -->
+            </div>
+
+        </div>
+    </div>
+    <!-- <div class="container d-flex align-items-center justify-content-center h-100vh">
+       
+        <div class="text-right mt-5">
+            <a class="btn btn-link mb-24 d-inline-block" href='http://localhost:4200/#/mains/returns'><span
+                    class="font-18"> > </span> Back to Returns</a>
+        </div>
+        <div class="inner">
+            <div class="text-center mb-56">
+                <div class="text-center mb-40">
+                    <img src="assets/images/icon-success.svg" alt="">
+                </div>
+                <h2 class="mb-12">Excise Tax Transitional Return</h2>
+                <div class="text-Gray font-16 mb-56">Excise Tax Transitional Return is submitted succesfully</div>
+            </div>
+            <div>
+                
+            </div>
+            <div class="mb-24 text-center  d-flex flex-column justify-content-center align-items-center">
+                <button class="btn btn-primary d-inline-block mb-40 "
+                    (click)="DownloadInvoice(submitObj.Fbnum)">Download Confirmation</button>
+
+            </div>
+        </div>
+    </div> -->
+</div>
+<!----Notes Step Starts Here ---->
+<div class="container" *ngIf="Step==8" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="mb-24">
+        <a (click)="Step=1" class="text-Gray">{{lang.creamburds.c1}} <span class="ar-direction-align"> > </span>  {{lang.creamburds.c2}} <span class="ar-direction-align"> > </span> {{lang.creamburds.c3}} <span class="ar-direction-align"> > </span> </a>        {{lang.creamburds.c4}}
+    </div>
+    <div class="mb-32 d-flex justify-content-between align-items-center">
+
+        <a class="text-Watercourse d-flex font-weight-bold align-items-center flex-direction-inherit">
+            <img src="assets/images/arrow-left-green.svg" class="mr-10 ar-dir-reverse" alt="" (click)="Step=4">{{lang.direction.back}}
+        </a>
+        <div class="vat-steps">
+            <ul class="p-0 m-0 list-style-none d-flex position-relative row-reverse">
+                <li>
+                    <a (click)="Step=2" class="active">
+                        <img src="assets/images/icon-wcheck.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a (click)="Step=3" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                </li>
+                <li>
+                    <a (click)="Step=4;" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                </li>
+                <li>
+                    <a (click)="Step=8;" class="active"><img src="assets/images/icon-wcheck.svg" alt=""></a>
+                </li>
+                <li>
+                    <a (click)="Step=5;">5</a>
+                </li>
+                <li>
+                    <!-- (click)="Step=6;" -->
+                    <a>6</a>
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="bullet-nav d-flex align-items-center">
+            <a (click)="step=2" class="active2">
+                <span></span>
+            </a>
+            <a (click)="step=3" class="active2">
+                <span></span>
+            </a>
+            <a (click)="step=4">
+                <span></span>
+            </a>
+            <a (click)="step=5">
+                <span></span>
+            </a>
+        </div> -->
+    </div>
+    <h2 class="mb-24">{{lang?.NotesStep.p}}</h2>
+    <textarea rows="9" cols="132" class="form-control ar-text-right" [(ngModel)]="notesAttached" (keyup)="SaveNotes()" (change)="SubmitNotes()">
+    </textarea>
+    <div class="text-danger" *ngIf="errorNotes">
+        Only 132 Characters allowed
+    </div>
+    <!-- [(ngModel)]="attachedNotes" [disabled]="disableInputs" -->
+    <div class="form-group pt-32">
+        <div class="mb-56 ">
+            <button class="btn btn-primary mr-15" (click)="SaveasDraft()" [disabled]="errorNotes">{{lang.btns.btnsaveasdraft}}</button>
+            <button class="btn btn-primary" [disabled]="errorNotes" (click)="Step=5">{{lang.btns.btncontinue}}</button>
+        </div>
+
+    </div>
+</div>
+<!---- Notes Step Ends Here ----->
+
+<div class="modal modal-filter fade" id="ConfirmSaveasDraft" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex max-width-600 align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        {{lang.btns.btnclear}}
+                    </span>
+                </button> -->
+                <div class="text-right modal-filter-head">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <img src="assets/images/icon-close-1.svg" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-24">{{lang.examplemodallabel.text}}</p>
+
+                <div class="form-group text-right ar-text-left">
+                    <button class="btn btn-primary ar-ml-0" data-dismiss="modal">{{lang.btns.btnok}}</button>
+
+                    <!-- <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="govProfitsCancel()">Cancel</button> -->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal modal-filter fade" id="ConfirmSubmitPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex max-width-600 align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        <img  alt="" src="assets/images/icon-close-1.svg">
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner p-15 mb-56 mt-5">
+                    <p class="text-center mb-24"> {{lang.examplemodalpopup1.calculation}} {{latePaymentPnaltyObj.LateFillpenalty*1 + latePaymentPnaltyObj.LatePaypenalty*1 + totalDueExciseTax*1 + totaltoboccoDueExciseTax*1 | number:'1.2-2' | mask:'separator':','}} {{lang.examplemodalpopup1.calculation1}}
+                    </p>
+                </div>
+                <div class="form-group text-right d-flex justify-content-end ar-justify-content-start">
+                    <button class="btn btn-primary mr-15" data-dismiss="modal" (click)="Step=7; confirmSubmit()">{{lang.btns.btnok}}</button>
+
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="Step=6">{{lang.btns.btncancel}}</button>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-filter fade" id="ConfirmPopupSB" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex max-width-600 align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        {{lang.btns.btnclear}}
+                    </span>
+                </button> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="assets/images/icon-close-1.svg" alt="">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner p-15 mb-56 mt-5">
+                    <p class="text-center mb-24"> {{lang.popup2.condition}}</p>
+                </div>
+                <div class="form-group text-right d-flex justify-content-end la-justify-content-start">
+                    <button class="btn btn-primary mr-15" data-dismiss="modal" (click)="sweetenedConfirmOk()">{{lang.btns.btnok}}</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="Sweetendtiles=true">{{lang.btns.btncancel}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-filter fade" id="ConfirmPopupTP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex max-width-600 align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        <img  alt="" src="assets/images/icon-close-1.svg">
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner p-15 mb-56 mt-5">
+                    <p class="text-center mb-24">{{lang.popup2.condition}}</p>
+                </div>
+                <div class="form-group text-right d-flex justify-content-end la-justify-content-start">
+                    <button class="btn btn-primary mr-15" data-dismiss="modal" (click)="toboccoConfirmOk()">{{lang.btns.btnok}}</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="toboccotiles=true">{{lang.btns.btncancel}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-filter fade" id="submitSuccessPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex max-width-600 align-items-center height100VH my-0 mx-auto justify-content-center" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        <img  alt="" src="assets/images/icon-close-1.svg">
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center mb-24">{{lang.popup2.condition1}} {{submitObj.Fbnum}}</p>
+
+                <div class="form-group text-right ar-text-left">
+                    <button class="btn btn-primary mr-15" data-dismiss="modal">{{lang.btns.btnok}}</button>
+
+                    <!-- <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="govProfitsCancel()">Cancel</button> -->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- PAYMENT HISTORY MODAL STARTS HERE -->
+<div class="modal " id="paymenthistory" tabindex="-1" role="dialog" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog modal-dialog-xlarge " role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        <img  alt="" src="assets/images/icon-close-1.svg">
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body px-60">
+
+                <div>
+
+                </div>
+                <div class="table mb-24 border-top-whisper card overflow-auto">
+                    <div class="p-24 d-flex align-items-center justify-content-between">
+                        <h3 class="d-flex align-items-center text-center mb-0"> {{lang.paymenthistory1popup.heading}}</h3>
+                        <div>
+
+                            <a data-toggle="collapse" href="#togglePayHis" role="button" aria-expanded="true" aria-controls="togglePayHis" class="">
+                                <img src="./images/icon-arrow-up.svg" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="multi-collapse collapse show " id="togglePayHis">
+                        <table width="100%" class="table-bordered table-bordered-less cutsom-table-width">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        {{lang.paymenthistory1popup.table.tr1.th1}}
+                                    </th>
+                                    <th>
+                                        {{lang.paymenthistory1popup.table.tr1.th2}}
+                                    </th>
+                                    <th>{{lang.paymenthistory1popup.table.tr1.th3}}</th>
+                                    <th>{{lang.paymenthistory1popup.table.tr1.th4}}</th>
+                                    <th>{{lang.paymenthistory1popup.table.tr1.th5}}</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="paymentHistoryObj.length==0">
+                                <td colspan="5" class="text-Gray text-center font-16 font-weight-500">
+                                    {{lang.paymenthistory1popup.table.tr1.td1}}
+                                </td>
+                            </tbody>
+                            <tbody>
+                                <tr *ngFor="let payment of paymentHistoryObj">
+                                    <td>
+                                        <div class="text-Gray font-16 font-weight-500">{{payment.Persl}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-Gray font-16 font-weight-500">{{payment.Sopbel}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-Gray font-16 font-weight-500">{{payment.Zbetrh | number:'1.2-2' | mask:'separator':','}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-Gray font-16 font-weight-500">{{payment.Betrh | number:'1.2-2' | mask:'separator':','}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-Gray font-16 font-weight-500"></div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="form-group text-right ar-text-left mb-0">
+                    <button class="btn btn-primary ar-ml-0" data-dismiss="modal" aria-label="Close">{{lang.btns.btnclose}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- PAYMENT HISTORY MODAL ENDS HERE -->
+
+<div class="modal modal-filter fade" id="toolTips" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" dir={{Direction}} [ngClass]="{'lang-arabic':direction=='rtl'}">
+    <div class="modal-dialog d-flex align-items-center justify-content-center height100VH my-0 mx-auto" role="document">
+        <div class="modal-content">
+            <!-- <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="material-icons font-28">
+                        {{lang.btns.btnclear}}
+                    </span>
+                </button>
+            </div> -->
+            <div class="text-right modal-filter-head">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img src="assets/images/icon-close-1.svg" alt="">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner p-15 mt-5 mb-56">
+                    <p *ngIf="infoNum == 1">
+                        {{lang.examplelabelmodal3.label1.l1}}
+                    </p>
+                    <p *ngIf="infoNum == 2">
+                        {{lang.examplelabelmodal3.label1.l2}}
+                    </p>
+                    <p *ngIf="infoNum == 3">
+                        {{lang.examplelabelmodal3.label1.l3}}
+                    </p>
+                    <p *ngIf="infoNum == 4">
+                        {{lang.examplelabelmodal3.label1.l4}}
+                    </p>
+                    <p *ngIf="infoNum == 5">
+                        {{lang.examplelabelmodal3.label1.l5}}
+                    </p>
+                    <p *ngIf="infoNum == 6">
+                        {{lang.examplelabelmodal3.label1.l6}}
+                    </p>
+                    <p *ngIf="infoNum == 7">
+                        {{lang.examplelabelmodal3.label1.l7}}
+                    </p>
+                </div>
+                <div class="form-group text-right ar-text-left">
+                    <button class="btn btn-primary ar-ml-0" data-dismiss="modal" aria-label="Close">{{lang.btns.btndone}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Excel upload confirmation starts -->
+
+<div dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" class="modal modal-filter fade" id="ExcelUploadConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex align-items-center justify-content-center height100VH my-0 mx-auto" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card-inner p-15 mt-5 mb-56">
+                    <p class="text-center mb-24">
+                        {{lang.confirmation.c3}}
+                    </p>
+                </div>
+                <div class="form-group text-right d-flex justify-content-center">
+                    <button class="btn btn-primary mr-15" data-dismiss="modal" (click)="ExcelUploadOk();">{{lang.btns.btnok}}</button>
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close" (click)="cancelUpload=true;ExcelUploadOk();">{{lang.btns.btncancel}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Excel upload confirmation ends -->
+
+
+<!-- Invalid File Popuup Starts -->
+
+<div dir={{direction}} [ngClass]="{'lang-arabic':direction=='rtl'}" class="modal modal-filter fade" id="excelUploadError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog d-flex align-items-center justify-content-center height100VH my-0 mx-auto" role="document">
+        <div class="modal-content">
+            <div class="text-right modal-filter-head">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img  alt="" src="assets/images/icon-close-1.svg">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-inner p-15 mt-5 mb-56">
+                    <p class="text-center mb-24">
+                        {{lang.confirmation.c4}}
+                    </p>
+                </div>
+                <div class="form-group text-right">
+                    <button class="btn btn-primary" data-dismiss="modal" aria-label="Close">{{lang.btns.btnok}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Invalid File Popuup Ends -->
+
+
+<notifier-container></notifier-container>

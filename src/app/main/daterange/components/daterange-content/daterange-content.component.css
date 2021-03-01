@@ -1,0 +1,100 @@
+.daterange-container {
+	position: relative;
+	width: 100%;
+	margin: 10px 0;
+	display: flex;
+	background: white;
+}
+
+.daterange-container.daterange-visible {
+	visibility: visible;
+}
+
+.daterange-container.daterange-hidden {
+	visibility: hidden;
+}
+
+.daterange-container .daterange-calendars {
+	display: flex;
+}
+
+.daterange-container .daterange-calendars .mat-calendar {
+	width: 296px;
+	margin: 5px;
+}
+
+.daterange-container .daterange-panel {
+	padding: 10px;
+}
+
+.daterange-container .daterange-panel .daterange-from-to {
+	display: flex;
+}
+
+.daterange-container .daterange-panel .daterange-from-to .mat-form-field {
+	flex: 1;
+	max-width: 90px;
+	justify-content: space-between;
+}
+
+.daterange-container .daterange-panel .daterange-from-to .mat-form-field:first-of-type {
+	margin-right: 5%;
+}
+
+.daterange-container .daterange-panel .daterange-actions {
+	padding: 10px;
+}
+
+.mat-calendar-body-today.mat-calendar-body-selected  {
+  /* border-color: rgba(0, 0, 0, 0.38); */
+  border: none !important;
+  border-radius: 100%;
+  box-shadow: 0 2px 4px 0 rgba(35, 35, 35, 0.1);
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #006450;
+  font-weight: bolder;
+}
+
+.dtBtn {
+  width: 75px;
+    height: 38px;
+    object-fit: contain;
+    border-radius: 14px;
+    border: solid 1px #ebebeb;
+    font-family: SST-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #232323;
+  background-color: #ffffff;
+}
+
+.dtBtn button :hover {
+  background-color: green!important;
+  outline-color: #ebebeb!important;
+
+}
+
+.dtBtn button :focus {
+  background-color: green!important;
+  outline-color: #ebebeb!important;
+}
+
+.dateRangeText {
+    width: 364px;
+    height: 24px;
+    object-fit: contain;
+    font-family: SSTArabic-Medium;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    color: #232323;
+    margin-left: 24px;
+}

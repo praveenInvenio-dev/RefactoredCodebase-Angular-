@@ -1,0 +1,39 @@
+.pt-15 {
+    padding-top: 15px;
+}
+
+.pl-30 {
+    padding-left: 30px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.search-with-shadow{
+	top:50%;
+	right:10px;
+	transform:translateY(-50%);
+}
+.card-popup {
+    /* top: 56%!important;
+    right: 57px!important; */
+    top: 83%!important;
+    z-index: 9999;
+    right: 24px!important;
+}
+
+.lang-arabic .pop-up-right {
+    left: 25px !important;
+    right: 27% !important;
+}
+.lang-arabic .ar-search-with-shadow{
+    top: 55% !important;
+    right: 96% !important;
+}
+.lang-arabic .ar-mt-10 {
+    margin-top: 0 !important;
+    transform: rotateZ(
+-180deg
+) !important;
+}

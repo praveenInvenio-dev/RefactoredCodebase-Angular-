@@ -1,0 +1,109 @@
+<div class="container alignStart" [dir]="direction">
+  <div class="row mt-5 justify-content-center">
+    <div class="col-12 justify-content-center" style="text-align: center">
+      <img src="assets/image/success.svg" alt="Success" />
+      <p class="heading mt-4">
+        {{
+          direction == "rtl"
+            ? searchConstants["requestSent"]["arb"]
+            : searchConstants["requestSent"]["eng"]
+        }}
+      </p>
+      <p class="heading-caption">
+        {{
+          requestType === "create"
+            ? direction == "rtl"
+              ? searchConstants["YourWhitelistingrequest"]["arb"]
+              : searchConstants["YourWhitelistingrequest"]["eng"]
+            : requestType === "cancel"
+            ? direction === "rtl"
+              ? searchConstants["yourwhitelistCancelRequest"]["arb"]
+              : searchConstants["yourwhitelistCancelRequest"]["eng"]
+            : ""
+        }}
+      </p>
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-5 col-12">
+          <div class="info-box mt-3" style="text-align: start">
+            <div class="info-text">
+              <div class="row mx-0 justify-content-between paddingx-10">
+                <div class="col-md-6 col-12 px-0">
+                  <p class="info-sub-text mb-0">
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["ReferenceName"]["arb"]
+                        : searchConstants["ReferenceName"]["eng"]
+                    }}
+                  </p>
+                </div>
+                <span class="info-text mb-0 col-md-6 px-0 col-12 textOnLeft">
+                  {{
+                    requestType === "create" ? acknowledgement?.TinNm : userName
+                  }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="info-box mt-3" style="text-align: start">
+            <div class="info-text">
+              <div class="row mx-0 justify-content-between paddingx-10">
+                <div class="col-md-6 col-12 px-0">
+                  <p class="info-sub-text mb-0">
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["ReferenceNumber"]["arb"]
+                        : searchConstants["ReferenceNumber"]["eng"]
+                    }}
+                  </p>
+                </div>
+                <span class="info-text mb-0 col-md-6 px-0 col-12 textOnLeft">{{
+                  acknowledgement?.Fbnumz
+                }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="info-box mt-3" style="text-align: start">
+            <div class="info-text">
+              <div class="row mx-0 justify-content-between paddingx-10">
+                <div class="col-md-4 col-12 px-0">
+                  <p class="info-sub-text mb-0">
+                    {{
+                      direction == "rtl"
+                        ? searchConstants["ReferenceDate"]["arb"]
+                        : searchConstants["ReferenceDate"]["eng"]
+                    }}
+                  </p>
+                </div>
+                <span class="info-text mb-0 col-md-6 px-0 col-12 textOnLeft">
+                  {{
+                    acknowledgement
+                      ? requestType === "create"
+                        ? getDate(acknowledgement.IssueDt)
+                        : today
+                      : today
+                  }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div style="text-align: center">
+        <button mat-button type="button" class="btnCss mt-5">
+          {{
+            direction == "rtl"
+              ? searchConstants["downloadConfirmation"]["arb"]
+              : searchConstants["downloadConfirmation"]["eng"]
+          }}
+        </button>
+      </div> -->
+      <div style="text-align: center" class="mt-5">
+        <a (click)="goToDashboard()" class="dashboard-link">{{
+          direction == "rtl"
+            ? searchConstants["GoToDashBoard"]["arb"]
+            : searchConstants["GoToDashBoard"]["eng"]
+        }}</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="row" [dir]="direction">
+  <div class="col-12">
+    <div class="input-group mb-4 mt-4 input-group-lg">
+      <input [(ngModel)]="searchFilter" (ngModelChange)="onSearchNotifications()"
+        [placeholder]="lang === 'en' ? correspondanceConstants.filters.search.en : correspondanceConstants.filters.search.ar"
+        type="text" class="form-control">
+      <div class="input-group-append">
+        <span class="input-group-text bg-white"> <img src="assets/images/inbox/search.svg" alt="" /></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card" [dir]="direction" [ngClass]="{'text-right':direction=='rtl'}">
+  <div class="card-header">
+    &nbsp;
+  </div>
+  <div class="card-body">
+    <div class="d-flex h-100">
+      <div class="w-37 h-100 overflow-y-auto rounded-0 position-relative">
+        <ul class="list-group list-group-flush">
+          <li [ngClass]="{'selected':notification.NotifTy==selectedNotification.NotifTy}"
+            (click)="onNotificationSelect(i, notification)" class="list-group-item"
+            *ngFor="let notification of filteredList;let i=index;">
+            <div class="d-flex justify-content-between">
+              <div *ngIf="!notification.NotifRead">
+                <span class="dot dot-orange"></span>
+              </div>
+              <div class="w-75">
+                <div class="text-truncate">{{notification?.title}}</div>
+                <div class="text-muted small">&#x202a;{{notification.dateStr}}&#x202c; &nbsp;{{notification.timeStr}}</div>
+              </div>
+              <div class="align-self-center text-muted">
+                <img [ngClass]="{'image-rtl' : direction=='rtl'}" [src]="getImageURL(notification)">
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item empty-message" *ngIf="filteredList?.length==0">
+            {{lang === 'en' ? correspondanceConstants.filters.empty.en : correspondanceConstants.filters.empty.ar}}
+          </li>
+        </ul>
+      </div>
+      <div class="border border-top-0 border-bottom-0 border-left-0"></div>
+      <div class="p-4 w-63 position-relative">
+        <div class="row">
+          <div class="col" *ngIf="selectedNotification?.title">
+            <h5>{{selectedNotification?.title}}</h5>
+            <h6 class="text-muted font-weight-normal">&#x202a;{{selectedNotification.dateStr}}&#x202c; &nbsp;{{selectedNotification.timeStr}}</h6>
+            <hr />
+            <p class="pointer-hand" (click)="navigateTo(selectedNotification)">{{selectedNotification?.description}}</p>
+          </div>
+          <div>
+            <div class="empty-message" *ngIf="!selectedNotification?.title">
+              <div><img src="assets/images/inbox/message.svg" alt="message" /></div>
+              <div class="text-muted small mt-2">
+                {{lang === 'en' ? correspondanceConstants.message.empty.en : correspondanceConstants.message.empty.ar}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

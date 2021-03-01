@@ -1,0 +1,699 @@
+<div class="container alignStart" dir="{{ dir }}">
+  <div
+    class="Installment-Plans mt-3 mx-3 px-4"
+    [ngClass]="dir === 'rtl' ? 'textAr' : 'textEn'"
+  >
+    {{ lang.screen1.title }}
+  </div>
+  <!-- <div> -->
+  <div class="col-md-12">
+    <span
+      class="right-icon"
+      [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+    >
+      <a
+        class="px-2"
+        (click)="changeView('1')"
+        [ngClass]="cls === '1' ? 'side-active ' : 'side-inActive'"
+        ><img [src]="img2" alt=""
+      /></a>
+      <a
+        class="px-2"
+        (click)="changeView('2')"
+        [ngClass]="cls === '2' ? 'side-active ' : 'side-inActive'"
+        ><img [src]="img1" alt=""
+      /></a>
+    </span>
+    <!-- svg -->
+    <mat-tab-group
+      mat-align-tabs="start"
+      (selectedTabChange)="changeTab($event)"
+    >
+      <div class="col-md-12">
+        <mat-tab
+          *ngFor="let tab of tabs; let index = index"
+          [label]="tab"
+          (click)="changeTab(tab)"
+        >
+          <div class="row mt-3 mx-3">
+            <div class="col-md-12 justify-content-between mx-3">
+              <div class="row mt-3">
+                <!-- <div class="col-md-6">
+									<span class="tag32 col-md-4 mx-1"><a>
+											<img class="px-2" src="assets/image/submitted.png"><span class="placeholder"
+												style="color: black;">{{lang.screen1.tag1}}</span></a></span>
+									<span class="tag32 col-md-5 mx-2"><a>
+											<img class="px-2" src="assets/image/overdue.svg"><span class="placeholder"
+												style="color: black;">{{lang.screen1.tag2}}</span></a></span>
+									<span class="tag32 col-md-4"><a>
+											<img class="px-2" src="assets/image/old.svg"><span class="placeholder"
+												style="color: black;">{{lang.screen1.tag3}}</span></a></span>
+
+								</div> -->
+                <div class="col-md-12 row" style="padding-inline-end: 0">
+                  <div class="search-input col-md-11" *ngIf="dir === 'ltr'">
+                    <input
+                      class="placeholder"
+                      type="text"
+                      placeholder="Search"
+                      [(ngModel)]="searchText"
+                      style="width: 100%"
+                    />
+                    <span class="align-center">
+                      <img src="assets/image/search.png" alt="" />
+                    </span>
+                  </div>
+                  <div class="search-input col-md-11" *ngIf="dir === 'rtl'">
+                    <input
+                      class="placeholder"
+                      type="text"
+                      placeholder="بحث"
+                      [(ngModel)]="searchText"
+                      style="width: 100%"
+                    />
+                    <span class="align-center">
+                      <img src="assets/image/search.png" alt="" />
+                    </span>
+                  </div>
+                  <div
+                    class="col-md-1 side-icon px-3"
+                    data-toggle="modal"
+                    data-target="#myModal"
+                    (click)="reset()"
+                  >
+                    <a
+                      ><img
+                        class="search-icon"
+                        src="assets/image/filter.png"
+                        alt=""
+                    /></a>
+                  </div>
+                  <!-- <div class="col-md-1 side-icon"><a><img class="search-icon"
+												src="assets/image/filter.png" alt=""></a>
+									</div> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12" *ngIf="!viewTable">
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div
+                    class="add-card-large mt-3"
+                    *ngIf="vatSelect"
+                    (click)="createNewInstalment(tab)"
+                  >
+                    <img class="px-2" src="assets/image/add.svg" alt="" />
+                    <div class="tag-partial-bold textPrimary mx-1 mt-2">
+                      {{ lang.screen1.card1 }}
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngFor="let data of data2 | filter: searchText; let i = index"
+                >
+                  <div
+                    class="add-card-installment mt-3"
+                    (click)="
+                      data.Fbtyp === 'VTIA'
+                        ? goToVAT(data.Fbnum, data.Fbust)
+                        : goToZakat(
+                            data.Fbnum,
+                            data.Fbust,
+                            data.Fbsta,
+                            data.Status
+                          )
+                    "
+                  >
+                    <div class="row filing-card-upper mx-0">
+                      <div class="col-md-6 px-0">
+                        <span class="value fwb px-3 row mx-0">{{
+                          data.Fbtyp === "VTIA" ? data.FbtText : data.taxType
+                        }}</span>
+                      </div>
+                      <div
+                        class="col-md-6 px-0"
+                        style="justify-content: flex-end; display: flex"
+                      >
+                        <div class="placeholder mx-3">
+                          <span
+                            class="tag32 px-3 placeholder"
+                            *ngIf="data.Fbtyp !== 'VTIA'"
+                            [matTooltip]="data.Status"
+                            [ngClass]="
+                              data.key_status === 1 ||
+                              data.key_status === 5 ||
+                              data.key_status === 6
+                                ? 'tag-unsubmit'
+                                : data.key_status === 4
+                                ? 'tag-danger'
+                                : data.key_status === 3
+                                ? 'tag-partial'
+                                : data.key_status === 2
+                                ? 'tag-success'
+                                : ''
+                            "
+                            >{{ data.Status }}</span
+                          >
+                          <span
+                            class="tag32 px-3 placeholder"
+                            *ngIf="data.Fbtyp === 'VTIA'"
+                            [matTooltip]="data.FbustTxt"
+                            [ngClass]="getStatusColor(data.Fbust)"
+                            >{{ data.FbustTxt }}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="px-3">
+                      <!-- <mat-progress-bar class="example-margin" [mode]="mode"
+												[value]="data.bufferValue" [bufferValue]="data.bufferValue">
+											</mat-progress-bar> -->
+                    </div>
+                    <div class="row filing-card-down pt-3">
+                      <div class="col-md-6">
+                        <div class="tag-partial-medium px-3">
+                          {{ lang.screen2.ref_num }}
+                        </div>
+                        <div class="placeholder px-3">{{ data.Fbnum }}</div>
+                      </div>
+                      <div
+                        class="col-md-6"
+                        style="justify-content: flex-end; display: flex"
+                        *ngIf="data.Fbtyp !== 'VTIA'"
+                      >
+                        <!-- <div class=""></div> -->
+                        <div
+                          class="tag-partial-medium pt-3"
+                          [ngClass]="dir === 'rtl' ? 'mr-left' : 'mr-right'"
+                        >
+                          {{
+                            getFormattedAmount(data.TotAmt)
+                              | currency: "SAR"
+                              | slice: 3
+                          }}
+                          {{ lang.screen1.sar }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-md-12 mt-3"
+              *ngIf="viewTable"
+              style="text-align: start"
+            >
+              <div class="row mt-3">
+                <div
+                  class="mat-card col-md-12 mt-3"
+                  (click)="createNewInstalment(tab)"
+                >
+                  <div class="row">
+                    <div class="col-md-12">
+                      <img class="px-2" src="assets/image/add.svg" alt="" />
+                      <div
+                        class="tag-partial-bold textPrimary"
+                        style="display: inline-flex"
+                      >
+                        {{ lang.screen1.card1 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <table style="width: 100%">
+                  <tr class="tabHeader">
+                    <th
+                      colspan="3"
+                      [style.border-top-right-radius]="
+                        dir === 'rtl' ? '16px' : '0px'
+                      "
+                      [style.border-top-left-radius]="
+                        dir === 'rtl' ? '0px' : '16px'
+                      "
+                    >
+                      {{ lang.screen1.srNo }}
+                    </th>
+                    <th colspan="3">{{ lang.screen1.taxType }}</th>
+                    <th colspan="3">{{ lang.screen2.ref_num }}</th>
+                    <th colspan="3" *ngIf="dirName !== tabs[2]">
+                      {{ lang.filter.label4 }}
+                    </th>
+                    <th colspan="3" *ngIf="dirName !== tabs[2]">
+                      {{ lang.zakatSc.ins_amt }}
+                    </th>
+                    <th
+                      colspan="3"
+                      [style.border-top-left-radius]="
+                        dir === 'rtl' ? '16px' : '0px'
+                      "
+                      [style.border-top-right-radius]="
+                        dir === 'rtl' ? '0px' : '16px'
+                      "
+                    >
+                      {{ lang.screen1.status }}
+                    </th>
+                  </tr>
+                  <ng-container
+                    *ngFor="
+                      let item of data2 | filter: searchText;
+                      let i = index;
+                      last as isLast
+                    "
+                  >
+                    <tr
+                      class="tabheader2"
+                      (click)="
+                        item.Fbtyp === 'VTIA'
+                          ? goToVAT(item.Fbnum, item.Fbust)
+                          : goToZakat(
+                              item.Fbnum,
+                              item.Fbust,
+                              item.Fbsta,
+                              item.Status
+                            )
+                      "
+                    >
+                      <td
+                        colspan="3"
+                        *ngIf="isLast"
+                        [style.border-bottom-right-radius]="
+                          dir === 'rtl' ? '16px' : '0px'
+                        "
+                        [style.border-bottom-left-radius]="
+                          dir === 'rtl' ? '0px' : '16px'
+                        "
+                      >
+                        {{ i + 1 }}
+                      </td>
+                      <td colspan="3" *ngIf="!isLast">{{ i + 1 }}</td>
+                      <td colspan="3">
+                        {{
+                          item.Fbtyp === "VTIA" ? item.FbtText : item.taxType
+                        }}
+                      </td>
+                      <td colspan="3">{{ item.Fbnum }}</td>
+                      <td
+                        colspan="3"
+                        *ngIf="item.Fbtyp !== 'VTIA' && dirName !== tabs[2]"
+                      >
+                        {{
+                          getFormattedAmount(item.DpAmt)
+                            | currency: "SAR"
+                            | slice: 3
+                        }}
+                        {{ lang.screen1.sar }}
+                      </td>
+                      <td
+                        colspan="3"
+                        *ngIf="item.Fbtyp !== 'VTIA' && dirName !== tabs[2]"
+                      >
+                        {{
+                          getFormattedAmount(item.TotAmt)
+                            | currency: "SAR"
+                            | slice: 3
+                        }}
+                        {{ lang.screen1.sar }}
+                      </td>
+                      <td
+                        colspan="3"
+                        *ngIf="item.Fbtyp === 'VTIA' && dirName === tabs[0]"
+                      ></td>
+                      <td
+                        colspan="3"
+                        *ngIf="item.Fbtyp === 'VTIA' && dirName === tabs[0]"
+                      ></td>
+                      <td
+                        colspan="3"
+                        *ngIf="isLast"
+                        [style.border-bottom-left-radius]="
+                          dir === 'rtl' ? '16px' : '0px'
+                        "
+                        [style.border-bottom-right-radius]="
+                          dir === 'rtl' ? '0px' : '16px'
+                        "
+                      >
+                        <span
+                          class="tag32 px-3 placeholder"
+                          *ngIf="item.Fbtyp !== 'VTIA'"
+                          [matTooltip]="item.Status"
+                          [ngClass]="
+                            item.key_status === 1 ||
+                            item.key_status === 5 ||
+                            item.key_status === 6
+                              ? 'tag-unsubmit'
+                              : item.key_status === 4
+                              ? 'tag-danger'
+                              : item.key_status === 3
+                              ? 'tag-partial'
+                              : item.key_status === 2
+                              ? 'tag-success'
+                              : ''
+                          "
+                          >{{ item.Status }}</span
+                        >
+                        <span
+                          class="tag32 px-3 placeholder"
+                          *ngIf="item.Fbtyp === 'VTIA'"
+                          [matTooltip]="item.FbustTxt"
+                          [ngClass]="getStatusColor(item.Fbust)"
+                          >{{ item.FbustTxt }}</span
+                        >
+                      </td>
+                      <td colspan="3" *ngIf="!isLast">
+                        <span
+                          class="tag32 px-3 placeholder"
+                          *ngIf="item.Fbtyp !== 'VTIA'"
+                          [matTooltip]="item.Status"
+                          [ngClass]="
+                            item.key_status === 1 ||
+                            item.key_status === 5 ||
+                            item.key_status === 6
+                              ? 'tag-unsubmit'
+                              : item.key_status === 4
+                              ? 'tag-danger'
+                              : item.key_status === 3
+                              ? 'tag-partial'
+                              : item.key_status === 2
+                              ? 'tag-success'
+                              : ''
+                          "
+                          >{{ item.Status }}</span
+                        >
+                        <span
+                          class="tag32 px-3 placeholder"
+                          *ngIf="item.Fbtyp === 'VTIA'"
+                          [matTooltip]="item.FbustTxt"
+                          [ngClass]="getStatusColor(item.Fbust)"
+                          >{{ item.FbustTxt }}</span
+                        >
+                      </td>
+                    </tr>
+                  </ng-container>
+                </table>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </div>
+    </mat-tab-group>
+    <!--modal-->
+    <div class="modal" id="myModal" style="border-radius: 14px">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header" style="border-bottom: none !important">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              style="width: 100%"
+              [style.text-align]="dir === 'rtl' ? 'end' : 'end'"
+            >
+              <img src="assets/image/close.svg" />
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="container">
+              <div
+                class="row"
+                style="text-align: start; margin-left: 5%; margin-right: 5%"
+              >
+                <div class="col-md-12">
+                  <div class="filter1">{{ lang.filter.header }}</div>
+
+                  <div class="row mt-4" *ngIf="dirName === tabs[0]">
+                    <div class="col-md-12">
+                      <div class="filter2">{{ lang.filter.label1 }}</div>
+                      <div style="display: flex">
+                        <ng-container *ngFor="let item of tab2; let i = index">
+                          <div
+                            class="filter3 mt-3 mr-3"
+                            [ngClass]="item.flag ? 'filter3Paid' : 'filter3'"
+                            (click)="changeTabz(i)"
+                          >
+                            <span class="filter4">
+                              {{ item.name }}
+                            </span>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      <div class="filter2">{{ lang.screen1.status }}</div>
+                      <div style="display: flex">
+                        <!-- <div class="mt-3 mr-3"
+													[ngClass]="impOrExp.indexOf('1') !== -1 ? 'filter3Paid' : 'filter3'"
+													(click)="getImpExp('1')">
+													<span class="filter4">
+														<img class="px-2" src="assets/image/submitted.png">
+														{{lang.filter.fil1}}
+													</span>
+
+												</div> -->
+                        <div
+                          class="mt-3 mr-3 filter3"
+                          [ngClass]="
+                            impOrExp.indexOf('1') !== -1
+                              ? 'filter3Paid'
+                              : 'filter3'
+                          "
+                          (click)="getImpExp('1')"
+                          *ngIf="dirName !== tabs[2]"
+                        >
+                          <span class="filter4"
+                            ><img class="px-2" src="assets/image/old.svg" />
+                            {{ lang.filter.fil1 }}
+                          </span>
+                        </div>
+
+                        <div
+                          class="mt-3 mr-3"
+                          [ngClass]="
+                            impOrExp.indexOf('2') !== -1
+                              ? 'filter3Paid'
+                              : 'filter3'
+                          "
+                          (click)="getImpExp('2')"
+                        >
+                          <span class="filter4">
+                            <img
+                              class="px-2"
+                              src="assets/image/submitted.svg"
+                            />
+                            {{ lang.filter.fil2 }}
+                          </span>
+                        </div>
+                        <div
+                          class="mt-3 mr-3"
+                          [ngClass]="
+                            impOrExp.indexOf('3') !== -1
+                              ? 'filter3Paid'
+                              : 'filter3'
+                          "
+                          (click)="getImpExp('3')"
+                        >
+                          <span class="filter4">
+                            <img class="px-2" src="assets/image/overdue.svg" />
+                            {{ lang.filter.fil3 }}
+                          </span>
+                        </div>
+                        <div
+                          class="mt-3 mr-3"
+                          [ngClass]="
+                            impOrExp.indexOf('4') !== -1
+                              ? 'filter3Paid'
+                              : 'filter3'
+                          "
+                          (click)="getImpExp('4')"
+                        >
+                          <span class="filter4">
+                            <img
+                              class="px-2"
+                              src="assets/images/cancelled.png"
+                              style="width: 40px; height: 24px"
+                            />
+                            {{ lang.filter.fil4 }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      <div style="display: flex">
+                        <div
+                          class="mt-3 mr-3 filter3"
+                          [ngClass]="
+                            impOrExp.indexOf('5') !== -1
+                              ? 'filter3Paid'
+                              : 'filter3'
+                          "
+                          (click)="getImpExp('5')"
+                        >
+                          <span class="filter4"
+                            ><img class="px-2" src="assets/image/old.svg" />
+                            {{ lang.filter.fil5 }}
+                          </span>
+                        </div>
+
+                        <div
+                          class="mt-3 mr-3"
+                          [ngClass]="
+                            impOrExp.indexOf('6') !== -1
+                              ? 'filter3Paid'
+                              : 'filter3'
+                          "
+                          (click)="getImpExp('6')"
+                        >
+                          <span class="filter4">
+                            <img class="px-2" src="assets/image/old.svg" />
+                            {{ lang.filter.fil6 }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="row mt-3">
+										<div class="col-md-12">
+											<div class="filter2">{{lang.filter.label3}}</div>
+
+											<div class="outBoxFilter">
+												<span class="filter22">{{lang.filter.t5}}</span>
+
+												<input matInput [matDatepicker]="picker" [(ngModel)]="fromDate"
+													(dateChange)="changesToDate()" name="fromdate" style="border: none;"
+													placeholder="" disabled>
+												<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+												<mat-datepicker #picker [calendarHeaderComponent]="headerComponent">
+												</mat-datepicker>
+												<span class="filter22"> <img src="assets/images/arrow-right.svg" />
+													{{lang.filter.t6}}</span>
+												<input matInput [matDatepicker]="picker1" [(ngModel)]="toDate"
+													name="todate" (dateChange)="changesFromDate()" style="border: none;"
+													placeholder="" disabled>
+												<mat-datepicker-toggle matSuffix [for]="picker1">
+												</mat-datepicker-toggle>
+												<mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+												</mat-datepicker>
+
+											</div>
+										</div>
+									</div> -->
+
+                  <div class="row mt-3" *ngIf="dirName !== tabs[2]">
+                    <div class="col-md-12">
+                      <div class="filter2">{{ lang.filter.label4 }}</div>
+
+                      <div class="outBoxFilter">
+                        <span class="filter222">{{ lang.filter.t5 }}</span>
+
+                        <input
+                          matInput
+                          type="text"
+                          style="
+                            border: none;
+                            position: relative;
+                            top: 3px;
+                            left: 10px;
+                          "
+                          [(ngModel)]="from"
+                          placeholder="0"
+                          name="form"
+                        />
+                        <span class="filter222"
+                          ><img src="assets/images/arrow-right.svg" />
+                          {{ lang.filter.t6 }}</span
+                        >
+                        <input
+                          matInput
+                          type="text"
+                          style="
+                            border: none;
+                            position: relative;
+                            top: 3px;
+                            left: 10px;
+                          "
+                          [(ngModel)]="to"
+                          placeholder="0"
+                          name="to"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3" *ngIf="dirName !== tabs[2]">
+                    <div class="col-md-12">
+                      <div class="filter2">{{ lang.filter.label5 }}</div>
+
+                      <div class="outBoxFilter">
+                        <span class="filter222">{{ lang.filter.t5 }}</span>
+
+                        <input
+                          matInput
+                          type="text"
+                          style="
+                            border: none;
+                            position: relative;
+                            top: 3px;
+                            left: 10px;
+                          "
+                          [(ngModel)]="from2"
+                          placeholder="0"
+                          name="form2"
+                        />
+                        <span class="filter222"
+                          ><img src="assets/images/arrow-right.svg" />
+                          {{ lang.filter.t6 }}</span
+                        >
+                        <input
+                          matInput
+                          type="text"
+                          style="
+                            border: none;
+                            position: relative;
+                            top: 3px;
+                            left: 10px;
+                          "
+                          [(ngModel)]="to2"
+                          placeholder="0"
+                          name="to2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-5 mb-5">
+                    <div class="col-md-12">
+                      <button
+                        class="btnPrimary mx-2"
+                        type="submit"
+                        mat-raised-button
+                        (click)="filterList()"
+                        data-dismiss="modal"
+                      >
+                        {{ lang.filter.button }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end modal-->
+  </div>
+</div>
+
+<notifier-container></notifier-container>

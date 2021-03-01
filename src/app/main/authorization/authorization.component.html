@@ -1,0 +1,683 @@
+<div *ngIf="!sub" class="container alignStart" [dir]="dir">
+    <div  *ngIf="optionSlected === 0" class = "auth-container">
+            <div class="row auth-breadcrumb  margin-t-40 margin-b-40">
+                <div class="auth-breadcrumb vCenter col-md-12 col-sm-12">
+                    <span class=" f16-m textGray"  [routerLink]="['/mains/tax']">{{page1.type}}  &gt; </span><span class="f16-m"
+                        > {{page1.title}}  </span>
+                </div>
+    
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="back-button f16-b">
+                        <span (click)="back()"> <img src="assets/image/arrow-left.svg"
+                                 [ngClass]="dir === 'rtl' ? 'transform-img':'auth-img'" > {{page1.back}}</span>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-t-32 alignStart d-flex">
+                <div class="col-md-10 col-sm-10">
+                    <div  class="auth_pageTitle">
+                        {{page1.title}}
+                    </div>
+                </div>
+                <div class=" col-md-2 col-sm-2  justifyContentEnd auth-inline alignEnd">
+                    <div class="auth-flex-col">
+                        <div >
+                            <div class="filterIcons" >
+                                <img [src]="img2" [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                (click)="changeView('1')"
+                                [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                [style.margin-right]="dir === 'rtl' ? '20px':'0px'"
+    
+                               >                           
+                            </div>
+                            <div class="navTxtActive"
+                                [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                               
+                                [style.background-color]="viewListView?'transparent':'#d99a29'"
+                                [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                [style.margin-right]="dir === 'rtl' ? '20px':'0px'"
+                                >
+                            </div>
+                        </div>                                                 
+                    </div>
+                    <div class="auth-flex-col">
+                        <div class="mx-0">
+                            <div class="filterIcons">
+                                <img [src]='img1' [ngClass]="dir === 'rtl' ? 'filterIconAr' : 'filterIconEn'"
+                                (click)="changeView('2')"
+                                [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                [style.margin-right]="dir === 'rtl' ? '10px':'0px'"
+                                >
+                            </div>                          
+                            <div class="navTxtActive" 
+                                    [ngClass]="dir === 'rtl' ? 'filterLineAr' : 'filterLineEn'"
+                                    
+                                    [style.background-color]="viewListView?'#d99a29':'transparent'"
+                                    [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                                    [style.margin-right]="dir === 'rtl' ? '10px':'0px'"    
+                                    >
+                            </div>
+                        </div>                        
+                    </div>
+                </div> 
+            </div>             
+            <div class="Rectangle-12New margin-t-16 margin-b-24"></div>
+
+            <div class="row  " *ngIf="!viewListView">
+                <div class="col-md-6 col-sm-6 margin-b-24">
+                    <mat-card class="auth-filing-card vCenter hCenter border" (click)="next()">
+                        <img src="assets/image/add.svg" class="px-2" >
+                        <div class="value fwb textPrimary mx-1 mt-2 d-flex">{{page1.addnewUser}}</div>
+                    </mat-card>
+                </div>
+                <div class="col-md-6 col-sm-6 margin-b-24" *ngFor="let item of authRequestsSet;index as i" (click)="getAuthDetails($event,item)">
+                    <div class="auth-filing-card textDark border" >
+                        <div class="row auth-filing-card-icon px-2 mt-2 mb-2" >
+                            <div class="auth col-md-12 col-sm-12 justifyContentEnd "  id="dropdownMenuButton" (click)="show(i,$event)">                                   
+                                <img id="MENU" src="assets/image/dots.svg"
+                                    [ngClass]="dir === 'rtl' ? 'filterIcon1Ar' : 'filterIcon1En'" alt="menu" 
+                                    [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'"
+                                    />
+                            </div>                                                                                    
+                        </div>
+                        <div [id]="'loc' + i" *ngIf="showBtn===i" className="auth-dropdown alignStart">
+                            <ul class="auth-dropdown-menu border alignStart" 
+                             [style.margin-left]="dir === 'rtl' ? '-38.9%':'0px'"
+                                [style.color]="'#232323'">
+                                <li id="EDIT" class="auth-dropdown-item-top " (click)="editRequest($event,item);">
+                                   <span class="f16-m" >{{page3.edit}}</span>
+                                </li>
+
+                                <li  class="auth-dropdown-item-bottom" id="DELETE" (click)="deleteModal(item,$event);">
+                                <span class="delete-label f16-b"> {{page3.delete}}</span>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                                  
+                        <div class="row auth-filing-card-upper">
+                            <div class="col-md-8 col-sm-8">
+                                <div class="auth_sectionTitle  fwb">{{item.AudName}}</div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 d-flex vCenter justifyContentEnd" >
+                                <div class="tag32" 
+                                [ngClass]= "getStyle(item.StatusCode)"
+                                >{{item.Status}}</div>
+                            </div>
+                        </div>   
+                        <div class="Rectangle-12New margin-t-16 margin-b-16"></div>
+                  
+                        <div class="row auth-filing-card-down">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="caption textGray">{{page2.subtitles.tin}}</div>
+                                <div class="value textDark  fwb">{{item.AuditorTin}}</div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="caption textGray">{{page3.serviceRequest.type}}</div>
+                                <div class="value textDark  fwb">{{item.Tptxt}}</div>
+                            </div>                      
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div  class="row" *ngIf="viewListView">
+                <div class="row col-md-12 col-sm-12 px-0"
+                    [style.margin-left]="dir === 'rtl' ? '0px' : '16px'"
+                    [style.margin-right]="dir === 'rtl' ? '16px' : '0px'"
+                >
+                    <div class="mat-card col-md-12 col-sm-12 "  (click)="next()">
+                        <div class="row" >
+                            <div class="col-md-12 col-sm-12 ">
+                                <img class="px-2" src="assets/image/add.svg" alt="" />
+                                <div class="tag-partial-bold textPrimary auth-inline" >
+                                    {{page1.addnewUser}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3 col-md-12 col-sm-12 px-0"  
+                [style.margin-left]="dir === 'rtl' ? '0px' : '16px'"
+                [style.margin-right]="dir === 'rtl' ? '16px' : '0px'"
+                >
+                    <table  class="auth_table" *ngIf='count >= 0'>
+                        <tr class="tabHeader">
+                        <ng-container *ngIf="dir !== 'rtl'">
+                            <th  class="tabheader f16-b" colspan="3" >{{page2.listViewTin}}</th>
+                        </ng-container>
+                        <ng-container *ngIf="dir === 'rtl'">
+                            <th colspan="3" class="tabheader f16-b"
+                                [style.border-right]="dir === 'rtl' ? ('1px solid #bbb'):''"
+                                [style.border-top-left-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                [style.border-top-right-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                {{page2.listViewTin}}
+                            </th>
+                        </ng-container>
+                        <th  class="tabheader f16-b" colspan="3" >{{page2.listViewName}}</th>
+                        <th  class="tabheader f16-b" colspan="3"  >{{page3.serviceRequest.type}}</th>
+
+                        <ng-container *ngIf="dir !== 'rtl'">
+                            <th  class="tabheader f16-b" colspan="3" > {{page1.Status}}</th>
+                        </ng-container>
+                        <ng-container *ngIf="dir === 'rtl'">
+                            <th colspan="3" class="tabheader f16-b" [style.border-top-right-radius]="dir === 'rtl' ? '0px' : '16px'"
+                                [style.border-top-left-radius]="dir === 'rtl' ? '16px' : '0px'">
+                                {{page1.Status}}
+                            </th>
+                        </ng-container>
+                    </tr>
+                    <ng-container *ngFor="let item of authRequestsSet ; let i=index"  >
+                        <tr class="tabheader2"  class="tabheader2" (click)="getAuthDetails($event,item)" >
+                            <ng-container *ngIf="dir === 'rtl'">
+                                <td colspan="3" *ngIf="i!==count">{{item.AuditorTin}}
+                                </td>
+                                <td colspan="3"
+                                    [style.border-bottom-right-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                    [style.border-bottom-left-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                    *ngIf="i===count"
+                                    >
+                                    {{item.AuditorTin}}
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="dir !== 'rtl'">
+                                <td colspan="3">{{item.AuditorTin}}</td>
+                            </ng-container>
+
+
+                            <td colspan="3">{{item.AudName}}</td>
+                            <td colspan="3">{{item.Tptxt}}</td>
+                            <ng-container *ngIf="dir !== 'rtl'">
+                                <td colspan="3">   
+                                    <div class="tag32"  
+                                    [ngClass]= "getStyle(item.StatusCode)"
+
+                                    >   {{item.Status}}   </div>                             
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="dir === 'rtl'">
+                                <td colspan="3" *ngIf="i!==count">
+                                    <div class="tag32" 
+                                    [ngClass]= "getStyle(item.StatusCode)"
+
+                                    >{{item.Status}}</div>
+                                </td>
+
+                                <td colspan="3"
+                                    [style.border-bottom-left-radius]="dir === 'rtl' ? '16px' : '0px'"
+                                    [style.border-bottom-right-radius]="dir === 'rtl' ? '0px' : '0px'"
+                                    *ngIf="i===count"                                   
+                                    >
+                                    <div class="tag32"  
+                                    [ngClass]= "getStyle(item.StatusCode)"
+                                    >
+                                        {{item.Status}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>        
+                </table>
+            </div>                   
+        </div>
+    </div>
+    <div  *ngIf="optionSlected === 1"  class="auth-container">
+        <div class="row auth-breadcrumb margin-t-40 margin-b-40">
+            <div class="auth-breadcrumb vCenter col-md-12 col-sm-12">
+                <span class="f16-m textGray" [style.float]="dir === 'rtl' ? 'right' : 'left'" [routerLink]="['/mains/tax']"
+                    
+                > {{page1.type}}
+                    &gt; </span>
+                <span class="f16-m textGray" (click)="optionSlected=0" 
+                    [style.float]="dir === 'rtl' ? 'right' : 'left'"> {{page1.title}} &gt;
+                    </span>    
+                    <span class="f16-m"
+                    [style.float]="dir === 'rtl' ? 'right' : 'left'">   {{page2.title}}  
+                    </span>          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="back-button f16-b">
+                    <span (click)="back()">
+                    <img src="assets/image/arrow-left.svg" 
+                    [ngClass]="dir === 'rtl' ? 'transform-img':'auth-img'"  />
+                    {{page1.back}}</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 col-sm-12">
+                <div class="auth_pageTitle">
+                    {{page2.title}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 mb-4">
+            <div class="col-md-12 col-sm-12">
+                <div class="subtitle textGray">
+                    {{page2.subtitles.t1}}
+                </div>
+            </div>
+        </div>
+        <div class="Rectangle-12New"></div>
+        <form [formGroup]="authFormGroup" (ngSubmit)="onSubmit()" >
+            <div class="auth_sectionTitle fwb margin-t-24 margin-b-24">{{page2.title2}}</div>
+            <div class="value textDark mt-3">
+                {{page2.labels.label1}}
+            </div>
+            <div class="row  mt-3 textDark">
+                <div  class="d-flex col-md-6 col-sm-6">
+                    <div [ngClass]="!tinReadOnly ? 'auth-selector-card auth-selector-card-active  border pb-3 px-3' : 'auth-selector-card border  pb-3 px-3'"
+                    [style.margin-left]="dir === 'rtl' ? '20px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'20px'"
+                        (click)="action==='X'?onSearchMethod('1'):null">
+                        <div [ngClass]="search === '1' ? 'value fwb' : 'value fwb'">
+                            {{page2.subtitles.tin}}
+                        </div>
+                    </div>
+                    <div aria-disabled="action==='U'?true:null" [ngClass]="!nameReadOnly ? 'auth-selector-card auth-selector-card-active border pb-3 px-3' : 'auth-selector-card border pb-3 px-3'"
+                    [style.margin-left]="dir === 'rtl' ? '0px':'10px'"
+                        [style.margin-right]="dir === 'rtl' ? '10px':'0px'"
+                            (click)="action==='X'?onSearchMethod('2'):null">
+                        <div [ngClass]="search === '2'? 'value fwb' : 'value fwb'">
+                            {{page2.labels.label3}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row margin-b-24 margin-t-24 input-container">
+                <div class="col-md-6 col-sm-6">
+                    <div class="matLabel mb-3">{{page2.subtitles.tin}}</div>
+                        <input #tinId  type="text" class="commonInput" placeholder="1234567890" formControlName="tin"
+                         required [readonly]="tinReadOnly"  [maxLength]="10" matInput  [ngClass]="getDisabledTinClass()"   
+                        [ngClass]="getTinErrorStyle()" (input)="tinValidation($event,authFormGroup.controls.tin.value)" 
+                       />
+                    <div *ngIf="(submitted1 || authFormGroup.controls.tin.touched) && tinErr" class="auth invalid-feedback "
+                    [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                      <p>{{ tinMsg  }}</p>
+                    </div>                       
+                </div>
+
+                <div class="auth_tin_name_row col-md-6 col-sm-6">
+                    <div class="matLabel mb-3">{{page2.subtitles.name}}</div>
+                    <input #nameId  class="commonInput"  [ngClass]="getDisabledNameClass()" placeholder={{page2.subtitles.name}} formControlName="name" 
+                    required [readonly]="nameReadOnly"  [matAutocomplete]="name_auto" (blur)="nameValidation(authFormGroup.controls.name.value)"
+                      [ngClass]="getNameErrorStyle()"
+                      />
+                      <mat-autocomplete #name_auto="matAutocomplete" >
+                        <mat-option *ngFor="let option of filteredOptions | async"  [value]="option['FullName']">
+                          {{option["FullName"]}}
+                        </mat-option>
+                      </mat-autocomplete>
+                  <div *ngIf="(submitted1 || authFormGroup.controls.name.touched) && authFormGroup.controls.name.errors && nameErr" class="auth invalid-feedback "
+                  [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                    <p>{{ authErr.namReq }}</p>
+                  </div>       
+                </div>
+            </div>
+            <div class="row input-container">
+                <div class="col-md-12 col-sm-12 matLabel">
+                    {{page2.subtitles.taxtype}}
+                </div>
+                <div class="col-md-6 col-sm-6 mt-2" >
+                    <mat-select  class="commonMatSelect "  required  formControlName="taxtype" placeholder={{page1.selectOne}} name="action" 
+                    (selectionChange)="onTaxtTypeChange($event)" #taxtypeId
+                    [ngClass]="getTxTypeErrorStyle()">
+                        <mat-option *ngFor="let type of taxtypeSet"
+                                        [value]="type.Vktyp">
+                                {{type.Text }}
+                            </mat-option>
+
+                        </mat-select>
+                    <div *ngIf="submitted1 && authFormGroup.controls.taxtype.errors" class=" auth invalid-feedback"
+                    [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                        <p>{{ authErr.typeError1 }}</p>
+                    </div> 
+                </div>
+                   
+            </div>
+            <div class="auth_sectionTitle margin-t-40 margin-b-24">{{page2.title3}}</div>
+            <div class="matLabel">{{page2.subtitles.startdate}}</div>
+            <div class="dateRangePicker rfcr-shadow mt-3" [ngClass]="getDateErrorStyle()">
+                <input class="noborder" (blur)="validateDate()" (click)="picker1.close(); picker.open()"
+                    readonly [matDatepicker]="picker" [min]="minDate" (dateChange)="chanangeDateAdapter('from', picker)" required matInput  name="authStartDate" 
+                    [placeholder]="authErr.t5" formControlName="authStartDate" 
+                   >
+                <mat-datepicker-toggle matSuffix [for]="picker" matDatepickerToggleIcon="none"></mat-datepicker-toggle>
+                <mat-datepicker #picker [disabled]="action==='U'?true:null" [calendarHeaderComponent]="headerComponent">
+                </mat-datepicker>
+                <span class="d-flex"> <img
+                        [src]="dir=='ltr'?'assets/image/arrow-right-green.svg':'assets/image/arrow-left-green.svg'" /></span>
+                <input class="noborder" (click)="picker.close(); picker1.open()" (blur)="validateDate()" required matDatepicker matInput [min]="minDate" [matDatepicker]="picker1" 
+                    [placeholder]="authErr.t6" formControlName="authEndDate"  (dateChange)="chanangeDateAdapter('to', picker1)"
+                     >
+                <mat-datepicker-toggle matSuffix [for]="picker1"><mat-icon matDatepickerToggleIcon>
+                    <span class="d-flex"> <img src="assets/image/calendar.svg" alt="calendar" /></span>
+                  </mat-icon></mat-datepicker-toggle>
+                <mat-datepicker #picker1 [calendarHeaderComponent]="headerComponent">
+                </mat-datepicker>
+        
+            </div>
+            <div class="row "
+            [style.margin-left]="dir === 'rtl' ? '20px':'0px'"
+            [style.margin-right]="dir === 'rtl' ? '0px':'20px'">
+                <div *ngIf="submitted1 && (authFormGroup.controls.authStartDate.value==null ||authFormGroup.controls.authEndDate.value==null) " class="auth  invalid-feedback"
+                [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                    <p>{{authErr.datReq1}}</p>
+
+                </div>
+            </div>
+            
+            <div *ngIf="(submitted1 || (authFormGroup.controls.authStartDate.touched && authFormGroup.controls.authEndDate.touched)) && endDateErr" class="auth invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                <p>{{authErr.minDate}}</p>
+
+            </div>
+            <div class="row margin-t-40">
+                <div class="col-md-12 col-sm-12">
+                    <div class="col-md-12 col-sm-12 px-0" [ngClass]="getListErrorStyle()">
+                    <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel class="authorizationPanel" #mep2="matExpansionPanel" (opened)="matPanel2Expanded = true" (closed)="matPanel2Expanded = false">
+                        <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <div class="auth auth_sectionTitle "> List of Returns & Objections</div>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            
+                            <mat-icon class="auth"><img  [ngClass]="dir === 'rtl' ? 'matIconImg-ar':'matIconImg'"  [src]="
+                                matPanel2Expanded
+                                    ? 'assets/image/cirlce-arrow-up.svg'
+                                    : 'assets/image/circle-arrow-down.svg'
+                                "
+                                ></mat-icon>
+                                </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="card custom-card noborder" style="width: 100%;">
+                                    <div class="Rectangle-12 mt-0"></div>
+                                        <div class="row alignStart">
+                                            <div class="col-4 mat-tab-header px-5">
+                                                    <span class="f16-b textDark" >{{page1.year}} </span>
+                                            </div>
+                                            <div class="col-4 mat-tab-header px-4">
+                                                <span class="imgsp">
+                                                <img src="assets/image/return.svg" /> </span><span>
+                                                    <span class="f16-b textDark" > {{page1.return}}</span>
+                                                </span>
+                                            </div>
+                                            <div
+                                                class="col-4 mat-tab-header">
+                                                <span class="imgsp">
+                                                <img src="assets/image/objections.svg" />
+                                                </span>
+                                                <span>
+                                                    <span class="f16-b textDark" > {{page1.objection}}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    <div class="Rectangle-12 mt-0"></div>
+                                    <div
+                                        *ngFor="let i of listOfReturnsObjections; index as j" >
+                                    <div class="row  alignStart">
+                                        <div
+                                            class=" d-flex col-4 mat-tab-header"
+                                        >
+                                        <span class="value  px-3 alignStart">{{ i["Period"] }}</span> 
+                                        </div>
+                                        <div
+                                            class="col-4 mat-tab-header">
+                                            <mat-slide-toggle
+                                            [checked]="(i['ReturnCb'] === 'X' || i['ReturnCb'] === true) ? true : false"
+                                            [disabled]="(i['RetCbDis'] === false ||disableForm) ? true : false"
+                                            class="zs-customSlider"
+                                            (toggleChange)="onReturnObjection(j, 'return')"
+                                            >
+                                            </mat-slide-toggle>
+                                        </div>
+                                        <div
+                                            class="col-4 mat-tab-header"
+                                        
+                                        >
+                                            <mat-slide-toggle
+                                            [checked]="(i['ObjectionCb'] === 'X'||i['ObjectionCb'] === true) ? true : false"
+                                            [disabled]="(i['ObjCbDis'] === false || disableForm) ? true : false"
+                                            (toggleChange)="onReturnObjection(j, 'objection')"
+                                            class="zs-customSlider"
+                                            >
+                                            </mat-slide-toggle>
+                                        </div>
+                                </div>
+                         </div>
+                    </div>
+                </mat-expansion-panel>        
+                </mat-accordion>           
+            </div><!--MAT EXPANDED PANEL HEADER-->
+        </div>
+    </div>
+
+            <div class="row margin-t-40">
+            <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-sm-12 px-0" [ngClass]="getListErrorStyle()">
+                    <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel class="authorizationPanel" #mep="matExpansionPanel" (opened)="matPanelExpanded = true" (closed)="matPanelExpanded = false">
+                            <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div class="auth auth_sectionTitle "> {{page2.list.header}}</div>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                
+                                <mat-icon class="auth"><img  [ngClass]="dir === 'rtl' ? 'matIconImg-ar':'matIconImg'"  [src]="
+                                    matPanelExpanded
+                                      ? 'assets/image/cirlce-arrow-up.svg'
+                                      : 'assets/image/circle-arrow-down.svg'
+                                    "
+                                    ></mat-icon>
+                            </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            
+                            <table class="table-default noborder">
+        
+                            <tbody *ngIf="taxtype!=undefined">
+                                                          
+                                    <tr  class="parameterListItem" *ngFor="let item of listOfOtherServices ; let i = index" formArrayName="otherServicesControlSet">                
+                                        <td class="parameterName f16-m textDark fwb " ><output [value]="item.Zdesc"> {{item.Zdesc}} </output></td>
+                                        <td class="d-flex vCenter hCenter"> 
+                                        <mat-slide-toggle  [checked]="item['RequestCB']"
+                                        (change)="changeToggleStatus($event, item,i)"
+                                       [id]="'otherServicesControlSet' + i" value="item.Zdesc"
+                                       [disabled]="disableForm"></mat-slide-toggle>
+                                     </td>
+                                    </tr>
+                            </tbody>
+                        </table>                                   <!--Material ROW end-->                            
+                        </mat-expansion-panel>
+                        
+                    </mat-accordion>
+                </div>                  
+            </div>
+            </div>
+            <div *ngIf="submitted1 && authFormGroup.controls.otherServicesControlSet.errors" class="auth invalid-feedback"
+            [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                <p>{{servicesMessage}}</p>
+
+            </div>
+            <div class="margin-t-b-48">
+            <button mat-button type="submit" class="btnPrimary" [disabled]="disableForm"  #authREqestBtn >
+                {{page2.button}}
+            </button>
+            </div>
+        </form>
+           
+    </div><!--AUTH PAGE END-->
+    <div  *ngIf="optionSlected === 2" class="auth-container">
+        <div class="row auth-breadcrumb  margin-t-40 margin-b-40">
+            <div class="auth-breadcrumb vCenter col-md-12 col-sm-12">
+                <span class=" f16-m textGray" [style.float]="dir === 'rtl' ? 'right' : 'left'" [routerLink]="['/mains/tax']"
+                    
+                >  {{page1.type}} &gt; 
+                     </span>
+                <span class=" f16-m textGray" (click)="optionSlected=0" 
+                    [style.float]="dir === 'rtl' ? 'right' : 'left'">  {{page2.title}} &gt; 
+                   </span>
+                    <span class="f16-m"
+                        [style.float]="dir === 'rtl' ? 'right' : 'left'">   {{page3.title}} 
+                        </span> 
+            </div>           
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="back-button f16-b">
+                    <span  (click)="back()">
+                    <img src="assets/image/arrow-left.svg" 
+                    [ngClass]="dir === 'rtl' ? 'transform-img':'auth-img'"  />
+                    {{page1.back}}</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4 alignStart" >
+            <div class="col-md-12 col-sm-12 auth-title-row">
+                <div class="auth_pageTitle">
+                    {{page3.title}}
+                </div>
+                <div class="auth-status hCenter border" 
+                [ngClass]= "getStyle(authDetails['StatusCode'])"
+                >{{authDetails["Status"]}}
+                </div>
+            </div>
+        </div>
+        <div class="auth-flex-row">
+            <div class="auth-details-card border">
+                <div class="subtitle textGray">{{page3.title2}}</div>
+                <div class="value textDark fwb"
+                > {{authDetails["AudName"]}}</div>
+            </div>
+            <div class="auth-details-card border"
+            [style.margin-left]="dir === 'ltr' ? '24px':'0px'"
+            [style.margin-right]="dir === 'rtl' ? '24px':'0px'">
+                <div class="subtitle textGray" >{{page3.title3}}</div>
+                <div class="value textDark fwb"
+               >{{authDetails["AuditorTin"]}}</div>
+
+            </div>  
+        </div>
+        <mat-card class=" alignStart px-0 mx-0 py-0 my-0">
+                <div class="col-md-12 col-sm-12 auth-detail-section vCenter" >
+                    <div class="Oval vCenter">
+                        <img class="details-img" src="assets/image/details.svg">
+                    </div>
+                     <div class="auth_sectionTitle"
+                     [style.margin-left]="dir === 'ltr' ? '16px':'0px'"
+                     [style.margin-right]="dir === 'rtl' ? '16px':'0px'">{{page3.serviceRequest.header}}</div>
+                </div>
+            <mat-divider></mat-divider>
+
+            <div class="row auth-section-detail alignStart" >
+                <div class="auth col-md-6 col-sm-6 px-0">
+                    <div class="subtitle textGray">{{page3.serviceRequest.number}}</div>
+                    <div class="value textDark fwb mt-1">{{authDetails["RelSnro"]}} </div>
+
+                </div>
+                <div class="auth col-md-6 col-sm-6 alignStart px-0" >
+                    <div class="subtitle textGray">{{page3.serviceRequest.type}}</div>
+                    <div class="value textDark fwb  mt-1"> {{authDetails["Tptxt"]}} </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div class="row auth-section-detail alignStart">
+                <div class="auth col-md-6 col-sm-6  px-0">
+                    <div class="subtitle textGray">{{page3.serviceRequest.time}}</div>
+                    <div class="value textDark fwb mt-1">{{authDetailFrom}} {{authErr.t6}} {{authDetailTo}}</div>
+                </div>
+                <div class="auth-flex-col col-md-6 col-sm-6 alignStart px-0" >
+                    <div class="subtitle textGray">{{page3.serviceRequest.approvalDate}}</div>
+                    <div class="value textDark fwb mt-1"></div>
+                </div>
+            </div>
+             <mat-divider></mat-divider>
+             <div class="row auth-section-detail2 alignStart">
+                <div class="auth-flex-col col-md-6 col-sm-6  px-0">
+                    <div class="subtitle textGray mb-1">Returns</div>
+                    <div class="value textDark fwb" *ngFor="let item of selectedReturns">
+                         {{item["Period"]}}
+                    </div>
+
+                </div>
+                <div class="auth-flex-col col-md-6 col-sm-6  px-0">
+                    <div class="subtitle textGray mb-1">Objections</div>
+                    <div class="value textDark fwb" *ngFor="let item of selectedObjections">
+                        {{item["Period"]}} 
+                    </div>
+
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+             <div class="row auth-section-detail2 alignStart">
+                <div class="auth-flex-col col-md-6 col-sm-6 px-0">
+                    <div class="subtitle textGray mb-1">{{page3.serviceRequest.list}}</div>
+                    <div class="value textDark fwb" *ngFor="let item of selectedServicesList">
+                         {{item["Zdesc"]}}
+                    </div>
+
+                </div>
+            </div>
+         </mat-card>
+        <div class="row alignStart margin-t-56">
+            <div class="d-flex vCenter">
+                <div 
+                    [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                    [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                    <button class="auth-delete noborder f16-b" (click)="deleteModal(authDetails,$event);">{{page3.delete}}</button>
+                </div>
+                <div >
+                    <button class="auth-edit f16-b" mat-raised-button  (click)="editRequest($event,authDetails);" >{{page3.edit}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div><!--AUTH DETAILS END-->
+    <notifier-container></notifier-container>
+   
+</div>
+<div class="modal" id="DELETE_MODEL" data-keyboard="false" data-backdrop="static" [dir]="dir"
+>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="px-4 py-3  col-md-12 ">
+                <div class="col-md-12 alignEnd"> <img class="modalCloseIcon" src="assets/image/close.svg"
+                    (click)="closeModal()" />
+                </div>
+                <div class="row alignStart margin-t-32">
+                    <div class="pageTitle textDark fbl f28 mb-3"> {{page3.deleteConfirm}}</div>
+                </div>
+
+                <div class="d-flex vCenter">
+                    <div 
+                        [style.margin-left]="dir === 'rtl' ? '24px':'0px'"
+                        [style.margin-right]="dir === 'rtl' ? '0px':'24px'">
+                        <button class="auth-delete noborder f16-b" (click)="deleteRequest(itemToDelete,$event);">{{page3.ok}}</button>
+                    </div>
+                    <div >
+                        <button class="btnPrimary" mat-raised-button (click)="closeModal()">{{page3.cancel}}</button>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+</div>

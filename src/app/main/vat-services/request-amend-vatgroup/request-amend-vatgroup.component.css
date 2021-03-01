@@ -1,0 +1,46 @@
+.getdate{width: 350px}
+.datepicker1{    position: absolute;
+    right: 15px;
+    top: 32px;}
+    .exportImport{    margin-top: 5px;
+        margin-left: 24px;}
+
+        .mat-slider-horizontal {
+            height: 48px;
+            min-width: 100% !important;
+        }
+        .scroll-model{height: 500px;
+            overflow-y: scroll;}
+
+            .lang-arabic .ml-10 {
+              margin-right: 0 !important;
+          }
+          .lang-arabic .ar-hover:hover{margin-left: 0 !important;}
+
+.modal-newMember{
+    padding-left: 90px !important;
+    padding-right: 90px !important;
+    padding-top: 45px !important; 
+}
+.text-newMember{
+    margin: 20px 40px 0 0;
+}
+
+.error{
+    color: red;
+} 
+.disablePointer
+{
+  pointer-events: none !important;
+} 
+.custom-mat-slider-w mat-slider {
+    width: 390px;
+  }     
+  .datepicker4{    position: absolute;
+    top: 31px;
+    right: 20px;}
+    .modal-body-4{margin-top: 55px !important;}
+
+.cursor-pointer{
+    cursor: pointer;
+}

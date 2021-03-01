@@ -1,0 +1,440 @@
+<div class="alignStart addUserRoot" [dir]="direction">
+  <div class="addUserMiddle col-md-8">
+    <div a class="addUserBack">
+      <div class="addUserLocation">
+        <span class="addUsrSpan1" style="cursor: pointer;" (click)="navigateToProfile()">
+          {{
+            direction == "rtl"
+              ? addUserConstants["profile"]["arb"]
+              : addUserConstants["profile"]["eng"]
+          }}
+        </span>
+        <span class="addUsrSpan1">></span>
+        <span class="addUsrSpan1" style="cursor: pointer;" (click)="navigateToUsermanagement()">
+          {{
+            direction == "rtl"
+              ? addUserConstants["umm"]["arb"]
+              : addUserConstants["umm"]["eng"]
+          }}
+        </span>
+        <span class="addUsrSpan1">></span>
+        <span class="addUsrSpan2">
+          {{
+            direction == "rtl"
+              ? addUserConstants["AddUser"]["arb"]
+              : addUserConstants["AddUser"]["eng"]
+          }}
+        </span>
+      </div>
+      <div class="auBack" (click)="goToUserManagement()">
+        <span class="addUsrSpan2">
+          <img
+            [src]="
+              direction === 'ltr'
+                ? 'assets/image/arrow-left-green.svg'
+                : 'assets/image/arrow-right-green.svg'
+            "
+          /> </span
+        ><span class="adduseHspan2">
+          {{
+            direction == "rtl"
+              ? addUserConstants["Back"]["arb"]
+              : addUserConstants["Back"]["eng"]
+          }}
+        </span>
+      </div>
+      <div>
+        <div class="addUserH">
+          {{
+            direction == "rtl"
+              ? addUserConstants["AddUser"]["arb"]
+              : addUserConstants["AddUser"]["eng"]
+          }}
+        </div>
+        <div class="addUserCompleteDetails">
+          {{
+            direction == "rtl"
+              ? addUserConstants["completeDetailsBelow"]["arb"]
+              : addUserConstants["completeDetailsBelow"]["eng"]
+          }}
+        </div>
+
+        <form class="form" (ngSubmit)="submit()" [formGroup]="form">
+          <div class="addUserForm row">
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["IdentityType"]["arb"]
+                    : addUserConstants["IdentityType"]["eng"]
+                }}
+              </div>
+              <mat-select
+                class="commonMatSelectx"
+                placeholder="Identity Type"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['IdentityType']['arb']
+                    : addUserConstants['IdentityType']['eng']
+                "
+                [ngClass]="(form.controls.idType.touched || formGroupValidator) &&
+                form.controls.idType.invalid?'inputErr':''"
+                formControlName="idType"
+                (selectionChange)="selectIdType()"
+              >
+                <mat-option [value]="i['IdType']" *ngFor="let i of idSetNew">
+                  {{ i["Text"] }}</mat-option
+                >
+              </mat-select>
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.idType.touched || formGroupValidator) &&
+                  form.controls.idType.invalid
+                "
+              >
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["selectID"]["arb"]
+                    : addUserConstants["selectID"]["eng"]
+                }}
+              </div>
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom" [dir]="direction">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["IdentificationNumber"]["arb"]
+                    : addUserConstants["IdentificationNumber"]["eng"]
+                }}
+              </div>
+              <input
+                class="commonInputx"
+                (input)="spaceValidator($event)"
+                [maxLength]="
+                  form?.value?.idType === 'ZTPAU1' ||
+                  form?.value?.idType === 'ZTPAU2'
+                    ? 10
+                    : 14
+                "
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['IdentificationNumber']['arb']
+                    : addUserConstants['IdentificationNumber']['eng']
+                "
+                formControlName="idNo" [ngClass]=" (form.controls.idNo.touched || formGroupValidator) &&
+                !isIDNumberValid?'inputErr':''"
+                (blur)="isValidCheck()"
+              />
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.idNo.touched || formGroupValidator) &&
+                  !isIDNumberValid
+                "
+              >
+                {{
+                  form.value.idType === "" && form.value.idNo.length === 0
+                  ? addUserConstants["pleaseEnterIDnumber"][
+                      direction === "rtl" ? "arb" : "eng"
+                    ]
+                  : 
+                  form.value.idType === "ZTPAU1" && form.value.idNo.length === 0
+                    ? addUserConstants["pleaseEnterNationalID"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : form.value.idType === "ZTPAU2" &&
+                      form.value.idNo.length === 0
+                    ? addUserConstants["pleaseEnterIqamaID"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : form.value.idType === "ZTPAU3" &&
+                      form.value.idNo.length === 0
+                    ? addUserConstants["pleaseEntergccID"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : form.value.idType === "ZTPAU1" &&
+                      form.value.idNo.charAt(0) !== "1"
+                    ? addUserConstants["nationalIdStart1"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : form.value.idType === "ZTPAU1" &&
+                      form.value.idNo.length !== 10
+                    ? addUserConstants["nationalIdLength"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : form.value.idType === "ZTPAU3" &&
+                      (form.value.idNo.length < 7 ||
+                        form.value.idNo.length > 14)
+                    ? addUserConstants["gccIdLength"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : form.value.idType === "ZTPAU2" &&
+                      form.value.idNo.charAt(0) !== "2"
+                    ? addUserConstants["iqamaIdStart2"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : form.value.idType === "ZTPAU2" &&
+                      form.value.idNo.length !== 10
+                    ? addUserConstants["iqamaIdLength"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : isIDNumberApiFailed
+                    ? addUserConstants["pleaseEnterValidId"][
+                        direction === "rtl" ? "arb" : "eng"
+                      ]
+                    : ""
+                }}
+              </div>
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["Name"]["arb"]
+                    : addUserConstants["Name"]["eng"]
+                }}
+              </div>
+              <input
+                class="commonInputx"
+                [readOnly]="name_v"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['Name']['arb']
+                    : addUserConstants['Name']['eng']
+                "
+                formControlName="name"
+                (input)="nameValidator($event)"
+                [ngClass]="  (form.controls.name.touched || formGroupValidator) &&
+                form.controls.name.invalid?'inputErr':''"
+              />
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.name.touched || formGroupValidator) &&
+                  form.controls.name.invalid
+                "
+              >
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["pleaseEnteraName"]["arb"]
+                    : addUserConstants["pleaseEnteraName"]["eng"]
+                }}
+              </div>
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["Branch"]["arb"]
+                    : addUserConstants["Branch"]["eng"]
+                }}
+              </div>
+              <mat-select
+                class="commonMatSelectx"
+                placeholder="Branch"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['Branch']['arb']
+                    : addUserConstants['Branch']['eng']
+                "
+                formControlName="branch"
+                [ngClass]=" (form.controls.branch.touched || formGroupValidator) &&
+                form.controls.branch.invalid?'inputErr':''"
+              >
+                <mat-option
+                  [value]="branchIndex"
+                  *ngFor="let i of new_branch; index as branchIndex"
+                >
+                  {{ i["BranchNm"] }}</mat-option
+                >
+              </mat-select>
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.branch.touched || formGroupValidator) &&
+                  form.controls.branch.invalid
+                "
+              >
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["pleaseSelectBranch"]["arb"]
+                    : addUserConstants["pleaseSelectBranch"]["eng"]
+                }}
+              </div>
+            </div>
+
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["DateofBirth"]["arb"]
+                    : addUserConstants["DateofBirth"]["eng"]
+                }}
+              </div>
+
+              <div class="commomDatePickerx row justify-content-between mx-0" [ngClass]="  (form.controls.dob.touched || formGroupValidator) &&
+              form.controls.dob.invalid?'inputErr':''">
+                <input
+                  class="zs-lengther"
+                  readonly
+                  (click)="datePicker.open()"
+                  matInput
+                  [matDatepicker]="datePicker"
+                  name="sd"
+                  [placeholder]=" direction == 'rtl'
+                  ? addUserConstants['DateofBirth']['arb']
+                  : addUserConstants['DateofBirth']['eng']"
+                  formControlName="dob"
+                  (dateChange)="ValidateUserIDandDob()"
+                  [max]="maxDate"    
+                />
+                <mat-datepicker-toggle matSuffix [for]="datePicker">
+                  <mat-icon matDatepickerToggleIcon class="zs-dateicon">
+                    <img src="assets/image/calendar.svg" alt="calendar" />
+                  </mat-icon>
+                </mat-datepicker-toggle>
+
+                <mat-datepicker
+                  class="zs-datpicker"
+                  #datePicker
+                  [calendarHeaderComponent]="headerComponent"
+                ></mat-datepicker>
+              </div>
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.dob.touched || formGroupValidator) &&
+                  form.controls.dob.invalid
+                "
+              >
+             <span *ngIf="form.controls.dob.errors.required">
+         {{
+
+          direction == "rtl"
+            ? addUserConstants["pleaseEnterDateOfBirth"]["arb"]
+            : addUserConstants["pleaseEnterDateOfBirth"]["eng"]
+        }}
+             </span>
+             <span *ngIf="!form.controls.dob.errors.required">
+              {{
+
+                direction == "rtl"
+                  ? addUserConstants["invalidDob"]["arb"]
+                  : addUserConstants["invalidDob"]["eng"]
+              }}
+             </span>
+                
+              
+              </div>
+            </div>
+
+            <div class="col-md-6 mt10" >
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["PhoneNumber"]["arb"]
+                    : addUserConstants["PhoneNumber"]["eng"]
+                }}
+              </div>
+
+              <div class="zs-mobileNumberContainer"  dir="ltr">
+                <input disabled class="zs-mobileCode" value="00966" dir="ltr" />
+                <input [dir]="direction" 
+                   [ngClass]="{'commonInputx':!((form.controls.phone.touched || formGroupValidator) &&
+                  form.controls.phone.invalid),'commonInputxError':((form.controls.phone.touched || formGroupValidator) &&
+                  form.controls.phone.invalid),'zs-mobileNumberar': direction === 'rtl', 'zs-mobileNumberen':direction !== 'rtl'}"
+                  [placeholder]="
+                    direction == 'rtl'
+                      ? addUserConstants['PhoneNumber']['arb']
+                      : addUserConstants['PhoneNumber']['eng']
+                  "
+                  formControlName="phone"
+                  (input)="numberValidator($event)"
+                  maxlength="9"  
+                />
+              </div>
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.phone.touched || formGroupValidator) &&
+                  form.controls.phone.invalid
+                "
+              >
+                {{
+                  form.value["phone"].length== 0?pleaseEnterMobile:
+                  form.value["phone"].charAt(0) == 5
+                    ? pleaseEnterMobile
+                    : mobNoShouldStartWithFive
+                }}
+              </div>
+            </div>
+            <div class="col-md-6 mt10">
+              <div class="matLabel labelMarginBottom">
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["Email"]["arb"]
+                    : addUserConstants["Email"]["eng"]
+                }}
+              </div>
+              <input dir="ltr" [ngStyle]="{'text-align': direction == 'rtl' ? ' end' : 'start' }"
+                class="commonInputx"
+                [placeholder]="
+                  direction == 'rtl'
+                    ? addUserConstants['Email']['arb']
+                    : addUserConstants['Email']['eng']
+                "
+                [ngClass]=" (form.controls.email.touched || formGroupValidator) &&
+                form.controls.email.invalid?'inputErr':''"
+                formControlName="email"
+              />
+              <div
+                class="matLabel helperMarginTop redTextaddUser"
+                *ngIf="
+                  (form.controls.email.touched || formGroupValidator) &&
+                  form.controls.email.invalid
+                "
+              >
+              <span *ngIf=" direction == 'rtl'">
+                {{
+                  form.controls.email.touched &&
+                  form.controls["email"].value !== ""
+                    ? addUserConstants["invalidEmail"]["arb"]: addUserConstants["pleaseEnterEmail"]["arb"]
+                  
+
+
+                }}
+
+              </span>
+              <span *ngIf=" direction != 'rtl'">
+                {{
+                  form.controls.email.touched &&
+                  form.controls["email"].value !== ""
+                    ? addUserConstants["invalidEmail"]["eng"]: addUserConstants["pleaseEnterEmail"]["eng"]
+                  
+
+
+                }}
+
+              </span>
+                
+               
+              </div>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-6 addBtn">
+              <button class="btnPrimary col-md-6 btnFonxt" mat-raised-button>
+                {{
+                  direction == "rtl"
+                    ? addUserConstants["Add"]["arb"]
+                    : addUserConstants["Add"]["eng"]
+                }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>

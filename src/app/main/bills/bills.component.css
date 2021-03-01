@@ -1,0 +1,782 @@
+.billsTitle {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.billsTitle2 {
+  object-fit: contain;
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 20px;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #151515;
+  font-family: SSTArabic-Bold;
+}
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label {
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #151515;
+  font-family: SSTArabic-Roman;
+}
+
+
+::ng-deep .mat-ink-bar {
+  height: 4px !important;
+  border-radius: 2px;
+  background-color: var(--primary-color, #d99a29) !important;
+}
+
+::ng-deep .mat-tab-body-content {
+  overflow: hidden !important;
+}
+
+.navTxtActive {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d99a29;
+}
+
+.tabTitleActive {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #151515;
+}
+
+.cardTxt1Css {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+}
+.cardTxt2Css {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.cardTxt3Css {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.cardTxt4Css {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: #006450;
+}
+
+.cardTxt4Css .O {
+  color: #aa0c19;
+}
+.cardTxt4Css .I {
+  color: #d99a29;
+}
+.cardTxt4Css .P {
+  color: #006450;
+}
+
+.cardTxt5Cssp {
+  color: #006450;
+}
+.cardTxt5Cssu {
+  color: #aa0c19;
+}
+.cardTxt5Csspp {
+  color: #d99a29;
+}
+.cardTxt5Css .O {
+  background-color: #e5efed;
+}
+.cardTxt5Css .I {
+  background-color: #96961a;
+}
+.cardTxt5Css .P {
+  background-color: #33ebc6;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 350px;
+}
+table tr th,
+table tr td {
+  border: 0.5px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  text-align: start;
+  height: 64px;
+  padding: 5px;
+}
+table tr th:first-child,
+table tr td:first-child {
+  border: 0.5px solid #ebebeb;
+}
+table tr th {
+  background: #ffffff;
+  border-top: 1px solid #ebebeb;
+  text-align: start;
+}
+
+/* top-left border-radius */
+table tr:first-child th:first-child {
+  border-top-left-radius: 16px;
+}
+
+/* top-right border-radius */
+table tr:first-child th:last-child {
+  border-top-right-radius: 16px;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+.viewMore {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: start;
+  margin-left: 10px;
+  color: #006450;
+}
+
+.sideNumber {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 6px;
+  float: right;
+}
+
+.sideNumberArb {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 6px;
+  float: left;
+}
+
+.tabHeader {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #151515;
+}
+
+.tabheader2 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+}
+
+.tabheader2:hover {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  box-shadow: 0 4px 8px 0 rgba(35, 35, 35, 0.1);
+  cursor: pointer;
+}
+
+/* table tr:hover{
+    box-shadow: 0 4px 8px 0 rgba(35, 35, 35, 0.1);
+} */
+
+.filter1 {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+  cursor: pointer;
+}
+
+.filter2 {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+}
+
+.filter22 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 8px;
+  margin-right: 10px;
+  cursor: pointer;
+  width: 60px !important;
+}
+
+.filter222 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.filter3 {
+  height: 40px;
+  border-radius: 20px;
+  /* background-color: #ebebeb;   */
+  width: max-content;
+  border: solid 1px #ebebeb;
+  padding: 5px 15px 5px 15px;
+  cursor: pointer;
+}
+
+.filter3Active {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #ebebeb;
+  width: max-content;
+  border: solid 1px #ebebeb;
+  padding: 5px 15px 5px 15px;
+  cursor: pointer;
+}
+
+.filter3Paid {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #e5efed;
+  width: max-content;
+  border: solid 1px #ebebeb;
+  padding: 5px 15px 5px 15px;
+  color: #006450;
+  cursor: pointer;
+}
+
+.filter3unpaid {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #f6e6e8;
+  width: max-content;
+  border: solid 1px #f6e6e8;
+  padding: 5px 15px 5px 15px;
+  color: red;
+  cursor: pointer;
+}
+
+.filter3partial {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #f7ebd4;
+  width: max-content;
+  border: solid 1px #f7ebd4;
+  padding: 5px 15px 5px 15px;
+  color: red;
+  cursor: pointer;
+}
+
+.filter4 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #232323;
+}
+
+.filter4p {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #006450;
+}
+
+.filter4p {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #006450;
+}
+
+.filter4u {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #aa0c19;
+}
+
+.filter4pp {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #d99a29;
+}
+
+.filtercp {
+  padding: 2px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #e5efed;
+  width: 100px;
+  text-align: center;
+  float: right;
+  position: relative;
+}
+
+.filtercu {
+  padding: 2px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #f6e6e8;
+  width: 100px;
+  text-align: center;
+  float: right;
+  position: relative;
+}
+
+.filtercpp {
+  text-align: center;
+  padding: 2px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #f7ebd4;
+  width: 100px;
+  text-align: center;
+  float: right;
+  position: relative;
+}
+
+.matborder {
+  height: 217px;
+  /* transform: rotate(-180deg); */
+  border-radius: 14px;
+  border: solid 1px #ebebeb;
+  margin-top: 24px;
+}
+.mat-raised-button {
+  border-radius: 14px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+  background-color: #f69833;
+  align-self: end;
+}
+.breadcrumb {
+  background-color: #ffffff;
+  color: #999999;
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+.breadcrumb active {
+  color: #151515;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #999999;
+  font-size: 16px;
+  content: ">";
+}
+.label {
+  font-family: SSTArabic;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #006450;
+}
+.title {
+  font-family: SSTArabic-Bold;
+  font-size: 28px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+.subTitle {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #232323;
+}
+.lable1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+}
+.label1Value {
+  font-family: SSTArabic-Medium;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+
+
+.invoiceCard {
+  /* opacity: 0.1; */
+  border-radius: 13px;
+  border: solid 1px #e5efed;
+  background-color: #e5efed;
+  margin-top: 23px;
+  margin-bottom: 23px;
+  padding: 15px 5px 5px 15px;
+  text-align: start;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.invoiceLabel {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #232323;
+}
+.invoiceText {
+  font-family: SSTArabic-Bold;
+  font-size: 20px;
+  font-stretch: normal;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-align: right;
+  color: #232323;
+}
+.invoiceBtn {
+  border-radius: 14px;
+  width: 207px;
+  height: 48px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  background-color: #d99a29;
+  color: #ffffff;
+}
+
+.exciseTitle1 {
+  font-family: SSTArabic-Roman;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #999999;
+  cursor: pointer;
+}
+
+.outBoxFilter {
+  margin-top: 15px;
+  display: flex;
+  border: solid 1px #ebebeb;
+  display: flex;
+  border-radius: 20px;
+  padding: 10px 15px 10px 15px;
+  width: auto;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}
+
+
+.viewMore {
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: start;
+  position: relative;
+  color: #006450;
+  right: 15px;
+}
+
+.sideNumber {
+  font-family: SSTArabic-Roman;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: #999999;
+  position: relative;
+  top: 6px;
+  float: right;
+}
+
+
+.btnCss {
+  width: 207px;
+  height: 48px;
+  border-radius: 14px;
+  font-family: SSTArabic-Bold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  background-color: #d2a02a;
+}
+
+.filterIconEn {
+  width: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.filterIconAr {
+  width: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.filterLineEn {
+  width: 24px;
+  float: left;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d99a29;
+}
+
+.filterLineAr {
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d99a29;
+  width: 24px;
+  float: right;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none !important;
+}
+
+.imgSearchEn {
+  position: relative;
+  right: 40px;
+}
+
+.imgSearchAr {
+  position: relative;
+  left: 40px;
+}
+
+
+
+.filtercpt {
+  padding: 8px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #e5efed;
+  width: auto;
+  text-align: center;
+}
+
+.filtercpar {
+  padding: 8px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #f7ebd4;
+  width: auto;
+  text-align: center;
+}
+
+.filtercut {
+  padding: 8px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #f6e6e8;
+  width: auto;
+  text-align: center;
+  position: relative;
+}
+
+.filtercovert {
+  padding: 2px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #ebebeb;
+  width: auto;
+  text-align: center;
+  float: right;
+  position: relative;
+}
+
+.filtercppt {
+  padding: 8px 10px 5px 10px;
+  height: 34px;
+  border-radius: 14px;
+  background-color: #f7ebd4;
+  width: auto;
+  text-align: center;
+  position: relative;
+}
+
+#billsearch .form-control:focus {
+  box-shadow: 0 0 0 0.1rem #999999!important
+}

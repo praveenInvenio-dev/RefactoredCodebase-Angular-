@@ -1,0 +1,46 @@
+.titleCssS {
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.96;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.insideCard {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.44;
+  letter-spacing: normal;
+  color: #13614c;
+}
+
+.insideCard:hover {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.44;
+    letter-spacing: normal;
+    color: white;
+  }
+  
+
+.outerDiv {
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+}
+
+
+.cardHover:hover {
+    background-color: #d2a02a;
+    color: white;
+  }

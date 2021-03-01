@@ -1,0 +1,623 @@
+<div class="container" [dir]="dir">
+    <!-- bread crumb menu -->
+    <div class="row">
+        <div class="col-md-12">
+            <span class="menu-title"
+                [style.float]="dir === 'rtl' ? 'right' : 'left'">{{labels.RefundAppeals.breadcrumb.Refunds}}
+                >&nbsp;</span>
+            <span class="menu-title"
+                [style.float]="dir === 'rtl' ? 'right' : 'left'">{{labels.RefundAppeals.breadcrumb.NewRefund}}
+                >&nbsp;</span>
+            <span class="menu-title" style="color: #151515;" [style.float]="dir === 'rtl' ? 'right' : 'left'"
+                [style.padding-right]="dir === 'rtl' ? '4px' : ''">
+                {{labels.breadcrumb.NewExciseTaxRefund}} </span>
+        </div>
+    </div>
+    <div class="row mt-3" style="width:100%">
+        <div class="col-md-12">
+            <div class="menu-back">
+                <span style="cursor: pointer;" (click)="back()"> <img src="assets/image/arrow-left.svg"
+                        style="width: 24px;"> {{labels.RefundAppeals.breadcrumb.Back}}</span>
+                <span class="progress-icon" [style.float]="dir === 'rtl' ? 'left' : ''"> <img
+                        src={{labels.menu[slideNumber].icon}} style="width: 66px;"> </span>
+            </div>
+        </div>
+    </div>
+    <!-- title and sub title -->
+    <div class="row mt-4" style="text-align: start;">
+        <div class="col-md-12">
+            <div class="title">
+                {{labels.RefundAppeals.menu[slideNumber].title}}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2" style="text-align: start;">
+        <div class="col-md-12">
+            <div class="sub-title">
+                {{labels.RefundAppeals.menu[slideNumber].subTitle}}
+            </div>
+        </div>
+    </div>
+    <!-- divider -->
+    <div class="Rectangle-12New mt-3"></div>
+    <!-- Slide Number 1 -->
+    <div *ngIf="slideNumber === 0">
+        <!-- tax payer details -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span class="icon-background">
+                                    <img src="assets/image/user.svg" alt="User" />
+                                </span>
+                                <span style="margin:auto 16px;">{{labels.taxPayerDetails.taxPayerDetails}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.TIN}}</p>
+                                <p class="refund-value mb-0">1234567890</p>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.VATACNO}}</p>
+                                <p class="refund-value mb-0">1234567890</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.IDNO}}</p>
+                                <p class="refund-value mb-0">Q1234567</p>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.TaxPayerName}}</p>
+                                <p class="refund-value mb-0">Zed Hardy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.Address}}</p>
+                                <p class="refund-value mb-0">Olaya St, Al Wurud, Riyadh 12253</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- General Information -->
+        <div class="custom-title mt-5" style="text-align: start;">{{labels.taxPayerDetails.GeneralInformation}}
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 col-12">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.DateofInitiatingRefund}}</p>
+                                <p class="refund-value mb-0">06th Aug 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <span class="refund-value-roman"
+                    [style.float]="dir === 'rtl' ? 'right' : 'left'">{{labels.taxPayerDetails.ApprovedRepayment}}</span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3 col-12 mt-2"
+                *ngFor="let refundType of labels.taxPayerDetails.RefundTypes; let i=index">
+                <mat-card [ngClass]="RefundType === i? 'cardActive' : 'cardInActive'" (click)="getRefundType(i)">
+                    <div class="action-txt">
+                        <div [ngClass]="RefundType === i? 'card-txt' : 'active-card-txt'">
+                            {{refundType.name}}
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <!-- Accounts -->
+        <div class="custom-title mt-5" style="text-align: start;">{{labels.taxPayerDetails.Accounts}}</div>
+        <div class="row mt-4" style="text-align: start;">
+            <div class="col-md-3">
+                <button mat-stroked-button class="accCardbck accLabel custom-refund-button-lg">
+                    <span [style.float]="(dir === 'rtl') ? 'left' : 'right'">
+                        <img src="assets/image/add.svg" style="width: 32px;">
+                    </span>
+                    <br>
+                    <span>
+                        Add Account
+                    </span>
+                </button>
+            </div>
+            <div class="col-md-3">
+                <mat-card [ngClass]="bankAccount === 1? 'bank-cardActive' : 'bank-cardInActive'"
+                    (click)="selectBankAccount(1)">
+                    <span [style.float]="(dir === 'rtl') ? 'left' : 'right'" class="pt-3">
+                        <span *ngIf="bankAccount === 1">
+                            <img src="assets/image/logo-al-rajhi-negative.svg" style="width: 32px;">
+                        </span>
+                        <span *ngIf="bankAccount !== 1">
+                            <img src="assets/image/logo-al-rajhi-positive.svg" style="width: 32px;">
+                        </span>
+                    </span>
+                    <br>
+                    <p
+                        [ngClass]="bankAccount === 1? 'active-card-txt-title mb-0 pt-4' : 'card-txt-title  mb-0 mt-2 pt-4'">
+                        Al Rahji Bank</p>
+                    <p [ngClass]="bankAccount === 1? 'active-card-txt-subtitle mb-0' : 'card-txt-subtitle  mb-0'">
+                        ....8157</p>
+                </mat-card>
+            </div>
+        </div>
+        <!-- Contine Button -->
+        <div class="row mt-5" style="text-align: start;">
+            <div class="col-12">
+                <button mat-button type="submit" class="btnCss"
+                    (click)="addTaxPayerDetails()">{{labels.taxPayerDetails.Continue}}</button>
+            </div>
+        </div>
+    </div>
+    <!-- Slide Number 2 -->
+    <div *ngIf="slideNumber === 1">
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span>{{labels.RefundAssets.AuditCaseRefundDetails.AuditCaseRefundDetails}}</span>
+                                <a href="#" data-toggle="collapse" href="#collapseRefund1" role="button"
+                                    aria-expanded="false" class="card-action-icon"
+                                    [style.float]="dir === 'rtl' ? 'left' : ''">
+                                    <img src="assets/image/circle-arrow-up.svg" style="width: 24px;margin:auto 15px;" class="show" (click)="toggleIcon($event)">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="collapse show" id="collapseRefund1">
+                        <div class="card-body">
+                            <div class="row" style="text-align: start;">
+                                <div class="col-md-9 col-12">
+                                    <p class="refund-value-light mb-0 mt-2">
+                                        {{labels.RefundAssets.AuditCaseRefundDetails.CaseNumber}}</p>
+                                </div>
+                                <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                    <span class="refund-value-light">000</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Rectangle-12 mt-0"></div>
+                        <div class="card-body">
+                            <div class="row" style="text-align: start;">
+                                <div class="col-md-9 col-12">
+                                    <p class="refund-value-light mb-0 mt-2">
+                                        {{labels.RefundAssets.AuditCaseRefundDetails.FinalAmountEligible}}</p>
+                                </div>
+                                <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                    <span class="refund-value-light">000000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span>{{labels.RefundDetails.RefundSummary}}</span>
+                                <a href="#" data-toggle="collapse" href="#collapseRefundSummary" role="button"
+                                    aria-expanded="false" class="card-action-icon"
+                                    [style.float]="dir === 'rtl' ? 'left' : ''">
+                                    <img src="assets/image/circle-arrow-up.svg" style="width: 24px;margin:auto 15px;" class="show" (click)="toggleIcon($event)">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="collapse show" id="collapseRefundSummary">
+                        <div class="card-body">
+                            <div class="row" style="text-align: start;">
+                                <div class="col-md-9 col-12">
+                                    <p class="refund-value-light mb-0 mt-2">
+                                        {{labels.RefundAssets.AuditCaseRefundDetails.DocumentNumber}}</p>
+                                </div>
+                                <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                    <span class="refund-value-light">000</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Rectangle-12 mt-0"></div>
+                        <div class="card-body">
+                            <div class="row" style="text-align: start;">
+                                <div class="col-md-9 col-12">
+                                    <p class="refund-value-light mb-0 mt-2">{{labels.RefundDetails.RefundClaimed}}</p>
+                                </div>
+                                <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                    <span class="refund-value-light">000000</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Rectangle-12 mt-0"></div>
+                        <div class="card-body">
+                            <div class="row" style="text-align: start;">
+                                <div class="col-md-9 col-12">
+                                    <p class="refund-value-light mb-0 mt-2">{{labels.RefundDetails.TaxCredit}}</p>
+                                </div>
+                                <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                    <span class="refund-value-light">100.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Rectangle-12 mt-0"></div>
+                        <div class="card-body">
+                            <div class="row" style="text-align: start;">
+                                <div class="col-md-9 col-12">
+                                    <p class="refund-value-light mb-0 mt-2">{{labels.RefundDetails.BankTransfer}}</p>
+                                </div>
+                                <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                    <span class="refund-value-light">0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contine Button -->
+        <div class="row mt-5" style="text-align: start;">
+            <div class="col-12">
+                <button mat-button type="submit" class="btnCss"
+                    (click)="addRefundDetails()">{{labels.taxPayerDetails.Continue}}</button>
+            </div>
+        </div>
+    </div>
+    <!-- Slide Number 3 -->
+    <div *ngIf="slideNumber === 2">
+        <form [formGroup]="declarationForm" style="width: 100%;">
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="label-text">{{labels.IDType}}</div>
+                    <mat-form-field appearance="outline">
+                        <mat-select formControlName="id_type">
+                            <mat-option value='ZS0001'>National ID</mat-option>
+                            <mat-option value='ZS0002'>Iqama ID</mat-option>
+                            <mat-option value='ZS0003'>GCC ID</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <div class="label-text">{{labels.IDNumber}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="" formControlName="id_number" maxlength="15">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <div class="label-text">{{labels.Date}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput [matDatepicker]="picker1" placeholder="Choose a date" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <div class="label-text">{{labels.ContactPersonName}}</div>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="" formControlName="name" maxlength="40">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row mt-3" style="text-align: start;">
+                <div class="col-md-12">
+                    <div class="info-box">
+                        <div class="info-text">
+                            <img src="assets/image/combined-shape.svg" style="width: 24px;margin:auto 5px;">
+                            {{labels.declaration.Information}}
+                            <p class="mt-1 info-sub-text">{{labels.declaration.declarationMessage}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: start;">
+                <button mat-button type="submit" class="btnCss mt-5" (click)="addDeclaration()">Continue</button>
+            </div>
+        </form>
+    </div>
+    <!-- Slide Number 4 -->
+    <div *ngIf="slideNumber === 3">
+        <!-- tax payer details -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span class="icon-background">
+                                    <img src="assets/image/user.svg" alt="User" />
+                                </span>
+                                <span style="margin:auto 16px;">{{labels.taxPayerDetails.taxPayerDetails}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.TIN}}</p>
+                                <p class="refund-value mb-0">1234567890</p>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.VATACNO}}</p>
+                                <p class="refund-value mb-0">1234567890</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.IDNO}}</p>
+                                <p class="refund-value mb-0">Q1234567</p>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.TaxPayerName}}</p>
+                                <p class="refund-value mb-0">Zed Hardy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.Address}}</p>
+                                <p class="refund-value mb-0">Olaya St, Al Wurud, Riyadh 12253</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bank details -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span class="icon-background">
+                                    <img src="assets/image/logo-al-rajhi-positive.svg" alt="Bank" />
+                                </span>
+                                <span style="margin:auto 16px;">{{labels.declaration.AlRajhiBank}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.IDType}}</p>
+                                <p class="refund-value mb-0">National ID</p>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.IDNumber}}</p>
+                                <p class="refund-value mb-0">Q1234567</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-12">
+                                <p class="refund-label mb-0">{{labels.IBAN}}</p>
+                                <p class="refund-value mb-0">SA03 80000 … 1235</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- General Information -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span class="icon-background">
+                                    <img src="assets/image/tax-details.svg" alt="Bank" />
+                                </span>
+                                <span style="margin:auto 16px;">{{labels.taxPayerDetails.GeneralInformation}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-12">
+                                <p class="refund-label mb-0">{{labels.taxPayerDetails.DateofInitiatingRefund}}</p>
+                                <p class="refund-value mb-0">06th Aug 2020</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Refund Details -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span>{{labels.RefundAssets.AuditCaseRefundDetails.AuditCaseRefundDetails}}</span>
+                                <a [routerLink]="" class="card-action" [style.float]="dir === 'rtl' ? 'left' : ''"
+                                    (click)="goToRefundDetails()">
+                                    {{labels.Edit}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-9 col-12">
+                                <p class="refund-value-light mb-0 mt-2">
+                                    {{labels.RefundAssets.AuditCaseRefundDetails.CaseNumber}}</p>
+                            </div>
+                            <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                <span class="refund-value-light">000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-9 col-12">
+                                <p class="refund-value-light mb-0 mt-2">
+                                    {{labels.RefundAssets.AuditCaseRefundDetails.FinalAmountEligible}}</p>
+                            </div>
+                            <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                <span class="refund-value-light">000000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Refund Summary -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span>{{labels.RefundDetails.RefundSummary}}</span>
+                                <a [routerLink]="" class="card-action" [style.float]="dir === 'rtl' ? 'left' : ''"
+                                    (click)="goToRefundDetails()">
+                                    {{labels.Edit}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-9 col-12">
+                                <p class="refund-value-light mb-0 mt-2">
+                                    {{labels.RefundAssets.AuditCaseRefundDetails.DocumentNumber}}</p>
+                            </div>
+                            <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                <span class="refund-value-light">000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-9 col-12">
+                                <p class="refund-value-light mb-0 mt-2">{{labels.RefundDetails.RefundClaimed}}</p>
+                            </div>
+                            <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                <span class="refund-value-light">000000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-9 col-12">
+                                <p class="refund-value-light mb-0 mt-2">{{labels.RefundDetails.TaxCredit}}</p>
+                            </div>
+                            <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                <span class="refund-value-light">100.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-9 col-12">
+                                <p class="refund-value-light mb-0 mt-2">{{labels.RefundDetails.BankTransfer}}</p>
+                            </div>
+                            <div class="col-md-3 col-12" [style.textAlign]="dir === 'rtl' ? 'left' : 'right'">
+                                <span class="refund-value-light">Product 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Declaration -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card custom-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="custom-card-title">
+                                <span class="icon-background">
+                                    <img src="assets/image/summary.svg" alt="User" style="padding:0px;" />
+                                </span>
+                                <span style="margin:auto 16px;">{{labels.Declaration}}</span>
+                                <a [routerLink]="" class="card-action" [style.float]="dir === 'rtl' ? 'left' : ''"
+                                    (click)="goToDeclaration()">
+                                    {{labels.Edit}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.IDType}}</p>
+                                <p class="refund-value mb-0">National ID</p>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.IDNumber}}</p>
+                                <p class="refund-value mb-0">Q1720187</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Rectangle-12 mt-0"></div>
+                    <div class="card-body">
+                        <div class="row" style="text-align: start;">
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.Date}}</p>
+                                <p class="refund-value mb-0">Q1234567</p>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <p class="refund-label mb-0">{{labels.ContactPersonName}}</p>
+                                <p class="refund-value mb-0">Zed Hardy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contine Button -->
+        <div class="row mt-5" style="text-align: start;">
+            <div class="col-12">
+                <button mat-button type="submit" class="btnCss" (click)="confirmRefund()">{{labels.Confirm}}</button>
+            </div>
+        </div>
+    </div>
+</div>
