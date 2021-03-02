@@ -7,8 +7,6 @@ import { BillsComponent } from "./bills/bills.component";
 import { TaxlandingComponent } from "./taxlanding/taxlanding.component";
 
 import { QuickactionComponent } from "./quickaction/quickaction.component";
-
-import { InboxComponent } from "./inbox/inbox.component";
 import { AuthorizationComponent } from "./authorization/authorization.component";
 import { AddUserComponent } from "./add-user/add-user.component";
 import { TaskAllocationComponent } from "./task-allocation/task-allocation.component";
@@ -79,6 +77,11 @@ const routes: Routes = [
           import("../profile/profile.module").then((m) => m.ProfileModule),
       },
       {
+        path: "inbox",
+        loadChildren: () =>
+          import("../inbox/inbox.module").then((m) => m.InboxModule),
+      },
+      {
         path: "dashboard",
         component: NewDashboardComponent,
       },
@@ -139,10 +142,6 @@ const routes: Routes = [
       {
         path: "taskallocation",
         component: TaskAllocationComponent,
-      },
-      {
-        path: "inbox",
-        component: InboxComponent,
       },
       {
         path: "authorization",

@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import * as moment from 'moment';
-
-import { CorrespondanceService } from 'src/app/services/correspondance.service';
-import { correspondanceConstants } from '../../constants/correspondanceConstants';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import * as moment from "moment";
+import { correspondanceConstants } from "src/app/constants/correspondanceConstants";
+import { CorrespondanceService } from "src/app/services/correspondance.service";
 
 @Component({
-  selector: 'app-correspondance',
-  templateUrl: './correspondance.component.html',
-  styleUrls: ['./correspondance.component.css'],
+  selector: "app-correspondance",
+  templateUrl: "./correspondance.component.html",
+  styleUrls: ["./correspondance.component.css"],
 })
 export class CorrespondanceComponent implements OnInit {
   lang: string;
@@ -27,23 +26,25 @@ export class CorrespondanceComponent implements OnInit {
 
   viewMessageIndex: number;
 
-  searchFilter: string = '';
+  searchFilter: string = "";
 
   setFavoriteFilter: boolean = false;
   Cokey: string;
   indexValue: string;
 
-  constructor(public correspondanceService: CorrespondanceService,
-    private routers: ActivatedRoute,) { }
+  constructor(
+    public correspondanceService: CorrespondanceService,
+    private routers: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    moment.locale('en');
-    if (localStorage.getItem('lang') === 'ar') {
-      this.lang = 'ar';
-      moment.locale('ar');
+    moment.locale("en");
+    if (localStorage.getItem("lang") === "ar") {
+      this.lang = "ar";
+      moment.locale("ar");
     } else {
-      this.lang = 'en';
-      moment.locale('en');
+      this.lang = "en";
+      moment.locale("en");
     }
 
     this.correspondanceConstants = correspondanceConstants;
@@ -114,42 +115,42 @@ export class CorrespondanceComponent implements OnInit {
           Ltrno: item.LetterNum,
           Txtdo: `${item.CoidtAr} - ${item.CoitmAr}`,
           Langu: item.Langz,
-          Cdate: '',
-          date: '',
+          Cdate: "",
+          date: "",
           Vkont: item.Vkont,
         };
 
-        if (item.Zzfav || item.Zzfav === '') {
-          correspondanceItem['Zzfav'] = item.Zzfav;
+        if (item.Zzfav || item.Zzfav === "") {
+          correspondanceItem["Zzfav"] = item.Zzfav;
         }
         moment.locale(this.lang);
-        const date = parseInt(item.Cdate.replace(/\D/g, ''));
+        const date = parseInt(item.Cdate.replace(/\D/g, ""));
 
         const Cday =
-          this.lang === 'en'
-            ? moment(date).format('ddd')
+          this.lang === "en"
+            ? moment(date).format("ddd")
             : correspondanceConstants.message.days.ar[moment(date).day()];
 
-        const Cdate = `${Cday} ${moment(date).format('Do MMM YYYY')} ${moment(
-          item.Coitm.replace(/\D/g, ''),
-          'hhmmss'
-        ).format('hh:mm a')}`;
+        const Cdate = `${Cday} ${moment(date).format("Do MMM YYYY")} ${moment(
+          item.Coitm.replace(/\D/g, ""),
+          "hhmmss"
+        ).format("hh:mm a")}`;
 
         correspondanceItem.Cdate = Cdate;
 
         const day =
-          this.lang === 'en'
-            ? moment(correspondanceItem.Txtdo, 'YYYY/MM/DD - hh:mm').format(
-                'ddd'
+          this.lang === "en"
+            ? moment(correspondanceItem.Txtdo, "YYYY/MM/DD - hh:mm").format(
+                "ddd"
               )
             : correspondanceConstants.message.days.ar[
-                moment(correspondanceItem.Txtdo, 'YYYY/MM/DD - hh:mm').day()
+                moment(correspondanceItem.Txtdo, "YYYY/MM/DD - hh:mm").day()
               ];
 
         correspondanceItem.date = `${day} ${moment(
           correspondanceItem.Txtdo,
-          'YYYY/MM/DD - hh:mm'
-        ).format('Do MMM YYYY hh:mm a')}`;
+          "YYYY/MM/DD - hh:mm"
+        ).format("Do MMM YYYY hh:mm a")}`;
 
         this.correspondanceList = [
           ...this.correspondanceList,
@@ -159,15 +160,18 @@ export class CorrespondanceComponent implements OnInit {
     }
 
     const list = this.correspondanceList.sort((a, b) => {
-      const d1: any = moment(a.Cdate, 'Do MMM YYYY hh:mm a').valueOf();
-      const d2: any = moment(b.Cdate, 'Do MMM YYYY hh:mm a').valueOf();
+      const d1: any = moment(a.Cdate, "Do MMM YYYY hh:mm a").valueOf();
+      const d2: any = moment(b.Cdate, "Do MMM YYYY hh:mm a").valueOf();
       return d2 - d1;
     });
 
     this.correspondanceList = list;
     this.filteredList = list;
     if (this.Cokey !== undefined) {
-      this.onViewMessage(Number(this.indexValue), this.correspondanceList.filter((item) => item.Cokey === this.Cokey)[0]);
+      this.onViewMessage(
+        Number(this.indexValue),
+        this.correspondanceList.filter((item) => item.Cokey === this.Cokey)[0]
+      );
     }
   }
 
@@ -200,7 +204,7 @@ export class CorrespondanceComponent implements OnInit {
     this.viewMessageIndex = null;
     if (!this.setFavoriteFilter) {
       this.setFavoriteFilter = true;
-      const list = this.correspondanceList.filter((item) => item.Zzfav === '1');
+      const list = this.correspondanceList.filter((item) => item.Zzfav === "1");
       this.filteredList = list;
     } else {
       this.setFavoriteFilter = false;
@@ -214,7 +218,7 @@ export class CorrespondanceComponent implements OnInit {
     if (this.searchFilter) {
       let arSearch;
 
-      if (this.lang === 'ar') {
+      if (this.lang === "ar") {
         arSearch = this.searchFilter
           .replace(/[٠١٢٣٤٥٦٧٨٩]/g, (d) => {
             return (d.charCodeAt(0) - 1632).toString();
@@ -225,16 +229,16 @@ export class CorrespondanceComponent implements OnInit {
       }
 
       const title = this.correspondanceList.filter(
-        (item) => item.Cotxt.search(new RegExp(this.searchFilter, 'i')) > -1
+        (item) => item.Cotxt.search(new RegExp(this.searchFilter, "i")) > -1
       );
 
-      if (this.lang === 'ar') {
+      if (this.lang === "ar") {
       }
 
       const ltrNo = this.correspondanceList.filter(
         (item) =>
           item.Ltrno.search(
-            new RegExp(this.lang === 'ar' ? arSearch : this.searchFilter, 'i')
+            new RegExp(this.lang === "ar" ? arSearch : this.searchFilter, "i")
           ) > -1
       );
 
@@ -247,7 +251,7 @@ export class CorrespondanceComponent implements OnInit {
   onFavoriteMessage(item) {
     this.correspondanceService.favoriteCorrespondance(item).subscribe(
       (response) => {
-        const data = response['d'];
+        const data = response["d"];
 
         const index = this.correspondanceList.findIndex(
           (listItem) => listItem.Cokey === data.Cokey
@@ -263,7 +267,7 @@ export class CorrespondanceComponent implements OnInit {
 
         if (this.setFavoriteFilter) {
           const list = this.correspondanceList.filter(
-            (item) => item.Zzfav === '1'
+            (item) => item.Zzfav === "1"
           );
 
           let filterIndex;
@@ -292,14 +296,14 @@ export class CorrespondanceComponent implements OnInit {
     this.viewMessageIndex = i;
     this.correspondanceService.getZakatCorrespondanceBody(item).subscribe(
       (response) => {
-        let body = '';
-        let Attfg = '';
-        let Gpart = '';
-        let Ltrno = '';
-        let Hotline = '';
+        let body = "";
+        let Attfg = "";
+        let Gpart = "";
+        let Ltrno = "";
+        let Hotline = "";
 
-        if (response['d'].results && response['d'].results.length > 0) {
-          response['d'].results.map((item) => {
+        if (response["d"].results && response["d"].results.length > 0) {
+          response["d"].results.map((item) => {
             body += item.Tdline;
             Attfg += item.Attfg;
             Gpart = item.Gpart;
@@ -311,8 +315,8 @@ export class CorrespondanceComponent implements OnInit {
         this.viewMessage = {
           title: item.Cotxt,
           date:
-            item.date === 'undefined Invalid date' ||
-              item.date === 'Invalid date Invalid date'
+            item.date === "undefined Invalid date" ||
+            item.date === "Invalid date Invalid date"
               ? item.Cdate
               : item.date,
           Cotyp: item.Cotyp,
@@ -325,8 +329,8 @@ export class CorrespondanceComponent implements OnInit {
           Hotline,
         };
 
-        if (item.Zzfav || item.Zzfav === '') {
-          this.viewMessage['Zzfav'] = item.Zzfav;
+        if (item.Zzfav || item.Zzfav === "") {
+          this.viewMessage["Zzfav"] = item.Zzfav;
         }
       },
       (error) => {
@@ -336,58 +340,58 @@ export class CorrespondanceComponent implements OnInit {
   }
 
   onDownloadAttachment(item) {
-    if (item.Cotyp === 'RC03') {
-      const link = document.createElement('a');
-      link.setAttribute('target', '_self');
+    if (item.Cotyp === "RC03") {
+      const link = document.createElement("a");
+      link.setAttribute("target", "_self");
       link.setAttribute(
-        'href',
+        "href",
         this.correspondanceService.downloadZakatCorrespondance(item)
       );
-      link.setAttribute('download', '');
+      link.setAttribute("download", "");
       document.body.appendChild(link);
       link.click();
       link.remove();
-    } else if (item.Cotyp === 'ZVT1') {
-      const link = document.createElement('a');
-      link.setAttribute('target', '_self');
+    } else if (item.Cotyp === "ZVT1") {
+      const link = document.createElement("a");
+      link.setAttribute("target", "_self");
       link.setAttribute(
-        'href',
+        "href",
         this.correspondanceService.downloadVatCorrespondance(item)
       );
-      link.setAttribute('download', '');
+      link.setAttribute("download", "");
       document.body.appendChild(link);
       link.click();
       link.remove();
-    } else if (item.Cotyp === 'ZET1') {
-      const link = document.createElement('a');
-      link.setAttribute('target', '_self');
+    } else if (item.Cotyp === "ZET1") {
+      const link = document.createElement("a");
+      link.setAttribute("target", "_self");
       link.setAttribute(
-        'href',
+        "href",
         this.correspondanceService.downloadEtCorrespondance(item)
       );
-      link.setAttribute('download', '');
+      link.setAttribute("download", "");
       document.body.appendChild(link);
       link.click();
       link.remove();
-    } else if (item.Cotyp === 'EP02') {
-      const link = document.createElement('a');
-      link.setAttribute('target', '_self');
+    } else if (item.Cotyp === "EP02") {
+      const link = document.createElement("a");
+      link.setAttribute("target", "_self");
       link.setAttribute(
-        'href',
+        "href",
         this.correspondanceService.downloadEpCorrespondance(item)
       );
-      link.setAttribute('download', '');
+      link.setAttribute("download", "");
       document.body.appendChild(link);
       link.click();
       link.remove();
     } else {
-      const link = document.createElement('a');
-      link.setAttribute('target', '_self');
+      const link = document.createElement("a");
+      link.setAttribute("target", "_self");
       link.setAttribute(
-        'href',
+        "href",
         this.correspondanceService.downloadCorrespondance(item)
       );
-      link.setAttribute('download', '');
+      link.setAttribute("download", "");
       document.body.appendChild(link);
       link.click();
       link.remove();

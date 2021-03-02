@@ -19,8 +19,6 @@ import { QuickactionComponent } from "./quickaction/quickaction.component";
 
 /*ZS Components Starts */
 
-import { InboxComponent } from "./inbox/inbox.component";
-import { CorrespondanceComponent } from "./correspondance/correspondance.component";
 import { AuthorizationComponent } from "./authorization/authorization.component";
 import { UserManagementComponent } from "./user-management/user-management.component";
 import { AddUserComponent } from "./add-user/add-user.component";
@@ -60,7 +58,6 @@ import { SearchPipe } from "./search.pipe";
 import { DateRangePickerModule } from "@syncfusion/ej2-angular-calendars";
 import { EditUserComponent } from "./edit-user/edit-user.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { NotificationsComponent } from "./notifications/notifications.component";
 import { DeferralVatPaymentComponent } from "./deferral-vat-payment/deferral-vat-payment.component";
 import { RequestForContractReleaseFormComponent } from "./request-for-contract-release-form/request-for-contract-release-form.component";
 import { StatementCategoryComponent } from "./account-statement/statement-category/statement-category.component";
@@ -142,8 +139,6 @@ const maskConfig: Partial<IConfig> = {
     TaxlandingComponent,
     //ReturnsComponent,
     QuickactionComponent,
-    CorrespondanceComponent,
-    InboxComponent,
     AuthorizationComponent,
     AddUserComponent,
     TaskAllocationComponent,
@@ -179,7 +174,6 @@ const maskConfig: Partial<IConfig> = {
     NumberInputDirective,
     UserdetailsComponent,
     EditUserComponent,
-    NotificationsComponent,
     DeferralVatPaymentComponent,
     RequestForContractReleaseFormComponent,
     ReportExciseGoodsComponent,

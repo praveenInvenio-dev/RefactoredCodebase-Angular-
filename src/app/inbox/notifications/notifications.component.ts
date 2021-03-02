@@ -1,26 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
-
-import { CorrespondanceService } from 'src/app/services/correspondance.service';
-import { DashboardService } from 'src/app/services/dashboard-service';
-import { correspondanceConstants } from '../../constants/correspondanceConstants';
+import { Component, OnInit } from "@angular/core";
+import * as moment from "moment";
+import { DashboardService } from "src/app/services/dashboard-service";
 import { constants } from "src/app/constants/constants.model";
-import { NotifierService } from 'angular-notifier';
-import { Router } from '@angular/router';
-import { OrderPipe } from 'ngx-order-pipe';
-
+import { NotifierService } from "angular-notifier";
+import { Router } from "@angular/router";
+import { OrderPipe } from "ngx-order-pipe";
+import { correspondanceConstants } from "src/app/constants/correspondanceConstants";
 
 @Component({
-  selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.css']
+  selector: "app-notifications",
+  templateUrl: "./notifications.component.html",
+  styleUrls: ["./notifications.component.css"],
 })
 export class NotificationsComponent implements OnInit {
-
   lang: string;
 
   correspondanceConstants;
-
 
   filteredList = [];
 
@@ -32,28 +27,33 @@ export class NotificationsComponent implements OnInit {
 
   viewMessageIndex: number;
 
-  searchFilter: string = '';
+  searchFilter: string = "";
 
   notifications: any = [];
   tin: any;
   language;
   setFavoriteFilter: boolean = false;
 
-  pathList: any = ['/mains/newvat', '', '/mains/tax', '/mains/returns/search'];
+  pathList: any = ["/mains/newvat", "", "/mains/tax", "/mains/returns/search"];
 
   direction: string = "ltr";
-  constructor(public dashboardService: DashboardService, public notifierService: NotifierService, private router: Router, private orderPipe: OrderPipe) { }
+  constructor(
+    public dashboardService: DashboardService,
+    public notifierService: NotifierService,
+    private router: Router,
+    private orderPipe: OrderPipe
+  ) {}
 
   ngOnInit(): void {
-    moment.locale('en');
-    if (localStorage.getItem('lang') === 'ar') {
-      this.lang = 'ar';
+    moment.locale("en");
+    if (localStorage.getItem("lang") === "ar") {
+      this.lang = "ar";
       this.language = constants.langz.arb;
 
       this.direction = "rtl";
     } else {
       this.language = constants.langz.eng;
-      this.lang = 'en';
+      this.lang = "en";
       this.direction = "ltr";
     }
     this.tin = localStorage.getItem("gpart");
@@ -63,13 +63,17 @@ export class NotificationsComponent implements OnInit {
   }
   public notificationsList: any = [];
   getNotifications() {
-    this.dashboardService.getInboxNotifications(this.tin).subscribe((res) => {
-      //this.notificationsList = res["d"]["results"];
-      let responseNotifList = res["d"]["results"];
-      this.notificationsList = this.tranformNotificationsList(responseNotifList);
-      this.filteredList = this.notificationsList.slice();
-    }, (err) => {
-    });
+    this.dashboardService.getInboxNotifications(this.tin).subscribe(
+      (res) => {
+        //this.notificationsList = res["d"]["results"];
+        let responseNotifList = res["d"]["results"];
+        this.notificationsList = this.tranformNotificationsList(
+          responseNotifList
+        );
+        this.filteredList = this.notificationsList.slice();
+      },
+      (err) => {}
+    );
   }
   onSearchNotifications() {
     this.viewMessage = null;
@@ -77,7 +81,7 @@ export class NotificationsComponent implements OnInit {
     this.selectedNotification = {};
     if (this.searchFilter) {
       const list = this.notificationsList.filter(
-        (item) => item.title.search(new RegExp(this.searchFilter, 'i')) > -1
+        (item) => item.title.search(new RegExp(this.searchFilter, "i")) > -1
       );
       this.filteredList = list;
     } else {
@@ -85,43 +89,59 @@ export class NotificationsComponent implements OnInit {
     }
   }
 
-
   private notificationTypes: any = ["01", "02", "03", "04"];
   tranformNotificationsList(notificationsList: any = []) {
     let transformedNotificaitonsList = [];
     //transformedNotificaitonsList = notificationsList.slice();
     notificationsList.forEach((notification) => {
-      notification.timeStamp = +notification.Begda.replace(/\D/g, '');
+      notification.timeStamp = +notification.Begda.replace(/\D/g, "");
     });
-    notificationsList = this.orderPipe.transform(notificationsList, 'timeStamp', true);
+    notificationsList = this.orderPipe.transform(
+      notificationsList,
+      "timeStamp",
+      true
+    );
     this.notificationTypes.forEach((notificationType) => {
-      let notificationObj = this.getRecentNotificationObj(notificationsList, notificationType);
+      let notificationObj = this.getRecentNotificationObj(
+        notificationsList,
+        notificationType
+      );
       if (notificationObj) {
         transformedNotificaitonsList.push(notificationObj);
       }
     });
-    transformedNotificaitonsList = this.orderPipe.transform(transformedNotificaitonsList, 'timeStamp', true);
+    transformedNotificaitonsList = this.orderPipe.transform(
+      transformedNotificaitonsList,
+      "timeStamp",
+      true
+    );
     transformedNotificaitonsList.forEach((notification) => {
       let notifIndex = this.getNotificationTypeIndex(notification.NotifTy);
       notification.title = this.language.notifications[notifIndex].title;
-      notification.description = this.language.notifications[notifIndex].description;
+      notification.description = this.language.notifications[
+        notifIndex
+      ].description;
       let datestr = notification.Begda;
-      notification.date = datestr.replace(/\D/g, '');
-      notification.dateStr = moment(Number(notification.date)).format("DD-MMM-YYYY");
+      notification.date = datestr.replace(/\D/g, "");
+      notification.dateStr = moment(Number(notification.date)).format(
+        "DD-MMM-YYYY"
+      );
 
-      let timeStr=notification.Ctime;
-      timeStr=`${moment(
-        timeStr.replace(/\D/g, ''),
-        'hhmmss'
-      ).format('hh:mm a')}`;
-      notification.timeStr=timeStr;
+      let timeStr = notification.Ctime;
+      timeStr = `${moment(timeStr.replace(/\D/g, ""), "hhmmss").format(
+        "hh:mm a"
+      )}`;
+      notification.timeStr = timeStr;
     });
     return transformedNotificaitonsList || [];
   }
 
-  getRecentNotificationObj(NotificationsList: any = [], notificationType: string = "") {
+  getRecentNotificationObj(
+    NotificationsList: any = [],
+    notificationType: string = ""
+  ) {
     let results = NotificationsList.filter((notification) => {
-      return (notification.NotifTy == notificationType);
+      return notification.NotifTy == notificationType;
     });
     if (results.length > 0) {
       return results[0];
@@ -131,13 +151,13 @@ export class NotificationsComponent implements OnInit {
   }
 
   getNotificationTypeIndex(notificationType) {
-    if (notificationType == '01') {
+    if (notificationType == "01") {
       return 0;
-    } else if (notificationType == '02') {
+    } else if (notificationType == "02") {
       return 1;
-    } else if (notificationType == '03') {
+    } else if (notificationType == "03") {
       return 2;
-    } else if (notificationType == '04') {
+    } else if (notificationType == "04") {
       return 3;
     }
   }
@@ -173,32 +193,34 @@ export class NotificationsComponent implements OnInit {
     delete deleteNotifObj.timeStr;
     delete deleteNotifObj.Ctime;
 
-    deleteNotifObj.Inpch = '243';
-    deleteNotifObj.NotifRead = 'X';
-    this.dashboardService.updateNotifications(deleteNotifObj).subscribe((res) => {
-      //this.getNotifications();
-      notification.NotifRead = 'X';
-    },
+    deleteNotifObj.Inpch = "243";
+    deleteNotifObj.NotifRead = "X";
+    this.dashboardService.updateNotifications(deleteNotifObj).subscribe(
+      (res) => {
+        //this.getNotifications();
+        notification.NotifRead = "X";
+      },
       (err) => {
         let errors = err.error.error.innererror.errordetails;
         if (errors.length > 0) {
-          this.notifierService.notify("error", errors[0].message || 'Error');
+          this.notifierService.notify("error", errors[0].message || "Error");
         } else {
-          this.notifierService.notify("error", 'Error');
+          this.notifierService.notify("error", "Error");
         }
-
-      });
+      }
+    );
   }
-
 
   navigateTo(notification) {
     console.log("navigateTo", notification);
     ///mains/returns/search?return=2
-    if (notification.NotifTy == '04') {
-      this.router.navigate(["/mains/returns/search"], { queryParams: { alloverDue: '1' } });
-    } else if (notification.NotifTy == '01') {
+    if (notification.NotifTy == "04") {
+      this.router.navigate(["/mains/returns/search"], {
+        queryParams: { alloverDue: "1" },
+      });
+    } else if (notification.NotifTy == "01") {
       this.router.navigate(["/mains/newvat"]);
-    } else if (notification.NotifTy == '02' || notification.NotifTy == '03') {
+    } else if (notification.NotifTy == "02" || notification.NotifTy == "03") {
       this.router.navigate(["/mains/tax"]);
     }
   }
@@ -263,12 +285,4 @@ export class NotificationsComponent implements OnInit {
 
   //     });
   // }
-
-
-
-
-
-
-
-
 }
