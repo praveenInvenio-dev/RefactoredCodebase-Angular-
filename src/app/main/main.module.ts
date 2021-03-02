@@ -20,9 +20,7 @@ import { QuickactionComponent } from "./quickaction/quickaction.component";
 /*ZS Components Starts */
 
 import { AuthorizationComponent } from "./authorization/authorization.component";
-import { UserManagementComponent } from "./user-management/user-management.component";
-import { AddUserComponent } from "./add-user/add-user.component";
-import { TaskAllocationComponent } from "./task-allocation/task-allocation.component";
+
 import { CommitmentComponent } from "./commitment/commitment.component";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { AccountStatementComponent } from "./account-statement/account-statement.component";
@@ -52,11 +50,9 @@ import { NewWithholdingTaxObjectionComponent } from "./new-withholding-tax-objec
 import { ObjectionReviewsComponent } from "./objection-reviews/objection-reviews.component";
 import { NewVatReviewComponent } from "./new-vat-review/new-vat-review.component";
 import { NumberInputDirective } from "../directives/number-input.directive";
-import { UserdetailsComponent } from "./userdetails/userdetails.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { SearchPipe } from "./search.pipe";
 import { DateRangePickerModule } from "@syncfusion/ej2-angular-calendars";
-import { EditUserComponent } from "./edit-user/edit-user.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { DeferralVatPaymentComponent } from "./deferral-vat-payment/deferral-vat-payment.component";
 import { RequestForContractReleaseFormComponent } from "./request-for-contract-release-form/request-for-contract-release-form.component";
@@ -140,8 +136,6 @@ const maskConfig: Partial<IConfig> = {
     //ReturnsComponent,
     QuickactionComponent,
     AuthorizationComponent,
-    AddUserComponent,
-    TaskAllocationComponent,
     CommitmentComponent,
     AccountStatementComponent,
     StatementDetailComponent,
@@ -172,8 +166,6 @@ const maskConfig: Partial<IConfig> = {
     ObjectionReviewsComponent,
     NewVatReviewComponent,
     NumberInputDirective,
-    UserdetailsComponent,
-    EditUserComponent,
     DeferralVatPaymentComponent,
     RequestForContractReleaseFormComponent,
     ReportExciseGoodsComponent,
@@ -195,7 +187,6 @@ const maskConfig: Partial<IConfig> = {
     TaxCardViewComponent,
     TaxTabularViewComponent,
     CreatePwdComponent,
-    UserManagementComponent,
   ],
   imports: [
     CommonModule,

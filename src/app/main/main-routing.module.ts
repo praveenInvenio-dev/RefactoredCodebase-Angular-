@@ -1,15 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-
 import { LandingpageComponent } from "./landingpage/landingpage.component";
 import { NewDashboardComponent } from "./new-dashboard/new-dashboard.component";
 import { BillsComponent } from "./bills/bills.component";
 import { TaxlandingComponent } from "./taxlanding/taxlanding.component";
-
 import { QuickactionComponent } from "./quickaction/quickaction.component";
 import { AuthorizationComponent } from "./authorization/authorization.component";
-import { AddUserComponent } from "./add-user/add-user.component";
-import { TaskAllocationComponent } from "./task-allocation/task-allocation.component";
 import { CommitmentComponent } from "./commitment/commitment.component";
 import { AccountStatementComponent } from "./account-statement/account-statement.component";
 import { SukukBondsComponent } from "./sukuk-bonds/sukuk-bonds.component";
@@ -23,7 +19,6 @@ import { RequestInstallmentComponent } from "./request-installment/request-insta
 import { NewRequestRulingComponent } from "./new-request-ruling/new-request-ruling.component";
 import { NewZakatObjectionComponent } from "./new-zakat-objection/new-zakat-objection.component";
 import { ZakatObjectionComponent } from "./zakat-objection/zakat-objection.component";
-import { UserdetailsComponent } from "./userdetails/userdetails.component";
 import { InstallmentDetailComponent } from "./investment-detail/installment-detail.component";
 import { ZakatDetailsComponent } from "./zakat-details/zakat-details.component";
 import { NewWithholdingTaxObjectionComponent } from "./new-withholding-tax-objection/new-withholding-tax-objection.component";
@@ -32,7 +27,6 @@ import { NewVatReviewComponent } from "./new-vat-review/new-vat-review.component
 import { ObjectionReviewsComponent } from "./objection-reviews/objection-reviews.component";
 import { ReportExciseGoodsComponent } from "./loss-excise-goods/report-excise-goods/report-excise-goods.component";
 import { AddGoodsLossComponent } from "./loss-excise-goods/add-goods-loss/add-goods-loss.component";
-import { EditUserComponent } from "./edit-user/edit-user.component";
 import { DeferralVatPaymentComponent } from "./deferral-vat-payment/deferral-vat-payment.component";
 import { RequestForContractReleaseFormComponent } from "./request-for-contract-release-form/request-for-contract-release-form.component";
 import { VatFieldInspectionComponent } from "./vat-field-inspection/vat-field-inspection.component";
@@ -44,7 +38,6 @@ import { ItReductionListComponent } from "./request-income-tax-reduction/main/it
 import { VatInstallmentPlanComponent } from "./vat-installment-plan/vat-installment-plan.component";
 import { InputTaxListComponent } from "./tax-reduction/input-tax-reduction/input-tax-list.component";
 import { InputTaxRequestComponent } from "./tax-reduction/input-tax-reduction/input-tax-request/input-tax-request.component";
-import { UserManagementComponent } from "./user-management/user-management.component";
 
 const routes: Routes = [
   {
@@ -90,10 +83,6 @@ const routes: Routes = [
         component: BillsComponent,
       },
       {
-        path: "usermanagement",
-        component: UserManagementComponent,
-      },
-      {
         path: "returns",
         loadChildren: () =>
           import("../returns/returns.module").then((r) => r.ReturnsModule),
@@ -135,14 +124,6 @@ const routes: Routes = [
         component: QuickactionComponent,
       },
 
-      {
-        path: "adduser",
-        component: AddUserComponent,
-      },
-      {
-        path: "taskallocation",
-        component: TaskAllocationComponent,
-      },
       {
         path: "authorization",
         component: AuthorizationComponent,
@@ -203,14 +184,7 @@ const routes: Routes = [
         path: "zakatobjection",
         component: ZakatObjectionComponent,
       },
-      {
-        path: "userdetails",
-        component: UserdetailsComponent,
-      },
-      {
-        path: "edituser",
-        component: EditUserComponent,
-      },
+
       {
         path: "installmentdetail",
         component: InstallmentDetailComponent,

@@ -5,6 +5,11 @@ import { UsermanagementRoutingModule } from "./usermanagement-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NotifierOptions, NotifierModule } from "angular-notifier";
 import { MaterialModule } from "../material.module";
+import { AddUserComponent } from "./add-user/add-user.component";
+import { EditUserComponent } from "./edit-user/edit-user.component";
+import { TaskAllocationComponent } from "./task-allocation/task-allocation.component";
+import { UserManagementComponent } from "./user-management/user-management.component";
+import { UserdetailsComponent } from "./userdetails/userdetails.component";
 const notifierDefaultOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -47,7 +52,13 @@ const notifierDefaultOptions: NotifierOptions = {
 };
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AddUserComponent,
+    EditUserComponent,
+    TaskAllocationComponent,
+    UserManagementComponent,
+    UserdetailsComponent,
+  ],
   imports: [
     CommonModule,
     UsermanagementRoutingModule,

@@ -1,7 +1,4 @@
 <app-header [direction]="direction" [title]="lang.title" [url]="url"></app-header>
-<div *ngFor="let item of a">
-    {{a%2 === 0}}
-</div>
 <div class="container" style="margin-top: 150px;" dir={{direction}}>
     <div class="row" *ngIf="!showVerification && !show">
         <div class="col-md-12">
